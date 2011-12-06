@@ -1,0 +1,7 @@
+thrift -gen cpp ozw.thrift  
+ruby1.9.1 create_server.rb
+gcc -c gen-cpp/RemoteManager_server.cpp -I/usr/local/include/thrift/ -I/home/ekarak/ozw/open-zwave-read-only/cpp/src -I/home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes
+gcc -c gen-cpp/RemoteManager_server.cpp -I/usr/local/include/thrift/ -I/home/ekarak/ozw/open-zwave-read-only/cpp/src -I/home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes -lthrift /home/ekarak/ozw/open-zwave-read-only/cpp/lib/linux/openzwave.a -ludev 
+
+gcc -c RemoteManager.cpp -I/usr/local/include/thrift/ -I/home/ekarak/ozw/open-zwave-read-only/cpp/src -I/home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes
+gcc RemoteManager_server.cpp -I/usr/local/include/thrift/ -I/home/ekarak/ozw/open-zwave-read-only/cpp/src -I/home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes -lthrift /home/ekarak/ozw/open-zwave-read-only/cpp/lib/linux/openzwave.a -ludev ozw_*.o RemoteManager.o 
