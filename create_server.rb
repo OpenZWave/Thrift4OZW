@@ -115,8 +115,12 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     
     # is the skeleton function's return type composite?
     composite_return = false
+    # 
     function_return_clause = ''
+    #
     returnarg = nil
+    #
+    last_argument = nil
     
     # gather all required arguments
     # key = target_method_argument (RbGCCXML::Node)
@@ -124,51 +128,60 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     
     #arr = target_method.arguments.map {|tma| meth.arguments.select { |a| a.name == tma.name}[0]}
     
-    args = {} # target node => source node
-    target_method.arguments.each {|tma| args[tma] = meth.arguments.select { |a| a.name == tma.name}[0]}
+    args = {} # source node => target node
+    meth.arguments.each {|a|   args[a] = target_method.arguments.select { |tma| a.name == tma.name}[0]}
 
     #
     # create the function call
     #
     arg_array = []
     #
-    args.each { |tgt_arg, src_arg|
-        puts "tgt=#{tgt_arg.to_cpp}, src=#{src_arg and src_arg.qualified_name}"
-        ampersand = (tgt_arg.cpp_type.to_cpp.include?('*') ? '&' : '')
-        if src_arg then # argument names matched
+    meth.arguments.each { | src_arg|
+        tgt_arg= args[src_arg]
+        puts "src=#{src_arg and src_arg.qualified_name} \t tgt=#{tgt_arg and tgt_arg.qualified_name}"
+        
+        if tgt_arg then # argument names matched
+            ampersand = (tgt_arg.cpp_type.to_cpp.include?('*') ? '&' : '')
             # maybe it's an OpenZWave::ValueID ???
             if (tgt_arg.to_cpp =~ /ValueID/) then
-                arg_array << ValueID_converter(src_arg.name)
+                arg_array <<  ValueID_converter(src_arg.name)
             else 
                 arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}#{src_arg.name}"
             end
         else # source argument not found by name, search elsewhere
-            puts "method #{meth.name}, argument #{tgt_arg.name} not found by name..."
+            puts "method #{meth.name}, argument #{src_arg.name} not found by name..."
             # 1) try searching through thrift's special '_return' argument (if there is one)
             if (returnarg = meth.arguments.select{ |a| a.name == "_return"}[0]).is_a?(RbGCCXML::Argument) then
                 puts "Thrift special _return argument detected!"
                 last_argument_type = target_method.arguments[-1].cpp_type.to_cpp
+                ampersand = (last_argument_type.include?('*') ? '&' : '')
                 if md = OverloadedRE.match(returnarg.cpp_type.to_cpp)  then
                     # ...and it's a complex type (Thrift struct)
                     # 1st match is the function's return type
                     composite_return = true
                     function_return_clause = " _return.retval = "
                     # 2nd match is function's last argument type
-                    arg_array << "(#{last_argument_type}) #{ampersand}_return#{composite_return ? '.arg' : ''}"
+                    last_argument = "(#{last_argument_type}) #{ampersand}_return#{composite_return ? '.arg' : ''}"
                 else
-                    function_return_clause = " _return = "
-                    # _return is a simple data type
-                    arg_array << "(#{last_argument_type}) #{ampersand}_return"
+                    # _return is a simple data type used 
+                    if meth.return_type.name == "void" then
+                        #_return is used as the main function return clause
+                        function_return_clause = " _return = "
+                    else
+                        # _return is the last argument to target function 
+                        last_argument = "(#{last_argument_type}) #{ampersand}_return"
+                    end
                 end            
             else
-                puts "WARNING:: estimated argument '#{tgt_arg.name}' in method '#{meth.name}'!!!"
-                arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}_return.arg"
+                raise "ERROR:couldn't match argument '#{src_arg.name}' in method '#{meth.name}'!!!"
             end
         end
     }
 
+    # add last argument to array (it's about time...)
+    arg_array << last_argument
     # unleash the beast
-    fcall = "#{function_return_clause} mgr->#{target_method.name}(#{arg_array.join(', ')})"
+    fcall = "#{function_return_clause} mgr->#{target_method.name}(#{arg_array.compact.join(', ')})"
 
     #
     # FUNCTION RETURN CLAUSE

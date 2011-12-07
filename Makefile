@@ -58,13 +58,13 @@ gen-cpp:
 	$(THRIFT) --gen cpp ozw.thrift
 
 gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp
-	g++ $(CFLAGS) -c gen-cpp/RemoteManager.cpp $(INCLUDES)
+	g++ $(CFLAGS) -c gen-cpp/RemoteManager.cpp -o gen-cpp/RemoteManager.o $(INCLUDES)
 
 gen-cpp/ozw_constants.o:  gen-cpp/ozw_constants.cpp
-	g++ $(CFLAGS) -c gen-cpp/ozw_constants.cpp $(INCLUDES)
+	g++ $(CFLAGS) -c gen-cpp/ozw_constants.cpp -o gen-cpp/ozw_constants.o $(INCLUDES)
     
 gen-cpp/ozw_types.o:  gen-cpp/ozw_types.cpp
-	g++ $(CFLAGS) -c gen-cpp/ozw_types.cpp $(INCLUDES)
+	g++ $(CFLAGS) -c gen-cpp/ozw_types.cpp -o gen-cpp/ozw_types.o $(INCLUDES)
     
 Stomp_sm.cpp: Stomp.sm
 	smc -c++ Stomp.sm 
