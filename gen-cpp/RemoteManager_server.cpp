@@ -211,11 +211,16 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 
   void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
 	Manager* mgr = Manager::Get();
+      uint8* arr;
 	g_criticalSection.lock();
-	 _return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return.arg);
+	 _return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, &arr);
 	g_criticalSection.unlock();
-  }
-
+      if (_return.retval > 0) {
+        for (int i=0; i<_return.retval; i++) _return.arg.push_back(arr[i]);
+        delete arr;
+        }
+    }
+    
   void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -580,7 +585,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID _id, const int8_t _idx) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	 _return =  mgr->GetSwitchPoint(*g_values[_id], (::uint8 const) _idx, (::int8*) &_return, (::int8*) &_return, (::int8*) &_return);
+	 mgr->GetSwitchPoint(*g_values[_id], (::uint8 const) _idx, (::uint8*) &_return.o_hours, (::uint8*) &_return.o_minutes, (::int8*) &_return.o_setback);
 	g_criticalSection.unlock();
   }
 
@@ -631,8 +636,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   void GetAssociations(std::vector<int8_t> & _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	 _return =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &_return);
+    uint8* o_associations; 
+    uint num_assoc = mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, &o_associations);
 	g_criticalSection.unlock();
+    if (num_assoc > 0) {
+        for (uint i=0; i<num_assoc; i++) _return.push_back(o_associations[i]);
+        delete o_associations;
+    }
   }
 
   int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
@@ -688,9 +698,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 
   void GetAllScenes(std::vector<int8_t> & _return) {
 	Manager* mgr = Manager::Get();
+      uint8* _sceneIds;
 	g_criticalSection.lock();
-	 _return =  mgr->GetAllScenes((::uint8**) &_return);
+	 uint num_scenes =  mgr->GetAllScenes((::uint8**) &_sceneIds);
 	g_criticalSection.unlock();
+    if (num_scenes> 0) {
+        for (uint i=0; i<num_scenes; i++) _return.push_back(_sceneIds[i]);
+        delete(_sceneIds);
+    }
   }
 
   int8_t CreateScene() {
@@ -783,9 +798,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 
   void SceneGetValues(std::vector<RemoteValueID> & _return, const int8_t _sceneId) {
 	Manager* mgr = Manager::Get();
+      vector<ValueID> _valueIds;
 	g_criticalSection.lock();
-	 _return =  mgr->SceneGetValues((::uint8 const) _sceneId, (std::vector<OpenZWave::ValueID, std::allocator<OpenZWave::ValueID> >*) &_return);
+	 uint num_values =  mgr->SceneGetValues((::uint8 const) _sceneId, &_valueIds);
 	g_criticalSection.unlock();
+    if (num_values > 0) {
+        for (uint i=0; i<num_values; i++) _return.push_back(_valueIds[i].GetId());
+    }
   }
 
   void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
@@ -939,17 +958,4 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
 };
-
-int main(int argc, char **argv) {
-  int port = 9090;
-  shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
-  shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
-  shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
-  shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-  shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-
-  TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
-  server.serve();
-  return 0;
-}
 
