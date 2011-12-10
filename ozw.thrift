@@ -46,42 +46,63 @@ struct GetSwitchPointReturnStruct {
 
 struct Bool_Bool {
     1:bool retval; // function succeeded?
-    2:bool arg; // value returned
+    2:bool o_value; // value returned
 }
 
 struct Bool_UInt8 {
     1:bool retval; // function succeeded?
-    2:byte arg; // value returned
+    2:byte o_value; // value returned
 }    
 
 struct Bool_Float {
     1:bool retval; // function succeeded?
-    2:double arg; // value returned    
+    2:double o_value; // value returned    
 }
 
 struct Bool_Int {
     1:bool retval; // function succeeded?
-    2:i32 arg; // value returned    
+    2:i32 o_value; // value returned    
 }
 
 struct Bool_Int16 {
     1:bool retval; // function succeeded?
-    2:i16 arg; // value returned    
+    2:i16 o_value; // value returned    
 }
 
 struct Bool_String {
     1:bool retval; // function succeeded?
-    2:string arg; // value returned    
+    2:string o_value; // value returned    
 }
 
 struct Bool_ListString {
     1:bool retval;
-    2:list<string> arg;
+    2:list<string> o_value;
 }
 
 struct UInt32_ListByte {
     1:i32   retval;
-    2:list<byte>    arg;
+    2:list<byte> _nodeNeighbors;
+}
+
+struct Bool_GetNodeClassInformation {
+    1:bool retval;
+    2:string _className;
+    3:byte _classVersion;
+}
+
+struct GetAssociationsReturnStruct {
+    1:i32 retval;
+    2:list<byte> o_associations;
+}
+
+struct GetAllScenesReturnStruct {
+    1:byte retval;
+    2:list<byte> _sceneIds;
+}
+
+struct SceneGetValuesReturnStruct {
+    1: i32 retval; 
+    2: list<RemoteValueID> o_value;
 }
 
 /*-------------------------------------*/
@@ -120,6 +141,7 @@ service RemoteManager {
     
     //TODO    
     //bool IsStaticUpdateController( uint32 const _homeId );
+    bool IsStaticUpdateController( 1:i32 _homeId );
 
 		/**
 		 * \brief Query if the controller is using the bridge controller library.
@@ -582,9 +604,8 @@ service RemoteManager {
 		 * \param _commandClassId Id of the class to test for
 		 * \return True if the node does have the class instantiated, will return name & version
 		 */
-		//TODO: define complex return structure
         //bool GetNodeClassInformation( uint32 const _homeId, uint8 const _nodeId, uint8 const _commandClassId, string *_className = NULL, uint8 *_classVersion = NULL);
-        
+    Bool_GetNodeClassInformation GetNodeClassInformation( 1:i32 _homeId, 2:byte _nodeId, 3:byte _commandClassId);
         
 	//-----------------------------------------------------------------------------
 	// Values
@@ -1104,7 +1125,7 @@ service RemoteManager {
 		 */
 		//uint32 GetAssociations( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, uint8** o_associations );
     // ekarak: return list of associations instead
-    list<byte> GetAssociations( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx);
+    GetAssociationsReturnStruct GetAssociations( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx);
 
 		/**
 		 * \brief Gets the maximum number of associations for a group.
@@ -1266,7 +1287,7 @@ service RemoteManager {
 		 */
 		//uint8 GetAllScenes( uint8** _sceneIds );
         // ekarak: Notice change of return argument
-    list<byte> GetAllScenes( );
+    GetAllScenesReturnStruct GetAllScenes( );
 
 		/**
 		 * \brief Create a new Scene passing in Scene ID
@@ -1401,7 +1422,7 @@ service RemoteManager {
 		 */
 		//int SceneGetValues( uint8 const _sceneId, vector<ValueID>* o_value );
     // ekarak: Notice change of return argument
-    list<RemoteValueID> SceneGetValues( 1:byte _sceneId );
+    SceneGetValuesReturnStruct SceneGetValues( 1:byte _sceneId );
     
 		/**
 		 * \brief Retrieves a scene's value as a bool.

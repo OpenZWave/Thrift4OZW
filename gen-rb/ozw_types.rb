@@ -54,11 +54,11 @@ module OpenZWave
     class Bool_Bool
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::BOOL, :name => 'arg'}
+        O_VALUE => {:type => ::Thrift::Types::BOOL, :name => 'o_value'}
       }
 
       def struct_fields; FIELDS; end
@@ -72,11 +72,11 @@ module OpenZWave
     class Bool_UInt8
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::BYTE, :name => 'arg'}
+        O_VALUE => {:type => ::Thrift::Types::BYTE, :name => 'o_value'}
       }
 
       def struct_fields; FIELDS; end
@@ -90,11 +90,11 @@ module OpenZWave
     class Bool_Float
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::DOUBLE, :name => 'arg'}
+        O_VALUE => {:type => ::Thrift::Types::DOUBLE, :name => 'o_value'}
       }
 
       def struct_fields; FIELDS; end
@@ -108,11 +108,11 @@ module OpenZWave
     class Bool_Int
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::I32, :name => 'arg'}
+        O_VALUE => {:type => ::Thrift::Types::I32, :name => 'o_value'}
       }
 
       def struct_fields; FIELDS; end
@@ -126,11 +126,11 @@ module OpenZWave
     class Bool_Int16
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::I16, :name => 'arg'}
+        O_VALUE => {:type => ::Thrift::Types::I16, :name => 'o_value'}
       }
 
       def struct_fields; FIELDS; end
@@ -144,11 +144,11 @@ module OpenZWave
     class Bool_String
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::STRING, :name => 'arg'}
+        O_VALUE => {:type => ::Thrift::Types::STRING, :name => 'o_value'}
       }
 
       def struct_fields; FIELDS; end
@@ -162,11 +162,11 @@ module OpenZWave
     class Bool_ListString
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      O_VALUE = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::LIST, :name => 'arg', :element => {:type => ::Thrift::Types::STRING}}
+        O_VALUE => {:type => ::Thrift::Types::LIST, :name => 'o_value', :element => {:type => ::Thrift::Types::STRING}}
       }
 
       def struct_fields; FIELDS; end
@@ -180,11 +180,85 @@ module OpenZWave
     class UInt32_ListByte
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1
-      ARG = 2
+      _NODENEIGHBORS = 2
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::I32, :name => 'retval'},
-        ARG => {:type => ::Thrift::Types::LIST, :name => 'arg', :element => {:type => ::Thrift::Types::BYTE}}
+        _NODENEIGHBORS => {:type => ::Thrift::Types::LIST, :name => '_nodeNeighbors', :element => {:type => ::Thrift::Types::BYTE}}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class Bool_GetNodeClassInformation
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      RETVAL = 1
+      _CLASSNAME = 2
+      _CLASSVERSION = 3
+
+      FIELDS = {
+        RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
+        _CLASSNAME => {:type => ::Thrift::Types::STRING, :name => '_className'},
+        _CLASSVERSION => {:type => ::Thrift::Types::BYTE, :name => '_classVersion'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetAssociationsReturnStruct
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      RETVAL = 1
+      O_ASSOCIATIONS = 2
+
+      FIELDS = {
+        RETVAL => {:type => ::Thrift::Types::I32, :name => 'retval'},
+        O_ASSOCIATIONS => {:type => ::Thrift::Types::LIST, :name => 'o_associations', :element => {:type => ::Thrift::Types::BYTE}}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetAllScenesReturnStruct
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      RETVAL = 1
+      _SCENEIDS = 2
+
+      FIELDS = {
+        RETVAL => {:type => ::Thrift::Types::BYTE, :name => 'retval'},
+        _SCENEIDS => {:type => ::Thrift::Types::LIST, :name => '_sceneIds', :element => {:type => ::Thrift::Types::BYTE}}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class SceneGetValuesReturnStruct
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      RETVAL = 1
+      O_VALUE = 2
+
+      FIELDS = {
+        RETVAL => {:type => ::Thrift::Types::I32, :name => 'retval'},
+        O_VALUE => {:type => ::Thrift::Types::LIST, :name => 'o_value', :element => {:type => ::Thrift::Types::I64}}
       }
 
       def struct_fields; FIELDS; end

@@ -8,6 +8,17 @@
 #include <server/TSimpleServer.h>
 #include <transport/TServerSocket.h>
 #include <transport/TBufferTransports.h>
+#include <string>
+#include <sstream>
+#include <iostream>
+
+//~ template <class T>
+//~ std::string to_string(T t, std::ios_base & (*f)(std::ios_base&))
+//~ {
+  //~ std::ostringstream oss;
+  //~ oss << f << t;
+  //~ return oss.str();
+//~ }
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -41,8 +52,6 @@ static std::map<uint64, ValueID*> g_values;
 
 // PocoStromp
 #include "PocoStomp.h"
-
-
 
 static uint32 g_homeId = 0;
 static bool   g_initFailed = false;
@@ -88,6 +97,8 @@ void OnNotification
     void* _context
 )
 {
+    bool notify_stomp = true;
+    
     // Must do this inside a critical section to avoid conflicts with the main thread
     g_criticalSection.lock();
     
@@ -107,8 +118,10 @@ void OnNotification
                 uint64 key = v.GetId();
                 nodeInfo->m_values[ key] = &v;
                 // ekarak: also add it to global ValueID map
+                std::cout << "========================= Adding "<<key<<std::hex<< " to g_values..."<<std::endl;
                 g_values[ key ] = &v;
             }
+            //send_valueID = true;
             break;
         }
 
@@ -116,11 +129,9 @@ void OnNotification
         This only occurs when a node is removed. */
         case Notification::Type_ValueRemoved:
         {
-            if( NodeInfo* nodeInfo = GetNodeInfo( _notification ) )
-            {
+            //~ if( NodeInfo* nodeInfo = GetNodeInfo( _notification ) )
+            //~ {
                 // Remove the value from out list
-                // ekarak: no need to iterate a map
-                nodeInfo->m_values.erase(_notification->GetValueID().GetId());
                 //~ for( list<ValueID>::iterator it = nodeInfo->m_values.begin(); it != nodeInfo->m_values.end(); ++it )
                 //~ {
                     //~ if( (*it) == _notification->GetValueID() )
@@ -129,14 +140,17 @@ void OnNotification
                         //~ break;
                     //~ }
                 //~ }
-            }
+            //~ }
+            //send_valueID = true;
             break;
         }
             
         /**< A node value has been updated from the Z-Wave network. */
-        case Notification::Type_ValueChanged:
+        case Notification::Type_ValueChanged: {
+            //send_valueID = true;
         /**< The associations for the node have changed. The application 
         should rebuild any group information it holds about the node. */
+        }
         case Notification::Type_Group:
         /**< A new node has been found (not already stored in zwcfg*.xml file) */
         case Notification::Type_NodeNew:
@@ -251,25 +265,19 @@ void OnNotification
     }
     
     // now we can send the captured event to STOMP queue
-    char *val1 = (char*) malloc(10); // notification type
-    char *val2 = (char*) malloc(6);  // notification byte
-    char *val3 = (char*) malloc(14); // ValueID m_id and m_id1 as 64-bit integer
-    char *val4 = (char*) malloc(10); // ValueID._homeId
-    sprintf(val1, "0x%08x", _notification->GetType());
-    sprintf(val2, "0x%02x", _notification->GetByte());
-    sprintf(val3, "0x%10x", _notification->GetValueID().GetId()); // uint64 ValueID::GetId()const{ return (uint64) ( ( (uint64)m_id1 << 32 ) | m_id );}
-    sprintf(val4, "0x%08x", _notification->GetValueID().GetHomeId()); // uint32 GetHomeId()const{ return m_homeId; }
     //
-    STOMP::hdrmap headers;
-    headers["NotificationType"] = val1;
-    headers["NotificationByte"] = val2;
-    headers["NotificationValueID"] = val3;
-    headers["NotificationValueHomeID"] = val4;
-    //
-    string empty = ""  ;
-    stomp_client->send(*notifications_topic, headers, empty);
-    //
-    free(val1); free(val2); free(val3); free(val4);
+    if (notify_stomp) {
+        STOMP::hdrmap headers;
+        headers["NotificationValueHomeID"] =  to_string<uint32_t>(_notification->GetValueID().GetHomeId(), std::hex);
+        headers["NotificationType"] =  to_string<uint32_t>(_notification->GetType(), std::hex);
+        headers["NotificationByte"] =  to_string<uint8_t>(_notification->GetByte(), std::hex);    
+        //if (send_valueID) {
+            headers["NotificationValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
+        //}
+        //
+        string empty = ""  ;
+        stomp_client->send(*notifications_topic, headers, empty);
+    }
     //
     g_criticalSection.unlock();
 }

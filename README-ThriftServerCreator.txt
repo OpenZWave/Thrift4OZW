@@ -8,7 +8,7 @@ Requirements:
 -------------
     Apache Thrift >= 0.7.0
     Ruby >= 1.9.1
-    RbGCCXML (http://rbplusplus.rubyforge.org/rbgccxml/) >= 1.0.1
+    RbGCCXML (http://rbplusplus.rubyforge.org/rbgccxml/) >= 1.0.2
 
 About the script:
 -----------------
@@ -18,7 +18,7 @@ What it lacks though is the "sauce" that binds it to your infrastructure, and wh
 
 This little script is a nice complement to Apache Thrift. All it does is to parse two sets of files: 1) the server skeleton file produced by Thrift, and 2) the headers of the library you want to expose with Thrift. It uses the excellent tool "RbGCCXML" to build an XML-like tree of the two interfaces and  binds them together (*ahem* at least it tries to).
 
-So say you want to expose your shiny app/lib to the world. Only problem is it's API is of monstrous size (hundreds of methods) and you need it quick. Use this script and you can have the skeleton file automatically generate the actual server code for Thrift. And, if you're lucky, you even might compile it without errors!
+So say you want to expose your shiny app/lib to the world. Only problem is it's API is of monstrous size (hundreds of methods) and you need it quick. Use this script and you can have the skeleton file automatically generate the actual server code for Thrift. And, if you're lucky (and the library's API is consistent), you even might compile it without errors!
 
 For example, OpenZWave has a single "Manager" class for interfacing with the rest of the world. 
 
@@ -62,9 +62,44 @@ turns into:
 	return(function_result);
   }
 
-Got it? S&S (silly and simple....)
+The critical section is needed to serialize access to OZW from the thrift server's thread. Got it? S&S (silly and simple....)
 
-The produced C++ server file will probably still need some manual tweaking, but that's up to the quality of the library's API. In my case (the OpenZWave library), I only had to write some 15 lines of extra code for 3 methods with "peculiar" arguments.
+The produced C++ server file will probably still need some manual tweaking, but that's up to the quality of the library's API. In my case (the OpenZWave library), I only had to write some 15 lines of extra code for 3 methods with "peculiar" arguments. 
+
+For instance, there's the "Manager::GetNodeNeighbors" method:
+(uint32 GetNodeNeighbors( uint32 const _homeId, uint8 const _nodeId, uint8** _nodeNeighbors );
+
+Look at the last argument: am I dreaming?? a double star in C++??  The method is a C-style call to get a bitmap of node neighbors, its return value is the size of the array pointed by _nodeNeighbors. If the map is empty, you don't need to delete the map. so does the API say.
+
+Its thrift definition is:
+struct UInt32_ListByte {
+    1:i32   retval;
+    2:list<byte> _nodeNeighbors;
+}
+UInt32_ListByte GetNodeNeighbors( 1:i32 _homeId, 2:byte _nodeId);
+
+And the produced Thrift server code for C++ is:
+
+  void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors); // ERROR, vector<uint8> is not uint8**
+	g_criticalSection.unlock();
+  }
+
+The create_server.rb script tried to cast a vector<uint8> to the _nodeNeighbors argument but it will fail because the method is expecting a plain-old C-style pointer to pointer of uint8. Alas, you have to manually write a simple iterator.
+
+  void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
+      uint8* arr;
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &arr);
+	g_criticalSection.unlock();
+    if (_return.retval > 0) {
+        for (int i=0; i<_return.retval; i++) _return._nodeNeighbors.push_back(arr[i]);
+        delete arr;
+    }
+  }
 
 
 

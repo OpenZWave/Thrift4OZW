@@ -56,6 +56,21 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsPrimaryController failed: unknown result')
           end
 
+          def IsStaticUpdateController(_homeId)
+            send_IsStaticUpdateController(_homeId)
+            return recv_IsStaticUpdateController()
+          end
+
+          def send_IsStaticUpdateController(_homeId)
+            send_message('IsStaticUpdateController', IsStaticUpdateController_args, :_homeId => _homeId)
+          end
+
+          def recv_IsStaticUpdateController()
+            result = receive_message(IsStaticUpdateController_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsStaticUpdateController failed: unknown result')
+          end
+
           def IsBridgeController(_homeId)
             send_IsBridgeController(_homeId)
             return recv_IsBridgeController()
@@ -601,6 +616,21 @@ require 'ozw_types'
             result = receive_message(IsNodeInfoReceived_result)
             return result.success unless result.success.nil?
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeInfoReceived failed: unknown result')
+          end
+
+          def GetNodeClassInformation(_homeId, _nodeId, _commandClassId)
+            send_GetNodeClassInformation(_homeId, _nodeId, _commandClassId)
+            return recv_GetNodeClassInformation()
+          end
+
+          def send_GetNodeClassInformation(_homeId, _nodeId, _commandClassId)
+            send_message('GetNodeClassInformation', GetNodeClassInformation_args, :_homeId => _homeId, :_nodeId => _nodeId, :_commandClassId => _commandClassId)
+          end
+
+          def recv_GetNodeClassInformation()
+            result = receive_message(GetNodeClassInformation_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeClassInformation failed: unknown result')
           end
 
           def GetValueLabel(_id)
@@ -1846,6 +1876,13 @@ require 'ozw_types'
             write_result(result, oprot, 'IsPrimaryController', seqid)
           end
 
+          def process_IsStaticUpdateController(seqid, iprot, oprot)
+            args = read_args(iprot, IsStaticUpdateController_args)
+            result = IsStaticUpdateController_result.new()
+            result.success = @handler.IsStaticUpdateController(args._homeId)
+            write_result(result, oprot, 'IsStaticUpdateController', seqid)
+          end
+
           def process_IsBridgeController(seqid, iprot, oprot)
             args = read_args(iprot, IsBridgeController_args)
             result = IsBridgeController_result.new()
@@ -2103,6 +2140,13 @@ require 'ozw_types'
             result = IsNodeInfoReceived_result.new()
             result.success = @handler.IsNodeInfoReceived(args._homeId, args._nodeId)
             write_result(result, oprot, 'IsNodeInfoReceived', seqid)
+          end
+
+          def process_GetNodeClassInformation(seqid, iprot, oprot)
+            args = read_args(iprot, GetNodeClassInformation_args)
+            result = GetNodeClassInformation_result.new()
+            result.success = @handler.GetNodeClassInformation(args._homeId, args._nodeId, args._commandClassId)
+            write_result(result, oprot, 'GetNodeClassInformation', seqid)
           end
 
           def process_GetValueLabel(seqid, iprot, oprot)
@@ -2763,6 +2807,38 @@ require 'ozw_types'
         end
 
         class IsPrimaryController_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsStaticUpdateController_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsStaticUpdateController_result
           include ::Thrift::Struct, ::Thrift::Struct_Union
           SUCCESS = 0
 
@@ -4009,6 +4085,42 @@ require 'ozw_types'
 
           FIELDS = {
             SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class GetNodeClassInformation_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+          _NODEID = 2
+          _COMMANDCLASSID = 3
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'},
+            _COMMANDCLASSID => {:type => ::Thrift::Types::BYTE, :name => '_commandClassId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class GetNodeClassInformation_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => OpenZWave::Bool_GetNodeClassInformation}
           }
 
           def struct_fields; FIELDS; end
@@ -5396,7 +5508,7 @@ require 'ozw_types'
           SUCCESS = 0
 
           FIELDS = {
-            SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::BYTE}}
+            SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => OpenZWave::GetAssociationsReturnStruct}
           }
 
           def struct_fields; FIELDS; end
@@ -5666,7 +5778,7 @@ require 'ozw_types'
           SUCCESS = 0
 
           FIELDS = {
-            SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::BYTE}}
+            SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => OpenZWave::GetAllScenesReturnStruct}
           }
 
           def struct_fields; FIELDS; end
@@ -6083,7 +6195,7 @@ require 'ozw_types'
           SUCCESS = 0
 
           FIELDS = {
-            SUCCESS => {:type => ::Thrift::Types::LIST, :name => 'success', :element => {:type => ::Thrift::Types::I64}}
+            SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => OpenZWave::SceneGetValuesReturnStruct}
           }
 
           def struct_fields; FIELDS; end

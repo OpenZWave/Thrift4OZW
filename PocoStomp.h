@@ -48,6 +48,8 @@
 #include "StompSocket.h"
 
 // helpers
+using namespace std;
+
 namespace STOMP {
     
     // a STOMP connection
@@ -89,10 +91,12 @@ namespace STOMP {
 // the state machine must be included here (uses the structs above)
 #include "Stomp_sm.h"
 
+// helper template function for pretty-printing just about anything
 template <class T>
 std::string to_string(T t, std::ios_base & (*f)(std::ios_base&))
 {
   std::ostringstream oss;
+  oss.setf (ios_base::showbase);
   oss << f << t;
   return oss.str();
 }

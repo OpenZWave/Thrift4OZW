@@ -54,7 +54,10 @@ LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBMICROHTTPD) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 
 all: main
 
-gen-cpp: 
+gen-cpp/RemoteManager_server.cpp: create_server.rb
+	ruby1.9.1 create_server.rb
+
+gen-cpp/RemoteManager.cpp: ozw.thrift
 	$(THRIFT) --gen cpp ozw.thrift
 
 gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp

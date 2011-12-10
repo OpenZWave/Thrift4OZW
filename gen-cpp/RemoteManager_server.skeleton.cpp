@@ -37,6 +37,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("IsPrimaryController\n");
   }
 
+  bool IsStaticUpdateController(const int32_t _homeId) {
+    // Your implementation goes here
+    printf("IsStaticUpdateController\n");
+  }
+
   bool IsBridgeController(const int32_t _homeId) {
     // Your implementation goes here
     printf("IsBridgeController\n");
@@ -220,6 +225,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   bool IsNodeInfoReceived(const int32_t _homeId, const int8_t _nodeId) {
     // Your implementation goes here
     printf("IsNodeInfoReceived\n");
+  }
+
+  void GetNodeClassInformation(Bool_GetNodeClassInformation& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId) {
+    // Your implementation goes here
+    printf("GetNodeClassInformation\n");
   }
 
   void GetValueLabel(std::string& _return, const RemoteValueID _id) {
@@ -427,7 +437,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("GetNumGroups\n");
   }
 
-  void GetAssociations(std::vector<int8_t> & _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
+  void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
     // Your implementation goes here
     printf("GetAssociations\n");
   }
@@ -467,7 +477,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("GetNumScenes\n");
   }
 
-  void GetAllScenes(std::vector<int8_t> & _return) {
+  void GetAllScenes(GetAllScenesReturnStruct& _return) {
     // Your implementation goes here
     printf("GetAllScenes\n");
   }
@@ -527,7 +537,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("RemoveSceneValue\n");
   }
 
-  void SceneGetValues(std::vector<RemoteValueID> & _return, const int8_t _sceneId) {
+  void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId) {
     // Your implementation goes here
     printf("SceneGetValues\n");
   }

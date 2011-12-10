@@ -24,7 +24,7 @@ MANAGER_INCLUDES = [
 #
 files = [
     "/home/ekarak/ozw/thrift4ozw/gen-cpp/RemoteManager_server.skeleton.cpp",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/src/Manager.cpp"
+    "/home/ekarak/ozw/open-zwave-read-only/cpp/src/Manager.h"
 ]
 puts "Parsing:" + files.join("\n\t")
 RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES)
@@ -42,6 +42,10 @@ lineno = RootNode.classes("RemoteManagerHandler").constructors[1]['line'].to_i
 # add our extra hidden sauce
 #lineno = foo.classes("RemoteManagerHandler").constructors[1]['endline'].to_i
 #output[lineno] = Converter
+
+a = RootNode.classes("RemoteManagerHandler").methods.find(:access => :public)
+b = RootNode.namespaces("OpenZWave").classes("Manager").methods.find(:access => :public)
+puts "RemoteManagerHandler: #{a.size} public methods, OpenZWave::Manager: #{b.size} public methods"
 
 RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     # find line number, insert critical section enter code
@@ -107,85 +111,80 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     #   (C++)       bool GetValueListItems( ValueID const& _id, vector<string>* o_value );
     #   (thrift)    Bool_ListString GetValueListItems( 1:RemoteValueID _id );
     #   (skeleton)  void GetValueListItems(Bool_ListString& _return, const RemoteValueID _id)
-    #   ozw_types.h:class Bool_ListString { 
+    # where the Thrift definition for Bool_ListString is:
+    #   (ozw_types.h):class Bool_ListString { 
     #       bool retval; 
     #       std::vector<std::string>  arg;
     #   }
     #
     
-    # is the skeleton function's return type composite?
-    composite_return = false
-    # 
-    function_return_clause = ''
     #
-    returnarg = nil
+    # STEP 1. Map arguments from target (OpenZWave::Manager) to source (skeleton server)
     #
-    last_argument = nil
-    
-    # gather all required arguments
-    # key = target_method_argument (RbGCCXML::Node)
-    # value => source argument cpp definition (string) - e.g. "(cast) argname"
-    
-    #arr = target_method.arguments.map {|tma| meth.arguments.select { |a| a.name == tma.name}[0]}
-    
-    args = {} # source node => target node
-    meth.arguments.each {|a|   args[a] = target_method.arguments.select { |tma| a.name == tma.name}[0]}
-
-    #
-    # create the function call
-    #
-    arg_array = []
-    #
-    meth.arguments.each { | src_arg|
-        tgt_arg= args[src_arg]
-        puts "src=#{src_arg and src_arg.qualified_name} \t tgt=#{tgt_arg and tgt_arg.qualified_name}"
-        
-        if tgt_arg then # argument names matched
-            ampersand = (tgt_arg.cpp_type.to_cpp.include?('*') ? '&' : '')
-            # maybe it's an OpenZWave::ValueID ???
-            if (tgt_arg.to_cpp =~ /ValueID/) then
-                arg_array <<  ValueID_converter(src_arg.name)
-            else 
-                arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}#{src_arg.name}"
-            end
-        else # source argument not found by name, search elsewhere
-            puts "method #{meth.name}, argument #{src_arg.name} not found by name..."
-            # 1) try searching through thrift's special '_return' argument (if there is one)
-            if (returnarg = meth.arguments.select{ |a| a.name == "_return"}[0]).is_a?(RbGCCXML::Argument) then
-                puts "Thrift special _return argument detected!"
-                last_argument_type = target_method.arguments[-1].cpp_type.to_cpp
-                ampersand = (last_argument_type.include?('*') ? '&' : '')
-                if md = OverloadedRE.match(returnarg.cpp_type.to_cpp)  then
-                    # ...and it's a complex type (Thrift struct)
-                    # 1st match is the function's return type
-                    composite_return = true
-                    function_return_clause = " _return.retval = "
-                    # 2nd match is function's last argument type
-                    last_argument = "(#{last_argument_type}) #{ampersand}_return#{composite_return ? '.arg' : ''}"
-                else
-                    # _return is a simple data type used 
-                    if meth.return_type.name == "void" then
-                        #_return is used as the main function return clause
-                        function_return_clause = " _return = "
-                    else
-                        # _return is the last argument to target function 
-                        last_argument = "(#{last_argument_type}) #{ampersand}_return"
-                    end
-                end            
-            else
-                raise "ERROR:couldn't match argument '#{src_arg.name}' in method '#{meth.name}'!!!"
-            end
+    argmap = {}  
+        # KEY: target argument node
+        # VALUE: hash with
+        #       :descriptor => source argument DESCRIPTOR STRING (eg "_return._className")
+        #       :node => the actual source argument node (Argument or Field)
+    target_method.arguments.each {|a|   
+        # 1) match directly by name
+        if (arg = meth.arguments.find(:name => a.name )).is_a?RbGCCXML::Argument then
+            argmap[a] = {}
+            argmap[a][:descriptor] = arg.name
+            argmap[a][:node] = arg
+        # 2) else, match as a member of Thrift's special "_return" argument (class struct)
+        elsif (_ret = meth.arguments.find(:name => "_return" )) and (_ret.cpp_type.base_type.is_a?RbGCCXML::Class) and
+            (arg = _ret.cpp_type.base_type.variables.find(:name => a.name)).is_a?RbGCCXML::Field  then
+            argmap[a] = {}
+            argmap[a][:descriptor] = "_return.#{a.name}"
+            argmap[a][:node] = arg
+        else
+            raise ("Reverse argument mapping: couldn't resolve argument '#{a.name}' in method '#{target_method.name}'!!!")
         end
     }
 
-    # add last argument to array (it's about time...)
-    arg_array << last_argument
-    # unleash the beast
-    fcall = "#{function_return_clause} mgr->#{target_method.name}(#{arg_array.compact.join(', ')})"
+    #
+    # STEP 2.  Resolve the function call's return clause
+    #
+    function_return_clause = ''
+    if (_return = meth.arguments.find(:name => '_return')).is_a?RbGCCXML::Argument then
+        puts "Thrift special _return argument detected!" if $DEBUG
+        if (_return.cpp_type.base_type.is_a?RbGCCXML::Class) and 
+            (retval = _return.cpp_type.base_type.variables.find(:name => 'retval')) and
+            (retval.is_a?RbGCCXML::Field)   then
+                function_return_clause = "_return.retval = "
+        else
+            unless meth.return_type.name == "void" then
+                function_return_clause = "_return = "
+            end
+        end
+    end
 
     #
-    # FUNCTION RETURN CLAUSE
+    # STEP 3. Prepare argument array (ordered by target_method's argument order)
     #
+    arg_array = []
+    target_method.arguments.each { |tgt_arg|
+        if (hsh = argmap[tgt_arg]) then
+            src_arg = hsh[:node]
+            descriptor = hsh[:descriptor]
+            #puts "  src=#{descriptor}\ttgt=#{tgt_arg.qualified_name}"
+            ampersand = (tgt_arg.cpp_type.to_cpp.include?('*') ? '&' : '')
+            case src_arg.to_cpp
+                when /ValueID/
+                    arg_array <<  ValueID_converter(descriptor)
+                else
+                    arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}#{descriptor}"
+                    size_src = src_arg.cpp_type.base_type['size'].to_i
+                    size_tgt = tgt_arg.cpp_type.base_type['size'].to_i
+                    # sanity check
+                    puts "WARNING!!! method '#{meth.name}': Argument '#{descriptor}' size mismatch (src=#{size_src} tgt=#{size_tgt}) - CHECK GENERATED CODE!" unless size_src == size_tgt
+            end
+        end
+    }
+    
+    # Unleash the beast!
+    fcall = "#{function_return_clause} mgr->#{target_method.name}(#{arg_array.compact.join(', ')})"
     case meth.return_type.name 
     when "void"
         output[lineno+1] =  "\t#{fcall};\n"
@@ -205,4 +204,6 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
 output[0] = "// Automatically generated OpenZWave::Manager_server wrapper\n"
 output[1] = "// (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>\n"
 # write out the generated file
+puts "Writing generated server...."
 File.new("gen-cpp/RemoteManager_server.cpp", File::CREAT|File::TRUNC|File::RDWR, 0644) << output.join
+puts "Done!"

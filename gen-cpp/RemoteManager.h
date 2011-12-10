@@ -17,6 +17,7 @@ class RemoteManagerIf {
   virtual void WriteConfig(const int32_t _homeId) = 0;
   virtual int8_t GetControllerNodeId(const int32_t _homeId) = 0;
   virtual bool IsPrimaryController(const int32_t _homeId) = 0;
+  virtual bool IsStaticUpdateController(const int32_t _homeId) = 0;
   virtual bool IsBridgeController(const int32_t _homeId) = 0;
   virtual void GetLibraryVersion(std::string& _return, const int32_t _homeId) = 0;
   virtual void GetLibraryTypeName(std::string& _return, const int32_t _homeId) = 0;
@@ -54,6 +55,7 @@ class RemoteManagerIf {
   virtual void SetNodeOff(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual void SetNodeLevel(const int32_t _homeId, const int8_t _nodeId, const int8_t _level) = 0;
   virtual bool IsNodeInfoReceived(const int32_t _homeId, const int8_t _nodeId) = 0;
+  virtual void GetNodeClassInformation(Bool_GetNodeClassInformation& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId) = 0;
   virtual void GetValueLabel(std::string& _return, const RemoteValueID _id) = 0;
   virtual void SetValueLabel(const RemoteValueID _id, const std::string& _value) = 0;
   virtual void GetValueUnits(std::string& _return, const RemoteValueID _id) = 0;
@@ -95,7 +97,7 @@ class RemoteManagerIf {
   virtual void RequestConfigParam(const int32_t _homeId, const int8_t _nodeId, const int8_t _param) = 0;
   virtual void RequestAllConfigParams(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNumGroups(const int32_t _homeId, const int8_t _nodeId) = 0;
-  virtual void GetAssociations(std::vector<int8_t> & _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) = 0;
+  virtual void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) = 0;
   virtual int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) = 0;
   virtual void GetGroupLabel(std::string& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) = 0;
   virtual void AddAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId) = 0;
@@ -103,7 +105,7 @@ class RemoteManagerIf {
   virtual void ResetController(const int32_t _homeId) = 0;
   virtual void SoftReset(const int32_t _homeId) = 0;
   virtual int8_t GetNumScenes() = 0;
-  virtual void GetAllScenes(std::vector<int8_t> & _return) = 0;
+  virtual void GetAllScenes(GetAllScenesReturnStruct& _return) = 0;
   virtual int8_t CreateScene() = 0;
   virtual bool RemoveScene(const int8_t _sceneId) = 0;
   virtual bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) = 0;
@@ -115,7 +117,7 @@ class RemoteManagerIf {
   virtual bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) = 0;
   virtual bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) = 0;
   virtual bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValues(std::vector<RemoteValueID> & _return, const int8_t _sceneId) = 0;
+  virtual void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId) = 0;
   virtual void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
   virtual void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
   virtual void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
@@ -149,6 +151,10 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     return _return;
   }
   bool IsPrimaryController(const int32_t /* _homeId */) {
+    bool _return = false;
+    return _return;
+  }
+  bool IsStaticUpdateController(const int32_t /* _homeId */) {
     bool _return = false;
     return _return;
   }
@@ -280,6 +286,9 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   bool IsNodeInfoReceived(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
     bool _return = false;
     return _return;
+  }
+  void GetNodeClassInformation(Bool_GetNodeClassInformation& /* _return */, const int32_t /* _homeId */, const int8_t /* _nodeId */, const int8_t /* _commandClassId */) {
+    return;
   }
   void GetValueLabel(std::string& /* _return */, const RemoteValueID /* _id */) {
     return;
@@ -423,7 +432,7 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     int8_t _return = 0;
     return _return;
   }
-  void GetAssociations(std::vector<int8_t> & /* _return */, const int32_t /* _homeId */, const int8_t /* _nodeId */, const int8_t /* _groupIdx */) {
+  void GetAssociations(GetAssociationsReturnStruct& /* _return */, const int32_t /* _homeId */, const int8_t /* _nodeId */, const int8_t /* _groupIdx */) {
     return;
   }
   int8_t GetMaxAssociations(const int32_t /* _homeId */, const int8_t /* _nodeId */, const int8_t /* _groupIdx */) {
@@ -449,7 +458,7 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     int8_t _return = 0;
     return _return;
   }
-  void GetAllScenes(std::vector<int8_t> & /* _return */) {
+  void GetAllScenes(GetAllScenesReturnStruct& /* _return */) {
     return;
   }
   int8_t CreateScene() {
@@ -496,7 +505,7 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     bool _return = false;
     return _return;
   }
-  void SceneGetValues(std::vector<RemoteValueID> & /* _return */, const int8_t /* _sceneId */) {
+  void SceneGetValues(SceneGetValuesReturnStruct& /* _return */, const int8_t /* _sceneId */) {
     return;
   }
   void SceneGetValueAsBool(Bool_Bool& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
@@ -870,6 +879,114 @@ class RemoteManager_IsPrimaryController_presult {
   bool* success;
 
   _RemoteManager_IsPrimaryController_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_IsStaticUpdateController_args__isset {
+  _RemoteManager_IsStaticUpdateController_args__isset() : _homeId(false) {}
+  bool _homeId;
+} _RemoteManager_IsStaticUpdateController_args__isset;
+
+class RemoteManager_IsStaticUpdateController_args {
+ public:
+
+  RemoteManager_IsStaticUpdateController_args() : _homeId(0) {
+  }
+
+  virtual ~RemoteManager_IsStaticUpdateController_args() throw() {}
+
+  int32_t _homeId;
+
+  _RemoteManager_IsStaticUpdateController_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  bool operator == (const RemoteManager_IsStaticUpdateController_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsStaticUpdateController_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsStaticUpdateController_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_IsStaticUpdateController_pargs {
+ public:
+
+
+  virtual ~RemoteManager_IsStaticUpdateController_pargs() throw() {}
+
+  const int32_t* _homeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsStaticUpdateController_result__isset {
+  _RemoteManager_IsStaticUpdateController_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsStaticUpdateController_result__isset;
+
+class RemoteManager_IsStaticUpdateController_result {
+ public:
+
+  RemoteManager_IsStaticUpdateController_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_IsStaticUpdateController_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_IsStaticUpdateController_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_IsStaticUpdateController_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsStaticUpdateController_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsStaticUpdateController_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsStaticUpdateController_presult__isset {
+  _RemoteManager_IsStaticUpdateController_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsStaticUpdateController_presult__isset;
+
+class RemoteManager_IsStaticUpdateController_presult {
+ public:
+
+
+  virtual ~RemoteManager_IsStaticUpdateController_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_IsStaticUpdateController_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -4989,6 +5106,132 @@ class RemoteManager_IsNodeInfoReceived_presult {
   bool* success;
 
   _RemoteManager_IsNodeInfoReceived_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_GetNodeClassInformation_args__isset {
+  _RemoteManager_GetNodeClassInformation_args__isset() : _homeId(false), _nodeId(false), _commandClassId(false) {}
+  bool _homeId;
+  bool _nodeId;
+  bool _commandClassId;
+} _RemoteManager_GetNodeClassInformation_args__isset;
+
+class RemoteManager_GetNodeClassInformation_args {
+ public:
+
+  RemoteManager_GetNodeClassInformation_args() : _homeId(0), _nodeId(0), _commandClassId(0) {
+  }
+
+  virtual ~RemoteManager_GetNodeClassInformation_args() throw() {}
+
+  int32_t _homeId;
+  int8_t _nodeId;
+  int8_t _commandClassId;
+
+  _RemoteManager_GetNodeClassInformation_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  void __set__commandClassId(const int8_t val) {
+    _commandClassId = val;
+  }
+
+  bool operator == (const RemoteManager_GetNodeClassInformation_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    if (!(_commandClassId == rhs._commandClassId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_GetNodeClassInformation_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_GetNodeClassInformation_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_GetNodeClassInformation_pargs {
+ public:
+
+
+  virtual ~RemoteManager_GetNodeClassInformation_pargs() throw() {}
+
+  const int32_t* _homeId;
+  const int8_t* _nodeId;
+  const int8_t* _commandClassId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_GetNodeClassInformation_result__isset {
+  _RemoteManager_GetNodeClassInformation_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_GetNodeClassInformation_result__isset;
+
+class RemoteManager_GetNodeClassInformation_result {
+ public:
+
+  RemoteManager_GetNodeClassInformation_result() {
+  }
+
+  virtual ~RemoteManager_GetNodeClassInformation_result() throw() {}
+
+  Bool_GetNodeClassInformation success;
+
+  _RemoteManager_GetNodeClassInformation_result__isset __isset;
+
+  void __set_success(const Bool_GetNodeClassInformation& val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_GetNodeClassInformation_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_GetNodeClassInformation_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_GetNodeClassInformation_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_GetNodeClassInformation_presult__isset {
+  _RemoteManager_GetNodeClassInformation_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_GetNodeClassInformation_presult__isset;
+
+class RemoteManager_GetNodeClassInformation_presult {
+ public:
+
+
+  virtual ~RemoteManager_GetNodeClassInformation_presult() throw() {}
+
+  Bool_GetNodeClassInformation* success;
+
+  _RemoteManager_GetNodeClassInformation_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -9560,11 +9803,11 @@ class RemoteManager_GetAssociations_result {
 
   virtual ~RemoteManager_GetAssociations_result() throw() {}
 
-  std::vector<int8_t>  success;
+  GetAssociationsReturnStruct success;
 
   _RemoteManager_GetAssociations_result__isset __isset;
 
-  void __set_success(const std::vector<int8_t> & val) {
+  void __set_success(const GetAssociationsReturnStruct& val) {
     success = val;
   }
 
@@ -9596,7 +9839,7 @@ class RemoteManager_GetAssociations_presult {
 
   virtual ~RemoteManager_GetAssociations_presult() throw() {}
 
-  std::vector<int8_t> * success;
+  GetAssociationsReturnStruct* success;
 
   _RemoteManager_GetAssociations_presult__isset __isset;
 
@@ -10406,11 +10649,11 @@ class RemoteManager_GetAllScenes_result {
 
   virtual ~RemoteManager_GetAllScenes_result() throw() {}
 
-  std::vector<int8_t>  success;
+  GetAllScenesReturnStruct success;
 
   _RemoteManager_GetAllScenes_result__isset __isset;
 
-  void __set_success(const std::vector<int8_t> & val) {
+  void __set_success(const GetAllScenesReturnStruct& val) {
     success = val;
   }
 
@@ -10442,7 +10685,7 @@ class RemoteManager_GetAllScenes_presult {
 
   virtual ~RemoteManager_GetAllScenes_presult() throw() {}
 
-  std::vector<int8_t> * success;
+  GetAllScenesReturnStruct* success;
 
   _RemoteManager_GetAllScenes_presult__isset __isset;
 
@@ -11841,11 +12084,11 @@ class RemoteManager_SceneGetValues_result {
 
   virtual ~RemoteManager_SceneGetValues_result() throw() {}
 
-  std::vector<RemoteValueID>  success;
+  SceneGetValuesReturnStruct success;
 
   _RemoteManager_SceneGetValues_result__isset __isset;
 
-  void __set_success(const std::vector<RemoteValueID> & val) {
+  void __set_success(const SceneGetValuesReturnStruct& val) {
     success = val;
   }
 
@@ -11877,7 +12120,7 @@ class RemoteManager_SceneGetValues_presult {
 
   virtual ~RemoteManager_SceneGetValues_presult() throw() {}
 
-  std::vector<RemoteValueID> * success;
+  SceneGetValuesReturnStruct* success;
 
   _RemoteManager_SceneGetValues_presult__isset __isset;
 
@@ -14279,6 +14522,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool IsPrimaryController(const int32_t _homeId);
   void send_IsPrimaryController(const int32_t _homeId);
   bool recv_IsPrimaryController();
+  bool IsStaticUpdateController(const int32_t _homeId);
+  void send_IsStaticUpdateController(const int32_t _homeId);
+  bool recv_IsStaticUpdateController();
   bool IsBridgeController(const int32_t _homeId);
   void send_IsBridgeController(const int32_t _homeId);
   bool recv_IsBridgeController();
@@ -14390,6 +14636,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool IsNodeInfoReceived(const int32_t _homeId, const int8_t _nodeId);
   void send_IsNodeInfoReceived(const int32_t _homeId, const int8_t _nodeId);
   bool recv_IsNodeInfoReceived();
+  void GetNodeClassInformation(Bool_GetNodeClassInformation& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId);
+  void send_GetNodeClassInformation(const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId);
+  void recv_GetNodeClassInformation(Bool_GetNodeClassInformation& _return);
   void GetValueLabel(std::string& _return, const RemoteValueID _id);
   void send_GetValueLabel(const RemoteValueID _id);
   void recv_GetValueLabel(std::string& _return);
@@ -14513,9 +14762,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   int8_t GetNumGroups(const int32_t _homeId, const int8_t _nodeId);
   void send_GetNumGroups(const int32_t _homeId, const int8_t _nodeId);
   int8_t recv_GetNumGroups();
-  void GetAssociations(std::vector<int8_t> & _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx);
+  void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx);
   void send_GetAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx);
-  void recv_GetAssociations(std::vector<int8_t> & _return);
+  void recv_GetAssociations(GetAssociationsReturnStruct& _return);
   int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx);
   void send_GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx);
   int8_t recv_GetMaxAssociations();
@@ -14537,9 +14786,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   int8_t GetNumScenes();
   void send_GetNumScenes();
   int8_t recv_GetNumScenes();
-  void GetAllScenes(std::vector<int8_t> & _return);
+  void GetAllScenes(GetAllScenesReturnStruct& _return);
   void send_GetAllScenes();
-  void recv_GetAllScenes(std::vector<int8_t> & _return);
+  void recv_GetAllScenes(GetAllScenesReturnStruct& _return);
   int8_t CreateScene();
   void send_CreateScene();
   int8_t recv_CreateScene();
@@ -14573,9 +14822,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId);
   void send_RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId);
   bool recv_RemoveSceneValue();
-  void SceneGetValues(std::vector<RemoteValueID> & _return, const int8_t _sceneId);
+  void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId);
   void send_SceneGetValues(const int8_t _sceneId);
-  void recv_SceneGetValues(std::vector<RemoteValueID> & _return);
+  void recv_SceneGetValues(SceneGetValuesReturnStruct& _return);
   void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId);
   void send_SceneGetValueAsBool(const int8_t _sceneId, const RemoteValueID _valueId);
   void recv_SceneGetValueAsBool(Bool_Bool& _return);
@@ -14652,6 +14901,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_WriteConfig(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetControllerNodeId(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsPrimaryController(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_IsStaticUpdateController(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsBridgeController(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetLibraryVersion(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetLibraryTypeName(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -14689,6 +14939,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_SetNodeOff(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SetNodeLevel(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsNodeInfoReceived(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_GetNodeClassInformation(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetValueLabel(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SetValueLabel(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetValueUnits(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -14777,6 +15028,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["WriteConfig"] = &RemoteManagerProcessor::process_WriteConfig;
     processMap_["GetControllerNodeId"] = &RemoteManagerProcessor::process_GetControllerNodeId;
     processMap_["IsPrimaryController"] = &RemoteManagerProcessor::process_IsPrimaryController;
+    processMap_["IsStaticUpdateController"] = &RemoteManagerProcessor::process_IsStaticUpdateController;
     processMap_["IsBridgeController"] = &RemoteManagerProcessor::process_IsBridgeController;
     processMap_["GetLibraryVersion"] = &RemoteManagerProcessor::process_GetLibraryVersion;
     processMap_["GetLibraryTypeName"] = &RemoteManagerProcessor::process_GetLibraryTypeName;
@@ -14814,6 +15066,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["SetNodeOff"] = &RemoteManagerProcessor::process_SetNodeOff;
     processMap_["SetNodeLevel"] = &RemoteManagerProcessor::process_SetNodeLevel;
     processMap_["IsNodeInfoReceived"] = &RemoteManagerProcessor::process_IsNodeInfoReceived;
+    processMap_["GetNodeClassInformation"] = &RemoteManagerProcessor::process_GetNodeClassInformation;
     processMap_["GetValueLabel"] = &RemoteManagerProcessor::process_GetValueLabel;
     processMap_["SetValueLabel"] = &RemoteManagerProcessor::process_SetValueLabel;
     processMap_["GetValueUnits"] = &RemoteManagerProcessor::process_GetValueUnits;
@@ -14939,6 +15192,17 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->IsPrimaryController(_homeId);
       } else {
         ifaces_[i]->IsPrimaryController(_homeId);
+      }
+    }
+  }
+
+  bool IsStaticUpdateController(const int32_t _homeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->IsStaticUpdateController(_homeId);
+      } else {
+        ifaces_[i]->IsStaticUpdateController(_homeId);
       }
     }
   }
@@ -15325,6 +15589,18 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->IsNodeInfoReceived(_homeId, _nodeId);
       } else {
         ifaces_[i]->IsNodeInfoReceived(_homeId, _nodeId);
+      }
+    }
+  }
+
+  void GetNodeClassInformation(Bool_GetNodeClassInformation& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->GetNodeClassInformation(_return, _homeId, _nodeId, _commandClassId);
+        return;
+      } else {
+        ifaces_[i]->GetNodeClassInformation(_return, _homeId, _nodeId, _commandClassId);
       }
     }
   }
@@ -15762,7 +16038,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetAssociations(std::vector<int8_t> & _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
+  void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15836,7 +16112,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetAllScenes(std::vector<int8_t> & _return) {
+  void GetAllScenes(GetAllScenesReturnStruct& _return) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15969,7 +16245,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValues(std::vector<RemoteValueID> & _return, const int8_t _sceneId) {
+  void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
