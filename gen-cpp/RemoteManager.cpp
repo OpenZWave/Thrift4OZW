@@ -1552,8 +1552,8 @@ uint32_t RemoteManager_EnablePoll_args::read(::apache::thrift::protocol::TProtoc
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -1574,8 +1574,8 @@ uint32_t RemoteManager_EnablePoll_args::read(::apache::thrift::protocol::TProtoc
 uint32_t RemoteManager_EnablePoll_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_EnablePoll_args");
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1585,8 +1585,8 @@ uint32_t RemoteManager_EnablePoll_args::write(::apache::thrift::protocol::TProto
 uint32_t RemoteManager_EnablePoll_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_EnablePoll_pargs");
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1710,8 +1710,8 @@ uint32_t RemoteManager_DisablePoll_args::read(::apache::thrift::protocol::TProto
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -1732,8 +1732,8 @@ uint32_t RemoteManager_DisablePoll_args::read(::apache::thrift::protocol::TProto
 uint32_t RemoteManager_DisablePoll_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_DisablePoll_args");
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1743,8 +1743,8 @@ uint32_t RemoteManager_DisablePoll_args::write(::apache::thrift::protocol::TProt
 uint32_t RemoteManager_DisablePoll_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_DisablePoll_pargs");
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1868,8 +1868,8 @@ uint32_t RemoteManager_isPolled_args::read(::apache::thrift::protocol::TProtocol
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -1890,8 +1890,8 @@ uint32_t RemoteManager_isPolled_args::read(::apache::thrift::protocol::TProtocol
 uint32_t RemoteManager_isPolled_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_isPolled_args");
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1901,8 +1901,8 @@ uint32_t RemoteManager_isPolled_args::write(::apache::thrift::protocol::TProtoco
 uint32_t RemoteManager_isPolled_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_isPolled_pargs");
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -6951,8 +6951,8 @@ uint32_t RemoteManager_GetValueLabel_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -6973,8 +6973,8 @@ uint32_t RemoteManager_GetValueLabel_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_GetValueLabel_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueLabel_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -6984,8 +6984,8 @@ uint32_t RemoteManager_GetValueLabel_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_GetValueLabel_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueLabel_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -7109,8 +7109,8 @@ uint32_t RemoteManager_SetValueLabel_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -7139,8 +7139,8 @@ uint32_t RemoteManager_SetValueLabel_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_SetValueLabel_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueLabel_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString(this->_value);
@@ -7153,8 +7153,8 @@ uint32_t RemoteManager_SetValueLabel_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValueLabel_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueLabel_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString((*(this->_value)));
@@ -7260,8 +7260,8 @@ uint32_t RemoteManager_GetValueUnits_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -7282,8 +7282,8 @@ uint32_t RemoteManager_GetValueUnits_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_GetValueUnits_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueUnits_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -7293,8 +7293,8 @@ uint32_t RemoteManager_GetValueUnits_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_GetValueUnits_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueUnits_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -7418,8 +7418,8 @@ uint32_t RemoteManager_SetValueUnits_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -7448,8 +7448,8 @@ uint32_t RemoteManager_SetValueUnits_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_SetValueUnits_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueUnits_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString(this->_value);
@@ -7462,8 +7462,8 @@ uint32_t RemoteManager_SetValueUnits_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValueUnits_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueUnits_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString((*(this->_value)));
@@ -7569,8 +7569,8 @@ uint32_t RemoteManager_GetValueHelp_args::read(::apache::thrift::protocol::TProt
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -7591,8 +7591,8 @@ uint32_t RemoteManager_GetValueHelp_args::read(::apache::thrift::protocol::TProt
 uint32_t RemoteManager_GetValueHelp_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueHelp_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -7602,8 +7602,8 @@ uint32_t RemoteManager_GetValueHelp_args::write(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_GetValueHelp_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueHelp_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -7727,8 +7727,8 @@ uint32_t RemoteManager_SetValueHelp_args::read(::apache::thrift::protocol::TProt
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -7757,8 +7757,8 @@ uint32_t RemoteManager_SetValueHelp_args::read(::apache::thrift::protocol::TProt
 uint32_t RemoteManager_SetValueHelp_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueHelp_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString(this->_value);
@@ -7771,8 +7771,8 @@ uint32_t RemoteManager_SetValueHelp_args::write(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_SetValueHelp_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueHelp_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString((*(this->_value)));
@@ -7878,8 +7878,8 @@ uint32_t RemoteManager_GetValueMin_args::read(::apache::thrift::protocol::TProto
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -7900,8 +7900,8 @@ uint32_t RemoteManager_GetValueMin_args::read(::apache::thrift::protocol::TProto
 uint32_t RemoteManager_GetValueMin_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueMin_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -7911,8 +7911,8 @@ uint32_t RemoteManager_GetValueMin_args::write(::apache::thrift::protocol::TProt
 uint32_t RemoteManager_GetValueMin_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueMin_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8036,8 +8036,8 @@ uint32_t RemoteManager_GetValueMax_args::read(::apache::thrift::protocol::TProto
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -8058,8 +8058,8 @@ uint32_t RemoteManager_GetValueMax_args::read(::apache::thrift::protocol::TProto
 uint32_t RemoteManager_GetValueMax_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueMax_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8069,8 +8069,8 @@ uint32_t RemoteManager_GetValueMax_args::write(::apache::thrift::protocol::TProt
 uint32_t RemoteManager_GetValueMax_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueMax_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8194,8 +8194,8 @@ uint32_t RemoteManager_IsValueReadOnly_args::read(::apache::thrift::protocol::TP
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -8216,8 +8216,8 @@ uint32_t RemoteManager_IsValueReadOnly_args::read(::apache::thrift::protocol::TP
 uint32_t RemoteManager_IsValueReadOnly_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_IsValueReadOnly_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8227,8 +8227,8 @@ uint32_t RemoteManager_IsValueReadOnly_args::write(::apache::thrift::protocol::T
 uint32_t RemoteManager_IsValueReadOnly_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_IsValueReadOnly_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8352,8 +8352,8 @@ uint32_t RemoteManager_IsValueWriteOnly_args::read(::apache::thrift::protocol::T
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -8374,8 +8374,8 @@ uint32_t RemoteManager_IsValueWriteOnly_args::read(::apache::thrift::protocol::T
 uint32_t RemoteManager_IsValueWriteOnly_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_IsValueWriteOnly_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8385,8 +8385,8 @@ uint32_t RemoteManager_IsValueWriteOnly_args::write(::apache::thrift::protocol::
 uint32_t RemoteManager_IsValueWriteOnly_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_IsValueWriteOnly_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8510,8 +8510,8 @@ uint32_t RemoteManager_IsValueSet_args::read(::apache::thrift::protocol::TProtoc
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -8532,8 +8532,8 @@ uint32_t RemoteManager_IsValueSet_args::read(::apache::thrift::protocol::TProtoc
 uint32_t RemoteManager_IsValueSet_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_IsValueSet_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8543,8 +8543,8 @@ uint32_t RemoteManager_IsValueSet_args::write(::apache::thrift::protocol::TProto
 uint32_t RemoteManager_IsValueSet_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_IsValueSet_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8668,8 +8668,8 @@ uint32_t RemoteManager_GetValueAsBool_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -8690,8 +8690,8 @@ uint32_t RemoteManager_GetValueAsBool_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_GetValueAsBool_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsBool_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8701,8 +8701,8 @@ uint32_t RemoteManager_GetValueAsBool_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_GetValueAsBool_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsBool_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8826,8 +8826,8 @@ uint32_t RemoteManager_GetValueAsByte_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -8848,8 +8848,8 @@ uint32_t RemoteManager_GetValueAsByte_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_GetValueAsByte_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsByte_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8859,8 +8859,8 @@ uint32_t RemoteManager_GetValueAsByte_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_GetValueAsByte_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsByte_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -8984,8 +8984,8 @@ uint32_t RemoteManager_GetValueAsFloat_args::read(::apache::thrift::protocol::TP
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9006,8 +9006,8 @@ uint32_t RemoteManager_GetValueAsFloat_args::read(::apache::thrift::protocol::TP
 uint32_t RemoteManager_GetValueAsFloat_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsFloat_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9017,8 +9017,8 @@ uint32_t RemoteManager_GetValueAsFloat_args::write(::apache::thrift::protocol::T
 uint32_t RemoteManager_GetValueAsFloat_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsFloat_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9142,8 +9142,8 @@ uint32_t RemoteManager_GetValueAsInt_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9164,8 +9164,8 @@ uint32_t RemoteManager_GetValueAsInt_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_GetValueAsInt_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsInt_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9175,8 +9175,8 @@ uint32_t RemoteManager_GetValueAsInt_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_GetValueAsInt_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsInt_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9300,8 +9300,8 @@ uint32_t RemoteManager_GetValueAsShort_args::read(::apache::thrift::protocol::TP
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9322,8 +9322,8 @@ uint32_t RemoteManager_GetValueAsShort_args::read(::apache::thrift::protocol::TP
 uint32_t RemoteManager_GetValueAsShort_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsShort_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9333,8 +9333,8 @@ uint32_t RemoteManager_GetValueAsShort_args::write(::apache::thrift::protocol::T
 uint32_t RemoteManager_GetValueAsShort_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsShort_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9458,8 +9458,8 @@ uint32_t RemoteManager_GetValueAsString_args::read(::apache::thrift::protocol::T
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9480,8 +9480,8 @@ uint32_t RemoteManager_GetValueAsString_args::read(::apache::thrift::protocol::T
 uint32_t RemoteManager_GetValueAsString_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsString_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9491,8 +9491,8 @@ uint32_t RemoteManager_GetValueAsString_args::write(::apache::thrift::protocol::
 uint32_t RemoteManager_GetValueAsString_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueAsString_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9616,8 +9616,8 @@ uint32_t RemoteManager_GetValueListSelection_String_args::read(::apache::thrift:
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9638,8 +9638,8 @@ uint32_t RemoteManager_GetValueListSelection_String_args::read(::apache::thrift:
 uint32_t RemoteManager_GetValueListSelection_String_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueListSelection_String_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9649,8 +9649,8 @@ uint32_t RemoteManager_GetValueListSelection_String_args::write(::apache::thrift
 uint32_t RemoteManager_GetValueListSelection_String_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueListSelection_String_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9774,8 +9774,8 @@ uint32_t RemoteManager_GetValueListSelection_Int32_args::read(::apache::thrift::
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9796,8 +9796,8 @@ uint32_t RemoteManager_GetValueListSelection_Int32_args::read(::apache::thrift::
 uint32_t RemoteManager_GetValueListSelection_Int32_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueListSelection_Int32_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9807,8 +9807,8 @@ uint32_t RemoteManager_GetValueListSelection_Int32_args::write(::apache::thrift:
 uint32_t RemoteManager_GetValueListSelection_Int32_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueListSelection_Int32_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9932,8 +9932,8 @@ uint32_t RemoteManager_GetValueListItems_args::read(::apache::thrift::protocol::
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -9954,8 +9954,8 @@ uint32_t RemoteManager_GetValueListItems_args::read(::apache::thrift::protocol::
 uint32_t RemoteManager_GetValueListItems_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueListItems_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -9965,8 +9965,8 @@ uint32_t RemoteManager_GetValueListItems_args::write(::apache::thrift::protocol:
 uint32_t RemoteManager_GetValueListItems_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueListItems_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -10090,8 +10090,8 @@ uint32_t RemoteManager_GetValueFloatPrecision_args::read(::apache::thrift::proto
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -10112,8 +10112,8 @@ uint32_t RemoteManager_GetValueFloatPrecision_args::read(::apache::thrift::proto
 uint32_t RemoteManager_GetValueFloatPrecision_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueFloatPrecision_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -10123,8 +10123,8 @@ uint32_t RemoteManager_GetValueFloatPrecision_args::write(::apache::thrift::prot
 uint32_t RemoteManager_GetValueFloatPrecision_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetValueFloatPrecision_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -10248,8 +10248,8 @@ uint32_t RemoteManager_SetValue_Bool_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -10278,8 +10278,8 @@ uint32_t RemoteManager_SetValue_Bool_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_SetValue_Bool_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Bool_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BOOL, 2);
   xfer += oprot->writeBool(this->_value);
@@ -10292,8 +10292,8 @@ uint32_t RemoteManager_SetValue_Bool_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValue_Bool_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Bool_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BOOL, 2);
   xfer += oprot->writeBool((*(this->_value)));
@@ -10420,8 +10420,8 @@ uint32_t RemoteManager_SetValue_UInt8_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -10450,8 +10450,8 @@ uint32_t RemoteManager_SetValue_UInt8_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValue_UInt8_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_UInt8_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte(this->_value);
@@ -10464,8 +10464,8 @@ uint32_t RemoteManager_SetValue_UInt8_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetValue_UInt8_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_UInt8_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte((*(this->_value)));
@@ -10592,8 +10592,8 @@ uint32_t RemoteManager_SetValue_Float_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -10622,8 +10622,8 @@ uint32_t RemoteManager_SetValue_Float_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValue_Float_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Float_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_DOUBLE, 2);
   xfer += oprot->writeDouble(this->_value);
@@ -10636,8 +10636,8 @@ uint32_t RemoteManager_SetValue_Float_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetValue_Float_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Float_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_DOUBLE, 2);
   xfer += oprot->writeDouble((*(this->_value)));
@@ -10764,8 +10764,8 @@ uint32_t RemoteManager_SetValue_Int32_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -10794,8 +10794,8 @@ uint32_t RemoteManager_SetValue_Int32_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValue_Int32_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Int32_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 2);
   xfer += oprot->writeI32(this->_value);
@@ -10808,8 +10808,8 @@ uint32_t RemoteManager_SetValue_Int32_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetValue_Int32_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Int32_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 2);
   xfer += oprot->writeI32((*(this->_value)));
@@ -10936,8 +10936,8 @@ uint32_t RemoteManager_SetValue_Int16_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -10966,8 +10966,8 @@ uint32_t RemoteManager_SetValue_Int16_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetValue_Int16_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Int16_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I16, 2);
   xfer += oprot->writeI16(this->_value);
@@ -10980,8 +10980,8 @@ uint32_t RemoteManager_SetValue_Int16_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetValue_Int16_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_Int16_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I16, 2);
   xfer += oprot->writeI16((*(this->_value)));
@@ -11108,8 +11108,8 @@ uint32_t RemoteManager_SetValue_String_args::read(::apache::thrift::protocol::TP
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -11138,8 +11138,8 @@ uint32_t RemoteManager_SetValue_String_args::read(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetValue_String_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_String_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString(this->_value);
@@ -11152,8 +11152,8 @@ uint32_t RemoteManager_SetValue_String_args::write(::apache::thrift::protocol::T
 uint32_t RemoteManager_SetValue_String_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValue_String_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString((*(this->_value)));
@@ -11280,8 +11280,8 @@ uint32_t RemoteManager_SetValueListSelection_args::read(::apache::thrift::protoc
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -11310,8 +11310,8 @@ uint32_t RemoteManager_SetValueListSelection_args::read(::apache::thrift::protoc
 uint32_t RemoteManager_SetValueListSelection_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueListSelection_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_selectedItem", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString(this->_selectedItem);
@@ -11324,8 +11324,8 @@ uint32_t RemoteManager_SetValueListSelection_args::write(::apache::thrift::proto
 uint32_t RemoteManager_SetValueListSelection_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetValueListSelection_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_selectedItem", ::apache::thrift::protocol::T_STRING, 2);
   xfer += oprot->writeString((*(this->_selectedItem)));
@@ -11452,8 +11452,8 @@ uint32_t RemoteManager_PressButton_args::read(::apache::thrift::protocol::TProto
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -11474,8 +11474,8 @@ uint32_t RemoteManager_PressButton_args::read(::apache::thrift::protocol::TProto
 uint32_t RemoteManager_PressButton_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_PressButton_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -11485,8 +11485,8 @@ uint32_t RemoteManager_PressButton_args::write(::apache::thrift::protocol::TProt
 uint32_t RemoteManager_PressButton_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_PressButton_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -11610,8 +11610,8 @@ uint32_t RemoteManager_ReleaseButton_args::read(::apache::thrift::protocol::TPro
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -11632,8 +11632,8 @@ uint32_t RemoteManager_ReleaseButton_args::read(::apache::thrift::protocol::TPro
 uint32_t RemoteManager_ReleaseButton_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_ReleaseButton_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -11643,8 +11643,8 @@ uint32_t RemoteManager_ReleaseButton_args::write(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_ReleaseButton_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_ReleaseButton_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -11768,8 +11768,8 @@ uint32_t RemoteManager_GetNumSwitchPoints_args::read(::apache::thrift::protocol:
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -11790,8 +11790,8 @@ uint32_t RemoteManager_GetNumSwitchPoints_args::read(::apache::thrift::protocol:
 uint32_t RemoteManager_GetNumSwitchPoints_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetNumSwitchPoints_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -11801,8 +11801,8 @@ uint32_t RemoteManager_GetNumSwitchPoints_args::write(::apache::thrift::protocol
 uint32_t RemoteManager_GetNumSwitchPoints_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetNumSwitchPoints_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -11926,8 +11926,8 @@ uint32_t RemoteManager_SetSwitchPoint_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -11972,8 +11972,8 @@ uint32_t RemoteManager_SetSwitchPoint_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_SetSwitchPoint_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetSwitchPoint_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_hours", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte(this->_hours);
@@ -11992,8 +11992,8 @@ uint32_t RemoteManager_SetSwitchPoint_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetSwitchPoint_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetSwitchPoint_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_hours", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte((*(this->_hours)));
@@ -12126,8 +12126,8 @@ uint32_t RemoteManager_RemoveSwitchPoint_args::read(::apache::thrift::protocol::
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -12164,8 +12164,8 @@ uint32_t RemoteManager_RemoveSwitchPoint_args::read(::apache::thrift::protocol::
 uint32_t RemoteManager_RemoveSwitchPoint_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_RemoveSwitchPoint_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_hours", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte(this->_hours);
@@ -12181,8 +12181,8 @@ uint32_t RemoteManager_RemoveSwitchPoint_args::write(::apache::thrift::protocol:
 uint32_t RemoteManager_RemoveSwitchPoint_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_RemoveSwitchPoint_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_hours", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte((*(this->_hours)));
@@ -12312,8 +12312,8 @@ uint32_t RemoteManager_ClearSwitchPoints_args::read(::apache::thrift::protocol::
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -12334,8 +12334,8 @@ uint32_t RemoteManager_ClearSwitchPoints_args::read(::apache::thrift::protocol::
 uint32_t RemoteManager_ClearSwitchPoints_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_ClearSwitchPoints_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -12345,8 +12345,8 @@ uint32_t RemoteManager_ClearSwitchPoints_args::write(::apache::thrift::protocol:
 uint32_t RemoteManager_ClearSwitchPoints_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_ClearSwitchPoints_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -12449,8 +12449,8 @@ uint32_t RemoteManager_GetSwitchPoint_args::read(::apache::thrift::protocol::TPr
     switch (fid)
     {
       case 1:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_id);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
           this->__isset._id = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -12479,8 +12479,8 @@ uint32_t RemoteManager_GetSwitchPoint_args::read(::apache::thrift::protocol::TPr
 uint32_t RemoteManager_GetSwitchPoint_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetSwitchPoint_args");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64(this->_id);
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_idx", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte(this->_idx);
@@ -12493,8 +12493,8 @@ uint32_t RemoteManager_GetSwitchPoint_args::write(::apache::thrift::protocol::TP
 uint32_t RemoteManager_GetSwitchPoint_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_GetSwitchPoint_pargs");
-  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_I64, 1);
-  xfer += oprot->writeI64((*(this->_id)));
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_idx", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte((*(this->_idx)));
@@ -15385,8 +15385,8 @@ uint32_t RemoteManager_AddSceneValue_Bool_args::read(::apache::thrift::protocol:
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -15418,8 +15418,8 @@ uint32_t RemoteManager_AddSceneValue_Bool_args::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BOOL, 3);
   xfer += oprot->writeBool(this->_value);
@@ -15435,8 +15435,8 @@ uint32_t RemoteManager_AddSceneValue_Bool_pargs::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BOOL, 3);
   xfer += oprot->writeBool((*(this->_value)));
@@ -15571,8 +15571,8 @@ uint32_t RemoteManager_AddSceneValue_Uint8_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -15604,8 +15604,8 @@ uint32_t RemoteManager_AddSceneValue_Uint8_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BYTE, 3);
   xfer += oprot->writeByte(this->_value);
@@ -15621,8 +15621,8 @@ uint32_t RemoteManager_AddSceneValue_Uint8_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BYTE, 3);
   xfer += oprot->writeByte((*(this->_value)));
@@ -15757,8 +15757,8 @@ uint32_t RemoteManager_AddSceneValue_Float_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -15790,8 +15790,8 @@ uint32_t RemoteManager_AddSceneValue_Float_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_DOUBLE, 3);
   xfer += oprot->writeDouble(this->_value);
@@ -15807,8 +15807,8 @@ uint32_t RemoteManager_AddSceneValue_Float_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_DOUBLE, 3);
   xfer += oprot->writeDouble((*(this->_value)));
@@ -15943,8 +15943,8 @@ uint32_t RemoteManager_AddSceneValue_Int32_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -15976,8 +15976,8 @@ uint32_t RemoteManager_AddSceneValue_Int32_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32(this->_value);
@@ -15993,8 +15993,8 @@ uint32_t RemoteManager_AddSceneValue_Int32_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32((*(this->_value)));
@@ -16129,8 +16129,8 @@ uint32_t RemoteManager_AddSceneValue_Int16_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -16162,8 +16162,8 @@ uint32_t RemoteManager_AddSceneValue_Int16_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I16, 3);
   xfer += oprot->writeI16(this->_value);
@@ -16179,8 +16179,8 @@ uint32_t RemoteManager_AddSceneValue_Int16_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I16, 3);
   xfer += oprot->writeI16((*(this->_value)));
@@ -16315,8 +16315,8 @@ uint32_t RemoteManager_AddSceneValue_String_args::read(::apache::thrift::protoco
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -16348,8 +16348,8 @@ uint32_t RemoteManager_AddSceneValue_String_args::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString(this->_value);
@@ -16365,8 +16365,8 @@ uint32_t RemoteManager_AddSceneValue_String_pargs::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString((*(this->_value)));
@@ -16501,8 +16501,8 @@ uint32_t RemoteManager_AddSceneValueListSelection_String_args::read(::apache::th
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -16534,8 +16534,8 @@ uint32_t RemoteManager_AddSceneValueListSelection_String_args::write(::apache::t
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString(this->_value);
@@ -16551,8 +16551,8 @@ uint32_t RemoteManager_AddSceneValueListSelection_String_pargs::write(::apache::
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString((*(this->_value)));
@@ -16687,8 +16687,8 @@ uint32_t RemoteManager_AddSceneValueListSelection_Int32_args::read(::apache::thr
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -16720,8 +16720,8 @@ uint32_t RemoteManager_AddSceneValueListSelection_Int32_args::write(::apache::th
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32(this->_value);
@@ -16737,8 +16737,8 @@ uint32_t RemoteManager_AddSceneValueListSelection_Int32_pargs::write(::apache::t
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32((*(this->_value)));
@@ -16873,8 +16873,8 @@ uint32_t RemoteManager_RemoveSceneValue_args::read(::apache::thrift::protocol::T
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -16898,8 +16898,8 @@ uint32_t RemoteManager_RemoveSceneValue_args::write(::apache::thrift::protocol::
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -16912,8 +16912,8 @@ uint32_t RemoteManager_RemoveSceneValue_pargs::write(::apache::thrift::protocol:
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17203,8 +17203,8 @@ uint32_t RemoteManager_SceneGetValueAsBool_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -17228,8 +17228,8 @@ uint32_t RemoteManager_SceneGetValueAsBool_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17242,8 +17242,8 @@ uint32_t RemoteManager_SceneGetValueAsBool_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17375,8 +17375,8 @@ uint32_t RemoteManager_SceneGetValueAsByte_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -17400,8 +17400,8 @@ uint32_t RemoteManager_SceneGetValueAsByte_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17414,8 +17414,8 @@ uint32_t RemoteManager_SceneGetValueAsByte_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17547,8 +17547,8 @@ uint32_t RemoteManager_SceneGetValueAsFloat_args::read(::apache::thrift::protoco
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -17572,8 +17572,8 @@ uint32_t RemoteManager_SceneGetValueAsFloat_args::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17586,8 +17586,8 @@ uint32_t RemoteManager_SceneGetValueAsFloat_pargs::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17719,8 +17719,8 @@ uint32_t RemoteManager_SceneGetValueAsInt_args::read(::apache::thrift::protocol:
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -17744,8 +17744,8 @@ uint32_t RemoteManager_SceneGetValueAsInt_args::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17758,8 +17758,8 @@ uint32_t RemoteManager_SceneGetValueAsInt_pargs::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17891,8 +17891,8 @@ uint32_t RemoteManager_SceneGetValueAsShort_args::read(::apache::thrift::protoco
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -17916,8 +17916,8 @@ uint32_t RemoteManager_SceneGetValueAsShort_args::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -17930,8 +17930,8 @@ uint32_t RemoteManager_SceneGetValueAsShort_pargs::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18063,8 +18063,8 @@ uint32_t RemoteManager_SceneGetValueAsString_args::read(::apache::thrift::protoc
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -18088,8 +18088,8 @@ uint32_t RemoteManager_SceneGetValueAsString_args::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18102,8 +18102,8 @@ uint32_t RemoteManager_SceneGetValueAsString_pargs::write(::apache::thrift::prot
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18235,8 +18235,8 @@ uint32_t RemoteManager_SceneGetValueListSelection_String_args::read(::apache::th
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -18260,8 +18260,8 @@ uint32_t RemoteManager_SceneGetValueListSelection_String_args::write(::apache::t
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18274,8 +18274,8 @@ uint32_t RemoteManager_SceneGetValueListSelection_String_pargs::write(::apache::
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18407,8 +18407,8 @@ uint32_t RemoteManager_SceneGetValueListSelection_Int32_args::read(::apache::thr
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -18432,8 +18432,8 @@ uint32_t RemoteManager_SceneGetValueListSelection_Int32_args::write(::apache::th
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18446,8 +18446,8 @@ uint32_t RemoteManager_SceneGetValueListSelection_Int32_pargs::write(::apache::t
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -18579,8 +18579,8 @@ uint32_t RemoteManager_SetSceneValue_Bool_args::read(::apache::thrift::protocol:
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -18612,8 +18612,8 @@ uint32_t RemoteManager_SetSceneValue_Bool_args::write(::apache::thrift::protocol
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BOOL, 3);
   xfer += oprot->writeBool(this->_value);
@@ -18629,8 +18629,8 @@ uint32_t RemoteManager_SetSceneValue_Bool_pargs::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BOOL, 3);
   xfer += oprot->writeBool((*(this->_value)));
@@ -18765,8 +18765,8 @@ uint32_t RemoteManager_SetSceneValue_Uint8_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -18798,8 +18798,8 @@ uint32_t RemoteManager_SetSceneValue_Uint8_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BYTE, 3);
   xfer += oprot->writeByte(this->_value);
@@ -18815,8 +18815,8 @@ uint32_t RemoteManager_SetSceneValue_Uint8_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_BYTE, 3);
   xfer += oprot->writeByte((*(this->_value)));
@@ -18951,8 +18951,8 @@ uint32_t RemoteManager_SetSceneValue_Float_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -18984,8 +18984,8 @@ uint32_t RemoteManager_SetSceneValue_Float_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_DOUBLE, 3);
   xfer += oprot->writeDouble(this->_value);
@@ -19001,8 +19001,8 @@ uint32_t RemoteManager_SetSceneValue_Float_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_DOUBLE, 3);
   xfer += oprot->writeDouble((*(this->_value)));
@@ -19137,8 +19137,8 @@ uint32_t RemoteManager_SetSceneValue_Int32_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -19170,8 +19170,8 @@ uint32_t RemoteManager_SetSceneValue_Int32_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32(this->_value);
@@ -19187,8 +19187,8 @@ uint32_t RemoteManager_SetSceneValue_Int32_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32((*(this->_value)));
@@ -19323,8 +19323,8 @@ uint32_t RemoteManager_SetSceneValue_Int16_args::read(::apache::thrift::protocol
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -19356,8 +19356,8 @@ uint32_t RemoteManager_SetSceneValue_Int16_args::write(::apache::thrift::protoco
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I16, 3);
   xfer += oprot->writeI16(this->_value);
@@ -19373,8 +19373,8 @@ uint32_t RemoteManager_SetSceneValue_Int16_pargs::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I16, 3);
   xfer += oprot->writeI16((*(this->_value)));
@@ -19509,8 +19509,8 @@ uint32_t RemoteManager_SetSceneValue_String_args::read(::apache::thrift::protoco
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -19542,8 +19542,8 @@ uint32_t RemoteManager_SetSceneValue_String_args::write(::apache::thrift::protoc
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString(this->_value);
@@ -19559,8 +19559,8 @@ uint32_t RemoteManager_SetSceneValue_String_pargs::write(::apache::thrift::proto
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString((*(this->_value)));
@@ -19695,8 +19695,8 @@ uint32_t RemoteManager_SetSceneValueListSelection_String_args::read(::apache::th
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -19728,8 +19728,8 @@ uint32_t RemoteManager_SetSceneValueListSelection_String_args::write(::apache::t
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString(this->_value);
@@ -19745,8 +19745,8 @@ uint32_t RemoteManager_SetSceneValueListSelection_String_pargs::write(::apache::
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_STRING, 3);
   xfer += oprot->writeString((*(this->_value)));
@@ -19881,8 +19881,8 @@ uint32_t RemoteManager_SetSceneValueListSelection_Int32_args::read(::apache::thr
         }
         break;
       case 2:
-        if (ftype == ::apache::thrift::protocol::T_I64) {
-          xfer += iprot->readI64(this->_valueId);
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
           this->__isset._valueId = true;
         } else {
           xfer += iprot->skip(ftype);
@@ -19914,8 +19914,8 @@ uint32_t RemoteManager_SetSceneValueListSelection_Int32_args::write(::apache::th
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte(this->_sceneId);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64(this->_valueId);
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32(this->_value);
@@ -19931,8 +19931,8 @@ uint32_t RemoteManager_SetSceneValueListSelection_Int32_pargs::write(::apache::t
   xfer += oprot->writeFieldBegin("_sceneId", ::apache::thrift::protocol::T_BYTE, 1);
   xfer += oprot->writeByte((*(this->_sceneId)));
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_I64, 2);
-  xfer += oprot->writeI64((*(this->_valueId)));
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 2);
+  xfer += (*(this->_valueId)).write(oprot);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_value", ::apache::thrift::protocol::T_I32, 3);
   xfer += oprot->writeI32((*(this->_value)));
@@ -21232,13 +21232,13 @@ void RemoteManagerClient::recv_SetPollInterval()
   return;
 }
 
-bool RemoteManagerClient::EnablePoll(const RemoteValueID _valueId)
+bool RemoteManagerClient::EnablePoll(const RemoteValueID& _valueId)
 {
   send_EnablePoll(_valueId);
   return recv_EnablePoll();
 }
 
-void RemoteManagerClient::send_EnablePoll(const RemoteValueID _valueId)
+void RemoteManagerClient::send_EnablePoll(const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("EnablePoll", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -21290,13 +21290,13 @@ bool RemoteManagerClient::recv_EnablePoll()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "EnablePoll failed: unknown result");
 }
 
-bool RemoteManagerClient::DisablePoll(const RemoteValueID _valueId)
+bool RemoteManagerClient::DisablePoll(const RemoteValueID& _valueId)
 {
   send_DisablePoll(_valueId);
   return recv_DisablePoll();
 }
 
-void RemoteManagerClient::send_DisablePoll(const RemoteValueID _valueId)
+void RemoteManagerClient::send_DisablePoll(const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("DisablePoll", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -21348,13 +21348,13 @@ bool RemoteManagerClient::recv_DisablePoll()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "DisablePoll failed: unknown result");
 }
 
-bool RemoteManagerClient::isPolled(const RemoteValueID _valueId)
+bool RemoteManagerClient::isPolled(const RemoteValueID& _valueId)
 {
   send_isPolled(_valueId);
   return recv_isPolled();
 }
 
-void RemoteManagerClient::send_isPolled(const RemoteValueID _valueId)
+void RemoteManagerClient::send_isPolled(const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("isPolled", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23088,13 +23088,13 @@ void RemoteManagerClient::recv_GetNodeClassInformation(Bool_GetNodeClassInformat
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetNodeClassInformation failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueLabel(std::string& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueLabel(std::string& _return, const RemoteValueID& _id)
 {
   send_GetValueLabel(_id);
   recv_GetValueLabel(_return);
 }
 
-void RemoteManagerClient::send_GetValueLabel(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueLabel(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueLabel", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23146,13 +23146,13 @@ void RemoteManagerClient::recv_GetValueLabel(std::string& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueLabel failed: unknown result");
 }
 
-void RemoteManagerClient::SetValueLabel(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::SetValueLabel(const RemoteValueID& _id, const std::string& _value)
 {
   send_SetValueLabel(_id, _value);
   recv_SetValueLabel();
 }
 
-void RemoteManagerClient::send_SetValueLabel(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::send_SetValueLabel(const RemoteValueID& _id, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValueLabel", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23200,13 +23200,13 @@ void RemoteManagerClient::recv_SetValueLabel()
   return;
 }
 
-void RemoteManagerClient::GetValueUnits(std::string& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueUnits(std::string& _return, const RemoteValueID& _id)
 {
   send_GetValueUnits(_id);
   recv_GetValueUnits(_return);
 }
 
-void RemoteManagerClient::send_GetValueUnits(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueUnits(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueUnits", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23258,13 +23258,13 @@ void RemoteManagerClient::recv_GetValueUnits(std::string& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueUnits failed: unknown result");
 }
 
-void RemoteManagerClient::SetValueUnits(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::SetValueUnits(const RemoteValueID& _id, const std::string& _value)
 {
   send_SetValueUnits(_id, _value);
   recv_SetValueUnits();
 }
 
-void RemoteManagerClient::send_SetValueUnits(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::send_SetValueUnits(const RemoteValueID& _id, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValueUnits", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23312,13 +23312,13 @@ void RemoteManagerClient::recv_SetValueUnits()
   return;
 }
 
-void RemoteManagerClient::GetValueHelp(std::string& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueHelp(std::string& _return, const RemoteValueID& _id)
 {
   send_GetValueHelp(_id);
   recv_GetValueHelp(_return);
 }
 
-void RemoteManagerClient::send_GetValueHelp(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueHelp(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueHelp", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23370,13 +23370,13 @@ void RemoteManagerClient::recv_GetValueHelp(std::string& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueHelp failed: unknown result");
 }
 
-void RemoteManagerClient::SetValueHelp(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::SetValueHelp(const RemoteValueID& _id, const std::string& _value)
 {
   send_SetValueHelp(_id, _value);
   recv_SetValueHelp();
 }
 
-void RemoteManagerClient::send_SetValueHelp(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::send_SetValueHelp(const RemoteValueID& _id, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValueHelp", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23424,13 +23424,13 @@ void RemoteManagerClient::recv_SetValueHelp()
   return;
 }
 
-int32_t RemoteManagerClient::GetValueMin(const RemoteValueID _id)
+int32_t RemoteManagerClient::GetValueMin(const RemoteValueID& _id)
 {
   send_GetValueMin(_id);
   return recv_GetValueMin();
 }
 
-void RemoteManagerClient::send_GetValueMin(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueMin(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueMin", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23482,13 +23482,13 @@ int32_t RemoteManagerClient::recv_GetValueMin()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueMin failed: unknown result");
 }
 
-int32_t RemoteManagerClient::GetValueMax(const RemoteValueID _id)
+int32_t RemoteManagerClient::GetValueMax(const RemoteValueID& _id)
 {
   send_GetValueMax(_id);
   return recv_GetValueMax();
 }
 
-void RemoteManagerClient::send_GetValueMax(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueMax(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueMax", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23540,13 +23540,13 @@ int32_t RemoteManagerClient::recv_GetValueMax()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueMax failed: unknown result");
 }
 
-bool RemoteManagerClient::IsValueReadOnly(const RemoteValueID _id)
+bool RemoteManagerClient::IsValueReadOnly(const RemoteValueID& _id)
 {
   send_IsValueReadOnly(_id);
   return recv_IsValueReadOnly();
 }
 
-void RemoteManagerClient::send_IsValueReadOnly(const RemoteValueID _id)
+void RemoteManagerClient::send_IsValueReadOnly(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("IsValueReadOnly", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23598,13 +23598,13 @@ bool RemoteManagerClient::recv_IsValueReadOnly()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsValueReadOnly failed: unknown result");
 }
 
-bool RemoteManagerClient::IsValueWriteOnly(const RemoteValueID _id)
+bool RemoteManagerClient::IsValueWriteOnly(const RemoteValueID& _id)
 {
   send_IsValueWriteOnly(_id);
   return recv_IsValueWriteOnly();
 }
 
-void RemoteManagerClient::send_IsValueWriteOnly(const RemoteValueID _id)
+void RemoteManagerClient::send_IsValueWriteOnly(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("IsValueWriteOnly", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23656,13 +23656,13 @@ bool RemoteManagerClient::recv_IsValueWriteOnly()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsValueWriteOnly failed: unknown result");
 }
 
-bool RemoteManagerClient::IsValueSet(const RemoteValueID _id)
+bool RemoteManagerClient::IsValueSet(const RemoteValueID& _id)
 {
   send_IsValueSet(_id);
   return recv_IsValueSet();
 }
 
-void RemoteManagerClient::send_IsValueSet(const RemoteValueID _id)
+void RemoteManagerClient::send_IsValueSet(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("IsValueSet", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23714,13 +23714,13 @@ bool RemoteManagerClient::recv_IsValueSet()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsValueSet failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueAsBool(Bool_Bool& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id)
 {
   send_GetValueAsBool(_id);
   recv_GetValueAsBool(_return);
 }
 
-void RemoteManagerClient::send_GetValueAsBool(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueAsBool(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueAsBool", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23772,13 +23772,13 @@ void RemoteManagerClient::recv_GetValueAsBool(Bool_Bool& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueAsBool failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueAsByte(Bool_UInt8& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueAsByte(Bool_UInt8& _return, const RemoteValueID& _id)
 {
   send_GetValueAsByte(_id);
   recv_GetValueAsByte(_return);
 }
 
-void RemoteManagerClient::send_GetValueAsByte(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueAsByte(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueAsByte", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23830,13 +23830,13 @@ void RemoteManagerClient::recv_GetValueAsByte(Bool_UInt8& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueAsByte failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueAsFloat(Bool_Float& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueAsFloat(Bool_Float& _return, const RemoteValueID& _id)
 {
   send_GetValueAsFloat(_id);
   recv_GetValueAsFloat(_return);
 }
 
-void RemoteManagerClient::send_GetValueAsFloat(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueAsFloat(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueAsFloat", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23888,13 +23888,13 @@ void RemoteManagerClient::recv_GetValueAsFloat(Bool_Float& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueAsFloat failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueAsInt(Bool_Int& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueAsInt(Bool_Int& _return, const RemoteValueID& _id)
 {
   send_GetValueAsInt(_id);
   recv_GetValueAsInt(_return);
 }
 
-void RemoteManagerClient::send_GetValueAsInt(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueAsInt(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueAsInt", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -23946,13 +23946,13 @@ void RemoteManagerClient::recv_GetValueAsInt(Bool_Int& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueAsInt failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueAsShort(Bool_Int16& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueAsShort(Bool_Int16& _return, const RemoteValueID& _id)
 {
   send_GetValueAsShort(_id);
   recv_GetValueAsShort(_return);
 }
 
-void RemoteManagerClient::send_GetValueAsShort(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueAsShort(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueAsShort", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24004,13 +24004,13 @@ void RemoteManagerClient::recv_GetValueAsShort(Bool_Int16& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueAsShort failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueAsString(Bool_String& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueAsString(Bool_String& _return, const RemoteValueID& _id)
 {
   send_GetValueAsString(_id);
   recv_GetValueAsString(_return);
 }
 
-void RemoteManagerClient::send_GetValueAsString(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueAsString(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueAsString", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24062,13 +24062,13 @@ void RemoteManagerClient::recv_GetValueAsString(Bool_String& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueAsString failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueListSelection_String(Bool_String& _return, const RemoteValueID& _id)
 {
   send_GetValueListSelection_String(_id);
   recv_GetValueListSelection_String(_return);
 }
 
-void RemoteManagerClient::send_GetValueListSelection_String(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueListSelection_String(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueListSelection_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24120,13 +24120,13 @@ void RemoteManagerClient::recv_GetValueListSelection_String(Bool_String& _return
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueListSelection_String failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID& _id)
 {
   send_GetValueListSelection_Int32(_id);
   recv_GetValueListSelection_Int32(_return);
 }
 
-void RemoteManagerClient::send_GetValueListSelection_Int32(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueListSelection_Int32(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueListSelection_Int32", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24178,13 +24178,13 @@ void RemoteManagerClient::recv_GetValueListSelection_Int32(Bool_Int& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueListSelection_Int32 failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueListItems(Bool_ListString& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id)
 {
   send_GetValueListItems(_id);
   recv_GetValueListItems(_return);
 }
 
-void RemoteManagerClient::send_GetValueListItems(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueListItems(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueListItems", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24236,13 +24236,13 @@ void RemoteManagerClient::recv_GetValueListItems(Bool_ListString& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueListItems failed: unknown result");
 }
 
-void RemoteManagerClient::GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID _id)
+void RemoteManagerClient::GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id)
 {
   send_GetValueFloatPrecision(_id);
   recv_GetValueFloatPrecision(_return);
 }
 
-void RemoteManagerClient::send_GetValueFloatPrecision(const RemoteValueID _id)
+void RemoteManagerClient::send_GetValueFloatPrecision(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetValueFloatPrecision", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24294,13 +24294,13 @@ void RemoteManagerClient::recv_GetValueFloatPrecision(Bool_UInt8& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetValueFloatPrecision failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValue_Bool(const RemoteValueID _id, const bool _value)
+bool RemoteManagerClient::SetValue_Bool(const RemoteValueID& _id, const bool _value)
 {
   send_SetValue_Bool(_id, _value);
   return recv_SetValue_Bool();
 }
 
-void RemoteManagerClient::send_SetValue_Bool(const RemoteValueID _id, const bool _value)
+void RemoteManagerClient::send_SetValue_Bool(const RemoteValueID& _id, const bool _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValue_Bool", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24353,13 +24353,13 @@ bool RemoteManagerClient::recv_SetValue_Bool()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValue_Bool failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValue_UInt8(const RemoteValueID _id, const int8_t _value)
+bool RemoteManagerClient::SetValue_UInt8(const RemoteValueID& _id, const int8_t _value)
 {
   send_SetValue_UInt8(_id, _value);
   return recv_SetValue_UInt8();
 }
 
-void RemoteManagerClient::send_SetValue_UInt8(const RemoteValueID _id, const int8_t _value)
+void RemoteManagerClient::send_SetValue_UInt8(const RemoteValueID& _id, const int8_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValue_UInt8", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24412,13 +24412,13 @@ bool RemoteManagerClient::recv_SetValue_UInt8()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValue_UInt8 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValue_Float(const RemoteValueID _id, const double _value)
+bool RemoteManagerClient::SetValue_Float(const RemoteValueID& _id, const double _value)
 {
   send_SetValue_Float(_id, _value);
   return recv_SetValue_Float();
 }
 
-void RemoteManagerClient::send_SetValue_Float(const RemoteValueID _id, const double _value)
+void RemoteManagerClient::send_SetValue_Float(const RemoteValueID& _id, const double _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValue_Float", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24471,13 +24471,13 @@ bool RemoteManagerClient::recv_SetValue_Float()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValue_Float failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValue_Int32(const RemoteValueID _id, const int32_t _value)
+bool RemoteManagerClient::SetValue_Int32(const RemoteValueID& _id, const int32_t _value)
 {
   send_SetValue_Int32(_id, _value);
   return recv_SetValue_Int32();
 }
 
-void RemoteManagerClient::send_SetValue_Int32(const RemoteValueID _id, const int32_t _value)
+void RemoteManagerClient::send_SetValue_Int32(const RemoteValueID& _id, const int32_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValue_Int32", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24530,13 +24530,13 @@ bool RemoteManagerClient::recv_SetValue_Int32()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValue_Int32 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValue_Int16(const RemoteValueID _id, const int16_t _value)
+bool RemoteManagerClient::SetValue_Int16(const RemoteValueID& _id, const int16_t _value)
 {
   send_SetValue_Int16(_id, _value);
   return recv_SetValue_Int16();
 }
 
-void RemoteManagerClient::send_SetValue_Int16(const RemoteValueID _id, const int16_t _value)
+void RemoteManagerClient::send_SetValue_Int16(const RemoteValueID& _id, const int16_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValue_Int16", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24589,13 +24589,13 @@ bool RemoteManagerClient::recv_SetValue_Int16()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValue_Int16 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValue_String(const RemoteValueID _id, const std::string& _value)
+bool RemoteManagerClient::SetValue_String(const RemoteValueID& _id, const std::string& _value)
 {
   send_SetValue_String(_id, _value);
   return recv_SetValue_String();
 }
 
-void RemoteManagerClient::send_SetValue_String(const RemoteValueID _id, const std::string& _value)
+void RemoteManagerClient::send_SetValue_String(const RemoteValueID& _id, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValue_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24648,13 +24648,13 @@ bool RemoteManagerClient::recv_SetValue_String()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValue_String failed: unknown result");
 }
 
-bool RemoteManagerClient::SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem)
+bool RemoteManagerClient::SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem)
 {
   send_SetValueListSelection(_id, _selectedItem);
   return recv_SetValueListSelection();
 }
 
-void RemoteManagerClient::send_SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem)
+void RemoteManagerClient::send_SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetValueListSelection", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24707,13 +24707,13 @@ bool RemoteManagerClient::recv_SetValueListSelection()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetValueListSelection failed: unknown result");
 }
 
-bool RemoteManagerClient::PressButton(const RemoteValueID _id)
+bool RemoteManagerClient::PressButton(const RemoteValueID& _id)
 {
   send_PressButton(_id);
   return recv_PressButton();
 }
 
-void RemoteManagerClient::send_PressButton(const RemoteValueID _id)
+void RemoteManagerClient::send_PressButton(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("PressButton", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24765,13 +24765,13 @@ bool RemoteManagerClient::recv_PressButton()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "PressButton failed: unknown result");
 }
 
-bool RemoteManagerClient::ReleaseButton(const RemoteValueID _id)
+bool RemoteManagerClient::ReleaseButton(const RemoteValueID& _id)
 {
   send_ReleaseButton(_id);
   return recv_ReleaseButton();
 }
 
-void RemoteManagerClient::send_ReleaseButton(const RemoteValueID _id)
+void RemoteManagerClient::send_ReleaseButton(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ReleaseButton", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24823,13 +24823,13 @@ bool RemoteManagerClient::recv_ReleaseButton()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "ReleaseButton failed: unknown result");
 }
 
-int8_t RemoteManagerClient::GetNumSwitchPoints(const RemoteValueID _id)
+int8_t RemoteManagerClient::GetNumSwitchPoints(const RemoteValueID& _id)
 {
   send_GetNumSwitchPoints(_id);
   return recv_GetNumSwitchPoints();
 }
 
-void RemoteManagerClient::send_GetNumSwitchPoints(const RemoteValueID _id)
+void RemoteManagerClient::send_GetNumSwitchPoints(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetNumSwitchPoints", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24881,13 +24881,13 @@ int8_t RemoteManagerClient::recv_GetNumSwitchPoints()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetNumSwitchPoints failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback)
+bool RemoteManagerClient::SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback)
 {
   send_SetSwitchPoint(_id, _hours, _minutes, _setback);
   return recv_SetSwitchPoint();
 }
 
-void RemoteManagerClient::send_SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback)
+void RemoteManagerClient::send_SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSwitchPoint", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -24942,13 +24942,13 @@ bool RemoteManagerClient::recv_SetSwitchPoint()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSwitchPoint failed: unknown result");
 }
 
-bool RemoteManagerClient::RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes)
+bool RemoteManagerClient::RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes)
 {
   send_RemoveSwitchPoint(_id, _hours, _minutes);
   return recv_RemoveSwitchPoint();
 }
 
-void RemoteManagerClient::send_RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes)
+void RemoteManagerClient::send_RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("RemoveSwitchPoint", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -25002,13 +25002,13 @@ bool RemoteManagerClient::recv_RemoveSwitchPoint()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "RemoveSwitchPoint failed: unknown result");
 }
 
-void RemoteManagerClient::ClearSwitchPoints(const RemoteValueID _id)
+void RemoteManagerClient::ClearSwitchPoints(const RemoteValueID& _id)
 {
   send_ClearSwitchPoints(_id);
   recv_ClearSwitchPoints();
 }
 
-void RemoteManagerClient::send_ClearSwitchPoints(const RemoteValueID _id)
+void RemoteManagerClient::send_ClearSwitchPoints(const RemoteValueID& _id)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("ClearSwitchPoints", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -25055,13 +25055,13 @@ void RemoteManagerClient::recv_ClearSwitchPoints()
   return;
 }
 
-void RemoteManagerClient::GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID _id, const int8_t _idx)
+void RemoteManagerClient::GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID& _id, const int8_t _idx)
 {
   send_GetSwitchPoint(_id, _idx);
   recv_GetSwitchPoint(_return);
 }
 
-void RemoteManagerClient::send_GetSwitchPoint(const RemoteValueID _id, const int8_t _idx)
+void RemoteManagerClient::send_GetSwitchPoint(const RemoteValueID& _id, const int8_t _idx)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("GetSwitchPoint", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26077,13 +26077,13 @@ bool RemoteManagerClient::recv_RemoveScene()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "RemoveScene failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value)
+bool RemoteManagerClient::AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value)
 {
   send_AddSceneValue_Bool(_sceneId, _valueId, _value);
   return recv_AddSceneValue_Bool();
 }
 
-void RemoteManagerClient::send_AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value)
+void RemoteManagerClient::send_AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValue_Bool", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26137,13 +26137,13 @@ bool RemoteManagerClient::recv_AddSceneValue_Bool()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValue_Bool failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value)
+bool RemoteManagerClient::AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value)
 {
   send_AddSceneValue_Uint8(_sceneId, _valueId, _value);
   return recv_AddSceneValue_Uint8();
 }
 
-void RemoteManagerClient::send_AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value)
+void RemoteManagerClient::send_AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValue_Uint8", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26197,13 +26197,13 @@ bool RemoteManagerClient::recv_AddSceneValue_Uint8()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValue_Uint8 failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value)
+bool RemoteManagerClient::AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value)
 {
   send_AddSceneValue_Float(_sceneId, _valueId, _value);
   return recv_AddSceneValue_Float();
 }
 
-void RemoteManagerClient::send_AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value)
+void RemoteManagerClient::send_AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValue_Float", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26257,13 +26257,13 @@ bool RemoteManagerClient::recv_AddSceneValue_Float()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValue_Float failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+bool RemoteManagerClient::AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   send_AddSceneValue_Int32(_sceneId, _valueId, _value);
   return recv_AddSceneValue_Int32();
 }
 
-void RemoteManagerClient::send_AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+void RemoteManagerClient::send_AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValue_Int32", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26317,13 +26317,13 @@ bool RemoteManagerClient::recv_AddSceneValue_Int32()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValue_Int32 failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value)
+bool RemoteManagerClient::AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value)
 {
   send_AddSceneValue_Int16(_sceneId, _valueId, _value);
   return recv_AddSceneValue_Int16();
 }
 
-void RemoteManagerClient::send_AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value)
+void RemoteManagerClient::send_AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValue_Int16", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26377,13 +26377,13 @@ bool RemoteManagerClient::recv_AddSceneValue_Int16()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValue_Int16 failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+bool RemoteManagerClient::AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   send_AddSceneValue_String(_sceneId, _valueId, _value);
   return recv_AddSceneValue_String();
 }
 
-void RemoteManagerClient::send_AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+void RemoteManagerClient::send_AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValue_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26437,13 +26437,13 @@ bool RemoteManagerClient::recv_AddSceneValue_String()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValue_String failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+bool RemoteManagerClient::AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   send_AddSceneValueListSelection_String(_sceneId, _valueId, _value);
   return recv_AddSceneValueListSelection_String();
 }
 
-void RemoteManagerClient::send_AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+void RemoteManagerClient::send_AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValueListSelection_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26497,13 +26497,13 @@ bool RemoteManagerClient::recv_AddSceneValueListSelection_String()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValueListSelection_String failed: unknown result");
 }
 
-bool RemoteManagerClient::AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+bool RemoteManagerClient::AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   send_AddSceneValueListSelection_Int32(_sceneId, _valueId, _value);
   return recv_AddSceneValueListSelection_Int32();
 }
 
-void RemoteManagerClient::send_AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+void RemoteManagerClient::send_AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("AddSceneValueListSelection_Int32", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26557,13 +26557,13 @@ bool RemoteManagerClient::recv_AddSceneValueListSelection_Int32()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "AddSceneValueListSelection_Int32 failed: unknown result");
 }
 
-bool RemoteManagerClient::RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId)
+bool RemoteManagerClient::RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_RemoveSceneValue(_sceneId, _valueId);
   return recv_RemoveSceneValue();
 }
 
-void RemoteManagerClient::send_RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("RemoveSceneValue", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26674,13 +26674,13 @@ void RemoteManagerClient::recv_SceneGetValues(SceneGetValuesReturnStruct& _retur
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValues failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueAsBool(_sceneId, _valueId);
   recv_SceneGetValueAsBool(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueAsBool(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueAsBool(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueAsBool", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26733,13 +26733,13 @@ void RemoteManagerClient::recv_SceneGetValueAsBool(Bool_Bool& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueAsBool failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueAsByte(_sceneId, _valueId);
   recv_SceneGetValueAsByte(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueAsByte(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueAsByte(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueAsByte", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26792,13 +26792,13 @@ void RemoteManagerClient::recv_SceneGetValueAsByte(Bool_UInt8& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueAsByte failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueAsFloat(_sceneId, _valueId);
   recv_SceneGetValueAsFloat(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueAsFloat(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueAsFloat(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueAsFloat", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26851,13 +26851,13 @@ void RemoteManagerClient::recv_SceneGetValueAsFloat(Bool_Float& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueAsFloat failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueAsInt(_sceneId, _valueId);
   recv_SceneGetValueAsInt(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueAsInt(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueAsInt(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueAsInt", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26910,13 +26910,13 @@ void RemoteManagerClient::recv_SceneGetValueAsInt(Bool_Int& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueAsInt failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueAsShort(_sceneId, _valueId);
   recv_SceneGetValueAsShort(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueAsShort(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueAsShort(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueAsShort", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26969,13 +26969,13 @@ void RemoteManagerClient::recv_SceneGetValueAsShort(Bool_Int16& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueAsShort failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueAsString(_sceneId, _valueId);
   recv_SceneGetValueAsString(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueAsString(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueAsString(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueAsString", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27028,13 +27028,13 @@ void RemoteManagerClient::recv_SceneGetValueAsString(Bool_String& _return)
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueAsString failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueListSelection_String(_sceneId, _valueId);
   recv_SceneGetValueListSelection_String(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueListSelection_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27087,13 +27087,13 @@ void RemoteManagerClient::recv_SceneGetValueListSelection_String(Bool_String& _r
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueListSelection_String failed: unknown result");
 }
 
-void RemoteManagerClient::SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   send_SceneGetValueListSelection_Int32(_sceneId, _valueId);
   recv_SceneGetValueListSelection_Int32(_return);
 }
 
-void RemoteManagerClient::send_SceneGetValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId)
+void RemoteManagerClient::send_SceneGetValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SceneGetValueListSelection_Int32", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27146,13 +27146,13 @@ void RemoteManagerClient::recv_SceneGetValueListSelection_Int32(Bool_Int& _retur
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SceneGetValueListSelection_Int32 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value)
+bool RemoteManagerClient::SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value)
 {
   send_SetSceneValue_Bool(_sceneId, _valueId, _value);
   return recv_SetSceneValue_Bool();
 }
 
-void RemoteManagerClient::send_SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value)
+void RemoteManagerClient::send_SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValue_Bool", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27206,13 +27206,13 @@ bool RemoteManagerClient::recv_SetSceneValue_Bool()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValue_Bool failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value)
+bool RemoteManagerClient::SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value)
 {
   send_SetSceneValue_Uint8(_sceneId, _valueId, _value);
   return recv_SetSceneValue_Uint8();
 }
 
-void RemoteManagerClient::send_SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value)
+void RemoteManagerClient::send_SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValue_Uint8", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27266,13 +27266,13 @@ bool RemoteManagerClient::recv_SetSceneValue_Uint8()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValue_Uint8 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value)
+bool RemoteManagerClient::SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value)
 {
   send_SetSceneValue_Float(_sceneId, _valueId, _value);
   return recv_SetSceneValue_Float();
 }
 
-void RemoteManagerClient::send_SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value)
+void RemoteManagerClient::send_SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValue_Float", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27326,13 +27326,13 @@ bool RemoteManagerClient::recv_SetSceneValue_Float()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValue_Float failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+bool RemoteManagerClient::SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   send_SetSceneValue_Int32(_sceneId, _valueId, _value);
   return recv_SetSceneValue_Int32();
 }
 
-void RemoteManagerClient::send_SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+void RemoteManagerClient::send_SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValue_Int32", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27386,13 +27386,13 @@ bool RemoteManagerClient::recv_SetSceneValue_Int32()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValue_Int32 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value)
+bool RemoteManagerClient::SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value)
 {
   send_SetSceneValue_Int16(_sceneId, _valueId, _value);
   return recv_SetSceneValue_Int16();
 }
 
-void RemoteManagerClient::send_SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value)
+void RemoteManagerClient::send_SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValue_Int16", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27446,13 +27446,13 @@ bool RemoteManagerClient::recv_SetSceneValue_Int16()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValue_Int16 failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+bool RemoteManagerClient::SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   send_SetSceneValue_String(_sceneId, _valueId, _value);
   return recv_SetSceneValue_String();
 }
 
-void RemoteManagerClient::send_SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+void RemoteManagerClient::send_SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValue_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27506,13 +27506,13 @@ bool RemoteManagerClient::recv_SetSceneValue_String()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValue_String failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+bool RemoteManagerClient::SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   send_SetSceneValueListSelection_String(_sceneId, _valueId, _value);
   return recv_SetSceneValueListSelection_String();
 }
 
-void RemoteManagerClient::send_SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value)
+void RemoteManagerClient::send_SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValueListSelection_String", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -27566,13 +27566,13 @@ bool RemoteManagerClient::recv_SetSceneValueListSelection_String()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "SetSceneValueListSelection_String failed: unknown result");
 }
 
-bool RemoteManagerClient::SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+bool RemoteManagerClient::SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   send_SetSceneValueListSelection_Int32(_sceneId, _valueId, _value);
   return recv_SetSceneValueListSelection_Int32();
 }
 
-void RemoteManagerClient::send_SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value)
+void RemoteManagerClient::send_SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetSceneValueListSelection_Int32", ::apache::thrift::protocol::T_CALL, cseqid);

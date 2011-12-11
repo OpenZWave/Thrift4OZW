@@ -24,9 +24,9 @@ class RemoteManagerIf {
   virtual int32_t GetSendQueueCount(const int32_t _homeId) = 0;
   virtual int32_t GetPollInterval() = 0;
   virtual void SetPollInterval(const int32_t _seconds) = 0;
-  virtual bool EnablePoll(const RemoteValueID _valueId) = 0;
-  virtual bool DisablePoll(const RemoteValueID _valueId) = 0;
-  virtual bool isPolled(const RemoteValueID _valueId) = 0;
+  virtual bool EnablePoll(const RemoteValueID& _valueId) = 0;
+  virtual bool DisablePoll(const RemoteValueID& _valueId) = 0;
+  virtual bool isPolled(const RemoteValueID& _valueId) = 0;
   virtual bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool RequestNodeState(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool RequestNodeDynamic(const int32_t _homeId, const int8_t _nodeId) = 0;
@@ -56,41 +56,41 @@ class RemoteManagerIf {
   virtual void SetNodeLevel(const int32_t _homeId, const int8_t _nodeId, const int8_t _level) = 0;
   virtual bool IsNodeInfoReceived(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual void GetNodeClassInformation(Bool_GetNodeClassInformation& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId) = 0;
-  virtual void GetValueLabel(std::string& _return, const RemoteValueID _id) = 0;
-  virtual void SetValueLabel(const RemoteValueID _id, const std::string& _value) = 0;
-  virtual void GetValueUnits(std::string& _return, const RemoteValueID _id) = 0;
-  virtual void SetValueUnits(const RemoteValueID _id, const std::string& _value) = 0;
-  virtual void GetValueHelp(std::string& _return, const RemoteValueID _id) = 0;
-  virtual void SetValueHelp(const RemoteValueID _id, const std::string& _value) = 0;
-  virtual int32_t GetValueMin(const RemoteValueID _id) = 0;
-  virtual int32_t GetValueMax(const RemoteValueID _id) = 0;
-  virtual bool IsValueReadOnly(const RemoteValueID _id) = 0;
-  virtual bool IsValueWriteOnly(const RemoteValueID _id) = 0;
-  virtual bool IsValueSet(const RemoteValueID _id) = 0;
-  virtual void GetValueAsBool(Bool_Bool& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueAsFloat(Bool_Float& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueAsInt(Bool_Int& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueAsShort(Bool_Int16& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueAsString(Bool_String& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueListItems(Bool_ListString& _return, const RemoteValueID _id) = 0;
-  virtual void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID _id) = 0;
-  virtual bool SetValue_Bool(const RemoteValueID _id, const bool _value) = 0;
-  virtual bool SetValue_UInt8(const RemoteValueID _id, const int8_t _value) = 0;
-  virtual bool SetValue_Float(const RemoteValueID _id, const double _value) = 0;
-  virtual bool SetValue_Int32(const RemoteValueID _id, const int32_t _value) = 0;
-  virtual bool SetValue_Int16(const RemoteValueID _id, const int16_t _value) = 0;
-  virtual bool SetValue_String(const RemoteValueID _id, const std::string& _value) = 0;
-  virtual bool SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem) = 0;
-  virtual bool PressButton(const RemoteValueID _id) = 0;
-  virtual bool ReleaseButton(const RemoteValueID _id) = 0;
-  virtual int8_t GetNumSwitchPoints(const RemoteValueID _id) = 0;
-  virtual bool SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback) = 0;
-  virtual bool RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes) = 0;
-  virtual void ClearSwitchPoints(const RemoteValueID _id) = 0;
-  virtual void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID _id, const int8_t _idx) = 0;
+  virtual void GetValueLabel(std::string& _return, const RemoteValueID& _id) = 0;
+  virtual void SetValueLabel(const RemoteValueID& _id, const std::string& _value) = 0;
+  virtual void GetValueUnits(std::string& _return, const RemoteValueID& _id) = 0;
+  virtual void SetValueUnits(const RemoteValueID& _id, const std::string& _value) = 0;
+  virtual void GetValueHelp(std::string& _return, const RemoteValueID& _id) = 0;
+  virtual void SetValueHelp(const RemoteValueID& _id, const std::string& _value) = 0;
+  virtual int32_t GetValueMin(const RemoteValueID& _id) = 0;
+  virtual int32_t GetValueMax(const RemoteValueID& _id) = 0;
+  virtual bool IsValueReadOnly(const RemoteValueID& _id) = 0;
+  virtual bool IsValueWriteOnly(const RemoteValueID& _id) = 0;
+  virtual bool IsValueSet(const RemoteValueID& _id) = 0;
+  virtual void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueAsFloat(Bool_Float& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueAsInt(Bool_Int& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueAsShort(Bool_Int16& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueAsString(Bool_String& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueListSelection_String(Bool_String& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) = 0;
+  virtual void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) = 0;
+  virtual bool SetValue_Bool(const RemoteValueID& _id, const bool _value) = 0;
+  virtual bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value) = 0;
+  virtual bool SetValue_Float(const RemoteValueID& _id, const double _value) = 0;
+  virtual bool SetValue_Int32(const RemoteValueID& _id, const int32_t _value) = 0;
+  virtual bool SetValue_Int16(const RemoteValueID& _id, const int16_t _value) = 0;
+  virtual bool SetValue_String(const RemoteValueID& _id, const std::string& _value) = 0;
+  virtual bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem) = 0;
+  virtual bool PressButton(const RemoteValueID& _id) = 0;
+  virtual bool ReleaseButton(const RemoteValueID& _id) = 0;
+  virtual int8_t GetNumSwitchPoints(const RemoteValueID& _id) = 0;
+  virtual bool SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback) = 0;
+  virtual bool RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes) = 0;
+  virtual void ClearSwitchPoints(const RemoteValueID& _id) = 0;
+  virtual void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID& _id, const int8_t _idx) = 0;
   virtual void SwitchAllOn(const int32_t _homeId) = 0;
   virtual void SwitchAllOff(const int32_t _homeId) = 0;
   virtual bool SetConfigParam(const int32_t _homeId, const int8_t _nodeId, const int8_t _param, const int32_t _value, const int8_t _size) = 0;
@@ -108,32 +108,32 @@ class RemoteManagerIf {
   virtual void GetAllScenes(GetAllScenesReturnStruct& _return) = 0;
   virtual int8_t CreateScene() = 0;
   virtual bool RemoveScene(const int8_t _sceneId) = 0;
-  virtual bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) = 0;
-  virtual bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value) = 0;
-  virtual bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value) = 0;
-  virtual bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) = 0;
-  virtual bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value) = 0;
-  virtual bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) = 0;
-  virtual bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) = 0;
-  virtual bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) = 0;
-  virtual bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId) = 0;
+  virtual bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value) = 0;
+  virtual bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value) = 0;
+  virtual bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value) = 0;
+  virtual bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) = 0;
+  virtual bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value) = 0;
+  virtual bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) = 0;
+  virtual bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) = 0;
+  virtual bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) = 0;
+  virtual bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
   virtual void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId) = 0;
-  virtual void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId) = 0;
-  virtual bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) = 0;
-  virtual bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value) = 0;
-  virtual bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value) = 0;
-  virtual bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) = 0;
-  virtual bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value) = 0;
-  virtual bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) = 0;
-  virtual bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) = 0;
-  virtual bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) = 0;
+  virtual void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId) = 0;
+  virtual bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value) = 0;
+  virtual bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value) = 0;
+  virtual bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value) = 0;
+  virtual bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) = 0;
+  virtual bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value) = 0;
+  virtual bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) = 0;
+  virtual bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) = 0;
+  virtual bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) = 0;
   virtual void GetSceneLabel(std::string& _return, const int8_t _sceneId) = 0;
   virtual void SetSceneLabel(const int8_t _sceneId, const std::string& _value) = 0;
   virtual bool SceneExists(const int8_t _sceneId) = 0;
@@ -179,15 +179,15 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   void SetPollInterval(const int32_t /* _seconds */) {
     return;
   }
-  bool EnablePoll(const RemoteValueID /* _valueId */) {
+  bool EnablePoll(const RemoteValueID& /* _valueId */) {
     bool _return = false;
     return _return;
   }
-  bool DisablePoll(const RemoteValueID /* _valueId */) {
+  bool DisablePoll(const RemoteValueID& /* _valueId */) {
     bool _return = false;
     return _return;
   }
-  bool isPolled(const RemoteValueID /* _valueId */) {
+  bool isPolled(const RemoteValueID& /* _valueId */) {
     bool _return = false;
     return _return;
   }
@@ -290,126 +290,126 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   void GetNodeClassInformation(Bool_GetNodeClassInformation& /* _return */, const int32_t /* _homeId */, const int8_t /* _nodeId */, const int8_t /* _commandClassId */) {
     return;
   }
-  void GetValueLabel(std::string& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueLabel(std::string& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void SetValueLabel(const RemoteValueID /* _id */, const std::string& /* _value */) {
+  void SetValueLabel(const RemoteValueID& /* _id */, const std::string& /* _value */) {
     return;
   }
-  void GetValueUnits(std::string& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueUnits(std::string& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void SetValueUnits(const RemoteValueID /* _id */, const std::string& /* _value */) {
+  void SetValueUnits(const RemoteValueID& /* _id */, const std::string& /* _value */) {
     return;
   }
-  void GetValueHelp(std::string& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueHelp(std::string& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void SetValueHelp(const RemoteValueID /* _id */, const std::string& /* _value */) {
+  void SetValueHelp(const RemoteValueID& /* _id */, const std::string& /* _value */) {
     return;
   }
-  int32_t GetValueMin(const RemoteValueID /* _id */) {
+  int32_t GetValueMin(const RemoteValueID& /* _id */) {
     int32_t _return = 0;
     return _return;
   }
-  int32_t GetValueMax(const RemoteValueID /* _id */) {
+  int32_t GetValueMax(const RemoteValueID& /* _id */) {
     int32_t _return = 0;
     return _return;
   }
-  bool IsValueReadOnly(const RemoteValueID /* _id */) {
+  bool IsValueReadOnly(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
-  bool IsValueWriteOnly(const RemoteValueID /* _id */) {
+  bool IsValueWriteOnly(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
-  bool IsValueSet(const RemoteValueID /* _id */) {
+  bool IsValueSet(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
-  void GetValueAsBool(Bool_Bool& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueAsBool(Bool_Bool& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueAsByte(Bool_UInt8& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueAsByte(Bool_UInt8& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueAsFloat(Bool_Float& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueAsFloat(Bool_Float& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueAsInt(Bool_Int& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueAsInt(Bool_Int& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueAsShort(Bool_Int16& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueAsShort(Bool_Int16& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueAsString(Bool_String& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueAsString(Bool_String& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueListSelection_String(Bool_String& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueListSelection_String(Bool_String& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueListSelection_Int32(Bool_Int& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueListSelection_Int32(Bool_Int& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueListItems(Bool_ListString& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueListItems(Bool_ListString& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  void GetValueFloatPrecision(Bool_UInt8& /* _return */, const RemoteValueID /* _id */) {
+  void GetValueFloatPrecision(Bool_UInt8& /* _return */, const RemoteValueID& /* _id */) {
     return;
   }
-  bool SetValue_Bool(const RemoteValueID /* _id */, const bool /* _value */) {
+  bool SetValue_Bool(const RemoteValueID& /* _id */, const bool /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetValue_UInt8(const RemoteValueID /* _id */, const int8_t /* _value */) {
+  bool SetValue_UInt8(const RemoteValueID& /* _id */, const int8_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetValue_Float(const RemoteValueID /* _id */, const double /* _value */) {
+  bool SetValue_Float(const RemoteValueID& /* _id */, const double /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetValue_Int32(const RemoteValueID /* _id */, const int32_t /* _value */) {
+  bool SetValue_Int32(const RemoteValueID& /* _id */, const int32_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetValue_Int16(const RemoteValueID /* _id */, const int16_t /* _value */) {
+  bool SetValue_Int16(const RemoteValueID& /* _id */, const int16_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetValue_String(const RemoteValueID /* _id */, const std::string& /* _value */) {
+  bool SetValue_String(const RemoteValueID& /* _id */, const std::string& /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetValueListSelection(const RemoteValueID /* _id */, const std::string& /* _selectedItem */) {
+  bool SetValueListSelection(const RemoteValueID& /* _id */, const std::string& /* _selectedItem */) {
     bool _return = false;
     return _return;
   }
-  bool PressButton(const RemoteValueID /* _id */) {
+  bool PressButton(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
-  bool ReleaseButton(const RemoteValueID /* _id */) {
+  bool ReleaseButton(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
-  int8_t GetNumSwitchPoints(const RemoteValueID /* _id */) {
+  int8_t GetNumSwitchPoints(const RemoteValueID& /* _id */) {
     int8_t _return = 0;
     return _return;
   }
-  bool SetSwitchPoint(const RemoteValueID /* _id */, const int8_t /* _hours */, const int8_t /* _minutes */, const int8_t /* _setback */) {
+  bool SetSwitchPoint(const RemoteValueID& /* _id */, const int8_t /* _hours */, const int8_t /* _minutes */, const int8_t /* _setback */) {
     bool _return = false;
     return _return;
   }
-  bool RemoveSwitchPoint(const RemoteValueID /* _id */, const int8_t /* _hours */, const int8_t /* _minutes */) {
+  bool RemoveSwitchPoint(const RemoteValueID& /* _id */, const int8_t /* _hours */, const int8_t /* _minutes */) {
     bool _return = false;
     return _return;
   }
-  void ClearSwitchPoints(const RemoteValueID /* _id */) {
+  void ClearSwitchPoints(const RemoteValueID& /* _id */) {
     return;
   }
-  void GetSwitchPoint(GetSwitchPointReturnStruct& /* _return */, const RemoteValueID /* _id */, const int8_t /* _idx */) {
+  void GetSwitchPoint(GetSwitchPointReturnStruct& /* _return */, const RemoteValueID& /* _id */, const int8_t /* _idx */) {
     return;
   }
   void SwitchAllOn(const int32_t /* _homeId */) {
@@ -469,98 +469,98 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValue_Bool(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const bool /* _value */) {
+  bool AddSceneValue_Bool(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const bool /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValue_Uint8(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int8_t /* _value */) {
+  bool AddSceneValue_Uint8(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int8_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValue_Float(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const double /* _value */) {
+  bool AddSceneValue_Float(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const double /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValue_Int32(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int32_t /* _value */) {
+  bool AddSceneValue_Int32(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int32_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValue_Int16(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int16_t /* _value */) {
+  bool AddSceneValue_Int16(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int16_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValue_String(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const std::string& /* _value */) {
+  bool AddSceneValue_String(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const std::string& /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValueListSelection_String(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const std::string& /* _value */) {
+  bool AddSceneValueListSelection_String(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const std::string& /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool AddSceneValueListSelection_Int32(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int32_t /* _value */) {
+  bool AddSceneValueListSelection_Int32(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int32_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool RemoveSceneValue(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  bool RemoveSceneValue(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     bool _return = false;
     return _return;
   }
   void SceneGetValues(SceneGetValuesReturnStruct& /* _return */, const int8_t /* _sceneId */) {
     return;
   }
-  void SceneGetValueAsBool(Bool_Bool& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueAsBool(Bool_Bool& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueAsByte(Bool_UInt8& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueAsByte(Bool_UInt8& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueAsFloat(Bool_Float& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueAsFloat(Bool_Float& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueAsInt(Bool_Int& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueAsInt(Bool_Int& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueAsShort(Bool_Int16& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueAsShort(Bool_Int16& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueAsString(Bool_String& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueAsString(Bool_String& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueListSelection_String(Bool_String& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueListSelection_String(Bool_String& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  void SceneGetValueListSelection_Int32(Bool_Int& /* _return */, const int8_t /* _sceneId */, const RemoteValueID /* _valueId */) {
+  void SceneGetValueListSelection_Int32(Bool_Int& /* _return */, const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */) {
     return;
   }
-  bool SetSceneValue_Bool(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const bool /* _value */) {
+  bool SetSceneValue_Bool(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const bool /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValue_Uint8(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int8_t /* _value */) {
+  bool SetSceneValue_Uint8(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int8_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValue_Float(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const double /* _value */) {
+  bool SetSceneValue_Float(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const double /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValue_Int32(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int32_t /* _value */) {
+  bool SetSceneValue_Int32(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int32_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValue_Int16(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int16_t /* _value */) {
+  bool SetSceneValue_Int16(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int16_t /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValue_String(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const std::string& /* _value */) {
+  bool SetSceneValue_String(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const std::string& /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValueListSelection_String(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const std::string& /* _value */) {
+  bool SetSceneValueListSelection_String(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const std::string& /* _value */) {
     bool _return = false;
     return _return;
   }
-  bool SetSceneValueListSelection_Int32(const int8_t /* _sceneId */, const RemoteValueID /* _valueId */, const int32_t /* _value */) {
+  bool SetSceneValueListSelection_Int32(const int8_t /* _sceneId */, const RemoteValueID& /* _valueId */, const int32_t /* _value */) {
     bool _return = false;
     return _return;
   }
@@ -1614,7 +1614,7 @@ typedef struct _RemoteManager_EnablePoll_args__isset {
 class RemoteManager_EnablePoll_args {
  public:
 
-  RemoteManager_EnablePoll_args() : _valueId(0) {
+  RemoteManager_EnablePoll_args() {
   }
 
   virtual ~RemoteManager_EnablePoll_args() throw() {}
@@ -1623,7 +1623,7 @@ class RemoteManager_EnablePoll_args {
 
   _RemoteManager_EnablePoll_args__isset __isset;
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -1722,7 +1722,7 @@ typedef struct _RemoteManager_DisablePoll_args__isset {
 class RemoteManager_DisablePoll_args {
  public:
 
-  RemoteManager_DisablePoll_args() : _valueId(0) {
+  RemoteManager_DisablePoll_args() {
   }
 
   virtual ~RemoteManager_DisablePoll_args() throw() {}
@@ -1731,7 +1731,7 @@ class RemoteManager_DisablePoll_args {
 
   _RemoteManager_DisablePoll_args__isset __isset;
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -1830,7 +1830,7 @@ typedef struct _RemoteManager_isPolled_args__isset {
 class RemoteManager_isPolled_args {
  public:
 
-  RemoteManager_isPolled_args() : _valueId(0) {
+  RemoteManager_isPolled_args() {
   }
 
   virtual ~RemoteManager_isPolled_args() throw() {}
@@ -1839,7 +1839,7 @@ class RemoteManager_isPolled_args {
 
   _RemoteManager_isPolled_args__isset __isset;
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -5245,7 +5245,7 @@ typedef struct _RemoteManager_GetValueLabel_args__isset {
 class RemoteManager_GetValueLabel_args {
  public:
 
-  RemoteManager_GetValueLabel_args() : _id(0) {
+  RemoteManager_GetValueLabel_args() {
   }
 
   virtual ~RemoteManager_GetValueLabel_args() throw() {}
@@ -5254,7 +5254,7 @@ class RemoteManager_GetValueLabel_args {
 
   _RemoteManager_GetValueLabel_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5354,7 +5354,7 @@ typedef struct _RemoteManager_SetValueLabel_args__isset {
 class RemoteManager_SetValueLabel_args {
  public:
 
-  RemoteManager_SetValueLabel_args() : _id(0), _value("") {
+  RemoteManager_SetValueLabel_args() : _value("") {
   }
 
   virtual ~RemoteManager_SetValueLabel_args() throw() {}
@@ -5364,7 +5364,7 @@ class RemoteManager_SetValueLabel_args {
 
   _RemoteManager_SetValueLabel_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5450,7 +5450,7 @@ typedef struct _RemoteManager_GetValueUnits_args__isset {
 class RemoteManager_GetValueUnits_args {
  public:
 
-  RemoteManager_GetValueUnits_args() : _id(0) {
+  RemoteManager_GetValueUnits_args() {
   }
 
   virtual ~RemoteManager_GetValueUnits_args() throw() {}
@@ -5459,7 +5459,7 @@ class RemoteManager_GetValueUnits_args {
 
   _RemoteManager_GetValueUnits_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5559,7 +5559,7 @@ typedef struct _RemoteManager_SetValueUnits_args__isset {
 class RemoteManager_SetValueUnits_args {
  public:
 
-  RemoteManager_SetValueUnits_args() : _id(0), _value("") {
+  RemoteManager_SetValueUnits_args() : _value("") {
   }
 
   virtual ~RemoteManager_SetValueUnits_args() throw() {}
@@ -5569,7 +5569,7 @@ class RemoteManager_SetValueUnits_args {
 
   _RemoteManager_SetValueUnits_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5655,7 +5655,7 @@ typedef struct _RemoteManager_GetValueHelp_args__isset {
 class RemoteManager_GetValueHelp_args {
  public:
 
-  RemoteManager_GetValueHelp_args() : _id(0) {
+  RemoteManager_GetValueHelp_args() {
   }
 
   virtual ~RemoteManager_GetValueHelp_args() throw() {}
@@ -5664,7 +5664,7 @@ class RemoteManager_GetValueHelp_args {
 
   _RemoteManager_GetValueHelp_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5764,7 +5764,7 @@ typedef struct _RemoteManager_SetValueHelp_args__isset {
 class RemoteManager_SetValueHelp_args {
  public:
 
-  RemoteManager_SetValueHelp_args() : _id(0), _value("") {
+  RemoteManager_SetValueHelp_args() : _value("") {
   }
 
   virtual ~RemoteManager_SetValueHelp_args() throw() {}
@@ -5774,7 +5774,7 @@ class RemoteManager_SetValueHelp_args {
 
   _RemoteManager_SetValueHelp_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5860,7 +5860,7 @@ typedef struct _RemoteManager_GetValueMin_args__isset {
 class RemoteManager_GetValueMin_args {
  public:
 
-  RemoteManager_GetValueMin_args() : _id(0) {
+  RemoteManager_GetValueMin_args() {
   }
 
   virtual ~RemoteManager_GetValueMin_args() throw() {}
@@ -5869,7 +5869,7 @@ class RemoteManager_GetValueMin_args {
 
   _RemoteManager_GetValueMin_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -5968,7 +5968,7 @@ typedef struct _RemoteManager_GetValueMax_args__isset {
 class RemoteManager_GetValueMax_args {
  public:
 
-  RemoteManager_GetValueMax_args() : _id(0) {
+  RemoteManager_GetValueMax_args() {
   }
 
   virtual ~RemoteManager_GetValueMax_args() throw() {}
@@ -5977,7 +5977,7 @@ class RemoteManager_GetValueMax_args {
 
   _RemoteManager_GetValueMax_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6076,7 +6076,7 @@ typedef struct _RemoteManager_IsValueReadOnly_args__isset {
 class RemoteManager_IsValueReadOnly_args {
  public:
 
-  RemoteManager_IsValueReadOnly_args() : _id(0) {
+  RemoteManager_IsValueReadOnly_args() {
   }
 
   virtual ~RemoteManager_IsValueReadOnly_args() throw() {}
@@ -6085,7 +6085,7 @@ class RemoteManager_IsValueReadOnly_args {
 
   _RemoteManager_IsValueReadOnly_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6184,7 +6184,7 @@ typedef struct _RemoteManager_IsValueWriteOnly_args__isset {
 class RemoteManager_IsValueWriteOnly_args {
  public:
 
-  RemoteManager_IsValueWriteOnly_args() : _id(0) {
+  RemoteManager_IsValueWriteOnly_args() {
   }
 
   virtual ~RemoteManager_IsValueWriteOnly_args() throw() {}
@@ -6193,7 +6193,7 @@ class RemoteManager_IsValueWriteOnly_args {
 
   _RemoteManager_IsValueWriteOnly_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6292,7 +6292,7 @@ typedef struct _RemoteManager_IsValueSet_args__isset {
 class RemoteManager_IsValueSet_args {
  public:
 
-  RemoteManager_IsValueSet_args() : _id(0) {
+  RemoteManager_IsValueSet_args() {
   }
 
   virtual ~RemoteManager_IsValueSet_args() throw() {}
@@ -6301,7 +6301,7 @@ class RemoteManager_IsValueSet_args {
 
   _RemoteManager_IsValueSet_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6400,7 +6400,7 @@ typedef struct _RemoteManager_GetValueAsBool_args__isset {
 class RemoteManager_GetValueAsBool_args {
  public:
 
-  RemoteManager_GetValueAsBool_args() : _id(0) {
+  RemoteManager_GetValueAsBool_args() {
   }
 
   virtual ~RemoteManager_GetValueAsBool_args() throw() {}
@@ -6409,7 +6409,7 @@ class RemoteManager_GetValueAsBool_args {
 
   _RemoteManager_GetValueAsBool_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6508,7 +6508,7 @@ typedef struct _RemoteManager_GetValueAsByte_args__isset {
 class RemoteManager_GetValueAsByte_args {
  public:
 
-  RemoteManager_GetValueAsByte_args() : _id(0) {
+  RemoteManager_GetValueAsByte_args() {
   }
 
   virtual ~RemoteManager_GetValueAsByte_args() throw() {}
@@ -6517,7 +6517,7 @@ class RemoteManager_GetValueAsByte_args {
 
   _RemoteManager_GetValueAsByte_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6616,7 +6616,7 @@ typedef struct _RemoteManager_GetValueAsFloat_args__isset {
 class RemoteManager_GetValueAsFloat_args {
  public:
 
-  RemoteManager_GetValueAsFloat_args() : _id(0) {
+  RemoteManager_GetValueAsFloat_args() {
   }
 
   virtual ~RemoteManager_GetValueAsFloat_args() throw() {}
@@ -6625,7 +6625,7 @@ class RemoteManager_GetValueAsFloat_args {
 
   _RemoteManager_GetValueAsFloat_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6724,7 +6724,7 @@ typedef struct _RemoteManager_GetValueAsInt_args__isset {
 class RemoteManager_GetValueAsInt_args {
  public:
 
-  RemoteManager_GetValueAsInt_args() : _id(0) {
+  RemoteManager_GetValueAsInt_args() {
   }
 
   virtual ~RemoteManager_GetValueAsInt_args() throw() {}
@@ -6733,7 +6733,7 @@ class RemoteManager_GetValueAsInt_args {
 
   _RemoteManager_GetValueAsInt_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6832,7 +6832,7 @@ typedef struct _RemoteManager_GetValueAsShort_args__isset {
 class RemoteManager_GetValueAsShort_args {
  public:
 
-  RemoteManager_GetValueAsShort_args() : _id(0) {
+  RemoteManager_GetValueAsShort_args() {
   }
 
   virtual ~RemoteManager_GetValueAsShort_args() throw() {}
@@ -6841,7 +6841,7 @@ class RemoteManager_GetValueAsShort_args {
 
   _RemoteManager_GetValueAsShort_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -6940,7 +6940,7 @@ typedef struct _RemoteManager_GetValueAsString_args__isset {
 class RemoteManager_GetValueAsString_args {
  public:
 
-  RemoteManager_GetValueAsString_args() : _id(0) {
+  RemoteManager_GetValueAsString_args() {
   }
 
   virtual ~RemoteManager_GetValueAsString_args() throw() {}
@@ -6949,7 +6949,7 @@ class RemoteManager_GetValueAsString_args {
 
   _RemoteManager_GetValueAsString_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7048,7 +7048,7 @@ typedef struct _RemoteManager_GetValueListSelection_String_args__isset {
 class RemoteManager_GetValueListSelection_String_args {
  public:
 
-  RemoteManager_GetValueListSelection_String_args() : _id(0) {
+  RemoteManager_GetValueListSelection_String_args() {
   }
 
   virtual ~RemoteManager_GetValueListSelection_String_args() throw() {}
@@ -7057,7 +7057,7 @@ class RemoteManager_GetValueListSelection_String_args {
 
   _RemoteManager_GetValueListSelection_String_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7156,7 +7156,7 @@ typedef struct _RemoteManager_GetValueListSelection_Int32_args__isset {
 class RemoteManager_GetValueListSelection_Int32_args {
  public:
 
-  RemoteManager_GetValueListSelection_Int32_args() : _id(0) {
+  RemoteManager_GetValueListSelection_Int32_args() {
   }
 
   virtual ~RemoteManager_GetValueListSelection_Int32_args() throw() {}
@@ -7165,7 +7165,7 @@ class RemoteManager_GetValueListSelection_Int32_args {
 
   _RemoteManager_GetValueListSelection_Int32_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7264,7 +7264,7 @@ typedef struct _RemoteManager_GetValueListItems_args__isset {
 class RemoteManager_GetValueListItems_args {
  public:
 
-  RemoteManager_GetValueListItems_args() : _id(0) {
+  RemoteManager_GetValueListItems_args() {
   }
 
   virtual ~RemoteManager_GetValueListItems_args() throw() {}
@@ -7273,7 +7273,7 @@ class RemoteManager_GetValueListItems_args {
 
   _RemoteManager_GetValueListItems_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7372,7 +7372,7 @@ typedef struct _RemoteManager_GetValueFloatPrecision_args__isset {
 class RemoteManager_GetValueFloatPrecision_args {
  public:
 
-  RemoteManager_GetValueFloatPrecision_args() : _id(0) {
+  RemoteManager_GetValueFloatPrecision_args() {
   }
 
   virtual ~RemoteManager_GetValueFloatPrecision_args() throw() {}
@@ -7381,7 +7381,7 @@ class RemoteManager_GetValueFloatPrecision_args {
 
   _RemoteManager_GetValueFloatPrecision_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7481,7 +7481,7 @@ typedef struct _RemoteManager_SetValue_Bool_args__isset {
 class RemoteManager_SetValue_Bool_args {
  public:
 
-  RemoteManager_SetValue_Bool_args() : _id(0), _value(0) {
+  RemoteManager_SetValue_Bool_args() : _value(0) {
   }
 
   virtual ~RemoteManager_SetValue_Bool_args() throw() {}
@@ -7491,7 +7491,7 @@ class RemoteManager_SetValue_Bool_args {
 
   _RemoteManager_SetValue_Bool_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7598,7 +7598,7 @@ typedef struct _RemoteManager_SetValue_UInt8_args__isset {
 class RemoteManager_SetValue_UInt8_args {
  public:
 
-  RemoteManager_SetValue_UInt8_args() : _id(0), _value(0) {
+  RemoteManager_SetValue_UInt8_args() : _value(0) {
   }
 
   virtual ~RemoteManager_SetValue_UInt8_args() throw() {}
@@ -7608,7 +7608,7 @@ class RemoteManager_SetValue_UInt8_args {
 
   _RemoteManager_SetValue_UInt8_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7715,7 +7715,7 @@ typedef struct _RemoteManager_SetValue_Float_args__isset {
 class RemoteManager_SetValue_Float_args {
  public:
 
-  RemoteManager_SetValue_Float_args() : _id(0), _value(0) {
+  RemoteManager_SetValue_Float_args() : _value(0) {
   }
 
   virtual ~RemoteManager_SetValue_Float_args() throw() {}
@@ -7725,7 +7725,7 @@ class RemoteManager_SetValue_Float_args {
 
   _RemoteManager_SetValue_Float_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7832,7 +7832,7 @@ typedef struct _RemoteManager_SetValue_Int32_args__isset {
 class RemoteManager_SetValue_Int32_args {
  public:
 
-  RemoteManager_SetValue_Int32_args() : _id(0), _value(0) {
+  RemoteManager_SetValue_Int32_args() : _value(0) {
   }
 
   virtual ~RemoteManager_SetValue_Int32_args() throw() {}
@@ -7842,7 +7842,7 @@ class RemoteManager_SetValue_Int32_args {
 
   _RemoteManager_SetValue_Int32_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -7949,7 +7949,7 @@ typedef struct _RemoteManager_SetValue_Int16_args__isset {
 class RemoteManager_SetValue_Int16_args {
  public:
 
-  RemoteManager_SetValue_Int16_args() : _id(0), _value(0) {
+  RemoteManager_SetValue_Int16_args() : _value(0) {
   }
 
   virtual ~RemoteManager_SetValue_Int16_args() throw() {}
@@ -7959,7 +7959,7 @@ class RemoteManager_SetValue_Int16_args {
 
   _RemoteManager_SetValue_Int16_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8066,7 +8066,7 @@ typedef struct _RemoteManager_SetValue_String_args__isset {
 class RemoteManager_SetValue_String_args {
  public:
 
-  RemoteManager_SetValue_String_args() : _id(0), _value("") {
+  RemoteManager_SetValue_String_args() : _value("") {
   }
 
   virtual ~RemoteManager_SetValue_String_args() throw() {}
@@ -8076,7 +8076,7 @@ class RemoteManager_SetValue_String_args {
 
   _RemoteManager_SetValue_String_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8183,7 +8183,7 @@ typedef struct _RemoteManager_SetValueListSelection_args__isset {
 class RemoteManager_SetValueListSelection_args {
  public:
 
-  RemoteManager_SetValueListSelection_args() : _id(0), _selectedItem("") {
+  RemoteManager_SetValueListSelection_args() : _selectedItem("") {
   }
 
   virtual ~RemoteManager_SetValueListSelection_args() throw() {}
@@ -8193,7 +8193,7 @@ class RemoteManager_SetValueListSelection_args {
 
   _RemoteManager_SetValueListSelection_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8299,7 +8299,7 @@ typedef struct _RemoteManager_PressButton_args__isset {
 class RemoteManager_PressButton_args {
  public:
 
-  RemoteManager_PressButton_args() : _id(0) {
+  RemoteManager_PressButton_args() {
   }
 
   virtual ~RemoteManager_PressButton_args() throw() {}
@@ -8308,7 +8308,7 @@ class RemoteManager_PressButton_args {
 
   _RemoteManager_PressButton_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8407,7 +8407,7 @@ typedef struct _RemoteManager_ReleaseButton_args__isset {
 class RemoteManager_ReleaseButton_args {
  public:
 
-  RemoteManager_ReleaseButton_args() : _id(0) {
+  RemoteManager_ReleaseButton_args() {
   }
 
   virtual ~RemoteManager_ReleaseButton_args() throw() {}
@@ -8416,7 +8416,7 @@ class RemoteManager_ReleaseButton_args {
 
   _RemoteManager_ReleaseButton_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8515,7 +8515,7 @@ typedef struct _RemoteManager_GetNumSwitchPoints_args__isset {
 class RemoteManager_GetNumSwitchPoints_args {
  public:
 
-  RemoteManager_GetNumSwitchPoints_args() : _id(0) {
+  RemoteManager_GetNumSwitchPoints_args() {
   }
 
   virtual ~RemoteManager_GetNumSwitchPoints_args() throw() {}
@@ -8524,7 +8524,7 @@ class RemoteManager_GetNumSwitchPoints_args {
 
   _RemoteManager_GetNumSwitchPoints_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8626,7 +8626,7 @@ typedef struct _RemoteManager_SetSwitchPoint_args__isset {
 class RemoteManager_SetSwitchPoint_args {
  public:
 
-  RemoteManager_SetSwitchPoint_args() : _id(0), _hours(0), _minutes(0), _setback(0) {
+  RemoteManager_SetSwitchPoint_args() : _hours(0), _minutes(0), _setback(0) {
   }
 
   virtual ~RemoteManager_SetSwitchPoint_args() throw() {}
@@ -8638,7 +8638,7 @@ class RemoteManager_SetSwitchPoint_args {
 
   _RemoteManager_SetSwitchPoint_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8760,7 +8760,7 @@ typedef struct _RemoteManager_RemoveSwitchPoint_args__isset {
 class RemoteManager_RemoveSwitchPoint_args {
  public:
 
-  RemoteManager_RemoveSwitchPoint_args() : _id(0), _hours(0), _minutes(0) {
+  RemoteManager_RemoveSwitchPoint_args() : _hours(0), _minutes(0) {
   }
 
   virtual ~RemoteManager_RemoveSwitchPoint_args() throw() {}
@@ -8771,7 +8771,7 @@ class RemoteManager_RemoveSwitchPoint_args {
 
   _RemoteManager_RemoveSwitchPoint_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8884,7 +8884,7 @@ typedef struct _RemoteManager_ClearSwitchPoints_args__isset {
 class RemoteManager_ClearSwitchPoints_args {
  public:
 
-  RemoteManager_ClearSwitchPoints_args() : _id(0) {
+  RemoteManager_ClearSwitchPoints_args() {
   }
 
   virtual ~RemoteManager_ClearSwitchPoints_args() throw() {}
@@ -8893,7 +8893,7 @@ class RemoteManager_ClearSwitchPoints_args {
 
   _RemoteManager_ClearSwitchPoints_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -8973,7 +8973,7 @@ typedef struct _RemoteManager_GetSwitchPoint_args__isset {
 class RemoteManager_GetSwitchPoint_args {
  public:
 
-  RemoteManager_GetSwitchPoint_args() : _id(0), _idx(0) {
+  RemoteManager_GetSwitchPoint_args() : _idx(0) {
   }
 
   virtual ~RemoteManager_GetSwitchPoint_args() throw() {}
@@ -8983,7 +8983,7 @@ class RemoteManager_GetSwitchPoint_args {
 
   _RemoteManager_GetSwitchPoint_args__isset __isset;
 
-  void __set__id(const RemoteValueID val) {
+  void __set__id(const RemoteValueID& val) {
     _id = val;
   }
 
@@ -10905,7 +10905,7 @@ typedef struct _RemoteManager_AddSceneValue_Bool_args__isset {
 class RemoteManager_AddSceneValue_Bool_args {
  public:
 
-  RemoteManager_AddSceneValue_Bool_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_AddSceneValue_Bool_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_AddSceneValue_Bool_args() throw() {}
@@ -10920,7 +10920,7 @@ class RemoteManager_AddSceneValue_Bool_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11031,7 +11031,7 @@ typedef struct _RemoteManager_AddSceneValue_Uint8_args__isset {
 class RemoteManager_AddSceneValue_Uint8_args {
  public:
 
-  RemoteManager_AddSceneValue_Uint8_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_AddSceneValue_Uint8_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_AddSceneValue_Uint8_args() throw() {}
@@ -11046,7 +11046,7 @@ class RemoteManager_AddSceneValue_Uint8_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11157,7 +11157,7 @@ typedef struct _RemoteManager_AddSceneValue_Float_args__isset {
 class RemoteManager_AddSceneValue_Float_args {
  public:
 
-  RemoteManager_AddSceneValue_Float_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_AddSceneValue_Float_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_AddSceneValue_Float_args() throw() {}
@@ -11172,7 +11172,7 @@ class RemoteManager_AddSceneValue_Float_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11283,7 +11283,7 @@ typedef struct _RemoteManager_AddSceneValue_Int32_args__isset {
 class RemoteManager_AddSceneValue_Int32_args {
  public:
 
-  RemoteManager_AddSceneValue_Int32_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_AddSceneValue_Int32_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_AddSceneValue_Int32_args() throw() {}
@@ -11298,7 +11298,7 @@ class RemoteManager_AddSceneValue_Int32_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11409,7 +11409,7 @@ typedef struct _RemoteManager_AddSceneValue_Int16_args__isset {
 class RemoteManager_AddSceneValue_Int16_args {
  public:
 
-  RemoteManager_AddSceneValue_Int16_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_AddSceneValue_Int16_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_AddSceneValue_Int16_args() throw() {}
@@ -11424,7 +11424,7 @@ class RemoteManager_AddSceneValue_Int16_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11535,7 +11535,7 @@ typedef struct _RemoteManager_AddSceneValue_String_args__isset {
 class RemoteManager_AddSceneValue_String_args {
  public:
 
-  RemoteManager_AddSceneValue_String_args() : _sceneId(0), _valueId(0), _value("") {
+  RemoteManager_AddSceneValue_String_args() : _sceneId(0), _value("") {
   }
 
   virtual ~RemoteManager_AddSceneValue_String_args() throw() {}
@@ -11550,7 +11550,7 @@ class RemoteManager_AddSceneValue_String_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11661,7 +11661,7 @@ typedef struct _RemoteManager_AddSceneValueListSelection_String_args__isset {
 class RemoteManager_AddSceneValueListSelection_String_args {
  public:
 
-  RemoteManager_AddSceneValueListSelection_String_args() : _sceneId(0), _valueId(0), _value("") {
+  RemoteManager_AddSceneValueListSelection_String_args() : _sceneId(0), _value("") {
   }
 
   virtual ~RemoteManager_AddSceneValueListSelection_String_args() throw() {}
@@ -11676,7 +11676,7 @@ class RemoteManager_AddSceneValueListSelection_String_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11787,7 +11787,7 @@ typedef struct _RemoteManager_AddSceneValueListSelection_Int32_args__isset {
 class RemoteManager_AddSceneValueListSelection_Int32_args {
  public:
 
-  RemoteManager_AddSceneValueListSelection_Int32_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_AddSceneValueListSelection_Int32_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_AddSceneValueListSelection_Int32_args() throw() {}
@@ -11802,7 +11802,7 @@ class RemoteManager_AddSceneValueListSelection_Int32_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -11912,7 +11912,7 @@ typedef struct _RemoteManager_RemoveSceneValue_args__isset {
 class RemoteManager_RemoveSceneValue_args {
  public:
 
-  RemoteManager_RemoveSceneValue_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_RemoveSceneValue_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_RemoveSceneValue_args() throw() {}
@@ -11926,7 +11926,7 @@ class RemoteManager_RemoveSceneValue_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12137,7 +12137,7 @@ typedef struct _RemoteManager_SceneGetValueAsBool_args__isset {
 class RemoteManager_SceneGetValueAsBool_args {
  public:
 
-  RemoteManager_SceneGetValueAsBool_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueAsBool_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueAsBool_args() throw() {}
@@ -12151,7 +12151,7 @@ class RemoteManager_SceneGetValueAsBool_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12254,7 +12254,7 @@ typedef struct _RemoteManager_SceneGetValueAsByte_args__isset {
 class RemoteManager_SceneGetValueAsByte_args {
  public:
 
-  RemoteManager_SceneGetValueAsByte_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueAsByte_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueAsByte_args() throw() {}
@@ -12268,7 +12268,7 @@ class RemoteManager_SceneGetValueAsByte_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12371,7 +12371,7 @@ typedef struct _RemoteManager_SceneGetValueAsFloat_args__isset {
 class RemoteManager_SceneGetValueAsFloat_args {
  public:
 
-  RemoteManager_SceneGetValueAsFloat_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueAsFloat_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueAsFloat_args() throw() {}
@@ -12385,7 +12385,7 @@ class RemoteManager_SceneGetValueAsFloat_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12488,7 +12488,7 @@ typedef struct _RemoteManager_SceneGetValueAsInt_args__isset {
 class RemoteManager_SceneGetValueAsInt_args {
  public:
 
-  RemoteManager_SceneGetValueAsInt_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueAsInt_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueAsInt_args() throw() {}
@@ -12502,7 +12502,7 @@ class RemoteManager_SceneGetValueAsInt_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12605,7 +12605,7 @@ typedef struct _RemoteManager_SceneGetValueAsShort_args__isset {
 class RemoteManager_SceneGetValueAsShort_args {
  public:
 
-  RemoteManager_SceneGetValueAsShort_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueAsShort_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueAsShort_args() throw() {}
@@ -12619,7 +12619,7 @@ class RemoteManager_SceneGetValueAsShort_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12722,7 +12722,7 @@ typedef struct _RemoteManager_SceneGetValueAsString_args__isset {
 class RemoteManager_SceneGetValueAsString_args {
  public:
 
-  RemoteManager_SceneGetValueAsString_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueAsString_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueAsString_args() throw() {}
@@ -12736,7 +12736,7 @@ class RemoteManager_SceneGetValueAsString_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12839,7 +12839,7 @@ typedef struct _RemoteManager_SceneGetValueListSelection_String_args__isset {
 class RemoteManager_SceneGetValueListSelection_String_args {
  public:
 
-  RemoteManager_SceneGetValueListSelection_String_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueListSelection_String_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueListSelection_String_args() throw() {}
@@ -12853,7 +12853,7 @@ class RemoteManager_SceneGetValueListSelection_String_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -12956,7 +12956,7 @@ typedef struct _RemoteManager_SceneGetValueListSelection_Int32_args__isset {
 class RemoteManager_SceneGetValueListSelection_Int32_args {
  public:
 
-  RemoteManager_SceneGetValueListSelection_Int32_args() : _sceneId(0), _valueId(0) {
+  RemoteManager_SceneGetValueListSelection_Int32_args() : _sceneId(0) {
   }
 
   virtual ~RemoteManager_SceneGetValueListSelection_Int32_args() throw() {}
@@ -12970,7 +12970,7 @@ class RemoteManager_SceneGetValueListSelection_Int32_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13074,7 +13074,7 @@ typedef struct _RemoteManager_SetSceneValue_Bool_args__isset {
 class RemoteManager_SetSceneValue_Bool_args {
  public:
 
-  RemoteManager_SetSceneValue_Bool_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_SetSceneValue_Bool_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_SetSceneValue_Bool_args() throw() {}
@@ -13089,7 +13089,7 @@ class RemoteManager_SetSceneValue_Bool_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13200,7 +13200,7 @@ typedef struct _RemoteManager_SetSceneValue_Uint8_args__isset {
 class RemoteManager_SetSceneValue_Uint8_args {
  public:
 
-  RemoteManager_SetSceneValue_Uint8_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_SetSceneValue_Uint8_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_SetSceneValue_Uint8_args() throw() {}
@@ -13215,7 +13215,7 @@ class RemoteManager_SetSceneValue_Uint8_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13326,7 +13326,7 @@ typedef struct _RemoteManager_SetSceneValue_Float_args__isset {
 class RemoteManager_SetSceneValue_Float_args {
  public:
 
-  RemoteManager_SetSceneValue_Float_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_SetSceneValue_Float_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_SetSceneValue_Float_args() throw() {}
@@ -13341,7 +13341,7 @@ class RemoteManager_SetSceneValue_Float_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13452,7 +13452,7 @@ typedef struct _RemoteManager_SetSceneValue_Int32_args__isset {
 class RemoteManager_SetSceneValue_Int32_args {
  public:
 
-  RemoteManager_SetSceneValue_Int32_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_SetSceneValue_Int32_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_SetSceneValue_Int32_args() throw() {}
@@ -13467,7 +13467,7 @@ class RemoteManager_SetSceneValue_Int32_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13578,7 +13578,7 @@ typedef struct _RemoteManager_SetSceneValue_Int16_args__isset {
 class RemoteManager_SetSceneValue_Int16_args {
  public:
 
-  RemoteManager_SetSceneValue_Int16_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_SetSceneValue_Int16_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_SetSceneValue_Int16_args() throw() {}
@@ -13593,7 +13593,7 @@ class RemoteManager_SetSceneValue_Int16_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13704,7 +13704,7 @@ typedef struct _RemoteManager_SetSceneValue_String_args__isset {
 class RemoteManager_SetSceneValue_String_args {
  public:
 
-  RemoteManager_SetSceneValue_String_args() : _sceneId(0), _valueId(0), _value("") {
+  RemoteManager_SetSceneValue_String_args() : _sceneId(0), _value("") {
   }
 
   virtual ~RemoteManager_SetSceneValue_String_args() throw() {}
@@ -13719,7 +13719,7 @@ class RemoteManager_SetSceneValue_String_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13830,7 +13830,7 @@ typedef struct _RemoteManager_SetSceneValueListSelection_String_args__isset {
 class RemoteManager_SetSceneValueListSelection_String_args {
  public:
 
-  RemoteManager_SetSceneValueListSelection_String_args() : _sceneId(0), _valueId(0), _value("") {
+  RemoteManager_SetSceneValueListSelection_String_args() : _sceneId(0), _value("") {
   }
 
   virtual ~RemoteManager_SetSceneValueListSelection_String_args() throw() {}
@@ -13845,7 +13845,7 @@ class RemoteManager_SetSceneValueListSelection_String_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -13956,7 +13956,7 @@ typedef struct _RemoteManager_SetSceneValueListSelection_Int32_args__isset {
 class RemoteManager_SetSceneValueListSelection_Int32_args {
  public:
 
-  RemoteManager_SetSceneValueListSelection_Int32_args() : _sceneId(0), _valueId(0), _value(0) {
+  RemoteManager_SetSceneValueListSelection_Int32_args() : _sceneId(0), _value(0) {
   }
 
   virtual ~RemoteManager_SetSceneValueListSelection_Int32_args() throw() {}
@@ -13971,7 +13971,7 @@ class RemoteManager_SetSceneValueListSelection_Int32_args {
     _sceneId = val;
   }
 
-  void __set__valueId(const RemoteValueID val) {
+  void __set__valueId(const RemoteValueID& val) {
     _valueId = val;
   }
 
@@ -14543,14 +14543,14 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   void SetPollInterval(const int32_t _seconds);
   void send_SetPollInterval(const int32_t _seconds);
   void recv_SetPollInterval();
-  bool EnablePoll(const RemoteValueID _valueId);
-  void send_EnablePoll(const RemoteValueID _valueId);
+  bool EnablePoll(const RemoteValueID& _valueId);
+  void send_EnablePoll(const RemoteValueID& _valueId);
   bool recv_EnablePoll();
-  bool DisablePoll(const RemoteValueID _valueId);
-  void send_DisablePoll(const RemoteValueID _valueId);
+  bool DisablePoll(const RemoteValueID& _valueId);
+  void send_DisablePoll(const RemoteValueID& _valueId);
   bool recv_DisablePoll();
-  bool isPolled(const RemoteValueID _valueId);
-  void send_isPolled(const RemoteValueID _valueId);
+  bool isPolled(const RemoteValueID& _valueId);
+  void send_isPolled(const RemoteValueID& _valueId);
   bool recv_isPolled();
   bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId);
   void send_RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId);
@@ -14639,110 +14639,110 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   void GetNodeClassInformation(Bool_GetNodeClassInformation& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId);
   void send_GetNodeClassInformation(const int32_t _homeId, const int8_t _nodeId, const int8_t _commandClassId);
   void recv_GetNodeClassInformation(Bool_GetNodeClassInformation& _return);
-  void GetValueLabel(std::string& _return, const RemoteValueID _id);
-  void send_GetValueLabel(const RemoteValueID _id);
+  void GetValueLabel(std::string& _return, const RemoteValueID& _id);
+  void send_GetValueLabel(const RemoteValueID& _id);
   void recv_GetValueLabel(std::string& _return);
-  void SetValueLabel(const RemoteValueID _id, const std::string& _value);
-  void send_SetValueLabel(const RemoteValueID _id, const std::string& _value);
+  void SetValueLabel(const RemoteValueID& _id, const std::string& _value);
+  void send_SetValueLabel(const RemoteValueID& _id, const std::string& _value);
   void recv_SetValueLabel();
-  void GetValueUnits(std::string& _return, const RemoteValueID _id);
-  void send_GetValueUnits(const RemoteValueID _id);
+  void GetValueUnits(std::string& _return, const RemoteValueID& _id);
+  void send_GetValueUnits(const RemoteValueID& _id);
   void recv_GetValueUnits(std::string& _return);
-  void SetValueUnits(const RemoteValueID _id, const std::string& _value);
-  void send_SetValueUnits(const RemoteValueID _id, const std::string& _value);
+  void SetValueUnits(const RemoteValueID& _id, const std::string& _value);
+  void send_SetValueUnits(const RemoteValueID& _id, const std::string& _value);
   void recv_SetValueUnits();
-  void GetValueHelp(std::string& _return, const RemoteValueID _id);
-  void send_GetValueHelp(const RemoteValueID _id);
+  void GetValueHelp(std::string& _return, const RemoteValueID& _id);
+  void send_GetValueHelp(const RemoteValueID& _id);
   void recv_GetValueHelp(std::string& _return);
-  void SetValueHelp(const RemoteValueID _id, const std::string& _value);
-  void send_SetValueHelp(const RemoteValueID _id, const std::string& _value);
+  void SetValueHelp(const RemoteValueID& _id, const std::string& _value);
+  void send_SetValueHelp(const RemoteValueID& _id, const std::string& _value);
   void recv_SetValueHelp();
-  int32_t GetValueMin(const RemoteValueID _id);
-  void send_GetValueMin(const RemoteValueID _id);
+  int32_t GetValueMin(const RemoteValueID& _id);
+  void send_GetValueMin(const RemoteValueID& _id);
   int32_t recv_GetValueMin();
-  int32_t GetValueMax(const RemoteValueID _id);
-  void send_GetValueMax(const RemoteValueID _id);
+  int32_t GetValueMax(const RemoteValueID& _id);
+  void send_GetValueMax(const RemoteValueID& _id);
   int32_t recv_GetValueMax();
-  bool IsValueReadOnly(const RemoteValueID _id);
-  void send_IsValueReadOnly(const RemoteValueID _id);
+  bool IsValueReadOnly(const RemoteValueID& _id);
+  void send_IsValueReadOnly(const RemoteValueID& _id);
   bool recv_IsValueReadOnly();
-  bool IsValueWriteOnly(const RemoteValueID _id);
-  void send_IsValueWriteOnly(const RemoteValueID _id);
+  bool IsValueWriteOnly(const RemoteValueID& _id);
+  void send_IsValueWriteOnly(const RemoteValueID& _id);
   bool recv_IsValueWriteOnly();
-  bool IsValueSet(const RemoteValueID _id);
-  void send_IsValueSet(const RemoteValueID _id);
+  bool IsValueSet(const RemoteValueID& _id);
+  void send_IsValueSet(const RemoteValueID& _id);
   bool recv_IsValueSet();
-  void GetValueAsBool(Bool_Bool& _return, const RemoteValueID _id);
-  void send_GetValueAsBool(const RemoteValueID _id);
+  void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id);
+  void send_GetValueAsBool(const RemoteValueID& _id);
   void recv_GetValueAsBool(Bool_Bool& _return);
-  void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID _id);
-  void send_GetValueAsByte(const RemoteValueID _id);
+  void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID& _id);
+  void send_GetValueAsByte(const RemoteValueID& _id);
   void recv_GetValueAsByte(Bool_UInt8& _return);
-  void GetValueAsFloat(Bool_Float& _return, const RemoteValueID _id);
-  void send_GetValueAsFloat(const RemoteValueID _id);
+  void GetValueAsFloat(Bool_Float& _return, const RemoteValueID& _id);
+  void send_GetValueAsFloat(const RemoteValueID& _id);
   void recv_GetValueAsFloat(Bool_Float& _return);
-  void GetValueAsInt(Bool_Int& _return, const RemoteValueID _id);
-  void send_GetValueAsInt(const RemoteValueID _id);
+  void GetValueAsInt(Bool_Int& _return, const RemoteValueID& _id);
+  void send_GetValueAsInt(const RemoteValueID& _id);
   void recv_GetValueAsInt(Bool_Int& _return);
-  void GetValueAsShort(Bool_Int16& _return, const RemoteValueID _id);
-  void send_GetValueAsShort(const RemoteValueID _id);
+  void GetValueAsShort(Bool_Int16& _return, const RemoteValueID& _id);
+  void send_GetValueAsShort(const RemoteValueID& _id);
   void recv_GetValueAsShort(Bool_Int16& _return);
-  void GetValueAsString(Bool_String& _return, const RemoteValueID _id);
-  void send_GetValueAsString(const RemoteValueID _id);
+  void GetValueAsString(Bool_String& _return, const RemoteValueID& _id);
+  void send_GetValueAsString(const RemoteValueID& _id);
   void recv_GetValueAsString(Bool_String& _return);
-  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id);
-  void send_GetValueListSelection_String(const RemoteValueID _id);
+  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID& _id);
+  void send_GetValueListSelection_String(const RemoteValueID& _id);
   void recv_GetValueListSelection_String(Bool_String& _return);
-  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id);
-  void send_GetValueListSelection_Int32(const RemoteValueID _id);
+  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID& _id);
+  void send_GetValueListSelection_Int32(const RemoteValueID& _id);
   void recv_GetValueListSelection_Int32(Bool_Int& _return);
-  void GetValueListItems(Bool_ListString& _return, const RemoteValueID _id);
-  void send_GetValueListItems(const RemoteValueID _id);
+  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id);
+  void send_GetValueListItems(const RemoteValueID& _id);
   void recv_GetValueListItems(Bool_ListString& _return);
-  void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID _id);
-  void send_GetValueFloatPrecision(const RemoteValueID _id);
+  void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id);
+  void send_GetValueFloatPrecision(const RemoteValueID& _id);
   void recv_GetValueFloatPrecision(Bool_UInt8& _return);
-  bool SetValue_Bool(const RemoteValueID _id, const bool _value);
-  void send_SetValue_Bool(const RemoteValueID _id, const bool _value);
+  bool SetValue_Bool(const RemoteValueID& _id, const bool _value);
+  void send_SetValue_Bool(const RemoteValueID& _id, const bool _value);
   bool recv_SetValue_Bool();
-  bool SetValue_UInt8(const RemoteValueID _id, const int8_t _value);
-  void send_SetValue_UInt8(const RemoteValueID _id, const int8_t _value);
+  bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value);
+  void send_SetValue_UInt8(const RemoteValueID& _id, const int8_t _value);
   bool recv_SetValue_UInt8();
-  bool SetValue_Float(const RemoteValueID _id, const double _value);
-  void send_SetValue_Float(const RemoteValueID _id, const double _value);
+  bool SetValue_Float(const RemoteValueID& _id, const double _value);
+  void send_SetValue_Float(const RemoteValueID& _id, const double _value);
   bool recv_SetValue_Float();
-  bool SetValue_Int32(const RemoteValueID _id, const int32_t _value);
-  void send_SetValue_Int32(const RemoteValueID _id, const int32_t _value);
+  bool SetValue_Int32(const RemoteValueID& _id, const int32_t _value);
+  void send_SetValue_Int32(const RemoteValueID& _id, const int32_t _value);
   bool recv_SetValue_Int32();
-  bool SetValue_Int16(const RemoteValueID _id, const int16_t _value);
-  void send_SetValue_Int16(const RemoteValueID _id, const int16_t _value);
+  bool SetValue_Int16(const RemoteValueID& _id, const int16_t _value);
+  void send_SetValue_Int16(const RemoteValueID& _id, const int16_t _value);
   bool recv_SetValue_Int16();
-  bool SetValue_String(const RemoteValueID _id, const std::string& _value);
-  void send_SetValue_String(const RemoteValueID _id, const std::string& _value);
+  bool SetValue_String(const RemoteValueID& _id, const std::string& _value);
+  void send_SetValue_String(const RemoteValueID& _id, const std::string& _value);
   bool recv_SetValue_String();
-  bool SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem);
-  void send_SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem);
+  bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem);
+  void send_SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem);
   bool recv_SetValueListSelection();
-  bool PressButton(const RemoteValueID _id);
-  void send_PressButton(const RemoteValueID _id);
+  bool PressButton(const RemoteValueID& _id);
+  void send_PressButton(const RemoteValueID& _id);
   bool recv_PressButton();
-  bool ReleaseButton(const RemoteValueID _id);
-  void send_ReleaseButton(const RemoteValueID _id);
+  bool ReleaseButton(const RemoteValueID& _id);
+  void send_ReleaseButton(const RemoteValueID& _id);
   bool recv_ReleaseButton();
-  int8_t GetNumSwitchPoints(const RemoteValueID _id);
-  void send_GetNumSwitchPoints(const RemoteValueID _id);
+  int8_t GetNumSwitchPoints(const RemoteValueID& _id);
+  void send_GetNumSwitchPoints(const RemoteValueID& _id);
   int8_t recv_GetNumSwitchPoints();
-  bool SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback);
-  void send_SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback);
+  bool SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback);
+  void send_SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback);
   bool recv_SetSwitchPoint();
-  bool RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes);
-  void send_RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes);
+  bool RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes);
+  void send_RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes);
   bool recv_RemoveSwitchPoint();
-  void ClearSwitchPoints(const RemoteValueID _id);
-  void send_ClearSwitchPoints(const RemoteValueID _id);
+  void ClearSwitchPoints(const RemoteValueID& _id);
+  void send_ClearSwitchPoints(const RemoteValueID& _id);
   void recv_ClearSwitchPoints();
-  void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID _id, const int8_t _idx);
-  void send_GetSwitchPoint(const RemoteValueID _id, const int8_t _idx);
+  void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID& _id, const int8_t _idx);
+  void send_GetSwitchPoint(const RemoteValueID& _id, const int8_t _idx);
   void recv_GetSwitchPoint(GetSwitchPointReturnStruct& _return);
   void SwitchAllOn(const int32_t _homeId);
   void send_SwitchAllOn(const int32_t _homeId);
@@ -14795,83 +14795,83 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool RemoveScene(const int8_t _sceneId);
   void send_RemoveScene(const int8_t _sceneId);
   bool recv_RemoveScene();
-  bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value);
-  void send_AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value);
+  bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value);
+  void send_AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value);
   bool recv_AddSceneValue_Bool();
-  bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value);
-  void send_AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value);
+  bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value);
+  void send_AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value);
   bool recv_AddSceneValue_Uint8();
-  bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value);
-  void send_AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value);
+  bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value);
+  void send_AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value);
   bool recv_AddSceneValue_Float();
-  bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
-  void send_AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
+  bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
+  void send_AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
   bool recv_AddSceneValue_Int32();
-  bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value);
-  void send_AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value);
+  bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value);
+  void send_AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value);
   bool recv_AddSceneValue_Int16();
-  bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
-  void send_AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
+  bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
+  void send_AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
   bool recv_AddSceneValue_String();
-  bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
-  void send_AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
+  bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
+  void send_AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
   bool recv_AddSceneValueListSelection_String();
-  bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
-  void send_AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
+  bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
+  void send_AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
   bool recv_AddSceneValueListSelection_Int32();
-  bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId);
+  bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId);
   bool recv_RemoveSceneValue();
   void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId);
   void send_SceneGetValues(const int8_t _sceneId);
   void recv_SceneGetValues(SceneGetValuesReturnStruct& _return);
-  void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueAsBool(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueAsBool(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueAsBool(Bool_Bool& _return);
-  void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueAsByte(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueAsByte(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueAsByte(Bool_UInt8& _return);
-  void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueAsFloat(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueAsFloat(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueAsFloat(Bool_Float& _return);
-  void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueAsInt(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueAsInt(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueAsInt(Bool_Int& _return);
-  void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueAsShort(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueAsShort(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueAsShort(Bool_Int16& _return);
-  void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueAsString(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueAsString(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueAsString(Bool_String& _return);
-  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueListSelection_String(Bool_String& _return);
-  void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId);
-  void send_SceneGetValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId);
+  void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId);
+  void send_SceneGetValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId);
   void recv_SceneGetValueListSelection_Int32(Bool_Int& _return);
-  bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value);
-  void send_SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value);
+  bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value);
+  void send_SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value);
   bool recv_SetSceneValue_Bool();
-  bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value);
-  void send_SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value);
+  bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value);
+  void send_SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value);
   bool recv_SetSceneValue_Uint8();
-  bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value);
-  void send_SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value);
+  bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value);
+  void send_SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value);
   bool recv_SetSceneValue_Float();
-  bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
-  void send_SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
+  bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
+  void send_SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
   bool recv_SetSceneValue_Int32();
-  bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value);
-  void send_SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value);
+  bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value);
+  void send_SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value);
   bool recv_SetSceneValue_Int16();
-  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
-  void send_SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
+  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
+  void send_SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
   bool recv_SetSceneValue_String();
-  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
-  void send_SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value);
+  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
+  void send_SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value);
   bool recv_SetSceneValueListSelection_String();
-  bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
-  void send_SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value);
+  bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
+  void send_SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value);
   bool recv_SetSceneValueListSelection_Int32();
   void GetSceneLabel(std::string& _return, const int8_t _sceneId);
   void send_GetSceneLabel(const int8_t _sceneId);
@@ -15271,7 +15271,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool EnablePoll(const RemoteValueID _valueId) {
+  bool EnablePoll(const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15282,7 +15282,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool DisablePoll(const RemoteValueID _valueId) {
+  bool DisablePoll(const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15293,7 +15293,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool isPolled(const RemoteValueID _valueId) {
+  bool isPolled(const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15605,7 +15605,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueLabel(std::string& _return, const RemoteValueID _id) {
+  void GetValueLabel(std::string& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15617,14 +15617,14 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SetValueLabel(const RemoteValueID _id, const std::string& _value) {
+  void SetValueLabel(const RemoteValueID& _id, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       ifaces_[i]->SetValueLabel(_id, _value);
     }
   }
 
-  void GetValueUnits(std::string& _return, const RemoteValueID _id) {
+  void GetValueUnits(std::string& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15636,14 +15636,14 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SetValueUnits(const RemoteValueID _id, const std::string& _value) {
+  void SetValueUnits(const RemoteValueID& _id, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       ifaces_[i]->SetValueUnits(_id, _value);
     }
   }
 
-  void GetValueHelp(std::string& _return, const RemoteValueID _id) {
+  void GetValueHelp(std::string& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15655,14 +15655,14 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SetValueHelp(const RemoteValueID _id, const std::string& _value) {
+  void SetValueHelp(const RemoteValueID& _id, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       ifaces_[i]->SetValueHelp(_id, _value);
     }
   }
 
-  int32_t GetValueMin(const RemoteValueID _id) {
+  int32_t GetValueMin(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15673,7 +15673,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  int32_t GetValueMax(const RemoteValueID _id) {
+  int32_t GetValueMax(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15684,7 +15684,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool IsValueReadOnly(const RemoteValueID _id) {
+  bool IsValueReadOnly(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15695,7 +15695,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool IsValueWriteOnly(const RemoteValueID _id) {
+  bool IsValueWriteOnly(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15706,7 +15706,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool IsValueSet(const RemoteValueID _id) {
+  bool IsValueSet(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15717,7 +15717,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueAsBool(Bool_Bool& _return, const RemoteValueID _id) {
+  void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15729,7 +15729,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID _id) {
+  void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15741,7 +15741,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueAsFloat(Bool_Float& _return, const RemoteValueID _id) {
+  void GetValueAsFloat(Bool_Float& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15753,7 +15753,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueAsInt(Bool_Int& _return, const RemoteValueID _id) {
+  void GetValueAsInt(Bool_Int& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15765,7 +15765,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueAsShort(Bool_Int16& _return, const RemoteValueID _id) {
+  void GetValueAsShort(Bool_Int16& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15777,7 +15777,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueAsString(Bool_String& _return, const RemoteValueID _id) {
+  void GetValueAsString(Bool_String& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15789,7 +15789,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id) {
+  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15801,7 +15801,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id) {
+  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15813,7 +15813,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueListItems(Bool_ListString& _return, const RemoteValueID _id) {
+  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15825,7 +15825,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID _id) {
+  void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15837,7 +15837,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValue_Bool(const RemoteValueID _id, const bool _value) {
+  bool SetValue_Bool(const RemoteValueID& _id, const bool _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15848,7 +15848,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValue_UInt8(const RemoteValueID _id, const int8_t _value) {
+  bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15859,7 +15859,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValue_Float(const RemoteValueID _id, const double _value) {
+  bool SetValue_Float(const RemoteValueID& _id, const double _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15870,7 +15870,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValue_Int32(const RemoteValueID _id, const int32_t _value) {
+  bool SetValue_Int32(const RemoteValueID& _id, const int32_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15881,7 +15881,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValue_Int16(const RemoteValueID _id, const int16_t _value) {
+  bool SetValue_Int16(const RemoteValueID& _id, const int16_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15892,7 +15892,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValue_String(const RemoteValueID _id, const std::string& _value) {
+  bool SetValue_String(const RemoteValueID& _id, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15903,7 +15903,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem) {
+  bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15914,7 +15914,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool PressButton(const RemoteValueID _id) {
+  bool PressButton(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15925,7 +15925,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool ReleaseButton(const RemoteValueID _id) {
+  bool ReleaseButton(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15936,7 +15936,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  int8_t GetNumSwitchPoints(const RemoteValueID _id) {
+  int8_t GetNumSwitchPoints(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15947,7 +15947,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback) {
+  bool SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15958,7 +15958,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes) {
+  bool RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -15969,14 +15969,14 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void ClearSwitchPoints(const RemoteValueID _id) {
+  void ClearSwitchPoints(const RemoteValueID& _id) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       ifaces_[i]->ClearSwitchPoints(_id);
     }
   }
 
-  void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID _id, const int8_t _idx) {
+  void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID& _id, const int8_t _idx) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16146,7 +16146,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) {
+  bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16157,7 +16157,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value) {
+  bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16168,7 +16168,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value) {
+  bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16179,7 +16179,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16190,7 +16190,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value) {
+  bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16201,7 +16201,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16212,7 +16212,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16223,7 +16223,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16234,7 +16234,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId) {
+  bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16257,7 +16257,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16269,7 +16269,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16281,7 +16281,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16293,7 +16293,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16305,7 +16305,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16317,7 +16317,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16329,7 +16329,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16341,7 +16341,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16353,7 +16353,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) {
+  bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16364,7 +16364,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value) {
+  bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16375,7 +16375,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value) {
+  bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16386,7 +16386,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16397,7 +16397,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value) {
+  bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16408,7 +16408,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16419,7 +16419,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
@@ -16430,7 +16430,7 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {

@@ -1,5 +1,5 @@
 require "thrift"
-$:.push("/home/ekarak/ozw/thrift4ozw/gen-rb")
+$:.push(File.join(Dir.getwd, 'gen-rb'))
 require "ozw_constants"
 require "remote_manager"
 
@@ -11,7 +11,18 @@ protocol = Thrift::BinaryProtocol.new(transport)
 transport.open()
 
 OZWmgr = OpenZWave::RemoteManager::Client.new(protocol)
-#OZWmgr.SetNodeOff(HomeID, 2)
 
-OZWmgr.GetNodeNeighbors(HomeID,1)
+#OZWmgr.GetNodeNeighbors(HomeID,1)
 
+OZWmgr.SetNodeOff(HomeID, 5)
+
+Rvid = OpenZWave::RemoteValueID.new
+Rvid._homeId  = HomeID
+Rvid._nodeId = 5
+Rvid._genre = 0 # OpenZWave::RemoteValueGenre::ValueGenre_Basic
+Rvid._type = 1 # OpenZWave::RemoteValueType::ValueType_Byte
+Rvid._instance = 1
+Rvid._valueIndex = 0
+Rvid._commandClassId = 32
+
+OZWmgr.GetValueAsByte(Rvid)

@@ -27,16 +27,22 @@ enum RemoteValueType {
 	ValueType_Max=8
 }
 
+struct RemoteValueID {
+			1:i32 _homeId,
+			2:byte _nodeId,
+			3:RemoteValueGenre _genre,
+			4:byte _commandClassId,
+			5:byte _instance,
+			6:byte _valueIndex,
+			7:RemoteValueType _type
+}
+//typedef i64 RemoteValueID
+
 //~ struct RemoteValueID {
-			//~ 1:i32 _homeId,
-			//~ 2:byte _nodeId,
-			//~ 3:RemoteValueGenre _genre,
-			//~ 4:byte _commandClassId,
-			//~ 5:byte _instance,
-			//~ 6:byte _valueIndex,
-			//~ 7:RemoteValueType _type
+    //~ 1: i32 m_id;
+    //~ 2: i32 m_id1;
+    //~ 3: i32 m_homeId;
 //~ }
-typedef i64 RemoteValueID
 
 struct GetSwitchPointReturnStruct {
     1:byte o_hours;

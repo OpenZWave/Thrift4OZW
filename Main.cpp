@@ -46,7 +46,8 @@ typedef struct
 } NodeInfo;
 //
 static list<NodeInfo*>          g_nodes;
-static std::map<uint64, ValueID*> g_values;
+//static std::map<uint64, ValueID*> g_values;
+
 // OpenZWave includes
 #include "Notification.h"
 
@@ -118,8 +119,8 @@ void OnNotification
                 uint64 key = v.GetId();
                 nodeInfo->m_values[ key] = &v;
                 // ekarak: also add it to global ValueID map
-                std::cout << "========================= Adding "<<key<<std::hex<< " to g_values..."<<std::endl;
-                g_values[ key ] = &v;
+                //std::cout << "========================= Adding "<<key<<std::hex<< " to g_values..."<<std::endl;
+                //g_values[ key ] = &v;
             }
             //send_valueID = true;
             break;

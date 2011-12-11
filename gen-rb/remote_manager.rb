@@ -3049,7 +3049,7 @@ require 'ozw_types'
           _VALUEID = 1
 
           FIELDS = {
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -3081,7 +3081,7 @@ require 'ozw_types'
           _VALUEID = 1
 
           FIELDS = {
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -3113,7 +3113,7 @@ require 'ozw_types'
           _VALUEID = 1
 
           FIELDS = {
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4136,7 +4136,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4169,7 +4169,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -4201,7 +4201,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4234,7 +4234,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -4266,7 +4266,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4299,7 +4299,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -4331,7 +4331,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4363,7 +4363,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4395,7 +4395,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4427,7 +4427,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4459,7 +4459,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4491,7 +4491,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4523,7 +4523,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4555,7 +4555,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4587,7 +4587,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4619,7 +4619,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4651,7 +4651,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4683,7 +4683,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4715,7 +4715,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4747,7 +4747,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4779,7 +4779,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -4812,7 +4812,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::BOOL, :name => '_value'}
           }
 
@@ -4846,7 +4846,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::BYTE, :name => '_value'}
           }
 
@@ -4880,7 +4880,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::DOUBLE, :name => '_value'}
           }
 
@@ -4914,7 +4914,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I32, :name => '_value'}
           }
 
@@ -4948,7 +4948,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I16, :name => '_value'}
           }
 
@@ -4982,7 +4982,7 @@ require 'ozw_types'
           _VALUE = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -5016,7 +5016,7 @@ require 'ozw_types'
           _SELECTEDITEM = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _SELECTEDITEM => {:type => ::Thrift::Types::STRING, :name => '_selectedItem'}
           }
 
@@ -5049,7 +5049,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -5081,7 +5081,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -5113,7 +5113,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -5148,7 +5148,7 @@ require 'ozw_types'
           _SETBACK = 4
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _HOURS => {:type => ::Thrift::Types::BYTE, :name => '_hours'},
             _MINUTES => {:type => ::Thrift::Types::BYTE, :name => '_minutes'},
             _SETBACK => {:type => ::Thrift::Types::BYTE, :name => '_setback'}
@@ -5185,7 +5185,7 @@ require 'ozw_types'
           _MINUTES = 3
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _HOURS => {:type => ::Thrift::Types::BYTE, :name => '_hours'},
             _MINUTES => {:type => ::Thrift::Types::BYTE, :name => '_minutes'}
           }
@@ -5219,7 +5219,7 @@ require 'ozw_types'
           _ID = 1
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'}
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -5251,7 +5251,7 @@ require 'ozw_types'
           _IDX = 2
 
           FIELDS = {
-            _ID => {:type => ::Thrift::Types::I64, :name => '_id'},
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
             _IDX => {:type => ::Thrift::Types::BYTE, :name => '_idx'}
           }
 
@@ -5860,7 +5860,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::BOOL, :name => '_value'}
           }
 
@@ -5896,7 +5896,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::BYTE, :name => '_value'}
           }
 
@@ -5932,7 +5932,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::DOUBLE, :name => '_value'}
           }
 
@@ -5968,7 +5968,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I32, :name => '_value'}
           }
 
@@ -6004,7 +6004,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I16, :name => '_value'}
           }
 
@@ -6040,7 +6040,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -6076,7 +6076,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -6112,7 +6112,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I32, :name => '_value'}
           }
 
@@ -6147,7 +6147,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6213,7 +6213,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6247,7 +6247,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6281,7 +6281,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6315,7 +6315,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6349,7 +6349,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6383,7 +6383,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6417,7 +6417,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6451,7 +6451,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
           }
 
           def struct_fields; FIELDS; end
@@ -6486,7 +6486,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::BOOL, :name => '_value'}
           }
 
@@ -6522,7 +6522,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::BYTE, :name => '_value'}
           }
 
@@ -6558,7 +6558,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::DOUBLE, :name => '_value'}
           }
 
@@ -6594,7 +6594,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I32, :name => '_value'}
           }
 
@@ -6630,7 +6630,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I16, :name => '_value'}
           }
 
@@ -6666,7 +6666,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -6702,7 +6702,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::STRING, :name => '_value'}
           }
 
@@ -6738,7 +6738,7 @@ require 'ozw_types'
 
           FIELDS = {
             _SCENEID => {:type => ::Thrift::Types::BYTE, :name => '_sceneId'},
-            _VALUEID => {:type => ::Thrift::Types::I64, :name => '_valueId'},
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
             _VALUE => {:type => ::Thrift::Types::I32, :name => '_value'}
           }
 

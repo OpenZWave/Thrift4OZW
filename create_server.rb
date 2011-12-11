@@ -23,7 +23,7 @@ MANAGER_INCLUDES = [
 # must load all source files in a single batch (RbGCCXML gets confused otherwise...)
 #
 files = [
-    "/home/ekarak/ozw/thrift4ozw/gen-cpp/RemoteManager_server.skeleton.cpp",
+    "/home/ekarak/ozw/Thrift4OZW/gen-cpp/RemoteManager_server.skeleton.cpp",
     "/home/ekarak/ozw/open-zwave-read-only/cpp/src/Manager.h"
 ]
 puts "Parsing:" + files.join("\n\t")
@@ -32,12 +32,9 @@ RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES)
 # read skeleton file in memory as an array
 output = File.open("gen-cpp/RemoteManager_server.skeleton.cpp").readlines
 
-def ValueID_converter(arg)
-    return  "*g_values[#{arg}]"
-end
 
 # fix the constructor
-lineno = RootNode.classes("RemoteManagerHandler").constructors[1]['line'].to_i
+#lineno = RootNode.classes("RemoteManagerHandler").constructors[1]['line'].to_i
 #~ output[lineno] = Constructor
 # add our extra hidden sauce
 #lineno = foo.classes("RemoteManagerHandler").constructors[1]['endline'].to_i
@@ -45,7 +42,7 @@ lineno = RootNode.classes("RemoteManagerHandler").constructors[1]['line'].to_i
 
 a = RootNode.classes("RemoteManagerHandler").methods.find(:access => :public)
 b = RootNode.namespaces("OpenZWave").classes("Manager").methods.find(:access => :public)
-puts "RemoteManagerHandler: #{a.size} public methods, OpenZWave::Manager: #{b.size} public methods"
+puts "RemoteManagerHandler: #{a.entries.size} public methods, OpenZWave::Manager: #{b.entries.size} public methods"
 
 RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     # find line number, insert critical section enter code
@@ -90,7 +87,7 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     # TIME TO BOOGEY
     #
     
-    puts "CREATING MAPPING for (#{meth.return_type.to_cpp}) #{meth.name}"
+    puts "CREATING MAPPING for (#{meth.return_type.to_cpp}) #{meth.name}" if $DEBUG
 
     #Thrift transforms methods with complex return types (string, vector<...>, user-defined structs etc)
     # example 1:
@@ -154,9 +151,9 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
             (retval.is_a?RbGCCXML::Field)   then
                 function_return_clause = "_return.retval = "
         else
-            unless meth.return_type.name == "void" then
+            #unless meth.return_type.name == "void" then
                 function_return_clause = "_return = "
-            end
+            #end
         end
     end
 
@@ -171,8 +168,8 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
             #puts "  src=#{descriptor}\ttgt=#{tgt_arg.qualified_name}"
             ampersand = (tgt_arg.cpp_type.to_cpp.include?('*') ? '&' : '')
             case src_arg.to_cpp
-                when /ValueID/
-                    arg_array <<  ValueID_converter(descriptor)
+                when /RemoteValueID/
+                    arg_array <<  "#{descriptor}.toValueID()"
                 else
                     arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}#{descriptor}"
                     size_src = src_arg.cpp_type.base_type['size'].to_i
@@ -203,6 +200,10 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
 
 output[0] = "// Automatically generated OpenZWave::Manager_server wrapper\n"
 output[1] = "// (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>\n"
+# comment out main()
+((RootNode.functions("main")["line"].to_i-1)..(output.size)).each{ |i|
+    output[i] = "// #{output[i]}"
+}
 # write out the generated file
 puts "Writing generated server...."
 File.new("gen-cpp/RemoteManager_server.cpp", File::CREAT|File::TRUNC|File::RDWR, 0644) << output.join

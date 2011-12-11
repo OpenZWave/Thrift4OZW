@@ -72,17 +72,17 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("SetPollInterval\n");
   }
 
-  bool EnablePoll(const RemoteValueID _valueId) {
+  bool EnablePoll(const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("EnablePoll\n");
   }
 
-  bool DisablePoll(const RemoteValueID _valueId) {
+  bool DisablePoll(const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("DisablePoll\n");
   }
 
-  bool isPolled(const RemoteValueID _valueId) {
+  bool isPolled(const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("isPolled\n");
   }
@@ -232,177 +232,177 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("GetNodeClassInformation\n");
   }
 
-  void GetValueLabel(std::string& _return, const RemoteValueID _id) {
+  void GetValueLabel(std::string& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueLabel\n");
   }
 
-  void SetValueLabel(const RemoteValueID _id, const std::string& _value) {
+  void SetValueLabel(const RemoteValueID& _id, const std::string& _value) {
     // Your implementation goes here
     printf("SetValueLabel\n");
   }
 
-  void GetValueUnits(std::string& _return, const RemoteValueID _id) {
+  void GetValueUnits(std::string& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueUnits\n");
   }
 
-  void SetValueUnits(const RemoteValueID _id, const std::string& _value) {
+  void SetValueUnits(const RemoteValueID& _id, const std::string& _value) {
     // Your implementation goes here
     printf("SetValueUnits\n");
   }
 
-  void GetValueHelp(std::string& _return, const RemoteValueID _id) {
+  void GetValueHelp(std::string& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueHelp\n");
   }
 
-  void SetValueHelp(const RemoteValueID _id, const std::string& _value) {
+  void SetValueHelp(const RemoteValueID& _id, const std::string& _value) {
     // Your implementation goes here
     printf("SetValueHelp\n");
   }
 
-  int32_t GetValueMin(const RemoteValueID _id) {
+  int32_t GetValueMin(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueMin\n");
   }
 
-  int32_t GetValueMax(const RemoteValueID _id) {
+  int32_t GetValueMax(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueMax\n");
   }
 
-  bool IsValueReadOnly(const RemoteValueID _id) {
+  bool IsValueReadOnly(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("IsValueReadOnly\n");
   }
 
-  bool IsValueWriteOnly(const RemoteValueID _id) {
+  bool IsValueWriteOnly(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("IsValueWriteOnly\n");
   }
 
-  bool IsValueSet(const RemoteValueID _id) {
+  bool IsValueSet(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("IsValueSet\n");
   }
 
-  void GetValueAsBool(Bool_Bool& _return, const RemoteValueID _id) {
+  void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueAsBool\n");
   }
 
-  void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID _id) {
+  void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueAsByte\n");
   }
 
-  void GetValueAsFloat(Bool_Float& _return, const RemoteValueID _id) {
+  void GetValueAsFloat(Bool_Float& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueAsFloat\n");
   }
 
-  void GetValueAsInt(Bool_Int& _return, const RemoteValueID _id) {
+  void GetValueAsInt(Bool_Int& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueAsInt\n");
   }
 
-  void GetValueAsShort(Bool_Int16& _return, const RemoteValueID _id) {
+  void GetValueAsShort(Bool_Int16& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueAsShort\n");
   }
 
-  void GetValueAsString(Bool_String& _return, const RemoteValueID _id) {
+  void GetValueAsString(Bool_String& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueAsString\n");
   }
 
-  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id) {
+  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueListSelection_String\n");
   }
 
-  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id) {
+  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueListSelection_Int32\n");
   }
 
-  void GetValueListItems(Bool_ListString& _return, const RemoteValueID _id) {
+  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueListItems\n");
   }
 
-  void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID _id) {
+  void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetValueFloatPrecision\n");
   }
 
-  bool SetValue_Bool(const RemoteValueID _id, const bool _value) {
+  bool SetValue_Bool(const RemoteValueID& _id, const bool _value) {
     // Your implementation goes here
     printf("SetValue_Bool\n");
   }
 
-  bool SetValue_UInt8(const RemoteValueID _id, const int8_t _value) {
+  bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value) {
     // Your implementation goes here
     printf("SetValue_UInt8\n");
   }
 
-  bool SetValue_Float(const RemoteValueID _id, const double _value) {
+  bool SetValue_Float(const RemoteValueID& _id, const double _value) {
     // Your implementation goes here
     printf("SetValue_Float\n");
   }
 
-  bool SetValue_Int32(const RemoteValueID _id, const int32_t _value) {
+  bool SetValue_Int32(const RemoteValueID& _id, const int32_t _value) {
     // Your implementation goes here
     printf("SetValue_Int32\n");
   }
 
-  bool SetValue_Int16(const RemoteValueID _id, const int16_t _value) {
+  bool SetValue_Int16(const RemoteValueID& _id, const int16_t _value) {
     // Your implementation goes here
     printf("SetValue_Int16\n");
   }
 
-  bool SetValue_String(const RemoteValueID _id, const std::string& _value) {
+  bool SetValue_String(const RemoteValueID& _id, const std::string& _value) {
     // Your implementation goes here
     printf("SetValue_String\n");
   }
 
-  bool SetValueListSelection(const RemoteValueID _id, const std::string& _selectedItem) {
+  bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem) {
     // Your implementation goes here
     printf("SetValueListSelection\n");
   }
 
-  bool PressButton(const RemoteValueID _id) {
+  bool PressButton(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("PressButton\n");
   }
 
-  bool ReleaseButton(const RemoteValueID _id) {
+  bool ReleaseButton(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("ReleaseButton\n");
   }
 
-  int8_t GetNumSwitchPoints(const RemoteValueID _id) {
+  int8_t GetNumSwitchPoints(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("GetNumSwitchPoints\n");
   }
 
-  bool SetSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback) {
+  bool SetSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes, const int8_t _setback) {
     // Your implementation goes here
     printf("SetSwitchPoint\n");
   }
 
-  bool RemoveSwitchPoint(const RemoteValueID _id, const int8_t _hours, const int8_t _minutes) {
+  bool RemoveSwitchPoint(const RemoteValueID& _id, const int8_t _hours, const int8_t _minutes) {
     // Your implementation goes here
     printf("RemoveSwitchPoint\n");
   }
 
-  void ClearSwitchPoints(const RemoteValueID _id) {
+  void ClearSwitchPoints(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("ClearSwitchPoints\n");
   }
 
-  void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID _id, const int8_t _idx) {
+  void GetSwitchPoint(GetSwitchPointReturnStruct& _return, const RemoteValueID& _id, const int8_t _idx) {
     // Your implementation goes here
     printf("GetSwitchPoint\n");
   }
@@ -492,47 +492,47 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("RemoveScene\n");
   }
 
-  bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) {
+  bool AddSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value) {
     // Your implementation goes here
     printf("AddSceneValue_Bool\n");
   }
 
-  bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value) {
+  bool AddSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value) {
     // Your implementation goes here
     printf("AddSceneValue_Uint8\n");
   }
 
-  bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value) {
+  bool AddSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value) {
     // Your implementation goes here
     printf("AddSceneValue_Float\n");
   }
 
-  bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool AddSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     // Your implementation goes here
     printf("AddSceneValue_Int32\n");
   }
 
-  bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value) {
+  bool AddSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value) {
     // Your implementation goes here
     printf("AddSceneValue_Int16\n");
   }
 
-  bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool AddSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     // Your implementation goes here
     printf("AddSceneValue_String\n");
   }
 
-  bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool AddSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     // Your implementation goes here
     printf("AddSceneValueListSelection_String\n");
   }
 
-  bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool AddSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     // Your implementation goes here
     printf("AddSceneValueListSelection_Int32\n");
   }
 
-  bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID _valueId) {
+  bool RemoveSceneValue(const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("RemoveSceneValue\n");
   }
@@ -542,82 +542,82 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("SceneGetValues\n");
   }
 
-  void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueAsBool\n");
   }
 
-  void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsByte(Bool_UInt8& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueAsByte\n");
   }
 
-  void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsFloat(Bool_Float& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueAsFloat\n");
   }
 
-  void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsInt(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueAsInt\n");
   }
 
-  void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsShort(Bool_Int16& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueAsShort\n");
   }
 
-  void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueAsString(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueAsString\n");
   }
 
-  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueListSelection_String\n");
   }
 
-  void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID _valueId) {
+  void SceneGetValueListSelection_Int32(Bool_Int& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("SceneGetValueListSelection_Int32\n");
   }
 
-  bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID _valueId, const bool _value) {
+  bool SetSceneValue_Bool(const int8_t _sceneId, const RemoteValueID& _valueId, const bool _value) {
     // Your implementation goes here
     printf("SetSceneValue_Bool\n");
   }
 
-  bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID _valueId, const int8_t _value) {
+  bool SetSceneValue_Uint8(const int8_t _sceneId, const RemoteValueID& _valueId, const int8_t _value) {
     // Your implementation goes here
     printf("SetSceneValue_Uint8\n");
   }
 
-  bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID _valueId, const double _value) {
+  bool SetSceneValue_Float(const int8_t _sceneId, const RemoteValueID& _valueId, const double _value) {
     // Your implementation goes here
     printf("SetSceneValue_Float\n");
   }
 
-  bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool SetSceneValue_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     // Your implementation goes here
     printf("SetSceneValue_Int32\n");
   }
 
-  bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID _valueId, const int16_t _value) {
+  bool SetSceneValue_Int16(const int8_t _sceneId, const RemoteValueID& _valueId, const int16_t _value) {
     // Your implementation goes here
     printf("SetSceneValue_Int16\n");
   }
 
-  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     // Your implementation goes here
     printf("SetSceneValue_String\n");
   }
 
-  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID _valueId, const std::string& _value) {
+  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
     // Your implementation goes here
     printf("SetSceneValueListSelection_String\n");
   }
 
-  bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID _valueId, const int32_t _value) {
+  bool SetSceneValueListSelection_Int32(const int8_t _sceneId, const RemoteValueID& _valueId, const int32_t _value) {
     // Your implementation goes here
     printf("SetSceneValueListSelection_Int32\n");
   }

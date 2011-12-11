@@ -31,6 +31,40 @@ module OpenZWave
       VALID_VALUES = Set.new([ValueType_Bool, ValueType_Byte, ValueType_Decimal, ValueType_Int, ValueType_List, ValueType_Schedule, ValueType_Short, ValueType_String, ValueType_Button, ValueType_Max]).freeze
     end
 
+    class RemoteValueID
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+      _NODEID = 2
+      _GENRE = 3
+      _COMMANDCLASSID = 4
+      _INSTANCE = 5
+      _VALUEINDEX = 6
+      _TYPE = 7
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+        _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'},
+        _GENRE => {:type => ::Thrift::Types::I32, :name => '_genre', :enum_class => OpenZWave::RemoteValueGenre},
+        _COMMANDCLASSID => {:type => ::Thrift::Types::BYTE, :name => '_commandClassId'},
+        _INSTANCE => {:type => ::Thrift::Types::BYTE, :name => '_instance'},
+        _VALUEINDEX => {:type => ::Thrift::Types::BYTE, :name => '_valueIndex'},
+        _TYPE => {:type => ::Thrift::Types::I32, :name => '_type', :enum_class => OpenZWave::RemoteValueType}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+        unless @_genre.nil? || OpenZWave::RemoteValueGenre::VALID_VALUES.include?(@_genre)
+          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field _genre!')
+        end
+        unless @_type.nil? || OpenZWave::RemoteValueType::VALID_VALUES.include?(@_type)
+          raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field _type!')
+        end
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
     class GetSwitchPointReturnStruct
       include ::Thrift::Struct, ::Thrift::Struct_Union
       O_HOURS = 1
@@ -258,7 +292,7 @@ module OpenZWave
 
       FIELDS = {
         RETVAL => {:type => ::Thrift::Types::I32, :name => 'retval'},
-        O_VALUE => {:type => ::Thrift::Types::LIST, :name => 'o_value', :element => {:type => ::Thrift::Types::I64}}
+        O_VALUE => {:type => ::Thrift::Types::LIST, :name => 'o_value', :element => {:type => ::Thrift::Types::STRUCT, :class => OpenZWave::RemoteValueID}}
       }
 
       def struct_fields; FIELDS; end

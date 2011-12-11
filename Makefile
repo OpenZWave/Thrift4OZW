@@ -1,6 +1,7 @@
 #
-# Makefile for OpenzWave Control Panel application
-# Greg Satz
+# Makefile for Thrift4OZW
+# Elias Karakoulakis <elias.karakoulakis@gmail.com>
+# based on Makefile for OpenWave Control Panel application by Greg Satz
 
 # GNU make only
 
@@ -54,11 +55,11 @@ LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBMICROHTTPD) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 
 all: main
 
-gen-cpp/RemoteManager_server.cpp: create_server.rb
+gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
 	ruby1.9.1 create_server.rb
 
 gen-cpp/RemoteManager.cpp: ozw.thrift
-	$(THRIFT) --gen cpp ozw.thrift
+	$(THRIFT) --gen cpp --gen rb ozw.thrift
 
 gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp
 	g++ $(CFLAGS) -c gen-cpp/RemoteManager.cpp -o gen-cpp/RemoteManager.o $(INCLUDES)
@@ -81,18 +82,6 @@ StompSocket.o: StompSocket.cpp StompSocket.h
 PocoStomp.o:  Stomp_sm.cpp StompSocket.o
 	g++ $(CFLAGS) -c PocoStomp.cpp $(INCLUDES)    
 
-#~ ozwcp.o: ozwcp.h webserver.h $(OPENZWAVE)/cpp/src/Options.h $(OPENZWAVE)/cpp/src/Manager.h \
-	#~ $(OPENZWAVE)/cpp/src/Node.h $(OPENZWAVE)/cpp/src/Group.h \
-	#~ $(OPENZWAVE)/cpp/src/Notification.h $(OPENZWAVE)/cpp/src/platform/Log.h \
-    #~ Stomp_sm.cpp
-
-#~ webserver.o: webserver.h ozwcp.h $(OPENZWAVE)/cpp/src/Options.h $(OPENZWAVE)/cpp/src/Manager.h \
-	#~ $(OPENZWAVE)/cpp/src/Node.h $(OPENZWAVE)/cpp/src/Group.h \
-	#~ $(OPENZWAVE)/cpp/src/Notification.h $(OPENZWAVE)/cpp/src/platform/Log.h
-
-#~ ozwcp:	ozwcp.o webserver.o zwavelib.o Stomp_sm.o StompSocket.o PocoStomp.o
-	#~ $(LD) -o $@ $(LDFLAGS) ozwcp.o webserver.o zwavelib.o Stomp_sm.o StompSocket.o PocoStomp.o $(LIBS)
-
 Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
 	g++ $(CFLAGS) -c Main.cpp $(INCLUDES)
     
@@ -101,7 +90,7 @@ main:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen
     
 dist:	main
 	rm -f Ansible_OpenZWave.tar.gz
-	tar -c --exclude=".svn" -hvzf Ansible_OpenZWave.tar.gz ozwcp config/ cp.html cp.js openzwavetinyicon.png README
+	tar -c --exclude=".git" --exclude ".svn" -hvzf Ansible_OpenZWave.tar.gz ozwcp config/ cp.html cp.js openzwavetinyicon.png README
 
 clean:
 	rm -f main *.o Stomp_sm.*

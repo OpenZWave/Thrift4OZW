@@ -47,7 +47,108 @@ struct RemoteValueType {
 
 extern const std::map<int, const char*> _RemoteValueType_VALUES_TO_NAMES;
 
-typedef int64_t RemoteValueID;
+typedef struct _RemoteValueID__isset {
+  _RemoteValueID__isset() : _homeId(false), _nodeId(false), _genre(false), _commandClassId(false), _instance(false), _valueIndex(false), _type(false) {}
+  bool _homeId;
+  bool _nodeId;
+  bool _genre;
+  bool _commandClassId;
+  bool _instance;
+  bool _valueIndex;
+  bool _type;
+} _RemoteValueID__isset;
+
+class RemoteValueID {
+ public:
+
+  static const char* ascii_fingerprint; // = "A30F44ED1C2FF443554DFCCDE82F70EE";
+  static const uint8_t binary_fingerprint[16]; // = {0xA3,0x0F,0x44,0xED,0x1C,0x2F,0xF4,0x43,0x55,0x4D,0xFC,0xCD,0xE8,0x2F,0x70,0xEE};
+
+  RemoteValueID() : _homeId(0), _nodeId(0), _commandClassId(0), _instance(0), _valueIndex(0) {
+  }
+
+  virtual ~RemoteValueID() throw() {}
+
+  int32_t _homeId;
+  int8_t _nodeId;
+  RemoteValueGenre::type _genre;
+  int8_t _commandClassId;
+  int8_t _instance;
+  int8_t _valueIndex;
+  RemoteValueType::type _type;
+
+  _RemoteValueID__isset __isset;
+
+// ekarak: constructor from ValueID
+  RemoteValueID(ValueID vid) : 
+    _homeId ((int32_t) vid.GetHomeId()), 
+    _nodeId ((int8_t) vid.GetNodeId()), 
+    _genre  ((RemoteValueGenre::type) vid.GetGenre()),
+    _commandClassId((int8_t) vid.GetCommandClassId()), 
+      _instance ((int8_t) vid.GetInstance()), 
+      _valueIndex((int8_t) vid.GetIndex()),
+    _type ((RemoteValueType::type) vid.GetType()) { }
+// ekarak: converter to ValueID
+ValueID toValueID() const {
+    return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
+}
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  void __set__genre(const RemoteValueGenre::type val) {
+    _genre = val;
+  }
+
+  void __set__commandClassId(const int8_t val) {
+    _commandClassId = val;
+  }
+
+  void __set__instance(const int8_t val) {
+    _instance = val;
+  }
+
+  void __set__valueIndex(const int8_t val) {
+    _valueIndex = val;
+  }
+
+  void __set__type(const RemoteValueType::type val) {
+    _type = val;
+  }
+
+  bool operator == (const RemoteValueID & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    if (!(_genre == rhs._genre))
+      return false;
+    if (!(_commandClassId == rhs._commandClassId))
+      return false;
+    if (!(_instance == rhs._instance))
+      return false;
+    if (!(_valueIndex == rhs._valueIndex))
+      return false;
+    if (!(_type == rhs._type))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteValueID &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteValueID & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
 
 typedef struct _GetSwitchPointReturnStruct__isset {
   _GetSwitchPointReturnStruct__isset() : o_hours(false), o_minutes(false), o_setback(false) {}
@@ -662,8 +763,8 @@ typedef struct _SceneGetValuesReturnStruct__isset {
 class SceneGetValuesReturnStruct {
  public:
 
-  static const char* ascii_fingerprint; // = "10B0DAF3A336BE67A0D106228B97776E";
-  static const uint8_t binary_fingerprint[16]; // = {0x10,0xB0,0xDA,0xF3,0xA3,0x36,0xBE,0x67,0xA0,0xD1,0x06,0x22,0x8B,0x97,0x77,0x6E};
+  static const char* ascii_fingerprint; // = "B185F1A76BEB4E1D6BC486700DAD2A95";
+  static const uint8_t binary_fingerprint[16]; // = {0xB1,0x85,0xF1,0xA7,0x6B,0xEB,0x4E,0x1D,0x6B,0xC4,0x86,0x70,0x0D,0xAD,0x2A,0x95};
 
   SceneGetValuesReturnStruct() : retval(0) {
   }
