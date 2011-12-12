@@ -45,9 +45,10 @@ struct RemoteValueID {
 //~ }
 
 struct GetSwitchPointReturnStruct {
-    1:byte o_hours;
-    2:byte o_minutes;
-    3:byte o_setback;
+    1:bool retval;
+    2:byte o_hours;
+    3:byte o_minutes;
+    4:byte o_setback;
 }
 
 struct Bool_Bool {

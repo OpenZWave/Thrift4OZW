@@ -151,7 +151,8 @@ ValueID toValueID() const {
 };
 
 typedef struct _GetSwitchPointReturnStruct__isset {
-  _GetSwitchPointReturnStruct__isset() : o_hours(false), o_minutes(false), o_setback(false) {}
+  _GetSwitchPointReturnStruct__isset() : retval(false), o_hours(false), o_minutes(false), o_setback(false) {}
+  bool retval;
   bool o_hours;
   bool o_minutes;
   bool o_setback;
@@ -160,19 +161,24 @@ typedef struct _GetSwitchPointReturnStruct__isset {
 class GetSwitchPointReturnStruct {
  public:
 
-  static const char* ascii_fingerprint; // = "0A77C25C826CC107FD266A55D263629B";
-  static const uint8_t binary_fingerprint[16]; // = {0x0A,0x77,0xC2,0x5C,0x82,0x6C,0xC1,0x07,0xFD,0x26,0x6A,0x55,0xD2,0x63,0x62,0x9B};
+  static const char* ascii_fingerprint; // = "D02F029A9CC8B0BD109ADDA9910FC412";
+  static const uint8_t binary_fingerprint[16]; // = {0xD0,0x2F,0x02,0x9A,0x9C,0xC8,0xB0,0xBD,0x10,0x9A,0xDD,0xA9,0x91,0x0F,0xC4,0x12};
 
-  GetSwitchPointReturnStruct() : o_hours(0), o_minutes(0), o_setback(0) {
+  GetSwitchPointReturnStruct() : retval(0), o_hours(0), o_minutes(0), o_setback(0) {
   }
 
   virtual ~GetSwitchPointReturnStruct() throw() {}
 
+  bool retval;
   int8_t o_hours;
   int8_t o_minutes;
   int8_t o_setback;
 
   _GetSwitchPointReturnStruct__isset __isset;
+
+  void __set_retval(const bool val) {
+    retval = val;
+  }
 
   void __set_o_hours(const int8_t val) {
     o_hours = val;
@@ -188,6 +194,8 @@ class GetSwitchPointReturnStruct {
 
   bool operator == (const GetSwitchPointReturnStruct & rhs) const
   {
+    if (!(retval == rhs.retval))
+      return false;
     if (!(o_hours == rhs.o_hours))
       return false;
     if (!(o_minutes == rhs.o_minutes))

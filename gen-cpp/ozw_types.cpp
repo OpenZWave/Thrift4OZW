@@ -173,8 +173,8 @@ uint32_t RemoteValueID::write(::apache::thrift::protocol::TProtocol* oprot) cons
   return xfer;
 }
 
-const char* GetSwitchPointReturnStruct::ascii_fingerprint = "0A77C25C826CC107FD266A55D263629B";
-const uint8_t GetSwitchPointReturnStruct::binary_fingerprint[16] = {0x0A,0x77,0xC2,0x5C,0x82,0x6C,0xC1,0x07,0xFD,0x26,0x6A,0x55,0xD2,0x63,0x62,0x9B};
+const char* GetSwitchPointReturnStruct::ascii_fingerprint = "D02F029A9CC8B0BD109ADDA9910FC412";
+const uint8_t GetSwitchPointReturnStruct::binary_fingerprint[16] = {0xD0,0x2F,0x02,0x9A,0x9C,0xC8,0xB0,0xBD,0x10,0x9A,0xDD,0xA9,0x91,0x0F,0xC4,0x12};
 
 uint32_t GetSwitchPointReturnStruct::read(::apache::thrift::protocol::TProtocol* iprot) {
 
@@ -197,6 +197,14 @@ uint32_t GetSwitchPointReturnStruct::read(::apache::thrift::protocol::TProtocol*
     switch (fid)
     {
       case 1:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->retval);
+          this->__isset.retval = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
         if (ftype == ::apache::thrift::protocol::T_BYTE) {
           xfer += iprot->readByte(this->o_hours);
           this->__isset.o_hours = true;
@@ -204,7 +212,7 @@ uint32_t GetSwitchPointReturnStruct::read(::apache::thrift::protocol::TProtocol*
           xfer += iprot->skip(ftype);
         }
         break;
-      case 2:
+      case 3:
         if (ftype == ::apache::thrift::protocol::T_BYTE) {
           xfer += iprot->readByte(this->o_minutes);
           this->__isset.o_minutes = true;
@@ -212,7 +220,7 @@ uint32_t GetSwitchPointReturnStruct::read(::apache::thrift::protocol::TProtocol*
           xfer += iprot->skip(ftype);
         }
         break;
-      case 3:
+      case 4:
         if (ftype == ::apache::thrift::protocol::T_BYTE) {
           xfer += iprot->readByte(this->o_setback);
           this->__isset.o_setback = true;
@@ -235,13 +243,16 @@ uint32_t GetSwitchPointReturnStruct::read(::apache::thrift::protocol::TProtocol*
 uint32_t GetSwitchPointReturnStruct::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("GetSwitchPointReturnStruct");
-  xfer += oprot->writeFieldBegin("o_hours", ::apache::thrift::protocol::T_BYTE, 1);
+  xfer += oprot->writeFieldBegin("retval", ::apache::thrift::protocol::T_BOOL, 1);
+  xfer += oprot->writeBool(this->retval);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("o_hours", ::apache::thrift::protocol::T_BYTE, 2);
   xfer += oprot->writeByte(this->o_hours);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("o_minutes", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeFieldBegin("o_minutes", ::apache::thrift::protocol::T_BYTE, 3);
   xfer += oprot->writeByte(this->o_minutes);
   xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("o_setback", ::apache::thrift::protocol::T_BYTE, 3);
+  xfer += oprot->writeFieldBegin("o_setback", ::apache::thrift::protocol::T_BYTE, 4);
   xfer += oprot->writeByte(this->o_setback);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();

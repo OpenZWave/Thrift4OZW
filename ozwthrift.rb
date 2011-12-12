@@ -14,7 +14,7 @@ OZWmgr = OpenZWave::RemoteManager::Client.new(protocol)
 
 #OZWmgr.GetNodeNeighbors(HomeID,1)
 
-OZWmgr.SetNodeOff(HomeID, 5)
+#~ OZWmgr.SetNodeOff(HomeID, 5)
 
 Rvid = OpenZWave::RemoteValueID.new
 Rvid._homeId  = HomeID
@@ -25,4 +25,4 @@ Rvid._instance = 1
 Rvid._valueIndex = 0
 Rvid._commandClassId = 32
 
-OZWmgr.GetValueAsByte(Rvid)
+#~ OZWmgr.GetValueAsByte(Rvid)

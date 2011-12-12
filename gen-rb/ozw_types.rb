@@ -67,11 +67,13 @@ module OpenZWave
 
     class GetSwitchPointReturnStruct
       include ::Thrift::Struct, ::Thrift::Struct_Union
-      O_HOURS = 1
-      O_MINUTES = 2
-      O_SETBACK = 3
+      RETVAL = 1
+      O_HOURS = 2
+      O_MINUTES = 3
+      O_SETBACK = 4
 
       FIELDS = {
+        RETVAL => {:type => ::Thrift::Types::BOOL, :name => 'retval'},
         O_HOURS => {:type => ::Thrift::Types::BYTE, :name => 'o_hours'},
         O_MINUTES => {:type => ::Thrift::Types::BYTE, :name => 'o_minutes'},
         O_SETBACK => {:type => ::Thrift::Types::BYTE, :name => 'o_setback'}

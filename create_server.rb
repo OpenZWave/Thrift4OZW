@@ -47,8 +47,6 @@ puts "RemoteManagerHandler: #{a.entries.size} public methods, OpenZWave::Manager
 RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     # find line number, insert critical section enter code
     lineno = meth['line'].to_i
-    #puts "Method #{meth.name} at line #{lineno}-------------------------"
-    output[lineno] = "\tManager* mgr = Manager::Get();\n\tg_criticalSection.lock();\n"
     #
     target_method = nil
     target_method_name = nil
@@ -151,9 +149,9 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
             (retval.is_a?RbGCCXML::Field)   then
                 function_return_clause = "_return.retval = "
         else
-            #unless meth.return_type.name == "void" then
+            unless target_method.return_type.name == "void" then
                 function_return_clause = "_return = "
-            #end
+            end
         end
     end
 
@@ -180,7 +178,8 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
         end
     }
     
-    # Unleash the beast!
+    # Get me the manager, and lock the criticalsection
+    output[lineno] = "\tManager* mgr = Manager::Get();\n\tg_criticalSection.lock();\n"
     fcall = "#{function_return_clause} mgr->#{target_method.name}(#{arg_array.compact.join(', ')})"
     case meth.return_type.name 
     when "void"
@@ -188,7 +187,6 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     else
         output[lineno+1] = "\t#{meth.return_type.to_cpp} function_result = #{fcall};\n"
     end
-    
     # unlock the critical section
     output[lineno+1] << "\tg_criticalSection.unlock();\n" 
     # output return statement (unless rettype == void)
