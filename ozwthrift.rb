@@ -11,6 +11,7 @@ protocol = Thrift::BinaryProtocol.new(transport)
 transport.open()
 
 OZWmgr = OpenZWave::RemoteManager::Client.new(protocol)
+puts OZWmgr.inspect
 
 #OZWmgr.GetNodeNeighbors(HomeID,1)
 
@@ -19,10 +20,10 @@ OZWmgr = OpenZWave::RemoteManager::Client.new(protocol)
 Rvid = OpenZWave::RemoteValueID.new
 Rvid._homeId  = HomeID
 Rvid._nodeId = 5
-Rvid._genre = 0 # OpenZWave::RemoteValueGenre::ValueGenre_Basic
+Rvid._genre = 1 # OpenZWave::RemoteValueGenre::ValueGenre_User
 Rvid._type = 1 # OpenZWave::RemoteValueType::ValueType_Byte
 Rvid._instance = 1
 Rvid._valueIndex = 0
-Rvid._commandClassId = 32
+Rvid._commandClassId = 38
 
-#~ OZWmgr.GetValueAsByte(Rvid)
+OZWmgr.GetValueAsByte(Rvid)

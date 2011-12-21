@@ -271,7 +271,7 @@ void OnNotification
         STOMP::hdrmap headers;
         headers["NotificationValueHomeID"] =  to_string<uint32_t>(_notification->GetValueID().GetHomeId(), std::hex);
         headers["NotificationType"] =  to_string<uint32_t>(_notification->GetType(), std::hex);
-        headers["NotificationByte"] =  to_string<uint8_t>(_notification->GetByte(), std::hex);    
+        headers["NotificationByte"] =  to_string<uint32_t>(_notification->GetByte(), std::hex);
         //if (send_valueID) {
             headers["NotificationValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
         //}

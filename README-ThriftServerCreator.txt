@@ -12,15 +12,28 @@ Requirements:
 
 About the script:
 -----------------
-When I learned about Thrift, I immediately fell in love with it: it made RPC almost "transparent", like the way I imagined it, and best of all, crossing most programming languages barriers with ease!
+When I learned about Thrift, I immediately fell in love with it: it made RPC 
+almost "transparent", like the way I imagined it, and best of all, crossing 
+most programming languages barriers with ease!
 
-What it lacks though is the "sauce" that binds it to your infrastructure, and when you have a 100+ methods API to begin with it is shocking that you still need to write the server code all by yourself.
+What it lacks though is the "sauce" that binds it to your infrastructure, 
+and when you have a 100+ methods C++ API to begin with, it is awkward
+that you still need to write the server code all by yourself.
 
-This little script is a nice complement to Apache Thrift. All it does is to parse two sets of files: 1) the server skeleton file produced by Thrift, and 2) the headers of the library you want to expose with Thrift. It uses the excellent tool "RbGCCXML" to build an XML-like tree of the two interfaces and  binds them together (*ahem* at least it tries to).
+This little script is a nice complement to Apache Thrift. All it does is to parse 
+two sets of files: 1) the C++ server skeleton file produced by Thrift, and 
+2) the headers of the C++ library you want to expose with Thrift. 
+It uses the excellent tool "RbGCCXML" to build an XML-like tree of the two 
+interfaces and  binds them together (*ahem* at least it tries to).
 
-So say you want to expose your shiny app/lib to the world. Only problem is it's API is of monstrous size (hundreds of methods) and you need it quick. Use this script and you can have the skeleton file automatically generate the actual server code for Thrift. And, if you're lucky (and the library's API is consistent), you even might compile it without errors!
+So say you want to expose your shiny app/lib to the world. Only problem is 
+it's API is of monstrous size (hundreds of methods) and you need it quick. 
+Use this script and you can have the skeleton file automatically generate 
+the actual server code for Thrift. And, if you're lucky (and the library's 
+API is consistent), you even might compile it without errors!
 
-For example, OpenZWave has a single "Manager" class for interfacing with the rest of the world. 
+For example, OpenZWave has a single "Manager" class for interfacing with 
+the rest of the world, as shown below (comments stripped for brevity)
 
 namespace OpenZWave {
     class Manager {
@@ -28,7 +41,8 @@ namespace OpenZWave {
         void SetPollInterval( int32 _seconds );
         string GetNodeType( uint32 const _homeId, uint8 const _nodeId );
         ... etc
-    }}
+    }
+}
 
 You can declare all the API as a Thrift IDL file:
 
@@ -40,12 +54,14 @@ service RemoteManager {
 }
 
 Then you configure & run the script:
+
 ekarak@ekarak-laptop:~/ozw/thrift4ozw$ ruby1.9.1 create_server.rb
 CREATING MAPPING for (bool) IsPrimaryController
 tgt=::uint32 const _homeId, src=RemoteManagerHandler::IsPrimaryController::_homeId
 ...tons
 
-the resulting code tries to map functions (including overloaded ones) from the Thrift skeleton file into the realm of the existing library, such as:
+the resulting code tries to map functions (including overloaded ones) from 
+the Thrift skeleton file into the realm of the existing library, so that:
 
   bool IsPrimaryController(const int32_t _homeId) {
     // Your implementation goes here
@@ -62,16 +78,23 @@ turns into:
 	return(function_result);
   }
 
-The critical section is needed to serialize access to OZW from the thrift server's thread. Got it? S&S (silly and simple....)
+The critical section is needed to serialize access to OZW from the thrift 
+server's thread. Got it? S&S (silly and simple....)
 
-The produced C++ server file will probably still need some manual tweaking, but that's up to the quality of the library's API. In my case (the OpenZWave library), I only had to write some 15 lines of extra code for 3 methods with "peculiar" arguments. 
+The produced C++ server file will probably still need some manual tweaking, 
+but that's up to the quality of the library's API. In my case (the OpenZWave 
+library), I only had to write some 15 lines of extra code for 3 methods with 
+"peculiar" arguments, like iterating over a pointer array to fill in a std::vector
 
 For instance, there's the "Manager::GetNodeNeighbors" method:
 (uint32 GetNodeNeighbors( uint32 const _homeId, uint8 const _nodeId, uint8** _nodeNeighbors );
 
-Look at the last argument: am I dreaming?? a double star in C++??  The method is a C-style call to get a bitmap of node neighbors, its return value is the size of the array pointed by _nodeNeighbors. If the map is empty, you don't need to delete the map. so does the API say.
+Look at the last argument: am I dreaming?? a double star in C++??  
+The method is a C-style call to get a bitmap of node neighbors, its return 
+value is the size of the array pointed by _nodeNeighbors. If the map is 
+empty, you don't need to delete the map (so does the OpenZWave API say)
+Its thrift IDL is:
 
-Its thrift definition is:
 struct UInt32_ListByte {
     1:i32   retval;
     2:list<byte> _nodeNeighbors;
@@ -87,7 +110,10 @@ And the produced Thrift server code for C++ is:
 	g_criticalSection.unlock();
   }
 
-The create_server.rb script tried to cast a vector<uint8> to the _nodeNeighbors argument but it will fail because the method is expecting a plain-old C-style pointer to pointer of uint8. Alas, you have to manually write a simple iterator.
+The create_server.rb script tried to cast a vector<uint8> to the _nodeNeighbors 
+argument but this will coredump your executable because the method is 
+expecting a plain-old C-style pointer to an array of uint8. Alas, you have to 
+manually write a simple iterator:
 
   void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
       uint8* arr;
@@ -105,7 +131,9 @@ The create_server.rb script tried to cast a vector<uint8> to the _nodeNeighbors 
 
 1) The rough requirements are:
 -----------------------------------------------
-    Use a universal naming conversion using the underscore('_') for overloaded functions and datatypes. For instance, these OpenZWave::Manager overloaded methods ("GetValueListSelection") must be declared in Thrift as:
+Use a universal naming conversion using the underscore('_') for overloaded 
+functions and datatypes. For instance, these OpenZWave::Manager overloaded 
+methods ("GetValueListSelection") must be declared in Thrift as:
 
     //(c++) bool GetValueListSelection( ValueID const& _id, int32* o_value );
     Bool_String GetValueListSelection_String( 1:RemoteValueID _id );
@@ -114,8 +142,10 @@ The create_server.rb script tried to cast a vector<uint8> to the _nodeNeighbors 
     Bool_Int GetValueListSelection_Int32( 1:RemoteValueID _id );
 
 This example illustrates the use of underscore in both intended cases:
-- the function return struct (since there are two values we need to get them returned)
-- the function overloading mechanism (since Thrift doesn't support overloading by its own)
+- the function return struct (since there are two values we need to get them
+returned)
+- the function overloading mechanism (since Thrift doesn't support 
+overloading by its own)
 
 Bool_xxxxx is a simple struct with TWO members:
   1: bool retval = the function's result value (bool in our case)
@@ -142,4 +172,6 @@ And the script's generated code for these two methods is:
 	g_criticalSection.unlock();
   }
 
-That's all for now, have to change diapers!!!
+
+December 2011,
+Elias Karakoulakis
