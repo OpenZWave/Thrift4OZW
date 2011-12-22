@@ -42,11 +42,12 @@ typedef struct
 	uint32			m_homeId;
 	uint8			m_nodeId;
 	bool			m_polled;
-    std::map<uint64, ValueID*>	m_values;
+    //std::map<uint64, ValueID*>	m_values;
+    list<ValueID>	m_values;
 } NodeInfo;
 //
 static list<NodeInfo*>          g_nodes;
-//static std::map<uint64, ValueID*> g_values;
+static std::map<uint64, ValueID*> g_values;
 
 // OpenZWave includes
 #include "Notification.h"
@@ -116,11 +117,11 @@ void OnNotification
             {
                 // Add the new value to the node's value list
                 ValueID v = _notification->GetValueID();
+                nodeInfo->m_values.push_back( v );
                 uint64 key = v.GetId();
-                nodeInfo->m_values[ key] = &v;
                 // ekarak: also add it to global ValueID map
                 //std::cout << "========================= Adding "<<key<<std::hex<< " to g_values..."<<std::endl;
-                //g_values[ key ] = &v;
+                g_values[ key ] = &v;
             }
             //send_valueID = true;
             break;
@@ -130,18 +131,29 @@ void OnNotification
         This only occurs when a node is removed. */
         case Notification::Type_ValueRemoved:
         {
-            //~ if( NodeInfo* nodeInfo = GetNodeInfo( _notification ) )
-            //~ {
+            if( NodeInfo* nodeInfo = GetNodeInfo( _notification ) )
+            {
                 // Remove the value from out list
-                //~ for( list<ValueID>::iterator it = nodeInfo->m_values.begin(); it != nodeInfo->m_values.end(); ++it )
-                //~ {
-                    //~ if( (*it) == _notification->GetValueID() )
-                    //~ {
-                        //~ nodeInfo->m_values.erase( it );
-                        //~ break;
-                    //~ }
-                //~ }
-            //~ }
+				for( list<ValueID>::iterator it = nodeInfo->m_values.begin(); it != nodeInfo->m_values.end(); ++it )
+				{
+					if( (*it) == _notification->GetValueID() )
+					{
+						nodeInfo->m_values.erase( it );
+						break;
+					}
+				}
+
+                //~ // Remove the value from out list
+                for( list<ValueID>::iterator it = nodeInfo->m_values.begin(); it != nodeInfo->m_values.end(); ++it )
+                {
+                    if( (*it) == _notification->GetValueID() )
+                    {
+                        nodeInfo->m_values.erase( it );
+                        break;
+                    }
+                }
+            }
+            g_values.erase(_notification->GetValueID().GetId());
             //send_valueID = true;
             break;
         }
@@ -269,11 +281,11 @@ void OnNotification
     //
     if (notify_stomp) {
         STOMP::hdrmap headers;
-        headers["NotificationValueHomeID"] =  to_string<uint32_t>(_notification->GetValueID().GetHomeId(), std::hex);
+        headers["ValueHomeID"] =  to_string<uint32_t>(_notification->GetValueID().GetHomeId(), std::hex);
         headers["NotificationType"] =  to_string<uint32_t>(_notification->GetType(), std::hex);
         headers["NotificationByte"] =  to_string<uint32_t>(_notification->GetByte(), std::hex);
         //if (send_valueID) {
-            headers["NotificationValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
+            headers["ValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
         //}
         //
         string empty = ""  ;
@@ -281,6 +293,20 @@ void OnNotification
     }
     //
     g_criticalSection.unlock();
+}
+
+// Send all known values via STOMP
+void send_all_values() {
+    std::map<uint64, ValueID*>::iterator it;
+    for ( it=g_values.begin() ; it != g_values.end(); it++ ) {
+        ValueID* v = (*it).second;
+        STOMP::hdrmap headers;
+        headers["ValueHomeID"] =  to_string<uint32_t>(v->GetHomeId(), std::hex);
+        headers["ValueID"] =  to_string<uint64_t>(v->GetId(), std::hex);
+        //
+        string empty = ""  ;
+        stomp_client->send(*notifications_topic, headers, empty);
+    }
 }
 
 // ------------------------
