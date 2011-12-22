@@ -1,8 +1,9 @@
 ----------------------------------------------------------------------------------------------------
 HOW TO USE OpenZWave FROM THE LANGUAGE OF YOUR CHOICE:
 ----------------------------------------------------------------------------------------------------
-OK folks, after several months of tweaking I can now talk to my ZWave devices at the leisure of the friendly Ruby's IRB interpreter.
-So can you, in any language you choose (Cocoa, C#, Erlang, Go, Java, JS, Perl, PHP, Python, Ruby...). Here's how:
+OK folks, after several months of tweaking I can now talk to my ZWave devices 
+at the leisure of Ruby's friendly IRB interpreter. So can you, in any language you 
+choose (Cocoa, C#, Erlang, Go, Java, JS, Perl, PHP, Python, Ruby...). Here's how:
 
 - First get a copy of the code:    https://github.com/ekarak/Thrift4OZW/zipball/master
 - Then unzip it to a folder, preferrably next to OZW's root folder (open-zwave-read-only)
@@ -14,15 +15,18 @@ My folder hierarchy is:
             open-zwave-read-only (the main OZW trunk)
             openzwave-control-panel (other OZW subproject)
 
-- Skip to next section if you're running Linux 32-bit and just want to try talking to the library (a precompiled binary is included)
-- Take a look at ozw.thrift , it's the Thrift interface definition file. Most (not all!) of Manager (124 out of 138) public methods are exposed.
-- Install SMC (http://smc.sf.net) , and Poco  (http://www.pocoproject.org), both development versions (with headers)
+- Skip to next section if you're running Linux 32-bit and just want to try talking to the library 
+(a precompiled binary is included)
+- Take a look at ozw.thrift , it's the Thrift interface definition file. Most (not all!) of Manager 
+(124 out of 138) public methods are exposed.
+- Install SMC (http://smc.sf.net) , and Poco  (http://www.pocoproject.org), both development 
+versions (with headers)
 - I assume you have Ruby >=1.9.1 installed with RbGCCXML and Nokogiri (gem install rbgccxml)
 - Inspect the Makefile, change directories (unless your username is ekarak!)
-- Run make, watch meaningless errors fly on the screen (it's not done yet!)
-- The generated code needs some manual tweaks for the compilation to succeed:
+- Run make, cross fingers, pop champagne.
+- The generated code is patched twice (I know, I know, this sucks) in order for the compilation to succeed:
 
-1) add these constructors/converters in class RemoteValueID (gen-cpp/ozw_types.h) :
+1) these constructors/converters are patched in class RemoteValueID (gen-cpp/ozw_types.h) :
 // ekarak: constructor from ValueID
   RemoteValueID(ValueID vid) : 
     _homeId ((int32_t) vid.GetHomeId()), 
@@ -37,11 +41,12 @@ ValueID toValueID() const {
     return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
 }
 
-2) Inspect each function marked with a warning during the server generation phase. There are two or three functions in OZW that use C-ish arguments 
-and need manual handling. (GetNodeNeighbors is an example). Diff gen-cpp/RemoteManager_server.preserve.cpp with your gen-cpp/RemoteManager_server.cpp 
-to see the changes I made in order to have meaningful results to the Thrift server.
+2) Inspect each function marked with a warning during the server generation phase. 
+There are two or three functions in OZW that use C-ish arguments and need manual handling. 
+(GetNodeNeighbors is an example I can think of). 
+See gen-cpp/RemoteManager_server.cpp.patch to see the changes I made in order to have 
+meaningful results from OpenZWave to the Thrift server.
 
-3) Run make again, and if your karma is high you'll get your server binary.
 
 ---------------------------------------------------------------------
 TALKING TO THE OPENZWAVE THRIFT SERVER 
@@ -68,10 +73,11 @@ irb(main):002:0> OZWmgr.GetNodeName(HomeID, 5)
 # Switch on node 2
 irb(main):003:0> OZWmgr.SetNodeOn(HomeID, 2)
 => nil 
+(*tack*) did you see the baanshee turning on the christmas tree lights?? :-)
 
 # Set dimmer node 5 at 50% via SetNodeLevel
 irb(main):004:0> OZWmgr.SetNodeLevel(HomeID, 5, 50)
-=> nil 
+=> nil
 
 # Construct a RemoteValueID for node 5, BasicSet command class
 Rvid = OpenZWave::RemoteValueID.new
@@ -99,7 +105,7 @@ irb(main):015:0> OZWmgr.SetValue_UInt8(Rvid,0)
 
 
 You can try using the server from other languages. I've posted the generated Thrift code in the project, 
-Read Thrift's tutorial (http:..thrift.apache.org) and you should be able to talk to OpenZWave with minimal effort.
+Read Thrift's tutorial (http://thrift.apache.org) and you should be able to talk to OpenZWave with minimal effort.
 
 That's it for the time being.
 Elias
