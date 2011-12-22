@@ -1850,6 +1850,20 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'ActivateScene failed: unknown result')
           end
 
+          def SendAllValues()
+            send_SendAllValues()
+            recv_SendAllValues()
+          end
+
+          def send_SendAllValues()
+            send_message('SendAllValues', SendAllValues_args)
+          end
+
+          def recv_SendAllValues()
+            result = receive_message(SendAllValues_result)
+            return
+          end
+
         end
 
         class Processor
@@ -2721,6 +2735,13 @@ require 'ozw_types'
             result = ActivateScene_result.new()
             result.success = @handler.ActivateScene(args._sceneId)
             write_result(result, oprot, 'ActivateScene', seqid)
+          end
+
+          def process_SendAllValues(seqid, iprot, oprot)
+            args = read_args(iprot, SendAllValues_args)
+            result = SendAllValues_result.new()
+            @handler.SendAllValues()
+            write_result(result, oprot, 'SendAllValues', seqid)
           end
 
         end
@@ -6885,6 +6906,36 @@ require 'ozw_types'
 
           FIELDS = {
             SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class SendAllValues_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+
+          FIELDS = {
+
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class SendAllValues_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+
+          FIELDS = {
+
           }
 
           def struct_fields; FIELDS; end

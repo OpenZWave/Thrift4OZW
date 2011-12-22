@@ -140,6 +140,7 @@ namespace OpenZWave
       void SetSceneLabel(byte _sceneId, string _value);
       bool SceneExists(byte _sceneId);
       bool ActivateScene(byte _sceneId);
+      void SendAllValues();
     }
 
     public class Client : Iface {
@@ -4302,6 +4303,35 @@ namespace OpenZWave
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "ActivateScene failed: unknown result");
       }
 
+      public void SendAllValues()
+      {
+        send_SendAllValues();
+        recv_SendAllValues();
+      }
+
+      public void send_SendAllValues()
+      {
+        oprot_.WriteMessageBegin(new TMessage("SendAllValues", TMessageType.Call, seqid_));
+        SendAllValues_args args = new SendAllValues_args();
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public void recv_SendAllValues()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        SendAllValues_result result = new SendAllValues_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        return;
+      }
+
     }
     public class Processor : TProcessor {
       public Processor(Iface iface)
@@ -4431,6 +4461,7 @@ namespace OpenZWave
         processMap_["SetSceneLabel"] = SetSceneLabel_Process;
         processMap_["SceneExists"] = SceneExists_Process;
         processMap_["ActivateScene"] = ActivateScene_Process;
+        processMap_["SendAllValues"] = SendAllValues_Process;
       }
 
       protected delegate void ProcessFunction(int seqid, TProtocol iprot, TProtocol oprot);
@@ -6070,6 +6101,19 @@ namespace OpenZWave
         ActivateScene_result result = new ActivateScene_result();
         result.Success = iface_.ActivateScene(args._sceneId);
         oprot.WriteMessageBegin(new TMessage("ActivateScene", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void SendAllValues_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        SendAllValues_args args = new SendAllValues_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        SendAllValues_result result = new SendAllValues_result();
+        iface_.SendAllValues();
+        oprot.WriteMessageBegin(new TMessage("SendAllValues", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -29547,6 +29591,95 @@ namespace OpenZWave
         StringBuilder sb = new StringBuilder("ActivateScene_result(");
         sb.Append("Success: ");
         sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class SendAllValues_args : TBase
+    {
+
+      public SendAllValues_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("SendAllValues_args");
+        oprot.WriteStructBegin(struc);
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("SendAllValues_args(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class SendAllValues_result : TBase
+    {
+
+      public SendAllValues_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("SendAllValues_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("SendAllValues_result(");
         sb.Append(")");
         return sb.ToString();
       }

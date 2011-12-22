@@ -17198,6 +17198,98 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_SendAllValues_args;
+use base qw(Class::Accessor);
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_SendAllValues_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_SendAllValues_args');
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_SendAllValues_result;
+use base qw(Class::Accessor);
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_SendAllValues_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_SendAllValues_result');
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManagerIf;
 
 use strict;
@@ -18176,6 +18268,12 @@ sub SceneExists{
 sub ActivateScene{
   my $self = shift;
   my $_sceneId = shift;
+
+  die 'implement interface';
+}
+
+sub SendAllValues{
+  my $self = shift;
 
   die 'implement interface';
 }
@@ -19167,6 +19265,12 @@ sub ActivateScene{
 
   my $_sceneId = ($request->{'_sceneId'}) ? $request->{'_sceneId'} : undef;
   return $self->{impl}->ActivateScene($_sceneId);
+}
+
+sub SendAllValues{
+  my ($self, $request) = @_;
+
+  return $self->{impl}->SendAllValues();
 }
 
 package OpenZWave::RemoteManagerClient;
@@ -24775,6 +24879,43 @@ sub recv_ActivateScene{
   }
   die "ActivateScene failed: unknown result";
 }
+sub SendAllValues{
+  my $self = shift;
+
+    $self->send_SendAllValues();
+  $self->recv_SendAllValues();
+}
+
+sub send_SendAllValues{
+  my $self = shift;
+
+  $self->{output}->writeMessageBegin('SendAllValues', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SendAllValues_args();
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_SendAllValues{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_SendAllValues_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  return;
+}
 package OpenZWave::RemoteManagerProcessor;
 
 use strict;
@@ -26416,6 +26557,19 @@ sub process_ActivateScene {
     my $result = new OpenZWave::RemoteManager_ActivateScene_result();
     $result->{success} = $self->{handler}->ActivateScene($args->_sceneId);
     $output->writeMessageBegin('ActivateScene', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_SendAllValues {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_SendAllValues_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_SendAllValues_result();
+    $self->{handler}->SendAllValues();
+    $output->writeMessageBegin('SendAllValues', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

@@ -606,6 +606,7 @@ enum OpenZWaveRemoteValueType {
 - (void) SetSceneLabel: (uint8_t) _sceneId : (NSString *) _value;  // throws TException
 - (BOOL) SceneExists: (uint8_t) _sceneId;  // throws TException
 - (BOOL) ActivateScene: (uint8_t) _sceneId;  // throws TException
+- (void) SendAllValues;  // throws TException
 @end
 
 @interface OpenZWaveRemoteManagerClient : NSObject <OpenZWaveRemoteManager> {

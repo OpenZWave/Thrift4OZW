@@ -1,0 +1,53 @@
+220a221
+>     uint8* arr;
+223c224
+< 	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors);
+---
+> 	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &arr);
+224a226,229
+>     if (_return.retval > 0) {
+>         for (int i=0; i<_return.retval; i++) _return._nodeNeighbors.push_back(arr[i]);
+>         delete arr;
+>     }
+646a652
+>     uint8* o_associations; 
+649c655
+< 	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &_return.o_associations);
+---
+> 	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &o_associations);
+650a657,660
+>     if (_return.retval > 0) {
+>         for (int i=0; i<_return.retval; i++) _return.o_associations.push_back(o_associations[i]);
+>         delete o_associations;
+>     }
+704a715
+>       uint8* _sceneIds;
+707c718
+< 	_return.retval =  mgr->GetAllScenes((::uint8**) &_return._sceneIds);
+---
+> 	_return.retval =  mgr->GetAllScenes((::uint8**) &_sceneIds);
+709c720,724
+<   }
+---
+>     if (_return.retval>0) {
+>         for (int i=0; i<_return.retval; i++) _return._sceneIds.push_back(_sceneIds[i]);
+>         delete(_sceneIds);
+>     }  
+> }
+799a815
+>     std::vector<OpenZWave::ValueID>  o_values;
+802c818
+< 	_return.retval =  mgr->SceneGetValues((::uint8 const) _sceneId, _return.o_value.toValueID());
+---
+> 	_return.retval =  mgr->SceneGetValues((::uint8 const) _sceneId, &o_values);
+803a820
+>       for (int i=0; i< _return.retval; i++) _return.o_value.push_back(RemoteValueID(o_values[i]));
+957,958c974
+<     // Your implementation goes here
+<     printf("SendAllValues\n");
+---
+>       send_all_values();
+960c976
+< 
+---
+>   

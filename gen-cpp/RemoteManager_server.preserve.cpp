@@ -970,6 +970,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void SendAllValues() {
+      send_all_values();
+  }
+  
 };
 
 // int main(int argc, char **argv) {

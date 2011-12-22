@@ -79,20 +79,6 @@ class RemoteValueID {
 
   _RemoteValueID__isset __isset;
 
-// ekarak: constructor from ValueID
-  RemoteValueID(ValueID vid) : 
-    _homeId ((int32_t) vid.GetHomeId()), 
-    _nodeId ((int8_t) vid.GetNodeId()), 
-    _genre  ((RemoteValueGenre::type) vid.GetGenre()),
-    _commandClassId((int8_t) vid.GetCommandClassId()), 
-      _instance ((int8_t) vid.GetInstance()), 
-      _valueIndex((int8_t) vid.GetIndex()),
-    _type ((RemoteValueType::type) vid.GetType()) { }
-// ekarak: converter to ValueID
-ValueID toValueID() const {
-    return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
-}
-
   void __set__homeId(const int32_t val) {
     _homeId = val;
   }
@@ -147,6 +133,21 @@ ValueID toValueID() const {
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+  // ekarak: constructor from ValueID
+  RemoteValueID(ValueID vid) : 
+    _homeId ((int32_t) vid.GetHomeId()), 
+    _nodeId ((int8_t) vid.GetNodeId()), 
+    _genre  ((RemoteValueGenre::type) vid.GetGenre()),
+    _commandClassId((int8_t) vid.GetCommandClassId()), 
+      _instance ((int8_t) vid.GetInstance()), 
+      _valueIndex((int8_t) vid.GetIndex()),
+    _type ((RemoteValueType::type) vid.GetType()) { }
+// ekarak: converter to ValueID
+ValueID toValueID() const {
+    return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
+}
+
 
 };
 

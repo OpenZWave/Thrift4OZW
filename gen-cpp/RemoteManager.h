@@ -138,6 +138,7 @@ class RemoteManagerIf {
   virtual void SetSceneLabel(const int8_t _sceneId, const std::string& _value) = 0;
   virtual bool SceneExists(const int8_t _sceneId) = 0;
   virtual bool ActivateScene(const int8_t _sceneId) = 0;
+  virtual void SendAllValues() = 0;
 };
 
 class RemoteManagerNull : virtual public RemoteManagerIf {
@@ -577,6 +578,9 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   bool ActivateScene(const int8_t /* _sceneId */) {
     bool _return = false;
     return _return;
+  }
+  void SendAllValues() {
+    return;
   }
 };
 
@@ -14493,6 +14497,80 @@ class RemoteManager_ActivateScene_presult {
 
 };
 
+
+class RemoteManager_SendAllValues_args {
+ public:
+
+  RemoteManager_SendAllValues_args() {
+  }
+
+  virtual ~RemoteManager_SendAllValues_args() throw() {}
+
+
+  bool operator == (const RemoteManager_SendAllValues_args & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const RemoteManager_SendAllValues_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_SendAllValues_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SendAllValues_pargs {
+ public:
+
+
+  virtual ~RemoteManager_SendAllValues_pargs() throw() {}
+
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SendAllValues_result {
+ public:
+
+  RemoteManager_SendAllValues_result() {
+  }
+
+  virtual ~RemoteManager_SendAllValues_result() throw() {}
+
+
+  bool operator == (const RemoteManager_SendAllValues_result & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const RemoteManager_SendAllValues_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_SendAllValues_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SendAllValues_presult {
+ public:
+
+
+  virtual ~RemoteManager_SendAllValues_presult() throw() {}
+
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 class RemoteManagerClient : virtual public RemoteManagerIf {
  public:
   RemoteManagerClient(boost::shared_ptr< ::apache::thrift::protocol::TProtocol> prot) :
@@ -14885,6 +14963,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool ActivateScene(const int8_t _sceneId);
   void send_ActivateScene(const int8_t _sceneId);
   bool recv_ActivateScene();
+  void SendAllValues();
+  void send_SendAllValues();
+  void recv_SendAllValues();
  protected:
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot_;
   boost::shared_ptr< ::apache::thrift::protocol::TProtocol> poprot_;
@@ -15022,6 +15103,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_SetSceneLabel(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SceneExists(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_ActivateScene(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_SendAllValues(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
  public:
   RemoteManagerProcessor(boost::shared_ptr<RemoteManagerIf> iface) :
     iface_(iface) {
@@ -15149,6 +15231,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["SetSceneLabel"] = &RemoteManagerProcessor::process_SetSceneLabel;
     processMap_["SceneExists"] = &RemoteManagerProcessor::process_SceneExists;
     processMap_["ActivateScene"] = &RemoteManagerProcessor::process_ActivateScene;
+    processMap_["SendAllValues"] = &RemoteManagerProcessor::process_SendAllValues;
   }
 
   virtual bool process(boost::shared_ptr< ::apache::thrift::protocol::TProtocol> piprot, boost::shared_ptr< ::apache::thrift::protocol::TProtocol> poprot, void* callContext);
@@ -16479,6 +16562,13 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
       } else {
         ifaces_[i]->ActivateScene(_sceneId);
       }
+    }
+  }
+
+  void SendAllValues() {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      ifaces_[i]->SendAllValues();
     }
   }
 

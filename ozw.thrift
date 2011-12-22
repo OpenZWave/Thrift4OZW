@@ -1658,4 +1658,7 @@ service RemoteManager {
 		//bool ActivateScene( uint8 const _sceneId );
     bool ActivateScene( 1:byte _sceneId );
 
+
+    // ----------------------- ekarak: and a little extra candy server for missing functionality from OZW
+    void SendAllValues();
 }

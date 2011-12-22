@@ -14165,6 +14165,62 @@ OpenZWave.RemoteManager_ActivateScene_result.prototype.write = function(output) 
   return;
 };
 
+OpenZWave.RemoteManager_SendAllValues_args = function(args) {
+};
+OpenZWave.RemoteManager_SendAllValues_args.prototype = {};
+OpenZWave.RemoteManager_SendAllValues_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    input.skip(ftype);
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SendAllValues_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SendAllValues_args');
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SendAllValues_result = function(args) {
+};
+OpenZWave.RemoteManager_SendAllValues_result.prototype = {};
+OpenZWave.RemoteManager_SendAllValues_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    input.skip(ftype);
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SendAllValues_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SendAllValues_result');
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.RemoteManagerClient = function(input, output) {
     this.input = input;
     this.output = (!output) ? input : output;
@@ -18429,4 +18485,34 @@ OpenZWave.RemoteManagerClient.prototype.recv_ActivateScene = function() {
     return result.success;
   }
   throw 'ActivateScene failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.SendAllValues = function() {
+  this.send_SendAllValues();
+  this.recv_SendAllValues();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_SendAllValues = function() {
+  this.output.writeMessageBegin('SendAllValues', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SendAllValues_args();
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_SendAllValues = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_SendAllValues_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  return;
 };

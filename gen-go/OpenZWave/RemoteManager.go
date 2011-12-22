@@ -1591,6 +1591,7 @@ type IRemoteManager interface {
    *  - _sceneId
    */
   ActivateScene(_sceneId byte) (retval246 bool, err os.Error)
+  SendAllValues() (err os.Error)
 }
 
 type RemoteManagerClient struct {
@@ -1641,9 +1642,9 @@ func (p *RemoteManagerClient) SendWriteConfig(_homeId int32)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("WriteConfig", thrift.CALL, p.SeqId)
-  args248 := NewWriteConfigArgs()
-  args248._homeId = _homeId
-  err = args248.Write(oprot)
+  args249 := NewWriteConfigArgs()
+  args249._homeId = _homeId
+  err = args249.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -1661,23 +1662,23 @@ func (p *RemoteManagerClient) RecvWriteConfig() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error250 := thrift.NewTApplicationExceptionDefault()
-    error251, err := error250.Read(iprot)
+    error251 := thrift.NewTApplicationExceptionDefault()
+    error252, err := error251.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error251
+    err = error252
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result249 := NewWriteConfigResult()
-  err = result249.Read(iprot)
+  result250 := NewWriteConfigResult()
+  err = result250.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -1689,7 +1690,7 @@ func (p *RemoteManagerClient) RecvWriteConfig() (err os.Error) {
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) GetControllerNodeId(_homeId int32) (retval252 byte, err os.Error) {
+func (p *RemoteManagerClient) GetControllerNodeId(_homeId int32) (retval253 byte, err os.Error) {
   err = p.SendGetControllerNodeId(_homeId)
   if err != nil { return }
   return p.RecvGetControllerNodeId()
@@ -1703,9 +1704,9 @@ func (p *RemoteManagerClient) SendGetControllerNodeId(_homeId int32)(err os.Erro
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetControllerNodeId", thrift.CALL, p.SeqId)
-  args253 := NewGetControllerNodeIdArgs()
-  args253._homeId = _homeId
-  err = args253.Write(oprot)
+  args254 := NewGetControllerNodeIdArgs()
+  args254._homeId = _homeId
+  err = args254.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -1723,25 +1724,25 @@ func (p *RemoteManagerClient) RecvGetControllerNodeId() (value byte, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error255 := thrift.NewTApplicationExceptionDefault()
-    error256, err := error255.Read(iprot)
+    error256 := thrift.NewTApplicationExceptionDefault()
+    error257, err := error256.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error256
+    err = error257
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result254 := NewGetControllerNodeIdResult()
-  err = result254.Read(iprot)
+  result255 := NewGetControllerNodeIdResult()
+  err = result255.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result254.Success
+  value = result255.Success
   return
 }
 
@@ -1749,7 +1750,7 @@ func (p *RemoteManagerClient) RecvGetControllerNodeId() (value byte, err os.Erro
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) IsPrimaryController(_homeId int32) (retval257 bool, err os.Error) {
+func (p *RemoteManagerClient) IsPrimaryController(_homeId int32) (retval258 bool, err os.Error) {
   err = p.SendIsPrimaryController(_homeId)
   if err != nil { return }
   return p.RecvIsPrimaryController()
@@ -1763,9 +1764,9 @@ func (p *RemoteManagerClient) SendIsPrimaryController(_homeId int32)(err os.Erro
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsPrimaryController", thrift.CALL, p.SeqId)
-  args258 := NewIsPrimaryControllerArgs()
-  args258._homeId = _homeId
-  err = args258.Write(oprot)
+  args259 := NewIsPrimaryControllerArgs()
+  args259._homeId = _homeId
+  err = args259.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -1783,25 +1784,25 @@ func (p *RemoteManagerClient) RecvIsPrimaryController() (value bool, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error260 := thrift.NewTApplicationExceptionDefault()
-    error261, err := error260.Read(iprot)
+    error261 := thrift.NewTApplicationExceptionDefault()
+    error262, err := error261.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error261
+    err = error262
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result259 := NewIsPrimaryControllerResult()
-  err = result259.Read(iprot)
+  result260 := NewIsPrimaryControllerResult()
+  err = result260.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result259.Success
+  value = result260.Success
   return
 }
 
@@ -1809,7 +1810,7 @@ func (p *RemoteManagerClient) RecvIsPrimaryController() (value bool, err os.Erro
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) IsStaticUpdateController(_homeId int32) (retval262 bool, err os.Error) {
+func (p *RemoteManagerClient) IsStaticUpdateController(_homeId int32) (retval263 bool, err os.Error) {
   err = p.SendIsStaticUpdateController(_homeId)
   if err != nil { return }
   return p.RecvIsStaticUpdateController()
@@ -1823,9 +1824,9 @@ func (p *RemoteManagerClient) SendIsStaticUpdateController(_homeId int32)(err os
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsStaticUpdateController", thrift.CALL, p.SeqId)
-  args263 := NewIsStaticUpdateControllerArgs()
-  args263._homeId = _homeId
-  err = args263.Write(oprot)
+  args264 := NewIsStaticUpdateControllerArgs()
+  args264._homeId = _homeId
+  err = args264.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -1843,25 +1844,25 @@ func (p *RemoteManagerClient) RecvIsStaticUpdateController() (value bool, err os
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error265 := thrift.NewTApplicationExceptionDefault()
-    error266, err := error265.Read(iprot)
+    error266 := thrift.NewTApplicationExceptionDefault()
+    error267, err := error266.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error266
+    err = error267
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result264 := NewIsStaticUpdateControllerResult()
-  err = result264.Read(iprot)
+  result265 := NewIsStaticUpdateControllerResult()
+  err = result265.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result264.Success
+  value = result265.Success
   return
 }
 
@@ -1875,7 +1876,7 @@ func (p *RemoteManagerClient) RecvIsStaticUpdateController() (value bool, err os
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) IsBridgeController(_homeId int32) (retval267 bool, err os.Error) {
+func (p *RemoteManagerClient) IsBridgeController(_homeId int32) (retval268 bool, err os.Error) {
   err = p.SendIsBridgeController(_homeId)
   if err != nil { return }
   return p.RecvIsBridgeController()
@@ -1889,9 +1890,9 @@ func (p *RemoteManagerClient) SendIsBridgeController(_homeId int32)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsBridgeController", thrift.CALL, p.SeqId)
-  args268 := NewIsBridgeControllerArgs()
-  args268._homeId = _homeId
-  err = args268.Write(oprot)
+  args269 := NewIsBridgeControllerArgs()
+  args269._homeId = _homeId
+  err = args269.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -1909,25 +1910,25 @@ func (p *RemoteManagerClient) RecvIsBridgeController() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error270 := thrift.NewTApplicationExceptionDefault()
-    error271, err := error270.Read(iprot)
+    error271 := thrift.NewTApplicationExceptionDefault()
+    error272, err := error271.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error271
+    err = error272
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result269 := NewIsBridgeControllerResult()
-  err = result269.Read(iprot)
+  result270 := NewIsBridgeControllerResult()
+  err = result270.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result269.Success
+  value = result270.Success
   return
 }
 
@@ -1939,7 +1940,7 @@ func (p *RemoteManagerClient) RecvIsBridgeController() (value bool, err os.Error
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) GetLibraryVersion(_homeId int32) (retval272 string, err os.Error) {
+func (p *RemoteManagerClient) GetLibraryVersion(_homeId int32) (retval273 string, err os.Error) {
   err = p.SendGetLibraryVersion(_homeId)
   if err != nil { return }
   return p.RecvGetLibraryVersion()
@@ -1953,9 +1954,9 @@ func (p *RemoteManagerClient) SendGetLibraryVersion(_homeId int32)(err os.Error)
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetLibraryVersion", thrift.CALL, p.SeqId)
-  args273 := NewGetLibraryVersionArgs()
-  args273._homeId = _homeId
-  err = args273.Write(oprot)
+  args274 := NewGetLibraryVersionArgs()
+  args274._homeId = _homeId
+  err = args274.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -1973,25 +1974,25 @@ func (p *RemoteManagerClient) RecvGetLibraryVersion() (value string, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error275 := thrift.NewTApplicationExceptionDefault()
-    error276, err := error275.Read(iprot)
+    error276 := thrift.NewTApplicationExceptionDefault()
+    error277, err := error276.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error276
+    err = error277
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result274 := NewGetLibraryVersionResult()
-  err = result274.Read(iprot)
+  result275 := NewGetLibraryVersionResult()
+  err = result275.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result274.Success
+  value = result275.Success
   return
 }
 
@@ -2016,7 +2017,7 @@ func (p *RemoteManagerClient) RecvGetLibraryVersion() (value string, err os.Erro
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) GetLibraryTypeName(_homeId int32) (retval277 string, err os.Error) {
+func (p *RemoteManagerClient) GetLibraryTypeName(_homeId int32) (retval278 string, err os.Error) {
   err = p.SendGetLibraryTypeName(_homeId)
   if err != nil { return }
   return p.RecvGetLibraryTypeName()
@@ -2030,9 +2031,9 @@ func (p *RemoteManagerClient) SendGetLibraryTypeName(_homeId int32)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetLibraryTypeName", thrift.CALL, p.SeqId)
-  args278 := NewGetLibraryTypeNameArgs()
-  args278._homeId = _homeId
-  err = args278.Write(oprot)
+  args279 := NewGetLibraryTypeNameArgs()
+  args279._homeId = _homeId
+  err = args279.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2050,25 +2051,25 @@ func (p *RemoteManagerClient) RecvGetLibraryTypeName() (value string, err os.Err
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error280 := thrift.NewTApplicationExceptionDefault()
-    error281, err := error280.Read(iprot)
+    error281 := thrift.NewTApplicationExceptionDefault()
+    error282, err := error281.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error281
+    err = error282
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result279 := NewGetLibraryTypeNameResult()
-  err = result279.Read(iprot)
+  result280 := NewGetLibraryTypeNameResult()
+  err = result280.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result279.Success
+  value = result280.Success
   return
 }
 
@@ -2080,7 +2081,7 @@ func (p *RemoteManagerClient) RecvGetLibraryTypeName() (value string, err os.Err
  * Parameters:
  *  - _homeId
  */
-func (p *RemoteManagerClient) GetSendQueueCount(_homeId int32) (retval282 int32, err os.Error) {
+func (p *RemoteManagerClient) GetSendQueueCount(_homeId int32) (retval283 int32, err os.Error) {
   err = p.SendGetSendQueueCount(_homeId)
   if err != nil { return }
   return p.RecvGetSendQueueCount()
@@ -2094,9 +2095,9 @@ func (p *RemoteManagerClient) SendGetSendQueueCount(_homeId int32)(err os.Error)
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetSendQueueCount", thrift.CALL, p.SeqId)
-  args283 := NewGetSendQueueCountArgs()
-  args283._homeId = _homeId
-  err = args283.Write(oprot)
+  args284 := NewGetSendQueueCountArgs()
+  args284._homeId = _homeId
+  err = args284.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2114,32 +2115,32 @@ func (p *RemoteManagerClient) RecvGetSendQueueCount() (value int32, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error285 := thrift.NewTApplicationExceptionDefault()
-    error286, err := error285.Read(iprot)
+    error286 := thrift.NewTApplicationExceptionDefault()
+    error287, err := error286.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error286
+    err = error287
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result284 := NewGetSendQueueCountResult()
-  err = result284.Read(iprot)
+  result285 := NewGetSendQueueCountResult()
+  err = result285.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result284.Success
+  value = result285.Success
   return
 }
 
 /**
  * \brief Get the time period between polls of a node's state.
  */
-func (p *RemoteManagerClient) GetPollInterval() (retval287 int32, err os.Error) {
+func (p *RemoteManagerClient) GetPollInterval() (retval288 int32, err os.Error) {
   err = p.SendGetPollInterval()
   if err != nil { return }
   return p.RecvGetPollInterval()
@@ -2153,8 +2154,8 @@ func (p *RemoteManagerClient) SendGetPollInterval()(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetPollInterval", thrift.CALL, p.SeqId)
-  args288 := NewGetPollIntervalArgs()
-  err = args288.Write(oprot)
+  args289 := NewGetPollIntervalArgs()
+  err = args289.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2172,25 +2173,25 @@ func (p *RemoteManagerClient) RecvGetPollInterval() (value int32, err os.Error) 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error290 := thrift.NewTApplicationExceptionDefault()
-    error291, err := error290.Read(iprot)
+    error291 := thrift.NewTApplicationExceptionDefault()
+    error292, err := error291.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error291
+    err = error292
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result289 := NewGetPollIntervalResult()
-  err = result289.Read(iprot)
+  result290 := NewGetPollIntervalResult()
+  err = result290.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result289.Success
+  value = result290.Success
   return
 }
 
@@ -2222,9 +2223,9 @@ func (p *RemoteManagerClient) SendSetPollInterval(_seconds int32)(err os.Error) 
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetPollInterval", thrift.CALL, p.SeqId)
-  args293 := NewSetPollIntervalArgs()
-  args293._seconds = _seconds
-  err = args293.Write(oprot)
+  args294 := NewSetPollIntervalArgs()
+  args294._seconds = _seconds
+  err = args294.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2242,23 +2243,23 @@ func (p *RemoteManagerClient) RecvSetPollInterval() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error295 := thrift.NewTApplicationExceptionDefault()
-    error296, err := error295.Read(iprot)
+    error296 := thrift.NewTApplicationExceptionDefault()
+    error297, err := error296.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error296
+    err = error297
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result294 := NewSetPollIntervalResult()
-  err = result294.Read(iprot)
+  result295 := NewSetPollIntervalResult()
+  err = result295.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -2271,7 +2272,7 @@ func (p *RemoteManagerClient) RecvSetPollInterval() (err os.Error) {
  * Parameters:
  *  - _valueId
  */
-func (p *RemoteManagerClient) EnablePoll(_valueId *RemoteValueID) (retval297 bool, err os.Error) {
+func (p *RemoteManagerClient) EnablePoll(_valueId *RemoteValueID) (retval298 bool, err os.Error) {
   err = p.SendEnablePoll(_valueId)
   if err != nil { return }
   return p.RecvEnablePoll()
@@ -2285,9 +2286,9 @@ func (p *RemoteManagerClient) SendEnablePoll(_valueId *RemoteValueID)(err os.Err
   }
   p.SeqId++
   oprot.WriteMessageBegin("EnablePoll", thrift.CALL, p.SeqId)
-  args298 := NewEnablePollArgs()
-  args298._valueId = _valueId
-  err = args298.Write(oprot)
+  args299 := NewEnablePollArgs()
+  args299._valueId = _valueId
+  err = args299.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2305,25 +2306,25 @@ func (p *RemoteManagerClient) RecvEnablePoll() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error300 := thrift.NewTApplicationExceptionDefault()
-    error301, err := error300.Read(iprot)
+    error301 := thrift.NewTApplicationExceptionDefault()
+    error302, err := error301.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error301
+    err = error302
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result299 := NewEnablePollResult()
-  err = result299.Read(iprot)
+  result300 := NewEnablePollResult()
+  err = result300.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result299.Success
+  value = result300.Success
   return
 }
 
@@ -2335,7 +2336,7 @@ func (p *RemoteManagerClient) RecvEnablePoll() (value bool, err os.Error) {
  * Parameters:
  *  - _valueId
  */
-func (p *RemoteManagerClient) DisablePoll(_valueId *RemoteValueID) (retval302 bool, err os.Error) {
+func (p *RemoteManagerClient) DisablePoll(_valueId *RemoteValueID) (retval303 bool, err os.Error) {
   err = p.SendDisablePoll(_valueId)
   if err != nil { return }
   return p.RecvDisablePoll()
@@ -2349,9 +2350,9 @@ func (p *RemoteManagerClient) SendDisablePoll(_valueId *RemoteValueID)(err os.Er
   }
   p.SeqId++
   oprot.WriteMessageBegin("DisablePoll", thrift.CALL, p.SeqId)
-  args303 := NewDisablePollArgs()
-  args303._valueId = _valueId
-  err = args303.Write(oprot)
+  args304 := NewDisablePollArgs()
+  args304._valueId = _valueId
+  err = args304.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2369,25 +2370,25 @@ func (p *RemoteManagerClient) RecvDisablePoll() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error305 := thrift.NewTApplicationExceptionDefault()
-    error306, err := error305.Read(iprot)
+    error306 := thrift.NewTApplicationExceptionDefault()
+    error307, err := error306.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error306
+    err = error307
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result304 := NewDisablePollResult()
-  err = result304.Read(iprot)
+  result305 := NewDisablePollResult()
+  err = result305.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result304.Success
+  value = result305.Success
   return
 }
 
@@ -2399,7 +2400,7 @@ func (p *RemoteManagerClient) RecvDisablePoll() (value bool, err os.Error) {
  * Parameters:
  *  - _valueId
  */
-func (p *RemoteManagerClient) IsPolled(_valueId *RemoteValueID) (retval307 bool, err os.Error) {
+func (p *RemoteManagerClient) IsPolled(_valueId *RemoteValueID) (retval308 bool, err os.Error) {
   err = p.SendIsPolled(_valueId)
   if err != nil { return }
   return p.RecvIsPolled()
@@ -2413,9 +2414,9 @@ func (p *RemoteManagerClient) SendIsPolled(_valueId *RemoteValueID)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("isPolled", thrift.CALL, p.SeqId)
-  args308 := NewIsPolledArgs()
-  args308._valueId = _valueId
-  err = args308.Write(oprot)
+  args309 := NewIsPolledArgs()
+  args309._valueId = _valueId
+  err = args309.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2433,25 +2434,25 @@ func (p *RemoteManagerClient) RecvIsPolled() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error310 := thrift.NewTApplicationExceptionDefault()
-    error311, err := error310.Read(iprot)
+    error311 := thrift.NewTApplicationExceptionDefault()
+    error312, err := error311.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error311
+    err = error312
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result309 := NewIsPolledResult()
-  err = result309.Read(iprot)
+  result310 := NewIsPolledResult()
+  err = result310.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result309.Success
+  value = result310.Success
   return
 }
 
@@ -2470,7 +2471,7 @@ func (p *RemoteManagerClient) RecvIsPolled() (value bool, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) RefreshNodeInfo(_homeId int32, _nodeId byte) (retval312 bool, err os.Error) {
+func (p *RemoteManagerClient) RefreshNodeInfo(_homeId int32, _nodeId byte) (retval313 bool, err os.Error) {
   err = p.SendRefreshNodeInfo(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvRefreshNodeInfo()
@@ -2484,10 +2485,10 @@ func (p *RemoteManagerClient) SendRefreshNodeInfo(_homeId int32, _nodeId byte)(e
   }
   p.SeqId++
   oprot.WriteMessageBegin("RefreshNodeInfo", thrift.CALL, p.SeqId)
-  args313 := NewRefreshNodeInfoArgs()
-  args313._homeId = _homeId
-  args313._nodeId = _nodeId
-  err = args313.Write(oprot)
+  args314 := NewRefreshNodeInfoArgs()
+  args314._homeId = _homeId
+  args314._nodeId = _nodeId
+  err = args314.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2505,25 +2506,25 @@ func (p *RemoteManagerClient) RecvRefreshNodeInfo() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error315 := thrift.NewTApplicationExceptionDefault()
-    error316, err := error315.Read(iprot)
+    error316 := thrift.NewTApplicationExceptionDefault()
+    error317, err := error316.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error316
+    err = error317
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result314 := NewRefreshNodeInfoResult()
-  err = result314.Read(iprot)
+  result315 := NewRefreshNodeInfoResult()
+  err = result315.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result314.Success
+  value = result315.Success
   return
 }
 
@@ -2539,7 +2540,7 @@ func (p *RemoteManagerClient) RecvRefreshNodeInfo() (value bool, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) RequestNodeState(_homeId int32, _nodeId byte) (retval317 bool, err os.Error) {
+func (p *RemoteManagerClient) RequestNodeState(_homeId int32, _nodeId byte) (retval318 bool, err os.Error) {
   err = p.SendRequestNodeState(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvRequestNodeState()
@@ -2553,10 +2554,10 @@ func (p *RemoteManagerClient) SendRequestNodeState(_homeId int32, _nodeId byte)(
   }
   p.SeqId++
   oprot.WriteMessageBegin("RequestNodeState", thrift.CALL, p.SeqId)
-  args318 := NewRequestNodeStateArgs()
-  args318._homeId = _homeId
-  args318._nodeId = _nodeId
-  err = args318.Write(oprot)
+  args319 := NewRequestNodeStateArgs()
+  args319._homeId = _homeId
+  args319._nodeId = _nodeId
+  err = args319.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2574,25 +2575,25 @@ func (p *RemoteManagerClient) RecvRequestNodeState() (value bool, err os.Error) 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error320 := thrift.NewTApplicationExceptionDefault()
-    error321, err := error320.Read(iprot)
+    error321 := thrift.NewTApplicationExceptionDefault()
+    error322, err := error321.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error321
+    err = error322
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result319 := NewRequestNodeStateResult()
-  err = result319.Read(iprot)
+  result320 := NewRequestNodeStateResult()
+  err = result320.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result319.Success
+  value = result320.Success
   return
 }
 
@@ -2608,7 +2609,7 @@ func (p *RemoteManagerClient) RecvRequestNodeState() (value bool, err os.Error) 
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) RequestNodeDynamic(_homeId int32, _nodeId byte) (retval322 bool, err os.Error) {
+func (p *RemoteManagerClient) RequestNodeDynamic(_homeId int32, _nodeId byte) (retval323 bool, err os.Error) {
   err = p.SendRequestNodeDynamic(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvRequestNodeDynamic()
@@ -2622,10 +2623,10 @@ func (p *RemoteManagerClient) SendRequestNodeDynamic(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("RequestNodeDynamic", thrift.CALL, p.SeqId)
-  args323 := NewRequestNodeDynamicArgs()
-  args323._homeId = _homeId
-  args323._nodeId = _nodeId
-  err = args323.Write(oprot)
+  args324 := NewRequestNodeDynamicArgs()
+  args324._homeId = _homeId
+  args324._nodeId = _nodeId
+  err = args324.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2643,25 +2644,25 @@ func (p *RemoteManagerClient) RecvRequestNodeDynamic() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error325 := thrift.NewTApplicationExceptionDefault()
-    error326, err := error325.Read(iprot)
+    error326 := thrift.NewTApplicationExceptionDefault()
+    error327, err := error326.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error326
+    err = error327
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result324 := NewRequestNodeDynamicResult()
-  err = result324.Read(iprot)
+  result325 := NewRequestNodeDynamicResult()
+  err = result325.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result324.Success
+  value = result325.Success
   return
 }
 
@@ -2675,7 +2676,7 @@ func (p *RemoteManagerClient) RecvRequestNodeDynamic() (value bool, err os.Error
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) IsNodeListeningDevice(_homeId int32, _nodeId byte) (retval327 bool, err os.Error) {
+func (p *RemoteManagerClient) IsNodeListeningDevice(_homeId int32, _nodeId byte) (retval328 bool, err os.Error) {
   err = p.SendIsNodeListeningDevice(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvIsNodeListeningDevice()
@@ -2689,10 +2690,10 @@ func (p *RemoteManagerClient) SendIsNodeListeningDevice(_homeId int32, _nodeId b
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsNodeListeningDevice", thrift.CALL, p.SeqId)
-  args328 := NewIsNodeListeningDeviceArgs()
-  args328._homeId = _homeId
-  args328._nodeId = _nodeId
-  err = args328.Write(oprot)
+  args329 := NewIsNodeListeningDeviceArgs()
+  args329._homeId = _homeId
+  args329._nodeId = _nodeId
+  err = args329.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2710,25 +2711,25 @@ func (p *RemoteManagerClient) RecvIsNodeListeningDevice() (value bool, err os.Er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error330 := thrift.NewTApplicationExceptionDefault()
-    error331, err := error330.Read(iprot)
+    error331 := thrift.NewTApplicationExceptionDefault()
+    error332, err := error331.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error331
+    err = error332
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result329 := NewIsNodeListeningDeviceResult()
-  err = result329.Read(iprot)
+  result330 := NewIsNodeListeningDeviceResult()
+  err = result330.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result329.Success
+  value = result330.Success
   return
 }
 
@@ -2742,7 +2743,7 @@ func (p *RemoteManagerClient) RecvIsNodeListeningDevice() (value bool, err os.Er
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) IsNodeRoutingDevice(_homeId int32, _nodeId byte) (retval332 bool, err os.Error) {
+func (p *RemoteManagerClient) IsNodeRoutingDevice(_homeId int32, _nodeId byte) (retval333 bool, err os.Error) {
   err = p.SendIsNodeRoutingDevice(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvIsNodeRoutingDevice()
@@ -2756,10 +2757,10 @@ func (p *RemoteManagerClient) SendIsNodeRoutingDevice(_homeId int32, _nodeId byt
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsNodeRoutingDevice", thrift.CALL, p.SeqId)
-  args333 := NewIsNodeRoutingDeviceArgs()
-  args333._homeId = _homeId
-  args333._nodeId = _nodeId
-  err = args333.Write(oprot)
+  args334 := NewIsNodeRoutingDeviceArgs()
+  args334._homeId = _homeId
+  args334._nodeId = _nodeId
+  err = args334.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2777,25 +2778,25 @@ func (p *RemoteManagerClient) RecvIsNodeRoutingDevice() (value bool, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error335 := thrift.NewTApplicationExceptionDefault()
-    error336, err := error335.Read(iprot)
+    error336 := thrift.NewTApplicationExceptionDefault()
+    error337, err := error336.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error336
+    err = error337
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result334 := NewIsNodeRoutingDeviceResult()
-  err = result334.Read(iprot)
+  result335 := NewIsNodeRoutingDeviceResult()
+  err = result335.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result334.Success
+  value = result335.Success
   return
 }
 
@@ -2809,7 +2810,7 @@ func (p *RemoteManagerClient) RecvIsNodeRoutingDevice() (value bool, err os.Erro
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeMaxBaudRate(_homeId int32, _nodeId byte) (retval337 int32, err os.Error) {
+func (p *RemoteManagerClient) GetNodeMaxBaudRate(_homeId int32, _nodeId byte) (retval338 int32, err os.Error) {
   err = p.SendGetNodeMaxBaudRate(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeMaxBaudRate()
@@ -2823,10 +2824,10 @@ func (p *RemoteManagerClient) SendGetNodeMaxBaudRate(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeMaxBaudRate", thrift.CALL, p.SeqId)
-  args338 := NewGetNodeMaxBaudRateArgs()
-  args338._homeId = _homeId
-  args338._nodeId = _nodeId
-  err = args338.Write(oprot)
+  args339 := NewGetNodeMaxBaudRateArgs()
+  args339._homeId = _homeId
+  args339._nodeId = _nodeId
+  err = args339.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2844,25 +2845,25 @@ func (p *RemoteManagerClient) RecvGetNodeMaxBaudRate() (value int32, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error340 := thrift.NewTApplicationExceptionDefault()
-    error341, err := error340.Read(iprot)
+    error341 := thrift.NewTApplicationExceptionDefault()
+    error342, err := error341.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error341
+    err = error342
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result339 := NewGetNodeMaxBaudRateResult()
-  err = result339.Read(iprot)
+  result340 := NewGetNodeMaxBaudRateResult()
+  err = result340.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result339.Success
+  value = result340.Success
   return
 }
 
@@ -2876,7 +2877,7 @@ func (p *RemoteManagerClient) RecvGetNodeMaxBaudRate() (value int32, err os.Erro
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeVersion(_homeId int32, _nodeId byte) (retval342 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNodeVersion(_homeId int32, _nodeId byte) (retval343 byte, err os.Error) {
   err = p.SendGetNodeVersion(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeVersion()
@@ -2890,10 +2891,10 @@ func (p *RemoteManagerClient) SendGetNodeVersion(_homeId int32, _nodeId byte)(er
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeVersion", thrift.CALL, p.SeqId)
-  args343 := NewGetNodeVersionArgs()
-  args343._homeId = _homeId
-  args343._nodeId = _nodeId
-  err = args343.Write(oprot)
+  args344 := NewGetNodeVersionArgs()
+  args344._homeId = _homeId
+  args344._nodeId = _nodeId
+  err = args344.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2911,25 +2912,25 @@ func (p *RemoteManagerClient) RecvGetNodeVersion() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error345 := thrift.NewTApplicationExceptionDefault()
-    error346, err := error345.Read(iprot)
+    error346 := thrift.NewTApplicationExceptionDefault()
+    error347, err := error346.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error346
+    err = error347
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result344 := NewGetNodeVersionResult()
-  err = result344.Read(iprot)
+  result345 := NewGetNodeVersionResult()
+  err = result345.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result344.Success
+  value = result345.Success
   return
 }
 
@@ -2943,7 +2944,7 @@ func (p *RemoteManagerClient) RecvGetNodeVersion() (value byte, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeSecurity(_homeId int32, _nodeId byte) (retval347 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNodeSecurity(_homeId int32, _nodeId byte) (retval348 byte, err os.Error) {
   err = p.SendGetNodeSecurity(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeSecurity()
@@ -2957,10 +2958,10 @@ func (p *RemoteManagerClient) SendGetNodeSecurity(_homeId int32, _nodeId byte)(e
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeSecurity", thrift.CALL, p.SeqId)
-  args348 := NewGetNodeSecurityArgs()
-  args348._homeId = _homeId
-  args348._nodeId = _nodeId
-  err = args348.Write(oprot)
+  args349 := NewGetNodeSecurityArgs()
+  args349._homeId = _homeId
+  args349._nodeId = _nodeId
+  err = args349.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -2978,25 +2979,25 @@ func (p *RemoteManagerClient) RecvGetNodeSecurity() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error350 := thrift.NewTApplicationExceptionDefault()
-    error351, err := error350.Read(iprot)
+    error351 := thrift.NewTApplicationExceptionDefault()
+    error352, err := error351.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error351
+    err = error352
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result349 := NewGetNodeSecurityResult()
-  err = result349.Read(iprot)
+  result350 := NewGetNodeSecurityResult()
+  err = result350.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result349.Success
+  value = result350.Success
   return
 }
 
@@ -3010,7 +3011,7 @@ func (p *RemoteManagerClient) RecvGetNodeSecurity() (value byte, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeBasic(_homeId int32, _nodeId byte) (retval352 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNodeBasic(_homeId int32, _nodeId byte) (retval353 byte, err os.Error) {
   err = p.SendGetNodeBasic(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeBasic()
@@ -3024,10 +3025,10 @@ func (p *RemoteManagerClient) SendGetNodeBasic(_homeId int32, _nodeId byte)(err 
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeBasic", thrift.CALL, p.SeqId)
-  args353 := NewGetNodeBasicArgs()
-  args353._homeId = _homeId
-  args353._nodeId = _nodeId
-  err = args353.Write(oprot)
+  args354 := NewGetNodeBasicArgs()
+  args354._homeId = _homeId
+  args354._nodeId = _nodeId
+  err = args354.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3045,25 +3046,25 @@ func (p *RemoteManagerClient) RecvGetNodeBasic() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error355 := thrift.NewTApplicationExceptionDefault()
-    error356, err := error355.Read(iprot)
+    error356 := thrift.NewTApplicationExceptionDefault()
+    error357, err := error356.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error356
+    err = error357
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result354 := NewGetNodeBasicResult()
-  err = result354.Read(iprot)
+  result355 := NewGetNodeBasicResult()
+  err = result355.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result354.Success
+  value = result355.Success
   return
 }
 
@@ -3077,7 +3078,7 @@ func (p *RemoteManagerClient) RecvGetNodeBasic() (value byte, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeGeneric(_homeId int32, _nodeId byte) (retval357 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNodeGeneric(_homeId int32, _nodeId byte) (retval358 byte, err os.Error) {
   err = p.SendGetNodeGeneric(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeGeneric()
@@ -3091,10 +3092,10 @@ func (p *RemoteManagerClient) SendGetNodeGeneric(_homeId int32, _nodeId byte)(er
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeGeneric", thrift.CALL, p.SeqId)
-  args358 := NewGetNodeGenericArgs()
-  args358._homeId = _homeId
-  args358._nodeId = _nodeId
-  err = args358.Write(oprot)
+  args359 := NewGetNodeGenericArgs()
+  args359._homeId = _homeId
+  args359._nodeId = _nodeId
+  err = args359.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3112,25 +3113,25 @@ func (p *RemoteManagerClient) RecvGetNodeGeneric() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error360 := thrift.NewTApplicationExceptionDefault()
-    error361, err := error360.Read(iprot)
+    error361 := thrift.NewTApplicationExceptionDefault()
+    error362, err := error361.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error361
+    err = error362
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result359 := NewGetNodeGenericResult()
-  err = result359.Read(iprot)
+  result360 := NewGetNodeGenericResult()
+  err = result360.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result359.Success
+  value = result360.Success
   return
 }
 
@@ -3144,7 +3145,7 @@ func (p *RemoteManagerClient) RecvGetNodeGeneric() (value byte, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeSpecific(_homeId int32, _nodeId byte) (retval362 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNodeSpecific(_homeId int32, _nodeId byte) (retval363 byte, err os.Error) {
   err = p.SendGetNodeSpecific(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeSpecific()
@@ -3158,10 +3159,10 @@ func (p *RemoteManagerClient) SendGetNodeSpecific(_homeId int32, _nodeId byte)(e
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeSpecific", thrift.CALL, p.SeqId)
-  args363 := NewGetNodeSpecificArgs()
-  args363._homeId = _homeId
-  args363._nodeId = _nodeId
-  err = args363.Write(oprot)
+  args364 := NewGetNodeSpecificArgs()
+  args364._homeId = _homeId
+  args364._nodeId = _nodeId
+  err = args364.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3179,25 +3180,25 @@ func (p *RemoteManagerClient) RecvGetNodeSpecific() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error365 := thrift.NewTApplicationExceptionDefault()
-    error366, err := error365.Read(iprot)
+    error366 := thrift.NewTApplicationExceptionDefault()
+    error367, err := error366.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error366
+    err = error367
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result364 := NewGetNodeSpecificResult()
-  err = result364.Read(iprot)
+  result365 := NewGetNodeSpecificResult()
+  err = result365.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result364.Success
+  value = result365.Success
   return
 }
 
@@ -3212,7 +3213,7 @@ func (p *RemoteManagerClient) RecvGetNodeSpecific() (value byte, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeType(_homeId int32, _nodeId byte) (retval367 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeType(_homeId int32, _nodeId byte) (retval368 string, err os.Error) {
   err = p.SendGetNodeType(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeType()
@@ -3226,10 +3227,10 @@ func (p *RemoteManagerClient) SendGetNodeType(_homeId int32, _nodeId byte)(err o
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeType", thrift.CALL, p.SeqId)
-  args368 := NewGetNodeTypeArgs()
-  args368._homeId = _homeId
-  args368._nodeId = _nodeId
-  err = args368.Write(oprot)
+  args369 := NewGetNodeTypeArgs()
+  args369._homeId = _homeId
+  args369._nodeId = _nodeId
+  err = args369.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3247,25 +3248,25 @@ func (p *RemoteManagerClient) RecvGetNodeType() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error370 := thrift.NewTApplicationExceptionDefault()
-    error371, err := error370.Read(iprot)
+    error371 := thrift.NewTApplicationExceptionDefault()
+    error372, err := error371.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error371
+    err = error372
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result369 := NewGetNodeTypeResult()
-  err = result369.Read(iprot)
+  result370 := NewGetNodeTypeResult()
+  err = result370.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result369.Success
+  value = result370.Success
   return
 }
 
@@ -3280,7 +3281,7 @@ func (p *RemoteManagerClient) RecvGetNodeType() (value string, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeNeighbors(_homeId int32, _nodeId byte) (retval372 *UInt32ListByte, err os.Error) {
+func (p *RemoteManagerClient) GetNodeNeighbors(_homeId int32, _nodeId byte) (retval373 *UInt32ListByte, err os.Error) {
   err = p.SendGetNodeNeighbors(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeNeighbors()
@@ -3294,10 +3295,10 @@ func (p *RemoteManagerClient) SendGetNodeNeighbors(_homeId int32, _nodeId byte)(
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeNeighbors", thrift.CALL, p.SeqId)
-  args373 := NewGetNodeNeighborsArgs()
-  args373._homeId = _homeId
-  args373._nodeId = _nodeId
-  err = args373.Write(oprot)
+  args374 := NewGetNodeNeighborsArgs()
+  args374._homeId = _homeId
+  args374._nodeId = _nodeId
+  err = args374.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3315,25 +3316,25 @@ func (p *RemoteManagerClient) RecvGetNodeNeighbors() (value *UInt32ListByte, err
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error375 := thrift.NewTApplicationExceptionDefault()
-    error376, err := error375.Read(iprot)
+    error376 := thrift.NewTApplicationExceptionDefault()
+    error377, err := error376.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error376
+    err = error377
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result374 := NewGetNodeNeighborsResult()
-  err = result374.Read(iprot)
+  result375 := NewGetNodeNeighborsResult()
+  err = result375.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result374.Success
+  value = result375.Success
   return
 }
 
@@ -3354,7 +3355,7 @@ func (p *RemoteManagerClient) RecvGetNodeNeighbors() (value *UInt32ListByte, err
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeManufacturerName(_homeId int32, _nodeId byte) (retval377 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeManufacturerName(_homeId int32, _nodeId byte) (retval378 string, err os.Error) {
   err = p.SendGetNodeManufacturerName(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeManufacturerName()
@@ -3368,10 +3369,10 @@ func (p *RemoteManagerClient) SendGetNodeManufacturerName(_homeId int32, _nodeId
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeManufacturerName", thrift.CALL, p.SeqId)
-  args378 := NewGetNodeManufacturerNameArgs()
-  args378._homeId = _homeId
-  args378._nodeId = _nodeId
-  err = args378.Write(oprot)
+  args379 := NewGetNodeManufacturerNameArgs()
+  args379._homeId = _homeId
+  args379._nodeId = _nodeId
+  err = args379.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3389,25 +3390,25 @@ func (p *RemoteManagerClient) RecvGetNodeManufacturerName() (value string, err o
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error380 := thrift.NewTApplicationExceptionDefault()
-    error381, err := error380.Read(iprot)
+    error381 := thrift.NewTApplicationExceptionDefault()
+    error382, err := error381.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error381
+    err = error382
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result379 := NewGetNodeManufacturerNameResult()
-  err = result379.Read(iprot)
+  result380 := NewGetNodeManufacturerNameResult()
+  err = result380.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result379.Success
+  value = result380.Success
   return
 }
 
@@ -3428,7 +3429,7 @@ func (p *RemoteManagerClient) RecvGetNodeManufacturerName() (value string, err o
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeProductName(_homeId int32, _nodeId byte) (retval382 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeProductName(_homeId int32, _nodeId byte) (retval383 string, err os.Error) {
   err = p.SendGetNodeProductName(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeProductName()
@@ -3442,10 +3443,10 @@ func (p *RemoteManagerClient) SendGetNodeProductName(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeProductName", thrift.CALL, p.SeqId)
-  args383 := NewGetNodeProductNameArgs()
-  args383._homeId = _homeId
-  args383._nodeId = _nodeId
-  err = args383.Write(oprot)
+  args384 := NewGetNodeProductNameArgs()
+  args384._homeId = _homeId
+  args384._nodeId = _nodeId
+  err = args384.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3463,25 +3464,25 @@ func (p *RemoteManagerClient) RecvGetNodeProductName() (value string, err os.Err
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error385 := thrift.NewTApplicationExceptionDefault()
-    error386, err := error385.Read(iprot)
+    error386 := thrift.NewTApplicationExceptionDefault()
+    error387, err := error386.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error386
+    err = error387
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result384 := NewGetNodeProductNameResult()
-  err = result384.Read(iprot)
+  result385 := NewGetNodeProductNameResult()
+  err = result385.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result384.Success
+  value = result385.Success
   return
 }
 
@@ -3501,7 +3502,7 @@ func (p *RemoteManagerClient) RecvGetNodeProductName() (value string, err os.Err
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeName(_homeId int32, _nodeId byte) (retval387 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeName(_homeId int32, _nodeId byte) (retval388 string, err os.Error) {
   err = p.SendGetNodeName(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeName()
@@ -3515,10 +3516,10 @@ func (p *RemoteManagerClient) SendGetNodeName(_homeId int32, _nodeId byte)(err o
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeName", thrift.CALL, p.SeqId)
-  args388 := NewGetNodeNameArgs()
-  args388._homeId = _homeId
-  args388._nodeId = _nodeId
-  err = args388.Write(oprot)
+  args389 := NewGetNodeNameArgs()
+  args389._homeId = _homeId
+  args389._nodeId = _nodeId
+  err = args389.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3536,25 +3537,25 @@ func (p *RemoteManagerClient) RecvGetNodeName() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error390 := thrift.NewTApplicationExceptionDefault()
-    error391, err := error390.Read(iprot)
+    error391 := thrift.NewTApplicationExceptionDefault()
+    error392, err := error391.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error391
+    err = error392
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result389 := NewGetNodeNameResult()
-  err = result389.Read(iprot)
+  result390 := NewGetNodeNameResult()
+  err = result390.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result389.Success
+  value = result390.Success
   return
 }
 
@@ -3573,7 +3574,7 @@ func (p *RemoteManagerClient) RecvGetNodeName() (value string, err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeLocation(_homeId int32, _nodeId byte) (retval392 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeLocation(_homeId int32, _nodeId byte) (retval393 string, err os.Error) {
   err = p.SendGetNodeLocation(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeLocation()
@@ -3587,10 +3588,10 @@ func (p *RemoteManagerClient) SendGetNodeLocation(_homeId int32, _nodeId byte)(e
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeLocation", thrift.CALL, p.SeqId)
-  args393 := NewGetNodeLocationArgs()
-  args393._homeId = _homeId
-  args393._nodeId = _nodeId
-  err = args393.Write(oprot)
+  args394 := NewGetNodeLocationArgs()
+  args394._homeId = _homeId
+  args394._nodeId = _nodeId
+  err = args394.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3608,25 +3609,25 @@ func (p *RemoteManagerClient) RecvGetNodeLocation() (value string, err os.Error)
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error395 := thrift.NewTApplicationExceptionDefault()
-    error396, err := error395.Read(iprot)
+    error396 := thrift.NewTApplicationExceptionDefault()
+    error397, err := error396.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error396
+    err = error397
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result394 := NewGetNodeLocationResult()
-  err = result394.Read(iprot)
+  result395 := NewGetNodeLocationResult()
+  err = result395.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result394.Success
+  value = result395.Success
   return
 }
 
@@ -3647,7 +3648,7 @@ func (p *RemoteManagerClient) RecvGetNodeLocation() (value string, err os.Error)
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeManufacturerId(_homeId int32, _nodeId byte) (retval397 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeManufacturerId(_homeId int32, _nodeId byte) (retval398 string, err os.Error) {
   err = p.SendGetNodeManufacturerId(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeManufacturerId()
@@ -3661,10 +3662,10 @@ func (p *RemoteManagerClient) SendGetNodeManufacturerId(_homeId int32, _nodeId b
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeManufacturerId", thrift.CALL, p.SeqId)
-  args398 := NewGetNodeManufacturerIdArgs()
-  args398._homeId = _homeId
-  args398._nodeId = _nodeId
-  err = args398.Write(oprot)
+  args399 := NewGetNodeManufacturerIdArgs()
+  args399._homeId = _homeId
+  args399._nodeId = _nodeId
+  err = args399.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3682,25 +3683,25 @@ func (p *RemoteManagerClient) RecvGetNodeManufacturerId() (value string, err os.
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error400 := thrift.NewTApplicationExceptionDefault()
-    error401, err := error400.Read(iprot)
+    error401 := thrift.NewTApplicationExceptionDefault()
+    error402, err := error401.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error401
+    err = error402
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result399 := NewGetNodeManufacturerIdResult()
-  err = result399.Read(iprot)
+  result400 := NewGetNodeManufacturerIdResult()
+  err = result400.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result399.Success
+  value = result400.Success
   return
 }
 
@@ -3721,7 +3722,7 @@ func (p *RemoteManagerClient) RecvGetNodeManufacturerId() (value string, err os.
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeProductType(_homeId int32, _nodeId byte) (retval402 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeProductType(_homeId int32, _nodeId byte) (retval403 string, err os.Error) {
   err = p.SendGetNodeProductType(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeProductType()
@@ -3735,10 +3736,10 @@ func (p *RemoteManagerClient) SendGetNodeProductType(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeProductType", thrift.CALL, p.SeqId)
-  args403 := NewGetNodeProductTypeArgs()
-  args403._homeId = _homeId
-  args403._nodeId = _nodeId
-  err = args403.Write(oprot)
+  args404 := NewGetNodeProductTypeArgs()
+  args404._homeId = _homeId
+  args404._nodeId = _nodeId
+  err = args404.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3756,25 +3757,25 @@ func (p *RemoteManagerClient) RecvGetNodeProductType() (value string, err os.Err
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error405 := thrift.NewTApplicationExceptionDefault()
-    error406, err := error405.Read(iprot)
+    error406 := thrift.NewTApplicationExceptionDefault()
+    error407, err := error406.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error406
+    err = error407
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result404 := NewGetNodeProductTypeResult()
-  err = result404.Read(iprot)
+  result405 := NewGetNodeProductTypeResult()
+  err = result405.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result404.Success
+  value = result405.Success
   return
 }
 
@@ -3795,7 +3796,7 @@ func (p *RemoteManagerClient) RecvGetNodeProductType() (value string, err os.Err
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNodeProductId(_homeId int32, _nodeId byte) (retval407 string, err os.Error) {
+func (p *RemoteManagerClient) GetNodeProductId(_homeId int32, _nodeId byte) (retval408 string, err os.Error) {
   err = p.SendGetNodeProductId(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNodeProductId()
@@ -3809,10 +3810,10 @@ func (p *RemoteManagerClient) SendGetNodeProductId(_homeId int32, _nodeId byte)(
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeProductId", thrift.CALL, p.SeqId)
-  args408 := NewGetNodeProductIdArgs()
-  args408._homeId = _homeId
-  args408._nodeId = _nodeId
-  err = args408.Write(oprot)
+  args409 := NewGetNodeProductIdArgs()
+  args409._homeId = _homeId
+  args409._nodeId = _nodeId
+  err = args409.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3830,25 +3831,25 @@ func (p *RemoteManagerClient) RecvGetNodeProductId() (value string, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error410 := thrift.NewTApplicationExceptionDefault()
-    error411, err := error410.Read(iprot)
+    error411 := thrift.NewTApplicationExceptionDefault()
+    error412, err := error411.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error411
+    err = error412
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result409 := NewGetNodeProductIdResult()
-  err = result409.Read(iprot)
+  result410 := NewGetNodeProductIdResult()
+  err = result410.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result409.Success
+  value = result410.Success
   return
 }
 
@@ -3884,11 +3885,11 @@ func (p *RemoteManagerClient) SendSetNodeManufacturerName(_homeId int32, _nodeId
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeManufacturerName", thrift.CALL, p.SeqId)
-  args413 := NewSetNodeManufacturerNameArgs()
-  args413._homeId = _homeId
-  args413._nodeId = _nodeId
-  args413._manufacturerName = _manufacturerName
-  err = args413.Write(oprot)
+  args414 := NewSetNodeManufacturerNameArgs()
+  args414._homeId = _homeId
+  args414._nodeId = _nodeId
+  args414._manufacturerName = _manufacturerName
+  err = args414.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3906,23 +3907,23 @@ func (p *RemoteManagerClient) RecvSetNodeManufacturerName() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error415 := thrift.NewTApplicationExceptionDefault()
-    error416, err := error415.Read(iprot)
+    error416 := thrift.NewTApplicationExceptionDefault()
+    error417, err := error416.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error416
+    err = error417
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result414 := NewSetNodeManufacturerNameResult()
-  err = result414.Read(iprot)
+  result415 := NewSetNodeManufacturerNameResult()
+  err = result415.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -3959,11 +3960,11 @@ func (p *RemoteManagerClient) SendSetNodeProductName(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeProductName", thrift.CALL, p.SeqId)
-  args418 := NewSetNodeProductNameArgs()
-  args418._homeId = _homeId
-  args418._nodeId = _nodeId
-  args418._productName = _productName
-  err = args418.Write(oprot)
+  args419 := NewSetNodeProductNameArgs()
+  args419._homeId = _homeId
+  args419._nodeId = _nodeId
+  args419._productName = _productName
+  err = args419.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -3981,23 +3982,23 @@ func (p *RemoteManagerClient) RecvSetNodeProductName() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error420 := thrift.NewTApplicationExceptionDefault()
-    error421, err := error420.Read(iprot)
+    error421 := thrift.NewTApplicationExceptionDefault()
+    error422, err := error421.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error421
+    err = error422
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result419 := NewSetNodeProductNameResult()
-  err = result419.Read(iprot)
+  result420 := NewSetNodeProductNameResult()
+  err = result420.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4034,11 +4035,11 @@ func (p *RemoteManagerClient) SendSetNodeName(_homeId int32, _nodeId byte, _node
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeName", thrift.CALL, p.SeqId)
-  args423 := NewSetNodeNameArgs()
-  args423._homeId = _homeId
-  args423._nodeId = _nodeId
-  args423._nodeName = _nodeName
-  err = args423.Write(oprot)
+  args424 := NewSetNodeNameArgs()
+  args424._homeId = _homeId
+  args424._nodeId = _nodeId
+  args424._nodeName = _nodeName
+  err = args424.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4056,23 +4057,23 @@ func (p *RemoteManagerClient) RecvSetNodeName() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error425 := thrift.NewTApplicationExceptionDefault()
-    error426, err := error425.Read(iprot)
+    error426 := thrift.NewTApplicationExceptionDefault()
+    error427, err := error426.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error426
+    err = error427
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result424 := NewSetNodeNameResult()
-  err = result424.Read(iprot)
+  result425 := NewSetNodeNameResult()
+  err = result425.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4108,11 +4109,11 @@ func (p *RemoteManagerClient) SendSetNodeLocation(_homeId int32, _nodeId byte, _
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeLocation", thrift.CALL, p.SeqId)
-  args428 := NewSetNodeLocationArgs()
-  args428._homeId = _homeId
-  args428._nodeId = _nodeId
-  args428._location = _location
-  err = args428.Write(oprot)
+  args429 := NewSetNodeLocationArgs()
+  args429._homeId = _homeId
+  args429._nodeId = _nodeId
+  args429._location = _location
+  err = args429.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4130,23 +4131,23 @@ func (p *RemoteManagerClient) RecvSetNodeLocation() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error430 := thrift.NewTApplicationExceptionDefault()
-    error431, err := error430.Read(iprot)
+    error431 := thrift.NewTApplicationExceptionDefault()
+    error432, err := error431.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error431
+    err = error432
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result429 := NewSetNodeLocationResult()
-  err = result429.Read(iprot)
+  result430 := NewSetNodeLocationResult()
+  err = result430.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4179,10 +4180,10 @@ func (p *RemoteManagerClient) SendSetNodeOn(_homeId int32, _nodeId byte)(err os.
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeOn", thrift.CALL, p.SeqId)
-  args433 := NewSetNodeOnArgs()
-  args433._homeId = _homeId
-  args433._nodeId = _nodeId
-  err = args433.Write(oprot)
+  args434 := NewSetNodeOnArgs()
+  args434._homeId = _homeId
+  args434._nodeId = _nodeId
+  err = args434.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4200,23 +4201,23 @@ func (p *RemoteManagerClient) RecvSetNodeOn() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error435 := thrift.NewTApplicationExceptionDefault()
-    error436, err := error435.Read(iprot)
+    error436 := thrift.NewTApplicationExceptionDefault()
+    error437, err := error436.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error436
+    err = error437
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result434 := NewSetNodeOnResult()
-  err = result434.Read(iprot)
+  result435 := NewSetNodeOnResult()
+  err = result435.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4248,10 +4249,10 @@ func (p *RemoteManagerClient) SendSetNodeOff(_homeId int32, _nodeId byte)(err os
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeOff", thrift.CALL, p.SeqId)
-  args438 := NewSetNodeOffArgs()
-  args438._homeId = _homeId
-  args438._nodeId = _nodeId
-  err = args438.Write(oprot)
+  args439 := NewSetNodeOffArgs()
+  args439._homeId = _homeId
+  args439._nodeId = _nodeId
+  err = args439.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4269,23 +4270,23 @@ func (p *RemoteManagerClient) RecvSetNodeOff() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error440 := thrift.NewTApplicationExceptionDefault()
-    error441, err := error440.Read(iprot)
+    error441 := thrift.NewTApplicationExceptionDefault()
+    error442, err := error441.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error441
+    err = error442
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result439 := NewSetNodeOffResult()
-  err = result439.Read(iprot)
+  result440 := NewSetNodeOffResult()
+  err = result440.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4320,11 +4321,11 @@ func (p *RemoteManagerClient) SendSetNodeLevel(_homeId int32, _nodeId byte, _lev
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetNodeLevel", thrift.CALL, p.SeqId)
-  args443 := NewSetNodeLevelArgs()
-  args443._homeId = _homeId
-  args443._nodeId = _nodeId
-  args443._level = _level
-  err = args443.Write(oprot)
+  args444 := NewSetNodeLevelArgs()
+  args444._homeId = _homeId
+  args444._nodeId = _nodeId
+  args444._level = _level
+  err = args444.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4342,23 +4343,23 @@ func (p *RemoteManagerClient) RecvSetNodeLevel() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error445 := thrift.NewTApplicationExceptionDefault()
-    error446, err := error445.Read(iprot)
+    error446 := thrift.NewTApplicationExceptionDefault()
+    error447, err := error446.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error446
+    err = error447
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result444 := NewSetNodeLevelResult()
-  err = result444.Read(iprot)
+  result445 := NewSetNodeLevelResult()
+  err = result445.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4373,7 +4374,7 @@ func (p *RemoteManagerClient) RecvSetNodeLevel() (err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) IsNodeInfoReceived(_homeId int32, _nodeId byte) (retval447 bool, err os.Error) {
+func (p *RemoteManagerClient) IsNodeInfoReceived(_homeId int32, _nodeId byte) (retval448 bool, err os.Error) {
   err = p.SendIsNodeInfoReceived(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvIsNodeInfoReceived()
@@ -4387,10 +4388,10 @@ func (p *RemoteManagerClient) SendIsNodeInfoReceived(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsNodeInfoReceived", thrift.CALL, p.SeqId)
-  args448 := NewIsNodeInfoReceivedArgs()
-  args448._homeId = _homeId
-  args448._nodeId = _nodeId
-  err = args448.Write(oprot)
+  args449 := NewIsNodeInfoReceivedArgs()
+  args449._homeId = _homeId
+  args449._nodeId = _nodeId
+  err = args449.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4408,25 +4409,25 @@ func (p *RemoteManagerClient) RecvIsNodeInfoReceived() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error450 := thrift.NewTApplicationExceptionDefault()
-    error451, err := error450.Read(iprot)
+    error451 := thrift.NewTApplicationExceptionDefault()
+    error452, err := error451.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error451
+    err = error452
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result449 := NewIsNodeInfoReceivedResult()
-  err = result449.Read(iprot)
+  result450 := NewIsNodeInfoReceivedResult()
+  err = result450.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result449.Success
+  value = result450.Success
   return
 }
 
@@ -4442,7 +4443,7 @@ func (p *RemoteManagerClient) RecvIsNodeInfoReceived() (value bool, err os.Error
  *  - _nodeId
  *  - _commandClassId
  */
-func (p *RemoteManagerClient) GetNodeClassInformation(_homeId int32, _nodeId byte, _commandClassId byte) (retval452 *BoolGetNodeClassInformation, err os.Error) {
+func (p *RemoteManagerClient) GetNodeClassInformation(_homeId int32, _nodeId byte, _commandClassId byte) (retval453 *BoolGetNodeClassInformation, err os.Error) {
   err = p.SendGetNodeClassInformation(_homeId, _nodeId, _commandClassId)
   if err != nil { return }
   return p.RecvGetNodeClassInformation()
@@ -4456,11 +4457,11 @@ func (p *RemoteManagerClient) SendGetNodeClassInformation(_homeId int32, _nodeId
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNodeClassInformation", thrift.CALL, p.SeqId)
-  args453 := NewGetNodeClassInformationArgs()
-  args453._homeId = _homeId
-  args453._nodeId = _nodeId
-  args453._commandClassId = _commandClassId
-  err = args453.Write(oprot)
+  args454 := NewGetNodeClassInformationArgs()
+  args454._homeId = _homeId
+  args454._nodeId = _nodeId
+  args454._commandClassId = _commandClassId
+  err = args454.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4478,25 +4479,25 @@ func (p *RemoteManagerClient) RecvGetNodeClassInformation() (value *BoolGetNodeC
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error455 := thrift.NewTApplicationExceptionDefault()
-    error456, err := error455.Read(iprot)
+    error456 := thrift.NewTApplicationExceptionDefault()
+    error457, err := error456.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error456
+    err = error457
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result454 := NewGetNodeClassInformationResult()
-  err = result454.Read(iprot)
+  result455 := NewGetNodeClassInformationResult()
+  err = result455.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result454.Success
+  value = result455.Success
   return
 }
 
@@ -4509,7 +4510,7 @@ func (p *RemoteManagerClient) RecvGetNodeClassInformation() (value *BoolGetNodeC
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueLabel(_id *RemoteValueID) (retval457 string, err os.Error) {
+func (p *RemoteManagerClient) GetValueLabel(_id *RemoteValueID) (retval458 string, err os.Error) {
   err = p.SendGetValueLabel(_id)
   if err != nil { return }
   return p.RecvGetValueLabel()
@@ -4523,9 +4524,9 @@ func (p *RemoteManagerClient) SendGetValueLabel(_id *RemoteValueID)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueLabel", thrift.CALL, p.SeqId)
-  args458 := NewGetValueLabelArgs()
-  args458._id = _id
-  err = args458.Write(oprot)
+  args459 := NewGetValueLabelArgs()
+  args459._id = _id
+  err = args459.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4543,25 +4544,25 @@ func (p *RemoteManagerClient) RecvGetValueLabel() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error460 := thrift.NewTApplicationExceptionDefault()
-    error461, err := error460.Read(iprot)
+    error461 := thrift.NewTApplicationExceptionDefault()
+    error462, err := error461.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error461
+    err = error462
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result459 := NewGetValueLabelResult()
-  err = result459.Read(iprot)
+  result460 := NewGetValueLabelResult()
+  err = result460.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result459.Success
+  value = result460.Success
   return
 }
 
@@ -4589,10 +4590,10 @@ func (p *RemoteManagerClient) SendSetValueLabel(_id *RemoteValueID, _value strin
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValueLabel", thrift.CALL, p.SeqId)
-  args463 := NewSetValueLabelArgs()
-  args463._id = _id
-  args463._value = _value
-  err = args463.Write(oprot)
+  args464 := NewSetValueLabelArgs()
+  args464._id = _id
+  args464._value = _value
+  err = args464.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4610,23 +4611,23 @@ func (p *RemoteManagerClient) RecvSetValueLabel() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error465 := thrift.NewTApplicationExceptionDefault()
-    error466, err := error465.Read(iprot)
+    error466 := thrift.NewTApplicationExceptionDefault()
+    error467, err := error466.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error466
+    err = error467
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result464 := NewSetValueLabelResult()
-  err = result464.Read(iprot)
+  result465 := NewSetValueLabelResult()
+  err = result465.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4640,7 +4641,7 @@ func (p *RemoteManagerClient) RecvSetValueLabel() (err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueUnits(_id *RemoteValueID) (retval467 string, err os.Error) {
+func (p *RemoteManagerClient) GetValueUnits(_id *RemoteValueID) (retval468 string, err os.Error) {
   err = p.SendGetValueUnits(_id)
   if err != nil { return }
   return p.RecvGetValueUnits()
@@ -4654,9 +4655,9 @@ func (p *RemoteManagerClient) SendGetValueUnits(_id *RemoteValueID)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueUnits", thrift.CALL, p.SeqId)
-  args468 := NewGetValueUnitsArgs()
-  args468._id = _id
-  err = args468.Write(oprot)
+  args469 := NewGetValueUnitsArgs()
+  args469._id = _id
+  err = args469.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4674,25 +4675,25 @@ func (p *RemoteManagerClient) RecvGetValueUnits() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error470 := thrift.NewTApplicationExceptionDefault()
-    error471, err := error470.Read(iprot)
+    error471 := thrift.NewTApplicationExceptionDefault()
+    error472, err := error471.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error471
+    err = error472
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result469 := NewGetValueUnitsResult()
-  err = result469.Read(iprot)
+  result470 := NewGetValueUnitsResult()
+  err = result470.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result469.Success
+  value = result470.Success
   return
 }
 
@@ -4720,10 +4721,10 @@ func (p *RemoteManagerClient) SendSetValueUnits(_id *RemoteValueID, _value strin
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValueUnits", thrift.CALL, p.SeqId)
-  args473 := NewSetValueUnitsArgs()
-  args473._id = _id
-  args473._value = _value
-  err = args473.Write(oprot)
+  args474 := NewSetValueUnitsArgs()
+  args474._id = _id
+  args474._value = _value
+  err = args474.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4741,23 +4742,23 @@ func (p *RemoteManagerClient) RecvSetValueUnits() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error475 := thrift.NewTApplicationExceptionDefault()
-    error476, err := error475.Read(iprot)
+    error476 := thrift.NewTApplicationExceptionDefault()
+    error477, err := error476.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error476
+    err = error477
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result474 := NewSetValueUnitsResult()
-  err = result474.Read(iprot)
+  result475 := NewSetValueUnitsResult()
+  err = result475.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4771,7 +4772,7 @@ func (p *RemoteManagerClient) RecvSetValueUnits() (err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueHelp(_id *RemoteValueID) (retval477 string, err os.Error) {
+func (p *RemoteManagerClient) GetValueHelp(_id *RemoteValueID) (retval478 string, err os.Error) {
   err = p.SendGetValueHelp(_id)
   if err != nil { return }
   return p.RecvGetValueHelp()
@@ -4785,9 +4786,9 @@ func (p *RemoteManagerClient) SendGetValueHelp(_id *RemoteValueID)(err os.Error)
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueHelp", thrift.CALL, p.SeqId)
-  args478 := NewGetValueHelpArgs()
-  args478._id = _id
-  err = args478.Write(oprot)
+  args479 := NewGetValueHelpArgs()
+  args479._id = _id
+  err = args479.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4805,25 +4806,25 @@ func (p *RemoteManagerClient) RecvGetValueHelp() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error480 := thrift.NewTApplicationExceptionDefault()
-    error481, err := error480.Read(iprot)
+    error481 := thrift.NewTApplicationExceptionDefault()
+    error482, err := error481.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error481
+    err = error482
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result479 := NewGetValueHelpResult()
-  err = result479.Read(iprot)
+  result480 := NewGetValueHelpResult()
+  err = result480.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result479.Success
+  value = result480.Success
   return
 }
 
@@ -4851,10 +4852,10 @@ func (p *RemoteManagerClient) SendSetValueHelp(_id *RemoteValueID, _value string
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValueHelp", thrift.CALL, p.SeqId)
-  args483 := NewSetValueHelpArgs()
-  args483._id = _id
-  args483._value = _value
-  err = args483.Write(oprot)
+  args484 := NewSetValueHelpArgs()
+  args484._id = _id
+  args484._value = _value
+  err = args484.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4872,23 +4873,23 @@ func (p *RemoteManagerClient) RecvSetValueHelp() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error485 := thrift.NewTApplicationExceptionDefault()
-    error486, err := error485.Read(iprot)
+    error486 := thrift.NewTApplicationExceptionDefault()
+    error487, err := error486.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error486
+    err = error487
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result484 := NewSetValueHelpResult()
-  err = result484.Read(iprot)
+  result485 := NewSetValueHelpResult()
+  err = result485.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -4902,7 +4903,7 @@ func (p *RemoteManagerClient) RecvSetValueHelp() (err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueMin(_id *RemoteValueID) (retval487 int32, err os.Error) {
+func (p *RemoteManagerClient) GetValueMin(_id *RemoteValueID) (retval488 int32, err os.Error) {
   err = p.SendGetValueMin(_id)
   if err != nil { return }
   return p.RecvGetValueMin()
@@ -4916,9 +4917,9 @@ func (p *RemoteManagerClient) SendGetValueMin(_id *RemoteValueID)(err os.Error) 
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueMin", thrift.CALL, p.SeqId)
-  args488 := NewGetValueMinArgs()
-  args488._id = _id
-  err = args488.Write(oprot)
+  args489 := NewGetValueMinArgs()
+  args489._id = _id
+  err = args489.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -4936,25 +4937,25 @@ func (p *RemoteManagerClient) RecvGetValueMin() (value int32, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error490 := thrift.NewTApplicationExceptionDefault()
-    error491, err := error490.Read(iprot)
+    error491 := thrift.NewTApplicationExceptionDefault()
+    error492, err := error491.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error491
+    err = error492
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result489 := NewGetValueMinResult()
-  err = result489.Read(iprot)
+  result490 := NewGetValueMinResult()
+  err = result490.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result489.Success
+  value = result490.Success
   return
 }
 
@@ -4967,7 +4968,7 @@ func (p *RemoteManagerClient) RecvGetValueMin() (value int32, err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueMax(_id *RemoteValueID) (retval492 int32, err os.Error) {
+func (p *RemoteManagerClient) GetValueMax(_id *RemoteValueID) (retval493 int32, err os.Error) {
   err = p.SendGetValueMax(_id)
   if err != nil { return }
   return p.RecvGetValueMax()
@@ -4981,9 +4982,9 @@ func (p *RemoteManagerClient) SendGetValueMax(_id *RemoteValueID)(err os.Error) 
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueMax", thrift.CALL, p.SeqId)
-  args493 := NewGetValueMaxArgs()
-  args493._id = _id
-  err = args493.Write(oprot)
+  args494 := NewGetValueMaxArgs()
+  args494._id = _id
+  err = args494.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5001,25 +5002,25 @@ func (p *RemoteManagerClient) RecvGetValueMax() (value int32, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error495 := thrift.NewTApplicationExceptionDefault()
-    error496, err := error495.Read(iprot)
+    error496 := thrift.NewTApplicationExceptionDefault()
+    error497, err := error496.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error496
+    err = error497
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result494 := NewGetValueMaxResult()
-  err = result494.Read(iprot)
+  result495 := NewGetValueMaxResult()
+  err = result495.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result494.Success
+  value = result495.Success
   return
 }
 
@@ -5032,7 +5033,7 @@ func (p *RemoteManagerClient) RecvGetValueMax() (value int32, err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) IsValueReadOnly(_id *RemoteValueID) (retval497 bool, err os.Error) {
+func (p *RemoteManagerClient) IsValueReadOnly(_id *RemoteValueID) (retval498 bool, err os.Error) {
   err = p.SendIsValueReadOnly(_id)
   if err != nil { return }
   return p.RecvIsValueReadOnly()
@@ -5046,9 +5047,9 @@ func (p *RemoteManagerClient) SendIsValueReadOnly(_id *RemoteValueID)(err os.Err
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsValueReadOnly", thrift.CALL, p.SeqId)
-  args498 := NewIsValueReadOnlyArgs()
-  args498._id = _id
-  err = args498.Write(oprot)
+  args499 := NewIsValueReadOnlyArgs()
+  args499._id = _id
+  err = args499.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5066,25 +5067,25 @@ func (p *RemoteManagerClient) RecvIsValueReadOnly() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error500 := thrift.NewTApplicationExceptionDefault()
-    error501, err := error500.Read(iprot)
+    error501 := thrift.NewTApplicationExceptionDefault()
+    error502, err := error501.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error501
+    err = error502
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result499 := NewIsValueReadOnlyResult()
-  err = result499.Read(iprot)
+  result500 := NewIsValueReadOnlyResult()
+  err = result500.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result499.Success
+  value = result500.Success
   return
 }
 
@@ -5097,7 +5098,7 @@ func (p *RemoteManagerClient) RecvIsValueReadOnly() (value bool, err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) IsValueWriteOnly(_id *RemoteValueID) (retval502 bool, err os.Error) {
+func (p *RemoteManagerClient) IsValueWriteOnly(_id *RemoteValueID) (retval503 bool, err os.Error) {
   err = p.SendIsValueWriteOnly(_id)
   if err != nil { return }
   return p.RecvIsValueWriteOnly()
@@ -5111,9 +5112,9 @@ func (p *RemoteManagerClient) SendIsValueWriteOnly(_id *RemoteValueID)(err os.Er
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsValueWriteOnly", thrift.CALL, p.SeqId)
-  args503 := NewIsValueWriteOnlyArgs()
-  args503._id = _id
-  err = args503.Write(oprot)
+  args504 := NewIsValueWriteOnlyArgs()
+  args504._id = _id
+  err = args504.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5131,25 +5132,25 @@ func (p *RemoteManagerClient) RecvIsValueWriteOnly() (value bool, err os.Error) 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error505 := thrift.NewTApplicationExceptionDefault()
-    error506, err := error505.Read(iprot)
+    error506 := thrift.NewTApplicationExceptionDefault()
+    error507, err := error506.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error506
+    err = error507
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result504 := NewIsValueWriteOnlyResult()
-  err = result504.Read(iprot)
+  result505 := NewIsValueWriteOnlyResult()
+  err = result505.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result504.Success
+  value = result505.Success
   return
 }
 
@@ -5162,7 +5163,7 @@ func (p *RemoteManagerClient) RecvIsValueWriteOnly() (value bool, err os.Error) 
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) IsValueSet(_id *RemoteValueID) (retval507 bool, err os.Error) {
+func (p *RemoteManagerClient) IsValueSet(_id *RemoteValueID) (retval508 bool, err os.Error) {
   err = p.SendIsValueSet(_id)
   if err != nil { return }
   return p.RecvIsValueSet()
@@ -5176,9 +5177,9 @@ func (p *RemoteManagerClient) SendIsValueSet(_id *RemoteValueID)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("IsValueSet", thrift.CALL, p.SeqId)
-  args508 := NewIsValueSetArgs()
-  args508._id = _id
-  err = args508.Write(oprot)
+  args509 := NewIsValueSetArgs()
+  args509._id = _id
+  err = args509.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5196,25 +5197,25 @@ func (p *RemoteManagerClient) RecvIsValueSet() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error510 := thrift.NewTApplicationExceptionDefault()
-    error511, err := error510.Read(iprot)
+    error511 := thrift.NewTApplicationExceptionDefault()
+    error512, err := error511.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error511
+    err = error512
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result509 := NewIsValueSetResult()
-  err = result509.Read(iprot)
+  result510 := NewIsValueSetResult()
+  err = result510.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result509.Success
+  value = result510.Success
   return
 }
 
@@ -5228,7 +5229,7 @@ func (p *RemoteManagerClient) RecvIsValueSet() (value bool, err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueAsBool(_id *RemoteValueID) (retval512 *BoolBool, err os.Error) {
+func (p *RemoteManagerClient) GetValueAsBool(_id *RemoteValueID) (retval513 *BoolBool, err os.Error) {
   err = p.SendGetValueAsBool(_id)
   if err != nil { return }
   return p.RecvGetValueAsBool()
@@ -5242,9 +5243,9 @@ func (p *RemoteManagerClient) SendGetValueAsBool(_id *RemoteValueID)(err os.Erro
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueAsBool", thrift.CALL, p.SeqId)
-  args513 := NewGetValueAsBoolArgs()
-  args513._id = _id
-  err = args513.Write(oprot)
+  args514 := NewGetValueAsBoolArgs()
+  args514._id = _id
+  err = args514.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5262,25 +5263,25 @@ func (p *RemoteManagerClient) RecvGetValueAsBool() (value *BoolBool, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error515 := thrift.NewTApplicationExceptionDefault()
-    error516, err := error515.Read(iprot)
+    error516 := thrift.NewTApplicationExceptionDefault()
+    error517, err := error516.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error516
+    err = error517
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result514 := NewGetValueAsBoolResult()
-  err = result514.Read(iprot)
+  result515 := NewGetValueAsBoolResult()
+  err = result515.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result514.Success
+  value = result515.Success
   return
 }
 
@@ -5294,7 +5295,7 @@ func (p *RemoteManagerClient) RecvGetValueAsBool() (value *BoolBool, err os.Erro
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueAsByte(_id *RemoteValueID) (retval517 *BoolUInt8, err os.Error) {
+func (p *RemoteManagerClient) GetValueAsByte(_id *RemoteValueID) (retval518 *BoolUInt8, err os.Error) {
   err = p.SendGetValueAsByte(_id)
   if err != nil { return }
   return p.RecvGetValueAsByte()
@@ -5308,9 +5309,9 @@ func (p *RemoteManagerClient) SendGetValueAsByte(_id *RemoteValueID)(err os.Erro
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueAsByte", thrift.CALL, p.SeqId)
-  args518 := NewGetValueAsByteArgs()
-  args518._id = _id
-  err = args518.Write(oprot)
+  args519 := NewGetValueAsByteArgs()
+  args519._id = _id
+  err = args519.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5328,25 +5329,25 @@ func (p *RemoteManagerClient) RecvGetValueAsByte() (value *BoolUInt8, err os.Err
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error520 := thrift.NewTApplicationExceptionDefault()
-    error521, err := error520.Read(iprot)
+    error521 := thrift.NewTApplicationExceptionDefault()
+    error522, err := error521.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error521
+    err = error522
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result519 := NewGetValueAsByteResult()
-  err = result519.Read(iprot)
+  result520 := NewGetValueAsByteResult()
+  err = result520.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result519.Success
+  value = result520.Success
   return
 }
 
@@ -5360,7 +5361,7 @@ func (p *RemoteManagerClient) RecvGetValueAsByte() (value *BoolUInt8, err os.Err
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueAsFloat(_id *RemoteValueID) (retval522 *BoolFloat, err os.Error) {
+func (p *RemoteManagerClient) GetValueAsFloat(_id *RemoteValueID) (retval523 *BoolFloat, err os.Error) {
   err = p.SendGetValueAsFloat(_id)
   if err != nil { return }
   return p.RecvGetValueAsFloat()
@@ -5374,9 +5375,9 @@ func (p *RemoteManagerClient) SendGetValueAsFloat(_id *RemoteValueID)(err os.Err
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueAsFloat", thrift.CALL, p.SeqId)
-  args523 := NewGetValueAsFloatArgs()
-  args523._id = _id
-  err = args523.Write(oprot)
+  args524 := NewGetValueAsFloatArgs()
+  args524._id = _id
+  err = args524.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5394,25 +5395,25 @@ func (p *RemoteManagerClient) RecvGetValueAsFloat() (value *BoolFloat, err os.Er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error525 := thrift.NewTApplicationExceptionDefault()
-    error526, err := error525.Read(iprot)
+    error526 := thrift.NewTApplicationExceptionDefault()
+    error527, err := error526.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error526
+    err = error527
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result524 := NewGetValueAsFloatResult()
-  err = result524.Read(iprot)
+  result525 := NewGetValueAsFloatResult()
+  err = result525.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result524.Success
+  value = result525.Success
   return
 }
 
@@ -5426,7 +5427,7 @@ func (p *RemoteManagerClient) RecvGetValueAsFloat() (value *BoolFloat, err os.Er
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueAsInt(_id *RemoteValueID) (retval527 *BoolInt, err os.Error) {
+func (p *RemoteManagerClient) GetValueAsInt(_id *RemoteValueID) (retval528 *BoolInt, err os.Error) {
   err = p.SendGetValueAsInt(_id)
   if err != nil { return }
   return p.RecvGetValueAsInt()
@@ -5440,9 +5441,9 @@ func (p *RemoteManagerClient) SendGetValueAsInt(_id *RemoteValueID)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueAsInt", thrift.CALL, p.SeqId)
-  args528 := NewGetValueAsIntArgs()
-  args528._id = _id
-  err = args528.Write(oprot)
+  args529 := NewGetValueAsIntArgs()
+  args529._id = _id
+  err = args529.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5460,25 +5461,25 @@ func (p *RemoteManagerClient) RecvGetValueAsInt() (value *BoolInt, err os.Error)
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error530 := thrift.NewTApplicationExceptionDefault()
-    error531, err := error530.Read(iprot)
+    error531 := thrift.NewTApplicationExceptionDefault()
+    error532, err := error531.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error531
+    err = error532
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result529 := NewGetValueAsIntResult()
-  err = result529.Read(iprot)
+  result530 := NewGetValueAsIntResult()
+  err = result530.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result529.Success
+  value = result530.Success
   return
 }
 
@@ -5492,7 +5493,7 @@ func (p *RemoteManagerClient) RecvGetValueAsInt() (value *BoolInt, err os.Error)
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueAsShort(_id *RemoteValueID) (retval532 *BoolInt16, err os.Error) {
+func (p *RemoteManagerClient) GetValueAsShort(_id *RemoteValueID) (retval533 *BoolInt16, err os.Error) {
   err = p.SendGetValueAsShort(_id)
   if err != nil { return }
   return p.RecvGetValueAsShort()
@@ -5506,9 +5507,9 @@ func (p *RemoteManagerClient) SendGetValueAsShort(_id *RemoteValueID)(err os.Err
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueAsShort", thrift.CALL, p.SeqId)
-  args533 := NewGetValueAsShortArgs()
-  args533._id = _id
-  err = args533.Write(oprot)
+  args534 := NewGetValueAsShortArgs()
+  args534._id = _id
+  err = args534.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5526,25 +5527,25 @@ func (p *RemoteManagerClient) RecvGetValueAsShort() (value *BoolInt16, err os.Er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error535 := thrift.NewTApplicationExceptionDefault()
-    error536, err := error535.Read(iprot)
+    error536 := thrift.NewTApplicationExceptionDefault()
+    error537, err := error536.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error536
+    err = error537
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result534 := NewGetValueAsShortResult()
-  err = result534.Read(iprot)
+  result535 := NewGetValueAsShortResult()
+  err = result535.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result534.Success
+  value = result535.Success
   return
 }
 
@@ -5559,7 +5560,7 @@ func (p *RemoteManagerClient) RecvGetValueAsShort() (value *BoolInt16, err os.Er
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueAsString(_id *RemoteValueID) (retval537 *BoolString, err os.Error) {
+func (p *RemoteManagerClient) GetValueAsString(_id *RemoteValueID) (retval538 *BoolString, err os.Error) {
   err = p.SendGetValueAsString(_id)
   if err != nil { return }
   return p.RecvGetValueAsString()
@@ -5573,9 +5574,9 @@ func (p *RemoteManagerClient) SendGetValueAsString(_id *RemoteValueID)(err os.Er
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueAsString", thrift.CALL, p.SeqId)
-  args538 := NewGetValueAsStringArgs()
-  args538._id = _id
-  err = args538.Write(oprot)
+  args539 := NewGetValueAsStringArgs()
+  args539._id = _id
+  err = args539.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5593,25 +5594,25 @@ func (p *RemoteManagerClient) RecvGetValueAsString() (value *BoolString, err os.
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error540 := thrift.NewTApplicationExceptionDefault()
-    error541, err := error540.Read(iprot)
+    error541 := thrift.NewTApplicationExceptionDefault()
+    error542, err := error541.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error541
+    err = error542
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result539 := NewGetValueAsStringResult()
-  err = result539.Read(iprot)
+  result540 := NewGetValueAsStringResult()
+  err = result540.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result539.Success
+  value = result540.Success
   return
 }
 
@@ -5625,7 +5626,7 @@ func (p *RemoteManagerClient) RecvGetValueAsString() (value *BoolString, err os.
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueListSelectionString(_id *RemoteValueID) (retval542 *BoolString, err os.Error) {
+func (p *RemoteManagerClient) GetValueListSelectionString(_id *RemoteValueID) (retval543 *BoolString, err os.Error) {
   err = p.SendGetValueListSelectionString(_id)
   if err != nil { return }
   return p.RecvGetValueListSelectionString()
@@ -5639,9 +5640,9 @@ func (p *RemoteManagerClient) SendGetValueListSelectionString(_id *RemoteValueID
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueListSelection_String", thrift.CALL, p.SeqId)
-  args543 := NewGetValueListSelectionStringArgs()
-  args543._id = _id
-  err = args543.Write(oprot)
+  args544 := NewGetValueListSelectionStringArgs()
+  args544._id = _id
+  err = args544.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5659,25 +5660,25 @@ func (p *RemoteManagerClient) RecvGetValueListSelectionString() (value *BoolStri
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error545 := thrift.NewTApplicationExceptionDefault()
-    error546, err := error545.Read(iprot)
+    error546 := thrift.NewTApplicationExceptionDefault()
+    error547, err := error546.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error546
+    err = error547
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result544 := NewGetValueListSelectionStringResult()
-  err = result544.Read(iprot)
+  result545 := NewGetValueListSelectionStringResult()
+  err = result545.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result544.Success
+  value = result545.Success
   return
 }
 
@@ -5691,7 +5692,7 @@ func (p *RemoteManagerClient) RecvGetValueListSelectionString() (value *BoolStri
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueListSelectionInt32(_id *RemoteValueID) (retval547 *BoolInt, err os.Error) {
+func (p *RemoteManagerClient) GetValueListSelectionInt32(_id *RemoteValueID) (retval548 *BoolInt, err os.Error) {
   err = p.SendGetValueListSelectionInt32(_id)
   if err != nil { return }
   return p.RecvGetValueListSelectionInt32()
@@ -5705,9 +5706,9 @@ func (p *RemoteManagerClient) SendGetValueListSelectionInt32(_id *RemoteValueID)
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueListSelection_Int32", thrift.CALL, p.SeqId)
-  args548 := NewGetValueListSelectionInt32Args()
-  args548._id = _id
-  err = args548.Write(oprot)
+  args549 := NewGetValueListSelectionInt32Args()
+  args549._id = _id
+  err = args549.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5725,25 +5726,25 @@ func (p *RemoteManagerClient) RecvGetValueListSelectionInt32() (value *BoolInt, 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error550 := thrift.NewTApplicationExceptionDefault()
-    error551, err := error550.Read(iprot)
+    error551 := thrift.NewTApplicationExceptionDefault()
+    error552, err := error551.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error551
+    err = error552
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result549 := NewGetValueListSelectionInt32Result()
-  err = result549.Read(iprot)
+  result550 := NewGetValueListSelectionInt32Result()
+  err = result550.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result549.Success
+  value = result550.Success
   return
 }
 
@@ -5757,7 +5758,7 @@ func (p *RemoteManagerClient) RecvGetValueListSelectionInt32() (value *BoolInt, 
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueListItems(_id *RemoteValueID) (retval552 *BoolListString, err os.Error) {
+func (p *RemoteManagerClient) GetValueListItems(_id *RemoteValueID) (retval553 *BoolListString, err os.Error) {
   err = p.SendGetValueListItems(_id)
   if err != nil { return }
   return p.RecvGetValueListItems()
@@ -5771,9 +5772,9 @@ func (p *RemoteManagerClient) SendGetValueListItems(_id *RemoteValueID)(err os.E
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueListItems", thrift.CALL, p.SeqId)
-  args553 := NewGetValueListItemsArgs()
-  args553._id = _id
-  err = args553.Write(oprot)
+  args554 := NewGetValueListItemsArgs()
+  args554._id = _id
+  err = args554.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5791,25 +5792,25 @@ func (p *RemoteManagerClient) RecvGetValueListItems() (value *BoolListString, er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error555 := thrift.NewTApplicationExceptionDefault()
-    error556, err := error555.Read(iprot)
+    error556 := thrift.NewTApplicationExceptionDefault()
+    error557, err := error556.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error556
+    err = error557
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result554 := NewGetValueListItemsResult()
-  err = result554.Read(iprot)
+  result555 := NewGetValueListItemsResult()
+  err = result555.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result554.Success
+  value = result555.Success
   return
 }
 
@@ -5823,7 +5824,7 @@ func (p *RemoteManagerClient) RecvGetValueListItems() (value *BoolListString, er
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetValueFloatPrecision(_id *RemoteValueID) (retval557 *BoolUInt8, err os.Error) {
+func (p *RemoteManagerClient) GetValueFloatPrecision(_id *RemoteValueID) (retval558 *BoolUInt8, err os.Error) {
   err = p.SendGetValueFloatPrecision(_id)
   if err != nil { return }
   return p.RecvGetValueFloatPrecision()
@@ -5837,9 +5838,9 @@ func (p *RemoteManagerClient) SendGetValueFloatPrecision(_id *RemoteValueID)(err
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetValueFloatPrecision", thrift.CALL, p.SeqId)
-  args558 := NewGetValueFloatPrecisionArgs()
-  args558._id = _id
-  err = args558.Write(oprot)
+  args559 := NewGetValueFloatPrecisionArgs()
+  args559._id = _id
+  err = args559.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5857,25 +5858,25 @@ func (p *RemoteManagerClient) RecvGetValueFloatPrecision() (value *BoolUInt8, er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error560 := thrift.NewTApplicationExceptionDefault()
-    error561, err := error560.Read(iprot)
+    error561 := thrift.NewTApplicationExceptionDefault()
+    error562, err := error561.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error561
+    err = error562
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result559 := NewGetValueFloatPrecisionResult()
-  err = result559.Read(iprot)
+  result560 := NewGetValueFloatPrecisionResult()
+  err = result560.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result559.Success
+  value = result560.Success
   return
 }
 
@@ -5892,7 +5893,7 @@ func (p *RemoteManagerClient) RecvGetValueFloatPrecision() (value *BoolUInt8, er
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueBool(_id *RemoteValueID, _value bool) (retval562 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueBool(_id *RemoteValueID, _value bool) (retval563 bool, err os.Error) {
   err = p.SendSetValueBool(_id, _value)
   if err != nil { return }
   return p.RecvSetValueBool()
@@ -5906,10 +5907,10 @@ func (p *RemoteManagerClient) SendSetValueBool(_id *RemoteValueID, _value bool)(
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValue_Bool", thrift.CALL, p.SeqId)
-  args563 := NewSetValueBoolArgs()
-  args563._id = _id
-  args563._value = _value
-  err = args563.Write(oprot)
+  args564 := NewSetValueBoolArgs()
+  args564._id = _id
+  args564._value = _value
+  err = args564.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5927,25 +5928,25 @@ func (p *RemoteManagerClient) RecvSetValueBool() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error565 := thrift.NewTApplicationExceptionDefault()
-    error566, err := error565.Read(iprot)
+    error566 := thrift.NewTApplicationExceptionDefault()
+    error567, err := error566.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error566
+    err = error567
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result564 := NewSetValueBoolResult()
-  err = result564.Read(iprot)
+  result565 := NewSetValueBoolResult()
+  err = result565.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result564.Success
+  value = result565.Success
   return
 }
 
@@ -5962,7 +5963,7 @@ func (p *RemoteManagerClient) RecvSetValueBool() (value bool, err os.Error) {
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueUInt8(_id *RemoteValueID, _value byte) (retval567 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueUInt8(_id *RemoteValueID, _value byte) (retval568 bool, err os.Error) {
   err = p.SendSetValueUInt8(_id, _value)
   if err != nil { return }
   return p.RecvSetValueUInt8()
@@ -5976,10 +5977,10 @@ func (p *RemoteManagerClient) SendSetValueUInt8(_id *RemoteValueID, _value byte)
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValue_UInt8", thrift.CALL, p.SeqId)
-  args568 := NewSetValueUInt8Args()
-  args568._id = _id
-  args568._value = _value
-  err = args568.Write(oprot)
+  args569 := NewSetValueUInt8Args()
+  args569._id = _id
+  args569._value = _value
+  err = args569.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -5997,25 +5998,25 @@ func (p *RemoteManagerClient) RecvSetValueUInt8() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error570 := thrift.NewTApplicationExceptionDefault()
-    error571, err := error570.Read(iprot)
+    error571 := thrift.NewTApplicationExceptionDefault()
+    error572, err := error571.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error571
+    err = error572
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result569 := NewSetValueUInt8Result()
-  err = result569.Read(iprot)
+  result570 := NewSetValueUInt8Result()
+  err = result570.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result569.Success
+  value = result570.Success
   return
 }
 
@@ -6033,7 +6034,7 @@ func (p *RemoteManagerClient) RecvSetValueUInt8() (value bool, err os.Error) {
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueFloat(_id *RemoteValueID, _value float64) (retval572 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueFloat(_id *RemoteValueID, _value float64) (retval573 bool, err os.Error) {
   err = p.SendSetValueFloat(_id, _value)
   if err != nil { return }
   return p.RecvSetValueFloat()
@@ -6047,10 +6048,10 @@ func (p *RemoteManagerClient) SendSetValueFloat(_id *RemoteValueID, _value float
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValue_Float", thrift.CALL, p.SeqId)
-  args573 := NewSetValueFloatArgs()
-  args573._id = _id
-  args573._value = _value
-  err = args573.Write(oprot)
+  args574 := NewSetValueFloatArgs()
+  args574._id = _id
+  args574._value = _value
+  err = args574.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6068,25 +6069,25 @@ func (p *RemoteManagerClient) RecvSetValueFloat() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error575 := thrift.NewTApplicationExceptionDefault()
-    error576, err := error575.Read(iprot)
+    error576 := thrift.NewTApplicationExceptionDefault()
+    error577, err := error576.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error576
+    err = error577
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result574 := NewSetValueFloatResult()
-  err = result574.Read(iprot)
+  result575 := NewSetValueFloatResult()
+  err = result575.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result574.Success
+  value = result575.Success
   return
 }
 
@@ -6103,7 +6104,7 @@ func (p *RemoteManagerClient) RecvSetValueFloat() (value bool, err os.Error) {
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueInt32(_id *RemoteValueID, _value int32) (retval577 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueInt32(_id *RemoteValueID, _value int32) (retval578 bool, err os.Error) {
   err = p.SendSetValueInt32(_id, _value)
   if err != nil { return }
   return p.RecvSetValueInt32()
@@ -6117,10 +6118,10 @@ func (p *RemoteManagerClient) SendSetValueInt32(_id *RemoteValueID, _value int32
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValue_Int32", thrift.CALL, p.SeqId)
-  args578 := NewSetValueInt32Args()
-  args578._id = _id
-  args578._value = _value
-  err = args578.Write(oprot)
+  args579 := NewSetValueInt32Args()
+  args579._id = _id
+  args579._value = _value
+  err = args579.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6138,25 +6139,25 @@ func (p *RemoteManagerClient) RecvSetValueInt32() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error580 := thrift.NewTApplicationExceptionDefault()
-    error581, err := error580.Read(iprot)
+    error581 := thrift.NewTApplicationExceptionDefault()
+    error582, err := error581.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error581
+    err = error582
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result579 := NewSetValueInt32Result()
-  err = result579.Read(iprot)
+  result580 := NewSetValueInt32Result()
+  err = result580.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result579.Success
+  value = result580.Success
   return
 }
 
@@ -6173,7 +6174,7 @@ func (p *RemoteManagerClient) RecvSetValueInt32() (value bool, err os.Error) {
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueInt16(_id *RemoteValueID, _value int16) (retval582 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueInt16(_id *RemoteValueID, _value int16) (retval583 bool, err os.Error) {
   err = p.SendSetValueInt16(_id, _value)
   if err != nil { return }
   return p.RecvSetValueInt16()
@@ -6187,10 +6188,10 @@ func (p *RemoteManagerClient) SendSetValueInt16(_id *RemoteValueID, _value int16
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValue_Int16", thrift.CALL, p.SeqId)
-  args583 := NewSetValueInt16Args()
-  args583._id = _id
-  args583._value = _value
-  err = args583.Write(oprot)
+  args584 := NewSetValueInt16Args()
+  args584._id = _id
+  args584._value = _value
+  err = args584.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6208,25 +6209,25 @@ func (p *RemoteManagerClient) RecvSetValueInt16() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error585 := thrift.NewTApplicationExceptionDefault()
-    error586, err := error585.Read(iprot)
+    error586 := thrift.NewTApplicationExceptionDefault()
+    error587, err := error586.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error586
+    err = error587
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result584 := NewSetValueInt16Result()
-  err = result584.Read(iprot)
+  result585 := NewSetValueInt16Result()
+  err = result585.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result584.Success
+  value = result585.Success
   return
 }
 
@@ -6243,7 +6244,7 @@ func (p *RemoteManagerClient) RecvSetValueInt16() (value bool, err os.Error) {
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueString(_id *RemoteValueID, _value string) (retval587 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueString(_id *RemoteValueID, _value string) (retval588 bool, err os.Error) {
   err = p.SendSetValueString(_id, _value)
   if err != nil { return }
   return p.RecvSetValueString()
@@ -6257,10 +6258,10 @@ func (p *RemoteManagerClient) SendSetValueString(_id *RemoteValueID, _value stri
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValue_String", thrift.CALL, p.SeqId)
-  args588 := NewSetValueStringArgs()
-  args588._id = _id
-  args588._value = _value
-  err = args588.Write(oprot)
+  args589 := NewSetValueStringArgs()
+  args589._id = _id
+  args589._value = _value
+  err = args589.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6278,25 +6279,25 @@ func (p *RemoteManagerClient) RecvSetValueString() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error590 := thrift.NewTApplicationExceptionDefault()
-    error591, err := error590.Read(iprot)
+    error591 := thrift.NewTApplicationExceptionDefault()
+    error592, err := error591.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error591
+    err = error592
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result589 := NewSetValueStringResult()
-  err = result589.Read(iprot)
+  result590 := NewSetValueStringResult()
+  err = result590.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result589.Success
+  value = result590.Success
   return
 }
 
@@ -6314,7 +6315,7 @@ func (p *RemoteManagerClient) RecvSetValueString() (value bool, err os.Error) {
  *  - _id
  *  - _selectedItem
  */
-func (p *RemoteManagerClient) SetValueListSelection(_id *RemoteValueID, _selectedItem string) (retval592 bool, err os.Error) {
+func (p *RemoteManagerClient) SetValueListSelection(_id *RemoteValueID, _selectedItem string) (retval593 bool, err os.Error) {
   err = p.SendSetValueListSelection(_id, _selectedItem)
   if err != nil { return }
   return p.RecvSetValueListSelection()
@@ -6328,10 +6329,10 @@ func (p *RemoteManagerClient) SendSetValueListSelection(_id *RemoteValueID, _sel
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetValueListSelection", thrift.CALL, p.SeqId)
-  args593 := NewSetValueListSelectionArgs()
-  args593._id = _id
-  args593._selectedItem = _selectedItem
-  err = args593.Write(oprot)
+  args594 := NewSetValueListSelectionArgs()
+  args594._id = _id
+  args594._selectedItem = _selectedItem
+  err = args594.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6349,25 +6350,25 @@ func (p *RemoteManagerClient) RecvSetValueListSelection() (value bool, err os.Er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error595 := thrift.NewTApplicationExceptionDefault()
-    error596, err := error595.Read(iprot)
+    error596 := thrift.NewTApplicationExceptionDefault()
+    error597, err := error596.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error596
+    err = error597
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result594 := NewSetValueListSelectionResult()
-  err = result594.Read(iprot)
+  result595 := NewSetValueListSelectionResult()
+  err = result595.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result594.Success
+  value = result595.Success
   return
 }
 
@@ -6380,7 +6381,7 @@ func (p *RemoteManagerClient) RecvSetValueListSelection() (value bool, err os.Er
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) PressButton(_id *RemoteValueID) (retval597 bool, err os.Error) {
+func (p *RemoteManagerClient) PressButton(_id *RemoteValueID) (retval598 bool, err os.Error) {
   err = p.SendPressButton(_id)
   if err != nil { return }
   return p.RecvPressButton()
@@ -6394,9 +6395,9 @@ func (p *RemoteManagerClient) SendPressButton(_id *RemoteValueID)(err os.Error) 
   }
   p.SeqId++
   oprot.WriteMessageBegin("PressButton", thrift.CALL, p.SeqId)
-  args598 := NewPressButtonArgs()
-  args598._id = _id
-  err = args598.Write(oprot)
+  args599 := NewPressButtonArgs()
+  args599._id = _id
+  err = args599.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6414,25 +6415,25 @@ func (p *RemoteManagerClient) RecvPressButton() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error600 := thrift.NewTApplicationExceptionDefault()
-    error601, err := error600.Read(iprot)
+    error601 := thrift.NewTApplicationExceptionDefault()
+    error602, err := error601.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error601
+    err = error602
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result599 := NewPressButtonResult()
-  err = result599.Read(iprot)
+  result600 := NewPressButtonResult()
+  err = result600.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result599.Success
+  value = result600.Success
   return
 }
 
@@ -6445,7 +6446,7 @@ func (p *RemoteManagerClient) RecvPressButton() (value bool, err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) ReleaseButton(_id *RemoteValueID) (retval602 bool, err os.Error) {
+func (p *RemoteManagerClient) ReleaseButton(_id *RemoteValueID) (retval603 bool, err os.Error) {
   err = p.SendReleaseButton(_id)
   if err != nil { return }
   return p.RecvReleaseButton()
@@ -6459,9 +6460,9 @@ func (p *RemoteManagerClient) SendReleaseButton(_id *RemoteValueID)(err os.Error
   }
   p.SeqId++
   oprot.WriteMessageBegin("ReleaseButton", thrift.CALL, p.SeqId)
-  args603 := NewReleaseButtonArgs()
-  args603._id = _id
-  err = args603.Write(oprot)
+  args604 := NewReleaseButtonArgs()
+  args604._id = _id
+  err = args604.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6479,25 +6480,25 @@ func (p *RemoteManagerClient) RecvReleaseButton() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error605 := thrift.NewTApplicationExceptionDefault()
-    error606, err := error605.Read(iprot)
+    error606 := thrift.NewTApplicationExceptionDefault()
+    error607, err := error606.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error606
+    err = error607
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result604 := NewReleaseButtonResult()
-  err = result604.Read(iprot)
+  result605 := NewReleaseButtonResult()
+  err = result605.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result604.Success
+  value = result605.Success
   return
 }
 
@@ -6509,7 +6510,7 @@ func (p *RemoteManagerClient) RecvReleaseButton() (value bool, err os.Error) {
  * Parameters:
  *  - _id
  */
-func (p *RemoteManagerClient) GetNumSwitchPoints(_id *RemoteValueID) (retval607 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNumSwitchPoints(_id *RemoteValueID) (retval608 byte, err os.Error) {
   err = p.SendGetNumSwitchPoints(_id)
   if err != nil { return }
   return p.RecvGetNumSwitchPoints()
@@ -6523,9 +6524,9 @@ func (p *RemoteManagerClient) SendGetNumSwitchPoints(_id *RemoteValueID)(err os.
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNumSwitchPoints", thrift.CALL, p.SeqId)
-  args608 := NewGetNumSwitchPointsArgs()
-  args608._id = _id
-  err = args608.Write(oprot)
+  args609 := NewGetNumSwitchPointsArgs()
+  args609._id = _id
+  err = args609.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6543,25 +6544,25 @@ func (p *RemoteManagerClient) RecvGetNumSwitchPoints() (value byte, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error610 := thrift.NewTApplicationExceptionDefault()
-    error611, err := error610.Read(iprot)
+    error611 := thrift.NewTApplicationExceptionDefault()
+    error612, err := error611.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error611
+    err = error612
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result609 := NewGetNumSwitchPointsResult()
-  err = result609.Read(iprot)
+  result610 := NewGetNumSwitchPointsResult()
+  err = result610.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result609.Success
+  value = result610.Success
   return
 }
 
@@ -6587,7 +6588,7 @@ func (p *RemoteManagerClient) RecvGetNumSwitchPoints() (value byte, err os.Error
  *  - _minutes
  *  - _setback
  */
-func (p *RemoteManagerClient) SetSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte, _setback byte) (retval612 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte, _setback byte) (retval613 bool, err os.Error) {
   err = p.SendSetSwitchPoint(_id, _hours, _minutes, _setback)
   if err != nil { return }
   return p.RecvSetSwitchPoint()
@@ -6601,12 +6602,12 @@ func (p *RemoteManagerClient) SendSetSwitchPoint(_id *RemoteValueID, _hours byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSwitchPoint", thrift.CALL, p.SeqId)
-  args613 := NewSetSwitchPointArgs()
-  args613._id = _id
-  args613._hours = _hours
-  args613._minutes = _minutes
-  args613._setback = _setback
-  err = args613.Write(oprot)
+  args614 := NewSetSwitchPointArgs()
+  args614._id = _id
+  args614._hours = _hours
+  args614._minutes = _minutes
+  args614._setback = _setback
+  err = args614.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6624,25 +6625,25 @@ func (p *RemoteManagerClient) RecvSetSwitchPoint() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error615 := thrift.NewTApplicationExceptionDefault()
-    error616, err := error615.Read(iprot)
+    error616 := thrift.NewTApplicationExceptionDefault()
+    error617, err := error616.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error616
+    err = error617
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result614 := NewSetSwitchPointResult()
-  err = result614.Read(iprot)
+  result615 := NewSetSwitchPointResult()
+  err = result615.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result614.Success
+  value = result615.Success
   return
 }
 
@@ -6663,7 +6664,7 @@ func (p *RemoteManagerClient) RecvSetSwitchPoint() (value bool, err os.Error) {
  *  - _hours
  *  - _minutes
  */
-func (p *RemoteManagerClient) RemoveSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte) (retval617 bool, err os.Error) {
+func (p *RemoteManagerClient) RemoveSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte) (retval618 bool, err os.Error) {
   err = p.SendRemoveSwitchPoint(_id, _hours, _minutes)
   if err != nil { return }
   return p.RecvRemoveSwitchPoint()
@@ -6677,11 +6678,11 @@ func (p *RemoteManagerClient) SendRemoveSwitchPoint(_id *RemoteValueID, _hours b
   }
   p.SeqId++
   oprot.WriteMessageBegin("RemoveSwitchPoint", thrift.CALL, p.SeqId)
-  args618 := NewRemoveSwitchPointArgs()
-  args618._id = _id
-  args618._hours = _hours
-  args618._minutes = _minutes
-  err = args618.Write(oprot)
+  args619 := NewRemoveSwitchPointArgs()
+  args619._id = _id
+  args619._hours = _hours
+  args619._minutes = _minutes
+  err = args619.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6699,25 +6700,25 @@ func (p *RemoteManagerClient) RecvRemoveSwitchPoint() (value bool, err os.Error)
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error620 := thrift.NewTApplicationExceptionDefault()
-    error621, err := error620.Read(iprot)
+    error621 := thrift.NewTApplicationExceptionDefault()
+    error622, err := error621.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error621
+    err = error622
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result619 := NewRemoveSwitchPointResult()
-  err = result619.Read(iprot)
+  result620 := NewRemoveSwitchPointResult()
+  err = result620.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result619.Success
+  value = result620.Success
   return
 }
 
@@ -6743,9 +6744,9 @@ func (p *RemoteManagerClient) SendClearSwitchPoints(_id *RemoteValueID)(err os.E
   }
   p.SeqId++
   oprot.WriteMessageBegin("ClearSwitchPoints", thrift.CALL, p.SeqId)
-  args623 := NewClearSwitchPointsArgs()
-  args623._id = _id
-  err = args623.Write(oprot)
+  args624 := NewClearSwitchPointsArgs()
+  args624._id = _id
+  err = args624.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6763,23 +6764,23 @@ func (p *RemoteManagerClient) RecvClearSwitchPoints() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error625 := thrift.NewTApplicationExceptionDefault()
-    error626, err := error625.Read(iprot)
+    error626 := thrift.NewTApplicationExceptionDefault()
+    error627, err := error626.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error626
+    err = error627
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result624 := NewClearSwitchPointsResult()
-  err = result624.Read(iprot)
+  result625 := NewClearSwitchPointsResult()
+  err = result625.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -6802,7 +6803,7 @@ func (p *RemoteManagerClient) RecvClearSwitchPoints() (err os.Error) {
  *  - _id
  *  - _idx
  */
-func (p *RemoteManagerClient) GetSwitchPoint(_id *RemoteValueID, _idx byte) (retval627 *GetSwitchPointReturnStruct, err os.Error) {
+func (p *RemoteManagerClient) GetSwitchPoint(_id *RemoteValueID, _idx byte) (retval628 *GetSwitchPointReturnStruct, err os.Error) {
   err = p.SendGetSwitchPoint(_id, _idx)
   if err != nil { return }
   return p.RecvGetSwitchPoint()
@@ -6816,10 +6817,10 @@ func (p *RemoteManagerClient) SendGetSwitchPoint(_id *RemoteValueID, _idx byte)(
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetSwitchPoint", thrift.CALL, p.SeqId)
-  args628 := NewGetSwitchPointArgs()
-  args628._id = _id
-  args628._idx = _idx
-  err = args628.Write(oprot)
+  args629 := NewGetSwitchPointArgs()
+  args629._id = _id
+  args629._idx = _idx
+  err = args629.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6837,25 +6838,25 @@ func (p *RemoteManagerClient) RecvGetSwitchPoint() (value *GetSwitchPointReturnS
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error630 := thrift.NewTApplicationExceptionDefault()
-    error631, err := error630.Read(iprot)
+    error631 := thrift.NewTApplicationExceptionDefault()
+    error632, err := error631.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error631
+    err = error632
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result629 := NewGetSwitchPointResult()
-  err = result629.Read(iprot)
+  result630 := NewGetSwitchPointResult()
+  err = result630.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result629.Success
+  value = result630.Success
   return
 }
 
@@ -6880,9 +6881,9 @@ func (p *RemoteManagerClient) SendSwitchAllOn(_homeId int32)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("SwitchAllOn", thrift.CALL, p.SeqId)
-  args633 := NewSwitchAllOnArgs()
-  args633._homeId = _homeId
-  err = args633.Write(oprot)
+  args634 := NewSwitchAllOnArgs()
+  args634._homeId = _homeId
+  err = args634.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6900,23 +6901,23 @@ func (p *RemoteManagerClient) RecvSwitchAllOn() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error635 := thrift.NewTApplicationExceptionDefault()
-    error636, err := error635.Read(iprot)
+    error636 := thrift.NewTApplicationExceptionDefault()
+    error637, err := error636.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error636
+    err = error637
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result634 := NewSwitchAllOnResult()
-  err = result634.Read(iprot)
+  result635 := NewSwitchAllOnResult()
+  err = result635.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -6942,9 +6943,9 @@ func (p *RemoteManagerClient) SendSwitchAllOff(_homeId int32)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("SwitchAllOff", thrift.CALL, p.SeqId)
-  args638 := NewSwitchAllOffArgs()
-  args638._homeId = _homeId
-  err = args638.Write(oprot)
+  args639 := NewSwitchAllOffArgs()
+  args639._homeId = _homeId
+  err = args639.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -6962,23 +6963,23 @@ func (p *RemoteManagerClient) RecvSwitchAllOff() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error640 := thrift.NewTApplicationExceptionDefault()
-    error641, err := error640.Read(iprot)
+    error641 := thrift.NewTApplicationExceptionDefault()
+    error642, err := error641.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error641
+    err = error642
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result639 := NewSwitchAllOffResult()
-  err = result639.Read(iprot)
+  result640 := NewSwitchAllOffResult()
+  err = result640.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7005,7 +7006,7 @@ func (p *RemoteManagerClient) RecvSwitchAllOff() (err os.Error) {
  *  - _value
  *  - _size
  */
-func (p *RemoteManagerClient) SetConfigParam(_homeId int32, _nodeId byte, _param byte, _value int32, _size byte) (retval642 bool, err os.Error) {
+func (p *RemoteManagerClient) SetConfigParam(_homeId int32, _nodeId byte, _param byte, _value int32, _size byte) (retval643 bool, err os.Error) {
   err = p.SendSetConfigParam(_homeId, _nodeId, _param, _value, _size)
   if err != nil { return }
   return p.RecvSetConfigParam()
@@ -7019,13 +7020,13 @@ func (p *RemoteManagerClient) SendSetConfigParam(_homeId int32, _nodeId byte, _p
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetConfigParam", thrift.CALL, p.SeqId)
-  args643 := NewSetConfigParamArgs()
-  args643._homeId = _homeId
-  args643._nodeId = _nodeId
-  args643._param = _param
-  args643._value = _value
-  args643._size = _size
-  err = args643.Write(oprot)
+  args644 := NewSetConfigParamArgs()
+  args644._homeId = _homeId
+  args644._nodeId = _nodeId
+  args644._param = _param
+  args644._value = _value
+  args644._size = _size
+  err = args644.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7043,25 +7044,25 @@ func (p *RemoteManagerClient) RecvSetConfigParam() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error645 := thrift.NewTApplicationExceptionDefault()
-    error646, err := error645.Read(iprot)
+    error646 := thrift.NewTApplicationExceptionDefault()
+    error647, err := error646.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error646
+    err = error647
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result644 := NewSetConfigParamResult()
-  err = result644.Read(iprot)
+  result645 := NewSetConfigParamResult()
+  err = result645.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result644.Success
+  value = result645.Success
   return
 }
 
@@ -7099,11 +7100,11 @@ func (p *RemoteManagerClient) SendRequestConfigParam(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("RequestConfigParam", thrift.CALL, p.SeqId)
-  args648 := NewRequestConfigParamArgs()
-  args648._homeId = _homeId
-  args648._nodeId = _nodeId
-  args648._param = _param
-  err = args648.Write(oprot)
+  args649 := NewRequestConfigParamArgs()
+  args649._homeId = _homeId
+  args649._nodeId = _nodeId
+  args649._param = _param
+  err = args649.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7121,23 +7122,23 @@ func (p *RemoteManagerClient) RecvRequestConfigParam() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error650 := thrift.NewTApplicationExceptionDefault()
-    error651, err := error650.Read(iprot)
+    error651 := thrift.NewTApplicationExceptionDefault()
+    error652, err := error651.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error651
+    err = error652
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result649 := NewRequestConfigParamResult()
-  err = result649.Read(iprot)
+  result650 := NewRequestConfigParamResult()
+  err = result650.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7166,10 +7167,10 @@ func (p *RemoteManagerClient) SendRequestAllConfigParams(_homeId int32, _nodeId 
   }
   p.SeqId++
   oprot.WriteMessageBegin("RequestAllConfigParams", thrift.CALL, p.SeqId)
-  args653 := NewRequestAllConfigParamsArgs()
-  args653._homeId = _homeId
-  args653._nodeId = _nodeId
-  err = args653.Write(oprot)
+  args654 := NewRequestAllConfigParamsArgs()
+  args654._homeId = _homeId
+  args654._nodeId = _nodeId
+  err = args654.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7187,23 +7188,23 @@ func (p *RemoteManagerClient) RecvRequestAllConfigParams() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error655 := thrift.NewTApplicationExceptionDefault()
-    error656, err := error655.Read(iprot)
+    error656 := thrift.NewTApplicationExceptionDefault()
+    error657, err := error656.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error656
+    err = error657
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result654 := NewRequestAllConfigParamsResult()
-  err = result654.Read(iprot)
+  result655 := NewRequestAllConfigParamsResult()
+  err = result655.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7221,7 +7222,7 @@ func (p *RemoteManagerClient) RecvRequestAllConfigParams() (err os.Error) {
  *  - _homeId
  *  - _nodeId
  */
-func (p *RemoteManagerClient) GetNumGroups(_homeId int32, _nodeId byte) (retval657 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNumGroups(_homeId int32, _nodeId byte) (retval658 byte, err os.Error) {
   err = p.SendGetNumGroups(_homeId, _nodeId)
   if err != nil { return }
   return p.RecvGetNumGroups()
@@ -7235,10 +7236,10 @@ func (p *RemoteManagerClient) SendGetNumGroups(_homeId int32, _nodeId byte)(err 
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNumGroups", thrift.CALL, p.SeqId)
-  args658 := NewGetNumGroupsArgs()
-  args658._homeId = _homeId
-  args658._nodeId = _nodeId
-  err = args658.Write(oprot)
+  args659 := NewGetNumGroupsArgs()
+  args659._homeId = _homeId
+  args659._nodeId = _nodeId
+  err = args659.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7256,25 +7257,25 @@ func (p *RemoteManagerClient) RecvGetNumGroups() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error660 := thrift.NewTApplicationExceptionDefault()
-    error661, err := error660.Read(iprot)
+    error661 := thrift.NewTApplicationExceptionDefault()
+    error662, err := error661.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error661
+    err = error662
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result659 := NewGetNumGroupsResult()
-  err = result659.Read(iprot)
+  result660 := NewGetNumGroupsResult()
+  err = result660.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result659.Success
+  value = result660.Success
   return
 }
 
@@ -7294,7 +7295,7 @@ func (p *RemoteManagerClient) RecvGetNumGroups() (value byte, err os.Error) {
  *  - _nodeId
  *  - _groupIdx
  */
-func (p *RemoteManagerClient) GetAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval662 *GetAssociationsReturnStruct, err os.Error) {
+func (p *RemoteManagerClient) GetAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval663 *GetAssociationsReturnStruct, err os.Error) {
   err = p.SendGetAssociations(_homeId, _nodeId, _groupIdx)
   if err != nil { return }
   return p.RecvGetAssociations()
@@ -7308,11 +7309,11 @@ func (p *RemoteManagerClient) SendGetAssociations(_homeId int32, _nodeId byte, _
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetAssociations", thrift.CALL, p.SeqId)
-  args663 := NewGetAssociationsArgs()
-  args663._homeId = _homeId
-  args663._nodeId = _nodeId
-  args663._groupIdx = _groupIdx
-  err = args663.Write(oprot)
+  args664 := NewGetAssociationsArgs()
+  args664._homeId = _homeId
+  args664._nodeId = _nodeId
+  args664._groupIdx = _groupIdx
+  err = args664.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7330,25 +7331,25 @@ func (p *RemoteManagerClient) RecvGetAssociations() (value *GetAssociationsRetur
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error665 := thrift.NewTApplicationExceptionDefault()
-    error666, err := error665.Read(iprot)
+    error666 := thrift.NewTApplicationExceptionDefault()
+    error667, err := error666.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error666
+    err = error667
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result664 := NewGetAssociationsResult()
-  err = result664.Read(iprot)
+  result665 := NewGetAssociationsResult()
+  err = result665.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result664.Success
+  value = result665.Success
   return
 }
 
@@ -7365,7 +7366,7 @@ func (p *RemoteManagerClient) RecvGetAssociations() (value *GetAssociationsRetur
  *  - _nodeId
  *  - _groupIdx
  */
-func (p *RemoteManagerClient) GetMaxAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval667 byte, err os.Error) {
+func (p *RemoteManagerClient) GetMaxAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval668 byte, err os.Error) {
   err = p.SendGetMaxAssociations(_homeId, _nodeId, _groupIdx)
   if err != nil { return }
   return p.RecvGetMaxAssociations()
@@ -7379,11 +7380,11 @@ func (p *RemoteManagerClient) SendGetMaxAssociations(_homeId int32, _nodeId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetMaxAssociations", thrift.CALL, p.SeqId)
-  args668 := NewGetMaxAssociationsArgs()
-  args668._homeId = _homeId
-  args668._nodeId = _nodeId
-  args668._groupIdx = _groupIdx
-  err = args668.Write(oprot)
+  args669 := NewGetMaxAssociationsArgs()
+  args669._homeId = _homeId
+  args669._nodeId = _nodeId
+  args669._groupIdx = _groupIdx
+  err = args669.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7401,25 +7402,25 @@ func (p *RemoteManagerClient) RecvGetMaxAssociations() (value byte, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error670 := thrift.NewTApplicationExceptionDefault()
-    error671, err := error670.Read(iprot)
+    error671 := thrift.NewTApplicationExceptionDefault()
+    error672, err := error671.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error671
+    err = error672
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result669 := NewGetMaxAssociationsResult()
-  err = result669.Read(iprot)
+  result670 := NewGetMaxAssociationsResult()
+  err = result670.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result669.Success
+  value = result670.Success
   return
 }
 
@@ -7436,7 +7437,7 @@ func (p *RemoteManagerClient) RecvGetMaxAssociations() (value byte, err os.Error
  *  - _nodeId
  *  - _groupIdx
  */
-func (p *RemoteManagerClient) GetGroupLabel(_homeId int32, _nodeId byte, _groupIdx byte) (retval672 string, err os.Error) {
+func (p *RemoteManagerClient) GetGroupLabel(_homeId int32, _nodeId byte, _groupIdx byte) (retval673 string, err os.Error) {
   err = p.SendGetGroupLabel(_homeId, _nodeId, _groupIdx)
   if err != nil { return }
   return p.RecvGetGroupLabel()
@@ -7450,11 +7451,11 @@ func (p *RemoteManagerClient) SendGetGroupLabel(_homeId int32, _nodeId byte, _gr
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetGroupLabel", thrift.CALL, p.SeqId)
-  args673 := NewGetGroupLabelArgs()
-  args673._homeId = _homeId
-  args673._nodeId = _nodeId
-  args673._groupIdx = _groupIdx
-  err = args673.Write(oprot)
+  args674 := NewGetGroupLabelArgs()
+  args674._homeId = _homeId
+  args674._nodeId = _nodeId
+  args674._groupIdx = _groupIdx
+  err = args674.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7472,25 +7473,25 @@ func (p *RemoteManagerClient) RecvGetGroupLabel() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error675 := thrift.NewTApplicationExceptionDefault()
-    error676, err := error675.Read(iprot)
+    error676 := thrift.NewTApplicationExceptionDefault()
+    error677, err := error676.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error676
+    err = error677
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result674 := NewGetGroupLabelResult()
-  err = result674.Read(iprot)
+  result675 := NewGetGroupLabelResult()
+  err = result675.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result674.Success
+  value = result675.Success
   return
 }
 
@@ -7525,12 +7526,12 @@ func (p *RemoteManagerClient) SendAddAssociation(_homeId int32, _nodeId byte, _g
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddAssociation", thrift.CALL, p.SeqId)
-  args678 := NewAddAssociationArgs()
-  args678._homeId = _homeId
-  args678._nodeId = _nodeId
-  args678._groupIdx = _groupIdx
-  args678._targetNodeId = _targetNodeId
-  err = args678.Write(oprot)
+  args679 := NewAddAssociationArgs()
+  args679._homeId = _homeId
+  args679._nodeId = _nodeId
+  args679._groupIdx = _groupIdx
+  args679._targetNodeId = _targetNodeId
+  err = args679.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7548,23 +7549,23 @@ func (p *RemoteManagerClient) RecvAddAssociation() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error680 := thrift.NewTApplicationExceptionDefault()
-    error681, err := error680.Read(iprot)
+    error681 := thrift.NewTApplicationExceptionDefault()
+    error682, err := error681.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error681
+    err = error682
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result679 := NewAddAssociationResult()
-  err = result679.Read(iprot)
+  result680 := NewAddAssociationResult()
+  err = result680.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7600,12 +7601,12 @@ func (p *RemoteManagerClient) SendRemoveAssociation(_homeId int32, _nodeId byte,
   }
   p.SeqId++
   oprot.WriteMessageBegin("RemoveAssociation", thrift.CALL, p.SeqId)
-  args683 := NewRemoveAssociationArgs()
-  args683._homeId = _homeId
-  args683._nodeId = _nodeId
-  args683._groupIdx = _groupIdx
-  args683._targetNodeId = _targetNodeId
-  err = args683.Write(oprot)
+  args684 := NewRemoveAssociationArgs()
+  args684._homeId = _homeId
+  args684._nodeId = _nodeId
+  args684._groupIdx = _groupIdx
+  args684._targetNodeId = _targetNodeId
+  err = args684.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7623,23 +7624,23 @@ func (p *RemoteManagerClient) RecvRemoveAssociation() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error685 := thrift.NewTApplicationExceptionDefault()
-    error686, err := error685.Read(iprot)
+    error686 := thrift.NewTApplicationExceptionDefault()
+    error687, err := error686.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error686
+    err = error687
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result684 := NewRemoveAssociationResult()
-  err = result684.Read(iprot)
+  result685 := NewRemoveAssociationResult()
+  err = result685.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7667,9 +7668,9 @@ func (p *RemoteManagerClient) SendResetController(_homeId int32)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("ResetController", thrift.CALL, p.SeqId)
-  args688 := NewResetControllerArgs()
-  args688._homeId = _homeId
-  err = args688.Write(oprot)
+  args689 := NewResetControllerArgs()
+  args689._homeId = _homeId
+  err = args689.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7687,23 +7688,23 @@ func (p *RemoteManagerClient) RecvResetController() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error690 := thrift.NewTApplicationExceptionDefault()
-    error691, err := error690.Read(iprot)
+    error691 := thrift.NewTApplicationExceptionDefault()
+    error692, err := error691.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error691
+    err = error692
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result689 := NewResetControllerResult()
-  err = result689.Read(iprot)
+  result690 := NewResetControllerResult()
+  err = result690.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7731,9 +7732,9 @@ func (p *RemoteManagerClient) SendSoftReset(_homeId int32)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("SoftReset", thrift.CALL, p.SeqId)
-  args693 := NewSoftResetArgs()
-  args693._homeId = _homeId
-  err = args693.Write(oprot)
+  args694 := NewSoftResetArgs()
+  args694._homeId = _homeId
+  err = args694.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7751,23 +7752,23 @@ func (p *RemoteManagerClient) RecvSoftReset() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error695 := thrift.NewTApplicationExceptionDefault()
-    error696, err := error695.Read(iprot)
+    error696 := thrift.NewTApplicationExceptionDefault()
+    error697, err := error696.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error696
+    err = error697
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result694 := NewSoftResetResult()
-  err = result694.Read(iprot)
+  result695 := NewSoftResetResult()
+  err = result695.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -7777,7 +7778,7 @@ func (p *RemoteManagerClient) RecvSoftReset() (err os.Error) {
  * \return The number of scenes.
  * \see GetAllScenes, CreateScene, RemoveScene, AddSceneValue, RemoveSceneValue, SceneGetValues, SceneGetValueAsBool, SceneGetValueAsByte, SceneGetValueAsFloat, SceneGetValueAsInt, SceneGetValueAsShort, SceneGetValueAsString, SetSceneValue, GetSceneLabel, SetSceneLabel, SceneExists, ActivateScene
  */
-func (p *RemoteManagerClient) GetNumScenes() (retval697 byte, err os.Error) {
+func (p *RemoteManagerClient) GetNumScenes() (retval698 byte, err os.Error) {
   err = p.SendGetNumScenes()
   if err != nil { return }
   return p.RecvGetNumScenes()
@@ -7791,8 +7792,8 @@ func (p *RemoteManagerClient) SendGetNumScenes()(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetNumScenes", thrift.CALL, p.SeqId)
-  args698 := NewGetNumScenesArgs()
-  err = args698.Write(oprot)
+  args699 := NewGetNumScenesArgs()
+  err = args699.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7810,25 +7811,25 @@ func (p *RemoteManagerClient) RecvGetNumScenes() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error700 := thrift.NewTApplicationExceptionDefault()
-    error701, err := error700.Read(iprot)
+    error701 := thrift.NewTApplicationExceptionDefault()
+    error702, err := error701.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error701
+    err = error702
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result699 := NewGetNumScenesResult()
-  err = result699.Read(iprot)
+  result700 := NewGetNumScenesResult()
+  err = result700.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result699.Success
+  value = result700.Success
   return
 }
 
@@ -7838,7 +7839,7 @@ func (p *RemoteManagerClient) RecvGetNumScenes() (value byte, err os.Error) {
  * \return The number of scenes. If zero, _sceneIds will be NULL and doesn't need to be freed.
  * \see GetNumScenes, CreateScene, RemoveScene, AddSceneValue, RemoveSceneValue, SceneGetValues, SceneGetValueAsBool, SceneGetValueAsByte, SceneGetValueAsFloat, SceneGetValueAsInt, SceneGetValueAsShort, SceneGetValueAsString, SetSceneValue, GetSceneLabel, SetSceneLabel, SceneExists, ActivateScene
  */
-func (p *RemoteManagerClient) GetAllScenes() (retval702 *GetAllScenesReturnStruct, err os.Error) {
+func (p *RemoteManagerClient) GetAllScenes() (retval703 *GetAllScenesReturnStruct, err os.Error) {
   err = p.SendGetAllScenes()
   if err != nil { return }
   return p.RecvGetAllScenes()
@@ -7852,8 +7853,8 @@ func (p *RemoteManagerClient) SendGetAllScenes()(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetAllScenes", thrift.CALL, p.SeqId)
-  args703 := NewGetAllScenesArgs()
-  err = args703.Write(oprot)
+  args704 := NewGetAllScenesArgs()
+  err = args704.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7871,25 +7872,25 @@ func (p *RemoteManagerClient) RecvGetAllScenes() (value *GetAllScenesReturnStruc
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error705 := thrift.NewTApplicationExceptionDefault()
-    error706, err := error705.Read(iprot)
+    error706 := thrift.NewTApplicationExceptionDefault()
+    error707, err := error706.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error706
+    err = error707
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result704 := NewGetAllScenesResult()
-  err = result704.Read(iprot)
+  result705 := NewGetAllScenesResult()
+  err = result705.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result704.Success
+  value = result705.Success
   return
 }
 
@@ -7899,7 +7900,7 @@ func (p *RemoteManagerClient) RecvGetAllScenes() (value *GetAllScenesReturnStruc
  * \see GetNumScenes, GetAllScenes, RemoveScene, AddSceneValue, RemoveSceneValue, SceneGetValues, SceneGetValueAsBool, SceneGetValueAsByte, SceneGetValueAsFloat, SceneGetValueAsInt, SceneGetValueAsShort, SceneGetValueAsString, SetSceneValue, GetSceneLabel, SetSceneLabel, SceneExists, ActivateScene
  * 
  */
-func (p *RemoteManagerClient) CreateScene() (retval707 byte, err os.Error) {
+func (p *RemoteManagerClient) CreateScene() (retval708 byte, err os.Error) {
   err = p.SendCreateScene()
   if err != nil { return }
   return p.RecvCreateScene()
@@ -7913,8 +7914,8 @@ func (p *RemoteManagerClient) SendCreateScene()(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("CreateScene", thrift.CALL, p.SeqId)
-  args708 := NewCreateSceneArgs()
-  err = args708.Write(oprot)
+  args709 := NewCreateSceneArgs()
+  err = args709.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7932,25 +7933,25 @@ func (p *RemoteManagerClient) RecvCreateScene() (value byte, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error710 := thrift.NewTApplicationExceptionDefault()
-    error711, err := error710.Read(iprot)
+    error711 := thrift.NewTApplicationExceptionDefault()
+    error712, err := error711.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error711
+    err = error712
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result709 := NewCreateSceneResult()
-  err = result709.Read(iprot)
+  result710 := NewCreateSceneResult()
+  err = result710.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result709.Success
+  value = result710.Success
   return
 }
 
@@ -7963,7 +7964,7 @@ func (p *RemoteManagerClient) RecvCreateScene() (value byte, err os.Error) {
  * Parameters:
  *  - _sceneId
  */
-func (p *RemoteManagerClient) RemoveScene(_sceneId byte) (retval712 bool, err os.Error) {
+func (p *RemoteManagerClient) RemoveScene(_sceneId byte) (retval713 bool, err os.Error) {
   err = p.SendRemoveScene(_sceneId)
   if err != nil { return }
   return p.RecvRemoveScene()
@@ -7977,9 +7978,9 @@ func (p *RemoteManagerClient) SendRemoveScene(_sceneId byte)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("RemoveScene", thrift.CALL, p.SeqId)
-  args713 := NewRemoveSceneArgs()
-  args713._sceneId = _sceneId
-  err = args713.Write(oprot)
+  args714 := NewRemoveSceneArgs()
+  args714._sceneId = _sceneId
+  err = args714.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -7997,25 +7998,25 @@ func (p *RemoteManagerClient) RecvRemoveScene() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error715 := thrift.NewTApplicationExceptionDefault()
-    error716, err := error715.Read(iprot)
+    error716 := thrift.NewTApplicationExceptionDefault()
+    error717, err := error716.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error716
+    err = error717
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result714 := NewRemoveSceneResult()
-  err = result714.Read(iprot)
+  result715 := NewRemoveSceneResult()
+  err = result715.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result714.Success
+  value = result715.Success
   return
 }
 
@@ -8032,7 +8033,7 @@ func (p *RemoteManagerClient) RecvRemoveScene() (value bool, err os.Error) {
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueBool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval717 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueBool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval718 bool, err os.Error) {
   err = p.SendAddSceneValueBool(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueBool()
@@ -8046,11 +8047,11 @@ func (p *RemoteManagerClient) SendAddSceneValueBool(_sceneId byte, _valueId *Rem
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValue_Bool", thrift.CALL, p.SeqId)
-  args718 := NewAddSceneValueBoolArgs()
-  args718._sceneId = _sceneId
-  args718._valueId = _valueId
-  args718._value = _value
-  err = args718.Write(oprot)
+  args719 := NewAddSceneValueBoolArgs()
+  args719._sceneId = _sceneId
+  args719._valueId = _valueId
+  args719._value = _value
+  err = args719.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8068,25 +8069,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueBool() (value bool, err os.Error)
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error720 := thrift.NewTApplicationExceptionDefault()
-    error721, err := error720.Read(iprot)
+    error721 := thrift.NewTApplicationExceptionDefault()
+    error722, err := error721.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error721
+    err = error722
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result719 := NewAddSceneValueBoolResult()
-  err = result719.Read(iprot)
+  result720 := NewAddSceneValueBoolResult()
+  err = result720.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result719.Success
+  value = result720.Success
   return
 }
 
@@ -8103,7 +8104,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueBool() (value bool, err os.Error)
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueUint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval722 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueUint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval723 bool, err os.Error) {
   err = p.SendAddSceneValueUint8(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueUint8()
@@ -8117,11 +8118,11 @@ func (p *RemoteManagerClient) SendAddSceneValueUint8(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValue_Uint8", thrift.CALL, p.SeqId)
-  args723 := NewAddSceneValueUint8Args()
-  args723._sceneId = _sceneId
-  args723._valueId = _valueId
-  args723._value = _value
-  err = args723.Write(oprot)
+  args724 := NewAddSceneValueUint8Args()
+  args724._sceneId = _sceneId
+  args724._valueId = _valueId
+  args724._value = _value
+  err = args724.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8139,25 +8140,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueUint8() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error725 := thrift.NewTApplicationExceptionDefault()
-    error726, err := error725.Read(iprot)
+    error726 := thrift.NewTApplicationExceptionDefault()
+    error727, err := error726.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error726
+    err = error727
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result724 := NewAddSceneValueUint8Result()
-  err = result724.Read(iprot)
+  result725 := NewAddSceneValueUint8Result()
+  err = result725.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result724.Success
+  value = result725.Success
   return
 }
 
@@ -8174,7 +8175,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueUint8() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueFloat(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval727 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueFloat(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval728 bool, err os.Error) {
   err = p.SendAddSceneValueFloat(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueFloat()
@@ -8188,11 +8189,11 @@ func (p *RemoteManagerClient) SendAddSceneValueFloat(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValue_Float", thrift.CALL, p.SeqId)
-  args728 := NewAddSceneValueFloatArgs()
-  args728._sceneId = _sceneId
-  args728._valueId = _valueId
-  args728._value = _value
-  err = args728.Write(oprot)
+  args729 := NewAddSceneValueFloatArgs()
+  args729._sceneId = _sceneId
+  args729._valueId = _valueId
+  args729._value = _value
+  err = args729.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8210,25 +8211,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueFloat() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error730 := thrift.NewTApplicationExceptionDefault()
-    error731, err := error730.Read(iprot)
+    error731 := thrift.NewTApplicationExceptionDefault()
+    error732, err := error731.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error731
+    err = error732
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result729 := NewAddSceneValueFloatResult()
-  err = result729.Read(iprot)
+  result730 := NewAddSceneValueFloatResult()
+  err = result730.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result729.Success
+  value = result730.Success
   return
 }
 
@@ -8245,7 +8246,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueFloat() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval732 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval733 bool, err os.Error) {
   err = p.SendAddSceneValueInt32(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueInt32()
@@ -8259,11 +8260,11 @@ func (p *RemoteManagerClient) SendAddSceneValueInt32(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValue_Int32", thrift.CALL, p.SeqId)
-  args733 := NewAddSceneValueInt32Args()
-  args733._sceneId = _sceneId
-  args733._valueId = _valueId
-  args733._value = _value
-  err = args733.Write(oprot)
+  args734 := NewAddSceneValueInt32Args()
+  args734._sceneId = _sceneId
+  args734._valueId = _valueId
+  args734._value = _value
+  err = args734.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8281,25 +8282,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueInt32() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error735 := thrift.NewTApplicationExceptionDefault()
-    error736, err := error735.Read(iprot)
+    error736 := thrift.NewTApplicationExceptionDefault()
+    error737, err := error736.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error736
+    err = error737
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result734 := NewAddSceneValueInt32Result()
-  err = result734.Read(iprot)
+  result735 := NewAddSceneValueInt32Result()
+  err = result735.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result734.Success
+  value = result735.Success
   return
 }
 
@@ -8316,7 +8317,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueInt32() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueInt16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval737 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueInt16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval738 bool, err os.Error) {
   err = p.SendAddSceneValueInt16(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueInt16()
@@ -8330,11 +8331,11 @@ func (p *RemoteManagerClient) SendAddSceneValueInt16(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValue_Int16", thrift.CALL, p.SeqId)
-  args738 := NewAddSceneValueInt16Args()
-  args738._sceneId = _sceneId
-  args738._valueId = _valueId
-  args738._value = _value
-  err = args738.Write(oprot)
+  args739 := NewAddSceneValueInt16Args()
+  args739._sceneId = _sceneId
+  args739._valueId = _valueId
+  args739._value = _value
+  err = args739.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8352,25 +8353,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueInt16() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error740 := thrift.NewTApplicationExceptionDefault()
-    error741, err := error740.Read(iprot)
+    error741 := thrift.NewTApplicationExceptionDefault()
+    error742, err := error741.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error741
+    err = error742
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result739 := NewAddSceneValueInt16Result()
-  err = result739.Read(iprot)
+  result740 := NewAddSceneValueInt16Result()
+  err = result740.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result739.Success
+  value = result740.Success
   return
 }
 
@@ -8387,7 +8388,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueInt16() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval742 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval743 bool, err os.Error) {
   err = p.SendAddSceneValueString(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueString()
@@ -8401,11 +8402,11 @@ func (p *RemoteManagerClient) SendAddSceneValueString(_sceneId byte, _valueId *R
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValue_String", thrift.CALL, p.SeqId)
-  args743 := NewAddSceneValueStringArgs()
-  args743._sceneId = _sceneId
-  args743._valueId = _valueId
-  args743._value = _value
-  err = args743.Write(oprot)
+  args744 := NewAddSceneValueStringArgs()
+  args744._sceneId = _sceneId
+  args744._valueId = _valueId
+  args744._value = _value
+  err = args744.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8423,25 +8424,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueString() (value bool, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error745 := thrift.NewTApplicationExceptionDefault()
-    error746, err := error745.Read(iprot)
+    error746 := thrift.NewTApplicationExceptionDefault()
+    error747, err := error746.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error746
+    err = error747
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result744 := NewAddSceneValueStringResult()
-  err = result744.Read(iprot)
+  result745 := NewAddSceneValueStringResult()
+  err = result745.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result744.Success
+  value = result745.Success
   return
 }
 
@@ -8458,7 +8459,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueString() (value bool, err os.Erro
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueListSelectionString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval747 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueListSelectionString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval748 bool, err os.Error) {
   err = p.SendAddSceneValueListSelectionString(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueListSelectionString()
@@ -8472,11 +8473,11 @@ func (p *RemoteManagerClient) SendAddSceneValueListSelectionString(_sceneId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValueListSelection_String", thrift.CALL, p.SeqId)
-  args748 := NewAddSceneValueListSelectionStringArgs()
-  args748._sceneId = _sceneId
-  args748._valueId = _valueId
-  args748._value = _value
-  err = args748.Write(oprot)
+  args749 := NewAddSceneValueListSelectionStringArgs()
+  args749._sceneId = _sceneId
+  args749._valueId = _valueId
+  args749._value = _value
+  err = args749.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8494,25 +8495,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueListSelectionString() (value bool
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error750 := thrift.NewTApplicationExceptionDefault()
-    error751, err := error750.Read(iprot)
+    error751 := thrift.NewTApplicationExceptionDefault()
+    error752, err := error751.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error751
+    err = error752
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result749 := NewAddSceneValueListSelectionStringResult()
-  err = result749.Read(iprot)
+  result750 := NewAddSceneValueListSelectionStringResult()
+  err = result750.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result749.Success
+  value = result750.Success
   return
 }
 
@@ -8529,7 +8530,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueListSelectionString() (value bool
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) AddSceneValueListSelectionInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval752 bool, err os.Error) {
+func (p *RemoteManagerClient) AddSceneValueListSelectionInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval753 bool, err os.Error) {
   err = p.SendAddSceneValueListSelectionInt32(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvAddSceneValueListSelectionInt32()
@@ -8543,11 +8544,11 @@ func (p *RemoteManagerClient) SendAddSceneValueListSelectionInt32(_sceneId byte,
   }
   p.SeqId++
   oprot.WriteMessageBegin("AddSceneValueListSelection_Int32", thrift.CALL, p.SeqId)
-  args753 := NewAddSceneValueListSelectionInt32Args()
-  args753._sceneId = _sceneId
-  args753._valueId = _valueId
-  args753._value = _value
-  err = args753.Write(oprot)
+  args754 := NewAddSceneValueListSelectionInt32Args()
+  args754._sceneId = _sceneId
+  args754._valueId = _valueId
+  args754._value = _value
+  err = args754.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8565,25 +8566,25 @@ func (p *RemoteManagerClient) RecvAddSceneValueListSelectionInt32() (value bool,
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error755 := thrift.NewTApplicationExceptionDefault()
-    error756, err := error755.Read(iprot)
+    error756 := thrift.NewTApplicationExceptionDefault()
+    error757, err := error756.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error756
+    err = error757
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result754 := NewAddSceneValueListSelectionInt32Result()
-  err = result754.Read(iprot)
+  result755 := NewAddSceneValueListSelectionInt32Result()
+  err = result755.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result754.Success
+  value = result755.Success
   return
 }
 
@@ -8598,7 +8599,7 @@ func (p *RemoteManagerClient) RecvAddSceneValueListSelectionInt32() (value bool,
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) RemoveSceneValue(_sceneId byte, _valueId *RemoteValueID) (retval757 bool, err os.Error) {
+func (p *RemoteManagerClient) RemoveSceneValue(_sceneId byte, _valueId *RemoteValueID) (retval758 bool, err os.Error) {
   err = p.SendRemoveSceneValue(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvRemoveSceneValue()
@@ -8612,10 +8613,10 @@ func (p *RemoteManagerClient) SendRemoveSceneValue(_sceneId byte, _valueId *Remo
   }
   p.SeqId++
   oprot.WriteMessageBegin("RemoveSceneValue", thrift.CALL, p.SeqId)
-  args758 := NewRemoveSceneValueArgs()
-  args758._sceneId = _sceneId
-  args758._valueId = _valueId
-  err = args758.Write(oprot)
+  args759 := NewRemoveSceneValueArgs()
+  args759._sceneId = _sceneId
+  args759._valueId = _valueId
+  err = args759.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8633,25 +8634,25 @@ func (p *RemoteManagerClient) RecvRemoveSceneValue() (value bool, err os.Error) 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error760 := thrift.NewTApplicationExceptionDefault()
-    error761, err := error760.Read(iprot)
+    error761 := thrift.NewTApplicationExceptionDefault()
+    error762, err := error761.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error761
+    err = error762
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result759 := NewRemoveSceneValueResult()
-  err = result759.Read(iprot)
+  result760 := NewRemoveSceneValueResult()
+  err = result760.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result759.Success
+  value = result760.Success
   return
 }
 
@@ -8665,7 +8666,7 @@ func (p *RemoteManagerClient) RecvRemoveSceneValue() (value bool, err os.Error) 
  * Parameters:
  *  - _sceneId
  */
-func (p *RemoteManagerClient) SceneGetValues(_sceneId byte) (retval762 *SceneGetValuesReturnStruct, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValues(_sceneId byte) (retval763 *SceneGetValuesReturnStruct, err os.Error) {
   err = p.SendSceneGetValues(_sceneId)
   if err != nil { return }
   return p.RecvSceneGetValues()
@@ -8679,9 +8680,9 @@ func (p *RemoteManagerClient) SendSceneGetValues(_sceneId byte)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValues", thrift.CALL, p.SeqId)
-  args763 := NewSceneGetValuesArgs()
-  args763._sceneId = _sceneId
-  err = args763.Write(oprot)
+  args764 := NewSceneGetValuesArgs()
+  args764._sceneId = _sceneId
+  err = args764.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8699,25 +8700,25 @@ func (p *RemoteManagerClient) RecvSceneGetValues() (value *SceneGetValuesReturnS
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error765 := thrift.NewTApplicationExceptionDefault()
-    error766, err := error765.Read(iprot)
+    error766 := thrift.NewTApplicationExceptionDefault()
+    error767, err := error766.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error766
+    err = error767
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result764 := NewSceneGetValuesResult()
-  err = result764.Read(iprot)
+  result765 := NewSceneGetValuesResult()
+  err = result765.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result764.Success
+  value = result765.Success
   return
 }
 
@@ -8733,7 +8734,7 @@ func (p *RemoteManagerClient) RecvSceneGetValues() (value *SceneGetValuesReturnS
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueAsBool(_sceneId byte, _valueId *RemoteValueID) (retval767 *BoolBool, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueAsBool(_sceneId byte, _valueId *RemoteValueID) (retval768 *BoolBool, err os.Error) {
   err = p.SendSceneGetValueAsBool(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueAsBool()
@@ -8747,10 +8748,10 @@ func (p *RemoteManagerClient) SendSceneGetValueAsBool(_sceneId byte, _valueId *R
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueAsBool", thrift.CALL, p.SeqId)
-  args768 := NewSceneGetValueAsBoolArgs()
-  args768._sceneId = _sceneId
-  args768._valueId = _valueId
-  err = args768.Write(oprot)
+  args769 := NewSceneGetValueAsBoolArgs()
+  args769._sceneId = _sceneId
+  args769._valueId = _valueId
+  err = args769.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8768,25 +8769,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsBool() (value *BoolBool, err os
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error770 := thrift.NewTApplicationExceptionDefault()
-    error771, err := error770.Read(iprot)
+    error771 := thrift.NewTApplicationExceptionDefault()
+    error772, err := error771.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error771
+    err = error772
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result769 := NewSceneGetValueAsBoolResult()
-  err = result769.Read(iprot)
+  result770 := NewSceneGetValueAsBoolResult()
+  err = result770.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result769.Success
+  value = result770.Success
   return
 }
 
@@ -8802,7 +8803,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsBool() (value *BoolBool, err os
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueAsByte(_sceneId byte, _valueId *RemoteValueID) (retval772 *BoolUInt8, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueAsByte(_sceneId byte, _valueId *RemoteValueID) (retval773 *BoolUInt8, err os.Error) {
   err = p.SendSceneGetValueAsByte(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueAsByte()
@@ -8816,10 +8817,10 @@ func (p *RemoteManagerClient) SendSceneGetValueAsByte(_sceneId byte, _valueId *R
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueAsByte", thrift.CALL, p.SeqId)
-  args773 := NewSceneGetValueAsByteArgs()
-  args773._sceneId = _sceneId
-  args773._valueId = _valueId
-  err = args773.Write(oprot)
+  args774 := NewSceneGetValueAsByteArgs()
+  args774._sceneId = _sceneId
+  args774._valueId = _valueId
+  err = args774.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8837,25 +8838,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsByte() (value *BoolUInt8, err o
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error775 := thrift.NewTApplicationExceptionDefault()
-    error776, err := error775.Read(iprot)
+    error776 := thrift.NewTApplicationExceptionDefault()
+    error777, err := error776.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error776
+    err = error777
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result774 := NewSceneGetValueAsByteResult()
-  err = result774.Read(iprot)
+  result775 := NewSceneGetValueAsByteResult()
+  err = result775.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result774.Success
+  value = result775.Success
   return
 }
 
@@ -8871,7 +8872,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsByte() (value *BoolUInt8, err o
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueAsFloat(_sceneId byte, _valueId *RemoteValueID) (retval777 *BoolFloat, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueAsFloat(_sceneId byte, _valueId *RemoteValueID) (retval778 *BoolFloat, err os.Error) {
   err = p.SendSceneGetValueAsFloat(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueAsFloat()
@@ -8885,10 +8886,10 @@ func (p *RemoteManagerClient) SendSceneGetValueAsFloat(_sceneId byte, _valueId *
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueAsFloat", thrift.CALL, p.SeqId)
-  args778 := NewSceneGetValueAsFloatArgs()
-  args778._sceneId = _sceneId
-  args778._valueId = _valueId
-  err = args778.Write(oprot)
+  args779 := NewSceneGetValueAsFloatArgs()
+  args779._sceneId = _sceneId
+  args779._valueId = _valueId
+  err = args779.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8906,25 +8907,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsFloat() (value *BoolFloat, err 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error780 := thrift.NewTApplicationExceptionDefault()
-    error781, err := error780.Read(iprot)
+    error781 := thrift.NewTApplicationExceptionDefault()
+    error782, err := error781.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error781
+    err = error782
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result779 := NewSceneGetValueAsFloatResult()
-  err = result779.Read(iprot)
+  result780 := NewSceneGetValueAsFloatResult()
+  err = result780.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result779.Success
+  value = result780.Success
   return
 }
 
@@ -8940,7 +8941,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsFloat() (value *BoolFloat, err 
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueAsInt(_sceneId byte, _valueId *RemoteValueID) (retval782 *BoolInt, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueAsInt(_sceneId byte, _valueId *RemoteValueID) (retval783 *BoolInt, err os.Error) {
   err = p.SendSceneGetValueAsInt(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueAsInt()
@@ -8954,10 +8955,10 @@ func (p *RemoteManagerClient) SendSceneGetValueAsInt(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueAsInt", thrift.CALL, p.SeqId)
-  args783 := NewSceneGetValueAsIntArgs()
-  args783._sceneId = _sceneId
-  args783._valueId = _valueId
-  err = args783.Write(oprot)
+  args784 := NewSceneGetValueAsIntArgs()
+  args784._sceneId = _sceneId
+  args784._valueId = _valueId
+  err = args784.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -8975,25 +8976,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsInt() (value *BoolInt, err os.E
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error785 := thrift.NewTApplicationExceptionDefault()
-    error786, err := error785.Read(iprot)
+    error786 := thrift.NewTApplicationExceptionDefault()
+    error787, err := error786.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error786
+    err = error787
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result784 := NewSceneGetValueAsIntResult()
-  err = result784.Read(iprot)
+  result785 := NewSceneGetValueAsIntResult()
+  err = result785.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result784.Success
+  value = result785.Success
   return
 }
 
@@ -9009,7 +9010,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsInt() (value *BoolInt, err os.E
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueAsShort(_sceneId byte, _valueId *RemoteValueID) (retval787 *BoolInt16, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueAsShort(_sceneId byte, _valueId *RemoteValueID) (retval788 *BoolInt16, err os.Error) {
   err = p.SendSceneGetValueAsShort(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueAsShort()
@@ -9023,10 +9024,10 @@ func (p *RemoteManagerClient) SendSceneGetValueAsShort(_sceneId byte, _valueId *
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueAsShort", thrift.CALL, p.SeqId)
-  args788 := NewSceneGetValueAsShortArgs()
-  args788._sceneId = _sceneId
-  args788._valueId = _valueId
-  err = args788.Write(oprot)
+  args789 := NewSceneGetValueAsShortArgs()
+  args789._sceneId = _sceneId
+  args789._valueId = _valueId
+  err = args789.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9044,25 +9045,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsShort() (value *BoolInt16, err 
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error790 := thrift.NewTApplicationExceptionDefault()
-    error791, err := error790.Read(iprot)
+    error791 := thrift.NewTApplicationExceptionDefault()
+    error792, err := error791.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error791
+    err = error792
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result789 := NewSceneGetValueAsShortResult()
-  err = result789.Read(iprot)
+  result790 := NewSceneGetValueAsShortResult()
+  err = result790.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result789.Success
+  value = result790.Success
   return
 }
 
@@ -9078,7 +9079,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsShort() (value *BoolInt16, err 
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueAsString(_sceneId byte, _valueId *RemoteValueID) (retval792 *BoolString, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueAsString(_sceneId byte, _valueId *RemoteValueID) (retval793 *BoolString, err os.Error) {
   err = p.SendSceneGetValueAsString(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueAsString()
@@ -9092,10 +9093,10 @@ func (p *RemoteManagerClient) SendSceneGetValueAsString(_sceneId byte, _valueId 
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueAsString", thrift.CALL, p.SeqId)
-  args793 := NewSceneGetValueAsStringArgs()
-  args793._sceneId = _sceneId
-  args793._valueId = _valueId
-  err = args793.Write(oprot)
+  args794 := NewSceneGetValueAsStringArgs()
+  args794._sceneId = _sceneId
+  args794._valueId = _valueId
+  err = args794.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9113,25 +9114,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsString() (value *BoolString, er
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error795 := thrift.NewTApplicationExceptionDefault()
-    error796, err := error795.Read(iprot)
+    error796 := thrift.NewTApplicationExceptionDefault()
+    error797, err := error796.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error796
+    err = error797
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result794 := NewSceneGetValueAsStringResult()
-  err = result794.Read(iprot)
+  result795 := NewSceneGetValueAsStringResult()
+  err = result795.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result794.Success
+  value = result795.Success
   return
 }
 
@@ -9147,7 +9148,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueAsString() (value *BoolString, er
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueListSelectionString(_sceneId byte, _valueId *RemoteValueID) (retval797 *BoolString, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueListSelectionString(_sceneId byte, _valueId *RemoteValueID) (retval798 *BoolString, err os.Error) {
   err = p.SendSceneGetValueListSelectionString(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueListSelectionString()
@@ -9161,10 +9162,10 @@ func (p *RemoteManagerClient) SendSceneGetValueListSelectionString(_sceneId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueListSelection_String", thrift.CALL, p.SeqId)
-  args798 := NewSceneGetValueListSelectionStringArgs()
-  args798._sceneId = _sceneId
-  args798._valueId = _valueId
-  err = args798.Write(oprot)
+  args799 := NewSceneGetValueListSelectionStringArgs()
+  args799._sceneId = _sceneId
+  args799._valueId = _valueId
+  err = args799.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9182,25 +9183,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueListSelectionString() (value *Boo
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error800 := thrift.NewTApplicationExceptionDefault()
-    error801, err := error800.Read(iprot)
+    error801 := thrift.NewTApplicationExceptionDefault()
+    error802, err := error801.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error801
+    err = error802
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result799 := NewSceneGetValueListSelectionStringResult()
-  err = result799.Read(iprot)
+  result800 := NewSceneGetValueListSelectionStringResult()
+  err = result800.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result799.Success
+  value = result800.Success
   return
 }
 
@@ -9216,7 +9217,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueListSelectionString() (value *Boo
  *  - _sceneId
  *  - _valueId
  */
-func (p *RemoteManagerClient) SceneGetValueListSelectionInt32(_sceneId byte, _valueId *RemoteValueID) (retval802 *BoolInt, err os.Error) {
+func (p *RemoteManagerClient) SceneGetValueListSelectionInt32(_sceneId byte, _valueId *RemoteValueID) (retval803 *BoolInt, err os.Error) {
   err = p.SendSceneGetValueListSelectionInt32(_sceneId, _valueId)
   if err != nil { return }
   return p.RecvSceneGetValueListSelectionInt32()
@@ -9230,10 +9231,10 @@ func (p *RemoteManagerClient) SendSceneGetValueListSelectionInt32(_sceneId byte,
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneGetValueListSelection_Int32", thrift.CALL, p.SeqId)
-  args803 := NewSceneGetValueListSelectionInt32Args()
-  args803._sceneId = _sceneId
-  args803._valueId = _valueId
-  err = args803.Write(oprot)
+  args804 := NewSceneGetValueListSelectionInt32Args()
+  args804._sceneId = _sceneId
+  args804._valueId = _valueId
+  err = args804.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9251,25 +9252,25 @@ func (p *RemoteManagerClient) RecvSceneGetValueListSelectionInt32() (value *Bool
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error805 := thrift.NewTApplicationExceptionDefault()
-    error806, err := error805.Read(iprot)
+    error806 := thrift.NewTApplicationExceptionDefault()
+    error807, err := error806.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error806
+    err = error807
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result804 := NewSceneGetValueListSelectionInt32Result()
-  err = result804.Read(iprot)
+  result805 := NewSceneGetValueListSelectionInt32Result()
+  err = result805.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result804.Success
+  value = result805.Success
   return
 }
 
@@ -9286,7 +9287,7 @@ func (p *RemoteManagerClient) RecvSceneGetValueListSelectionInt32() (value *Bool
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueBool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval807 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueBool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval808 bool, err os.Error) {
   err = p.SendSetSceneValueBool(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueBool()
@@ -9300,11 +9301,11 @@ func (p *RemoteManagerClient) SendSetSceneValueBool(_sceneId byte, _valueId *Rem
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValue_Bool", thrift.CALL, p.SeqId)
-  args808 := NewSetSceneValueBoolArgs()
-  args808._sceneId = _sceneId
-  args808._valueId = _valueId
-  args808._value = _value
-  err = args808.Write(oprot)
+  args809 := NewSetSceneValueBoolArgs()
+  args809._sceneId = _sceneId
+  args809._valueId = _valueId
+  args809._value = _value
+  err = args809.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9322,25 +9323,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueBool() (value bool, err os.Error)
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error810 := thrift.NewTApplicationExceptionDefault()
-    error811, err := error810.Read(iprot)
+    error811 := thrift.NewTApplicationExceptionDefault()
+    error812, err := error811.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error811
+    err = error812
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result809 := NewSetSceneValueBoolResult()
-  err = result809.Read(iprot)
+  result810 := NewSetSceneValueBoolResult()
+  err = result810.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result809.Success
+  value = result810.Success
   return
 }
 
@@ -9357,7 +9358,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueBool() (value bool, err os.Error)
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueUint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval812 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueUint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval813 bool, err os.Error) {
   err = p.SendSetSceneValueUint8(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueUint8()
@@ -9371,11 +9372,11 @@ func (p *RemoteManagerClient) SendSetSceneValueUint8(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValue_Uint8", thrift.CALL, p.SeqId)
-  args813 := NewSetSceneValueUint8Args()
-  args813._sceneId = _sceneId
-  args813._valueId = _valueId
-  args813._value = _value
-  err = args813.Write(oprot)
+  args814 := NewSetSceneValueUint8Args()
+  args814._sceneId = _sceneId
+  args814._valueId = _valueId
+  args814._value = _value
+  err = args814.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9393,25 +9394,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueUint8() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error815 := thrift.NewTApplicationExceptionDefault()
-    error816, err := error815.Read(iprot)
+    error816 := thrift.NewTApplicationExceptionDefault()
+    error817, err := error816.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error816
+    err = error817
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result814 := NewSetSceneValueUint8Result()
-  err = result814.Read(iprot)
+  result815 := NewSetSceneValueUint8Result()
+  err = result815.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result814.Success
+  value = result815.Success
   return
 }
 
@@ -9428,7 +9429,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueUint8() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueFloat(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval817 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueFloat(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval818 bool, err os.Error) {
   err = p.SendSetSceneValueFloat(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueFloat()
@@ -9442,11 +9443,11 @@ func (p *RemoteManagerClient) SendSetSceneValueFloat(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValue_Float", thrift.CALL, p.SeqId)
-  args818 := NewSetSceneValueFloatArgs()
-  args818._sceneId = _sceneId
-  args818._valueId = _valueId
-  args818._value = _value
-  err = args818.Write(oprot)
+  args819 := NewSetSceneValueFloatArgs()
+  args819._sceneId = _sceneId
+  args819._valueId = _valueId
+  args819._value = _value
+  err = args819.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9464,25 +9465,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueFloat() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error820 := thrift.NewTApplicationExceptionDefault()
-    error821, err := error820.Read(iprot)
+    error821 := thrift.NewTApplicationExceptionDefault()
+    error822, err := error821.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error821
+    err = error822
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result819 := NewSetSceneValueFloatResult()
-  err = result819.Read(iprot)
+  result820 := NewSetSceneValueFloatResult()
+  err = result820.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result819.Success
+  value = result820.Success
   return
 }
 
@@ -9499,7 +9500,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueFloat() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval822 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval823 bool, err os.Error) {
   err = p.SendSetSceneValueInt32(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueInt32()
@@ -9513,11 +9514,11 @@ func (p *RemoteManagerClient) SendSetSceneValueInt32(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValue_Int32", thrift.CALL, p.SeqId)
-  args823 := NewSetSceneValueInt32Args()
-  args823._sceneId = _sceneId
-  args823._valueId = _valueId
-  args823._value = _value
-  err = args823.Write(oprot)
+  args824 := NewSetSceneValueInt32Args()
+  args824._sceneId = _sceneId
+  args824._valueId = _valueId
+  args824._value = _value
+  err = args824.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9535,25 +9536,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueInt32() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error825 := thrift.NewTApplicationExceptionDefault()
-    error826, err := error825.Read(iprot)
+    error826 := thrift.NewTApplicationExceptionDefault()
+    error827, err := error826.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error826
+    err = error827
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result824 := NewSetSceneValueInt32Result()
-  err = result824.Read(iprot)
+  result825 := NewSetSceneValueInt32Result()
+  err = result825.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result824.Success
+  value = result825.Success
   return
 }
 
@@ -9570,7 +9571,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueInt32() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueInt16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval827 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueInt16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval828 bool, err os.Error) {
   err = p.SendSetSceneValueInt16(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueInt16()
@@ -9584,11 +9585,11 @@ func (p *RemoteManagerClient) SendSetSceneValueInt16(_sceneId byte, _valueId *Re
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValue_Int16", thrift.CALL, p.SeqId)
-  args828 := NewSetSceneValueInt16Args()
-  args828._sceneId = _sceneId
-  args828._valueId = _valueId
-  args828._value = _value
-  err = args828.Write(oprot)
+  args829 := NewSetSceneValueInt16Args()
+  args829._sceneId = _sceneId
+  args829._valueId = _valueId
+  args829._value = _value
+  err = args829.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9606,25 +9607,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueInt16() (value bool, err os.Error
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error830 := thrift.NewTApplicationExceptionDefault()
-    error831, err := error830.Read(iprot)
+    error831 := thrift.NewTApplicationExceptionDefault()
+    error832, err := error831.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error831
+    err = error832
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result829 := NewSetSceneValueInt16Result()
-  err = result829.Read(iprot)
+  result830 := NewSetSceneValueInt16Result()
+  err = result830.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result829.Success
+  value = result830.Success
   return
 }
 
@@ -9641,7 +9642,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueInt16() (value bool, err os.Error
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval832 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval833 bool, err os.Error) {
   err = p.SendSetSceneValueString(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueString()
@@ -9655,11 +9656,11 @@ func (p *RemoteManagerClient) SendSetSceneValueString(_sceneId byte, _valueId *R
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValue_String", thrift.CALL, p.SeqId)
-  args833 := NewSetSceneValueStringArgs()
-  args833._sceneId = _sceneId
-  args833._valueId = _valueId
-  args833._value = _value
-  err = args833.Write(oprot)
+  args834 := NewSetSceneValueStringArgs()
+  args834._sceneId = _sceneId
+  args834._valueId = _valueId
+  args834._value = _value
+  err = args834.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9677,25 +9678,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueString() (value bool, err os.Erro
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error835 := thrift.NewTApplicationExceptionDefault()
-    error836, err := error835.Read(iprot)
+    error836 := thrift.NewTApplicationExceptionDefault()
+    error837, err := error836.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error836
+    err = error837
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result834 := NewSetSceneValueStringResult()
-  err = result834.Read(iprot)
+  result835 := NewSetSceneValueStringResult()
+  err = result835.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result834.Success
+  value = result835.Success
   return
 }
 
@@ -9712,7 +9713,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueString() (value bool, err os.Erro
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueListSelectionString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval837 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueListSelectionString(_sceneId byte, _valueId *RemoteValueID, _value string) (retval838 bool, err os.Error) {
   err = p.SendSetSceneValueListSelectionString(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueListSelectionString()
@@ -9726,11 +9727,11 @@ func (p *RemoteManagerClient) SendSetSceneValueListSelectionString(_sceneId byte
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValueListSelection_String", thrift.CALL, p.SeqId)
-  args838 := NewSetSceneValueListSelectionStringArgs()
-  args838._sceneId = _sceneId
-  args838._valueId = _valueId
-  args838._value = _value
-  err = args838.Write(oprot)
+  args839 := NewSetSceneValueListSelectionStringArgs()
+  args839._sceneId = _sceneId
+  args839._valueId = _valueId
+  args839._value = _value
+  err = args839.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9748,25 +9749,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueListSelectionString() (value bool
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error840 := thrift.NewTApplicationExceptionDefault()
-    error841, err := error840.Read(iprot)
+    error841 := thrift.NewTApplicationExceptionDefault()
+    error842, err := error841.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error841
+    err = error842
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result839 := NewSetSceneValueListSelectionStringResult()
-  err = result839.Read(iprot)
+  result840 := NewSetSceneValueListSelectionStringResult()
+  err = result840.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result839.Success
+  value = result840.Success
   return
 }
 
@@ -9783,7 +9784,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueListSelectionString() (value bool
  *  - _valueId
  *  - _value
  */
-func (p *RemoteManagerClient) SetSceneValueListSelectionInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval842 bool, err os.Error) {
+func (p *RemoteManagerClient) SetSceneValueListSelectionInt32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval843 bool, err os.Error) {
   err = p.SendSetSceneValueListSelectionInt32(_sceneId, _valueId, _value)
   if err != nil { return }
   return p.RecvSetSceneValueListSelectionInt32()
@@ -9797,11 +9798,11 @@ func (p *RemoteManagerClient) SendSetSceneValueListSelectionInt32(_sceneId byte,
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneValueListSelection_Int32", thrift.CALL, p.SeqId)
-  args843 := NewSetSceneValueListSelectionInt32Args()
-  args843._sceneId = _sceneId
-  args843._valueId = _valueId
-  args843._value = _value
-  err = args843.Write(oprot)
+  args844 := NewSetSceneValueListSelectionInt32Args()
+  args844._sceneId = _sceneId
+  args844._valueId = _valueId
+  args844._value = _value
+  err = args844.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9819,25 +9820,25 @@ func (p *RemoteManagerClient) RecvSetSceneValueListSelectionInt32() (value bool,
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error845 := thrift.NewTApplicationExceptionDefault()
-    error846, err := error845.Read(iprot)
+    error846 := thrift.NewTApplicationExceptionDefault()
+    error847, err := error846.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error846
+    err = error847
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result844 := NewSetSceneValueListSelectionInt32Result()
-  err = result844.Read(iprot)
+  result845 := NewSetSceneValueListSelectionInt32Result()
+  err = result845.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result844.Success
+  value = result845.Success
   return
 }
 
@@ -9850,7 +9851,7 @@ func (p *RemoteManagerClient) RecvSetSceneValueListSelectionInt32() (value bool,
  * Parameters:
  *  - _sceneId
  */
-func (p *RemoteManagerClient) GetSceneLabel(_sceneId byte) (retval847 string, err os.Error) {
+func (p *RemoteManagerClient) GetSceneLabel(_sceneId byte) (retval848 string, err os.Error) {
   err = p.SendGetSceneLabel(_sceneId)
   if err != nil { return }
   return p.RecvGetSceneLabel()
@@ -9864,9 +9865,9 @@ func (p *RemoteManagerClient) SendGetSceneLabel(_sceneId byte)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("GetSceneLabel", thrift.CALL, p.SeqId)
-  args848 := NewGetSceneLabelArgs()
-  args848._sceneId = _sceneId
-  err = args848.Write(oprot)
+  args849 := NewGetSceneLabelArgs()
+  args849._sceneId = _sceneId
+  err = args849.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9884,25 +9885,25 @@ func (p *RemoteManagerClient) RecvGetSceneLabel() (value string, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error850 := thrift.NewTApplicationExceptionDefault()
-    error851, err := error850.Read(iprot)
+    error851 := thrift.NewTApplicationExceptionDefault()
+    error852, err := error851.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error851
+    err = error852
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result849 := NewGetSceneLabelResult()
-  err = result849.Read(iprot)
+  result850 := NewGetSceneLabelResult()
+  err = result850.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result849.Success
+  value = result850.Success
   return
 }
 
@@ -9930,10 +9931,10 @@ func (p *RemoteManagerClient) SendSetSceneLabel(_sceneId byte, _value string)(er
   }
   p.SeqId++
   oprot.WriteMessageBegin("SetSceneLabel", thrift.CALL, p.SeqId)
-  args853 := NewSetSceneLabelArgs()
-  args853._sceneId = _sceneId
-  args853._value = _value
-  err = args853.Write(oprot)
+  args854 := NewSetSceneLabelArgs()
+  args854._sceneId = _sceneId
+  args854._value = _value
+  err = args854.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -9951,23 +9952,23 @@ func (p *RemoteManagerClient) RecvSetSceneLabel() (err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error855 := thrift.NewTApplicationExceptionDefault()
-    error856, err := error855.Read(iprot)
+    error856 := thrift.NewTApplicationExceptionDefault()
+    error857, err := error856.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error856
+    err = error857
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result854 := NewSetSceneLabelResult()
-  err = result854.Read(iprot)
+  result855 := NewSetSceneLabelResult()
+  err = result855.Read(iprot)
   iprot.ReadMessageEnd()
   return
 }
@@ -9981,7 +9982,7 @@ func (p *RemoteManagerClient) RecvSetSceneLabel() (err os.Error) {
  * Parameters:
  *  - _sceneId
  */
-func (p *RemoteManagerClient) SceneExists(_sceneId byte) (retval857 bool, err os.Error) {
+func (p *RemoteManagerClient) SceneExists(_sceneId byte) (retval858 bool, err os.Error) {
   err = p.SendSceneExists(_sceneId)
   if err != nil { return }
   return p.RecvSceneExists()
@@ -9995,9 +9996,9 @@ func (p *RemoteManagerClient) SendSceneExists(_sceneId byte)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("SceneExists", thrift.CALL, p.SeqId)
-  args858 := NewSceneExistsArgs()
-  args858._sceneId = _sceneId
-  err = args858.Write(oprot)
+  args859 := NewSceneExistsArgs()
+  args859._sceneId = _sceneId
+  err = args859.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -10015,25 +10016,25 @@ func (p *RemoteManagerClient) RecvSceneExists() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error860 := thrift.NewTApplicationExceptionDefault()
-    error861, err := error860.Read(iprot)
+    error861 := thrift.NewTApplicationExceptionDefault()
+    error862, err := error861.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error861
+    err = error862
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result859 := NewSceneExistsResult()
-  err = result859.Read(iprot)
+  result860 := NewSceneExistsResult()
+  err = result860.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result859.Success
+  value = result860.Success
   return
 }
 
@@ -10046,7 +10047,7 @@ func (p *RemoteManagerClient) RecvSceneExists() (value bool, err os.Error) {
  * Parameters:
  *  - _sceneId
  */
-func (p *RemoteManagerClient) ActivateScene(_sceneId byte) (retval862 bool, err os.Error) {
+func (p *RemoteManagerClient) ActivateScene(_sceneId byte) (retval863 bool, err os.Error) {
   err = p.SendActivateScene(_sceneId)
   if err != nil { return }
   return p.RecvActivateScene()
@@ -10060,9 +10061,9 @@ func (p *RemoteManagerClient) SendActivateScene(_sceneId byte)(err os.Error) {
   }
   p.SeqId++
   oprot.WriteMessageBegin("ActivateScene", thrift.CALL, p.SeqId)
-  args863 := NewActivateSceneArgs()
-  args863._sceneId = _sceneId
-  err = args863.Write(oprot)
+  args864 := NewActivateSceneArgs()
+  args864._sceneId = _sceneId
+  err = args864.Write(oprot)
   oprot.WriteMessageEnd()
   oprot.Transport().Flush()
   return
@@ -10080,25 +10081,79 @@ func (p *RemoteManagerClient) RecvActivateScene() (value bool, err os.Error) {
     return
   }
   if mTypeId == thrift.EXCEPTION {
-    error865 := thrift.NewTApplicationExceptionDefault()
-    error866, err := error865.Read(iprot)
+    error866 := thrift.NewTApplicationExceptionDefault()
+    error867, err := error866.Read(iprot)
     if err != nil {
       return
     }
     if err = iprot.ReadMessageEnd(); err != nil {
       return
     }
-    err = error866
+    err = error867
     return
   }
   if p.SeqId != seqId {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result864 := NewActivateSceneResult()
-  err = result864.Read(iprot)
+  result865 := NewActivateSceneResult()
+  err = result865.Read(iprot)
   iprot.ReadMessageEnd()
-  value = result864.Success
+  value = result865.Success
+  return
+}
+
+func (p *RemoteManagerClient) SendAllValues() (err os.Error) {
+  err = p.SendSendAllValues()
+  if err != nil { return }
+  return p.RecvSendAllValues()
+}
+
+func (p *RemoteManagerClient) SendSendAllValues()(err os.Error) {
+  oprot := p.OutputProtocol
+  if oprot != nil {
+    oprot = p.ProtocolFactory.GetProtocol(p.Transport)
+    p.OutputProtocol = oprot
+  }
+  p.SeqId++
+  oprot.WriteMessageBegin("SendAllValues", thrift.CALL, p.SeqId)
+  args869 := NewSendAllValuesArgs()
+  err = args869.Write(oprot)
+  oprot.WriteMessageEnd()
+  oprot.Transport().Flush()
+  return
+}
+
+
+func (p *RemoteManagerClient) RecvSendAllValues() (err os.Error) {
+  iprot := p.InputProtocol
+  if iprot == nil {
+    iprot = p.ProtocolFactory.GetProtocol(p.Transport)
+    p.InputProtocol = iprot
+  }
+  _, mTypeId, seqId, err := iprot.ReadMessageBegin()
+  if err != nil {
+    return
+  }
+  if mTypeId == thrift.EXCEPTION {
+    error871 := thrift.NewTApplicationExceptionDefault()
+    error872, err := error871.Read(iprot)
+    if err != nil {
+      return
+    }
+    if err = iprot.ReadMessageEnd(); err != nil {
+      return
+    }
+    err = error872
+    return
+  }
+  if p.SeqId != seqId {
+    err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
+    return
+  }
+  result870 := NewSendAllValuesResult()
+  err = result870.Read(iprot)
+  iprot.ReadMessageEnd()
   return
 }
 
@@ -10127,132 +10182,133 @@ func (p *RemoteManagerProcessor) ProcessorMap() map[string]thrift.TProcessorFunc
 
 func NewRemoteManagerProcessor(handler IRemoteManager) *RemoteManagerProcessor {
 
-  self867 := &RemoteManagerProcessor{handler:handler, processorMap:make(map[string]thrift.TProcessorFunction)}
-  self867.processorMap["WriteConfig"] = &remoteManagerProcessorWriteConfig{handler:handler}
-  self867.processorMap["GetControllerNodeId"] = &remoteManagerProcessorGetControllerNodeId{handler:handler}
-  self867.processorMap["IsPrimaryController"] = &remoteManagerProcessorIsPrimaryController{handler:handler}
-  self867.processorMap["IsStaticUpdateController"] = &remoteManagerProcessorIsStaticUpdateController{handler:handler}
-  self867.processorMap["IsBridgeController"] = &remoteManagerProcessorIsBridgeController{handler:handler}
-  self867.processorMap["GetLibraryVersion"] = &remoteManagerProcessorGetLibraryVersion{handler:handler}
-  self867.processorMap["GetLibraryTypeName"] = &remoteManagerProcessorGetLibraryTypeName{handler:handler}
-  self867.processorMap["GetSendQueueCount"] = &remoteManagerProcessorGetSendQueueCount{handler:handler}
-  self867.processorMap["GetPollInterval"] = &remoteManagerProcessorGetPollInterval{handler:handler}
-  self867.processorMap["SetPollInterval"] = &remoteManagerProcessorSetPollInterval{handler:handler}
-  self867.processorMap["EnablePoll"] = &remoteManagerProcessorEnablePoll{handler:handler}
-  self867.processorMap["DisablePoll"] = &remoteManagerProcessorDisablePoll{handler:handler}
-  self867.processorMap["isPolled"] = &remoteManagerProcessorIsPolled{handler:handler}
-  self867.processorMap["RefreshNodeInfo"] = &remoteManagerProcessorRefreshNodeInfo{handler:handler}
-  self867.processorMap["RequestNodeState"] = &remoteManagerProcessorRequestNodeState{handler:handler}
-  self867.processorMap["RequestNodeDynamic"] = &remoteManagerProcessorRequestNodeDynamic{handler:handler}
-  self867.processorMap["IsNodeListeningDevice"] = &remoteManagerProcessorIsNodeListeningDevice{handler:handler}
-  self867.processorMap["IsNodeRoutingDevice"] = &remoteManagerProcessorIsNodeRoutingDevice{handler:handler}
-  self867.processorMap["GetNodeMaxBaudRate"] = &remoteManagerProcessorGetNodeMaxBaudRate{handler:handler}
-  self867.processorMap["GetNodeVersion"] = &remoteManagerProcessorGetNodeVersion{handler:handler}
-  self867.processorMap["GetNodeSecurity"] = &remoteManagerProcessorGetNodeSecurity{handler:handler}
-  self867.processorMap["GetNodeBasic"] = &remoteManagerProcessorGetNodeBasic{handler:handler}
-  self867.processorMap["GetNodeGeneric"] = &remoteManagerProcessorGetNodeGeneric{handler:handler}
-  self867.processorMap["GetNodeSpecific"] = &remoteManagerProcessorGetNodeSpecific{handler:handler}
-  self867.processorMap["GetNodeType"] = &remoteManagerProcessorGetNodeType{handler:handler}
-  self867.processorMap["GetNodeNeighbors"] = &remoteManagerProcessorGetNodeNeighbors{handler:handler}
-  self867.processorMap["GetNodeManufacturerName"] = &remoteManagerProcessorGetNodeManufacturerName{handler:handler}
-  self867.processorMap["GetNodeProductName"] = &remoteManagerProcessorGetNodeProductName{handler:handler}
-  self867.processorMap["GetNodeName"] = &remoteManagerProcessorGetNodeName{handler:handler}
-  self867.processorMap["GetNodeLocation"] = &remoteManagerProcessorGetNodeLocation{handler:handler}
-  self867.processorMap["GetNodeManufacturerId"] = &remoteManagerProcessorGetNodeManufacturerId{handler:handler}
-  self867.processorMap["GetNodeProductType"] = &remoteManagerProcessorGetNodeProductType{handler:handler}
-  self867.processorMap["GetNodeProductId"] = &remoteManagerProcessorGetNodeProductId{handler:handler}
-  self867.processorMap["SetNodeManufacturerName"] = &remoteManagerProcessorSetNodeManufacturerName{handler:handler}
-  self867.processorMap["SetNodeProductName"] = &remoteManagerProcessorSetNodeProductName{handler:handler}
-  self867.processorMap["SetNodeName"] = &remoteManagerProcessorSetNodeName{handler:handler}
-  self867.processorMap["SetNodeLocation"] = &remoteManagerProcessorSetNodeLocation{handler:handler}
-  self867.processorMap["SetNodeOn"] = &remoteManagerProcessorSetNodeOn{handler:handler}
-  self867.processorMap["SetNodeOff"] = &remoteManagerProcessorSetNodeOff{handler:handler}
-  self867.processorMap["SetNodeLevel"] = &remoteManagerProcessorSetNodeLevel{handler:handler}
-  self867.processorMap["IsNodeInfoReceived"] = &remoteManagerProcessorIsNodeInfoReceived{handler:handler}
-  self867.processorMap["GetNodeClassInformation"] = &remoteManagerProcessorGetNodeClassInformation{handler:handler}
-  self867.processorMap["GetValueLabel"] = &remoteManagerProcessorGetValueLabel{handler:handler}
-  self867.processorMap["SetValueLabel"] = &remoteManagerProcessorSetValueLabel{handler:handler}
-  self867.processorMap["GetValueUnits"] = &remoteManagerProcessorGetValueUnits{handler:handler}
-  self867.processorMap["SetValueUnits"] = &remoteManagerProcessorSetValueUnits{handler:handler}
-  self867.processorMap["GetValueHelp"] = &remoteManagerProcessorGetValueHelp{handler:handler}
-  self867.processorMap["SetValueHelp"] = &remoteManagerProcessorSetValueHelp{handler:handler}
-  self867.processorMap["GetValueMin"] = &remoteManagerProcessorGetValueMin{handler:handler}
-  self867.processorMap["GetValueMax"] = &remoteManagerProcessorGetValueMax{handler:handler}
-  self867.processorMap["IsValueReadOnly"] = &remoteManagerProcessorIsValueReadOnly{handler:handler}
-  self867.processorMap["IsValueWriteOnly"] = &remoteManagerProcessorIsValueWriteOnly{handler:handler}
-  self867.processorMap["IsValueSet"] = &remoteManagerProcessorIsValueSet{handler:handler}
-  self867.processorMap["GetValueAsBool"] = &remoteManagerProcessorGetValueAsBool{handler:handler}
-  self867.processorMap["GetValueAsByte"] = &remoteManagerProcessorGetValueAsByte{handler:handler}
-  self867.processorMap["GetValueAsFloat"] = &remoteManagerProcessorGetValueAsFloat{handler:handler}
-  self867.processorMap["GetValueAsInt"] = &remoteManagerProcessorGetValueAsInt{handler:handler}
-  self867.processorMap["GetValueAsShort"] = &remoteManagerProcessorGetValueAsShort{handler:handler}
-  self867.processorMap["GetValueAsString"] = &remoteManagerProcessorGetValueAsString{handler:handler}
-  self867.processorMap["GetValueListSelection_String"] = &remoteManagerProcessorGetValueListSelectionString{handler:handler}
-  self867.processorMap["GetValueListSelection_Int32"] = &remoteManagerProcessorGetValueListSelectionInt32{handler:handler}
-  self867.processorMap["GetValueListItems"] = &remoteManagerProcessorGetValueListItems{handler:handler}
-  self867.processorMap["GetValueFloatPrecision"] = &remoteManagerProcessorGetValueFloatPrecision{handler:handler}
-  self867.processorMap["SetValue_Bool"] = &remoteManagerProcessorSetValueBool{handler:handler}
-  self867.processorMap["SetValue_UInt8"] = &remoteManagerProcessorSetValueUInt8{handler:handler}
-  self867.processorMap["SetValue_Float"] = &remoteManagerProcessorSetValueFloat{handler:handler}
-  self867.processorMap["SetValue_Int32"] = &remoteManagerProcessorSetValueInt32{handler:handler}
-  self867.processorMap["SetValue_Int16"] = &remoteManagerProcessorSetValueInt16{handler:handler}
-  self867.processorMap["SetValue_String"] = &remoteManagerProcessorSetValueString{handler:handler}
-  self867.processorMap["SetValueListSelection"] = &remoteManagerProcessorSetValueListSelection{handler:handler}
-  self867.processorMap["PressButton"] = &remoteManagerProcessorPressButton{handler:handler}
-  self867.processorMap["ReleaseButton"] = &remoteManagerProcessorReleaseButton{handler:handler}
-  self867.processorMap["GetNumSwitchPoints"] = &remoteManagerProcessorGetNumSwitchPoints{handler:handler}
-  self867.processorMap["SetSwitchPoint"] = &remoteManagerProcessorSetSwitchPoint{handler:handler}
-  self867.processorMap["RemoveSwitchPoint"] = &remoteManagerProcessorRemoveSwitchPoint{handler:handler}
-  self867.processorMap["ClearSwitchPoints"] = &remoteManagerProcessorClearSwitchPoints{handler:handler}
-  self867.processorMap["GetSwitchPoint"] = &remoteManagerProcessorGetSwitchPoint{handler:handler}
-  self867.processorMap["SwitchAllOn"] = &remoteManagerProcessorSwitchAllOn{handler:handler}
-  self867.processorMap["SwitchAllOff"] = &remoteManagerProcessorSwitchAllOff{handler:handler}
-  self867.processorMap["SetConfigParam"] = &remoteManagerProcessorSetConfigParam{handler:handler}
-  self867.processorMap["RequestConfigParam"] = &remoteManagerProcessorRequestConfigParam{handler:handler}
-  self867.processorMap["RequestAllConfigParams"] = &remoteManagerProcessorRequestAllConfigParams{handler:handler}
-  self867.processorMap["GetNumGroups"] = &remoteManagerProcessorGetNumGroups{handler:handler}
-  self867.processorMap["GetAssociations"] = &remoteManagerProcessorGetAssociations{handler:handler}
-  self867.processorMap["GetMaxAssociations"] = &remoteManagerProcessorGetMaxAssociations{handler:handler}
-  self867.processorMap["GetGroupLabel"] = &remoteManagerProcessorGetGroupLabel{handler:handler}
-  self867.processorMap["AddAssociation"] = &remoteManagerProcessorAddAssociation{handler:handler}
-  self867.processorMap["RemoveAssociation"] = &remoteManagerProcessorRemoveAssociation{handler:handler}
-  self867.processorMap["ResetController"] = &remoteManagerProcessorResetController{handler:handler}
-  self867.processorMap["SoftReset"] = &remoteManagerProcessorSoftReset{handler:handler}
-  self867.processorMap["GetNumScenes"] = &remoteManagerProcessorGetNumScenes{handler:handler}
-  self867.processorMap["GetAllScenes"] = &remoteManagerProcessorGetAllScenes{handler:handler}
-  self867.processorMap["CreateScene"] = &remoteManagerProcessorCreateScene{handler:handler}
-  self867.processorMap["RemoveScene"] = &remoteManagerProcessorRemoveScene{handler:handler}
-  self867.processorMap["AddSceneValue_Bool"] = &remoteManagerProcessorAddSceneValueBool{handler:handler}
-  self867.processorMap["AddSceneValue_Uint8"] = &remoteManagerProcessorAddSceneValueUint8{handler:handler}
-  self867.processorMap["AddSceneValue_Float"] = &remoteManagerProcessorAddSceneValueFloat{handler:handler}
-  self867.processorMap["AddSceneValue_Int32"] = &remoteManagerProcessorAddSceneValueInt32{handler:handler}
-  self867.processorMap["AddSceneValue_Int16"] = &remoteManagerProcessorAddSceneValueInt16{handler:handler}
-  self867.processorMap["AddSceneValue_String"] = &remoteManagerProcessorAddSceneValueString{handler:handler}
-  self867.processorMap["AddSceneValueListSelection_String"] = &remoteManagerProcessorAddSceneValueListSelectionString{handler:handler}
-  self867.processorMap["AddSceneValueListSelection_Int32"] = &remoteManagerProcessorAddSceneValueListSelectionInt32{handler:handler}
-  self867.processorMap["RemoveSceneValue"] = &remoteManagerProcessorRemoveSceneValue{handler:handler}
-  self867.processorMap["SceneGetValues"] = &remoteManagerProcessorSceneGetValues{handler:handler}
-  self867.processorMap["SceneGetValueAsBool"] = &remoteManagerProcessorSceneGetValueAsBool{handler:handler}
-  self867.processorMap["SceneGetValueAsByte"] = &remoteManagerProcessorSceneGetValueAsByte{handler:handler}
-  self867.processorMap["SceneGetValueAsFloat"] = &remoteManagerProcessorSceneGetValueAsFloat{handler:handler}
-  self867.processorMap["SceneGetValueAsInt"] = &remoteManagerProcessorSceneGetValueAsInt{handler:handler}
-  self867.processorMap["SceneGetValueAsShort"] = &remoteManagerProcessorSceneGetValueAsShort{handler:handler}
-  self867.processorMap["SceneGetValueAsString"] = &remoteManagerProcessorSceneGetValueAsString{handler:handler}
-  self867.processorMap["SceneGetValueListSelection_String"] = &remoteManagerProcessorSceneGetValueListSelectionString{handler:handler}
-  self867.processorMap["SceneGetValueListSelection_Int32"] = &remoteManagerProcessorSceneGetValueListSelectionInt32{handler:handler}
-  self867.processorMap["SetSceneValue_Bool"] = &remoteManagerProcessorSetSceneValueBool{handler:handler}
-  self867.processorMap["SetSceneValue_Uint8"] = &remoteManagerProcessorSetSceneValueUint8{handler:handler}
-  self867.processorMap["SetSceneValue_Float"] = &remoteManagerProcessorSetSceneValueFloat{handler:handler}
-  self867.processorMap["SetSceneValue_Int32"] = &remoteManagerProcessorSetSceneValueInt32{handler:handler}
-  self867.processorMap["SetSceneValue_Int16"] = &remoteManagerProcessorSetSceneValueInt16{handler:handler}
-  self867.processorMap["SetSceneValue_String"] = &remoteManagerProcessorSetSceneValueString{handler:handler}
-  self867.processorMap["SetSceneValueListSelection_String"] = &remoteManagerProcessorSetSceneValueListSelectionString{handler:handler}
-  self867.processorMap["SetSceneValueListSelection_Int32"] = &remoteManagerProcessorSetSceneValueListSelectionInt32{handler:handler}
-  self867.processorMap["GetSceneLabel"] = &remoteManagerProcessorGetSceneLabel{handler:handler}
-  self867.processorMap["SetSceneLabel"] = &remoteManagerProcessorSetSceneLabel{handler:handler}
-  self867.processorMap["SceneExists"] = &remoteManagerProcessorSceneExists{handler:handler}
-  self867.processorMap["ActivateScene"] = &remoteManagerProcessorActivateScene{handler:handler}
-return self867
+  self873 := &RemoteManagerProcessor{handler:handler, processorMap:make(map[string]thrift.TProcessorFunction)}
+  self873.processorMap["WriteConfig"] = &remoteManagerProcessorWriteConfig{handler:handler}
+  self873.processorMap["GetControllerNodeId"] = &remoteManagerProcessorGetControllerNodeId{handler:handler}
+  self873.processorMap["IsPrimaryController"] = &remoteManagerProcessorIsPrimaryController{handler:handler}
+  self873.processorMap["IsStaticUpdateController"] = &remoteManagerProcessorIsStaticUpdateController{handler:handler}
+  self873.processorMap["IsBridgeController"] = &remoteManagerProcessorIsBridgeController{handler:handler}
+  self873.processorMap["GetLibraryVersion"] = &remoteManagerProcessorGetLibraryVersion{handler:handler}
+  self873.processorMap["GetLibraryTypeName"] = &remoteManagerProcessorGetLibraryTypeName{handler:handler}
+  self873.processorMap["GetSendQueueCount"] = &remoteManagerProcessorGetSendQueueCount{handler:handler}
+  self873.processorMap["GetPollInterval"] = &remoteManagerProcessorGetPollInterval{handler:handler}
+  self873.processorMap["SetPollInterval"] = &remoteManagerProcessorSetPollInterval{handler:handler}
+  self873.processorMap["EnablePoll"] = &remoteManagerProcessorEnablePoll{handler:handler}
+  self873.processorMap["DisablePoll"] = &remoteManagerProcessorDisablePoll{handler:handler}
+  self873.processorMap["isPolled"] = &remoteManagerProcessorIsPolled{handler:handler}
+  self873.processorMap["RefreshNodeInfo"] = &remoteManagerProcessorRefreshNodeInfo{handler:handler}
+  self873.processorMap["RequestNodeState"] = &remoteManagerProcessorRequestNodeState{handler:handler}
+  self873.processorMap["RequestNodeDynamic"] = &remoteManagerProcessorRequestNodeDynamic{handler:handler}
+  self873.processorMap["IsNodeListeningDevice"] = &remoteManagerProcessorIsNodeListeningDevice{handler:handler}
+  self873.processorMap["IsNodeRoutingDevice"] = &remoteManagerProcessorIsNodeRoutingDevice{handler:handler}
+  self873.processorMap["GetNodeMaxBaudRate"] = &remoteManagerProcessorGetNodeMaxBaudRate{handler:handler}
+  self873.processorMap["GetNodeVersion"] = &remoteManagerProcessorGetNodeVersion{handler:handler}
+  self873.processorMap["GetNodeSecurity"] = &remoteManagerProcessorGetNodeSecurity{handler:handler}
+  self873.processorMap["GetNodeBasic"] = &remoteManagerProcessorGetNodeBasic{handler:handler}
+  self873.processorMap["GetNodeGeneric"] = &remoteManagerProcessorGetNodeGeneric{handler:handler}
+  self873.processorMap["GetNodeSpecific"] = &remoteManagerProcessorGetNodeSpecific{handler:handler}
+  self873.processorMap["GetNodeType"] = &remoteManagerProcessorGetNodeType{handler:handler}
+  self873.processorMap["GetNodeNeighbors"] = &remoteManagerProcessorGetNodeNeighbors{handler:handler}
+  self873.processorMap["GetNodeManufacturerName"] = &remoteManagerProcessorGetNodeManufacturerName{handler:handler}
+  self873.processorMap["GetNodeProductName"] = &remoteManagerProcessorGetNodeProductName{handler:handler}
+  self873.processorMap["GetNodeName"] = &remoteManagerProcessorGetNodeName{handler:handler}
+  self873.processorMap["GetNodeLocation"] = &remoteManagerProcessorGetNodeLocation{handler:handler}
+  self873.processorMap["GetNodeManufacturerId"] = &remoteManagerProcessorGetNodeManufacturerId{handler:handler}
+  self873.processorMap["GetNodeProductType"] = &remoteManagerProcessorGetNodeProductType{handler:handler}
+  self873.processorMap["GetNodeProductId"] = &remoteManagerProcessorGetNodeProductId{handler:handler}
+  self873.processorMap["SetNodeManufacturerName"] = &remoteManagerProcessorSetNodeManufacturerName{handler:handler}
+  self873.processorMap["SetNodeProductName"] = &remoteManagerProcessorSetNodeProductName{handler:handler}
+  self873.processorMap["SetNodeName"] = &remoteManagerProcessorSetNodeName{handler:handler}
+  self873.processorMap["SetNodeLocation"] = &remoteManagerProcessorSetNodeLocation{handler:handler}
+  self873.processorMap["SetNodeOn"] = &remoteManagerProcessorSetNodeOn{handler:handler}
+  self873.processorMap["SetNodeOff"] = &remoteManagerProcessorSetNodeOff{handler:handler}
+  self873.processorMap["SetNodeLevel"] = &remoteManagerProcessorSetNodeLevel{handler:handler}
+  self873.processorMap["IsNodeInfoReceived"] = &remoteManagerProcessorIsNodeInfoReceived{handler:handler}
+  self873.processorMap["GetNodeClassInformation"] = &remoteManagerProcessorGetNodeClassInformation{handler:handler}
+  self873.processorMap["GetValueLabel"] = &remoteManagerProcessorGetValueLabel{handler:handler}
+  self873.processorMap["SetValueLabel"] = &remoteManagerProcessorSetValueLabel{handler:handler}
+  self873.processorMap["GetValueUnits"] = &remoteManagerProcessorGetValueUnits{handler:handler}
+  self873.processorMap["SetValueUnits"] = &remoteManagerProcessorSetValueUnits{handler:handler}
+  self873.processorMap["GetValueHelp"] = &remoteManagerProcessorGetValueHelp{handler:handler}
+  self873.processorMap["SetValueHelp"] = &remoteManagerProcessorSetValueHelp{handler:handler}
+  self873.processorMap["GetValueMin"] = &remoteManagerProcessorGetValueMin{handler:handler}
+  self873.processorMap["GetValueMax"] = &remoteManagerProcessorGetValueMax{handler:handler}
+  self873.processorMap["IsValueReadOnly"] = &remoteManagerProcessorIsValueReadOnly{handler:handler}
+  self873.processorMap["IsValueWriteOnly"] = &remoteManagerProcessorIsValueWriteOnly{handler:handler}
+  self873.processorMap["IsValueSet"] = &remoteManagerProcessorIsValueSet{handler:handler}
+  self873.processorMap["GetValueAsBool"] = &remoteManagerProcessorGetValueAsBool{handler:handler}
+  self873.processorMap["GetValueAsByte"] = &remoteManagerProcessorGetValueAsByte{handler:handler}
+  self873.processorMap["GetValueAsFloat"] = &remoteManagerProcessorGetValueAsFloat{handler:handler}
+  self873.processorMap["GetValueAsInt"] = &remoteManagerProcessorGetValueAsInt{handler:handler}
+  self873.processorMap["GetValueAsShort"] = &remoteManagerProcessorGetValueAsShort{handler:handler}
+  self873.processorMap["GetValueAsString"] = &remoteManagerProcessorGetValueAsString{handler:handler}
+  self873.processorMap["GetValueListSelection_String"] = &remoteManagerProcessorGetValueListSelectionString{handler:handler}
+  self873.processorMap["GetValueListSelection_Int32"] = &remoteManagerProcessorGetValueListSelectionInt32{handler:handler}
+  self873.processorMap["GetValueListItems"] = &remoteManagerProcessorGetValueListItems{handler:handler}
+  self873.processorMap["GetValueFloatPrecision"] = &remoteManagerProcessorGetValueFloatPrecision{handler:handler}
+  self873.processorMap["SetValue_Bool"] = &remoteManagerProcessorSetValueBool{handler:handler}
+  self873.processorMap["SetValue_UInt8"] = &remoteManagerProcessorSetValueUInt8{handler:handler}
+  self873.processorMap["SetValue_Float"] = &remoteManagerProcessorSetValueFloat{handler:handler}
+  self873.processorMap["SetValue_Int32"] = &remoteManagerProcessorSetValueInt32{handler:handler}
+  self873.processorMap["SetValue_Int16"] = &remoteManagerProcessorSetValueInt16{handler:handler}
+  self873.processorMap["SetValue_String"] = &remoteManagerProcessorSetValueString{handler:handler}
+  self873.processorMap["SetValueListSelection"] = &remoteManagerProcessorSetValueListSelection{handler:handler}
+  self873.processorMap["PressButton"] = &remoteManagerProcessorPressButton{handler:handler}
+  self873.processorMap["ReleaseButton"] = &remoteManagerProcessorReleaseButton{handler:handler}
+  self873.processorMap["GetNumSwitchPoints"] = &remoteManagerProcessorGetNumSwitchPoints{handler:handler}
+  self873.processorMap["SetSwitchPoint"] = &remoteManagerProcessorSetSwitchPoint{handler:handler}
+  self873.processorMap["RemoveSwitchPoint"] = &remoteManagerProcessorRemoveSwitchPoint{handler:handler}
+  self873.processorMap["ClearSwitchPoints"] = &remoteManagerProcessorClearSwitchPoints{handler:handler}
+  self873.processorMap["GetSwitchPoint"] = &remoteManagerProcessorGetSwitchPoint{handler:handler}
+  self873.processorMap["SwitchAllOn"] = &remoteManagerProcessorSwitchAllOn{handler:handler}
+  self873.processorMap["SwitchAllOff"] = &remoteManagerProcessorSwitchAllOff{handler:handler}
+  self873.processorMap["SetConfigParam"] = &remoteManagerProcessorSetConfigParam{handler:handler}
+  self873.processorMap["RequestConfigParam"] = &remoteManagerProcessorRequestConfigParam{handler:handler}
+  self873.processorMap["RequestAllConfigParams"] = &remoteManagerProcessorRequestAllConfigParams{handler:handler}
+  self873.processorMap["GetNumGroups"] = &remoteManagerProcessorGetNumGroups{handler:handler}
+  self873.processorMap["GetAssociations"] = &remoteManagerProcessorGetAssociations{handler:handler}
+  self873.processorMap["GetMaxAssociations"] = &remoteManagerProcessorGetMaxAssociations{handler:handler}
+  self873.processorMap["GetGroupLabel"] = &remoteManagerProcessorGetGroupLabel{handler:handler}
+  self873.processorMap["AddAssociation"] = &remoteManagerProcessorAddAssociation{handler:handler}
+  self873.processorMap["RemoveAssociation"] = &remoteManagerProcessorRemoveAssociation{handler:handler}
+  self873.processorMap["ResetController"] = &remoteManagerProcessorResetController{handler:handler}
+  self873.processorMap["SoftReset"] = &remoteManagerProcessorSoftReset{handler:handler}
+  self873.processorMap["GetNumScenes"] = &remoteManagerProcessorGetNumScenes{handler:handler}
+  self873.processorMap["GetAllScenes"] = &remoteManagerProcessorGetAllScenes{handler:handler}
+  self873.processorMap["CreateScene"] = &remoteManagerProcessorCreateScene{handler:handler}
+  self873.processorMap["RemoveScene"] = &remoteManagerProcessorRemoveScene{handler:handler}
+  self873.processorMap["AddSceneValue_Bool"] = &remoteManagerProcessorAddSceneValueBool{handler:handler}
+  self873.processorMap["AddSceneValue_Uint8"] = &remoteManagerProcessorAddSceneValueUint8{handler:handler}
+  self873.processorMap["AddSceneValue_Float"] = &remoteManagerProcessorAddSceneValueFloat{handler:handler}
+  self873.processorMap["AddSceneValue_Int32"] = &remoteManagerProcessorAddSceneValueInt32{handler:handler}
+  self873.processorMap["AddSceneValue_Int16"] = &remoteManagerProcessorAddSceneValueInt16{handler:handler}
+  self873.processorMap["AddSceneValue_String"] = &remoteManagerProcessorAddSceneValueString{handler:handler}
+  self873.processorMap["AddSceneValueListSelection_String"] = &remoteManagerProcessorAddSceneValueListSelectionString{handler:handler}
+  self873.processorMap["AddSceneValueListSelection_Int32"] = &remoteManagerProcessorAddSceneValueListSelectionInt32{handler:handler}
+  self873.processorMap["RemoveSceneValue"] = &remoteManagerProcessorRemoveSceneValue{handler:handler}
+  self873.processorMap["SceneGetValues"] = &remoteManagerProcessorSceneGetValues{handler:handler}
+  self873.processorMap["SceneGetValueAsBool"] = &remoteManagerProcessorSceneGetValueAsBool{handler:handler}
+  self873.processorMap["SceneGetValueAsByte"] = &remoteManagerProcessorSceneGetValueAsByte{handler:handler}
+  self873.processorMap["SceneGetValueAsFloat"] = &remoteManagerProcessorSceneGetValueAsFloat{handler:handler}
+  self873.processorMap["SceneGetValueAsInt"] = &remoteManagerProcessorSceneGetValueAsInt{handler:handler}
+  self873.processorMap["SceneGetValueAsShort"] = &remoteManagerProcessorSceneGetValueAsShort{handler:handler}
+  self873.processorMap["SceneGetValueAsString"] = &remoteManagerProcessorSceneGetValueAsString{handler:handler}
+  self873.processorMap["SceneGetValueListSelection_String"] = &remoteManagerProcessorSceneGetValueListSelectionString{handler:handler}
+  self873.processorMap["SceneGetValueListSelection_Int32"] = &remoteManagerProcessorSceneGetValueListSelectionInt32{handler:handler}
+  self873.processorMap["SetSceneValue_Bool"] = &remoteManagerProcessorSetSceneValueBool{handler:handler}
+  self873.processorMap["SetSceneValue_Uint8"] = &remoteManagerProcessorSetSceneValueUint8{handler:handler}
+  self873.processorMap["SetSceneValue_Float"] = &remoteManagerProcessorSetSceneValueFloat{handler:handler}
+  self873.processorMap["SetSceneValue_Int32"] = &remoteManagerProcessorSetSceneValueInt32{handler:handler}
+  self873.processorMap["SetSceneValue_Int16"] = &remoteManagerProcessorSetSceneValueInt16{handler:handler}
+  self873.processorMap["SetSceneValue_String"] = &remoteManagerProcessorSetSceneValueString{handler:handler}
+  self873.processorMap["SetSceneValueListSelection_String"] = &remoteManagerProcessorSetSceneValueListSelectionString{handler:handler}
+  self873.processorMap["SetSceneValueListSelection_Int32"] = &remoteManagerProcessorSetSceneValueListSelectionInt32{handler:handler}
+  self873.processorMap["GetSceneLabel"] = &remoteManagerProcessorGetSceneLabel{handler:handler}
+  self873.processorMap["SetSceneLabel"] = &remoteManagerProcessorSetSceneLabel{handler:handler}
+  self873.processorMap["SceneExists"] = &remoteManagerProcessorSceneExists{handler:handler}
+  self873.processorMap["ActivateScene"] = &remoteManagerProcessorActivateScene{handler:handler}
+  self873.processorMap["SendAllValues"] = &remoteManagerProcessorSendAllValues{handler:handler}
+return self873
 }
 
 func (p *RemoteManagerProcessor) Process(iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
@@ -10262,12 +10318,12 @@ func (p *RemoteManagerProcessor) Process(iprot, oprot thrift.TProtocol) (success
   if !nameFound || process == nil {
     iprot.Skip(thrift.STRUCT)
     iprot.ReadMessageEnd()
-    x868 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function " + name)
+    x874 := thrift.NewTApplicationException(thrift.UNKNOWN_METHOD, "Unknown function " + name)
     oprot.WriteMessageBegin(name, thrift.EXCEPTION, seqId)
-    x868.Write(oprot)
+    x874.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
-    return false, x868
+    return false, x874
   }
   return process.Process(seqId, iprot, oprot)
 }
@@ -15604,6 +15660,49 @@ func (p *remoteManagerProcessorActivateScene) Process(seqId int32, iprot, oprot 
   return true, err
 }
 
+type remoteManagerProcessorSendAllValues struct {
+  handler IRemoteManager
+}
+
+func (p *remoteManagerProcessorSendAllValues) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
+  args := NewSendAllValuesArgs()
+  if err = args.Read(iprot); err != nil {
+    iprot.ReadMessageEnd()
+    x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
+    oprot.WriteMessageBegin("SendAllValues", thrift.EXCEPTION, seqId)
+    x.Write(oprot)
+    oprot.WriteMessageEnd()
+    oprot.Transport().Flush()
+    return
+  }
+  iprot.ReadMessageEnd()
+  result := NewSendAllValuesResult()
+  if err = p.handler.SendAllValues(); err != nil {
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SendAllValues: " + err.String())
+    oprot.WriteMessageBegin("SendAllValues", thrift.EXCEPTION, seqId)
+    x.Write(oprot)
+    oprot.WriteMessageEnd()
+    oprot.Transport().Flush()
+    return
+  }
+  if err2 := oprot.WriteMessageBegin("SendAllValues", thrift.REPLY, seqId); err2 != nil {
+    err = err2
+  }
+  if err2 := result.Write(oprot); err == nil && err2 != nil {
+    err = err2
+  }
+  if err2 := oprot.WriteMessageEnd(); err == nil && err2 != nil {
+    err = err2
+  }
+  if err2 := oprot.Transport().Flush(); err == nil && err2 != nil {
+    err = err2
+  }
+  if err != nil {
+    return
+  }
+  return true, err
+}
+
 
 // HELPER FUNCTIONS AND STRUCTURES
 
@@ -15668,9 +15767,9 @@ func (p *WriteConfigArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *WriteConfigArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v869, err870 := iprot.ReadI32()
-  if err870 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err870); }
-  p._homeId = v869
+  v875, err876 := iprot.ReadI32()
+  if err876 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err876); }
+  p._homeId = v875
   return err
 }
 
@@ -15900,9 +15999,9 @@ func (p *GetControllerNodeIdArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *GetControllerNodeIdArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v871, err872 := iprot.ReadI32()
-  if err872 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err872); }
-  p._homeId = v871
+  v877, err878 := iprot.ReadI32()
+  if err878 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err878); }
+  p._homeId = v877
   return err
 }
 
@@ -16043,9 +16142,9 @@ func (p *GetControllerNodeIdResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *GetControllerNodeIdResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v873, err874 := iprot.ReadByte()
-  if err874 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err874); }
-  p.Success = v873
+  v879, err880 := iprot.ReadByte()
+  if err880 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err880); }
+  p.Success = v879
   return err
 }
 
@@ -16190,9 +16289,9 @@ func (p *IsPrimaryControllerArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *IsPrimaryControllerArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v875, err876 := iprot.ReadI32()
-  if err876 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err876); }
-  p._homeId = v875
+  v881, err882 := iprot.ReadI32()
+  if err882 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err882); }
+  p._homeId = v881
   return err
 }
 
@@ -16333,9 +16432,9 @@ func (p *IsPrimaryControllerResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *IsPrimaryControllerResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v877, err878 := iprot.ReadBool()
-  if err878 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err878); }
-  p.Success = v877
+  v883, err884 := iprot.ReadBool()
+  if err884 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err884); }
+  p.Success = v883
   return err
 }
 
@@ -16477,9 +16576,9 @@ func (p *IsStaticUpdateControllerArgs) Read(iprot thrift.TProtocol) (err thrift.
 }
 
 func (p *IsStaticUpdateControllerArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v879, err880 := iprot.ReadI32()
-  if err880 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err880); }
-  p._homeId = v879
+  v885, err886 := iprot.ReadI32()
+  if err886 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err886); }
+  p._homeId = v885
   return err
 }
 
@@ -16620,9 +16719,9 @@ func (p *IsStaticUpdateControllerResult) Read(iprot thrift.TProtocol) (err thrif
 }
 
 func (p *IsStaticUpdateControllerResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v881, err882 := iprot.ReadBool()
-  if err882 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err882); }
-  p.Success = v881
+  v887, err888 := iprot.ReadBool()
+  if err888 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err888); }
+  p.Success = v887
   return err
 }
 
@@ -16764,9 +16863,9 @@ func (p *IsBridgeControllerArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *IsBridgeControllerArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v883, err884 := iprot.ReadI32()
-  if err884 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err884); }
-  p._homeId = v883
+  v889, err890 := iprot.ReadI32()
+  if err890 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err890); }
+  p._homeId = v889
   return err
 }
 
@@ -16907,9 +17006,9 @@ func (p *IsBridgeControllerResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *IsBridgeControllerResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v885, err886 := iprot.ReadBool()
-  if err886 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err886); }
-  p.Success = v885
+  v891, err892 := iprot.ReadBool()
+  if err892 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err892); }
+  p.Success = v891
   return err
 }
 
@@ -17051,9 +17150,9 @@ func (p *GetLibraryVersionArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetLibraryVersionArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v887, err888 := iprot.ReadI32()
-  if err888 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err888); }
-  p._homeId = v887
+  v893, err894 := iprot.ReadI32()
+  if err894 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err894); }
+  p._homeId = v893
   return err
 }
 
@@ -17194,9 +17293,9 @@ func (p *GetLibraryVersionResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *GetLibraryVersionResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v889, err890 := iprot.ReadString()
-  if err890 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err890); }
-  p.Success = v889
+  v895, err896 := iprot.ReadString()
+  if err896 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err896); }
+  p.Success = v895
   return err
 }
 
@@ -17341,9 +17440,9 @@ func (p *GetLibraryTypeNameArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetLibraryTypeNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v891, err892 := iprot.ReadI32()
-  if err892 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err892); }
-  p._homeId = v891
+  v897, err898 := iprot.ReadI32()
+  if err898 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err898); }
+  p._homeId = v897
   return err
 }
 
@@ -17484,9 +17583,9 @@ func (p *GetLibraryTypeNameResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetLibraryTypeNameResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v893, err894 := iprot.ReadString()
-  if err894 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err894); }
-  p.Success = v893
+  v899, err900 := iprot.ReadString()
+  if err900 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err900); }
+  p.Success = v899
   return err
 }
 
@@ -17631,9 +17730,9 @@ func (p *GetSendQueueCountArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetSendQueueCountArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v895, err896 := iprot.ReadI32()
-  if err896 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err896); }
-  p._homeId = v895
+  v901, err902 := iprot.ReadI32()
+  if err902 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err902); }
+  p._homeId = v901
   return err
 }
 
@@ -17774,9 +17873,9 @@ func (p *GetSendQueueCountResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *GetSendQueueCountResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v897, err898 := iprot.ReadI32()
-  if err898 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err898); }
-  p.Success = v897
+  v903, err904 := iprot.ReadI32()
+  if err904 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err904); }
+  p.Success = v903
   return err
 }
 
@@ -18010,9 +18109,9 @@ func (p *GetPollIntervalResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetPollIntervalResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v899, err900 := iprot.ReadI32()
-  if err900 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err900); }
-  p.Success = v899
+  v905, err906 := iprot.ReadI32()
+  if err906 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err906); }
+  p.Success = v905
   return err
 }
 
@@ -18157,9 +18256,9 @@ func (p *SetPollIntervalArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetPollIntervalArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v901, err902 := iprot.ReadI32()
-  if err902 != nil { return thrift.NewTProtocolExceptionReadField(1, "_seconds", p.ThriftName(), err902); }
-  p._seconds = v901
+  v907, err908 := iprot.ReadI32()
+  if err908 != nil { return thrift.NewTProtocolExceptionReadField(1, "_seconds", p.ThriftName(), err908); }
+  p._seconds = v907
   return err
 }
 
@@ -18390,8 +18489,8 @@ func (p *EnablePollArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcep
 
 func (p *EnablePollArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err905 := p._valueId.Read(iprot)
-  if err905 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err905); }
+  err911 := p._valueId.Read(iprot)
+  if err911 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err911); }
   return err
 }
 
@@ -18531,9 +18630,9 @@ func (p *EnablePollResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *EnablePollResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v906, err907 := iprot.ReadBool()
-  if err907 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err907); }
-  p.Success = v906
+  v912, err913 := iprot.ReadBool()
+  if err913 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err913); }
+  p.Success = v912
   return err
 }
 
@@ -18676,8 +18775,8 @@ func (p *DisablePollArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 
 func (p *DisablePollArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err910 := p._valueId.Read(iprot)
-  if err910 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err910); }
+  err916 := p._valueId.Read(iprot)
+  if err916 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err916); }
   return err
 }
 
@@ -18817,9 +18916,9 @@ func (p *DisablePollResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *DisablePollResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v911, err912 := iprot.ReadBool()
-  if err912 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err912); }
-  p.Success = v911
+  v917, err918 := iprot.ReadBool()
+  if err918 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err918); }
+  p.Success = v917
   return err
 }
 
@@ -18962,8 +19061,8 @@ func (p *IsPolledArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcepti
 
 func (p *IsPolledArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err915 := p._valueId.Read(iprot)
-  if err915 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err915); }
+  err921 := p._valueId.Read(iprot)
+  if err921 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err921); }
   return err
 }
 
@@ -19103,9 +19202,9 @@ func (p *IsPolledResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcep
 }
 
 func (p *IsPolledResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v916, err917 := iprot.ReadBool()
-  if err917 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err917); }
-  p.Success = v916
+  v922, err923 := iprot.ReadBool()
+  if err923 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err923); }
+  p.Success = v922
   return err
 }
 
@@ -19261,9 +19360,9 @@ func (p *RefreshNodeInfoArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *RefreshNodeInfoArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v918, err919 := iprot.ReadI32()
-  if err919 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err919); }
-  p._homeId = v918
+  v924, err925 := iprot.ReadI32()
+  if err925 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err925); }
+  p._homeId = v924
   return err
 }
 
@@ -19272,9 +19371,9 @@ func (p *RefreshNodeInfoArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *RefreshNodeInfoArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v920, err921 := iprot.ReadByte()
-  if err921 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err921); }
-  p._nodeId = v920
+  v926, err927 := iprot.ReadByte()
+  if err927 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err927); }
+  p._nodeId = v926
   return err
 }
 
@@ -19439,9 +19538,9 @@ func (p *RefreshNodeInfoResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *RefreshNodeInfoResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v922, err923 := iprot.ReadBool()
-  if err923 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err923); }
-  p.Success = v922
+  v928, err929 := iprot.ReadBool()
+  if err929 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err929); }
+  p.Success = v928
   return err
 }
 
@@ -19597,9 +19696,9 @@ func (p *RequestNodeStateArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *RequestNodeStateArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v924, err925 := iprot.ReadI32()
-  if err925 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err925); }
-  p._homeId = v924
+  v930, err931 := iprot.ReadI32()
+  if err931 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err931); }
+  p._homeId = v930
   return err
 }
 
@@ -19608,9 +19707,9 @@ func (p *RequestNodeStateArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *RequestNodeStateArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v926, err927 := iprot.ReadByte()
-  if err927 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err927); }
-  p._nodeId = v926
+  v932, err933 := iprot.ReadByte()
+  if err933 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err933); }
+  p._nodeId = v932
   return err
 }
 
@@ -19775,9 +19874,9 @@ func (p *RequestNodeStateResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *RequestNodeStateResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v928, err929 := iprot.ReadBool()
-  if err929 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err929); }
-  p.Success = v928
+  v934, err935 := iprot.ReadBool()
+  if err935 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err935); }
+  p.Success = v934
   return err
 }
 
@@ -19933,9 +20032,9 @@ func (p *RequestNodeDynamicArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *RequestNodeDynamicArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v930, err931 := iprot.ReadI32()
-  if err931 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err931); }
-  p._homeId = v930
+  v936, err937 := iprot.ReadI32()
+  if err937 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err937); }
+  p._homeId = v936
   return err
 }
 
@@ -19944,9 +20043,9 @@ func (p *RequestNodeDynamicArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *RequestNodeDynamicArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v932, err933 := iprot.ReadByte()
-  if err933 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err933); }
-  p._nodeId = v932
+  v938, err939 := iprot.ReadByte()
+  if err939 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err939); }
+  p._nodeId = v938
   return err
 }
 
@@ -20111,9 +20210,9 @@ func (p *RequestNodeDynamicResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *RequestNodeDynamicResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v934, err935 := iprot.ReadBool()
-  if err935 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err935); }
-  p.Success = v934
+  v940, err941 := iprot.ReadBool()
+  if err941 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err941); }
+  p.Success = v940
   return err
 }
 
@@ -20269,9 +20368,9 @@ func (p *IsNodeListeningDeviceArgs) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *IsNodeListeningDeviceArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v936, err937 := iprot.ReadI32()
-  if err937 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err937); }
-  p._homeId = v936
+  v942, err943 := iprot.ReadI32()
+  if err943 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err943); }
+  p._homeId = v942
   return err
 }
 
@@ -20280,9 +20379,9 @@ func (p *IsNodeListeningDeviceArgs) ReadField_homeId(iprot thrift.TProtocol) (th
 }
 
 func (p *IsNodeListeningDeviceArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v938, err939 := iprot.ReadByte()
-  if err939 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err939); }
-  p._nodeId = v938
+  v944, err945 := iprot.ReadByte()
+  if err945 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err945); }
+  p._nodeId = v944
   return err
 }
 
@@ -20447,9 +20546,9 @@ func (p *IsNodeListeningDeviceResult) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *IsNodeListeningDeviceResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v940, err941 := iprot.ReadBool()
-  if err941 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err941); }
-  p.Success = v940
+  v946, err947 := iprot.ReadBool()
+  if err947 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err947); }
+  p.Success = v946
   return err
 }
 
@@ -20605,9 +20704,9 @@ func (p *IsNodeRoutingDeviceArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *IsNodeRoutingDeviceArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v942, err943 := iprot.ReadI32()
-  if err943 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err943); }
-  p._homeId = v942
+  v948, err949 := iprot.ReadI32()
+  if err949 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err949); }
+  p._homeId = v948
   return err
 }
 
@@ -20616,9 +20715,9 @@ func (p *IsNodeRoutingDeviceArgs) ReadField_homeId(iprot thrift.TProtocol) (thri
 }
 
 func (p *IsNodeRoutingDeviceArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v944, err945 := iprot.ReadByte()
-  if err945 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err945); }
-  p._nodeId = v944
+  v950, err951 := iprot.ReadByte()
+  if err951 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err951); }
+  p._nodeId = v950
   return err
 }
 
@@ -20783,9 +20882,9 @@ func (p *IsNodeRoutingDeviceResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *IsNodeRoutingDeviceResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v946, err947 := iprot.ReadBool()
-  if err947 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err947); }
-  p.Success = v946
+  v952, err953 := iprot.ReadBool()
+  if err953 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err953); }
+  p.Success = v952
   return err
 }
 
@@ -20941,9 +21040,9 @@ func (p *GetNodeMaxBaudRateArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetNodeMaxBaudRateArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v948, err949 := iprot.ReadI32()
-  if err949 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err949); }
-  p._homeId = v948
+  v954, err955 := iprot.ReadI32()
+  if err955 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err955); }
+  p._homeId = v954
   return err
 }
 
@@ -20952,9 +21051,9 @@ func (p *GetNodeMaxBaudRateArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetNodeMaxBaudRateArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v950, err951 := iprot.ReadByte()
-  if err951 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err951); }
-  p._nodeId = v950
+  v956, err957 := iprot.ReadByte()
+  if err957 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err957); }
+  p._nodeId = v956
   return err
 }
 
@@ -21119,9 +21218,9 @@ func (p *GetNodeMaxBaudRateResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetNodeMaxBaudRateResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v952, err953 := iprot.ReadI32()
-  if err953 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err953); }
-  p.Success = v952
+  v958, err959 := iprot.ReadI32()
+  if err959 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err959); }
+  p.Success = v958
   return err
 }
 
@@ -21280,9 +21379,9 @@ func (p *GetNodeVersionArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNodeVersionArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v954, err955 := iprot.ReadI32()
-  if err955 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err955); }
-  p._homeId = v954
+  v960, err961 := iprot.ReadI32()
+  if err961 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err961); }
+  p._homeId = v960
   return err
 }
 
@@ -21291,9 +21390,9 @@ func (p *GetNodeVersionArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *GetNodeVersionArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v956, err957 := iprot.ReadByte()
-  if err957 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err957); }
-  p._nodeId = v956
+  v962, err963 := iprot.ReadByte()
+  if err963 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err963); }
+  p._nodeId = v962
   return err
 }
 
@@ -21458,9 +21557,9 @@ func (p *GetNodeVersionResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *GetNodeVersionResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v958, err959 := iprot.ReadByte()
-  if err959 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err959); }
-  p.Success = v958
+  v964, err965 := iprot.ReadByte()
+  if err965 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err965); }
+  p.Success = v964
   return err
 }
 
@@ -21619,9 +21718,9 @@ func (p *GetNodeSecurityArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetNodeSecurityArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v960, err961 := iprot.ReadI32()
-  if err961 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err961); }
-  p._homeId = v960
+  v966, err967 := iprot.ReadI32()
+  if err967 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err967); }
+  p._homeId = v966
   return err
 }
 
@@ -21630,9 +21729,9 @@ func (p *GetNodeSecurityArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetNodeSecurityArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v962, err963 := iprot.ReadByte()
-  if err963 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err963); }
-  p._nodeId = v962
+  v968, err969 := iprot.ReadByte()
+  if err969 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err969); }
+  p._nodeId = v968
   return err
 }
 
@@ -21797,9 +21896,9 @@ func (p *GetNodeSecurityResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetNodeSecurityResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v964, err965 := iprot.ReadByte()
-  if err965 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err965); }
-  p.Success = v964
+  v970, err971 := iprot.ReadByte()
+  if err971 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err971); }
+  p.Success = v970
   return err
 }
 
@@ -21958,9 +22057,9 @@ func (p *GetNodeBasicArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *GetNodeBasicArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v966, err967 := iprot.ReadI32()
-  if err967 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err967); }
-  p._homeId = v966
+  v972, err973 := iprot.ReadI32()
+  if err973 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err973); }
+  p._homeId = v972
   return err
 }
 
@@ -21969,9 +22068,9 @@ func (p *GetNodeBasicArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TPro
 }
 
 func (p *GetNodeBasicArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v968, err969 := iprot.ReadByte()
-  if err969 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err969); }
-  p._nodeId = v968
+  v974, err975 := iprot.ReadByte()
+  if err975 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err975); }
+  p._nodeId = v974
   return err
 }
 
@@ -22136,9 +22235,9 @@ func (p *GetNodeBasicResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNodeBasicResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v970, err971 := iprot.ReadByte()
-  if err971 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err971); }
-  p.Success = v970
+  v976, err977 := iprot.ReadByte()
+  if err977 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err977); }
+  p.Success = v976
   return err
 }
 
@@ -22297,9 +22396,9 @@ func (p *GetNodeGenericArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNodeGenericArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v972, err973 := iprot.ReadI32()
-  if err973 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err973); }
-  p._homeId = v972
+  v978, err979 := iprot.ReadI32()
+  if err979 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err979); }
+  p._homeId = v978
   return err
 }
 
@@ -22308,9 +22407,9 @@ func (p *GetNodeGenericArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *GetNodeGenericArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v974, err975 := iprot.ReadByte()
-  if err975 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err975); }
-  p._nodeId = v974
+  v980, err981 := iprot.ReadByte()
+  if err981 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err981); }
+  p._nodeId = v980
   return err
 }
 
@@ -22475,9 +22574,9 @@ func (p *GetNodeGenericResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *GetNodeGenericResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v976, err977 := iprot.ReadByte()
-  if err977 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err977); }
-  p.Success = v976
+  v982, err983 := iprot.ReadByte()
+  if err983 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err983); }
+  p.Success = v982
   return err
 }
 
@@ -22636,9 +22735,9 @@ func (p *GetNodeSpecificArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetNodeSpecificArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v978, err979 := iprot.ReadI32()
-  if err979 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err979); }
-  p._homeId = v978
+  v984, err985 := iprot.ReadI32()
+  if err985 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err985); }
+  p._homeId = v984
   return err
 }
 
@@ -22647,9 +22746,9 @@ func (p *GetNodeSpecificArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetNodeSpecificArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v980, err981 := iprot.ReadByte()
-  if err981 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err981); }
-  p._nodeId = v980
+  v986, err987 := iprot.ReadByte()
+  if err987 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err987); }
+  p._nodeId = v986
   return err
 }
 
@@ -22814,9 +22913,9 @@ func (p *GetNodeSpecificResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetNodeSpecificResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v982, err983 := iprot.ReadByte()
-  if err983 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err983); }
-  p.Success = v982
+  v988, err989 := iprot.ReadByte()
+  if err989 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err989); }
+  p.Success = v988
   return err
 }
 
@@ -22975,9 +23074,9 @@ func (p *GetNodeTypeArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *GetNodeTypeArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v984, err985 := iprot.ReadI32()
-  if err985 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err985); }
-  p._homeId = v984
+  v990, err991 := iprot.ReadI32()
+  if err991 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err991); }
+  p._homeId = v990
   return err
 }
 
@@ -22986,9 +23085,9 @@ func (p *GetNodeTypeArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *GetNodeTypeArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v986, err987 := iprot.ReadByte()
-  if err987 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err987); }
-  p._nodeId = v986
+  v992, err993 := iprot.ReadByte()
+  if err993 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err993); }
+  p._nodeId = v992
   return err
 }
 
@@ -23153,9 +23252,9 @@ func (p *GetNodeTypeResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetNodeTypeResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v988, err989 := iprot.ReadString()
-  if err989 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err989); }
-  p.Success = v988
+  v994, err995 := iprot.ReadString()
+  if err995 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err995); }
+  p.Success = v994
   return err
 }
 
@@ -23314,9 +23413,9 @@ func (p *GetNodeNeighborsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *GetNodeNeighborsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v990, err991 := iprot.ReadI32()
-  if err991 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err991); }
-  p._homeId = v990
+  v996, err997 := iprot.ReadI32()
+  if err997 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err997); }
+  p._homeId = v996
   return err
 }
 
@@ -23325,9 +23424,9 @@ func (p *GetNodeNeighborsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *GetNodeNeighborsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v992, err993 := iprot.ReadByte()
-  if err993 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err993); }
-  p._nodeId = v992
+  v998, err999 := iprot.ReadByte()
+  if err999 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err999); }
+  p._nodeId = v998
   return err
 }
 
@@ -23493,8 +23592,8 @@ func (p *GetNodeNeighborsResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 
 func (p *GetNodeNeighborsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewUInt32ListByte()
-  err996 := p.Success.Read(iprot)
-  if err996 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessUInt32_ListByte", err996); }
+  err1002 := p.Success.Read(iprot)
+  if err1002 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessUInt32_ListByte", err1002); }
   return err
 }
 
@@ -23652,9 +23751,9 @@ func (p *GetNodeManufacturerNameArgs) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *GetNodeManufacturerNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v997, err998 := iprot.ReadI32()
-  if err998 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err998); }
-  p._homeId = v997
+  v1003, err1004 := iprot.ReadI32()
+  if err1004 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1004); }
+  p._homeId = v1003
   return err
 }
 
@@ -23663,9 +23762,9 @@ func (p *GetNodeManufacturerNameArgs) ReadField_homeId(iprot thrift.TProtocol) (
 }
 
 func (p *GetNodeManufacturerNameArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v999, err1000 := iprot.ReadByte()
-  if err1000 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1000); }
-  p._nodeId = v999
+  v1005, err1006 := iprot.ReadByte()
+  if err1006 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1006); }
+  p._nodeId = v1005
   return err
 }
 
@@ -23830,9 +23929,9 @@ func (p *GetNodeManufacturerNameResult) Read(iprot thrift.TProtocol) (err thrift
 }
 
 func (p *GetNodeManufacturerNameResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1001, err1002 := iprot.ReadString()
-  if err1002 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1002); }
-  p.Success = v1001
+  v1007, err1008 := iprot.ReadString()
+  if err1008 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1008); }
+  p.Success = v1007
   return err
 }
 
@@ -23991,9 +24090,9 @@ func (p *GetNodeProductNameArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetNodeProductNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1003, err1004 := iprot.ReadI32()
-  if err1004 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1004); }
-  p._homeId = v1003
+  v1009, err1010 := iprot.ReadI32()
+  if err1010 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1010); }
+  p._homeId = v1009
   return err
 }
 
@@ -24002,9 +24101,9 @@ func (p *GetNodeProductNameArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetNodeProductNameArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1005, err1006 := iprot.ReadByte()
-  if err1006 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1006); }
-  p._nodeId = v1005
+  v1011, err1012 := iprot.ReadByte()
+  if err1012 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1012); }
+  p._nodeId = v1011
   return err
 }
 
@@ -24169,9 +24268,9 @@ func (p *GetNodeProductNameResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetNodeProductNameResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1007, err1008 := iprot.ReadString()
-  if err1008 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1008); }
-  p.Success = v1007
+  v1013, err1014 := iprot.ReadString()
+  if err1014 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1014); }
+  p.Success = v1013
   return err
 }
 
@@ -24330,9 +24429,9 @@ func (p *GetNodeNameArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *GetNodeNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1009, err1010 := iprot.ReadI32()
-  if err1010 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1010); }
-  p._homeId = v1009
+  v1015, err1016 := iprot.ReadI32()
+  if err1016 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1016); }
+  p._homeId = v1015
   return err
 }
 
@@ -24341,9 +24440,9 @@ func (p *GetNodeNameArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *GetNodeNameArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1011, err1012 := iprot.ReadByte()
-  if err1012 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1012); }
-  p._nodeId = v1011
+  v1017, err1018 := iprot.ReadByte()
+  if err1018 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1018); }
+  p._nodeId = v1017
   return err
 }
 
@@ -24508,9 +24607,9 @@ func (p *GetNodeNameResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetNodeNameResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1013, err1014 := iprot.ReadString()
-  if err1014 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1014); }
-  p.Success = v1013
+  v1019, err1020 := iprot.ReadString()
+  if err1020 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1020); }
+  p.Success = v1019
   return err
 }
 
@@ -24669,9 +24768,9 @@ func (p *GetNodeLocationArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetNodeLocationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1015, err1016 := iprot.ReadI32()
-  if err1016 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1016); }
-  p._homeId = v1015
+  v1021, err1022 := iprot.ReadI32()
+  if err1022 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1022); }
+  p._homeId = v1021
   return err
 }
 
@@ -24680,9 +24779,9 @@ func (p *GetNodeLocationArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetNodeLocationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1017, err1018 := iprot.ReadByte()
-  if err1018 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1018); }
-  p._nodeId = v1017
+  v1023, err1024 := iprot.ReadByte()
+  if err1024 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1024); }
+  p._nodeId = v1023
   return err
 }
 
@@ -24847,9 +24946,9 @@ func (p *GetNodeLocationResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetNodeLocationResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1019, err1020 := iprot.ReadString()
-  if err1020 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1020); }
-  p.Success = v1019
+  v1025, err1026 := iprot.ReadString()
+  if err1026 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1026); }
+  p.Success = v1025
   return err
 }
 
@@ -25008,9 +25107,9 @@ func (p *GetNodeManufacturerIdArgs) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *GetNodeManufacturerIdArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1021, err1022 := iprot.ReadI32()
-  if err1022 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1022); }
-  p._homeId = v1021
+  v1027, err1028 := iprot.ReadI32()
+  if err1028 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1028); }
+  p._homeId = v1027
   return err
 }
 
@@ -25019,9 +25118,9 @@ func (p *GetNodeManufacturerIdArgs) ReadField_homeId(iprot thrift.TProtocol) (th
 }
 
 func (p *GetNodeManufacturerIdArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1023, err1024 := iprot.ReadByte()
-  if err1024 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1024); }
-  p._nodeId = v1023
+  v1029, err1030 := iprot.ReadByte()
+  if err1030 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1030); }
+  p._nodeId = v1029
   return err
 }
 
@@ -25186,9 +25285,9 @@ func (p *GetNodeManufacturerIdResult) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *GetNodeManufacturerIdResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1025, err1026 := iprot.ReadString()
-  if err1026 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1026); }
-  p.Success = v1025
+  v1031, err1032 := iprot.ReadString()
+  if err1032 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1032); }
+  p.Success = v1031
   return err
 }
 
@@ -25347,9 +25446,9 @@ func (p *GetNodeProductTypeArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetNodeProductTypeArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1027, err1028 := iprot.ReadI32()
-  if err1028 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1028); }
-  p._homeId = v1027
+  v1033, err1034 := iprot.ReadI32()
+  if err1034 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1034); }
+  p._homeId = v1033
   return err
 }
 
@@ -25358,9 +25457,9 @@ func (p *GetNodeProductTypeArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetNodeProductTypeArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1029, err1030 := iprot.ReadByte()
-  if err1030 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1030); }
-  p._nodeId = v1029
+  v1035, err1036 := iprot.ReadByte()
+  if err1036 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1036); }
+  p._nodeId = v1035
   return err
 }
 
@@ -25525,9 +25624,9 @@ func (p *GetNodeProductTypeResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetNodeProductTypeResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1031, err1032 := iprot.ReadString()
-  if err1032 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1032); }
-  p.Success = v1031
+  v1037, err1038 := iprot.ReadString()
+  if err1038 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1038); }
+  p.Success = v1037
   return err
 }
 
@@ -25686,9 +25785,9 @@ func (p *GetNodeProductIdArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *GetNodeProductIdArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1033, err1034 := iprot.ReadI32()
-  if err1034 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1034); }
-  p._homeId = v1033
+  v1039, err1040 := iprot.ReadI32()
+  if err1040 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1040); }
+  p._homeId = v1039
   return err
 }
 
@@ -25697,9 +25796,9 @@ func (p *GetNodeProductIdArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *GetNodeProductIdArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1035, err1036 := iprot.ReadByte()
-  if err1036 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1036); }
-  p._nodeId = v1035
+  v1041, err1042 := iprot.ReadByte()
+  if err1042 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1042); }
+  p._nodeId = v1041
   return err
 }
 
@@ -25864,9 +25963,9 @@ func (p *GetNodeProductIdResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetNodeProductIdResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1037, err1038 := iprot.ReadString()
-  if err1038 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1038); }
-  p.Success = v1037
+  v1043, err1044 := iprot.ReadString()
+  if err1044 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1044); }
+  p.Success = v1043
   return err
 }
 
@@ -26039,9 +26138,9 @@ func (p *SetNodeManufacturerNameArgs) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *SetNodeManufacturerNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1039, err1040 := iprot.ReadI32()
-  if err1040 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1040); }
-  p._homeId = v1039
+  v1045, err1046 := iprot.ReadI32()
+  if err1046 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1046); }
+  p._homeId = v1045
   return err
 }
 
@@ -26050,9 +26149,9 @@ func (p *SetNodeManufacturerNameArgs) ReadField_homeId(iprot thrift.TProtocol) (
 }
 
 func (p *SetNodeManufacturerNameArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1041, err1042 := iprot.ReadByte()
-  if err1042 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1042); }
-  p._nodeId = v1041
+  v1047, err1048 := iprot.ReadByte()
+  if err1048 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1048); }
+  p._nodeId = v1047
   return err
 }
 
@@ -26061,9 +26160,9 @@ func (p *SetNodeManufacturerNameArgs) ReadField_nodeId(iprot thrift.TProtocol) (
 }
 
 func (p *SetNodeManufacturerNameArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1043, err1044 := iprot.ReadString()
-  if err1044 != nil { return thrift.NewTProtocolExceptionReadField(3, "_manufacturerName", p.ThriftName(), err1044); }
-  p._manufacturerName = v1043
+  v1049, err1050 := iprot.ReadString()
+  if err1050 != nil { return thrift.NewTProtocolExceptionReadField(3, "_manufacturerName", p.ThriftName(), err1050); }
+  p._manufacturerName = v1049
   return err
 }
 
@@ -26369,9 +26468,9 @@ func (p *SetNodeProductNameArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetNodeProductNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1045, err1046 := iprot.ReadI32()
-  if err1046 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1046); }
-  p._homeId = v1045
+  v1051, err1052 := iprot.ReadI32()
+  if err1052 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1052); }
+  p._homeId = v1051
   return err
 }
 
@@ -26380,9 +26479,9 @@ func (p *SetNodeProductNameArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *SetNodeProductNameArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1047, err1048 := iprot.ReadByte()
-  if err1048 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1048); }
-  p._nodeId = v1047
+  v1053, err1054 := iprot.ReadByte()
+  if err1054 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1054); }
+  p._nodeId = v1053
   return err
 }
 
@@ -26391,9 +26490,9 @@ func (p *SetNodeProductNameArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *SetNodeProductNameArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1049, err1050 := iprot.ReadString()
-  if err1050 != nil { return thrift.NewTProtocolExceptionReadField(3, "_productName", p.ThriftName(), err1050); }
-  p._productName = v1049
+  v1055, err1056 := iprot.ReadString()
+  if err1056 != nil { return thrift.NewTProtocolExceptionReadField(3, "_productName", p.ThriftName(), err1056); }
+  p._productName = v1055
   return err
 }
 
@@ -26699,9 +26798,9 @@ func (p *SetNodeNameArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *SetNodeNameArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1051, err1052 := iprot.ReadI32()
-  if err1052 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1052); }
-  p._homeId = v1051
+  v1057, err1058 := iprot.ReadI32()
+  if err1058 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1058); }
+  p._homeId = v1057
   return err
 }
 
@@ -26710,9 +26809,9 @@ func (p *SetNodeNameArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *SetNodeNameArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1053, err1054 := iprot.ReadByte()
-  if err1054 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1054); }
-  p._nodeId = v1053
+  v1059, err1060 := iprot.ReadByte()
+  if err1060 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1060); }
+  p._nodeId = v1059
   return err
 }
 
@@ -26721,9 +26820,9 @@ func (p *SetNodeNameArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *SetNodeNameArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1055, err1056 := iprot.ReadString()
-  if err1056 != nil { return thrift.NewTProtocolExceptionReadField(3, "_nodeName", p.ThriftName(), err1056); }
-  p._nodeName = v1055
+  v1061, err1062 := iprot.ReadString()
+  if err1062 != nil { return thrift.NewTProtocolExceptionReadField(3, "_nodeName", p.ThriftName(), err1062); }
+  p._nodeName = v1061
   return err
 }
 
@@ -27029,9 +27128,9 @@ func (p *SetNodeLocationArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetNodeLocationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1057, err1058 := iprot.ReadI32()
-  if err1058 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1058); }
-  p._homeId = v1057
+  v1063, err1064 := iprot.ReadI32()
+  if err1064 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1064); }
+  p._homeId = v1063
   return err
 }
 
@@ -27040,9 +27139,9 @@ func (p *SetNodeLocationArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *SetNodeLocationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1059, err1060 := iprot.ReadByte()
-  if err1060 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1060); }
-  p._nodeId = v1059
+  v1065, err1066 := iprot.ReadByte()
+  if err1066 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1066); }
+  p._nodeId = v1065
   return err
 }
 
@@ -27051,9 +27150,9 @@ func (p *SetNodeLocationArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *SetNodeLocationArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1061, err1062 := iprot.ReadString()
-  if err1062 != nil { return thrift.NewTProtocolExceptionReadField(3, "_location", p.ThriftName(), err1062); }
-  p._location = v1061
+  v1067, err1068 := iprot.ReadString()
+  if err1068 != nil { return thrift.NewTProtocolExceptionReadField(3, "_location", p.ThriftName(), err1068); }
+  p._location = v1067
   return err
 }
 
@@ -27345,9 +27444,9 @@ func (p *SetNodeOnArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcept
 }
 
 func (p *SetNodeOnArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1063, err1064 := iprot.ReadI32()
-  if err1064 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1064); }
-  p._homeId = v1063
+  v1069, err1070 := iprot.ReadI32()
+  if err1070 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1070); }
+  p._homeId = v1069
   return err
 }
 
@@ -27356,9 +27455,9 @@ func (p *SetNodeOnArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetNodeOnArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1065, err1066 := iprot.ReadByte()
-  if err1066 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1066); }
-  p._nodeId = v1065
+  v1071, err1072 := iprot.ReadByte()
+  if err1072 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1072); }
+  p._nodeId = v1071
   return err
 }
 
@@ -27626,9 +27725,9 @@ func (p *SetNodeOffArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcep
 }
 
 func (p *SetNodeOffArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1067, err1068 := iprot.ReadI32()
-  if err1068 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1068); }
-  p._homeId = v1067
+  v1073, err1074 := iprot.ReadI32()
+  if err1074 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1074); }
+  p._homeId = v1073
   return err
 }
 
@@ -27637,9 +27736,9 @@ func (p *SetNodeOffArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *SetNodeOffArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1069, err1070 := iprot.ReadByte()
-  if err1070 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1070); }
-  p._nodeId = v1069
+  v1075, err1076 := iprot.ReadByte()
+  if err1076 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1076); }
+  p._nodeId = v1075
   return err
 }
 
@@ -27921,9 +28020,9 @@ func (p *SetNodeLevelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *SetNodeLevelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1071, err1072 := iprot.ReadI32()
-  if err1072 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1072); }
-  p._homeId = v1071
+  v1077, err1078 := iprot.ReadI32()
+  if err1078 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1078); }
+  p._homeId = v1077
   return err
 }
 
@@ -27932,9 +28031,9 @@ func (p *SetNodeLevelArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TPro
 }
 
 func (p *SetNodeLevelArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1073, err1074 := iprot.ReadByte()
-  if err1074 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1074); }
-  p._nodeId = v1073
+  v1079, err1080 := iprot.ReadByte()
+  if err1080 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1080); }
+  p._nodeId = v1079
   return err
 }
 
@@ -27943,9 +28042,9 @@ func (p *SetNodeLevelArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TPro
 }
 
 func (p *SetNodeLevelArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1075, err1076 := iprot.ReadByte()
-  if err1076 != nil { return thrift.NewTProtocolExceptionReadField(3, "_level", p.ThriftName(), err1076); }
-  p._level = v1075
+  v1081, err1082 := iprot.ReadByte()
+  if err1082 != nil { return thrift.NewTProtocolExceptionReadField(3, "_level", p.ThriftName(), err1082); }
+  p._level = v1081
   return err
 }
 
@@ -28237,9 +28336,9 @@ func (p *IsNodeInfoReceivedArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *IsNodeInfoReceivedArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1077, err1078 := iprot.ReadI32()
-  if err1078 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1078); }
-  p._homeId = v1077
+  v1083, err1084 := iprot.ReadI32()
+  if err1084 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1084); }
+  p._homeId = v1083
   return err
 }
 
@@ -28248,9 +28347,9 @@ func (p *IsNodeInfoReceivedArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *IsNodeInfoReceivedArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1079, err1080 := iprot.ReadByte()
-  if err1080 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1080); }
-  p._nodeId = v1079
+  v1085, err1086 := iprot.ReadByte()
+  if err1086 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1086); }
+  p._nodeId = v1085
   return err
 }
 
@@ -28415,9 +28514,9 @@ func (p *IsNodeInfoReceivedResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *IsNodeInfoReceivedResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1081, err1082 := iprot.ReadBool()
-  if err1082 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1082); }
-  p.Success = v1081
+  v1087, err1088 := iprot.ReadBool()
+  if err1088 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1088); }
+  p.Success = v1087
   return err
 }
 
@@ -28587,9 +28686,9 @@ func (p *GetNodeClassInformationArgs) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *GetNodeClassInformationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1083, err1084 := iprot.ReadI32()
-  if err1084 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1084); }
-  p._homeId = v1083
+  v1089, err1090 := iprot.ReadI32()
+  if err1090 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1090); }
+  p._homeId = v1089
   return err
 }
 
@@ -28598,9 +28697,9 @@ func (p *GetNodeClassInformationArgs) ReadField_homeId(iprot thrift.TProtocol) (
 }
 
 func (p *GetNodeClassInformationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1085, err1086 := iprot.ReadByte()
-  if err1086 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1086); }
-  p._nodeId = v1085
+  v1091, err1092 := iprot.ReadByte()
+  if err1092 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1092); }
+  p._nodeId = v1091
   return err
 }
 
@@ -28609,9 +28708,9 @@ func (p *GetNodeClassInformationArgs) ReadField_nodeId(iprot thrift.TProtocol) (
 }
 
 func (p *GetNodeClassInformationArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1087, err1088 := iprot.ReadByte()
-  if err1088 != nil { return thrift.NewTProtocolExceptionReadField(3, "_commandClassId", p.ThriftName(), err1088); }
-  p._commandClassId = v1087
+  v1093, err1094 := iprot.ReadByte()
+  if err1094 != nil { return thrift.NewTProtocolExceptionReadField(3, "_commandClassId", p.ThriftName(), err1094); }
+  p._commandClassId = v1093
   return err
 }
 
@@ -28801,8 +28900,8 @@ func (p *GetNodeClassInformationResult) Read(iprot thrift.TProtocol) (err thrift
 
 func (p *GetNodeClassInformationResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolGetNodeClassInformation()
-  err1091 := p.Success.Read(iprot)
-  if err1091 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_GetNodeClassInformation", err1091); }
+  err1097 := p.Success.Read(iprot)
+  if err1097 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_GetNodeClassInformation", err1097); }
   return err
 }
 
@@ -28947,8 +29046,8 @@ func (p *GetValueLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *GetValueLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1094 := p._id.Read(iprot)
-  if err1094 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1094); }
+  err1100 := p._id.Read(iprot)
+  if err1100 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1100); }
   return err
 }
 
@@ -29088,9 +29187,9 @@ func (p *GetValueLabelResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetValueLabelResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1095, err1096 := iprot.ReadString()
-  if err1096 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1096); }
-  p.Success = v1095
+  v1101, err1102 := iprot.ReadString()
+  if err1102 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1102); }
+  p.Success = v1101
   return err
 }
 
@@ -29250,8 +29349,8 @@ func (p *SetValueLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1099 := p._id.Read(iprot)
-  if err1099 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1099); }
+  err1105 := p._id.Read(iprot)
+  if err1105 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1105); }
   return err
 }
 
@@ -29260,9 +29359,9 @@ func (p *SetValueLabelArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueLabelArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1100, err1101 := iprot.ReadString()
-  if err1101 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1101); }
-  p._value = v1100
+  v1106, err1107 := iprot.ReadString()
+  if err1107 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1107); }
+  p._value = v1106
   return err
 }
 
@@ -29516,8 +29615,8 @@ func (p *GetValueUnitsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *GetValueUnitsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1104 := p._id.Read(iprot)
-  if err1104 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1104); }
+  err1110 := p._id.Read(iprot)
+  if err1110 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1110); }
   return err
 }
 
@@ -29657,9 +29756,9 @@ func (p *GetValueUnitsResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetValueUnitsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1105, err1106 := iprot.ReadString()
-  if err1106 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1106); }
-  p.Success = v1105
+  v1111, err1112 := iprot.ReadString()
+  if err1112 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1112); }
+  p.Success = v1111
   return err
 }
 
@@ -29819,8 +29918,8 @@ func (p *SetValueUnitsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueUnitsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1109 := p._id.Read(iprot)
-  if err1109 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1109); }
+  err1115 := p._id.Read(iprot)
+  if err1115 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1115); }
   return err
 }
 
@@ -29829,9 +29928,9 @@ func (p *SetValueUnitsArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueUnitsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1110, err1111 := iprot.ReadString()
-  if err1111 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1111); }
-  p._value = v1110
+  v1116, err1117 := iprot.ReadString()
+  if err1117 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1117); }
+  p._value = v1116
   return err
 }
 
@@ -30085,8 +30184,8 @@ func (p *GetValueHelpArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 
 func (p *GetValueHelpArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1114 := p._id.Read(iprot)
-  if err1114 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1114); }
+  err1120 := p._id.Read(iprot)
+  if err1120 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1120); }
   return err
 }
 
@@ -30226,9 +30325,9 @@ func (p *GetValueHelpResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetValueHelpResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1115, err1116 := iprot.ReadString()
-  if err1116 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1116); }
-  p.Success = v1115
+  v1121, err1122 := iprot.ReadString()
+  if err1122 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1122); }
+  p.Success = v1121
   return err
 }
 
@@ -30388,8 +30487,8 @@ func (p *SetValueHelpArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 
 func (p *SetValueHelpArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1119 := p._id.Read(iprot)
-  if err1119 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1119); }
+  err1125 := p._id.Read(iprot)
+  if err1125 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1125); }
   return err
 }
 
@@ -30398,9 +30497,9 @@ func (p *SetValueHelpArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoco
 }
 
 func (p *SetValueHelpArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1120, err1121 := iprot.ReadString()
-  if err1121 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1121); }
-  p._value = v1120
+  v1126, err1127 := iprot.ReadString()
+  if err1127 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1127); }
+  p._value = v1126
   return err
 }
 
@@ -30654,8 +30753,8 @@ func (p *GetValueMinArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 
 func (p *GetValueMinArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1124 := p._id.Read(iprot)
-  if err1124 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1124); }
+  err1130 := p._id.Read(iprot)
+  if err1130 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1130); }
   return err
 }
 
@@ -30795,9 +30894,9 @@ func (p *GetValueMinResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetValueMinResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1125, err1126 := iprot.ReadI32()
-  if err1126 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1126); }
-  p.Success = v1125
+  v1131, err1132 := iprot.ReadI32()
+  if err1132 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1132); }
+  p.Success = v1131
   return err
 }
 
@@ -30943,8 +31042,8 @@ func (p *GetValueMaxArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 
 func (p *GetValueMaxArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1129 := p._id.Read(iprot)
-  if err1129 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1129); }
+  err1135 := p._id.Read(iprot)
+  if err1135 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1135); }
   return err
 }
 
@@ -31084,9 +31183,9 @@ func (p *GetValueMaxResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetValueMaxResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1130, err1131 := iprot.ReadI32()
-  if err1131 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1131); }
-  p.Success = v1130
+  v1136, err1137 := iprot.ReadI32()
+  if err1137 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1137); }
+  p.Success = v1136
   return err
 }
 
@@ -31232,8 +31331,8 @@ func (p *IsValueReadOnlyArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 
 func (p *IsValueReadOnlyArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1134 := p._id.Read(iprot)
-  if err1134 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1134); }
+  err1140 := p._id.Read(iprot)
+  if err1140 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1140); }
   return err
 }
 
@@ -31373,9 +31472,9 @@ func (p *IsValueReadOnlyResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *IsValueReadOnlyResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1135, err1136 := iprot.ReadBool()
-  if err1136 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1136); }
-  p.Success = v1135
+  v1141, err1142 := iprot.ReadBool()
+  if err1142 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1142); }
+  p.Success = v1141
   return err
 }
 
@@ -31518,8 +31617,8 @@ func (p *IsValueWriteOnlyArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *IsValueWriteOnlyArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1139 := p._id.Read(iprot)
-  if err1139 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1139); }
+  err1145 := p._id.Read(iprot)
+  if err1145 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1145); }
   return err
 }
 
@@ -31659,9 +31758,9 @@ func (p *IsValueWriteOnlyResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *IsValueWriteOnlyResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1140, err1141 := iprot.ReadBool()
-  if err1141 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1141); }
-  p.Success = v1140
+  v1146, err1147 := iprot.ReadBool()
+  if err1147 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1147); }
+  p.Success = v1146
   return err
 }
 
@@ -31804,8 +31903,8 @@ func (p *IsValueSetArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcep
 
 func (p *IsValueSetArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1144 := p._id.Read(iprot)
-  if err1144 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1144); }
+  err1150 := p._id.Read(iprot)
+  if err1150 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1150); }
   return err
 }
 
@@ -31945,9 +32044,9 @@ func (p *IsValueSetResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *IsValueSetResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1145, err1146 := iprot.ReadBool()
-  if err1146 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1146); }
-  p.Success = v1145
+  v1151, err1152 := iprot.ReadBool()
+  if err1152 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1152); }
+  p.Success = v1151
   return err
 }
 
@@ -32090,8 +32189,8 @@ func (p *GetValueAsBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *GetValueAsBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1149 := p._id.Read(iprot)
-  if err1149 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1149); }
+  err1155 := p._id.Read(iprot)
+  if err1155 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1155); }
   return err
 }
 
@@ -32232,8 +32331,8 @@ func (p *GetValueAsBoolResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *GetValueAsBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolBool()
-  err1152 := p.Success.Read(iprot)
-  if err1152 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Bool", err1152); }
+  err1158 := p.Success.Read(iprot)
+  if err1158 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Bool", err1158); }
   return err
 }
 
@@ -32378,8 +32477,8 @@ func (p *GetValueAsByteArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *GetValueAsByteArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1155 := p._id.Read(iprot)
-  if err1155 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1155); }
+  err1161 := p._id.Read(iprot)
+  if err1161 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1161); }
   return err
 }
 
@@ -32520,8 +32619,8 @@ func (p *GetValueAsByteResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *GetValueAsByteResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolUInt8()
-  err1158 := p.Success.Read(iprot)
-  if err1158 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1158); }
+  err1164 := p.Success.Read(iprot)
+  if err1164 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1164); }
   return err
 }
 
@@ -32666,8 +32765,8 @@ func (p *GetValueAsFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 
 func (p *GetValueAsFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1161 := p._id.Read(iprot)
-  if err1161 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1161); }
+  err1167 := p._id.Read(iprot)
+  if err1167 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1167); }
   return err
 }
 
@@ -32808,8 +32907,8 @@ func (p *GetValueAsFloatResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *GetValueAsFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolFloat()
-  err1164 := p.Success.Read(iprot)
-  if err1164 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Float", err1164); }
+  err1170 := p.Success.Read(iprot)
+  if err1170 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Float", err1170); }
   return err
 }
 
@@ -32954,8 +33053,8 @@ func (p *GetValueAsIntArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *GetValueAsIntArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1167 := p._id.Read(iprot)
-  if err1167 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1167); }
+  err1173 := p._id.Read(iprot)
+  if err1173 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1173); }
   return err
 }
 
@@ -33096,8 +33195,8 @@ func (p *GetValueAsIntResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 
 func (p *GetValueAsIntResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt()
-  err1170 := p.Success.Read(iprot)
-  if err1170 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1170); }
+  err1176 := p.Success.Read(iprot)
+  if err1176 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1176); }
   return err
 }
 
@@ -33242,8 +33341,8 @@ func (p *GetValueAsShortArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 
 func (p *GetValueAsShortArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1173 := p._id.Read(iprot)
-  if err1173 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1173); }
+  err1179 := p._id.Read(iprot)
+  if err1179 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1179); }
   return err
 }
 
@@ -33384,8 +33483,8 @@ func (p *GetValueAsShortResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *GetValueAsShortResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt16()
-  err1176 := p.Success.Read(iprot)
-  if err1176 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int16", err1176); }
+  err1182 := p.Success.Read(iprot)
+  if err1182 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int16", err1182); }
   return err
 }
 
@@ -33530,8 +33629,8 @@ func (p *GetValueAsStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *GetValueAsStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1179 := p._id.Read(iprot)
-  if err1179 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1179); }
+  err1185 := p._id.Read(iprot)
+  if err1185 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1185); }
   return err
 }
 
@@ -33672,8 +33771,8 @@ func (p *GetValueAsStringResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 
 func (p *GetValueAsStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolString()
-  err1182 := p.Success.Read(iprot)
-  if err1182 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1182); }
+  err1188 := p.Success.Read(iprot)
+  if err1188 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1188); }
   return err
 }
 
@@ -33818,8 +33917,8 @@ func (p *GetValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err thri
 
 func (p *GetValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1185 := p._id.Read(iprot)
-  if err1185 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1185); }
+  err1191 := p._id.Read(iprot)
+  if err1191 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1191); }
   return err
 }
 
@@ -33960,8 +34059,8 @@ func (p *GetValueListSelectionStringResult) Read(iprot thrift.TProtocol) (err th
 
 func (p *GetValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolString()
-  err1188 := p.Success.Read(iprot)
-  if err1188 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1188); }
+  err1194 := p.Success.Read(iprot)
+  if err1194 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1194); }
   return err
 }
 
@@ -34106,8 +34205,8 @@ func (p *GetValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err thrif
 
 func (p *GetValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1191 := p._id.Read(iprot)
-  if err1191 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1191); }
+  err1197 := p._id.Read(iprot)
+  if err1197 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1197); }
   return err
 }
 
@@ -34248,8 +34347,8 @@ func (p *GetValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (err thr
 
 func (p *GetValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt()
-  err1194 := p.Success.Read(iprot)
-  if err1194 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1194); }
+  err1200 := p.Success.Read(iprot)
+  if err1200 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1200); }
   return err
 }
 
@@ -34394,8 +34493,8 @@ func (p *GetValueListItemsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *GetValueListItemsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1197 := p._id.Read(iprot)
-  if err1197 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1197); }
+  err1203 := p._id.Read(iprot)
+  if err1203 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1203); }
   return err
 }
 
@@ -34536,8 +34635,8 @@ func (p *GetValueListItemsResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 
 func (p *GetValueListItemsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolListString()
-  err1200 := p.Success.Read(iprot)
-  if err1200 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_ListString", err1200); }
+  err1206 := p.Success.Read(iprot)
+  if err1206 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_ListString", err1206); }
   return err
 }
 
@@ -34682,8 +34781,8 @@ func (p *GetValueFloatPrecisionArgs) Read(iprot thrift.TProtocol) (err thrift.TP
 
 func (p *GetValueFloatPrecisionArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1203 := p._id.Read(iprot)
-  if err1203 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1203); }
+  err1209 := p._id.Read(iprot)
+  if err1209 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1209); }
   return err
 }
 
@@ -34824,8 +34923,8 @@ func (p *GetValueFloatPrecisionResult) Read(iprot thrift.TProtocol) (err thrift.
 
 func (p *GetValueFloatPrecisionResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolUInt8()
-  err1206 := p.Success.Read(iprot)
-  if err1206 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1206); }
+  err1212 := p.Success.Read(iprot)
+  if err1212 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1212); }
   return err
 }
 
@@ -34984,8 +35083,8 @@ func (p *SetValueBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 
 func (p *SetValueBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1209 := p._id.Read(iprot)
-  if err1209 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1209); }
+  err1215 := p._id.Read(iprot)
+  if err1215 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1215); }
   return err
 }
 
@@ -34994,9 +35093,9 @@ func (p *SetValueBoolArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoco
 }
 
 func (p *SetValueBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1210, err1211 := iprot.ReadBool()
-  if err1211 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1211); }
-  p._value = v1210
+  v1216, err1217 := iprot.ReadBool()
+  if err1217 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1217); }
+  p._value = v1216
   return err
 }
 
@@ -35157,9 +35256,9 @@ func (p *SetValueBoolResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *SetValueBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1212, err1213 := iprot.ReadBool()
-  if err1213 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1213); }
-  p.Success = v1212
+  v1218, err1219 := iprot.ReadBool()
+  if err1219 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1219); }
+  p.Success = v1218
   return err
 }
 
@@ -35316,8 +35415,8 @@ func (p *SetValueUInt8Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueUInt8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1216 := p._id.Read(iprot)
-  if err1216 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1216); }
+  err1222 := p._id.Read(iprot)
+  if err1222 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1222); }
   return err
 }
 
@@ -35326,9 +35425,9 @@ func (p *SetValueUInt8Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueUInt8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1217, err1218 := iprot.ReadByte()
-  if err1218 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1218); }
-  p._value = v1217
+  v1223, err1224 := iprot.ReadByte()
+  if err1224 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1224); }
+  p._value = v1223
   return err
 }
 
@@ -35492,9 +35591,9 @@ func (p *SetValueUInt8Result) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueUInt8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1219, err1220 := iprot.ReadBool()
-  if err1220 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1220); }
-  p.Success = v1219
+  v1225, err1226 := iprot.ReadBool()
+  if err1226 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1226); }
+  p.Success = v1225
   return err
 }
 
@@ -35651,8 +35750,8 @@ func (p *SetValueFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1223 := p._id.Read(iprot)
-  if err1223 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1223); }
+  err1229 := p._id.Read(iprot)
+  if err1229 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1229); }
   return err
 }
 
@@ -35661,9 +35760,9 @@ func (p *SetValueFloatArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1224, err1225 := iprot.ReadDouble()
-  if err1225 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1225); }
-  p._value = v1224
+  v1230, err1231 := iprot.ReadDouble()
+  if err1231 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1231); }
+  p._value = v1230
   return err
 }
 
@@ -35827,9 +35926,9 @@ func (p *SetValueFloatResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1226, err1227 := iprot.ReadBool()
-  if err1227 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1227); }
-  p.Success = v1226
+  v1232, err1233 := iprot.ReadBool()
+  if err1233 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1233); }
+  p.Success = v1232
   return err
 }
 
@@ -35986,8 +36085,8 @@ func (p *SetValueInt32Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1230 := p._id.Read(iprot)
-  if err1230 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1230); }
+  err1236 := p._id.Read(iprot)
+  if err1236 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1236); }
   return err
 }
 
@@ -35996,9 +36095,9 @@ func (p *SetValueInt32Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1231, err1232 := iprot.ReadI32()
-  if err1232 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1232); }
-  p._value = v1231
+  v1237, err1238 := iprot.ReadI32()
+  if err1238 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1238); }
+  p._value = v1237
   return err
 }
 
@@ -36162,9 +36261,9 @@ func (p *SetValueInt32Result) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1233, err1234 := iprot.ReadBool()
-  if err1234 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1234); }
-  p.Success = v1233
+  v1239, err1240 := iprot.ReadBool()
+  if err1240 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1240); }
+  p.Success = v1239
   return err
 }
 
@@ -36321,8 +36420,8 @@ func (p *SetValueInt16Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueInt16Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1237 := p._id.Read(iprot)
-  if err1237 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1237); }
+  err1243 := p._id.Read(iprot)
+  if err1243 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1243); }
   return err
 }
 
@@ -36331,9 +36430,9 @@ func (p *SetValueInt16Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueInt16Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1238, err1239 := iprot.ReadI16()
-  if err1239 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1239); }
-  p._value = v1238
+  v1244, err1245 := iprot.ReadI16()
+  if err1245 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1245); }
+  p._value = v1244
   return err
 }
 
@@ -36497,9 +36596,9 @@ func (p *SetValueInt16Result) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueInt16Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1240, err1241 := iprot.ReadBool()
-  if err1241 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1241); }
-  p.Success = v1240
+  v1246, err1247 := iprot.ReadBool()
+  if err1247 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1247); }
+  p.Success = v1246
   return err
 }
 
@@ -36656,8 +36755,8 @@ func (p *SetValueStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *SetValueStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1244 := p._id.Read(iprot)
-  if err1244 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1244); }
+  err1250 := p._id.Read(iprot)
+  if err1250 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1250); }
   return err
 }
 
@@ -36666,9 +36765,9 @@ func (p *SetValueStringArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *SetValueStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1245, err1246 := iprot.ReadString()
-  if err1246 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1246); }
-  p._value = v1245
+  v1251, err1252 := iprot.ReadString()
+  if err1252 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1252); }
+  p._value = v1251
   return err
 }
 
@@ -36832,9 +36931,9 @@ func (p *SetValueStringResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *SetValueStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1247, err1248 := iprot.ReadBool()
-  if err1248 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1248); }
-  p.Success = v1247
+  v1253, err1254 := iprot.ReadBool()
+  if err1254 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1254); }
+  p.Success = v1253
   return err
 }
 
@@ -36991,8 +37090,8 @@ func (p *SetValueListSelectionArgs) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *SetValueListSelectionArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1251 := p._id.Read(iprot)
-  if err1251 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1251); }
+  err1257 := p._id.Read(iprot)
+  if err1257 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1257); }
   return err
 }
 
@@ -37001,9 +37100,9 @@ func (p *SetValueListSelectionArgs) ReadField_id(iprot thrift.TProtocol) (thrift
 }
 
 func (p *SetValueListSelectionArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1252, err1253 := iprot.ReadString()
-  if err1253 != nil { return thrift.NewTProtocolExceptionReadField(2, "_selectedItem", p.ThriftName(), err1253); }
-  p._selectedItem = v1252
+  v1258, err1259 := iprot.ReadString()
+  if err1259 != nil { return thrift.NewTProtocolExceptionReadField(2, "_selectedItem", p.ThriftName(), err1259); }
+  p._selectedItem = v1258
   return err
 }
 
@@ -37167,9 +37266,9 @@ func (p *SetValueListSelectionResult) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *SetValueListSelectionResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1254, err1255 := iprot.ReadBool()
-  if err1255 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1255); }
-  p.Success = v1254
+  v1260, err1261 := iprot.ReadBool()
+  if err1261 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1261); }
+  p.Success = v1260
   return err
 }
 
@@ -37312,8 +37411,8 @@ func (p *PressButtonArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 
 func (p *PressButtonArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1258 := p._id.Read(iprot)
-  if err1258 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1258); }
+  err1264 := p._id.Read(iprot)
+  if err1264 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1264); }
   return err
 }
 
@@ -37453,9 +37552,9 @@ func (p *PressButtonResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *PressButtonResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1259, err1260 := iprot.ReadBool()
-  if err1260 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1260); }
-  p.Success = v1259
+  v1265, err1266 := iprot.ReadBool()
+  if err1266 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1266); }
+  p.Success = v1265
   return err
 }
 
@@ -37598,8 +37697,8 @@ func (p *ReleaseButtonArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *ReleaseButtonArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1263 := p._id.Read(iprot)
-  if err1263 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1263); }
+  err1269 := p._id.Read(iprot)
+  if err1269 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1269); }
   return err
 }
 
@@ -37739,9 +37838,9 @@ func (p *ReleaseButtonResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *ReleaseButtonResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1264, err1265 := iprot.ReadBool()
-  if err1265 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1265); }
-  p.Success = v1264
+  v1270, err1271 := iprot.ReadBool()
+  if err1271 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1271); }
+  p.Success = v1270
   return err
 }
 
@@ -37884,8 +37983,8 @@ func (p *GetNumSwitchPointsArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 
 func (p *GetNumSwitchPointsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1268 := p._id.Read(iprot)
-  if err1268 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1268); }
+  err1274 := p._id.Read(iprot)
+  if err1274 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1274); }
   return err
 }
 
@@ -38025,9 +38124,9 @@ func (p *GetNumSwitchPointsResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetNumSwitchPointsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1269, err1270 := iprot.ReadByte()
-  if err1270 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1270); }
-  p.Success = v1269
+  v1275, err1276 := iprot.ReadByte()
+  if err1276 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1276); }
+  p.Success = v1275
   return err
 }
 
@@ -38215,8 +38314,8 @@ func (p *SetSwitchPointArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *SetSwitchPointArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1273 := p._id.Read(iprot)
-  if err1273 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1273); }
+  err1279 := p._id.Read(iprot)
+  if err1279 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1279); }
   return err
 }
 
@@ -38225,9 +38324,9 @@ func (p *SetSwitchPointArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *SetSwitchPointArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1274, err1275 := iprot.ReadByte()
-  if err1275 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1275); }
-  p._hours = v1274
+  v1280, err1281 := iprot.ReadByte()
+  if err1281 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1281); }
+  p._hours = v1280
   return err
 }
 
@@ -38236,9 +38335,9 @@ func (p *SetSwitchPointArgs) ReadField_hours(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetSwitchPointArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1276, err1277 := iprot.ReadByte()
-  if err1277 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1277); }
-  p._minutes = v1276
+  v1282, err1283 := iprot.ReadByte()
+  if err1283 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1283); }
+  p._minutes = v1282
   return err
 }
 
@@ -38247,9 +38346,9 @@ func (p *SetSwitchPointArgs) ReadField_minutes(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *SetSwitchPointArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1278, err1279 := iprot.ReadByte()
-  if err1279 != nil { return thrift.NewTProtocolExceptionReadField(4, "_setback", p.ThriftName(), err1279); }
-  p._setback = v1278
+  v1284, err1285 := iprot.ReadByte()
+  if err1285 != nil { return thrift.NewTProtocolExceptionReadField(4, "_setback", p.ThriftName(), err1285); }
+  p._setback = v1284
   return err
 }
 
@@ -38461,9 +38560,9 @@ func (p *SetSwitchPointResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *SetSwitchPointResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1280, err1281 := iprot.ReadBool()
-  if err1281 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1281); }
-  p.Success = v1280
+  v1286, err1287 := iprot.ReadBool()
+  if err1287 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1287); }
+  p.Success = v1286
   return err
 }
 
@@ -38634,8 +38733,8 @@ func (p *RemoveSwitchPointArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *RemoveSwitchPointArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1284 := p._id.Read(iprot)
-  if err1284 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1284); }
+  err1290 := p._id.Read(iprot)
+  if err1290 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1290); }
   return err
 }
 
@@ -38644,9 +38743,9 @@ func (p *RemoveSwitchPointArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *RemoveSwitchPointArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1285, err1286 := iprot.ReadByte()
-  if err1286 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1286); }
-  p._hours = v1285
+  v1291, err1292 := iprot.ReadByte()
+  if err1292 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1292); }
+  p._hours = v1291
   return err
 }
 
@@ -38655,9 +38754,9 @@ func (p *RemoveSwitchPointArgs) ReadField_hours(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *RemoveSwitchPointArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1287, err1288 := iprot.ReadByte()
-  if err1288 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1288); }
-  p._minutes = v1287
+  v1293, err1294 := iprot.ReadByte()
+  if err1294 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1294); }
+  p._minutes = v1293
   return err
 }
 
@@ -38845,9 +38944,9 @@ func (p *RemoveSwitchPointResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *RemoveSwitchPointResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1289, err1290 := iprot.ReadBool()
-  if err1290 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1290); }
-  p.Success = v1289
+  v1295, err1296 := iprot.ReadBool()
+  if err1296 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1296); }
+  p.Success = v1295
   return err
 }
 
@@ -38990,8 +39089,8 @@ func (p *ClearSwitchPointsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *ClearSwitchPointsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1293 := p._id.Read(iprot)
-  if err1293 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1293); }
+  err1299 := p._id.Read(iprot)
+  if err1299 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1299); }
   return err
 }
 
@@ -39235,8 +39334,8 @@ func (p *GetSwitchPointArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *GetSwitchPointArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1296 := p._id.Read(iprot)
-  if err1296 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1296); }
+  err1302 := p._id.Read(iprot)
+  if err1302 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1302); }
   return err
 }
 
@@ -39245,9 +39344,9 @@ func (p *GetSwitchPointArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *GetSwitchPointArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1297, err1298 := iprot.ReadByte()
-  if err1298 != nil { return thrift.NewTProtocolExceptionReadField(2, "_idx", p.ThriftName(), err1298); }
-  p._idx = v1297
+  v1303, err1304 := iprot.ReadByte()
+  if err1304 != nil { return thrift.NewTProtocolExceptionReadField(2, "_idx", p.ThriftName(), err1304); }
+  p._idx = v1303
   return err
 }
 
@@ -39412,8 +39511,8 @@ func (p *GetSwitchPointResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *GetSwitchPointResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetSwitchPointReturnStruct()
-  err1301 := p.Success.Read(iprot)
-  if err1301 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetSwitchPointReturnStruct", err1301); }
+  err1307 := p.Success.Read(iprot)
+  if err1307 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetSwitchPointReturnStruct", err1307); }
   return err
 }
 
@@ -39557,9 +39656,9 @@ func (p *SwitchAllOnArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *SwitchAllOnArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1302, err1303 := iprot.ReadI32()
-  if err1303 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1303); }
-  p._homeId = v1302
+  v1308, err1309 := iprot.ReadI32()
+  if err1309 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1309); }
+  p._homeId = v1308
   return err
 }
 
@@ -39789,9 +39888,9 @@ func (p *SwitchAllOffArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *SwitchAllOffArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1304, err1305 := iprot.ReadI32()
-  if err1305 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1305); }
-  p._homeId = v1304
+  v1310, err1311 := iprot.ReadI32()
+  if err1311 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1311); }
+  p._homeId = v1310
   return err
 }
 
@@ -40078,9 +40177,9 @@ func (p *SetConfigParamArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *SetConfigParamArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1306, err1307 := iprot.ReadI32()
-  if err1307 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1307); }
-  p._homeId = v1306
+  v1312, err1313 := iprot.ReadI32()
+  if err1313 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1313); }
+  p._homeId = v1312
   return err
 }
 
@@ -40089,9 +40188,9 @@ func (p *SetConfigParamArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetConfigParamArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1308, err1309 := iprot.ReadByte()
-  if err1309 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1309); }
-  p._nodeId = v1308
+  v1314, err1315 := iprot.ReadByte()
+  if err1315 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1315); }
+  p._nodeId = v1314
   return err
 }
 
@@ -40100,9 +40199,9 @@ func (p *SetConfigParamArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetConfigParamArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1310, err1311 := iprot.ReadByte()
-  if err1311 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1311); }
-  p._param = v1310
+  v1316, err1317 := iprot.ReadByte()
+  if err1317 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1317); }
+  p._param = v1316
   return err
 }
 
@@ -40111,9 +40210,9 @@ func (p *SetConfigParamArgs) ReadField_param(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetConfigParamArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1312, err1313 := iprot.ReadI32()
-  if err1313 != nil { return thrift.NewTProtocolExceptionReadField(4, "_value", p.ThriftName(), err1313); }
-  p._value = v1312
+  v1318, err1319 := iprot.ReadI32()
+  if err1319 != nil { return thrift.NewTProtocolExceptionReadField(4, "_value", p.ThriftName(), err1319); }
+  p._value = v1318
   return err
 }
 
@@ -40122,9 +40221,9 @@ func (p *SetConfigParamArgs) ReadField_value(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetConfigParamArgs) ReadField5(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1314, err1315 := iprot.ReadByte()
-  if err1315 != nil { return thrift.NewTProtocolExceptionReadField(5, "_size", p.ThriftName(), err1315); }
-  p._size = v1314
+  v1320, err1321 := iprot.ReadByte()
+  if err1321 != nil { return thrift.NewTProtocolExceptionReadField(5, "_size", p.ThriftName(), err1321); }
+  p._size = v1320
   return err
 }
 
@@ -40361,9 +40460,9 @@ func (p *SetConfigParamResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *SetConfigParamResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1316, err1317 := iprot.ReadBool()
-  if err1317 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1317); }
-  p.Success = v1316
+  v1322, err1323 := iprot.ReadBool()
+  if err1323 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1323); }
+  p.Success = v1322
   return err
 }
 
@@ -40533,9 +40632,9 @@ func (p *RequestConfigParamArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *RequestConfigParamArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1318, err1319 := iprot.ReadI32()
-  if err1319 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1319); }
-  p._homeId = v1318
+  v1324, err1325 := iprot.ReadI32()
+  if err1325 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1325); }
+  p._homeId = v1324
   return err
 }
 
@@ -40544,9 +40643,9 @@ func (p *RequestConfigParamArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *RequestConfigParamArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1320, err1321 := iprot.ReadByte()
-  if err1321 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1321); }
-  p._nodeId = v1320
+  v1326, err1327 := iprot.ReadByte()
+  if err1327 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1327); }
+  p._nodeId = v1326
   return err
 }
 
@@ -40555,9 +40654,9 @@ func (p *RequestConfigParamArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *RequestConfigParamArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1322, err1323 := iprot.ReadByte()
-  if err1323 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1323); }
-  p._param = v1322
+  v1328, err1329 := iprot.ReadByte()
+  if err1329 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1329); }
+  p._param = v1328
   return err
 }
 
@@ -40849,9 +40948,9 @@ func (p *RequestAllConfigParamsArgs) Read(iprot thrift.TProtocol) (err thrift.TP
 }
 
 func (p *RequestAllConfigParamsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1324, err1325 := iprot.ReadI32()
-  if err1325 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1325); }
-  p._homeId = v1324
+  v1330, err1331 := iprot.ReadI32()
+  if err1331 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1331); }
+  p._homeId = v1330
   return err
 }
 
@@ -40860,9 +40959,9 @@ func (p *RequestAllConfigParamsArgs) ReadField_homeId(iprot thrift.TProtocol) (t
 }
 
 func (p *RequestAllConfigParamsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1326, err1327 := iprot.ReadByte()
-  if err1327 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1327); }
-  p._nodeId = v1326
+  v1332, err1333 := iprot.ReadByte()
+  if err1333 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1333); }
+  p._nodeId = v1332
   return err
 }
 
@@ -41130,9 +41229,9 @@ func (p *GetNumGroupsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *GetNumGroupsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1328, err1329 := iprot.ReadI32()
-  if err1329 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1329); }
-  p._homeId = v1328
+  v1334, err1335 := iprot.ReadI32()
+  if err1335 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1335); }
+  p._homeId = v1334
   return err
 }
 
@@ -41141,9 +41240,9 @@ func (p *GetNumGroupsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TPro
 }
 
 func (p *GetNumGroupsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1330, err1331 := iprot.ReadByte()
-  if err1331 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1331); }
-  p._nodeId = v1330
+  v1336, err1337 := iprot.ReadByte()
+  if err1337 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1337); }
+  p._nodeId = v1336
   return err
 }
 
@@ -41308,9 +41407,9 @@ func (p *GetNumGroupsResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNumGroupsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1332, err1333 := iprot.ReadByte()
-  if err1333 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1333); }
-  p.Success = v1332
+  v1338, err1339 := iprot.ReadByte()
+  if err1339 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1339); }
+  p.Success = v1338
   return err
 }
 
@@ -41483,9 +41582,9 @@ func (p *GetAssociationsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetAssociationsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1334, err1335 := iprot.ReadI32()
-  if err1335 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1335); }
-  p._homeId = v1334
+  v1340, err1341 := iprot.ReadI32()
+  if err1341 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1341); }
+  p._homeId = v1340
   return err
 }
 
@@ -41494,9 +41593,9 @@ func (p *GetAssociationsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetAssociationsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1336, err1337 := iprot.ReadByte()
-  if err1337 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1337); }
-  p._nodeId = v1336
+  v1342, err1343 := iprot.ReadByte()
+  if err1343 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1343); }
+  p._nodeId = v1342
   return err
 }
 
@@ -41505,9 +41604,9 @@ func (p *GetAssociationsArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetAssociationsArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1338, err1339 := iprot.ReadByte()
-  if err1339 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1339); }
-  p._groupIdx = v1338
+  v1344, err1345 := iprot.ReadByte()
+  if err1345 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1345); }
+  p._groupIdx = v1344
   return err
 }
 
@@ -41697,8 +41796,8 @@ func (p *GetAssociationsResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *GetAssociationsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetAssociationsReturnStruct()
-  err1342 := p.Success.Read(iprot)
-  if err1342 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAssociationsReturnStruct", err1342); }
+  err1348 := p.Success.Read(iprot)
+  if err1348 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAssociationsReturnStruct", err1348); }
   return err
 }
 
@@ -41870,9 +41969,9 @@ func (p *GetMaxAssociationsArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetMaxAssociationsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1343, err1344 := iprot.ReadI32()
-  if err1344 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1344); }
-  p._homeId = v1343
+  v1349, err1350 := iprot.ReadI32()
+  if err1350 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1350); }
+  p._homeId = v1349
   return err
 }
 
@@ -41881,9 +41980,9 @@ func (p *GetMaxAssociationsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetMaxAssociationsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1345, err1346 := iprot.ReadByte()
-  if err1346 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1346); }
-  p._nodeId = v1345
+  v1351, err1352 := iprot.ReadByte()
+  if err1352 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1352); }
+  p._nodeId = v1351
   return err
 }
 
@@ -41892,9 +41991,9 @@ func (p *GetMaxAssociationsArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetMaxAssociationsArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1347, err1348 := iprot.ReadByte()
-  if err1348 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1348); }
-  p._groupIdx = v1347
+  v1353, err1354 := iprot.ReadByte()
+  if err1354 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1354); }
+  p._groupIdx = v1353
   return err
 }
 
@@ -42083,9 +42182,9 @@ func (p *GetMaxAssociationsResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetMaxAssociationsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1349, err1350 := iprot.ReadByte()
-  if err1350 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1350); }
-  p.Success = v1349
+  v1355, err1356 := iprot.ReadByte()
+  if err1356 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1356); }
+  p.Success = v1355
   return err
 }
 
@@ -42258,9 +42357,9 @@ func (p *GetGroupLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetGroupLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1351, err1352 := iprot.ReadI32()
-  if err1352 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1352); }
-  p._homeId = v1351
+  v1357, err1358 := iprot.ReadI32()
+  if err1358 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1358); }
+  p._homeId = v1357
   return err
 }
 
@@ -42269,9 +42368,9 @@ func (p *GetGroupLabelArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *GetGroupLabelArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1353, err1354 := iprot.ReadByte()
-  if err1354 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1354); }
-  p._nodeId = v1353
+  v1359, err1360 := iprot.ReadByte()
+  if err1360 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1360); }
+  p._nodeId = v1359
   return err
 }
 
@@ -42280,9 +42379,9 @@ func (p *GetGroupLabelArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *GetGroupLabelArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1355, err1356 := iprot.ReadByte()
-  if err1356 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1356); }
-  p._groupIdx = v1355
+  v1361, err1362 := iprot.ReadByte()
+  if err1362 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1362); }
+  p._groupIdx = v1361
   return err
 }
 
@@ -42471,9 +42570,9 @@ func (p *GetGroupLabelResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetGroupLabelResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1357, err1358 := iprot.ReadString()
-  if err1358 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1358); }
-  p.Success = v1357
+  v1363, err1364 := iprot.ReadString()
+  if err1364 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1364); }
+  p.Success = v1363
   return err
 }
 
@@ -42660,9 +42759,9 @@ func (p *AddAssociationArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *AddAssociationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1359, err1360 := iprot.ReadI32()
-  if err1360 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1360); }
-  p._homeId = v1359
+  v1365, err1366 := iprot.ReadI32()
+  if err1366 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1366); }
+  p._homeId = v1365
   return err
 }
 
@@ -42671,9 +42770,9 @@ func (p *AddAssociationArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *AddAssociationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1361, err1362 := iprot.ReadByte()
-  if err1362 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1362); }
-  p._nodeId = v1361
+  v1367, err1368 := iprot.ReadByte()
+  if err1368 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1368); }
+  p._nodeId = v1367
   return err
 }
 
@@ -42682,9 +42781,9 @@ func (p *AddAssociationArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *AddAssociationArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1363, err1364 := iprot.ReadByte()
-  if err1364 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1364); }
-  p._groupIdx = v1363
+  v1369, err1370 := iprot.ReadByte()
+  if err1370 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1370); }
+  p._groupIdx = v1369
   return err
 }
 
@@ -42693,9 +42792,9 @@ func (p *AddAssociationArgs) ReadField_groupIdx(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *AddAssociationArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1365, err1366 := iprot.ReadByte()
-  if err1366 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1366); }
-  p._targetNodeId = v1365
+  v1371, err1372 := iprot.ReadByte()
+  if err1372 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1372); }
+  p._targetNodeId = v1371
   return err
 }
 
@@ -43039,9 +43138,9 @@ func (p *RemoveAssociationArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *RemoveAssociationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1367, err1368 := iprot.ReadI32()
-  if err1368 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1368); }
-  p._homeId = v1367
+  v1373, err1374 := iprot.ReadI32()
+  if err1374 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1374); }
+  p._homeId = v1373
   return err
 }
 
@@ -43050,9 +43149,9 @@ func (p *RemoveAssociationArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift
 }
 
 func (p *RemoveAssociationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1369, err1370 := iprot.ReadByte()
-  if err1370 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1370); }
-  p._nodeId = v1369
+  v1375, err1376 := iprot.ReadByte()
+  if err1376 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1376); }
+  p._nodeId = v1375
   return err
 }
 
@@ -43061,9 +43160,9 @@ func (p *RemoveAssociationArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift
 }
 
 func (p *RemoveAssociationArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1371, err1372 := iprot.ReadByte()
-  if err1372 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1372); }
-  p._groupIdx = v1371
+  v1377, err1378 := iprot.ReadByte()
+  if err1378 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1378); }
+  p._groupIdx = v1377
   return err
 }
 
@@ -43072,9 +43171,9 @@ func (p *RemoveAssociationArgs) ReadField_groupIdx(iprot thrift.TProtocol) (thri
 }
 
 func (p *RemoveAssociationArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1373, err1374 := iprot.ReadByte()
-  if err1374 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1374); }
-  p._targetNodeId = v1373
+  v1379, err1380 := iprot.ReadByte()
+  if err1380 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1380); }
+  p._targetNodeId = v1379
   return err
 }
 
@@ -43376,9 +43475,9 @@ func (p *ResetControllerArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *ResetControllerArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1375, err1376 := iprot.ReadI32()
-  if err1376 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1376); }
-  p._homeId = v1375
+  v1381, err1382 := iprot.ReadI32()
+  if err1382 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1382); }
+  p._homeId = v1381
   return err
 }
 
@@ -43608,9 +43707,9 @@ func (p *SoftResetArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcept
 }
 
 func (p *SoftResetArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1377, err1378 := iprot.ReadI32()
-  if err1378 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1378); }
-  p._homeId = v1377
+  v1383, err1384 := iprot.ReadI32()
+  if err1384 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1384); }
+  p._homeId = v1383
   return err
 }
 
@@ -43929,9 +44028,9 @@ func (p *GetNumScenesResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNumScenesResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1379, err1380 := iprot.ReadByte()
-  if err1380 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1380); }
-  p.Success = v1379
+  v1385, err1386 := iprot.ReadByte()
+  if err1386 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1386); }
+  p.Success = v1385
   return err
 }
 
@@ -44166,8 +44265,8 @@ func (p *GetAllScenesResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *GetAllScenesResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetAllScenesReturnStruct()
-  err1383 := p.Success.Read(iprot)
-  if err1383 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAllScenesReturnStruct", err1383); }
+  err1389 := p.Success.Read(iprot)
+  if err1389 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAllScenesReturnStruct", err1389); }
   return err
 }
 
@@ -44400,9 +44499,9 @@ func (p *CreateSceneResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *CreateSceneResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1384, err1385 := iprot.ReadByte()
-  if err1385 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1385); }
-  p.Success = v1384
+  v1390, err1391 := iprot.ReadByte()
+  if err1391 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1391); }
+  p.Success = v1390
   return err
 }
 
@@ -44547,9 +44646,9 @@ func (p *RemoveSceneArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *RemoveSceneArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1386, err1387 := iprot.ReadByte()
-  if err1387 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1387); }
-  p._sceneId = v1386
+  v1392, err1393 := iprot.ReadByte()
+  if err1393 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1393); }
+  p._sceneId = v1392
   return err
 }
 
@@ -44690,9 +44789,9 @@ func (p *RemoveSceneResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *RemoveSceneResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1388, err1389 := iprot.ReadBool()
-  if err1389 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1389); }
-  p.Success = v1388
+  v1394, err1395 := iprot.ReadBool()
+  if err1395 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1395); }
+  p.Success = v1394
   return err
 }
 
@@ -44862,9 +44961,9 @@ func (p *AddSceneValueBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *AddSceneValueBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1390, err1391 := iprot.ReadByte()
-  if err1391 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1391); }
-  p._sceneId = v1390
+  v1396, err1397 := iprot.ReadByte()
+  if err1397 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1397); }
+  p._sceneId = v1396
   return err
 }
 
@@ -44874,8 +44973,8 @@ func (p *AddSceneValueBoolArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrif
 
 func (p *AddSceneValueBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1394 := p._valueId.Read(iprot)
-  if err1394 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1394); }
+  err1400 := p._valueId.Read(iprot)
+  if err1400 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1400); }
   return err
 }
 
@@ -44884,9 +44983,9 @@ func (p *AddSceneValueBoolArgs) ReadField_valueId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *AddSceneValueBoolArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1395, err1396 := iprot.ReadBool()
-  if err1396 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1396); }
-  p._value = v1395
+  v1401, err1402 := iprot.ReadBool()
+  if err1402 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1402); }
+  p._value = v1401
   return err
 }
 
@@ -45071,9 +45170,9 @@ func (p *AddSceneValueBoolResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *AddSceneValueBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1397, err1398 := iprot.ReadBool()
-  if err1398 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1398); }
-  p.Success = v1397
+  v1403, err1404 := iprot.ReadBool()
+  if err1404 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1404); }
+  p.Success = v1403
   return err
 }
 
@@ -45243,9 +45342,9 @@ func (p *AddSceneValueUint8Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueUint8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1399, err1400 := iprot.ReadByte()
-  if err1400 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1400); }
-  p._sceneId = v1399
+  v1405, err1406 := iprot.ReadByte()
+  if err1406 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1406); }
+  p._sceneId = v1405
   return err
 }
 
@@ -45255,8 +45354,8 @@ func (p *AddSceneValueUint8Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueUint8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1403 := p._valueId.Read(iprot)
-  if err1403 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1403); }
+  err1409 := p._valueId.Read(iprot)
+  if err1409 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1409); }
   return err
 }
 
@@ -45265,9 +45364,9 @@ func (p *AddSceneValueUint8Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueUint8Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1404, err1405 := iprot.ReadByte()
-  if err1405 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1405); }
-  p._value = v1404
+  v1410, err1411 := iprot.ReadByte()
+  if err1411 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1411); }
+  p._value = v1410
   return err
 }
 
@@ -45455,9 +45554,9 @@ func (p *AddSceneValueUint8Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueUint8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1406, err1407 := iprot.ReadBool()
-  if err1407 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1407); }
-  p.Success = v1406
+  v1412, err1413 := iprot.ReadBool()
+  if err1413 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1413); }
+  p.Success = v1412
   return err
 }
 
@@ -45627,9 +45726,9 @@ func (p *AddSceneValueFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1408, err1409 := iprot.ReadByte()
-  if err1409 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1409); }
-  p._sceneId = v1408
+  v1414, err1415 := iprot.ReadByte()
+  if err1415 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1415); }
+  p._sceneId = v1414
   return err
 }
 
@@ -45639,8 +45738,8 @@ func (p *AddSceneValueFloatArgs) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1412 := p._valueId.Read(iprot)
-  if err1412 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1412); }
+  err1418 := p._valueId.Read(iprot)
+  if err1418 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1418); }
   return err
 }
 
@@ -45649,9 +45748,9 @@ func (p *AddSceneValueFloatArgs) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueFloatArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1413, err1414 := iprot.ReadDouble()
-  if err1414 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1414); }
-  p._value = v1413
+  v1419, err1420 := iprot.ReadDouble()
+  if err1420 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1420); }
+  p._value = v1419
   return err
 }
 
@@ -45839,9 +45938,9 @@ func (p *AddSceneValueFloatResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1415, err1416 := iprot.ReadBool()
-  if err1416 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1416); }
-  p.Success = v1415
+  v1421, err1422 := iprot.ReadBool()
+  if err1422 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1422); }
+  p.Success = v1421
   return err
 }
 
@@ -46011,9 +46110,9 @@ func (p *AddSceneValueInt32Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1417, err1418 := iprot.ReadByte()
-  if err1418 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1418); }
-  p._sceneId = v1417
+  v1423, err1424 := iprot.ReadByte()
+  if err1424 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1424); }
+  p._sceneId = v1423
   return err
 }
 
@@ -46023,8 +46122,8 @@ func (p *AddSceneValueInt32Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1421 := p._valueId.Read(iprot)
-  if err1421 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1421); }
+  err1427 := p._valueId.Read(iprot)
+  if err1427 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1427); }
   return err
 }
 
@@ -46033,9 +46132,9 @@ func (p *AddSceneValueInt32Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1422, err1423 := iprot.ReadI32()
-  if err1423 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1423); }
-  p._value = v1422
+  v1428, err1429 := iprot.ReadI32()
+  if err1429 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1429); }
+  p._value = v1428
   return err
 }
 
@@ -46223,9 +46322,9 @@ func (p *AddSceneValueInt32Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1424, err1425 := iprot.ReadBool()
-  if err1425 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1425); }
-  p.Success = v1424
+  v1430, err1431 := iprot.ReadBool()
+  if err1431 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1431); }
+  p.Success = v1430
   return err
 }
 
@@ -46395,9 +46494,9 @@ func (p *AddSceneValueInt16Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueInt16Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1426, err1427 := iprot.ReadByte()
-  if err1427 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1427); }
-  p._sceneId = v1426
+  v1432, err1433 := iprot.ReadByte()
+  if err1433 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1433); }
+  p._sceneId = v1432
   return err
 }
 
@@ -46407,8 +46506,8 @@ func (p *AddSceneValueInt16Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueInt16Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1430 := p._valueId.Read(iprot)
-  if err1430 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1430); }
+  err1436 := p._valueId.Read(iprot)
+  if err1436 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1436); }
   return err
 }
 
@@ -46417,9 +46516,9 @@ func (p *AddSceneValueInt16Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueInt16Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1431, err1432 := iprot.ReadI16()
-  if err1432 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1432); }
-  p._value = v1431
+  v1437, err1438 := iprot.ReadI16()
+  if err1438 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1438); }
+  p._value = v1437
   return err
 }
 
@@ -46607,9 +46706,9 @@ func (p *AddSceneValueInt16Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueInt16Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1433, err1434 := iprot.ReadBool()
-  if err1434 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1434); }
-  p.Success = v1433
+  v1439, err1440 := iprot.ReadBool()
+  if err1440 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1440); }
+  p.Success = v1439
   return err
 }
 
@@ -46779,9 +46878,9 @@ func (p *AddSceneValueStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *AddSceneValueStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1435, err1436 := iprot.ReadByte()
-  if err1436 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1436); }
-  p._sceneId = v1435
+  v1441, err1442 := iprot.ReadByte()
+  if err1442 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1442); }
+  p._sceneId = v1441
   return err
 }
 
@@ -46791,8 +46890,8 @@ func (p *AddSceneValueStringArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *AddSceneValueStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1439 := p._valueId.Read(iprot)
-  if err1439 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1439); }
+  err1445 := p._valueId.Read(iprot)
+  if err1445 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1445); }
   return err
 }
 
@@ -46801,9 +46900,9 @@ func (p *AddSceneValueStringArgs) ReadField_valueId(iprot thrift.TProtocol) (thr
 }
 
 func (p *AddSceneValueStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1440, err1441 := iprot.ReadString()
-  if err1441 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1441); }
-  p._value = v1440
+  v1446, err1447 := iprot.ReadString()
+  if err1447 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1447); }
+  p._value = v1446
   return err
 }
 
@@ -46991,9 +47090,9 @@ func (p *AddSceneValueStringResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *AddSceneValueStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1442, err1443 := iprot.ReadBool()
-  if err1443 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1443); }
-  p.Success = v1442
+  v1448, err1449 := iprot.ReadBool()
+  if err1449 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1449); }
+  p.Success = v1448
   return err
 }
 
@@ -47163,9 +47262,9 @@ func (p *AddSceneValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err
 }
 
 func (p *AddSceneValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1444, err1445 := iprot.ReadByte()
-  if err1445 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1445); }
-  p._sceneId = v1444
+  v1450, err1451 := iprot.ReadByte()
+  if err1451 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1451); }
+  p._sceneId = v1450
   return err
 }
 
@@ -47175,8 +47274,8 @@ func (p *AddSceneValueListSelectionStringArgs) ReadField_sceneId(iprot thrift.TP
 
 func (p *AddSceneValueListSelectionStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1448 := p._valueId.Read(iprot)
-  if err1448 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1448); }
+  err1454 := p._valueId.Read(iprot)
+  if err1454 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1454); }
   return err
 }
 
@@ -47185,9 +47284,9 @@ func (p *AddSceneValueListSelectionStringArgs) ReadField_valueId(iprot thrift.TP
 }
 
 func (p *AddSceneValueListSelectionStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1449, err1450 := iprot.ReadString()
-  if err1450 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1450); }
-  p._value = v1449
+  v1455, err1456 := iprot.ReadString()
+  if err1456 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1456); }
+  p._value = v1455
   return err
 }
 
@@ -47375,9 +47474,9 @@ func (p *AddSceneValueListSelectionStringResult) Read(iprot thrift.TProtocol) (e
 }
 
 func (p *AddSceneValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1451, err1452 := iprot.ReadBool()
-  if err1452 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1452); }
-  p.Success = v1451
+  v1457, err1458 := iprot.ReadBool()
+  if err1458 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1458); }
+  p.Success = v1457
   return err
 }
 
@@ -47547,9 +47646,9 @@ func (p *AddSceneValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err 
 }
 
 func (p *AddSceneValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1453, err1454 := iprot.ReadByte()
-  if err1454 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1454); }
-  p._sceneId = v1453
+  v1459, err1460 := iprot.ReadByte()
+  if err1460 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1460); }
+  p._sceneId = v1459
   return err
 }
 
@@ -47559,8 +47658,8 @@ func (p *AddSceneValueListSelectionInt32Args) ReadField_sceneId(iprot thrift.TPr
 
 func (p *AddSceneValueListSelectionInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1457 := p._valueId.Read(iprot)
-  if err1457 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1457); }
+  err1463 := p._valueId.Read(iprot)
+  if err1463 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1463); }
   return err
 }
 
@@ -47569,9 +47668,9 @@ func (p *AddSceneValueListSelectionInt32Args) ReadField_valueId(iprot thrift.TPr
 }
 
 func (p *AddSceneValueListSelectionInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1458, err1459 := iprot.ReadI32()
-  if err1459 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1459); }
-  p._value = v1458
+  v1464, err1465 := iprot.ReadI32()
+  if err1465 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1465); }
+  p._value = v1464
   return err
 }
 
@@ -47759,9 +47858,9 @@ func (p *AddSceneValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (er
 }
 
 func (p *AddSceneValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1460, err1461 := iprot.ReadBool()
-  if err1461 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1461); }
-  p.Success = v1460
+  v1466, err1467 := iprot.ReadBool()
+  if err1467 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1467); }
+  p.Success = v1466
   return err
 }
 
@@ -47917,9 +48016,9 @@ func (p *RemoveSceneValueArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *RemoveSceneValueArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1462, err1463 := iprot.ReadByte()
-  if err1463 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1463); }
-  p._sceneId = v1462
+  v1468, err1469 := iprot.ReadByte()
+  if err1469 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1469); }
+  p._sceneId = v1468
   return err
 }
 
@@ -47929,8 +48028,8 @@ func (p *RemoveSceneValueArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrift
 
 func (p *RemoveSceneValueArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1466 := p._valueId.Read(iprot)
-  if err1466 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1466); }
+  err1472 := p._valueId.Read(iprot)
+  if err1472 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1472); }
   return err
 }
 
@@ -48094,9 +48193,9 @@ func (p *RemoveSceneValueResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *RemoveSceneValueResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1467, err1468 := iprot.ReadBool()
-  if err1468 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1468); }
-  p.Success = v1467
+  v1473, err1474 := iprot.ReadBool()
+  if err1474 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1474); }
+  p.Success = v1473
   return err
 }
 
@@ -48238,9 +48337,9 @@ func (p *SceneGetValuesArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *SceneGetValuesArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1469, err1470 := iprot.ReadByte()
-  if err1470 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1470); }
-  p._sceneId = v1469
+  v1475, err1476 := iprot.ReadByte()
+  if err1476 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1476); }
+  p._sceneId = v1475
   return err
 }
 
@@ -48382,8 +48481,8 @@ func (p *SceneGetValuesResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *SceneGetValuesResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewSceneGetValuesReturnStruct()
-  err1473 := p.Success.Read(iprot)
-  if err1473 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessSceneGetValuesReturnStruct", err1473); }
+  err1479 := p.Success.Read(iprot)
+  if err1479 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessSceneGetValuesReturnStruct", err1479); }
   return err
 }
 
@@ -48541,9 +48640,9 @@ func (p *SceneGetValueAsBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SceneGetValueAsBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1474, err1475 := iprot.ReadByte()
-  if err1475 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1475); }
-  p._sceneId = v1474
+  v1480, err1481 := iprot.ReadByte()
+  if err1481 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1481); }
+  p._sceneId = v1480
   return err
 }
 
@@ -48553,8 +48652,8 @@ func (p *SceneGetValueAsBoolArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *SceneGetValueAsBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1478 := p._valueId.Read(iprot)
-  if err1478 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1478); }
+  err1484 := p._valueId.Read(iprot)
+  if err1484 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1484); }
   return err
 }
 
@@ -48719,8 +48818,8 @@ func (p *SceneGetValueAsBoolResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *SceneGetValueAsBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolBool()
-  err1481 := p.Success.Read(iprot)
-  if err1481 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Bool", err1481); }
+  err1487 := p.Success.Read(iprot)
+  if err1487 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Bool", err1487); }
   return err
 }
 
@@ -48878,9 +48977,9 @@ func (p *SceneGetValueAsByteArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SceneGetValueAsByteArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1482, err1483 := iprot.ReadByte()
-  if err1483 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1483); }
-  p._sceneId = v1482
+  v1488, err1489 := iprot.ReadByte()
+  if err1489 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1489); }
+  p._sceneId = v1488
   return err
 }
 
@@ -48890,8 +48989,8 @@ func (p *SceneGetValueAsByteArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *SceneGetValueAsByteArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1486 := p._valueId.Read(iprot)
-  if err1486 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1486); }
+  err1492 := p._valueId.Read(iprot)
+  if err1492 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1492); }
   return err
 }
 
@@ -49056,8 +49155,8 @@ func (p *SceneGetValueAsByteResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *SceneGetValueAsByteResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolUInt8()
-  err1489 := p.Success.Read(iprot)
-  if err1489 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1489); }
+  err1495 := p.Success.Read(iprot)
+  if err1495 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1495); }
   return err
 }
 
@@ -49215,9 +49314,9 @@ func (p *SceneGetValueAsFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SceneGetValueAsFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1490, err1491 := iprot.ReadByte()
-  if err1491 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1491); }
-  p._sceneId = v1490
+  v1496, err1497 := iprot.ReadByte()
+  if err1497 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1497); }
+  p._sceneId = v1496
   return err
 }
 
@@ -49227,8 +49326,8 @@ func (p *SceneGetValueAsFloatArgs) ReadField_sceneId(iprot thrift.TProtocol) (th
 
 func (p *SceneGetValueAsFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1494 := p._valueId.Read(iprot)
-  if err1494 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1494); }
+  err1500 := p._valueId.Read(iprot)
+  if err1500 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1500); }
   return err
 }
 
@@ -49393,8 +49492,8 @@ func (p *SceneGetValueAsFloatResult) Read(iprot thrift.TProtocol) (err thrift.TP
 
 func (p *SceneGetValueAsFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolFloat()
-  err1497 := p.Success.Read(iprot)
-  if err1497 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Float", err1497); }
+  err1503 := p.Success.Read(iprot)
+  if err1503 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Float", err1503); }
   return err
 }
 
@@ -49552,9 +49651,9 @@ func (p *SceneGetValueAsIntArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SceneGetValueAsIntArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1498, err1499 := iprot.ReadByte()
-  if err1499 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1499); }
-  p._sceneId = v1498
+  v1504, err1505 := iprot.ReadByte()
+  if err1505 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1505); }
+  p._sceneId = v1504
   return err
 }
 
@@ -49564,8 +49663,8 @@ func (p *SceneGetValueAsIntArgs) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SceneGetValueAsIntArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1502 := p._valueId.Read(iprot)
-  if err1502 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1502); }
+  err1508 := p._valueId.Read(iprot)
+  if err1508 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1508); }
   return err
 }
 
@@ -49730,8 +49829,8 @@ func (p *SceneGetValueAsIntResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 
 func (p *SceneGetValueAsIntResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt()
-  err1505 := p.Success.Read(iprot)
-  if err1505 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1505); }
+  err1511 := p.Success.Read(iprot)
+  if err1511 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1511); }
   return err
 }
 
@@ -49889,9 +49988,9 @@ func (p *SceneGetValueAsShortArgs) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SceneGetValueAsShortArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1506, err1507 := iprot.ReadByte()
-  if err1507 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1507); }
-  p._sceneId = v1506
+  v1512, err1513 := iprot.ReadByte()
+  if err1513 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1513); }
+  p._sceneId = v1512
   return err
 }
 
@@ -49901,8 +50000,8 @@ func (p *SceneGetValueAsShortArgs) ReadField_sceneId(iprot thrift.TProtocol) (th
 
 func (p *SceneGetValueAsShortArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1510 := p._valueId.Read(iprot)
-  if err1510 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1510); }
+  err1516 := p._valueId.Read(iprot)
+  if err1516 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1516); }
   return err
 }
 
@@ -50067,8 +50166,8 @@ func (p *SceneGetValueAsShortResult) Read(iprot thrift.TProtocol) (err thrift.TP
 
 func (p *SceneGetValueAsShortResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt16()
-  err1513 := p.Success.Read(iprot)
-  if err1513 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int16", err1513); }
+  err1519 := p.Success.Read(iprot)
+  if err1519 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int16", err1519); }
   return err
 }
 
@@ -50226,9 +50325,9 @@ func (p *SceneGetValueAsStringArgs) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *SceneGetValueAsStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1514, err1515 := iprot.ReadByte()
-  if err1515 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1515); }
-  p._sceneId = v1514
+  v1520, err1521 := iprot.ReadByte()
+  if err1521 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1521); }
+  p._sceneId = v1520
   return err
 }
 
@@ -50238,8 +50337,8 @@ func (p *SceneGetValueAsStringArgs) ReadField_sceneId(iprot thrift.TProtocol) (t
 
 func (p *SceneGetValueAsStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1518 := p._valueId.Read(iprot)
-  if err1518 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1518); }
+  err1524 := p._valueId.Read(iprot)
+  if err1524 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1524); }
   return err
 }
 
@@ -50404,8 +50503,8 @@ func (p *SceneGetValueAsStringResult) Read(iprot thrift.TProtocol) (err thrift.T
 
 func (p *SceneGetValueAsStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolString()
-  err1521 := p.Success.Read(iprot)
-  if err1521 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1521); }
+  err1527 := p.Success.Read(iprot)
+  if err1527 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1527); }
   return err
 }
 
@@ -50563,9 +50662,9 @@ func (p *SceneGetValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err
 }
 
 func (p *SceneGetValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1522, err1523 := iprot.ReadByte()
-  if err1523 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1523); }
-  p._sceneId = v1522
+  v1528, err1529 := iprot.ReadByte()
+  if err1529 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1529); }
+  p._sceneId = v1528
   return err
 }
 
@@ -50575,8 +50674,8 @@ func (p *SceneGetValueListSelectionStringArgs) ReadField_sceneId(iprot thrift.TP
 
 func (p *SceneGetValueListSelectionStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1526 := p._valueId.Read(iprot)
-  if err1526 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1526); }
+  err1532 := p._valueId.Read(iprot)
+  if err1532 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1532); }
   return err
 }
 
@@ -50741,8 +50840,8 @@ func (p *SceneGetValueListSelectionStringResult) Read(iprot thrift.TProtocol) (e
 
 func (p *SceneGetValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolString()
-  err1529 := p.Success.Read(iprot)
-  if err1529 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1529); }
+  err1535 := p.Success.Read(iprot)
+  if err1535 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1535); }
   return err
 }
 
@@ -50900,9 +50999,9 @@ func (p *SceneGetValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err 
 }
 
 func (p *SceneGetValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1530, err1531 := iprot.ReadByte()
-  if err1531 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1531); }
-  p._sceneId = v1530
+  v1536, err1537 := iprot.ReadByte()
+  if err1537 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1537); }
+  p._sceneId = v1536
   return err
 }
 
@@ -50912,8 +51011,8 @@ func (p *SceneGetValueListSelectionInt32Args) ReadField_sceneId(iprot thrift.TPr
 
 func (p *SceneGetValueListSelectionInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1534 := p._valueId.Read(iprot)
-  if err1534 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1534); }
+  err1540 := p._valueId.Read(iprot)
+  if err1540 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1540); }
   return err
 }
 
@@ -51078,8 +51177,8 @@ func (p *SceneGetValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (er
 
 func (p *SceneGetValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt()
-  err1537 := p.Success.Read(iprot)
-  if err1537 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1537); }
+  err1543 := p.Success.Read(iprot)
+  if err1543 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1543); }
   return err
 }
 
@@ -51251,9 +51350,9 @@ func (p *SetSceneValueBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *SetSceneValueBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1538, err1539 := iprot.ReadByte()
-  if err1539 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1539); }
-  p._sceneId = v1538
+  v1544, err1545 := iprot.ReadByte()
+  if err1545 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1545); }
+  p._sceneId = v1544
   return err
 }
 
@@ -51263,8 +51362,8 @@ func (p *SetSceneValueBoolArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrif
 
 func (p *SetSceneValueBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1542 := p._valueId.Read(iprot)
-  if err1542 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1542); }
+  err1548 := p._valueId.Read(iprot)
+  if err1548 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1548); }
   return err
 }
 
@@ -51273,9 +51372,9 @@ func (p *SetSceneValueBoolArgs) ReadField_valueId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *SetSceneValueBoolArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1543, err1544 := iprot.ReadBool()
-  if err1544 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1544); }
-  p._value = v1543
+  v1549, err1550 := iprot.ReadBool()
+  if err1550 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1550); }
+  p._value = v1549
   return err
 }
 
@@ -51460,9 +51559,9 @@ func (p *SetSceneValueBoolResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SetSceneValueBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1545, err1546 := iprot.ReadBool()
-  if err1546 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1546); }
-  p.Success = v1545
+  v1551, err1552 := iprot.ReadBool()
+  if err1552 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1552); }
+  p.Success = v1551
   return err
 }
 
@@ -51632,9 +51731,9 @@ func (p *SetSceneValueUint8Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueUint8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1547, err1548 := iprot.ReadByte()
-  if err1548 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1548); }
-  p._sceneId = v1547
+  v1553, err1554 := iprot.ReadByte()
+  if err1554 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1554); }
+  p._sceneId = v1553
   return err
 }
 
@@ -51644,8 +51743,8 @@ func (p *SetSceneValueUint8Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueUint8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1551 := p._valueId.Read(iprot)
-  if err1551 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1551); }
+  err1557 := p._valueId.Read(iprot)
+  if err1557 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1557); }
   return err
 }
 
@@ -51654,9 +51753,9 @@ func (p *SetSceneValueUint8Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueUint8Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1552, err1553 := iprot.ReadByte()
-  if err1553 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1553); }
-  p._value = v1552
+  v1558, err1559 := iprot.ReadByte()
+  if err1559 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1559); }
+  p._value = v1558
   return err
 }
 
@@ -51844,9 +51943,9 @@ func (p *SetSceneValueUint8Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueUint8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1554, err1555 := iprot.ReadBool()
-  if err1555 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1555); }
-  p.Success = v1554
+  v1560, err1561 := iprot.ReadBool()
+  if err1561 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1561); }
+  p.Success = v1560
   return err
 }
 
@@ -52016,9 +52115,9 @@ func (p *SetSceneValueFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1556, err1557 := iprot.ReadByte()
-  if err1557 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1557); }
-  p._sceneId = v1556
+  v1562, err1563 := iprot.ReadByte()
+  if err1563 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1563); }
+  p._sceneId = v1562
   return err
 }
 
@@ -52028,8 +52127,8 @@ func (p *SetSceneValueFloatArgs) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1560 := p._valueId.Read(iprot)
-  if err1560 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1560); }
+  err1566 := p._valueId.Read(iprot)
+  if err1566 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1566); }
   return err
 }
 
@@ -52038,9 +52137,9 @@ func (p *SetSceneValueFloatArgs) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueFloatArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1561, err1562 := iprot.ReadDouble()
-  if err1562 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1562); }
-  p._value = v1561
+  v1567, err1568 := iprot.ReadDouble()
+  if err1568 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1568); }
+  p._value = v1567
   return err
 }
 
@@ -52228,9 +52327,9 @@ func (p *SetSceneValueFloatResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1563, err1564 := iprot.ReadBool()
-  if err1564 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1564); }
-  p.Success = v1563
+  v1569, err1570 := iprot.ReadBool()
+  if err1570 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1570); }
+  p.Success = v1569
   return err
 }
 
@@ -52400,9 +52499,9 @@ func (p *SetSceneValueInt32Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1565, err1566 := iprot.ReadByte()
-  if err1566 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1566); }
-  p._sceneId = v1565
+  v1571, err1572 := iprot.ReadByte()
+  if err1572 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1572); }
+  p._sceneId = v1571
   return err
 }
 
@@ -52412,8 +52511,8 @@ func (p *SetSceneValueInt32Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1569 := p._valueId.Read(iprot)
-  if err1569 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1569); }
+  err1575 := p._valueId.Read(iprot)
+  if err1575 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1575); }
   return err
 }
 
@@ -52422,9 +52521,9 @@ func (p *SetSceneValueInt32Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1570, err1571 := iprot.ReadI32()
-  if err1571 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1571); }
-  p._value = v1570
+  v1576, err1577 := iprot.ReadI32()
+  if err1577 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1577); }
+  p._value = v1576
   return err
 }
 
@@ -52612,9 +52711,9 @@ func (p *SetSceneValueInt32Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1572, err1573 := iprot.ReadBool()
-  if err1573 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1573); }
-  p.Success = v1572
+  v1578, err1579 := iprot.ReadBool()
+  if err1579 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1579); }
+  p.Success = v1578
   return err
 }
 
@@ -52784,9 +52883,9 @@ func (p *SetSceneValueInt16Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueInt16Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1574, err1575 := iprot.ReadByte()
-  if err1575 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1575); }
-  p._sceneId = v1574
+  v1580, err1581 := iprot.ReadByte()
+  if err1581 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1581); }
+  p._sceneId = v1580
   return err
 }
 
@@ -52796,8 +52895,8 @@ func (p *SetSceneValueInt16Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueInt16Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1578 := p._valueId.Read(iprot)
-  if err1578 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1578); }
+  err1584 := p._valueId.Read(iprot)
+  if err1584 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1584); }
   return err
 }
 
@@ -52806,9 +52905,9 @@ func (p *SetSceneValueInt16Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueInt16Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1579, err1580 := iprot.ReadI16()
-  if err1580 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1580); }
-  p._value = v1579
+  v1585, err1586 := iprot.ReadI16()
+  if err1586 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1586); }
+  p._value = v1585
   return err
 }
 
@@ -52996,9 +53095,9 @@ func (p *SetSceneValueInt16Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueInt16Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1581, err1582 := iprot.ReadBool()
-  if err1582 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1582); }
-  p.Success = v1581
+  v1587, err1588 := iprot.ReadBool()
+  if err1588 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1588); }
+  p.Success = v1587
   return err
 }
 
@@ -53168,9 +53267,9 @@ func (p *SetSceneValueStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SetSceneValueStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1583, err1584 := iprot.ReadByte()
-  if err1584 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1584); }
-  p._sceneId = v1583
+  v1589, err1590 := iprot.ReadByte()
+  if err1590 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1590); }
+  p._sceneId = v1589
   return err
 }
 
@@ -53180,8 +53279,8 @@ func (p *SetSceneValueStringArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *SetSceneValueStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1587 := p._valueId.Read(iprot)
-  if err1587 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1587); }
+  err1593 := p._valueId.Read(iprot)
+  if err1593 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1593); }
   return err
 }
 
@@ -53190,9 +53289,9 @@ func (p *SetSceneValueStringArgs) ReadField_valueId(iprot thrift.TProtocol) (thr
 }
 
 func (p *SetSceneValueStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1588, err1589 := iprot.ReadString()
-  if err1589 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1589); }
-  p._value = v1588
+  v1594, err1595 := iprot.ReadString()
+  if err1595 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1595); }
+  p._value = v1594
   return err
 }
 
@@ -53380,9 +53479,9 @@ func (p *SetSceneValueStringResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *SetSceneValueStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1590, err1591 := iprot.ReadBool()
-  if err1591 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1591); }
-  p.Success = v1590
+  v1596, err1597 := iprot.ReadBool()
+  if err1597 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1597); }
+  p.Success = v1596
   return err
 }
 
@@ -53552,9 +53651,9 @@ func (p *SetSceneValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err
 }
 
 func (p *SetSceneValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1592, err1593 := iprot.ReadByte()
-  if err1593 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1593); }
-  p._sceneId = v1592
+  v1598, err1599 := iprot.ReadByte()
+  if err1599 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1599); }
+  p._sceneId = v1598
   return err
 }
 
@@ -53564,8 +53663,8 @@ func (p *SetSceneValueListSelectionStringArgs) ReadField_sceneId(iprot thrift.TP
 
 func (p *SetSceneValueListSelectionStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1596 := p._valueId.Read(iprot)
-  if err1596 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1596); }
+  err1602 := p._valueId.Read(iprot)
+  if err1602 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1602); }
   return err
 }
 
@@ -53574,9 +53673,9 @@ func (p *SetSceneValueListSelectionStringArgs) ReadField_valueId(iprot thrift.TP
 }
 
 func (p *SetSceneValueListSelectionStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1597, err1598 := iprot.ReadString()
-  if err1598 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1598); }
-  p._value = v1597
+  v1603, err1604 := iprot.ReadString()
+  if err1604 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1604); }
+  p._value = v1603
   return err
 }
 
@@ -53764,9 +53863,9 @@ func (p *SetSceneValueListSelectionStringResult) Read(iprot thrift.TProtocol) (e
 }
 
 func (p *SetSceneValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1599, err1600 := iprot.ReadBool()
-  if err1600 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1600); }
-  p.Success = v1599
+  v1605, err1606 := iprot.ReadBool()
+  if err1606 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1606); }
+  p.Success = v1605
   return err
 }
 
@@ -53936,9 +54035,9 @@ func (p *SetSceneValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err 
 }
 
 func (p *SetSceneValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1601, err1602 := iprot.ReadByte()
-  if err1602 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1602); }
-  p._sceneId = v1601
+  v1607, err1608 := iprot.ReadByte()
+  if err1608 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1608); }
+  p._sceneId = v1607
   return err
 }
 
@@ -53948,8 +54047,8 @@ func (p *SetSceneValueListSelectionInt32Args) ReadField_sceneId(iprot thrift.TPr
 
 func (p *SetSceneValueListSelectionInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1605 := p._valueId.Read(iprot)
-  if err1605 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1605); }
+  err1611 := p._valueId.Read(iprot)
+  if err1611 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1611); }
   return err
 }
 
@@ -53958,9 +54057,9 @@ func (p *SetSceneValueListSelectionInt32Args) ReadField_valueId(iprot thrift.TPr
 }
 
 func (p *SetSceneValueListSelectionInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1606, err1607 := iprot.ReadI32()
-  if err1607 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1607); }
-  p._value = v1606
+  v1612, err1613 := iprot.ReadI32()
+  if err1613 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1613); }
+  p._value = v1612
   return err
 }
 
@@ -54148,9 +54247,9 @@ func (p *SetSceneValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (er
 }
 
 func (p *SetSceneValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1608, err1609 := iprot.ReadBool()
-  if err1609 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1609); }
-  p.Success = v1608
+  v1614, err1615 := iprot.ReadBool()
+  if err1615 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1615); }
+  p.Success = v1614
   return err
 }
 
@@ -54292,9 +54391,9 @@ func (p *GetSceneLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetSceneLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1610, err1611 := iprot.ReadByte()
-  if err1611 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1611); }
-  p._sceneId = v1610
+  v1616, err1617 := iprot.ReadByte()
+  if err1617 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1617); }
+  p._sceneId = v1616
   return err
 }
 
@@ -54435,9 +54534,9 @@ func (p *GetSceneLabelResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetSceneLabelResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1612, err1613 := iprot.ReadString()
-  if err1613 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1613); }
-  p.Success = v1612
+  v1618, err1619 := iprot.ReadString()
+  if err1619 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1619); }
+  p.Success = v1618
   return err
 }
 
@@ -54596,9 +54695,9 @@ func (p *SetSceneLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *SetSceneLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1614, err1615 := iprot.ReadByte()
-  if err1615 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1615); }
-  p._sceneId = v1614
+  v1620, err1621 := iprot.ReadByte()
+  if err1621 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1621); }
+  p._sceneId = v1620
   return err
 }
 
@@ -54607,9 +54706,9 @@ func (p *SetSceneLabelArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetSceneLabelArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1616, err1617 := iprot.ReadString()
-  if err1617 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1617); }
-  p._value = v1616
+  v1622, err1623 := iprot.ReadString()
+  if err1623 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1623); }
+  p._value = v1622
   return err
 }
 
@@ -54863,9 +54962,9 @@ func (p *SceneExistsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *SceneExistsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1618, err1619 := iprot.ReadByte()
-  if err1619 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1619); }
-  p._sceneId = v1618
+  v1624, err1625 := iprot.ReadByte()
+  if err1625 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1625); }
+  p._sceneId = v1624
   return err
 }
 
@@ -55006,9 +55105,9 @@ func (p *SceneExistsResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *SceneExistsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1620, err1621 := iprot.ReadBool()
-  if err1621 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1621); }
-  p.Success = v1620
+  v1626, err1627 := iprot.ReadBool()
+  if err1627 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1627); }
+  p.Success = v1626
   return err
 }
 
@@ -55150,9 +55249,9 @@ func (p *ActivateSceneArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *ActivateSceneArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1622, err1623 := iprot.ReadByte()
-  if err1623 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1623); }
-  p._sceneId = v1622
+  v1628, err1629 := iprot.ReadByte()
+  if err1629 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1629); }
+  p._sceneId = v1628
   return err
 }
 
@@ -55293,9 +55392,9 @@ func (p *ActivateSceneResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *ActivateSceneResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1624, err1625 := iprot.ReadBool()
-  if err1625 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1625); }
-  p.Success = v1624
+  v1630, err1631 := iprot.ReadBool()
+  if err1631 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1631); }
+  p.Success = v1630
   return err
 }
 
@@ -55373,6 +55472,184 @@ func (p *ActivateSceneResult) AttributeByFieldId(id int) interface{} {
 func (p *ActivateSceneResult) TStructFields() thrift.TFieldContainer {
   return thrift.NewTFieldContainer([]thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
+    })
+}
+
+type SendAllValuesArgs struct {
+  thrift.TStruct
+}
+
+func NewSendAllValuesArgs() *SendAllValuesArgs {
+  output := &SendAllValuesArgs{
+    TStruct:thrift.NewTStruct("SendAllValues_args", []thrift.TField{
+    }),
+  }
+  {
+  }
+  return output
+}
+
+func (p *SendAllValuesArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  _, err = iprot.ReadStructBegin()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  for {
+    fieldName, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+    if fieldId < 0 {
+      fieldId = int16(p.FieldIdFromFieldName(fieldName))
+    } else if fieldName == "" {
+      fieldName = p.FieldNameFromFieldId(int(fieldId))
+    }
+    if fieldTypeId == thrift.GENERIC {
+      fieldTypeId = p.FieldFromFieldId(int(fieldId)).TypeId()
+    }
+    if err != nil {
+      return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err)
+    }
+    if fieldTypeId == thrift.STOP { break; }
+    err = iprot.Skip(fieldTypeId)
+    if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+    err = iprot.ReadFieldEnd()
+    if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+  }
+  err = iprot.ReadStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *SendAllValuesArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("SendAllValues_args")
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  err = oprot.WriteFieldStop()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "STOP", p.ThriftName(), err); }
+  err = oprot.WriteStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *SendAllValuesArgs) TStructName() string {
+  return "SendAllValuesArgs"
+}
+
+func (p *SendAllValuesArgs) ThriftName() string {
+  return "SendAllValues_args"
+}
+
+func (p *SendAllValuesArgs) String() string {
+  if p == nil {
+    return "<nil>"
+  }
+  return fmt.Sprintf("SendAllValuesArgs(%+v)", *p)
+}
+
+func (p *SendAllValuesArgs) CompareTo(other interface{}) (int, bool) {
+  if other == nil {
+    return 1, true
+  }
+  _, ok := other.(*SendAllValuesArgs)
+  if !ok {
+    return 0, false
+  }
+  return 0, true
+}
+
+func (p *SendAllValuesArgs) AttributeByFieldId(id int) interface{} {
+  switch id {
+  default: return nil
+  }
+  return nil
+}
+
+func (p *SendAllValuesArgs) TStructFields() thrift.TFieldContainer {
+  return thrift.NewTFieldContainer([]thrift.TField{
+    })
+}
+
+type SendAllValuesResult struct {
+  thrift.TStruct
+}
+
+func NewSendAllValuesResult() *SendAllValuesResult {
+  output := &SendAllValuesResult{
+    TStruct:thrift.NewTStruct("SendAllValues_result", []thrift.TField{
+    }),
+  }
+  {
+  }
+  return output
+}
+
+func (p *SendAllValuesResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  _, err = iprot.ReadStructBegin()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  for {
+    fieldName, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+    if fieldId < 0 {
+      fieldId = int16(p.FieldIdFromFieldName(fieldName))
+    } else if fieldName == "" {
+      fieldName = p.FieldNameFromFieldId(int(fieldId))
+    }
+    if fieldTypeId == thrift.GENERIC {
+      fieldTypeId = p.FieldFromFieldId(int(fieldId)).TypeId()
+    }
+    if err != nil {
+      return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err)
+    }
+    if fieldTypeId == thrift.STOP { break; }
+    err = iprot.Skip(fieldTypeId)
+    if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+    err = iprot.ReadFieldEnd()
+    if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+  }
+  err = iprot.ReadStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *SendAllValuesResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("SendAllValues_result")
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  err = oprot.WriteFieldStop()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "STOP", p.ThriftName(), err); }
+  err = oprot.WriteStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *SendAllValuesResult) TStructName() string {
+  return "SendAllValuesResult"
+}
+
+func (p *SendAllValuesResult) ThriftName() string {
+  return "SendAllValues_result"
+}
+
+func (p *SendAllValuesResult) String() string {
+  if p == nil {
+    return "<nil>"
+  }
+  return fmt.Sprintf("SendAllValuesResult(%+v)", *p)
+}
+
+func (p *SendAllValuesResult) CompareTo(other interface{}) (int, bool) {
+  if other == nil {
+    return 1, true
+  }
+  _, ok := other.(*SendAllValuesResult)
+  if !ok {
+    return 0, false
+  }
+  return 0, true
+}
+
+func (p *SendAllValuesResult) AttributeByFieldId(id int) interface{} {
+  switch id {
+  default: return nil
+  }
+  return nil
+}
+
+func (p *SendAllValuesResult) TStructFields() thrift.TFieldContainer {
+  return thrift.NewTFieldContainer([]thrift.TField{
     })
 }
 

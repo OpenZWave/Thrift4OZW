@@ -145,6 +145,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  void SetSceneLabel(byte _sceneId, string _value)'
   print '  bool SceneExists(byte _sceneId)'
   print '  bool ActivateScene(byte _sceneId)'
+  print '  void SendAllValues()'
   print ''
   sys.exit(0)
 
@@ -938,6 +939,12 @@ elif cmd == 'ActivateScene':
     print 'ActivateScene requires 1 args'
     sys.exit(1)
   pp.pprint(client.ActivateScene(eval(args[0]),))
+
+elif cmd == 'SendAllValues':
+  if len(args) != 0:
+    print 'SendAllValues requires 0 args'
+    sys.exit(1)
+  pp.pprint(client.SendAllValues())
 
 else:
   print 'Unrecognized method %s' % cmd

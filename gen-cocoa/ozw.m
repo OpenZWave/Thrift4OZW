@@ -38607,6 +38607,125 @@
 
 @end
 
+@interface OpenZWaveSendAllValues_args : NSObject <NSCoding> {
+}
+
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+@end
+
+@implementation OpenZWaveSendAllValues_args
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SendAllValues_args"];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SendAllValues_args("];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveSendAllValues_result : NSObject <NSCoding> {
+}
+
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+@end
+
+@implementation OpenZWaveSendAllValues_result
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SendAllValues_result"];
+
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SendAllValues_result("];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation OpenZWaveRemoteManagerClient
 - (id) initWithProtocol: (id <TProtocol>) protocol
 {
@@ -43733,6 +43852,37 @@
   return [self recv_ActivateScene];
 }
 
+- (void) send_SendAllValues
+{
+  [outProtocol writeMessageBeginWithName: @"SendAllValues" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"SendAllValues_args"];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (void) recv_SendAllValues
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveSendAllValues_result * result = [[[OpenZWaveSendAllValues_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  return;
+}
+
+- (void) SendAllValues
+{
+  [self send_SendAllValues];
+  [self recv_SendAllValues];
+}
+
 @end
 
 @implementation OpenZWaveRemoteManagerProcessor
@@ -44736,6 +44886,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"ActivateScene"];
+  }
+  {
+    SEL s = @selector(process_SendAllValues_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"SendAllValues"];
   }
   return self;
 }
@@ -46877,6 +47035,23 @@
   OpenZWaveActivateScene_result * result = [[OpenZWaveActivateScene_result alloc] init];
   [result setSuccess: [mService ActivateScene: [args _sceneId]]];
   [outProtocol writeMessageBeginWithName: @"ActivateScene"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_SendAllValues_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveSendAllValues_args * args = [[OpenZWaveSendAllValues_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveSendAllValues_result * result = [[OpenZWaveSendAllValues_result alloc] init];
+  [mService SendAllValues];
+  [outProtocol writeMessageBeginWithName: @"SendAllValues"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

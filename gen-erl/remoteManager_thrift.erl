@@ -1130,5 +1130,14 @@ function_info('ActivateScene', reply_type) ->
 function_info('ActivateScene', exceptions) ->
   {struct, []}
 ;
+% SendAllValues(This)
+function_info('SendAllValues', params_type) ->
+  {struct, []}
+;
+function_info('SendAllValues', reply_type) ->
+  {struct, []};
+function_info('SendAllValues', exceptions) ->
+  {struct, []}
+;
 function_info(_Func, _Info) -> no_function.
 

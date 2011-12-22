@@ -642,6 +642,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("ActivateScene\n");
   }
 
+  void SendAllValues() {
+    // Your implementation goes here
+    printf("SendAllValues\n");
+  }
+
 };
 
 int main(int argc, char **argv) {
