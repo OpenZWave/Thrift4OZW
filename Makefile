@@ -59,7 +59,7 @@ gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
 	ruby1.9.1 create_server.rb
 
 gen-cpp/RemoteManager.cpp: ozw.thrift
-	$(THRIFT) --gen cpp --gen rb ozw.thrift
+	$(THRIFT) --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
 
 gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp
 	g++ $(CFLAGS) -c gen-cpp/RemoteManager.cpp -o gen-cpp/RemoteManager.o $(INCLUDES)
