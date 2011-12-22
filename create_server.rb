@@ -67,6 +67,7 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     #puts "search result: #{search_result.class.name}"
     case search_result
     when RbGCCXML::QueryResult then
+        next if search_result.empty? # skip unknown functions (needed for "void SendAllValues()"
         raise "#{target_method_name}(): no disambiguation hint given!!!" unless disambiguation_hint
         #puts "  ...Overloaded method: #{meth.name}"
         search_result.each { |node|
