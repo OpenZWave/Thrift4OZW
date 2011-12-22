@@ -57,7 +57,8 @@ all: main
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
 	ruby1.9.1 create_server.rb
-
+	patch -p0 gen-cpp/RemoteManager_server.cpp < gen-cpp/RemoteManager_server.cpp.patch
+    
 gen-cpp/RemoteManager.cpp: ozw.thrift
 	$(THRIFT) --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
 
@@ -67,8 +68,11 @@ gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp
 gen-cpp/ozw_constants.o:  gen-cpp/ozw_constants.cpp
 	g++ $(CFLAGS) -c gen-cpp/ozw_constants.cpp -o gen-cpp/ozw_constants.o $(INCLUDES)
     
-gen-cpp/ozw_types.o:  gen-cpp/ozw_types.cpp
+gen-cpp/ozw_types.o:  gen-cpp/ozw_types.cpp gen-cpp/ozw_types.h
 	g++ $(CFLAGS) -c gen-cpp/ozw_types.cpp -o gen-cpp/ozw_types.o $(INCLUDES)
+
+gen-cpp/ozw_types.h:  gen-cpp/ozw_types.h.patch
+	patch -p0 gen-cpp/ozw_types.h <gen-cpp/ozw_types.h.patch
     
 Stomp_sm.cpp: Stomp.sm
 	smc -c++ Stomp.sm 
@@ -93,4 +97,4 @@ dist:	main
 	tar -c --exclude=".git" --exclude ".svn" -hvzf Ansible_OpenZWave.tar.gz ozwcp config/ cp.html cp.js openzwavetinyicon.png README
 
 clean:
-	rm -f main *.o Stomp_sm.*
+	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager_server.cpp
