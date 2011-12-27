@@ -1,30 +1,31 @@
-//-----------------------------------------------------------------------------
-//
+/*
+Thrift4OZW - An Apache Thrift wrapper for OpenZWave
+----------------------------------------------------
+Copyright (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
+
+SOFTWARE NOTICE AND LICENSE
+
+Thrift4OZW is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+
+Thrift4OZW is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Thrift4OZW.  If not, see <http://www.gnu.org/licenses/>.
+
+for more information on the LGPL, see:
+http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
+*/
+
 //	PocoStomp.h
-//
-//	a STOMP (Simple Text Oriented Messaging Protocol) client for OZW
+//  a STOMP (Simple Text Oriented Messaging Protocol) client for OZW
 //  using the Poco library for platform interoperability
-//
-//	Copyright (c) 2011 Elias Karakoulakis
-//
-//	SOFTWARE NOTICE AND LICENSE
-//
-//	This file is part of OpenZWave.
-//
-//	OpenZWave is free software: you can redistribute it and/or modify
-//	it under the terms of the GNU Lesser General Public License as published
-//	by the Free Software Foundation, either version 3 of the License,
-//	or (at your option) any later version.
-//
-//	OpenZWave is distributed in the hope that it will be useful,
-//	but WITHOUT ANY WARRANTY; without even the implied warranty of
-//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//	GNU Lesser General Public License for more details.
-//
-//	You should have received a copy of the GNU Lesser General Public License
-//	along with OpenZWave.  If not, see <http://www.gnu.org/licenses/>.
-//
-//-----------------------------------------------------------------------------
+
 #ifndef __POCOSTOMP_H_
 #define __POCOSTOMP_H_
 
@@ -66,9 +67,11 @@ namespace STOMP {
             std::string command;
             hdrmap       headers;
             std::string  body;
+        // constructors
         Frame(std::string cmd) : command(cmd) {};
         Frame(std::string cmd, hdrmap h) : command(cmd), headers(h) {};
         Frame(std::string cmd, hdrmap h, std::string b) : command(cmd), headers(h), body(b) {};
+        // copy constructor
         Frame(Frame& other)  {
             command = other.command;
             headers = other.headers;
@@ -138,11 +141,12 @@ namespace STOMP {
         
         //instance variables
         protected:
-            Connection*      m_connection;
+            std::string     m_hostname;
+            int                 m_port;
+            Connection*   m_connection;
             AckMode         m_ackmode;
             StompContext   m_fsm;
             //
-            
             Poco::Thread*           m_thread;
             Poco::Mutex*             m_mutex;
             Poco::Mutex*            m_initcond_mutex;
@@ -186,7 +190,7 @@ namespace STOMP {
             bool stomp_write_buffer(std::string s) ;
         
             // more methods called from the thread loop
-            bool socket_connect(const std::string& hostname, int port);
+            bool socket_connect();
             bool incoming_data_waiting();
         private:
             void run(); // Runnable::run(): Stomp worker thread implementation

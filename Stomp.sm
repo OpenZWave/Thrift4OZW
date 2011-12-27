@@ -13,20 +13,20 @@
 //
 //	SOFTWARE NOTICE AND LICENSE
 //
-//	This file is part of OpenZWave.
+//	This file is part of Thrift4OZW.
 //
-//	OpenZWave is free software: you can redistribute it and/or modify
+//	Thrift4OZW is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU Lesser General Public License as published
 //	by the Free Software Foundation, either version 3 of the License,
 //	or (at your option) any later version.
 //
-//	OpenZWave is distributed in the hope that it will be useful,
+//	Thrift4OZW is distributed in the hope that it will be useful,
 //	but WITHOUT ANY WARRANTY; without even the implied warranty of
 //	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //	GNU Lesser General Public License for more details.
 //
 //	You should have received a copy of the GNU Lesser General Public License
-//	along with OpenZWave.  If not, see <http://www.gnu.org/licenses/>.
+//	along with Thrift4OZW.  If not, see <http://www.gnu.org/licenses/>.
 //
 //-----------------------------------------------------------------------------
 %}
@@ -48,6 +48,10 @@ Disconnected
         SocketConnected {
             debug_print("socket connected!\n");
         }
+// --------
+    socket_disconnected  Disconnected {
+        debug_print("STOMP server disconnected! retrying connection...");
+    } 
 }
 
 // ############
@@ -59,6 +63,10 @@ SocketConnected
             initialized(); // signal I/O thread to start
             debug_print("CONNECT");
         }
+// --------
+    socket_disconnected  Disconnected {
+        debug_print("STOMP server disconnected! retrying connection...");
+    } 
 }
 
 // ############
@@ -134,7 +142,10 @@ Ready
     timeout Ready {
         debug_print("timeout waiting for full STOMP frame!");
     }
-    
+// ------------------------
+    socket_disconnected  Disconnected {
+        debug_print("STOMP server disconnected! retrying connection...");
+    }    
 }
 
 // ############

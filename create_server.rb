@@ -1,9 +1,35 @@
-# a Thrift server generator for OpenZWave
+=begin
+Thrift4OZW - An Apache Thrift wrapper for OpenZWave
+----------------------------------------------------
+Copyright (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
+
+SOFTWARE NOTICE AND LICENSE
+
+Thrift4OZW is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+
+Thrift4OZW is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Thrift4OZW.  If not, see <http://www.gnu.org/licenses/>.
+
+for more information on the LGPL, see:
+http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
+=end
+
+# --------------------------
+#
+# create_server.rb: a Thrift server generator for OpenZWave
 # transform a server skeleton file into a fully operational server
 # a.k.a. "fills in the blanks for you"
 #
-# (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
-#
+# ---------------------------
+
 require 'rubygems'
 require 'rbgccxml'
 

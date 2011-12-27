@@ -1,30 +1,30 @@
-//-----------------------------------------------------------------------------
-//
+/*
+Thrift4OZW - An Apache Thrift wrapper for OpenZWave
+----------------------------------------------------
+Copyright (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
+
+SOFTWARE NOTICE AND LICENSE
+
+Thrift4OZW is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+
+Thrift4OZW is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Thrift4OZW.  If not, see <http://www.gnu.org/licenses/>.
+
+for more information on the LGPL, see:
+http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
+*/
+
 //	PocoStomp.cpp
-//
 //  a STOMP (Simple Text Oriented Messaging Protocol) client for OZW
 //  using the Poco library for platform interoperability
-//
-//	Copyright (c) 2011 Elias Karakoulakis
-//
-//	SOFTWARE NOTICE AND LICENSE
-//
-//	This file is part of OpenZWave.
-//
-//	OpenZWave is free software: you can redistribute it and/or modify
-//	it under the terms of the GNU Lesser General Public License as published
-//	by the Free Software Foundation, either version 3 of the License,
-//	or (at your option) any later version.
-//
-//	OpenZWave is distributed in the hope that it will be useful,
-//	but WITHOUT ANY WARRANTY; without even the implied warranty of
-//	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//	GNU Lesser General Public License for more details.
-//
-//	You should have received a copy of the GNU Lesser General Public License
-//	along with OpenZWave.  If not, see <http://www.gnu.org/licenses/>.
-//
-//-----------------------------------------------------------------------------
 
 #include <stdlib.h>
 #include <iostream>
@@ -57,10 +57,14 @@ namespace STOMP {
 // constructor
 // ####################################################
 PocoStomp::PocoStomp(const std::string& hostname, int port):
+    m_hostname(hostname),
+    m_port(port),
     m_connection(new Connection),
     m_ackmode(ACK_AUTO),
     m_fsm(* this)     // initialize the state machine
 {
+    m_connection->addr = NULL;
+    m_connection->socket = NULL;
     // insert valid server commands in set
     m_stomp_server_commands.insert("CONNECTED");
     m_stomp_server_commands.insert("MESSAGE");
@@ -75,11 +79,6 @@ PocoStomp::PocoStomp(const std::string& hostname, int port):
     m_initcond = new Poco::Condition();
     m_mutex = new Poco::Mutex();
     (m_thread = new Poco::Thread())->start(*this);
-    m_connection->addr = new Poco::Net::SocketAddress(hostname, port);
-    m_connection->socket = new Poco::Net::StompSocket(*(m_connection->addr));
-    // TODO: check connection
-    // signal FSM that we're connected
-    m_fsm.socket_connected();
 }
 
 // ####################################################
@@ -92,24 +91,62 @@ PocoStomp::~PocoStomp()
     delete(m_thread);
     delete(m_connection);
     delete(m_mutex);
-    delete(m_initcond);
+    delete(m_initcond);            
     delete(m_initcond_mutex);
+}
+
+// ####################################################
+bool PocoStomp::socket_connect()
+// ####################################################
+{
+    while (m_fsm.getState().getId() != StompFSM_map::SocketConnected.getId()) {
+        try {
+            if (m_connection->addr != NULL) {
+                delete m_connection->addr;
+            }
+            if (m_connection->socket != NULL) {
+                delete m_connection->socket;
+            }
+            m_connection->addr = new Poco::Net::SocketAddress(m_hostname, m_port);
+            m_connection->socket = new Poco::Net::StompSocket(*(m_connection->addr));
+            m_fsm.socket_connected();
+        } catch (exception& e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+            m_fsm.socket_disconnected();
+            sleep(3);
+        } catch (...) {
+            std::cerr << "other error in socket_connect()" << std::endl;
+            m_fsm.socket_disconnected();
+            sleep(3);
+        }
+    }
+    return(m_fsm.getState().getId() == StompFSM_map::SocketConnected.getId());
 }
 
 // ####################################################
 bool PocoStomp::connect()
 // ####################################################
 {
-    bool result=true;
+    bool result=socket_connect();
     m_mutex->lock();
-    if (m_fsm.getState().getId() == StompFSM_map::SocketConnected.getId()) {
-        //std::cout << "Sending CONNECT frame...";
-        Frame _frame("CONNECT");
-        //
-        if (stomp_write(&_frame)) {    
-            m_fsm.send_frame(&_frame);
+    try {
+        if (m_fsm.getState().getId() == StompFSM_map::SocketConnected.getId()) {
+            //std::cout << "Sending CONNECT frame...";
+            Frame _frame("CONNECT");
+            //
+            if (stomp_write(&_frame)) {    
+                m_fsm.send_frame(&_frame);
+            }
+            //
         }
-        //
+    } catch (exception& e) {
+        std::cerr << "Exception: " << e.what() << std::endl;
+        m_fsm.socket_disconnected();
+        sleep(3);
+    } catch (...) {
+        std::cerr << "other error in connect()" << std::endl;
+        m_fsm.socket_disconnected();
+        sleep(3);
     }
     m_mutex->unlock();
     return(result);
@@ -117,7 +154,7 @@ bool PocoStomp::connect()
 
 
 // ####################################################
-bool PocoStomp::subscribe   (std::string& _topic, pfnOnStompMessage_t _callback)
+bool PocoStomp::subscribe(std::string& _topic, pfnOnStompMessage_t _callback)
 // ####################################################
 {
     bool result = true;
@@ -358,44 +395,59 @@ void PocoStomp::stop_timer()
 void  PocoStomp::run()
 // ####################################################
 {
+
     PFrame _frame;
     bool cond1, cond2;
+    bool frame_popped = false;
     int state_id;
     //wait for stomp client initialization
     m_initcond_mutex->lock();
     m_initcond->wait(*m_initcond_mutex);
     m_initcond_mutex->unlock();
     // ok, stomp object is initialized, lets start.
-    for (;;)  {
+    while (true) {
         //
         m_mutex->lock();
         //
-        // phase 1: read incoming frames, if any
-        if (stomp_read(&_frame)) {
-            m_fsm.receive_frame(_frame);
-            //std::cout << "received frame:" << _frame->command << std::endl;
-            free(_frame);
-        } 
-        //
-        // phase 2: send first frame in queue, if any
-        state_id = m_fsm.getState().getId();
-        cond1 = (state_id == StompFSM_map::Ready.getId());
-        cond2 = (m_sendqueue.size() > 0);
-        if (cond1 && cond2) {
-            _frame = m_sendqueue.front();
-            m_sendqueue.pop();
-            if (stomp_write(_frame)) {                        
-                m_fsm.send_frame(_frame);
-                //std::cout << "sent frame:" << _frame->command << std::endl;
+        run_loop_start:
+        try {
+            // phase 1: read incoming frames, if any
+            if (stomp_read(&_frame)) {
+                m_fsm.receive_frame(_frame);
+                //std::cout << "received frame:" << _frame->command << std::endl;
+                free(_frame);
+            } 
+            //
+            // phase 2: send first frame in queue, if any
+            state_id = m_fsm.getState().getId();
+            cond1 = (state_id == StompFSM_map::Ready.getId());
+            cond2 = (m_sendqueue.size() > 0);
+            if (cond1 && cond2) {
+                _frame = m_sendqueue.front();
+                m_sendqueue.pop();
+                frame_popped = true;
+                if (stomp_write(_frame)) {                        
+                    m_fsm.send_frame(_frame);
+                    //std::cout << "sent frame:" << _frame->command << std::endl;
+                }
+                free(_frame);
             }
-            free(_frame);
-        }
+        } catch (exception& e) {
+            std::cerr << "Exception in PocoStomp::run(): " << e.what() << std::endl;
+            if (frame_popped) m_sendqueue.push(_frame);
+            m_fsm.socket_disconnected();
+            sleep(3);
+            connect();
+            goto run_loop_start;
+        } catch (...) {
+            std::cerr << "default exception in PocoStomp::run()";
+            exit(-1);
+        };
         //
         m_mutex->unlock();
         //
         Poco::Thread::sleep(50);
     }
 }
-
 
 }

@@ -1,5 +1,29 @@
+/*
+Thrift4OZW - An Apache Thrift wrapper for OpenZWave
+----------------------------------------------------
+Copyright (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
+
+SOFTWARE NOTICE AND LICENSE
+
+Thrift4OZW is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published
+by the Free Software Foundation, either version 3 of the License,
+or (at your option) any later version.
+
+Thrift4OZW is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public License
+along with Thrift4OZW.  If not, see <http://www.gnu.org/licenses/>.
+
+for more information on the LGPL, see:
+http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
+*/
+
 // 
-// OpenZWave hub for Project Ansible
+// Main.cpp: OpenZWave Thrift Server for Project Ansible
 // (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
 //
 
@@ -46,8 +70,7 @@ typedef struct
     list<ValueID>	m_values;
 } NodeInfo;
 //
-static list<NodeInfo*>          g_nodes;
-static std::map<uint64, ValueID*> g_values;
+static list<NodeInfo*>     g_nodes;
 
 // OpenZWave includes
 #include "Notification.h"
@@ -100,6 +123,7 @@ void OnNotification
 )
 {
     bool notify_stomp = true;
+    bool send_valueID = false;
     
     // Must do this inside a critical section to avoid conflicts with the main thread
     g_criticalSection.lock();
@@ -118,12 +142,8 @@ void OnNotification
                 // Add the new value to the node's value list
                 ValueID v = _notification->GetValueID();
                 nodeInfo->m_values.push_back( v );
-                uint64 key = v.GetId();
-                // ekarak: also add it to global ValueID map
-                //std::cout << "========================= Adding "<<key<<std::hex<< " to g_values..."<<std::endl;
-                g_values[ key ] = &v;
             }
-            //send_valueID = true;
+            send_valueID = true;
             break;
         }
 
@@ -153,14 +173,13 @@ void OnNotification
                     }
                 }
             }
-            g_values.erase(_notification->GetValueID().GetId());
-            //send_valueID = true;
+            send_valueID = true;
             break;
         }
             
         /**< A node value has been updated from the Z-Wave network. */
         case Notification::Type_ValueChanged: {
-            //send_valueID = true;
+            send_valueID = true;
         /**< The associations for the node have changed. The application 
         should rebuild any group information it holds about the node. */
         }
@@ -281,12 +300,13 @@ void OnNotification
     //
     if (notify_stomp) {
         STOMP::hdrmap headers;
-        headers["ValueHomeID"] =  to_string<uint32_t>(_notification->GetValueID().GetHomeId(), std::hex);
+        headers["NotificationNodeId"] = to_string<uint16_t>(_notification->GetNodeId(), std::hex);
         headers["NotificationType"] =  to_string<uint32_t>(_notification->GetType(), std::hex);
-        headers["NotificationByte"] =  to_string<uint32_t>(_notification->GetByte(), std::hex);
-        //if (send_valueID) {
+        headers["NotificationByte"] =  to_string<uint16_t>(_notification->GetByte(), std::hex);
+        if (send_valueID) {
+            headers["HomeID"] =  to_string<uint32_t>(_notification->GetValueID().GetHomeId(), std::hex);
             headers["ValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
-        //}
+        }
         //
         string empty = ""  ;
         stomp_client->send(*notifications_topic, headers, empty);
@@ -297,16 +317,26 @@ void OnNotification
 
 // Send all known values via STOMP
 void send_all_values() {
-    std::map<uint64, ValueID*>::iterator it;
-    for ( it=g_values.begin() ; it != g_values.end(); it++ ) {
-        ValueID* v = (*it).second;
-        STOMP::hdrmap headers;
-        headers["ValueHomeID"] =  to_string<uint32_t>(v->GetHomeId(), std::hex);
-        headers["ValueID"] =  to_string<uint64_t>(v->GetId(), std::hex);
-        //
-        string empty = ""  ;
-        stomp_client->send(*notifications_topic, headers, empty);
-    }
+    //
+    g_criticalSection.lock();
+    //
+    for( list<NodeInfo*>::iterator node_it = g_nodes.begin(); node_it != g_nodes.end(); ++node_it )
+	{
+		NodeInfo* nodeInfo = *node_it;
+        
+		for( list<ValueID>::iterator val_iter = nodeInfo->m_values.begin(); val_iter != nodeInfo->m_values.end(); ++val_iter )
+		{
+			ValueID v = *val_iter;
+            STOMP::hdrmap headers;
+            headers["HomeID"] =  to_string<uint32_t>(v.GetHomeId(), std::hex);
+            headers["ValueID"] =  to_string<uint64_t>(v.GetId(), std::hex);
+            //
+            string empty = ""  ;
+            stomp_client->send(*notifications_topic, headers, empty);            
+		}
+	}
+	//
+	g_criticalSection.unlock();
 }
 
 // ------------------------
@@ -357,7 +387,9 @@ int main(int argc, char **argv) {
     int port = 9090;
     shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
     shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
-    shared_ptr<TServerTransport> serverTransport(new TServerSocket(port));
+    TServerSocket* ss = new TServerSocket(port);
+    ss->setRecvTimeout(3000);
+    shared_ptr<TServerTransport> serverTransport(ss);
     shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
     shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
 

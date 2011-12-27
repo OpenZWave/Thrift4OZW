@@ -83,7 +83,7 @@ Stomp_sm.o: Stomp_sm.cpp
 StompSocket.o: StompSocket.cpp StompSocket.h
 	g++ $(CFLAGS) -c StompSocket.cpp $(INCLUDES)
     
-PocoStomp.o:  Stomp_sm.cpp StompSocket.o
+PocoStomp.o:  PocoStomp.cpp PocoStomp.h Stomp_sm.cpp StompSocket.o
 	g++ $(CFLAGS) -c PocoStomp.cpp $(INCLUDES)    
 
 Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
