@@ -24,7 +24,8 @@ versions (with headers)
 - I assume you have Ruby >=1.9.1 installed with RbGCCXML and Nokogiri (gem install rbgccxml)
 - Inspect the Makefile, change directories (unless your username is ekarak!)
 - Run make, cross fingers, pop champagne.
-- The generated code is patched twice (I know, I know, this sucks) in order for the compilation to succeed:
+- The generated code is patched twice (I know, I know, this sucks) in order for the compilation 
+to succeed:
 
 1) these constructors/converters are patched in class RemoteValueID (gen-cpp/ozw_types.h) :
 // ekarak: constructor from ValueID
@@ -52,15 +53,23 @@ meaningful results from OpenZWave to the Thrift server.
 TALKING TO THE OPENZWAVE THRIFT SERVER 
 ---------------------------------------------------------------------
 OK, you have the server binary (./main) either precompiled or you did it yourself. Fine.
-- Install a STOMP Server (gem install stompserver). It will route all notifications from OZW to anywhere you want it to.
-- Hook up your favourite USB controller at /dev/ttyUSB0 (sorry its hardcoded for the time being, see Main.cpp)
+- Install a STOMP Server (gem install stompserver), or if you're on Ruby 1.9 from git:
+    git clone git://github.com/gmallard/stompserver_ng.git
+    cd stompserver_ng
+    sudo ruby setup.rb
+Then, run it with the debug flag (stompserver_ng -d). It will route all notifications 
+from OZW to anywhere you want it to.
+- Hook up your favourite USB controller at /dev/ttyUSB0 (sorry its hardcoded for the
+    time being, see Main.cpp)
 - Fire up ./main, preferrably in a debugger (gdb ./main)
 
-The server tries to connect to the Stomp Server (localhost:61613) and then starts the OpenZWave engine. 
-When all ZWave processing is done, it also fires up the Thrift server at port 9090, and listens for requests.
+The server tries to connect to the Stomp Server (localhost:61613) and then starts 
+the OpenZWave engine.  When all ZWave processing is done, it also fires up the 
+Thrift server at port 9090, and listens for requests.
 
-Let's connect from Ruby as an example. First edit ozwthrift.rb and fill in the correct HomeID for your controller.
-Then fire up the Interactive Ruby Shell and load the bootup code:
+Let's connect from Ruby as an example. First edit ozwthrift.rb and fill in the correct 
+HomeID for your controller. Then fire up the Interactive Ruby Shell and load the 
+bootup code:
 
 ekarak@ekarak-laptop:~/ozw/Thrift4OZW$ irb1.9.1
 irb(main):001:0> load 'ozwthrift.rb'
@@ -104,8 +113,10 @@ irb(main):015:0> OZWmgr.SetValue_UInt8(Rvid,0)
 => true
 
 
-You can try using the server from other languages. I've posted the generated Thrift code in the project, 
-Read Thrift's tutorial (http://thrift.apache.org) and you should be able to talk to OpenZWave with minimal effort.
+You can try using the server from other languages. I've posted the generated 
+Thrift code in the project, 
+Read Thrift's tutorial (http://thrift.apache.org) and you should be able to talk 
+to OpenZWave with minimal effort.
 
 That's it for the time being.
 Elias
