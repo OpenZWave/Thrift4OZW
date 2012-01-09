@@ -57,6 +57,7 @@ namespace STOMP {
     typedef struct {
         Poco::Net::SocketAddress* addr;
         Poco::Net::StompSocket*  socket;
+        bool alive;
     } Connection;
 
     typedef std::map<std::string, std::string> hdrmap;
@@ -191,6 +192,7 @@ namespace STOMP {
         
             // more methods called from the thread loop
             bool socket_connect();
+            void socket_shutdown();
             bool incoming_data_waiting();
         private:
             void run(); // Runnable::run(): Stomp worker thread implementation

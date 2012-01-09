@@ -101,12 +101,6 @@ bool PocoStomp::socket_connect()
 {
     while (m_fsm.getState().getId() != StompFSM_map::SocketConnected.getId()) {
         try {
-            if (m_connection->addr != NULL) {
-                delete m_connection->addr;
-            }
-            if (m_connection->socket != NULL) {
-                delete m_connection->socket;
-            }
             m_connection->addr = new Poco::Net::SocketAddress(m_hostname, m_port);
             m_connection->socket = new Poco::Net::StompSocket(*(m_connection->addr));
             m_fsm.socket_connected();
@@ -121,6 +115,18 @@ bool PocoStomp::socket_connect()
         }
     }
     return(m_fsm.getState().getId() == StompFSM_map::SocketConnected.getId());
+}
+
+// ####################################################
+void PocoStomp::socket_shutdown()
+// ####################################################
+{
+    if (m_connection->addr != NULL) {
+            delete m_connection->addr;
+            if (m_connection->socket != NULL) {
+                    delete m_connection->socket;
+            }
+    }
 }
 
 // ####################################################
