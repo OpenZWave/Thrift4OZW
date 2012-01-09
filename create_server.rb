@@ -33,24 +33,42 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 require 'rubygems'
 require 'rbgccxml'
 
+OZWCpp = '/home/ekarak/ozw/open-zwave-read-only/cpp'
+ThriftInc = "/usr/local/include/thrift/"
+
+require 'getoptlong'
+
+GetoptLong.new(
+  #[ "--ozwroot",    GetoptLong::REQUIRED_ARGUMENT ],
+  [ "--ozwroot",    GetoptLong::OPTIONAL_ARGUMENT ],
+  [ "--thriftroot",   GetoptLong::OPTIONAL_ARGUMENT ],
+  [ "--verbose", "-v",   GetoptLong::NO_ARGUMENT ],
+).each { |opt, arg|
+    case opt
+    when '--ozwroot' then OZWCpp = arg
+    when '--thriftroot' then ThriftInc = arg
+    when '--verbose' then $DEBUG = true
+    end
+}
+
 OverloadedRE = /([^_]*)(?:_(.*))/
 
 MANAGER_INCLUDES = [
     "gen_cpp",
-    "/usr/local/include/thrift/",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/tinyxml",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/src",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/src/command_classes",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/src/platform",
+    ThriftInc,
+    File.join(OZWCpp, "tinyxml"),
+    File.join(OZWCpp, "src"),
+    File.join(OZWCpp, "src", "value_classes"),
+    File.join(OZWCpp, "src", "command_classes"),
+    File.join(OZWCpp, "src", "platform")
 ]
 
 #
 # must load all source files in a single batch (RbGCCXML gets confused otherwise...)
 #
 files = [
-    "/home/ekarak/ozw/Thrift4OZW/gen-cpp/RemoteManager_server.skeleton.cpp",
-    "/home/ekarak/ozw/open-zwave-read-only/cpp/src/Manager.h"
+    File.join(Dir.getwd, "gen-cpp", "RemoteManager_server.skeleton.cpp"),
+    File.join(OZWCpp, "src", "Manager.h")
 ]
 puts "Parsing:" + files.join("\n\t")
 RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES)
@@ -161,7 +179,7 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
             argmap[a][:descriptor] = "_return.#{a.name}"
             argmap[a][:node] = arg
         else
-            raise ("Reverse argument mapping: couldn't resolve argument '#{a.name}' in method '#{target_method.name}'!!!")
+            raise "Reverse argument mapping: couldn't resolve argument '#{a.name}' in method '#{target_method.name}'!!!"
         end
     }
 
