@@ -95,4 +95,5 @@ dist:	main
 	tar -c --exclude=".git" --exclude ".svn" -hvzf Ansible_OpenZWave.tar.gz ozwcp config/ cp.html cp.js openzwavetinyicon.png README
 
 clean:
-	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager_server.cpp
+	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
+
