@@ -403,6 +403,7 @@ namespace STOMP
         context.clearState();
         try
         {
+            ctxt.socket_shutdown();
             ctxt.debug_print("STOMP server disconnected! retrying connection...");
             context.setState(StompFSM_map::Disconnected);
         }

@@ -144,6 +144,7 @@ Ready
     }
 // ------------------------
     socket_disconnected  Disconnected {
+        socket_shutdown();
         debug_print("STOMP server disconnected! retrying connection...");
     }    
 }
