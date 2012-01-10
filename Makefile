@@ -12,7 +12,6 @@ CXX    := g++
 LD     := g++
 AR     := ar rc
 RANLIB := ranlib
-THRIFT := thrift
 
 DEBUG_CFLAGS    := -Wall -Wno-format -g -DDEBUG -Werror -O0
 RELEASE_CFLAGS  := -Wall -Wno-unknown-pragmas -Wno-format -O3 -DNDEBUG
@@ -23,14 +22,16 @@ DEBUG_LDFLAGS	:= -g
 CFLAGS	:= -c $(DEBUG_CFLAGS)
 LDFLAGS	:= $(DEBUG_LDFLAGS)
 
+# change directories if needed
 OPENZWAVE := ../open-zwave
-LIBTHRIFT := ../libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
+THRIFT := /usr/local/include/thrift
+# LIBTHRIFT := ../libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
 SMC := /opt/smc
 
 INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 	-I $(OPENZWAVE)/cpp/src/value_classes/ -I $(OPENZWAVE)/cpp/src/platform/ \
 	-I $(OPENZWAVE)/cpp/src/platform/unix -I $(OPENZWAVE)/cpp/tinyxml/ \
-    -I /usr/local/include/thrift -I $(SMC)/lib/C++/ \
+    -I $(THRIFT) -I $(SMC)/lib/C++/ \
 	-I . -I gen-cpp/
 
 # Remove comment below for gnutls support
@@ -57,12 +58,12 @@ LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBMICROHTTPD) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 all: main
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
-	ruby1.9.1 create_server.rb
+	ruby1.9.1 create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
 	patch -p0 gen-cpp/RemoteManager_server.cpp < gen-cpp/RemoteManager_server.cpp.patch
 	patch -p0 gen-cpp/ozw_types.h <gen-cpp/ozw_types.h.patch
     
 gen-cpp/RemoteManager.cpp: ozw.thrift
-	$(THRIFT) --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
+	thrift --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
 
 gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp
 	g++ $(CFLAGS) -c gen-cpp/RemoteManager.cpp -o gen-cpp/RemoteManager.o $(INCLUDES)
@@ -96,5 +97,5 @@ dist:	main
 	tar -c --exclude=".git" --exclude ".svn" -hvzf Ansible_OpenZWave.tar.gz ozwcp config/ cp.html cp.js openzwavetinyicon.png README
 
 clean:
-	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
+	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager.cpp gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
 

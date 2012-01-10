@@ -378,7 +378,9 @@ bool PocoStomp::stomp_write_buffer(std::string s)
 // ####################################################
 void PocoStomp::debug_print(std::string message)
 {
+#ifdef DEBUG_POCOSTOMP
     std::cout << "FSM DEBUG: " << message << endl;
+#endif
 }
 
 void PocoStomp::initialized()

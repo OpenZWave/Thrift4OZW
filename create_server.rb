@@ -32,21 +32,20 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 
 require 'rubygems'
 require 'rbgccxml'
-
-OZWCpp = '/home/ekarak/ozw/open-zwave-read-only/cpp'
-ThriftInc = "/usr/local/include/thrift/"
-
 require 'getoptlong'
 
+def abspath(path)
+    return (path[0] == ".") ? File.expand_path(path) : path
+end
+
 GetoptLong.new(
-  #[ "--ozwroot",    GetoptLong::REQUIRED_ARGUMENT ],
-  [ "--ozwroot",    GetoptLong::OPTIONAL_ARGUMENT ],
-  [ "--thriftroot",   GetoptLong::OPTIONAL_ARGUMENT ],
+  [ "--ozwroot",    GetoptLong::REQUIRED_ARGUMENT ],
+  [ "--thriftroot",   GetoptLong::REQUIRED_ARGUMENT ],
   [ "--verbose", "-v",   GetoptLong::NO_ARGUMENT ],
 ).each { |opt, arg|
     case opt
-    when '--ozwroot' then OZWCpp = arg
-    when '--thriftroot' then ThriftInc = arg
+    when '--ozwroot' then OZWRoot = abspath(arg)
+    when '--thriftroot' then ThriftInc = abspath(arg)
     when '--verbose' then $DEBUG = true
     end
 }
@@ -56,11 +55,11 @@ OverloadedRE = /([^_]*)(?:_(.*))/
 MANAGER_INCLUDES = [
     "gen_cpp",
     ThriftInc,
-    File.join(OZWCpp, "tinyxml"),
-    File.join(OZWCpp, "src"),
-    File.join(OZWCpp, "src", "value_classes"),
-    File.join(OZWCpp, "src", "command_classes"),
-    File.join(OZWCpp, "src", "platform")
+    File.join(OZWRoot, 'cpp', "tinyxml"),
+    File.join(OZWRoot, 'cpp', "src"),
+    File.join(OZWRoot, 'cpp', "src", "value_classes"),
+    File.join(OZWRoot, 'cpp', "src", "command_classes"),
+    File.join(OZWRoot, 'cpp', "src", "platform")
 ]
 
 #
@@ -68,7 +67,7 @@ MANAGER_INCLUDES = [
 #
 files = [
     File.join(Dir.getwd, "gen-cpp", "RemoteManager_server.skeleton.cpp"),
-    File.join(OZWCpp, "src", "Manager.h")
+    File.join(OZWRoot, 'cpp', "src", "Manager.h")
 ]
 puts "Parsing:" + files.join("\n\t")
 RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES)
