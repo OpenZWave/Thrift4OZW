@@ -25,7 +25,6 @@ LDFLAGS	:= $(DEBUG_LDFLAGS)
 # change directories if needed
 OPENZWAVE := ../open-zwave
 THRIFT := /usr/local/include/thrift
-# LIBTHRIFT := ../libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
 SMC := /opt/smc
 
 INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
@@ -40,14 +39,14 @@ GNUTLS := -lgnutls
 # for Linux uncomment out next two lines
 LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/linux/*.a)
 LIBUSB := -ludev
-LIBPOCO := -lPocoNet -lboost_thread
+LIBPOCO := -lPocoNet -lboost_thread -lboost_program_options
 LIBTHRIFT := -lthrift
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
 #LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/mac/*.a)
 #LIBUSB := -framework IOKit -framework CoreFoundation
 
-LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBMICROHTTPD) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
+LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 
 %.o : %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $<

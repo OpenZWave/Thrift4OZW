@@ -35,14 +35,9 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #include <string>
 #include <sstream>
 #include <iostream>
-
-//~ template <class T>
-//~ std::string to_string(T t, std::ios_base & (*f)(std::ios_base&))
-//~ {
-  //~ std::ostringstream oss;
-  //~ oss << f << t;
-  //~ return oss.str();
-//~ }
+// we're using Boost's program_options
+#include <boost/program_options.hpp>
+namespace po = boost::program_options;
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -339,18 +334,54 @@ void send_all_values() {
 	g_criticalSection.unlock();
 }
 
-// ------------------------
-// THRIFT MAGIC
-// ------------------------
 // the Thrift-generated (and manually edited) RemoteManager implementation
 // for OpenZWave::Manager class
 #include "gen-cpp/RemoteManager_server.cpp"
 //
 
-int main(int argc, char **argv) {
-    // STOMP
-    stomp_client = new STOMP::PocoStomp("localhost", 61613);
-    stomp_client->connect();
+
+// -----------------------------------------
+int main(int argc, char *argv[]) {
+// -----------------------------------------
+    string  stomp_host = "localhost";
+    int       stomp_port = 61613;
+    string  ozw_config_dir = "/home/ekarak/ozw/open-zwave-read-only/config/";
+    string  ozw_port = "/dev/ttyUSB0";
+
+    try {        
+        // Declare the supported options.
+        po::options_description desc("OpenZWave orbiter: Allowed options");
+        desc.add_options()
+            ("help,?", "print this message")
+            ("stomphost,h", po::value(&stomp_host), "STOMP server hostname (default: localhost)")
+            ("stompport,p", po::value(&stomp_port), "STOMP server port num (default: 61613)")
+            ("ozwconf,c", po::value(&ozw_config_dir), "OpenZWave config/ directory")
+            ("ozwport,o", po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
+        ;
+        
+        po::variables_map vm;
+        po::store(po::parse_command_line(argc, argv, desc), vm);
+        po::notify(vm);    
+        
+        if (vm.count("help")) {
+            cout << desc << "\n";
+            return 1;
+        }     
+    }
+    catch (exception& e) {
+        cerr << "Error parsing options: " << e.what() << "\n";
+        return 2;
+    }
+
+    // ------------------
+    try {
+        // STOMP
+        stomp_client = new STOMP::PocoStomp(stomp_host, stomp_port);
+        stomp_client->connect();
+    } catch (exception& e) {
+        cerr << "Error connecting to STOMP: " << e.what() << "\n";
+        return 3;
+    } 
 
     // OpenZWave initialization
 	//initMutex.lock();
@@ -359,22 +390,15 @@ int main(int argc, char **argv) {
 	// The first argument is the path to the config files (where the manufacturer_specific.xml file is located
 	// The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
 	// the log file will appear in the program's working directory.
-	Options::Create( "/home/ekarak/ozw/open-zwave-read-only/config/", "", "" );
+	Options::Create(ozw_config_dir, "", "" );
 	Options::Get()->Lock();
 
 	Manager::Create();
       
-    // Add a callback handler to the manager.  The second argument is a context that
-	// is passed to the OnNotification method.  If the OnNotification is a method of
-	// a class, the context would usually be a pointer to that class object, to
-	// avoid the need for the notification handler to be a static.
+    // Add a callback handler to the manager. 
 	Manager::Get()->AddWatcher( OnNotification, NULL );
 
 	// Add a Z-Wave Driver
-	// Modify this line to set the correct serial port for your PC interface.
-
-	string ozw_port = "/dev/ttyUSB0";
-
 	Manager::Get()->AddDriver( ozw_port );
 	//Manager::Get()->AddDriver( "HID Controller", Driver::ControllerInterface_Hid );
 
