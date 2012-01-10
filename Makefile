@@ -25,11 +25,12 @@ LDFLAGS	:= $(DEBUG_LDFLAGS)
 
 OPENZWAVE := ../open-zwave
 LIBTHRIFT := ../libmicrohttpd/src/daemon/.libs/libmicrohttpd.a
+SMC := /opt/smc
 
 INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 	-I $(OPENZWAVE)/cpp/src/value_classes/ -I $(OPENZWAVE)/cpp/src/platform/ \
 	-I $(OPENZWAVE)/cpp/src/platform/unix -I $(OPENZWAVE)/cpp/tinyxml/ \
-    -I /usr/local/include/thrift -I /home/ekarak/smc_6_0_1/lib/C++/ \
+    -I /usr/local/include/thrift -I $(SMC)/lib/C++/ \
 	-I . -I gen-cpp/
 
 # Remove comment below for gnutls support
