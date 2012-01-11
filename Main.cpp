@@ -344,25 +344,29 @@ void send_all_values() {
 int main(int argc, char *argv[]) {
 // -----------------------------------------
     string  stomp_host = "localhost";
-    int       stomp_port = 61613;
+    int     stomp_port = 61613;
     string  ozw_config_dir = "/home/ekarak/ozw/open-zwave-read-only/config/";
+    string  ozw_user = "";
     string  ozw_port = "/dev/ttyUSB0";
+    int     thrift_port = 9090;
 
     try {        
         // Declare the supported options.
-        po::options_description desc("OpenZWave orbiter: Allowed options");
+        po::options_description desc("Project Ansible - OpenZWave orbiter");
         desc.add_options()
-            ("help,?", "print this message")
-            ("stomphost,h", po::value(&stomp_host), "STOMP server hostname (default: localhost)")
-            ("stompport,p", po::value(&stomp_port), "STOMP server port num (default: 61613)")
-            ("ozwconf,c", po::value(&ozw_config_dir), "OpenZWave config/ directory")
-            ("ozwport,o", po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
+            ("help,?", "print this help message")
+            ("stomphost,h",     po::value(&stomp_host), "STOMP server hostname")
+            ("stompport,s",     po::value(&stomp_port), "STOMP server port number")
+            ("thriftport,t",    po::value(&thrift_port), "Thrift service port")
+            ("ozwconf,c",       po::value(&ozw_config_dir), "OpenZWave config/ path (manufacturer database)")
+            ("ozwuser,u",       po::value(&ozw_user), "OpenZWave user path (network & configuration state)")
+            ("ozwport,p",       po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
         ;
-        
+        // a boost:program_options variable map
         po::variables_map vm;
         po::store(po::parse_command_line(argc, argv, desc), vm);
         po::notify(vm);    
-        
+        // exit on help        
         if (vm.count("help")) {
             cout << desc << "\n";
             return 1;
@@ -375,7 +379,7 @@ int main(int argc, char *argv[]) {
 
     // ------------------
     try {
-        // STOMP
+        // connect to STOMP server in order to send openzwave notifications 
         stomp_client = new STOMP::PocoStomp(stomp_host, stomp_port);
         stomp_client->connect();
     } catch (exception& e) {
@@ -386,11 +390,11 @@ int main(int argc, char *argv[]) {
     // OpenZWave initialization
 	//initMutex.lock();
     
-      // Create the OpenZWave Manager.
+    // Create the OpenZWave Manager.
 	// The first argument is the path to the config files (where the manufacturer_specific.xml file is located
 	// The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
 	// the log file will appear in the program's working directory.
-	Options::Create(ozw_config_dir, "", "" );
+	Options::Create(ozw_config_dir, ozw_user, "" );
 	Options::Get()->Lock();
 
 	Manager::Create();
@@ -402,22 +406,21 @@ int main(int argc, char *argv[]) {
 	Manager::Get()->AddDriver( ozw_port );
 	//Manager::Get()->AddDriver( "HID Controller", Driver::ControllerInterface_Hid );
 
-	// Now we just wait for the driver to become ready, and then write out the loaded config.
-	// In a normal app, we would be handling notifications and building a UI for the user.
-    boost::unique_lock<boost::mutex> initLock(initMutex);
-	initCond.wait(initLock);
-
-    // initialize RemoteManager
-    int port = 9090;
+	// THRIFT: initialize RemoteManager
     shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
     shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
-    TServerSocket* ss = new TServerSocket(port);
+    TServerSocket* ss = new TServerSocket(thrift_port);
     ss->setRecvTimeout(3000);
     shared_ptr<TServerTransport> serverTransport(ss);
     shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
     shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-
     TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+
+	// Now we just wait for the driver to become ready, and then write out the loaded config.
+    boost::unique_lock<boost::mutex> initLock(initMutex);
+	initCond.wait(initLock);
+
+	// start up the Thrift RemoteManager server 
     server.serve();
     return 0;
 }
