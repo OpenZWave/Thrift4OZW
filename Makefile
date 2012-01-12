@@ -86,11 +86,13 @@ PocoStomp.o:  PocoStomp.cpp PocoStomp.h Stomp_sm.cpp StompSocket.o
 	g++ $(CFLAGS) -c PocoStomp.cpp $(INCLUDES)    
 
 Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
-	g++ $(CFLAGS) -c Main.cpp $(INCLUDES)
-    
-main:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o
+	g++ $(CFLAGS) -c Main.cpp $(INCLUDES)   
+
+ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o
 	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS)
     
+main: ozwd
+
 dist:	main
 	rm -f Thrift4OZW.tar.gz
 	tar -c --exclude=".git" --exclude ".svn" --exclude "*.o" -hvzf Thrift4OZW.tar.gz *.cpp *.h *.thrift *.sm *.rb Makefile gen-*/ license/ README*
