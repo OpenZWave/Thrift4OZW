@@ -92,8 +92,12 @@ main:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen
 	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS)
     
 dist:	main
-	rm -f Ansible_OpenZWave.tar.gz
-	tar -c --exclude=".git" --exclude ".svn" -hvzf Ansible_OpenZWave.tar.gz ozwcp config/ cp.html cp.js openzwavetinyicon.png README
+	rm -f Thrift4OZW.tar.gz
+	tar -c --exclude=".git" --exclude ".svn" --exclude "*.o" -hvzf Thrift4OZW.tar.gz *.cpp *.h *.thrift *.sm *.rb Makefile gen-*/ license/ README*
+
+bindist: main
+	rm -f Thrift4OZW_bin_`uname -i`.tar.gz
+	tar -c --exclude=".git" --exclude ".svn" -hvzf Thrift4OZW_bin_`uname -i`.tar.gz main license/ README*
 
 clean:
 	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager.cpp gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
