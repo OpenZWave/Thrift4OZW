@@ -52,11 +52,12 @@ meaningful results from OpenZWave to the Thrift server.
 ---------------------------------------------------------------------
 TALKING TO THE OPENZWAVE THRIFT SERVER 
 ---------------------------------------------------------------------
-OK, you have the server binary (./main) either precompiled or you did it yourself. Fine.
-- Install a STOMP Server (gem install stompserver), or if you're on Ruby 1.9 from git:
+OK, you have the server binary (./ozwd) either precompiled or you did it yourself. Fine.
+- Install a STOMP Server (gem install stompserver), or if you're on Ruby 1.9 install 
+stompserver_ng from git:
     git clone git://github.com/gmallard/stompserver_ng.git
     cd stompserver_ng
-    sudo ruby setup.rb
+    sudo ruby1.9.1 setup.rb
 Then, run it with the debug flag (stompserver_ng -d). It will route all notifications 
 from OZW to anywhere you want it to.
 - Hook up your favourite USB controller at /dev/ttyUSB0 (sorry its hardcoded for the
@@ -65,7 +66,7 @@ from OZW to anywhere you want it to.
 
 The server tries to connect to the Stomp Server (localhost:61613) and then starts 
 the OpenZWave engine.  When all ZWave processing is done, it also fires up the 
-Thrift server at port 9090, and listens for requests.
+Thrift server at 127.0.0.1:9090, and listens for requests.
 
 Let's connect from Ruby as an example. First edit ozwthrift.rb and fill in the correct 
 HomeID for your controller. Then fire up the Interactive Ruby Shell and load the 
@@ -114,9 +115,9 @@ irb(main):015:0> OZWmgr.SetValue_UInt8(Rvid,0)
 
 
 You can try using the server from other languages. I've posted the generated 
-Thrift code in the project, 
-Read Thrift's tutorial (http://thrift.apache.org) and you should be able to talk 
-to OpenZWave with minimal effort.
+Thrift code for all languages it can generate client code, Read Thrift's tutorial 
+(more info at http://thrift.apache.org) and you should be able to talk 
+to OpenZWave from your language of choice with minimal effort.
 
 That's it for the time being.
 Elias
