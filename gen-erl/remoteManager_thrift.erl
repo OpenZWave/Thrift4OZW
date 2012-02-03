@@ -824,6 +824,24 @@ function_info('SoftReset', reply_type) ->
 function_info('SoftReset', exceptions) ->
   {struct, []}
 ;
+% BeginControllerCommand(This, _homeId, _command, _highPower, _nodeId)
+function_info('BeginControllerCommand', params_type) ->
+  {struct, [{1, i32}, {2, i32}, {3, bool}, {4, byte}]}
+;
+function_info('BeginControllerCommand', reply_type) ->
+  bool;
+function_info('BeginControllerCommand', exceptions) ->
+  {struct, []}
+;
+% CancelControllerCommand(This, _homeId)
+function_info('CancelControllerCommand', params_type) ->
+  {struct, [{1, i32}]}
+;
+function_info('CancelControllerCommand', reply_type) ->
+  bool;
+function_info('CancelControllerCommand', exceptions) ->
+  {struct, []}
+;
 % GetNumScenes(This)
 function_info('GetNumScenes', params_type) ->
   {struct, []}

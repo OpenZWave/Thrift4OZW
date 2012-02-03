@@ -68,6 +68,59 @@ final class RemoteValueType {
   );
 }
 
+$GLOBALS['E_DriverControllerCommand'] = array(
+  'ControllerCommand_None' => 0,
+  'ControllerCommand_AddController' => 1,
+  'ControllerCommand_AddDevice' => 2,
+  'ControllerCommand_CreateNewPrimary' => 3,
+  'ControllerCommand_ReceiveConfiguration' => 4,
+  'ControllerCommand_RemoveController' => 5,
+  'ControllerCommand_RemoveDevice' => 6,
+  'ControllerCommand_RemoveFailedNode' => 7,
+  'ControllerCommand_HasNodeFailed' => 8,
+  'ControllerCommand_ReplaceFailedNode' => 9,
+  'ControllerCommand_TransferPrimaryRole' => 10,
+  'ControllerCommand_RequestNetworkUpdate' => 11,
+  'ControllerCommand_RequestNodeNeighborUpdate' => 12,
+  'ControllerCommand_AssignReturnRoute' => 13,
+  'ControllerCommand_DeleteAllReturnRoutes' => 14,
+);
+
+final class DriverControllerCommand {
+  const ControllerCommand_None = 0;
+  const ControllerCommand_AddController = 1;
+  const ControllerCommand_AddDevice = 2;
+  const ControllerCommand_CreateNewPrimary = 3;
+  const ControllerCommand_ReceiveConfiguration = 4;
+  const ControllerCommand_RemoveController = 5;
+  const ControllerCommand_RemoveDevice = 6;
+  const ControllerCommand_RemoveFailedNode = 7;
+  const ControllerCommand_HasNodeFailed = 8;
+  const ControllerCommand_ReplaceFailedNode = 9;
+  const ControllerCommand_TransferPrimaryRole = 10;
+  const ControllerCommand_RequestNetworkUpdate = 11;
+  const ControllerCommand_RequestNodeNeighborUpdate = 12;
+  const ControllerCommand_AssignReturnRoute = 13;
+  const ControllerCommand_DeleteAllReturnRoutes = 14;
+  static public $__names = array(
+    0 => 'ControllerCommand_None',
+    1 => 'ControllerCommand_AddController',
+    2 => 'ControllerCommand_AddDevice',
+    3 => 'ControllerCommand_CreateNewPrimary',
+    4 => 'ControllerCommand_ReceiveConfiguration',
+    5 => 'ControllerCommand_RemoveController',
+    6 => 'ControllerCommand_RemoveDevice',
+    7 => 'ControllerCommand_RemoveFailedNode',
+    8 => 'ControllerCommand_HasNodeFailed',
+    9 => 'ControllerCommand_ReplaceFailedNode',
+    10 => 'ControllerCommand_TransferPrimaryRole',
+    11 => 'ControllerCommand_RequestNetworkUpdate',
+    12 => 'ControllerCommand_RequestNodeNeighborUpdate',
+    13 => 'ControllerCommand_AssignReturnRoute',
+    14 => 'ControllerCommand_DeleteAllReturnRoutes',
+  );
+}
+
 class RemoteValueID {
   static $_TSPEC;
 

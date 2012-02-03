@@ -38,10 +38,13 @@ def abspath(path)
     return (path[0] == ".") ? File.expand_path(path) : path
 end
 
+OZWRoot = abspath("../open-zwave")
+ThriftInc = abspath("/usr/local/include/thrift")
+
 GetoptLong.new(
   [ "--ozwroot",    GetoptLong::REQUIRED_ARGUMENT ],
   [ "--thriftroot",   GetoptLong::REQUIRED_ARGUMENT ],
-  [ "--verbose", "-v",   GetoptLong::NO_ARGUMENT ],
+  [ "--verbose", "-v",   GetoptLong::NO_ARGUMENT ]
 ).each { |opt, arg|
     case opt
     when '--ozwroot' then OZWRoot = abspath(arg)
@@ -76,12 +79,13 @@ RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES)
 output = File.open("gen-cpp/RemoteManager_server.skeleton.cpp").readlines
 
 
+# 
+Callbacks = {}
+#
+
 # fix the constructor
 #lineno = RootNode.classes("RemoteManagerHandler").constructors[1]['line'].to_i
 #~ output[lineno] = Constructor
-# add our extra hidden sauce
-#lineno = foo.classes("RemoteManagerHandler").constructors[1]['endline'].to_i
-#output[lineno] = Converter
 
 a = RootNode.classes("RemoteManagerHandler").methods.find(:access => :public)
 b = RootNode.namespaces("OpenZWave").classes("Manager").methods.find(:access => :public)
@@ -172,11 +176,32 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
             argmap[a][:descriptor] = arg.name
             argmap[a][:node] = arg
         # 2) else, match as a member of Thrift's special "_return" argument (class struct)
-        elsif (_ret = meth.arguments.find(:name => "_return" )) and (_ret.cpp_type.base_type.is_a?RbGCCXML::Class) and
-            (arg = _ret.cpp_type.base_type.variables.find(:name => a.name)).is_a?RbGCCXML::Field  then
+        elsif (_ret = meth.arguments.find(:name => "_return" )) and 
+              (_ret.is_a?RbGCCXML::Node) and 
+              (_ret.cpp_type.base_type.is_a?RbGCCXML::Class) and
+              (arg = _ret.cpp_type.base_type.variables.find(:name => a.name)).is_a?RbGCCXML::Field  then
             argmap[a] = {}
             argmap[a][:descriptor] = "_return.#{a.name}"
             argmap[a][:node] = arg
+        # 3) else, check if is a _callback or _context argument (callbacks)
+        elsif (a.name =~ /callback/) then
+            cb_fun = "#{target_method.name}_callback"
+            puts "defining #{cb_fun}"
+            fntype = RbGCCXML::NodeCache.find(a['type']).base_type # => RbGCCXML::PointerType => RbGCCXML::FunctionType
+            i = 0
+            fntype_args = fntype.arguments.collect{ |arg| i=i+1; "#{arg.to_cpp} arg#{i}"}.join(', ')            
+            cb = []
+            cb << fntype.base_type.return_type.to_cpp + " #{cb_fun}(#{fntype_args}) {"
+            cb << "\t// FIXME: fill in the blanks (sorry!)"
+            cb << "}"
+            Callbacks[cb_fun] = cb.join("\n")
+            argmap[a] = {}
+            argmap[a][:descriptor] = "&#{target_method.name}_callback"
+        #
+        elsif (a.name =~ /context/) then
+            # pass the Thrift server singleton instance as the callback context
+            argmap[a] = {}
+            argmap[a][:descriptor] = "(void*) this"
         else
             raise "Reverse argument mapping: couldn't resolve argument '#{a.name}' in method '#{target_method.name}'!!!"
         end
@@ -205,19 +230,23 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     arg_array = []
     target_method.arguments.each { |tgt_arg|
         if (hsh = argmap[tgt_arg]) then
-            src_arg = hsh[:node]
             descriptor = hsh[:descriptor]
             #puts "  src=#{descriptor}\ttgt=#{tgt_arg.qualified_name}"
             ampersand = (tgt_arg.cpp_type.to_cpp.include?('*') ? '&' : '')
-            case src_arg.to_cpp
-                when /RemoteValueID/
-                    arg_array <<  "#{descriptor}.toValueID()"
-                else
-                    arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}#{descriptor}"
-                    size_src = src_arg.cpp_type.base_type['size'].to_i
-                    size_tgt = tgt_arg.cpp_type.base_type['size'].to_i
-                    # sanity check
-                    puts "WARNING!!! method '#{meth.name}': Argument '#{descriptor}' size mismatch (src=#{size_src} tgt=#{size_tgt}) - CHECK GENERATED CODE!" unless size_src == size_tgt
+            if (src_arg = hsh[:node]) then
+                case src_arg.to_cpp
+                    when /RemoteValueID/
+                        arg_array <<  "#{descriptor}.toValueID()"
+                    else
+                        arg_array << "(#{tgt_arg.cpp_type.to_cpp}) #{ampersand}#{descriptor}"
+                        size_src = src_arg.cpp_type.base_type['size'].to_i
+                        size_tgt = tgt_arg.cpp_type.base_type['size'].to_i
+                        # sanity check
+                        puts "WARNING!!! method '#{meth.name}': Argument '#{descriptor}' size mismatch (src=#{size_src} tgt=#{size_tgt}) - CHECK GENERATED CODE!" unless size_src == size_tgt
+                end
+            else
+                puts "WARNING!!! target argument '#{tgt_arg.to_cpp}' not bound to a source node - needs patching..."
+                arg_array << descriptor
             end
         end
     }
@@ -246,7 +275,13 @@ output[1] = "// (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>\n"
 ((RootNode.functions("main")["line"].to_i-1)..(output.size)).each{ |i|
     output[i] = "// #{output[i]}"
 }
+
+# add our callback sauce after the first constructor
+lineno = RootNode.classes("RemoteManagerHandler")['line'].to_i - 2
+output[lineno] = "\n" << Callbacks.values.join("\n") << "\n\n"
+
 # write out the generated file
-puts "Writing generated server...."
-File.new("gen-cpp/RemoteManager_server.cpp", File::CREAT|File::TRUNC|File::RDWR, 0644) << output.join
+HackedFile = "gen-cpp/RemoteManager_server.cpp"
+puts "Writing generated server (#{HackedFile})...."
+File.new(HackedFile, File::CREAT|File::TRUNC|File::RDWR, 0644) << output.join
 puts "Done!"

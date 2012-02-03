@@ -104,6 +104,8 @@ class RemoteManagerIf {
   virtual void RemoveAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId) = 0;
   virtual void ResetController(const int32_t _homeId) = 0;
   virtual void SoftReset(const int32_t _homeId) = 0;
+  virtual bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) = 0;
+  virtual bool CancelControllerCommand(const int32_t _homeId) = 0;
   virtual int8_t GetNumScenes() = 0;
   virtual void GetAllScenes(GetAllScenesReturnStruct& _return) = 0;
   virtual int8_t CreateScene() = 0;
@@ -454,6 +456,14 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   }
   void SoftReset(const int32_t /* _homeId */) {
     return;
+  }
+  bool BeginControllerCommand(const int32_t /* _homeId */, const DriverControllerCommand::type /* _command */, const bool /* _highPower */, const int8_t /* _nodeId */) {
+    bool _return = false;
+    return _return;
+  }
+  bool CancelControllerCommand(const int32_t /* _homeId */) {
+    bool _return = false;
+    return _return;
   }
   int8_t GetNumScenes() {
     int8_t _return = 0;
@@ -10509,6 +10519,249 @@ class RemoteManager_SoftReset_presult {
 
 };
 
+typedef struct _RemoteManager_BeginControllerCommand_args__isset {
+  _RemoteManager_BeginControllerCommand_args__isset() : _homeId(false), _command(false), _highPower(false), _nodeId(false) {}
+  bool _homeId;
+  bool _command;
+  bool _highPower;
+  bool _nodeId;
+} _RemoteManager_BeginControllerCommand_args__isset;
+
+class RemoteManager_BeginControllerCommand_args {
+ public:
+
+  RemoteManager_BeginControllerCommand_args() : _homeId(0), _highPower(0), _nodeId(0) {
+  }
+
+  virtual ~RemoteManager_BeginControllerCommand_args() throw() {}
+
+  int32_t _homeId;
+  DriverControllerCommand::type _command;
+  bool _highPower;
+  int8_t _nodeId;
+
+  _RemoteManager_BeginControllerCommand_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__command(const DriverControllerCommand::type val) {
+    _command = val;
+  }
+
+  void __set__highPower(const bool val) {
+    _highPower = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  bool operator == (const RemoteManager_BeginControllerCommand_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_command == rhs._command))
+      return false;
+    if (!(_highPower == rhs._highPower))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_BeginControllerCommand_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_BeginControllerCommand_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_BeginControllerCommand_pargs {
+ public:
+
+
+  virtual ~RemoteManager_BeginControllerCommand_pargs() throw() {}
+
+  const int32_t* _homeId;
+  const DriverControllerCommand::type* _command;
+  const bool* _highPower;
+  const int8_t* _nodeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_BeginControllerCommand_result__isset {
+  _RemoteManager_BeginControllerCommand_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_BeginControllerCommand_result__isset;
+
+class RemoteManager_BeginControllerCommand_result {
+ public:
+
+  RemoteManager_BeginControllerCommand_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_BeginControllerCommand_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_BeginControllerCommand_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_BeginControllerCommand_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_BeginControllerCommand_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_BeginControllerCommand_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_BeginControllerCommand_presult__isset {
+  _RemoteManager_BeginControllerCommand_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_BeginControllerCommand_presult__isset;
+
+class RemoteManager_BeginControllerCommand_presult {
+ public:
+
+
+  virtual ~RemoteManager_BeginControllerCommand_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_BeginControllerCommand_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_CancelControllerCommand_args__isset {
+  _RemoteManager_CancelControllerCommand_args__isset() : _homeId(false) {}
+  bool _homeId;
+} _RemoteManager_CancelControllerCommand_args__isset;
+
+class RemoteManager_CancelControllerCommand_args {
+ public:
+
+  RemoteManager_CancelControllerCommand_args() : _homeId(0) {
+  }
+
+  virtual ~RemoteManager_CancelControllerCommand_args() throw() {}
+
+  int32_t _homeId;
+
+  _RemoteManager_CancelControllerCommand_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  bool operator == (const RemoteManager_CancelControllerCommand_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_CancelControllerCommand_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_CancelControllerCommand_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_CancelControllerCommand_pargs {
+ public:
+
+
+  virtual ~RemoteManager_CancelControllerCommand_pargs() throw() {}
+
+  const int32_t* _homeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_CancelControllerCommand_result__isset {
+  _RemoteManager_CancelControllerCommand_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_CancelControllerCommand_result__isset;
+
+class RemoteManager_CancelControllerCommand_result {
+ public:
+
+  RemoteManager_CancelControllerCommand_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_CancelControllerCommand_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_CancelControllerCommand_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_CancelControllerCommand_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_CancelControllerCommand_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_CancelControllerCommand_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_CancelControllerCommand_presult__isset {
+  _RemoteManager_CancelControllerCommand_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_CancelControllerCommand_presult__isset;
+
+class RemoteManager_CancelControllerCommand_presult {
+ public:
+
+
+  virtual ~RemoteManager_CancelControllerCommand_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_CancelControllerCommand_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 
 class RemoteManager_GetNumScenes_args {
  public:
@@ -14861,6 +15114,12 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   void SoftReset(const int32_t _homeId);
   void send_SoftReset(const int32_t _homeId);
   void recv_SoftReset();
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId);
+  void send_BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId);
+  bool recv_BeginControllerCommand();
+  bool CancelControllerCommand(const int32_t _homeId);
+  void send_CancelControllerCommand(const int32_t _homeId);
+  bool recv_CancelControllerCommand();
   int8_t GetNumScenes();
   void send_GetNumScenes();
   int8_t recv_GetNumScenes();
@@ -15069,6 +15328,8 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_RemoveAssociation(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_ResetController(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SoftReset(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_BeginControllerCommand(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_CancelControllerCommand(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNumScenes(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetAllScenes(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_CreateScene(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -15197,6 +15458,8 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["RemoveAssociation"] = &RemoteManagerProcessor::process_RemoveAssociation;
     processMap_["ResetController"] = &RemoteManagerProcessor::process_ResetController;
     processMap_["SoftReset"] = &RemoteManagerProcessor::process_SoftReset;
+    processMap_["BeginControllerCommand"] = &RemoteManagerProcessor::process_BeginControllerCommand;
+    processMap_["CancelControllerCommand"] = &RemoteManagerProcessor::process_CancelControllerCommand;
     processMap_["GetNumScenes"] = &RemoteManagerProcessor::process_GetNumScenes;
     processMap_["GetAllScenes"] = &RemoteManagerProcessor::process_GetAllScenes;
     processMap_["CreateScene"] = &RemoteManagerProcessor::process_CreateScene;
@@ -16181,6 +16444,28 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       ifaces_[i]->SoftReset(_homeId);
+    }
+  }
+
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+      } else {
+        ifaces_[i]->BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+      }
+    }
+  }
+
+  bool CancelControllerCommand(const int32_t _homeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->CancelControllerCommand(_homeId);
+      } else {
+        ifaces_[i]->CancelControllerCommand(_homeId);
+      }
     }
   }
 

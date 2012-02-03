@@ -26,6 +26,23 @@ OpenZWave.RemoteValueType = {
 'ValueType_Button' : 8,
 'ValueType_Max' : 8
 };
+OpenZWave.DriverControllerCommand = {
+'ControllerCommand_None' : 0,
+'ControllerCommand_AddController' : 1,
+'ControllerCommand_AddDevice' : 2,
+'ControllerCommand_CreateNewPrimary' : 3,
+'ControllerCommand_ReceiveConfiguration' : 4,
+'ControllerCommand_RemoveController' : 5,
+'ControllerCommand_RemoveDevice' : 6,
+'ControllerCommand_RemoveFailedNode' : 7,
+'ControllerCommand_HasNodeFailed' : 8,
+'ControllerCommand_ReplaceFailedNode' : 9,
+'ControllerCommand_TransferPrimaryRole' : 10,
+'ControllerCommand_RequestNetworkUpdate' : 11,
+'ControllerCommand_RequestNodeNeighborUpdate' : 12,
+'ControllerCommand_AssignReturnRoute' : 13,
+'ControllerCommand_DeleteAllReturnRoutes' : 14
+};
 OpenZWave.RemoteValueID = function(args) {
   this._homeId = null;
   this._nodeId = null;

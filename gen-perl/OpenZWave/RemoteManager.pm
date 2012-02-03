@@ -12253,6 +12253,307 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_BeginControllerCommand_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_BeginControllerCommand_args->mk_accessors( qw( _homeId _command _highPower _nodeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  $self->{_command} = undef;
+  $self->{_highPower} = undef;
+  $self->{_nodeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+    if (defined $vals->{_command}) {
+      $self->{_command} = $vals->{_command};
+    }
+    if (defined $vals->{_highPower}) {
+      $self->{_highPower} = $vals->{_highPower};
+    }
+    if (defined $vals->{_nodeId}) {
+      $self->{_nodeId} = $vals->{_nodeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_BeginControllerCommand_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_command});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^3$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{_highPower});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^4$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_nodeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_BeginControllerCommand_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_command}) {
+    $xfer += $output->writeFieldBegin('_command', TType::I32, 2);
+    $xfer += $output->writeI32($self->{_command});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_highPower}) {
+    $xfer += $output->writeFieldBegin('_highPower', TType::BOOL, 3);
+    $xfer += $output->writeBool($self->{_highPower});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_nodeId}) {
+    $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 4);
+    $xfer += $output->writeByte($self->{_nodeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_BeginControllerCommand_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_BeginControllerCommand_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_BeginControllerCommand_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_BeginControllerCommand_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_CancelControllerCommand_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_CancelControllerCommand_args->mk_accessors( qw( _homeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_CancelControllerCommand_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_CancelControllerCommand_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_CancelControllerCommand_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_CancelControllerCommand_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_CancelControllerCommand_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_CancelControllerCommand_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManager_GetNumScenes_args;
 use base qw(Class::Accessor);
 
@@ -17995,6 +18296,23 @@ sub SoftReset{
   die 'implement interface';
 }
 
+sub BeginControllerCommand{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_command = shift;
+  my $_highPower = shift;
+  my $_nodeId = shift;
+
+  die 'implement interface';
+}
+
+sub CancelControllerCommand{
+  my $self = shift;
+  my $_homeId = shift;
+
+  die 'implement interface';
+}
+
 sub GetNumScenes{
   my $self = shift;
 
@@ -18988,6 +19306,23 @@ sub SoftReset{
 
   my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
   return $self->{impl}->SoftReset($_homeId);
+}
+
+sub BeginControllerCommand{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  my $_command = ($request->{'_command'}) ? $request->{'_command'} : undef;
+  my $_highPower = ($request->{'_highPower'}) ? $request->{'_highPower'} : undef;
+  my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
+  return $self->{impl}->BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+}
+
+sub CancelControllerCommand{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  return $self->{impl}->CancelControllerCommand($_homeId);
 }
 
 sub GetNumScenes{
@@ -23303,6 +23638,101 @@ sub recv_SoftReset{
 
   return;
 }
+sub BeginControllerCommand{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_command = shift;
+  my $_highPower = shift;
+  my $_nodeId = shift;
+
+    $self->send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+  return $self->recv_BeginControllerCommand();
+}
+
+sub send_BeginControllerCommand{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_command = shift;
+  my $_highPower = shift;
+  my $_nodeId = shift;
+
+  $self->{output}->writeMessageBegin('BeginControllerCommand', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_BeginControllerCommand_args();
+  $args->{_homeId} = $_homeId;
+  $args->{_command} = $_command;
+  $args->{_highPower} = $_highPower;
+  $args->{_nodeId} = $_nodeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_BeginControllerCommand{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_BeginControllerCommand_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "BeginControllerCommand failed: unknown result";
+}
+sub CancelControllerCommand{
+  my $self = shift;
+  my $_homeId = shift;
+
+    $self->send_CancelControllerCommand($_homeId);
+  return $self->recv_CancelControllerCommand();
+}
+
+sub send_CancelControllerCommand{
+  my $self = shift;
+  my $_homeId = shift;
+
+  $self->{output}->writeMessageBegin('CancelControllerCommand', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_CancelControllerCommand_args();
+  $args->{_homeId} = $_homeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_CancelControllerCommand{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_CancelControllerCommand_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "CancelControllerCommand failed: unknown result";
+}
 sub GetNumScenes{
   my $self = shift;
 
@@ -26115,6 +26545,32 @@ sub process_SoftReset {
     my $result = new OpenZWave::RemoteManager_SoftReset_result();
     $self->{handler}->SoftReset($args->_homeId);
     $output->writeMessageBegin('SoftReset', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_BeginControllerCommand {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_BeginControllerCommand_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_BeginControllerCommand_result();
+    $result->{success} = $self->{handler}->BeginControllerCommand($args->_homeId, $args->_command, $args->_highPower, $args->_nodeId);
+    $output->writeMessageBegin('BeginControllerCommand', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_CancelControllerCommand {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_CancelControllerCommand_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_CancelControllerCommand_result();
+    $result->{success} = $self->{handler}->CancelControllerCommand($args->_homeId);
+    $output->writeMessageBegin('CancelControllerCommand', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

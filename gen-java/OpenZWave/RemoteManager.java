@@ -1174,6 +1174,67 @@ public class RemoteManager {
     public void SoftReset(int _homeId) throws org.apache.thrift.TException;
 
     /**
+     * * \brief Start a controller command process.
+     * * \param _homeId The Home ID of the Z-Wave controller.
+     * * \param _command The command to be sent to the controller.
+     * * \param _callback pointer to a function that will be called at various stages during the command process
+     * * \param _context pointer to user defined data that will be passed into to the callback function.  Defaults to NULL.
+     * * \param _highPower used only with the AddDevice, AddController, RemoveDevice and RemoveController commands.
+     * * Usually when adding or removing devices, the controller operates at low power so that the controller must
+     * * be physically close to the device for security reasons.  If _highPower is true, the controller will
+     * * operate at normal power levels instead.  Defaults to false.
+     * * \param _nodeId used only with the ReplaceFailedNode command, to specify the node that is going to be replaced.
+     * * \return true if the command was accepted and has started.
+     * * \see CancelControllerCommand, HasNodeFailed, RemoveFailedNode, Driver::ControllerCommand, Driver::pfnControllerCallback_t,
+     * * to notify the user of progress or to request actions on the user's part.  Defaults to NULL.
+     * * <p> Commands
+     * * - Driver::ControllerCommand_AddController - Add a new secondary controller to the Z-Wave network.
+     * * - Driver::ControllerCommand_AddDevice - Add a new device (but not a controller) to the Z-Wave network.
+     * * - Driver::ControllerCommand_CreateNewPrimary (Not yet implemented)
+     * * - Driver::ControllerCommand_ReceiveConfiguration -
+     * * - Driver::ControllerCommand_RemoveController - remove a controller from the Z-Wave network.
+     * * - Driver::ControllerCommand_RemoveDevice - remove a device (but not a controller) from the Z-Wave network.
+     *  * - Driver::ControllerCommand_RemoveFailedNode - move a node to the controller's list of failed nodes.  The node must actually
+     * * have failed or have been disabled since the command will fail if it responds.  A node must be in the controller's failed nodes list
+     * * for ControllerCommand_ReplaceFailedNode to work.
+     * * - Driver::ControllerCommand_HasNodeFailed - Check whether a node is in the controller's failed nodes list.
+     * * - Driver::ControllerCommand_ReplaceFailedNode - replace a failed device with another. If the node is not in
+     * * the controller's failed nodes list, or the node responds, this command will fail.
+     * * - Driver:: ControllerCommand_TransferPrimaryRole	(Not yet implemented) - Add a new controller to the network and
+     * * make it the primary.  The existing primary will become a secondary controller.
+     * * - Driver::ControllerCommand_RequestNetworkUpdate - Update the controller with network information from the SUC/SIS.
+     * * - Driver::ControllerCommand_RequestNodeNeighborUpdate - Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors afterwards.
+     * * - Driver::ControllerCommand_AssignReturnRoute - Assign a network return route to a device.
+     * * - Driver::ControllerCommand_DeleteAllReturnRoutes - Delete all network return routes from a device.
+     * * <p> Callbacks
+     * * - Driver::ControllerState_Waiting, the controller is waiting for a user action.  A notice should be displayed
+     * * to the user at this point, telling them what to do next.
+     * * For the add, remove, replace and transfer primary role commands, the user needs to be told to press the
+     * * inclusion button on the device that  is going to be added or removed.  For ControllerCommand_ReceiveConfiguration,
+     * * they must set their other controller to send its data, and for ControllerCommand_CreateNewPrimary, set the other
+     * * controller to learn new data.
+     * * - Driver::ControllerState_InProgress - the controller is in the process of adding or removing the chosen node.  It is now too late to cancel the command.
+     * * - Driver::ControllerState_Complete - the controller has finished adding or removing the node, and the command is complete.
+     * * - Driver::ControllerState_Failed - will be sent if the command fails for any reason.
+     * 
+     * @param _homeId
+     * @param _command
+     * @param _highPower
+     * @param _nodeId
+     */
+    public boolean BeginControllerCommand(int _homeId, DriverControllerCommand _command, boolean _highPower, byte _nodeId) throws org.apache.thrift.TException;
+
+    /**
+     * \brief Cancels any in-progress command running on a controller.
+     * \param _homeId The Home ID of the Z-Wave controller.
+     * \return true if a command was running and was cancelled.
+     * \see BeginControllerCommand
+     * 
+     * @param _homeId
+     */
+    public boolean CancelControllerCommand(int _homeId) throws org.apache.thrift.TException;
+
+    /**
      * \brief Gets the number of scenes that have been defined.
      * \return The number of scenes.
      * \see GetAllScenes, CreateScene, RemoveScene, AddSceneValue, RemoveSceneValue, SceneGetValues, SceneGetValueAsBool, SceneGetValueAsByte, SceneGetValueAsFloat, SceneGetValueAsInt, SceneGetValueAsShort, SceneGetValueAsString, SetSceneValue, GetSceneLabel, SetSceneLabel, SceneExists, ActivateScene
@@ -1783,6 +1844,10 @@ public class RemoteManager {
     public void ResetController(int _homeId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.ResetController_call> resultHandler) throws org.apache.thrift.TException;
 
     public void SoftReset(int _homeId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SoftReset_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void BeginControllerCommand(int _homeId, DriverControllerCommand _command, boolean _highPower, byte _nodeId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.BeginControllerCommand_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void CancelControllerCommand(int _homeId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.CancelControllerCommand_call> resultHandler) throws org.apache.thrift.TException;
 
     public void GetNumScenes(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.GetNumScenes_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -3951,6 +4016,55 @@ public class RemoteManager {
       SoftReset_result result = new SoftReset_result();
       receiveBase(result, "SoftReset");
       return;
+    }
+
+    public boolean BeginControllerCommand(int _homeId, DriverControllerCommand _command, boolean _highPower, byte _nodeId) throws org.apache.thrift.TException
+    {
+      send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+      return recv_BeginControllerCommand();
+    }
+
+    public void send_BeginControllerCommand(int _homeId, DriverControllerCommand _command, boolean _highPower, byte _nodeId) throws org.apache.thrift.TException
+    {
+      BeginControllerCommand_args args = new BeginControllerCommand_args();
+      args.set_homeId(_homeId);
+      args.set_command(_command);
+      args.set_highPower(_highPower);
+      args.set_nodeId(_nodeId);
+      sendBase("BeginControllerCommand", args);
+    }
+
+    public boolean recv_BeginControllerCommand() throws org.apache.thrift.TException
+    {
+      BeginControllerCommand_result result = new BeginControllerCommand_result();
+      receiveBase(result, "BeginControllerCommand");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "BeginControllerCommand failed: unknown result");
+    }
+
+    public boolean CancelControllerCommand(int _homeId) throws org.apache.thrift.TException
+    {
+      send_CancelControllerCommand(_homeId);
+      return recv_CancelControllerCommand();
+    }
+
+    public void send_CancelControllerCommand(int _homeId) throws org.apache.thrift.TException
+    {
+      CancelControllerCommand_args args = new CancelControllerCommand_args();
+      args.set_homeId(_homeId);
+      sendBase("CancelControllerCommand", args);
+    }
+
+    public boolean recv_CancelControllerCommand() throws org.apache.thrift.TException
+    {
+      CancelControllerCommand_result result = new CancelControllerCommand_result();
+      receiveBase(result, "CancelControllerCommand");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "CancelControllerCommand failed: unknown result");
     }
 
     public byte GetNumScenes() throws org.apache.thrift.TException
@@ -7898,6 +8012,79 @@ public class RemoteManager {
       }
     }
 
+    public void BeginControllerCommand(int _homeId, DriverControllerCommand _command, boolean _highPower, byte _nodeId, org.apache.thrift.async.AsyncMethodCallback<BeginControllerCommand_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      BeginControllerCommand_call method_call = new BeginControllerCommand_call(_homeId, _command, _highPower, _nodeId, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class BeginControllerCommand_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private int _homeId;
+      private DriverControllerCommand _command;
+      private boolean _highPower;
+      private byte _nodeId;
+      public BeginControllerCommand_call(int _homeId, DriverControllerCommand _command, boolean _highPower, byte _nodeId, org.apache.thrift.async.AsyncMethodCallback<BeginControllerCommand_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this._homeId = _homeId;
+        this._command = _command;
+        this._highPower = _highPower;
+        this._nodeId = _nodeId;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("BeginControllerCommand", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        BeginControllerCommand_args args = new BeginControllerCommand_args();
+        args.set_homeId(_homeId);
+        args.set_command(_command);
+        args.set_highPower(_highPower);
+        args.set_nodeId(_nodeId);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_BeginControllerCommand();
+      }
+    }
+
+    public void CancelControllerCommand(int _homeId, org.apache.thrift.async.AsyncMethodCallback<CancelControllerCommand_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      CancelControllerCommand_call method_call = new CancelControllerCommand_call(_homeId, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class CancelControllerCommand_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private int _homeId;
+      public CancelControllerCommand_call(int _homeId, org.apache.thrift.async.AsyncMethodCallback<CancelControllerCommand_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this._homeId = _homeId;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("CancelControllerCommand", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        CancelControllerCommand_args args = new CancelControllerCommand_args();
+        args.set_homeId(_homeId);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_CancelControllerCommand();
+      }
+    }
+
     public void GetNumScenes(org.apache.thrift.async.AsyncMethodCallback<GetNumScenes_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       GetNumScenes_call method_call = new GetNumScenes_call(resultHandler, this, ___protocolFactory, ___transport);
@@ -9235,6 +9422,8 @@ public class RemoteManager {
       processMap.put("RemoveAssociation", new RemoveAssociation());
       processMap.put("ResetController", new ResetController());
       processMap.put("SoftReset", new SoftReset());
+      processMap.put("BeginControllerCommand", new BeginControllerCommand());
+      processMap.put("CancelControllerCommand", new CancelControllerCommand());
       processMap.put("GetNumScenes", new GetNumScenes());
       processMap.put("GetAllScenes", new GetAllScenes());
       processMap.put("CreateScene", new CreateScene());
@@ -10750,6 +10939,40 @@ public class RemoteManager {
       protected SoftReset_result getResult(I iface, SoftReset_args args) throws org.apache.thrift.TException {
         SoftReset_result result = new SoftReset_result();
         iface.SoftReset(args._homeId);
+        return result;
+      }
+    }
+
+    private static class BeginControllerCommand<I extends Iface> extends org.apache.thrift.ProcessFunction<I, BeginControllerCommand_args> {
+      public BeginControllerCommand() {
+        super("BeginControllerCommand");
+      }
+
+      protected BeginControllerCommand_args getEmptyArgsInstance() {
+        return new BeginControllerCommand_args();
+      }
+
+      protected BeginControllerCommand_result getResult(I iface, BeginControllerCommand_args args) throws org.apache.thrift.TException {
+        BeginControllerCommand_result result = new BeginControllerCommand_result();
+        result.success = iface.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId);
+        result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    private static class CancelControllerCommand<I extends Iface> extends org.apache.thrift.ProcessFunction<I, CancelControllerCommand_args> {
+      public CancelControllerCommand() {
+        super("CancelControllerCommand");
+      }
+
+      protected CancelControllerCommand_args getEmptyArgsInstance() {
+        return new CancelControllerCommand_args();
+      }
+
+      protected CancelControllerCommand_result getResult(I iface, CancelControllerCommand_args args) throws org.apache.thrift.TException {
+        CancelControllerCommand_result result = new CancelControllerCommand_result();
+        result.success = iface.CancelControllerCommand(args._homeId);
+        result.setSuccessIsSet(true);
         return result;
       }
     }
@@ -16760,8 +16983,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -20474,8 +20695,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -68615,6 +68834,1463 @@ public class RemoteManager {
 
   }
 
+  public static class BeginControllerCommand_args implements org.apache.thrift.TBase<BeginControllerCommand_args, BeginControllerCommand_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("BeginControllerCommand_args");
+
+    private static final org.apache.thrift.protocol.TField _HOME_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_homeId", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField _COMMAND_FIELD_DESC = new org.apache.thrift.protocol.TField("_command", org.apache.thrift.protocol.TType.I32, (short)2);
+    private static final org.apache.thrift.protocol.TField _HIGH_POWER_FIELD_DESC = new org.apache.thrift.protocol.TField("_highPower", org.apache.thrift.protocol.TType.BOOL, (short)3);
+    private static final org.apache.thrift.protocol.TField _NODE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_nodeId", org.apache.thrift.protocol.TType.BYTE, (short)4);
+
+    public int _homeId; // required
+    /**
+     * 
+     * @see DriverControllerCommand
+     */
+    public DriverControllerCommand _command; // required
+    public boolean _highPower; // required
+    public byte _nodeId; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      _HOME_ID((short)1, "_homeId"),
+      /**
+       * 
+       * @see DriverControllerCommand
+       */
+      _COMMAND((short)2, "_command"),
+      _HIGH_POWER((short)3, "_highPower"),
+      _NODE_ID((short)4, "_nodeId");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // _HOME_ID
+            return _HOME_ID;
+          case 2: // _COMMAND
+            return _COMMAND;
+          case 3: // _HIGH_POWER
+            return _HIGH_POWER;
+          case 4: // _NODE_ID
+            return _NODE_ID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int ___HOMEID_ISSET_ID = 0;
+    private static final int ___HIGHPOWER_ISSET_ID = 1;
+    private static final int ___NODEID_ISSET_ID = 2;
+    private BitSet __isset_bit_vector = new BitSet(3);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields._HOME_ID, new org.apache.thrift.meta_data.FieldMetaData("_homeId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields._COMMAND, new org.apache.thrift.meta_data.FieldMetaData("_command", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.EnumMetaData(org.apache.thrift.protocol.TType.ENUM, DriverControllerCommand.class)));
+      tmpMap.put(_Fields._HIGH_POWER, new org.apache.thrift.meta_data.FieldMetaData("_highPower", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      tmpMap.put(_Fields._NODE_ID, new org.apache.thrift.meta_data.FieldMetaData("_nodeId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BYTE)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BeginControllerCommand_args.class, metaDataMap);
+    }
+
+    public BeginControllerCommand_args() {
+    }
+
+    public BeginControllerCommand_args(
+      int _homeId,
+      DriverControllerCommand _command,
+      boolean _highPower,
+      byte _nodeId)
+    {
+      this();
+      this._homeId = _homeId;
+      set_homeIdIsSet(true);
+      this._command = _command;
+      this._highPower = _highPower;
+      set_highPowerIsSet(true);
+      this._nodeId = _nodeId;
+      set_nodeIdIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public BeginControllerCommand_args(BeginControllerCommand_args other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      this._homeId = other._homeId;
+      if (other.isSet_command()) {
+        this._command = other._command;
+      }
+      this._highPower = other._highPower;
+      this._nodeId = other._nodeId;
+    }
+
+    public BeginControllerCommand_args deepCopy() {
+      return new BeginControllerCommand_args(this);
+    }
+
+    @Override
+    public void clear() {
+      set_homeIdIsSet(false);
+      this._homeId = 0;
+      this._command = null;
+      set_highPowerIsSet(false);
+      this._highPower = false;
+      set_nodeIdIsSet(false);
+      this._nodeId = 0;
+    }
+
+    public int get_homeId() {
+      return this._homeId;
+    }
+
+    public BeginControllerCommand_args set_homeId(int _homeId) {
+      this._homeId = _homeId;
+      set_homeIdIsSet(true);
+      return this;
+    }
+
+    public void unset_homeId() {
+      __isset_bit_vector.clear(___HOMEID_ISSET_ID);
+    }
+
+    /** Returns true if field _homeId is set (has been assigned a value) and false otherwise */
+    public boolean isSet_homeId() {
+      return __isset_bit_vector.get(___HOMEID_ISSET_ID);
+    }
+
+    public void set_homeIdIsSet(boolean value) {
+      __isset_bit_vector.set(___HOMEID_ISSET_ID, value);
+    }
+
+    /**
+     * 
+     * @see DriverControllerCommand
+     */
+    public DriverControllerCommand get_command() {
+      return this._command;
+    }
+
+    /**
+     * 
+     * @see DriverControllerCommand
+     */
+    public BeginControllerCommand_args set_command(DriverControllerCommand _command) {
+      this._command = _command;
+      return this;
+    }
+
+    public void unset_command() {
+      this._command = null;
+    }
+
+    /** Returns true if field _command is set (has been assigned a value) and false otherwise */
+    public boolean isSet_command() {
+      return this._command != null;
+    }
+
+    public void set_commandIsSet(boolean value) {
+      if (!value) {
+        this._command = null;
+      }
+    }
+
+    public boolean is_highPower() {
+      return this._highPower;
+    }
+
+    public BeginControllerCommand_args set_highPower(boolean _highPower) {
+      this._highPower = _highPower;
+      set_highPowerIsSet(true);
+      return this;
+    }
+
+    public void unset_highPower() {
+      __isset_bit_vector.clear(___HIGHPOWER_ISSET_ID);
+    }
+
+    /** Returns true if field _highPower is set (has been assigned a value) and false otherwise */
+    public boolean isSet_highPower() {
+      return __isset_bit_vector.get(___HIGHPOWER_ISSET_ID);
+    }
+
+    public void set_highPowerIsSet(boolean value) {
+      __isset_bit_vector.set(___HIGHPOWER_ISSET_ID, value);
+    }
+
+    public byte get_nodeId() {
+      return this._nodeId;
+    }
+
+    public BeginControllerCommand_args set_nodeId(byte _nodeId) {
+      this._nodeId = _nodeId;
+      set_nodeIdIsSet(true);
+      return this;
+    }
+
+    public void unset_nodeId() {
+      __isset_bit_vector.clear(___NODEID_ISSET_ID);
+    }
+
+    /** Returns true if field _nodeId is set (has been assigned a value) and false otherwise */
+    public boolean isSet_nodeId() {
+      return __isset_bit_vector.get(___NODEID_ISSET_ID);
+    }
+
+    public void set_nodeIdIsSet(boolean value) {
+      __isset_bit_vector.set(___NODEID_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case _HOME_ID:
+        if (value == null) {
+          unset_homeId();
+        } else {
+          set_homeId((Integer)value);
+        }
+        break;
+
+      case _COMMAND:
+        if (value == null) {
+          unset_command();
+        } else {
+          set_command((DriverControllerCommand)value);
+        }
+        break;
+
+      case _HIGH_POWER:
+        if (value == null) {
+          unset_highPower();
+        } else {
+          set_highPower((Boolean)value);
+        }
+        break;
+
+      case _NODE_ID:
+        if (value == null) {
+          unset_nodeId();
+        } else {
+          set_nodeId((Byte)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case _HOME_ID:
+        return Integer.valueOf(get_homeId());
+
+      case _COMMAND:
+        return get_command();
+
+      case _HIGH_POWER:
+        return Boolean.valueOf(is_highPower());
+
+      case _NODE_ID:
+        return Byte.valueOf(get_nodeId());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case _HOME_ID:
+        return isSet_homeId();
+      case _COMMAND:
+        return isSet_command();
+      case _HIGH_POWER:
+        return isSet_highPower();
+      case _NODE_ID:
+        return isSet_nodeId();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof BeginControllerCommand_args)
+        return this.equals((BeginControllerCommand_args)that);
+      return false;
+    }
+
+    public boolean equals(BeginControllerCommand_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present__homeId = true;
+      boolean that_present__homeId = true;
+      if (this_present__homeId || that_present__homeId) {
+        if (!(this_present__homeId && that_present__homeId))
+          return false;
+        if (this._homeId != that._homeId)
+          return false;
+      }
+
+      boolean this_present__command = true && this.isSet_command();
+      boolean that_present__command = true && that.isSet_command();
+      if (this_present__command || that_present__command) {
+        if (!(this_present__command && that_present__command))
+          return false;
+        if (!this._command.equals(that._command))
+          return false;
+      }
+
+      boolean this_present__highPower = true;
+      boolean that_present__highPower = true;
+      if (this_present__highPower || that_present__highPower) {
+        if (!(this_present__highPower && that_present__highPower))
+          return false;
+        if (this._highPower != that._highPower)
+          return false;
+      }
+
+      boolean this_present__nodeId = true;
+      boolean that_present__nodeId = true;
+      if (this_present__nodeId || that_present__nodeId) {
+        if (!(this_present__nodeId && that_present__nodeId))
+          return false;
+        if (this._nodeId != that._nodeId)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(BeginControllerCommand_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      BeginControllerCommand_args typedOther = (BeginControllerCommand_args)other;
+
+      lastComparison = Boolean.valueOf(isSet_homeId()).compareTo(typedOther.isSet_homeId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_homeId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._homeId, typedOther._homeId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSet_command()).compareTo(typedOther.isSet_command());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_command()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._command, typedOther._command);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSet_highPower()).compareTo(typedOther.isSet_highPower());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_highPower()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._highPower, typedOther._highPower);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSet_nodeId()).compareTo(typedOther.isSet_nodeId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_nodeId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._nodeId, typedOther._nodeId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 1: // _HOME_ID
+            if (field.type == org.apache.thrift.protocol.TType.I32) {
+              this._homeId = iprot.readI32();
+              set_homeIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case 2: // _COMMAND
+            if (field.type == org.apache.thrift.protocol.TType.I32) {
+              this._command = DriverControllerCommand.findByValue(iprot.readI32());
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case 3: // _HIGH_POWER
+            if (field.type == org.apache.thrift.protocol.TType.BOOL) {
+              this._highPower = iprot.readBool();
+              set_highPowerIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case 4: // _NODE_ID
+            if (field.type == org.apache.thrift.protocol.TType.BYTE) {
+              this._nodeId = iprot.readByte();
+              set_nodeIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      validate();
+
+      oprot.writeStructBegin(STRUCT_DESC);
+      oprot.writeFieldBegin(_HOME_ID_FIELD_DESC);
+      oprot.writeI32(this._homeId);
+      oprot.writeFieldEnd();
+      if (this._command != null) {
+        oprot.writeFieldBegin(_COMMAND_FIELD_DESC);
+        oprot.writeI32(this._command.getValue());
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(_HIGH_POWER_FIELD_DESC);
+      oprot.writeBool(this._highPower);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(_NODE_ID_FIELD_DESC);
+      oprot.writeByte(this._nodeId);
+      oprot.writeFieldEnd();
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("BeginControllerCommand_args(");
+      boolean first = true;
+
+      sb.append("_homeId:");
+      sb.append(this._homeId);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_command:");
+      if (this._command == null) {
+        sb.append("null");
+      } else {
+        sb.append(this._command);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_highPower:");
+      sb.append(this._highPower);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_nodeId:");
+      sb.append(this._nodeId);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class BeginControllerCommand_result implements org.apache.thrift.TBase<BeginControllerCommand_result, BeginControllerCommand_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("BeginControllerCommand_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(BeginControllerCommand_result.class, metaDataMap);
+    }
+
+    public BeginControllerCommand_result() {
+    }
+
+    public BeginControllerCommand_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public BeginControllerCommand_result(BeginControllerCommand_result other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      this.success = other.success;
+    }
+
+    public BeginControllerCommand_result deepCopy() {
+      return new BeginControllerCommand_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public BeginControllerCommand_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bit_vector.set(__SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof BeginControllerCommand_result)
+        return this.equals((BeginControllerCommand_result)that);
+      return false;
+    }
+
+    public boolean equals(BeginControllerCommand_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(BeginControllerCommand_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      BeginControllerCommand_result typedOther = (BeginControllerCommand_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 0: // SUCCESS
+            if (field.type == org.apache.thrift.protocol.TType.BOOL) {
+              this.success = iprot.readBool();
+              setSuccessIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      oprot.writeStructBegin(STRUCT_DESC);
+
+      if (this.isSetSuccess()) {
+        oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+        oprot.writeBool(this.success);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("BeginControllerCommand_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class CancelControllerCommand_args implements org.apache.thrift.TBase<CancelControllerCommand_args, CancelControllerCommand_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("CancelControllerCommand_args");
+
+    private static final org.apache.thrift.protocol.TField _HOME_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_homeId", org.apache.thrift.protocol.TType.I32, (short)1);
+
+    public int _homeId; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      _HOME_ID((short)1, "_homeId");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // _HOME_ID
+            return _HOME_ID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int ___HOMEID_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields._HOME_ID, new org.apache.thrift.meta_data.FieldMetaData("_homeId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(CancelControllerCommand_args.class, metaDataMap);
+    }
+
+    public CancelControllerCommand_args() {
+    }
+
+    public CancelControllerCommand_args(
+      int _homeId)
+    {
+      this();
+      this._homeId = _homeId;
+      set_homeIdIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public CancelControllerCommand_args(CancelControllerCommand_args other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      this._homeId = other._homeId;
+    }
+
+    public CancelControllerCommand_args deepCopy() {
+      return new CancelControllerCommand_args(this);
+    }
+
+    @Override
+    public void clear() {
+      set_homeIdIsSet(false);
+      this._homeId = 0;
+    }
+
+    public int get_homeId() {
+      return this._homeId;
+    }
+
+    public CancelControllerCommand_args set_homeId(int _homeId) {
+      this._homeId = _homeId;
+      set_homeIdIsSet(true);
+      return this;
+    }
+
+    public void unset_homeId() {
+      __isset_bit_vector.clear(___HOMEID_ISSET_ID);
+    }
+
+    /** Returns true if field _homeId is set (has been assigned a value) and false otherwise */
+    public boolean isSet_homeId() {
+      return __isset_bit_vector.get(___HOMEID_ISSET_ID);
+    }
+
+    public void set_homeIdIsSet(boolean value) {
+      __isset_bit_vector.set(___HOMEID_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case _HOME_ID:
+        if (value == null) {
+          unset_homeId();
+        } else {
+          set_homeId((Integer)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case _HOME_ID:
+        return Integer.valueOf(get_homeId());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case _HOME_ID:
+        return isSet_homeId();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof CancelControllerCommand_args)
+        return this.equals((CancelControllerCommand_args)that);
+      return false;
+    }
+
+    public boolean equals(CancelControllerCommand_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present__homeId = true;
+      boolean that_present__homeId = true;
+      if (this_present__homeId || that_present__homeId) {
+        if (!(this_present__homeId && that_present__homeId))
+          return false;
+        if (this._homeId != that._homeId)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(CancelControllerCommand_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      CancelControllerCommand_args typedOther = (CancelControllerCommand_args)other;
+
+      lastComparison = Boolean.valueOf(isSet_homeId()).compareTo(typedOther.isSet_homeId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_homeId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._homeId, typedOther._homeId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 1: // _HOME_ID
+            if (field.type == org.apache.thrift.protocol.TType.I32) {
+              this._homeId = iprot.readI32();
+              set_homeIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      validate();
+
+      oprot.writeStructBegin(STRUCT_DESC);
+      oprot.writeFieldBegin(_HOME_ID_FIELD_DESC);
+      oprot.writeI32(this._homeId);
+      oprot.writeFieldEnd();
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("CancelControllerCommand_args(");
+      boolean first = true;
+
+      sb.append("_homeId:");
+      sb.append(this._homeId);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class CancelControllerCommand_result implements org.apache.thrift.TBase<CancelControllerCommand_result, CancelControllerCommand_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("CancelControllerCommand_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(CancelControllerCommand_result.class, metaDataMap);
+    }
+
+    public CancelControllerCommand_result() {
+    }
+
+    public CancelControllerCommand_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public CancelControllerCommand_result(CancelControllerCommand_result other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      this.success = other.success;
+    }
+
+    public CancelControllerCommand_result deepCopy() {
+      return new CancelControllerCommand_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public CancelControllerCommand_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bit_vector.set(__SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof CancelControllerCommand_result)
+        return this.equals((CancelControllerCommand_result)that);
+      return false;
+    }
+
+    public boolean equals(CancelControllerCommand_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(CancelControllerCommand_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      CancelControllerCommand_result typedOther = (CancelControllerCommand_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 0: // SUCCESS
+            if (field.type == org.apache.thrift.protocol.TType.BOOL) {
+              this.success = iprot.readBool();
+              setSuccessIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      oprot.writeStructBegin(STRUCT_DESC);
+
+      if (this.isSetSuccess()) {
+        oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+        oprot.writeBool(this.success);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("CancelControllerCommand_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
   public static class GetNumScenes_args implements org.apache.thrift.TBase<GetNumScenes_args, GetNumScenes_args._Fields>, java.io.Serializable, Cloneable   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetNumScenes_args");
 
@@ -70693,6 +72369,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -71927,8 +73605,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -74224,6 +75900,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -77506,6 +79184,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -79847,6 +81527,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -84023,6 +85705,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -84788,8 +86472,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -85086,6 +86768,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -85555,8 +87239,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);

@@ -1341,6 +1341,36 @@ require 'ozw_types'
             return
           end
 
+          def BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
+            send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
+            return recv_BeginControllerCommand()
+          end
+
+          def send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
+            send_message('BeginControllerCommand', BeginControllerCommand_args, :_homeId => _homeId, :_command => _command, :_highPower => _highPower, :_nodeId => _nodeId)
+          end
+
+          def recv_BeginControllerCommand()
+            result = receive_message(BeginControllerCommand_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'BeginControllerCommand failed: unknown result')
+          end
+
+          def CancelControllerCommand(_homeId)
+            send_CancelControllerCommand(_homeId)
+            return recv_CancelControllerCommand()
+          end
+
+          def send_CancelControllerCommand(_homeId)
+            send_message('CancelControllerCommand', CancelControllerCommand_args, :_homeId => _homeId)
+          end
+
+          def recv_CancelControllerCommand()
+            result = receive_message(CancelControllerCommand_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'CancelControllerCommand failed: unknown result')
+          end
+
           def GetNumScenes()
             send_GetNumScenes()
             return recv_GetNumScenes()
@@ -2497,6 +2527,20 @@ require 'ozw_types'
             result = SoftReset_result.new()
             @handler.SoftReset(args._homeId)
             write_result(result, oprot, 'SoftReset', seqid)
+          end
+
+          def process_BeginControllerCommand(seqid, iprot, oprot)
+            args = read_args(iprot, BeginControllerCommand_args)
+            result = BeginControllerCommand_result.new()
+            result.success = @handler.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId)
+            write_result(result, oprot, 'BeginControllerCommand', seqid)
+          end
+
+          def process_CancelControllerCommand(seqid, iprot, oprot)
+            args = read_args(iprot, CancelControllerCommand_args)
+            result = CancelControllerCommand_result.new()
+            result.success = @handler.CancelControllerCommand(args._homeId)
+            write_result(result, oprot, 'CancelControllerCommand', seqid)
           end
 
           def process_GetNumScenes(seqid, iprot, oprot)
@@ -5738,6 +5782,79 @@ require 'ozw_types'
 
           FIELDS = {
 
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class BeginControllerCommand_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+          _COMMAND = 2
+          _HIGHPOWER = 3
+          _NODEID = 4
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+            _COMMAND => {:type => ::Thrift::Types::I32, :name => '_command', :enum_class => OpenZWave::DriverControllerCommand},
+            _HIGHPOWER => {:type => ::Thrift::Types::BOOL, :name => '_highPower'},
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+            unless @_command.nil? || OpenZWave::DriverControllerCommand::VALID_VALUES.include?(@_command)
+              raise ::Thrift::ProtocolException.new(::Thrift::ProtocolException::UNKNOWN, 'Invalid value of field _command!')
+            end
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class BeginControllerCommand_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class CancelControllerCommand_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class CancelControllerCommand_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
           }
 
           def struct_fields; FIELDS; end

@@ -1,16 +1,29 @@
-136a137,151
->   // ekarak: constructor from ValueID
->   RemoteValueID(ValueID vid) : 
->     _homeId ((int32_t) vid.GetHomeId()), 
->     _nodeId ((int8_t) vid.GetNodeId()), 
->     _genre  ((RemoteValueGenre::type) vid.GetGenre()),
->     _commandClassId((int8_t) vid.GetCommandClassId()), 
->       _instance ((int8_t) vid.GetInstance()), 
->       _valueIndex((int8_t) vid.GetIndex()),
->     _type ((RemoteValueType::type) vid.GetType()) { }
-> // ekarak: converter to ValueID
-> ValueID toValueID() const {
->     return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
-> }
-> 
-> 
+*** ozw_types.h	2012-02-03 19:38:59.759230003 +0200
+--- ozw_types.h.patched	2012-02-03 19:38:50.783223371 +0200
+***************
+*** 89,98 ****
+--- 89,112 ----
+    RemoteValueID() : _homeId(0), _nodeId(0), _commandClassId(0), _instance(0), _valueIndex(0) {
+    }
+  
+    virtual ~RemoteValueID() throw() {}
+  
++   // ekarak: constructor from ValueID
++   RemoteValueID(ValueID vid) : 
++     _homeId ((int32_t) vid.GetHomeId()), 
++     _nodeId ((int8_t) vid.GetNodeId()), 
++     _genre  ((RemoteValueGenre::type) vid.GetGenre()),
++     _commandClassId((int8_t) vid.GetCommandClassId()), 
++     _instance ((int8_t) vid.GetInstance()), 
++     _valueIndex((int8_t) vid.GetIndex()),
++     _type ((RemoteValueType::type) vid.GetType()) { }
++   // ekarak: converter to ValueID
++   ValueID toValueID() const {
++     return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
++   }
++ 
+    int32_t _homeId;
+    int8_t _nodeId;
+    RemoteValueGenre::type _genre;
+    int8_t _commandClassId;
+    int8_t _instance;

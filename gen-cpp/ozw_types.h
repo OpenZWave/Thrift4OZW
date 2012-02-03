@@ -15,6 +15,7 @@
 #include "Manager.h"
 #include "ValueID.h"
 #include "Options.h"
+#include "Driver.h"
 
 namespace OpenZWave {
 
@@ -47,6 +48,28 @@ struct RemoteValueType {
 
 extern const std::map<int, const char*> _RemoteValueType_VALUES_TO_NAMES;
 
+struct DriverControllerCommand {
+  enum type {
+    ControllerCommand_None = 0,
+    ControllerCommand_AddController = 1,
+    ControllerCommand_AddDevice = 2,
+    ControllerCommand_CreateNewPrimary = 3,
+    ControllerCommand_ReceiveConfiguration = 4,
+    ControllerCommand_RemoveController = 5,
+    ControllerCommand_RemoveDevice = 6,
+    ControllerCommand_RemoveFailedNode = 7,
+    ControllerCommand_HasNodeFailed = 8,
+    ControllerCommand_ReplaceFailedNode = 9,
+    ControllerCommand_TransferPrimaryRole = 10,
+    ControllerCommand_RequestNetworkUpdate = 11,
+    ControllerCommand_RequestNodeNeighborUpdate = 12,
+    ControllerCommand_AssignReturnRoute = 13,
+    ControllerCommand_DeleteAllReturnRoutes = 14
+  };
+};
+
+extern const std::map<int, const char*> _DriverControllerCommand_VALUES_TO_NAMES;
+
 typedef struct _RemoteValueID__isset {
   _RemoteValueID__isset() : _homeId(false), _nodeId(false), _genre(false), _commandClassId(false), _instance(false), _valueIndex(false), _type(false) {}
   bool _homeId;
@@ -68,6 +91,20 @@ class RemoteValueID {
   }
 
   virtual ~RemoteValueID() throw() {}
+
+  // ekarak: constructor from ValueID
+  RemoteValueID(ValueID vid) : 
+    _homeId ((int32_t) vid.GetHomeId()), 
+    _nodeId ((int8_t) vid.GetNodeId()), 
+    _genre  ((RemoteValueGenre::type) vid.GetGenre()),
+    _commandClassId((int8_t) vid.GetCommandClassId()), 
+    _instance ((int8_t) vid.GetInstance()), 
+    _valueIndex((int8_t) vid.GetIndex()),
+    _type ((RemoteValueType::type) vid.GetType()) { }
+  // ekarak: converter to ValueID
+  ValueID toValueID() const {
+    return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
+  }
 
   int32_t _homeId;
   int8_t _nodeId;
@@ -133,21 +170,6 @@ class RemoteValueID {
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-  // ekarak: constructor from ValueID
-  RemoteValueID(ValueID vid) : 
-    _homeId ((int32_t) vid.GetHomeId()), 
-    _nodeId ((int8_t) vid.GetNodeId()), 
-    _genre  ((RemoteValueGenre::type) vid.GetGenre()),
-    _commandClassId((int8_t) vid.GetCommandClassId()), 
-      _instance ((int8_t) vid.GetInstance()), 
-      _valueIndex((int8_t) vid.GetIndex()),
-    _type ((RemoteValueType::type) vid.GetType()) { }
-// ekarak: converter to ValueID
-ValueID toValueID() const {
-    return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
-}
-
 
 };
 

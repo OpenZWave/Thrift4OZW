@@ -10032,6 +10032,263 @@ OpenZWave.RemoteManager_SoftReset_result.prototype.write = function(output) {
   return;
 };
 
+OpenZWave.RemoteManager_BeginControllerCommand_args = function(args) {
+  this._homeId = null;
+  this._command = null;
+  this._highPower = null;
+  this._nodeId = null;
+  if (args) {
+    if (args._homeId !== undefined) {
+      this._homeId = args._homeId;
+    }
+    if (args._command !== undefined) {
+      this._command = args._command;
+    }
+    if (args._highPower !== undefined) {
+      this._highPower = args._highPower;
+    }
+    if (args._nodeId !== undefined) {
+      this._nodeId = args._nodeId;
+    }
+  }
+};
+OpenZWave.RemoteManager_BeginControllerCommand_args.prototype = {};
+OpenZWave.RemoteManager_BeginControllerCommand_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this._homeId = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.I32) {
+        this._command = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.BOOL) {
+        this._highPower = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 4:
+      if (ftype == Thrift.Type.BYTE) {
+        this._nodeId = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_BeginControllerCommand_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_BeginControllerCommand_args');
+  if (this._homeId) {
+    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
+    output.writeI32(this._homeId);
+    output.writeFieldEnd();
+  }
+  if (this._command) {
+    output.writeFieldBegin('_command', Thrift.Type.I32, 2);
+    output.writeI32(this._command);
+    output.writeFieldEnd();
+  }
+  if (this._highPower) {
+    output.writeFieldBegin('_highPower', Thrift.Type.BOOL, 3);
+    output.writeBool(this._highPower);
+    output.writeFieldEnd();
+  }
+  if (this._nodeId) {
+    output.writeFieldBegin('_nodeId', Thrift.Type.BYTE, 4);
+    output.writeByte(this._nodeId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_BeginControllerCommand_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_BeginControllerCommand_result.prototype = {};
+OpenZWave.RemoteManager_BeginControllerCommand_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_BeginControllerCommand_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_BeginControllerCommand_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_CancelControllerCommand_args = function(args) {
+  this._homeId = null;
+  if (args) {
+    if (args._homeId !== undefined) {
+      this._homeId = args._homeId;
+    }
+  }
+};
+OpenZWave.RemoteManager_CancelControllerCommand_args.prototype = {};
+OpenZWave.RemoteManager_CancelControllerCommand_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this._homeId = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_CancelControllerCommand_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_CancelControllerCommand_args');
+  if (this._homeId) {
+    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
+    output.writeI32(this._homeId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_CancelControllerCommand_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_CancelControllerCommand_result.prototype = {};
+OpenZWave.RemoteManager_CancelControllerCommand_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_CancelControllerCommand_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_CancelControllerCommand_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.RemoteManager_GetNumScenes_args = function(args) {
 };
 OpenZWave.RemoteManager_GetNumScenes_args.prototype = {};
@@ -17293,6 +17550,77 @@ OpenZWave.RemoteManagerClient.prototype.recv_SoftReset = function() {
   this.input.readMessageEnd();
 
   return;
+};
+OpenZWave.RemoteManagerClient.prototype.BeginControllerCommand = function(_homeId, _command, _highPower, _nodeId) {
+  this.send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+  return this.recv_BeginControllerCommand();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_BeginControllerCommand = function(_homeId, _command, _highPower, _nodeId) {
+  this.output.writeMessageBegin('BeginControllerCommand', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_BeginControllerCommand_args();
+  args._homeId = _homeId;
+  args._command = _command;
+  args._highPower = _highPower;
+  args._nodeId = _nodeId;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_BeginControllerCommand = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_BeginControllerCommand_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'BeginControllerCommand failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.CancelControllerCommand = function(_homeId) {
+  this.send_CancelControllerCommand(_homeId);
+  return this.recv_CancelControllerCommand();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_CancelControllerCommand = function(_homeId) {
+  this.output.writeMessageBegin('CancelControllerCommand', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_CancelControllerCommand_args();
+  args._homeId = _homeId;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_CancelControllerCommand = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_CancelControllerCommand_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'CancelControllerCommand failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.GetNumScenes = function() {
   this.send_GetNumScenes();

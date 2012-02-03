@@ -49,6 +49,42 @@ const char* _kRemoteValueTypeNames[] = {
 };
 const std::map<int, const char*> _RemoteValueType_VALUES_TO_NAMES(::apache::thrift::TEnumIterator(10, _kRemoteValueTypeValues, _kRemoteValueTypeNames), ::apache::thrift::TEnumIterator(-1, NULL, NULL));
 
+int _kDriverControllerCommandValues[] = {
+  DriverControllerCommand::ControllerCommand_None,
+  DriverControllerCommand::ControllerCommand_AddController,
+  DriverControllerCommand::ControllerCommand_AddDevice,
+  DriverControllerCommand::ControllerCommand_CreateNewPrimary,
+  DriverControllerCommand::ControllerCommand_ReceiveConfiguration,
+  DriverControllerCommand::ControllerCommand_RemoveController,
+  DriverControllerCommand::ControllerCommand_RemoveDevice,
+  DriverControllerCommand::ControllerCommand_RemoveFailedNode,
+  DriverControllerCommand::ControllerCommand_HasNodeFailed,
+  DriverControllerCommand::ControllerCommand_ReplaceFailedNode,
+  DriverControllerCommand::ControllerCommand_TransferPrimaryRole,
+  DriverControllerCommand::ControllerCommand_RequestNetworkUpdate,
+  DriverControllerCommand::ControllerCommand_RequestNodeNeighborUpdate,
+  DriverControllerCommand::ControllerCommand_AssignReturnRoute,
+  DriverControllerCommand::ControllerCommand_DeleteAllReturnRoutes
+};
+const char* _kDriverControllerCommandNames[] = {
+  "ControllerCommand_None",
+  "ControllerCommand_AddController",
+  "ControllerCommand_AddDevice",
+  "ControllerCommand_CreateNewPrimary",
+  "ControllerCommand_ReceiveConfiguration",
+  "ControllerCommand_RemoveController",
+  "ControllerCommand_RemoveDevice",
+  "ControllerCommand_RemoveFailedNode",
+  "ControllerCommand_HasNodeFailed",
+  "ControllerCommand_ReplaceFailedNode",
+  "ControllerCommand_TransferPrimaryRole",
+  "ControllerCommand_RequestNetworkUpdate",
+  "ControllerCommand_RequestNodeNeighborUpdate",
+  "ControllerCommand_AssignReturnRoute",
+  "ControllerCommand_DeleteAllReturnRoutes"
+};
+const std::map<int, const char*> _DriverControllerCommand_VALUES_TO_NAMES(::apache::thrift::TEnumIterator(15, _kDriverControllerCommandValues, _kDriverControllerCommandNames), ::apache::thrift::TEnumIterator(-1, NULL, NULL));
+
 const char* RemoteValueID::ascii_fingerprint = "A30F44ED1C2FF443554DFCCDE82F70EE";
 const uint8_t RemoteValueID::binary_fingerprint[16] = {0xA3,0x0F,0x44,0xED,0x1C,0x2F,0xF4,0x43,0x55,0x4D,0xFC,0xCD,0xE8,0x2F,0x70,0xEE};
 

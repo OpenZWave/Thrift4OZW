@@ -334,7 +334,7 @@ void send_all_values() {
 	g_criticalSection.unlock();
 }
 
-// the Thrift-generated (and manually edited) RemoteManager implementation
+// the Thrift-generated (and manually patched) RemoteManager implementation
 // for OpenZWave::Manager class
 #include "gen-cpp/RemoteManager_server.cpp"
 //

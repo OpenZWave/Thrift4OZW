@@ -75,9 +75,64 @@ class RemoteValueType:
     "ValueType_Max": 8,
   }
 
+class DriverControllerCommand:
+  ControllerCommand_None = 0
+  ControllerCommand_AddController = 1
+  ControllerCommand_AddDevice = 2
+  ControllerCommand_CreateNewPrimary = 3
+  ControllerCommand_ReceiveConfiguration = 4
+  ControllerCommand_RemoveController = 5
+  ControllerCommand_RemoveDevice = 6
+  ControllerCommand_RemoveFailedNode = 7
+  ControllerCommand_HasNodeFailed = 8
+  ControllerCommand_ReplaceFailedNode = 9
+  ControllerCommand_TransferPrimaryRole = 10
+  ControllerCommand_RequestNetworkUpdate = 11
+  ControllerCommand_RequestNodeNeighborUpdate = 12
+  ControllerCommand_AssignReturnRoute = 13
+  ControllerCommand_DeleteAllReturnRoutes = 14
+
+  _VALUES_TO_NAMES = {
+    0: "ControllerCommand_None",
+    1: "ControllerCommand_AddController",
+    2: "ControllerCommand_AddDevice",
+    3: "ControllerCommand_CreateNewPrimary",
+    4: "ControllerCommand_ReceiveConfiguration",
+    5: "ControllerCommand_RemoveController",
+    6: "ControllerCommand_RemoveDevice",
+    7: "ControllerCommand_RemoveFailedNode",
+    8: "ControllerCommand_HasNodeFailed",
+    9: "ControllerCommand_ReplaceFailedNode",
+    10: "ControllerCommand_TransferPrimaryRole",
+    11: "ControllerCommand_RequestNetworkUpdate",
+    12: "ControllerCommand_RequestNodeNeighborUpdate",
+    13: "ControllerCommand_AssignReturnRoute",
+    14: "ControllerCommand_DeleteAllReturnRoutes",
+  }
+
+  _NAMES_TO_VALUES = {
+    "ControllerCommand_None": 0,
+    "ControllerCommand_AddController": 1,
+    "ControllerCommand_AddDevice": 2,
+    "ControllerCommand_CreateNewPrimary": 3,
+    "ControllerCommand_ReceiveConfiguration": 4,
+    "ControllerCommand_RemoveController": 5,
+    "ControllerCommand_RemoveDevice": 6,
+    "ControllerCommand_RemoveFailedNode": 7,
+    "ControllerCommand_HasNodeFailed": 8,
+    "ControllerCommand_ReplaceFailedNode": 9,
+    "ControllerCommand_TransferPrimaryRole": 10,
+    "ControllerCommand_RequestNetworkUpdate": 11,
+    "ControllerCommand_RequestNodeNeighborUpdate": 12,
+    "ControllerCommand_AssignReturnRoute": 13,
+    "ControllerCommand_DeleteAllReturnRoutes": 14,
+  }
+
 
 class RemoteValueID:
   """
+  < Delete all return routes from a device.
+
   Attributes:
    - _homeId
    - _nodeId

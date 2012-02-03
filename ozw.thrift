@@ -24,6 +24,7 @@ namespace * OpenZWave
 cpp_include "Manager.h"
 cpp_include "ValueID.h"
 cpp_include "Options.h"
+cpp_include "Driver.h"
 
 enum RemoteValueGenre {
 	ValueGenre_Basic=0,
@@ -46,6 +47,24 @@ enum RemoteValueType {
 	ValueType_Max=8
 }
 
+enum DriverControllerCommand {
+    ControllerCommand_None = 0,						/**< No command. */
+    ControllerCommand_AddController,				/**< Add a new controller to the Z-Wave network.  The new controller will be a secondary. */
+    ControllerCommand_AddDevice,					/**< Add a new device (but not a controller) to the Z-Wave network. */
+    ControllerCommand_CreateNewPrimary,				/**< Add a new controller to the Z-Wave network.  The new controller will be the primary, and the current primary will become a secondary controller. */
+    ControllerCommand_ReceiveConfiguration,			/**< Receive Z-Wave network configuration information from another controller. */
+    ControllerCommand_RemoveController,				/**< Remove a controller from the Z-Wave network. */
+    ControllerCommand_RemoveDevice,					/**< Remove a new device (but not a controller) from the Z-Wave network. */
+    ControllerCommand_RemoveFailedNode,				/**< Move a node to the controller's failed nodes list. This command will only work if the node cannot respond. */
+    ControllerCommand_HasNodeFailed,				/**< Check whether a node is in the controller's failed nodes list. */
+    ControllerCommand_ReplaceFailedNode,			/**< Replace a non-responding node with another. The node must be in the controller's list of failed nodes for this command to succeed. */
+    ControllerCommand_TransferPrimaryRole,			/**< Make a different controller the primary. */
+    ControllerCommand_RequestNetworkUpdate,			/**< Request network information from the SUC/SIS. */
+    ControllerCommand_RequestNodeNeighborUpdate,	/**< Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors */
+    ControllerCommand_AssignReturnRoute,			/**< Assign a network return routes to a device. */
+    ControllerCommand_DeleteAllReturnRoutes			/**< Delete all return routes from a device. */
+}
+    
 struct RemoteValueID {
 			1:i32 _homeId,
 			2:byte _nodeId,
@@ -147,7 +166,7 @@ service RemoteManager {
     void WriteConfig(1: i32 _homeId );
     
     //TODO:	Options* GetOptions()const{ return m_options; }
-    // list<Options> GetOptions();
+    //list<Options> GetOptions();
 
     //-----------------------------------------------------------------------------
 	//	Drivers
@@ -1279,8 +1298,8 @@ service RemoteManager {
 		 * - Driver::ControllerState_Complete - the controller has finished adding or removing the node, and the command is complete.
 		 * - Driver::ControllerState_Failed - will be sent if the command fails for any reason.
 		 */
-         // TODO
-		//bool BeginControllerCommand( uint32 const _homeId, Driver::ControllerCommand _command, Driver::pfnControllerCallback_t _callback = NULL, void* _context = NULL, bool _highPower = false, uint8 _nodeId = 0xff );
+		//bool BeginControllerCommand( uint32 const _homeId, Driver::ControllerCommand _command, Driver::pfnControllerCallback_t _callback = NULL, void* _context = NULL, bool _highPower = false, uint8 _nodeId = 0xff );]
+		bool BeginControllerCommand( 1:i32 _homeId, 2:DriverControllerCommand  _command, 3:bool _highPower, 4:byte _nodeId );
 
 		/**
 		 * \brief Cancels any in-progress command running on a controller.
@@ -1289,6 +1308,7 @@ service RemoteManager {
 		 * \see BeginControllerCommand 
 		 */
 		//bool CancelControllerCommand( uint32 const _homeId );
+		bool CancelControllerCommand( 1:i32 _homeId );
 
 	//-----------------------------------------------------------------------------
 	// Scene commands

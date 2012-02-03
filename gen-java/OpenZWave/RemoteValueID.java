@@ -20,6 +20,9 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * < Delete all return routes from a device.
+ */
 public class RemoteValueID implements org.apache.thrift.TBase<RemoteValueID, RemoteValueID._Fields>, java.io.Serializable, Cloneable {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("RemoteValueID");
 

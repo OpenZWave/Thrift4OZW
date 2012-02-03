@@ -16,6 +16,10 @@ using boost::shared_ptr;
 
 using namespace OpenZWave;
 
+void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
+	// FIXME: fill in the blanks (sorry!)
+}
+
 class RemoteManagerHandler : virtual public RemoteManagerIf {
  public:
   RemoteManagerHandler() {
@@ -649,7 +653,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-    uint8* o_associations; 
+    uint8* o_associations;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &o_associations);
@@ -703,6 +707,22 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->BeginControllerCommand((::uint32 const) _homeId, (OpenZWave::Driver::ControllerCommand) _command, &BeginControllerCommand_callback, (void*) this, (bool) _highPower, (::uint8) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  bool CancelControllerCommand(const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->CancelControllerCommand((::uint32 const) _homeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
   int8_t GetNumScenes() {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -712,7 +732,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetAllScenes(GetAllScenesReturnStruct& _return) {
-      uint8* _sceneIds;
+    uint8* _sceneIds;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	_return.retval =  mgr->GetAllScenes((::uint8**) &_sceneIds);
@@ -720,8 +740,8 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     if (_return.retval>0) {
         for (int i=0; i<_return.retval; i++) _return._sceneIds.push_back(_sceneIds[i]);
         delete(_sceneIds);
-    }  
-}
+    }
+  }
 
   int8_t CreateScene() {
 	Manager* mgr = Manager::Get();
@@ -817,7 +837,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.lock();
 	_return.retval =  mgr->SceneGetValues((::uint8 const) _sceneId, &o_values);
 	g_criticalSection.unlock();
-      for (int i=0; i< _return.retval; i++) _return.o_value.push_back(RemoteValueID(o_values[i]));
+    for (int i=0; i< _return.retval; i++) _return.o_value.push_back(RemoteValueID(o_values[i]));
   }
 
   void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
@@ -971,9 +991,9 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void SendAllValues() {
-      send_all_values();
+    send_all_values();
   }
-  
+
 };
 
 // int main(int argc, char **argv) {

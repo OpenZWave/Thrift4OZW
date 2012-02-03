@@ -31,6 +31,41 @@ module OpenZWave
       VALID_VALUES = Set.new([ValueType_Bool, ValueType_Byte, ValueType_Decimal, ValueType_Int, ValueType_List, ValueType_Schedule, ValueType_Short, ValueType_String, ValueType_Button, ValueType_Max]).freeze
     end
 
+    module DriverControllerCommand
+      ControllerCommand_None = 0
+      # < No command.
+      ControllerCommand_AddController = 1
+      # < Add a new controller to the Z-Wave network.  The new controller will be a secondary.
+      ControllerCommand_AddDevice = 2
+      # < Add a new device (but not a controller) to the Z-Wave network.
+      ControllerCommand_CreateNewPrimary = 3
+      # < Add a new controller to the Z-Wave network.  The new controller will be the primary, and the current primary will become a secondary controller.
+      ControllerCommand_ReceiveConfiguration = 4
+      # < Receive Z-Wave network configuration information from another controller.
+      ControllerCommand_RemoveController = 5
+      # < Remove a controller from the Z-Wave network.
+      ControllerCommand_RemoveDevice = 6
+      # < Remove a new device (but not a controller) from the Z-Wave network.
+      ControllerCommand_RemoveFailedNode = 7
+      # < Move a node to the controller's failed nodes list. This command will only work if the node cannot respond.
+      ControllerCommand_HasNodeFailed = 8
+      # < Check whether a node is in the controller's failed nodes list.
+      ControllerCommand_ReplaceFailedNode = 9
+      # < Replace a non-responding node with another. The node must be in the controller's list of failed nodes for this command to succeed.
+      ControllerCommand_TransferPrimaryRole = 10
+      # < Make a different controller the primary.
+      ControllerCommand_RequestNetworkUpdate = 11
+      # < Request network information from the SUC/SIS.
+      ControllerCommand_RequestNodeNeighborUpdate = 12
+      # < Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors
+      ControllerCommand_AssignReturnRoute = 13
+      # < Assign a network return routes to a device.
+      ControllerCommand_DeleteAllReturnRoutes = 14
+      VALUE_MAP = {0 => "ControllerCommand_None", 1 => "ControllerCommand_AddController", 2 => "ControllerCommand_AddDevice", 3 => "ControllerCommand_CreateNewPrimary", 4 => "ControllerCommand_ReceiveConfiguration", 5 => "ControllerCommand_RemoveController", 6 => "ControllerCommand_RemoveDevice", 7 => "ControllerCommand_RemoveFailedNode", 8 => "ControllerCommand_HasNodeFailed", 9 => "ControllerCommand_ReplaceFailedNode", 10 => "ControllerCommand_TransferPrimaryRole", 11 => "ControllerCommand_RequestNetworkUpdate", 12 => "ControllerCommand_RequestNodeNeighborUpdate", 13 => "ControllerCommand_AssignReturnRoute", 14 => "ControllerCommand_DeleteAllReturnRoutes"}
+      VALID_VALUES = Set.new([ControllerCommand_None, ControllerCommand_AddController, ControllerCommand_AddDevice, ControllerCommand_CreateNewPrimary, ControllerCommand_ReceiveConfiguration, ControllerCommand_RemoveController, ControllerCommand_RemoveDevice, ControllerCommand_RemoveFailedNode, ControllerCommand_HasNodeFailed, ControllerCommand_ReplaceFailedNode, ControllerCommand_TransferPrimaryRole, ControllerCommand_RequestNetworkUpdate, ControllerCommand_RequestNodeNeighborUpdate, ControllerCommand_AssignReturnRoute, ControllerCommand_DeleteAllReturnRoutes]).freeze
+    end
+
+    # < Delete all return routes from a device.
     class RemoteValueID
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _HOMEID = 1

@@ -27880,6 +27880,658 @@
 
 @end
 
+@interface OpenZWaveBeginControllerCommand_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+  int ___command;
+  BOOL ___highPower;
+  uint8_t ___nodeId;
+
+  BOOL ___homeId_isset;
+  BOOL ___command_isset;
+  BOOL ___highPower_isset;
+  BOOL ___nodeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+@property (nonatomic, getter=_command, setter=set_command:) int _command;
+@property (nonatomic, getter=_highPower, setter=set_highPower:) BOOL _highPower;
+@property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId _command: (int) _command _highPower: (BOOL) _highPower _nodeId: (uint8_t) _nodeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+- (int) _command;
+- (void) set_command: (int) _command;
+- (BOOL) _commandIsSet;
+
+- (BOOL) _highPower;
+- (void) set_highPower: (BOOL) _highPower;
+- (BOOL) _highPowerIsSet;
+
+- (uint8_t) _nodeId;
+- (void) set_nodeId: (uint8_t) _nodeId;
+- (BOOL) _nodeIdIsSet;
+
+@end
+
+@implementation OpenZWaveBeginControllerCommand_args
+
+- (id) initWith_homeId: (int32_t) _homeId _command: (int) _command _highPower: (BOOL) _highPower _nodeId: (uint8_t) _nodeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  ___command = _command;
+  ___command_isset = YES;
+  ___highPower = _highPower;
+  ___highPower_isset = YES;
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_command"])
+  {
+    ___command = [decoder decodeIntForKey: @"_command"];
+    ___command_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_highPower"])
+  {
+    ___highPower = [decoder decodeBoolForKey: @"_highPower"];
+    ___highPower_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_nodeId"])
+  {
+    ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
+    ___nodeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+  if (___command_isset)
+  {
+    [encoder encodeInt: ___command forKey: @"_command"];
+  }
+  if (___highPower_isset)
+  {
+    [encoder encodeBool: ___highPower forKey: @"_highPower"];
+  }
+  if (___nodeId_isset)
+  {
+    [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (int) _command {
+  return ___command;
+}
+
+- (void) set_command: (int) _command {
+  ___command = _command;
+  ___command_isset = YES;
+}
+
+- (BOOL) _commandIsSet {
+  return ___command_isset;
+}
+
+- (void) unset_command {
+  ___command_isset = NO;
+}
+
+- (BOOL) _highPower {
+  return ___highPower;
+}
+
+- (void) set_highPower: (BOOL) _highPower {
+  ___highPower = _highPower;
+  ___highPower_isset = YES;
+}
+
+- (BOOL) _highPowerIsSet {
+  return ___highPower_isset;
+}
+
+- (void) unset_highPower {
+  ___highPower_isset = NO;
+}
+
+- (uint8_t) _nodeId {
+  return ___nodeId;
+}
+
+- (void) set_nodeId: (uint8_t) _nodeId {
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+}
+
+- (BOOL) _nodeIdIsSet {
+  return ___nodeId_isset;
+}
+
+- (void) unset_nodeId {
+  ___nodeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_I32) {
+          int fieldValue = [inProtocol readI32];
+          [self set_command: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self set_highPower: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_nodeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"BeginControllerCommand_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  if (___command_isset) {
+    [outProtocol writeFieldBeginWithName: @"_command" type: TType_I32 fieldID: 2];
+    [outProtocol writeI32: ___command];
+    [outProtocol writeFieldEnd];
+  }
+  if (___highPower_isset) {
+    [outProtocol writeFieldBeginWithName: @"_highPower" type: TType_BOOL fieldID: 3];
+    [outProtocol writeBool: ___highPower];
+    [outProtocol writeFieldEnd];
+  }
+  if (___nodeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 4];
+    [outProtocol writeByte: ___nodeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"BeginControllerCommand_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @",_command:"];
+  [ms appendFormat: @"%i", ___command];
+  [ms appendString: @",_highPower:"];
+  [ms appendFormat: @"%i", ___highPower];
+  [ms appendString: @",_nodeId:"];
+  [ms appendFormat: @"%i", ___nodeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveBeginControllerCommand_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveBeginControllerCommand_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"BeginControllerCommand_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"BeginControllerCommand_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveCancelControllerCommand_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+
+  BOOL ___homeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+@end
+
+@implementation OpenZWaveCancelControllerCommand_args
+
+- (id) initWith_homeId: (int32_t) _homeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"CancelControllerCommand_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"CancelControllerCommand_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveCancelControllerCommand_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveCancelControllerCommand_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"CancelControllerCommand_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"CancelControllerCommand_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @interface OpenZWaveGetNumScenes_args : NSObject <NSCoding> {
 }
 
@@ -42387,6 +43039,91 @@
   [self recv_SoftReset];
 }
 
+- (void) send_BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId
+{
+  [outProtocol writeMessageBeginWithName: @"BeginControllerCommand" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"BeginControllerCommand_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_command" type: TType_I32 fieldID: 2];
+  [outProtocol writeI32: _command];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_highPower" type: TType_BOOL fieldID: 3];
+  [outProtocol writeBool: _highPower];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 4];
+  [outProtocol writeByte: _nodeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_BeginControllerCommand
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveBeginControllerCommand_result * result = [[[OpenZWaveBeginControllerCommand_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"BeginControllerCommand failed: unknown result"];
+}
+
+- (BOOL) BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId
+{
+  [self send_BeginControllerCommand: _homeId : _command : _highPower : _nodeId];
+  return [self recv_BeginControllerCommand];
+}
+
+- (void) send_CancelControllerCommand: (int32_t) _homeId
+{
+  [outProtocol writeMessageBeginWithName: @"CancelControllerCommand" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"CancelControllerCommand_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_CancelControllerCommand
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveCancelControllerCommand_result * result = [[[OpenZWaveCancelControllerCommand_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"CancelControllerCommand failed: unknown result"];
+}
+
+- (BOOL) CancelControllerCommand: (int32_t) _homeId
+{
+  [self send_CancelControllerCommand: _homeId];
+  return [self recv_CancelControllerCommand];
+}
+
 - (void) send_GetNumScenes
 {
   [outProtocol writeMessageBeginWithName: @"GetNumScenes" type: TMessageType_CALL sequenceID: 0];
@@ -44616,6 +45353,22 @@
     [mMethodMap setValue: invocation forKey: @"SoftReset"];
   }
   {
+    SEL s = @selector(process_BeginControllerCommand_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"BeginControllerCommand"];
+  }
+  {
+    SEL s = @selector(process_CancelControllerCommand_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"CancelControllerCommand"];
+  }
+  {
     SEL s = @selector(process_GetNumScenes_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
@@ -46457,6 +47210,40 @@
   OpenZWaveSoftReset_result * result = [[OpenZWaveSoftReset_result alloc] init];
   [mService SoftReset: [args _homeId]];
   [outProtocol writeMessageBeginWithName: @"SoftReset"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_BeginControllerCommand_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveBeginControllerCommand_args * args = [[OpenZWaveBeginControllerCommand_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveBeginControllerCommand_result * result = [[OpenZWaveBeginControllerCommand_result alloc] init];
+  [result setSuccess: [mService BeginControllerCommand: [args _homeId]: [args _command]: [args _highPower]: [args _nodeId]]];
+  [outProtocol writeMessageBeginWithName: @"BeginControllerCommand"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_CancelControllerCommand_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveCancelControllerCommand_args * args = [[OpenZWaveCancelControllerCommand_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveCancelControllerCommand_result * result = [[OpenZWaveCancelControllerCommand_result alloc] init];
+  [result setSuccess: [mService CancelControllerCommand: [args _homeId]]];
+  [outProtocol writeMessageBeginWithName: @"CancelControllerCommand"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

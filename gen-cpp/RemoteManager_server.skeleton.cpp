@@ -472,6 +472,16 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("SoftReset\n");
   }
 
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) {
+    // Your implementation goes here
+    printf("BeginControllerCommand\n");
+  }
+
+  bool CancelControllerCommand(const int32_t _homeId) {
+    // Your implementation goes here
+    printf("CancelControllerCommand\n");
+  }
+
   int8_t GetNumScenes() {
     // Your implementation goes here
     printf("GetNumScenes\n");

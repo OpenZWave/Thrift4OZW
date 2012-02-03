@@ -33,6 +33,24 @@ enum OpenZWaveRemoteValueType {
   RemoteValueType_ValueType_Max = 8
 };
 
+enum OpenZWaveDriverControllerCommand {
+  DriverControllerCommand_ControllerCommand_None = 0,
+  DriverControllerCommand_ControllerCommand_AddController = 1,
+  DriverControllerCommand_ControllerCommand_AddDevice = 2,
+  DriverControllerCommand_ControllerCommand_CreateNewPrimary = 3,
+  DriverControllerCommand_ControllerCommand_ReceiveConfiguration = 4,
+  DriverControllerCommand_ControllerCommand_RemoveController = 5,
+  DriverControllerCommand_ControllerCommand_RemoveDevice = 6,
+  DriverControllerCommand_ControllerCommand_RemoveFailedNode = 7,
+  DriverControllerCommand_ControllerCommand_HasNodeFailed = 8,
+  DriverControllerCommand_ControllerCommand_ReplaceFailedNode = 9,
+  DriverControllerCommand_ControllerCommand_TransferPrimaryRole = 10,
+  DriverControllerCommand_ControllerCommand_RequestNetworkUpdate = 11,
+  DriverControllerCommand_ControllerCommand_RequestNodeNeighborUpdate = 12,
+  DriverControllerCommand_ControllerCommand_AssignReturnRoute = 13,
+  DriverControllerCommand_ControllerCommand_DeleteAllReturnRoutes = 14
+};
+
 @interface OpenZWaveRemoteValueID : NSObject <NSCoding> {
   int32_t ___homeId;
   uint8_t ___nodeId;
@@ -572,6 +590,8 @@ enum OpenZWaveRemoteValueType {
 - (void) RemoveAssociation: (int32_t) _homeId : (uint8_t) _nodeId : (uint8_t) _groupIdx : (uint8_t) _targetNodeId;  // throws TException
 - (void) ResetController: (int32_t) _homeId;  // throws TException
 - (void) SoftReset: (int32_t) _homeId;  // throws TException
+- (BOOL) BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId;  // throws TException
+- (BOOL) CancelControllerCommand: (int32_t) _homeId;  // throws TException
 - (uint8_t) GetNumScenes;  // throws TException
 - (OpenZWaveGetAllScenesReturnStruct *) GetAllScenes;  // throws TException
 - (uint8_t) CreateScene;  // throws TException

@@ -14766,6 +14766,366 @@ uint32_t RemoteManager_SoftReset_presult::read(::apache::thrift::protocol::TProt
   return xfer;
 }
 
+uint32_t RemoteManager_BeginControllerCommand_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->_homeId);
+          this->__isset._homeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          int32_t ecast32;
+          xfer += iprot->readI32(ecast32);
+          this->_command = (DriverControllerCommand::type)ecast32;
+          this->__isset._command = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 3:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->_highPower);
+          this->__isset._highPower = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 4:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_nodeId);
+          this->__isset._nodeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_BeginControllerCommand_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_BeginControllerCommand_args");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->_homeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_command", ::apache::thrift::protocol::T_I32, 2);
+  xfer += oprot->writeI32((int32_t)this->_command);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_highPower", ::apache::thrift::protocol::T_BOOL, 3);
+  xfer += oprot->writeBool(this->_highPower);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 4);
+  xfer += oprot->writeByte(this->_nodeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_BeginControllerCommand_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_BeginControllerCommand_pargs");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((*(this->_homeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_command", ::apache::thrift::protocol::T_I32, 2);
+  xfer += oprot->writeI32((int32_t)(*(this->_command)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_highPower", ::apache::thrift::protocol::T_BOOL, 3);
+  xfer += oprot->writeBool((*(this->_highPower)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 4);
+  xfer += oprot->writeByte((*(this->_nodeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_BeginControllerCommand_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_BeginControllerCommand_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_BeginControllerCommand_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
+    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_BeginControllerCommand_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_CancelControllerCommand_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->_homeId);
+          this->__isset._homeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_CancelControllerCommand_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_CancelControllerCommand_args");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->_homeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_CancelControllerCommand_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_CancelControllerCommand_pargs");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((*(this->_homeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_CancelControllerCommand_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_CancelControllerCommand_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_CancelControllerCommand_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
+    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_CancelControllerCommand_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
 uint32_t RemoteManager_GetNumScenes_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
@@ -25971,6 +26331,125 @@ void RemoteManagerClient::recv_SoftReset()
   return;
 }
 
+bool RemoteManagerClient::BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId)
+{
+  send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+  return recv_BeginControllerCommand();
+}
+
+void RemoteManagerClient::send_BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("BeginControllerCommand", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_BeginControllerCommand_pargs args;
+  args._homeId = &_homeId;
+  args._command = &_command;
+  args._highPower = &_highPower;
+  args._nodeId = &_nodeId;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+bool RemoteManagerClient::recv_BeginControllerCommand()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("BeginControllerCommand") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  bool _return;
+  RemoteManager_BeginControllerCommand_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    return _return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "BeginControllerCommand failed: unknown result");
+}
+
+bool RemoteManagerClient::CancelControllerCommand(const int32_t _homeId)
+{
+  send_CancelControllerCommand(_homeId);
+  return recv_CancelControllerCommand();
+}
+
+void RemoteManagerClient::send_CancelControllerCommand(const int32_t _homeId)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("CancelControllerCommand", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_CancelControllerCommand_pargs args;
+  args._homeId = &_homeId;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+bool RemoteManagerClient::recv_CancelControllerCommand()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("CancelControllerCommand") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  bool _return;
+  RemoteManager_CancelControllerCommand_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    return _return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "CancelControllerCommand failed: unknown result");
+}
+
 int8_t RemoteManagerClient::GetNumScenes()
 {
   send_GetNumScenes();
@@ -32910,6 +33389,114 @@ void RemoteManagerProcessor::process_SoftReset(int32_t seqid, ::apache::thrift::
 
   if (eventHandler_.get() != NULL) {
     eventHandler_->postWrite(ctx, "RemoteManager.SoftReset", bytes);
+  }
+}
+
+void RemoteManagerProcessor::process_BeginControllerCommand(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.BeginControllerCommand", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.BeginControllerCommand");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.BeginControllerCommand");
+  }
+
+  RemoteManager_BeginControllerCommand_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.BeginControllerCommand", bytes);
+  }
+
+  RemoteManager_BeginControllerCommand_result result;
+  try {
+    result.success = iface_->BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.BeginControllerCommand");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("BeginControllerCommand", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.BeginControllerCommand");
+  }
+
+  oprot->writeMessageBegin("BeginControllerCommand", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.BeginControllerCommand", bytes);
+  }
+}
+
+void RemoteManagerProcessor::process_CancelControllerCommand(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.CancelControllerCommand", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.CancelControllerCommand");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.CancelControllerCommand");
+  }
+
+  RemoteManager_CancelControllerCommand_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.CancelControllerCommand", bytes);
+  }
+
+  RemoteManager_CancelControllerCommand_result result;
+  try {
+    result.success = iface_->CancelControllerCommand(args._homeId);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.CancelControllerCommand");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("CancelControllerCommand", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.CancelControllerCommand");
+  }
+
+  oprot->writeMessageBegin("CancelControllerCommand", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.CancelControllerCommand", bytes);
   }
 }
 

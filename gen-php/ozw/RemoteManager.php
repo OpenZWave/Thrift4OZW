@@ -99,6 +99,8 @@ interface RemoteManagerIf {
   public function RemoveAssociation($_homeId, $_nodeId, $_groupIdx, $_targetNodeId);
   public function ResetController($_homeId);
   public function SoftReset($_homeId);
+  public function BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+  public function CancelControllerCommand($_homeId);
   public function GetNumScenes();
   public function GetAllScenes();
   public function CreateScene();
@@ -4742,6 +4744,111 @@ class RemoteManagerClient implements RemoteManagerIf {
       $this->input_->readMessageEnd();
     }
     return;
+  }
+
+  public function BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId)
+  {
+    $this->send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+    return $this->recv_BeginControllerCommand();
+  }
+
+  public function send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId)
+  {
+    $args = new RemoteManager_BeginControllerCommand_args();
+    $args->_homeId = $_homeId;
+    $args->_command = $_command;
+    $args->_highPower = $_highPower;
+    $args->_nodeId = $_nodeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'BeginControllerCommand', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('BeginControllerCommand', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_BeginControllerCommand()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_BeginControllerCommand_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_BeginControllerCommand_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("BeginControllerCommand failed: unknown result");
+  }
+
+  public function CancelControllerCommand($_homeId)
+  {
+    $this->send_CancelControllerCommand($_homeId);
+    return $this->recv_CancelControllerCommand();
+  }
+
+  public function send_CancelControllerCommand($_homeId)
+  {
+    $args = new RemoteManager_CancelControllerCommand_args();
+    $args->_homeId = $_homeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'CancelControllerCommand', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('CancelControllerCommand', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_CancelControllerCommand()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_CancelControllerCommand_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_CancelControllerCommand_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("CancelControllerCommand failed: unknown result");
   }
 
   public function GetNumScenes()
@@ -20714,6 +20821,354 @@ class RemoteManager_SoftReset_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('RemoteManager_SoftReset_result');
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_BeginControllerCommand_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+  public $_command = null;
+  public $_highPower = null;
+  public $_nodeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => '_command',
+          'type' => TType::I32,
+          ),
+        3 => array(
+          'var' => '_highPower',
+          'type' => TType::BOOL,
+          ),
+        4 => array(
+          'var' => '_nodeId',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+      if (isset($vals['_command'])) {
+        $this->_command = $vals['_command'];
+      }
+      if (isset($vals['_highPower'])) {
+        $this->_highPower = $vals['_highPower'];
+      }
+      if (isset($vals['_nodeId'])) {
+        $this->_nodeId = $vals['_nodeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_BeginControllerCommand_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_command);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->_highPower);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 4:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_nodeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_BeginControllerCommand_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_command !== null) {
+      $xfer += $output->writeFieldBegin('_command', TType::I32, 2);
+      $xfer += $output->writeI32($this->_command);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_highPower !== null) {
+      $xfer += $output->writeFieldBegin('_highPower', TType::BOOL, 3);
+      $xfer += $output->writeBool($this->_highPower);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_nodeId !== null) {
+      $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 4);
+      $xfer += $output->writeByte($this->_nodeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_BeginControllerCommand_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_BeginControllerCommand_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_BeginControllerCommand_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+      $xfer += $output->writeBool($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_CancelControllerCommand_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_CancelControllerCommand_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_CancelControllerCommand_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_CancelControllerCommand_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_CancelControllerCommand_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_CancelControllerCommand_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+      $xfer += $output->writeBool($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
     $xfer += $output->writeFieldStop();
     $xfer += $output->writeStructEnd();
     return $xfer;

@@ -106,6 +106,8 @@ namespace OpenZWave
       void RemoveAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId);
       void ResetController(int _homeId);
       void SoftReset(int _homeId);
+      bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId);
+      bool CancelControllerCommand(int _homeId);
       byte GetNumScenes();
       GetAllScenesReturnStruct GetAllScenes();
       byte CreateScene();
@@ -3145,6 +3147,75 @@ namespace OpenZWave
         return;
       }
 
+      public bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId)
+      {
+        send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+        return recv_BeginControllerCommand();
+      }
+
+      public void send_BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("BeginControllerCommand", TMessageType.Call, seqid_));
+        BeginControllerCommand_args args = new BeginControllerCommand_args();
+        args._homeId = _homeId;
+        args._command = _command;
+        args._highPower = _highPower;
+        args._nodeId = _nodeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_BeginControllerCommand()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        BeginControllerCommand_result result = new BeginControllerCommand_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "BeginControllerCommand failed: unknown result");
+      }
+
+      public bool CancelControllerCommand(int _homeId)
+      {
+        send_CancelControllerCommand(_homeId);
+        return recv_CancelControllerCommand();
+      }
+
+      public void send_CancelControllerCommand(int _homeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("CancelControllerCommand", TMessageType.Call, seqid_));
+        CancelControllerCommand_args args = new CancelControllerCommand_args();
+        args._homeId = _homeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_CancelControllerCommand()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        CancelControllerCommand_result result = new CancelControllerCommand_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "CancelControllerCommand failed: unknown result");
+      }
+
       public byte GetNumScenes()
       {
         send_GetNumScenes();
@@ -4427,6 +4498,8 @@ namespace OpenZWave
         processMap_["RemoveAssociation"] = RemoveAssociation_Process;
         processMap_["ResetController"] = ResetController_Process;
         processMap_["SoftReset"] = SoftReset_Process;
+        processMap_["BeginControllerCommand"] = BeginControllerCommand_Process;
+        processMap_["CancelControllerCommand"] = CancelControllerCommand_Process;
         processMap_["GetNumScenes"] = GetNumScenes_Process;
         processMap_["GetAllScenes"] = GetAllScenes_Process;
         processMap_["CreateScene"] = CreateScene_Process;
@@ -5659,6 +5732,32 @@ namespace OpenZWave
         SoftReset_result result = new SoftReset_result();
         iface_.SoftReset(args._homeId);
         oprot.WriteMessageBegin(new TMessage("SoftReset", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void BeginControllerCommand_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        BeginControllerCommand_args args = new BeginControllerCommand_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        BeginControllerCommand_result result = new BeginControllerCommand_result();
+        result.Success = iface_.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId);
+        oprot.WriteMessageBegin(new TMessage("BeginControllerCommand", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void CancelControllerCommand_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        CancelControllerCommand_args args = new CancelControllerCommand_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        CancelControllerCommand_result result = new CancelControllerCommand_result();
+        result.Success = iface_.CancelControllerCommand(args._homeId);
+        oprot.WriteMessageBegin(new TMessage("CancelControllerCommand", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -22668,6 +22767,436 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("SoftReset_result(");
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class BeginControllerCommand_args : TBase
+    {
+      private int __homeId;
+      private DriverControllerCommand __command;
+      private bool __highPower;
+      private byte __nodeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+      public DriverControllerCommand _command
+      {
+        get
+        {
+          return __command;
+        }
+        set
+        {
+          __isset._command = true;
+          this.__command = value;
+        }
+      }
+
+      public bool _highPower
+      {
+        get
+        {
+          return __highPower;
+        }
+        set
+        {
+          __isset._highPower = true;
+          this.__highPower = value;
+        }
+      }
+
+      public byte _nodeId
+      {
+        get
+        {
+          return __nodeId;
+        }
+        set
+        {
+          __isset._nodeId = true;
+          this.__nodeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+        public bool _command;
+        public bool _highPower;
+        public bool _nodeId;
+      }
+
+      public BeginControllerCommand_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.I32) {
+                _command = (DriverControllerCommand)iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 3:
+              if (field.Type == TType.Bool) {
+                _highPower = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 4:
+              if (field.Type == TType.Byte) {
+                _nodeId = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("BeginControllerCommand_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._command) {
+          field.Name = "_command";
+          field.Type = TType.I32;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32((int)_command);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._highPower) {
+          field.Name = "_highPower";
+          field.Type = TType.Bool;
+          field.ID = 3;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(_highPower);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._nodeId) {
+          field.Name = "_nodeId";
+          field.Type = TType.Byte;
+          field.ID = 4;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_nodeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("BeginControllerCommand_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(",_command: ");
+        sb.Append(_command);
+        sb.Append(",_highPower: ");
+        sb.Append(_highPower);
+        sb.Append(",_nodeId: ");
+        sb.Append(_nodeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class BeginControllerCommand_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public BeginControllerCommand_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("BeginControllerCommand_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("BeginControllerCommand_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class CancelControllerCommand_args : TBase
+    {
+      private int __homeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+      }
+
+      public CancelControllerCommand_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("CancelControllerCommand_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("CancelControllerCommand_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class CancelControllerCommand_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public CancelControllerCommand_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("CancelControllerCommand_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("CancelControllerCommand_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
         sb.Append(")");
         return sb.ToString();
       }

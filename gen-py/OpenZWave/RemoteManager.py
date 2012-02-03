@@ -1350,6 +1350,71 @@ class Iface:
     """
     pass
 
+  def BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId):
+    """
+    * \brief Start a controller command process.
+    * \param _homeId The Home ID of the Z-Wave controller.
+    * \param _command The command to be sent to the controller.
+    * \param _callback pointer to a function that will be called at various stages during the command process
+    * \param _context pointer to user defined data that will be passed into to the callback function.  Defaults to NULL.
+    * \param _highPower used only with the AddDevice, AddController, RemoveDevice and RemoveController commands.
+    * Usually when adding or removing devices, the controller operates at low power so that the controller must
+    * be physically close to the device for security reasons.  If _highPower is true, the controller will
+    * operate at normal power levels instead.  Defaults to false.
+    * \param _nodeId used only with the ReplaceFailedNode command, to specify the node that is going to be replaced.
+    * \return true if the command was accepted and has started.
+    * \see CancelControllerCommand, HasNodeFailed, RemoveFailedNode, Driver::ControllerCommand, Driver::pfnControllerCallback_t,
+    * to notify the user of progress or to request actions on the user's part.  Defaults to NULL.
+    * <p> Commands
+    * - Driver::ControllerCommand_AddController - Add a new secondary controller to the Z-Wave network.
+    * - Driver::ControllerCommand_AddDevice - Add a new device (but not a controller) to the Z-Wave network.
+    * - Driver::ControllerCommand_CreateNewPrimary (Not yet implemented)
+    * - Driver::ControllerCommand_ReceiveConfiguration -
+    * - Driver::ControllerCommand_RemoveController - remove a controller from the Z-Wave network.
+    * - Driver::ControllerCommand_RemoveDevice - remove a device (but not a controller) from the Z-Wave network.
+     * - Driver::ControllerCommand_RemoveFailedNode - move a node to the controller's list of failed nodes.  The node must actually
+    * have failed or have been disabled since the command will fail if it responds.  A node must be in the controller's failed nodes list
+    * for ControllerCommand_ReplaceFailedNode to work.
+    * - Driver::ControllerCommand_HasNodeFailed - Check whether a node is in the controller's failed nodes list.
+    * - Driver::ControllerCommand_ReplaceFailedNode - replace a failed device with another. If the node is not in
+    * the controller's failed nodes list, or the node responds, this command will fail.
+    * - Driver:: ControllerCommand_TransferPrimaryRole	(Not yet implemented) - Add a new controller to the network and
+    * make it the primary.  The existing primary will become a secondary controller.
+    * - Driver::ControllerCommand_RequestNetworkUpdate - Update the controller with network information from the SUC/SIS.
+    * - Driver::ControllerCommand_RequestNodeNeighborUpdate - Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors afterwards.
+    * - Driver::ControllerCommand_AssignReturnRoute - Assign a network return route to a device.
+    * - Driver::ControllerCommand_DeleteAllReturnRoutes - Delete all network return routes from a device.
+    * <p> Callbacks
+    * - Driver::ControllerState_Waiting, the controller is waiting for a user action.  A notice should be displayed
+    * to the user at this point, telling them what to do next.
+    * For the add, remove, replace and transfer primary role commands, the user needs to be told to press the
+    * inclusion button on the device that  is going to be added or removed.  For ControllerCommand_ReceiveConfiguration,
+    * they must set their other controller to send its data, and for ControllerCommand_CreateNewPrimary, set the other
+    * controller to learn new data.
+    * - Driver::ControllerState_InProgress - the controller is in the process of adding or removing the chosen node.  It is now too late to cancel the command.
+    * - Driver::ControllerState_Complete - the controller has finished adding or removing the node, and the command is complete.
+    * - Driver::ControllerState_Failed - will be sent if the command fails for any reason.
+
+    Parameters:
+     - _homeId
+     - _command
+     - _highPower
+     - _nodeId
+    """
+    pass
+
+  def CancelControllerCommand(self, _homeId):
+    """
+    \brief Cancels any in-progress command running on a controller.
+    \param _homeId The Home ID of the Z-Wave controller.
+    \return true if a command was running and was cancelled.
+    \see BeginControllerCommand
+
+    Parameters:
+     - _homeId
+    """
+    pass
+
   def GetNumScenes(self, ):
     """
     \brief Gets the number of scenes that have been defined.
@@ -5283,6 +5348,120 @@ class Client(Iface):
     self._iprot.readMessageEnd()
     return
 
+  def BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId):
+    """
+    * \brief Start a controller command process.
+    * \param _homeId The Home ID of the Z-Wave controller.
+    * \param _command The command to be sent to the controller.
+    * \param _callback pointer to a function that will be called at various stages during the command process
+    * \param _context pointer to user defined data that will be passed into to the callback function.  Defaults to NULL.
+    * \param _highPower used only with the AddDevice, AddController, RemoveDevice and RemoveController commands.
+    * Usually when adding or removing devices, the controller operates at low power so that the controller must
+    * be physically close to the device for security reasons.  If _highPower is true, the controller will
+    * operate at normal power levels instead.  Defaults to false.
+    * \param _nodeId used only with the ReplaceFailedNode command, to specify the node that is going to be replaced.
+    * \return true if the command was accepted and has started.
+    * \see CancelControllerCommand, HasNodeFailed, RemoveFailedNode, Driver::ControllerCommand, Driver::pfnControllerCallback_t,
+    * to notify the user of progress or to request actions on the user's part.  Defaults to NULL.
+    * <p> Commands
+    * - Driver::ControllerCommand_AddController - Add a new secondary controller to the Z-Wave network.
+    * - Driver::ControllerCommand_AddDevice - Add a new device (but not a controller) to the Z-Wave network.
+    * - Driver::ControllerCommand_CreateNewPrimary (Not yet implemented)
+    * - Driver::ControllerCommand_ReceiveConfiguration -
+    * - Driver::ControllerCommand_RemoveController - remove a controller from the Z-Wave network.
+    * - Driver::ControllerCommand_RemoveDevice - remove a device (but not a controller) from the Z-Wave network.
+     * - Driver::ControllerCommand_RemoveFailedNode - move a node to the controller's list of failed nodes.  The node must actually
+    * have failed or have been disabled since the command will fail if it responds.  A node must be in the controller's failed nodes list
+    * for ControllerCommand_ReplaceFailedNode to work.
+    * - Driver::ControllerCommand_HasNodeFailed - Check whether a node is in the controller's failed nodes list.
+    * - Driver::ControllerCommand_ReplaceFailedNode - replace a failed device with another. If the node is not in
+    * the controller's failed nodes list, or the node responds, this command will fail.
+    * - Driver:: ControllerCommand_TransferPrimaryRole	(Not yet implemented) - Add a new controller to the network and
+    * make it the primary.  The existing primary will become a secondary controller.
+    * - Driver::ControllerCommand_RequestNetworkUpdate - Update the controller with network information from the SUC/SIS.
+    * - Driver::ControllerCommand_RequestNodeNeighborUpdate - Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors afterwards.
+    * - Driver::ControllerCommand_AssignReturnRoute - Assign a network return route to a device.
+    * - Driver::ControllerCommand_DeleteAllReturnRoutes - Delete all network return routes from a device.
+    * <p> Callbacks
+    * - Driver::ControllerState_Waiting, the controller is waiting for a user action.  A notice should be displayed
+    * to the user at this point, telling them what to do next.
+    * For the add, remove, replace and transfer primary role commands, the user needs to be told to press the
+    * inclusion button on the device that  is going to be added or removed.  For ControllerCommand_ReceiveConfiguration,
+    * they must set their other controller to send its data, and for ControllerCommand_CreateNewPrimary, set the other
+    * controller to learn new data.
+    * - Driver::ControllerState_InProgress - the controller is in the process of adding or removing the chosen node.  It is now too late to cancel the command.
+    * - Driver::ControllerState_Complete - the controller has finished adding or removing the node, and the command is complete.
+    * - Driver::ControllerState_Failed - will be sent if the command fails for any reason.
+
+    Parameters:
+     - _homeId
+     - _command
+     - _highPower
+     - _nodeId
+    """
+    self.send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
+    return self.recv_BeginControllerCommand()
+
+  def send_BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId):
+    self._oprot.writeMessageBegin('BeginControllerCommand', TMessageType.CALL, self._seqid)
+    args = BeginControllerCommand_args()
+    args._homeId = _homeId
+    args._command = _command
+    args._highPower = _highPower
+    args._nodeId = _nodeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_BeginControllerCommand(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = BeginControllerCommand_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "BeginControllerCommand failed: unknown result");
+
+  def CancelControllerCommand(self, _homeId):
+    """
+    \brief Cancels any in-progress command running on a controller.
+    \param _homeId The Home ID of the Z-Wave controller.
+    \return true if a command was running and was cancelled.
+    \see BeginControllerCommand
+
+    Parameters:
+     - _homeId
+    """
+    self.send_CancelControllerCommand(_homeId)
+    return self.recv_CancelControllerCommand()
+
+  def send_CancelControllerCommand(self, _homeId):
+    self._oprot.writeMessageBegin('CancelControllerCommand', TMessageType.CALL, self._seqid)
+    args = CancelControllerCommand_args()
+    args._homeId = _homeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_CancelControllerCommand(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = CancelControllerCommand_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "CancelControllerCommand failed: unknown result");
+
   def GetNumScenes(self, ):
     """
     \brief Gets the number of scenes that have been defined.
@@ -6710,6 +6889,8 @@ class Processor(Iface, TProcessor):
     self._processMap["RemoveAssociation"] = Processor.process_RemoveAssociation
     self._processMap["ResetController"] = Processor.process_ResetController
     self._processMap["SoftReset"] = Processor.process_SoftReset
+    self._processMap["BeginControllerCommand"] = Processor.process_BeginControllerCommand
+    self._processMap["CancelControllerCommand"] = Processor.process_CancelControllerCommand
     self._processMap["GetNumScenes"] = Processor.process_GetNumScenes
     self._processMap["GetAllScenes"] = Processor.process_GetAllScenes
     self._processMap["CreateScene"] = Processor.process_CreateScene
@@ -7747,6 +7928,28 @@ class Processor(Iface, TProcessor):
     result = SoftReset_result()
     self._handler.SoftReset(args._homeId)
     oprot.writeMessageBegin("SoftReset", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_BeginControllerCommand(self, seqid, iprot, oprot):
+    args = BeginControllerCommand_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = BeginControllerCommand_result()
+    result.success = self._handler.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId)
+    oprot.writeMessageBegin("BeginControllerCommand", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_CancelControllerCommand(self, seqid, iprot, oprot):
+    args = CancelControllerCommand_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = CancelControllerCommand_result()
+    result.success = self._handler.CancelControllerCommand(args._homeId)
+    oprot.writeMessageBegin("CancelControllerCommand", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -19360,6 +19563,280 @@ class SoftReset_result:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('SoftReset_result')
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class BeginControllerCommand_args:
+  """
+  Attributes:
+   - _homeId
+   - _command
+   - _highPower
+   - _nodeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+    (2, TType.I32, '_command', None, None, ), # 2
+    (3, TType.BOOL, '_highPower', None, None, ), # 3
+    (4, TType.BYTE, '_nodeId', None, None, ), # 4
+  )
+
+  def __init__(self, _homeId=None, _command=None, _highPower=None, _nodeId=None,):
+    self._homeId = _homeId
+    self._command = _command
+    self._highPower = _highPower
+    self._nodeId = _nodeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.I32:
+          self._command = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 3:
+        if ftype == TType.BOOL:
+          self._highPower = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      elif fid == 4:
+        if ftype == TType.BYTE:
+          self._nodeId = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('BeginControllerCommand_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    if self._command is not None:
+      oprot.writeFieldBegin('_command', TType.I32, 2)
+      oprot.writeI32(self._command)
+      oprot.writeFieldEnd()
+    if self._highPower is not None:
+      oprot.writeFieldBegin('_highPower', TType.BOOL, 3)
+      oprot.writeBool(self._highPower)
+      oprot.writeFieldEnd()
+    if self._nodeId is not None:
+      oprot.writeFieldBegin('_nodeId', TType.BYTE, 4)
+      oprot.writeByte(self._nodeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class BeginControllerCommand_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BOOL:
+          self.success = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('BeginControllerCommand_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BOOL, 0)
+      oprot.writeBool(self.success)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class CancelControllerCommand_args:
+  """
+  Attributes:
+   - _homeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+  )
+
+  def __init__(self, _homeId=None,):
+    self._homeId = _homeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('CancelControllerCommand_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class CancelControllerCommand_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BOOL:
+          self.success = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('CancelControllerCommand_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BOOL, 0)
+      oprot.writeBool(self.success)
+      oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 

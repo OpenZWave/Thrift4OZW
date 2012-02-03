@@ -18,6 +18,22 @@
 -define(ozw_RemoteValueType_ValueType_Button, 8).
 -define(ozw_RemoteValueType_ValueType_Max, 8).
 
+-define(ozw_DriverControllerCommand_ControllerCommand_None, 0).
+-define(ozw_DriverControllerCommand_ControllerCommand_AddController, 1).
+-define(ozw_DriverControllerCommand_ControllerCommand_AddDevice, 2).
+-define(ozw_DriverControllerCommand_ControllerCommand_CreateNewPrimary, 3).
+-define(ozw_DriverControllerCommand_ControllerCommand_ReceiveConfiguration, 4).
+-define(ozw_DriverControllerCommand_ControllerCommand_RemoveController, 5).
+-define(ozw_DriverControllerCommand_ControllerCommand_RemoveDevice, 6).
+-define(ozw_DriverControllerCommand_ControllerCommand_RemoveFailedNode, 7).
+-define(ozw_DriverControllerCommand_ControllerCommand_HasNodeFailed, 8).
+-define(ozw_DriverControllerCommand_ControllerCommand_ReplaceFailedNode, 9).
+-define(ozw_DriverControllerCommand_ControllerCommand_TransferPrimaryRole, 10).
+-define(ozw_DriverControllerCommand_ControllerCommand_RequestNetworkUpdate, 11).
+-define(ozw_DriverControllerCommand_ControllerCommand_RequestNodeNeighborUpdate, 12).
+-define(ozw_DriverControllerCommand_ControllerCommand_AssignReturnRoute, 13).
+-define(ozw_DriverControllerCommand_ControllerCommand_DeleteAllReturnRoutes, 14).
+
 %% struct remoteValueID
 
 -record(remoteValueID, {_homeId = undefined :: integer(), 

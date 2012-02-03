@@ -102,7 +102,77 @@ func (p RemoteValueType) IsEnum() bool {
   return true
 }
 
+type DriverControllerCommand int
+const (
+  ControllerCommand_None DriverControllerCommand = 0
+  ControllerCommand_AddController DriverControllerCommand = 1
+  ControllerCommand_AddDevice DriverControllerCommand = 2
+  ControllerCommand_CreateNewPrimary DriverControllerCommand = 3
+  ControllerCommand_ReceiveConfiguration DriverControllerCommand = 4
+  ControllerCommand_RemoveController DriverControllerCommand = 5
+  ControllerCommand_RemoveDevice DriverControllerCommand = 6
+  ControllerCommand_RemoveFailedNode DriverControllerCommand = 7
+  ControllerCommand_HasNodeFailed DriverControllerCommand = 8
+  ControllerCommand_ReplaceFailedNode DriverControllerCommand = 9
+  ControllerCommand_TransferPrimaryRole DriverControllerCommand = 10
+  ControllerCommand_RequestNetworkUpdate DriverControllerCommand = 11
+  ControllerCommand_RequestNodeNeighborUpdate DriverControllerCommand = 12
+  ControllerCommand_AssignReturnRoute DriverControllerCommand = 13
+  ControllerCommand_DeleteAllReturnRoutes DriverControllerCommand = 14
+)
+func (p DriverControllerCommand) String() string {
+  switch p {
+  case ControllerCommand_None: return "ControllerCommand_None"
+  case ControllerCommand_AddController: return "ControllerCommand_AddController"
+  case ControllerCommand_AddDevice: return "ControllerCommand_AddDevice"
+  case ControllerCommand_CreateNewPrimary: return "ControllerCommand_CreateNewPrimary"
+  case ControllerCommand_ReceiveConfiguration: return "ControllerCommand_ReceiveConfiguration"
+  case ControllerCommand_RemoveController: return "ControllerCommand_RemoveController"
+  case ControllerCommand_RemoveDevice: return "ControllerCommand_RemoveDevice"
+  case ControllerCommand_RemoveFailedNode: return "ControllerCommand_RemoveFailedNode"
+  case ControllerCommand_HasNodeFailed: return "ControllerCommand_HasNodeFailed"
+  case ControllerCommand_ReplaceFailedNode: return "ControllerCommand_ReplaceFailedNode"
+  case ControllerCommand_TransferPrimaryRole: return "ControllerCommand_TransferPrimaryRole"
+  case ControllerCommand_RequestNetworkUpdate: return "ControllerCommand_RequestNetworkUpdate"
+  case ControllerCommand_RequestNodeNeighborUpdate: return "ControllerCommand_RequestNodeNeighborUpdate"
+  case ControllerCommand_AssignReturnRoute: return "ControllerCommand_AssignReturnRoute"
+  case ControllerCommand_DeleteAllReturnRoutes: return "ControllerCommand_DeleteAllReturnRoutes"
+  }
+  return ""
+}
+
+func FromDriverControllerCommandString(s string) DriverControllerCommand {
+  switch s {
+  case "ControllerCommand_None": return ControllerCommand_None
+  case "ControllerCommand_AddController": return ControllerCommand_AddController
+  case "ControllerCommand_AddDevice": return ControllerCommand_AddDevice
+  case "ControllerCommand_CreateNewPrimary": return ControllerCommand_CreateNewPrimary
+  case "ControllerCommand_ReceiveConfiguration": return ControllerCommand_ReceiveConfiguration
+  case "ControllerCommand_RemoveController": return ControllerCommand_RemoveController
+  case "ControllerCommand_RemoveDevice": return ControllerCommand_RemoveDevice
+  case "ControllerCommand_RemoveFailedNode": return ControllerCommand_RemoveFailedNode
+  case "ControllerCommand_HasNodeFailed": return ControllerCommand_HasNodeFailed
+  case "ControllerCommand_ReplaceFailedNode": return ControllerCommand_ReplaceFailedNode
+  case "ControllerCommand_TransferPrimaryRole": return ControllerCommand_TransferPrimaryRole
+  case "ControllerCommand_RequestNetworkUpdate": return ControllerCommand_RequestNetworkUpdate
+  case "ControllerCommand_RequestNodeNeighborUpdate": return ControllerCommand_RequestNodeNeighborUpdate
+  case "ControllerCommand_AssignReturnRoute": return ControllerCommand_AssignReturnRoute
+  case "ControllerCommand_DeleteAllReturnRoutes": return ControllerCommand_DeleteAllReturnRoutes
+  }
+  return DriverControllerCommand(-10000)
+}
+
+func (p DriverControllerCommand) Value() int {
+  return int(p)
+}
+
+func (p DriverControllerCommand) IsEnum() bool {
+  return true
+}
+
 /**
+ * < Delete all return routes from a device.
+ * 
  * Attributes:
  *  - _homeId
  *  - _nodeId

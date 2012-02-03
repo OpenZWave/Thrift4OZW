@@ -105,11 +105,11 @@ bool PocoStomp::socket_connect()
             m_connection->socket = new Poco::Net::StompSocket(*(m_connection->addr));
             m_fsm.socket_connected();
         } catch (exception& e) {
-            std::cerr << "Exception: " << e.what() << std::endl;
+            std::cerr << "PocoStomp Exception: " << e.what() << std::endl;
             m_fsm.socket_disconnected();
             sleep(3);
         } catch (...) {
-            std::cerr << "other error in socket_connect()" << std::endl;
+            std::cerr << "PocoStomp: other error in socket_connect()" << std::endl;
             m_fsm.socket_disconnected();
             sleep(3);
         }
@@ -146,11 +146,11 @@ bool PocoStomp::connect()
             //
         }
     } catch (exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cerr << "PocoStomp Exception: " << e.what() << std::endl;
         m_fsm.socket_disconnected();
         sleep(3);
     } catch (...) {
-        std::cerr << "other error in connect()" << std::endl;
+        std::cerr << "PocoStomp: other error in connect()" << std::endl;
         m_fsm.socket_disconnected();
         sleep(3);
     }
