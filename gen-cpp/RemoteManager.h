@@ -31,10 +31,12 @@ class RemoteManagerIf {
   virtual bool RequestNodeState(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool RequestNodeDynamic(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool IsNodeListeningDevice(const int32_t _homeId, const int8_t _nodeId) = 0;
+  virtual bool IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId) = 0;
+  virtual bool IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId) = 0;
+  virtual bool IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int32_t GetNodeMaxBaudRate(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeVersion(const int32_t _homeId, const int8_t _nodeId) = 0;
-  virtual int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeBasic(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeGeneric(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeSpecific(const int32_t _homeId, const int8_t _nodeId) = 0;
@@ -104,7 +106,7 @@ class RemoteManagerIf {
   virtual void RemoveAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId) = 0;
   virtual void ResetController(const int32_t _homeId) = 0;
   virtual void SoftReset(const int32_t _homeId) = 0;
-  virtual bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) = 0;
+  virtual bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg) = 0;
   virtual bool CancelControllerCommand(const int32_t _homeId) = 0;
   virtual int8_t GetNumScenes() = 0;
   virtual void GetAllScenes(GetAllScenesReturnStruct& _return) = 0;
@@ -210,7 +212,19 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     bool _return = false;
     return _return;
   }
+  bool IsNodeFrequentListeningDevice(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
+    bool _return = false;
+    return _return;
+  }
+  bool IsNodeBeamingDevice(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
+    bool _return = false;
+    return _return;
+  }
   bool IsNodeRoutingDevice(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
+    bool _return = false;
+    return _return;
+  }
+  bool IsNodeSecurityDevice(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
     bool _return = false;
     return _return;
   }
@@ -219,10 +233,6 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     return _return;
   }
   int8_t GetNodeVersion(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
-    int8_t _return = 0;
-    return _return;
-  }
-  int8_t GetNodeSecurity(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
     int8_t _return = 0;
     return _return;
   }
@@ -457,7 +467,7 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   void SoftReset(const int32_t /* _homeId */) {
     return;
   }
-  bool BeginControllerCommand(const int32_t /* _homeId */, const DriverControllerCommand::type /* _command */, const bool /* _highPower */, const int8_t /* _nodeId */) {
+  bool BeginControllerCommand(const int32_t /* _homeId */, const DriverControllerCommand::type /* _command */, const bool /* _highPower */, const int8_t /* _nodeId */, const int8_t /* _arg */) {
     bool _return = false;
     return _return;
   }
@@ -2412,6 +2422,240 @@ class RemoteManager_IsNodeListeningDevice_presult {
 
 };
 
+typedef struct _RemoteManager_IsNodeFrequentListeningDevice_args__isset {
+  _RemoteManager_IsNodeFrequentListeningDevice_args__isset() : _homeId(false), _nodeId(false) {}
+  bool _homeId;
+  bool _nodeId;
+} _RemoteManager_IsNodeFrequentListeningDevice_args__isset;
+
+class RemoteManager_IsNodeFrequentListeningDevice_args {
+ public:
+
+  RemoteManager_IsNodeFrequentListeningDevice_args() : _homeId(0), _nodeId(0) {
+  }
+
+  virtual ~RemoteManager_IsNodeFrequentListeningDevice_args() throw() {}
+
+  int32_t _homeId;
+  int8_t _nodeId;
+
+  _RemoteManager_IsNodeFrequentListeningDevice_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  bool operator == (const RemoteManager_IsNodeFrequentListeningDevice_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsNodeFrequentListeningDevice_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsNodeFrequentListeningDevice_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_IsNodeFrequentListeningDevice_pargs {
+ public:
+
+
+  virtual ~RemoteManager_IsNodeFrequentListeningDevice_pargs() throw() {}
+
+  const int32_t* _homeId;
+  const int8_t* _nodeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsNodeFrequentListeningDevice_result__isset {
+  _RemoteManager_IsNodeFrequentListeningDevice_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsNodeFrequentListeningDevice_result__isset;
+
+class RemoteManager_IsNodeFrequentListeningDevice_result {
+ public:
+
+  RemoteManager_IsNodeFrequentListeningDevice_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_IsNodeFrequentListeningDevice_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_IsNodeFrequentListeningDevice_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_IsNodeFrequentListeningDevice_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsNodeFrequentListeningDevice_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsNodeFrequentListeningDevice_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsNodeFrequentListeningDevice_presult__isset {
+  _RemoteManager_IsNodeFrequentListeningDevice_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsNodeFrequentListeningDevice_presult__isset;
+
+class RemoteManager_IsNodeFrequentListeningDevice_presult {
+ public:
+
+
+  virtual ~RemoteManager_IsNodeFrequentListeningDevice_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_IsNodeFrequentListeningDevice_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_IsNodeBeamingDevice_args__isset {
+  _RemoteManager_IsNodeBeamingDevice_args__isset() : _homeId(false), _nodeId(false) {}
+  bool _homeId;
+  bool _nodeId;
+} _RemoteManager_IsNodeBeamingDevice_args__isset;
+
+class RemoteManager_IsNodeBeamingDevice_args {
+ public:
+
+  RemoteManager_IsNodeBeamingDevice_args() : _homeId(0), _nodeId(0) {
+  }
+
+  virtual ~RemoteManager_IsNodeBeamingDevice_args() throw() {}
+
+  int32_t _homeId;
+  int8_t _nodeId;
+
+  _RemoteManager_IsNodeBeamingDevice_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  bool operator == (const RemoteManager_IsNodeBeamingDevice_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsNodeBeamingDevice_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsNodeBeamingDevice_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_IsNodeBeamingDevice_pargs {
+ public:
+
+
+  virtual ~RemoteManager_IsNodeBeamingDevice_pargs() throw() {}
+
+  const int32_t* _homeId;
+  const int8_t* _nodeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsNodeBeamingDevice_result__isset {
+  _RemoteManager_IsNodeBeamingDevice_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsNodeBeamingDevice_result__isset;
+
+class RemoteManager_IsNodeBeamingDevice_result {
+ public:
+
+  RemoteManager_IsNodeBeamingDevice_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_IsNodeBeamingDevice_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_IsNodeBeamingDevice_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_IsNodeBeamingDevice_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsNodeBeamingDevice_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsNodeBeamingDevice_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsNodeBeamingDevice_presult__isset {
+  _RemoteManager_IsNodeBeamingDevice_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsNodeBeamingDevice_presult__isset;
+
+class RemoteManager_IsNodeBeamingDevice_presult {
+ public:
+
+
+  virtual ~RemoteManager_IsNodeBeamingDevice_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_IsNodeBeamingDevice_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 typedef struct _RemoteManager_IsNodeRoutingDevice_args__isset {
   _RemoteManager_IsNodeRoutingDevice_args__isset() : _homeId(false), _nodeId(false) {}
   bool _homeId;
@@ -2524,6 +2768,123 @@ class RemoteManager_IsNodeRoutingDevice_presult {
   bool* success;
 
   _RemoteManager_IsNodeRoutingDevice_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_IsNodeSecurityDevice_args__isset {
+  _RemoteManager_IsNodeSecurityDevice_args__isset() : _homeId(false), _nodeId(false) {}
+  bool _homeId;
+  bool _nodeId;
+} _RemoteManager_IsNodeSecurityDevice_args__isset;
+
+class RemoteManager_IsNodeSecurityDevice_args {
+ public:
+
+  RemoteManager_IsNodeSecurityDevice_args() : _homeId(0), _nodeId(0) {
+  }
+
+  virtual ~RemoteManager_IsNodeSecurityDevice_args() throw() {}
+
+  int32_t _homeId;
+  int8_t _nodeId;
+
+  _RemoteManager_IsNodeSecurityDevice_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  bool operator == (const RemoteManager_IsNodeSecurityDevice_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsNodeSecurityDevice_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsNodeSecurityDevice_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_IsNodeSecurityDevice_pargs {
+ public:
+
+
+  virtual ~RemoteManager_IsNodeSecurityDevice_pargs() throw() {}
+
+  const int32_t* _homeId;
+  const int8_t* _nodeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsNodeSecurityDevice_result__isset {
+  _RemoteManager_IsNodeSecurityDevice_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsNodeSecurityDevice_result__isset;
+
+class RemoteManager_IsNodeSecurityDevice_result {
+ public:
+
+  RemoteManager_IsNodeSecurityDevice_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_IsNodeSecurityDevice_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_IsNodeSecurityDevice_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_IsNodeSecurityDevice_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsNodeSecurityDevice_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsNodeSecurityDevice_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsNodeSecurityDevice_presult__isset {
+  _RemoteManager_IsNodeSecurityDevice_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsNodeSecurityDevice_presult__isset;
+
+class RemoteManager_IsNodeSecurityDevice_presult {
+ public:
+
+
+  virtual ~RemoteManager_IsNodeSecurityDevice_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_IsNodeSecurityDevice_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -2758,123 +3119,6 @@ class RemoteManager_GetNodeVersion_presult {
   int8_t* success;
 
   _RemoteManager_GetNodeVersion_presult__isset __isset;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-
-};
-
-typedef struct _RemoteManager_GetNodeSecurity_args__isset {
-  _RemoteManager_GetNodeSecurity_args__isset() : _homeId(false), _nodeId(false) {}
-  bool _homeId;
-  bool _nodeId;
-} _RemoteManager_GetNodeSecurity_args__isset;
-
-class RemoteManager_GetNodeSecurity_args {
- public:
-
-  RemoteManager_GetNodeSecurity_args() : _homeId(0), _nodeId(0) {
-  }
-
-  virtual ~RemoteManager_GetNodeSecurity_args() throw() {}
-
-  int32_t _homeId;
-  int8_t _nodeId;
-
-  _RemoteManager_GetNodeSecurity_args__isset __isset;
-
-  void __set__homeId(const int32_t val) {
-    _homeId = val;
-  }
-
-  void __set__nodeId(const int8_t val) {
-    _nodeId = val;
-  }
-
-  bool operator == (const RemoteManager_GetNodeSecurity_args & rhs) const
-  {
-    if (!(_homeId == rhs._homeId))
-      return false;
-    if (!(_nodeId == rhs._nodeId))
-      return false;
-    return true;
-  }
-  bool operator != (const RemoteManager_GetNodeSecurity_args &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RemoteManager_GetNodeSecurity_args & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-
-class RemoteManager_GetNodeSecurity_pargs {
- public:
-
-
-  virtual ~RemoteManager_GetNodeSecurity_pargs() throw() {}
-
-  const int32_t* _homeId;
-  const int8_t* _nodeId;
-
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RemoteManager_GetNodeSecurity_result__isset {
-  _RemoteManager_GetNodeSecurity_result__isset() : success(false) {}
-  bool success;
-} _RemoteManager_GetNodeSecurity_result__isset;
-
-class RemoteManager_GetNodeSecurity_result {
- public:
-
-  RemoteManager_GetNodeSecurity_result() : success(0) {
-  }
-
-  virtual ~RemoteManager_GetNodeSecurity_result() throw() {}
-
-  int8_t success;
-
-  _RemoteManager_GetNodeSecurity_result__isset __isset;
-
-  void __set_success(const int8_t val) {
-    success = val;
-  }
-
-  bool operator == (const RemoteManager_GetNodeSecurity_result & rhs) const
-  {
-    if (!(success == rhs.success))
-      return false;
-    return true;
-  }
-  bool operator != (const RemoteManager_GetNodeSecurity_result &rhs) const {
-    return !(*this == rhs);
-  }
-
-  bool operator < (const RemoteManager_GetNodeSecurity_result & ) const;
-
-  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
-  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
-
-};
-
-typedef struct _RemoteManager_GetNodeSecurity_presult__isset {
-  _RemoteManager_GetNodeSecurity_presult__isset() : success(false) {}
-  bool success;
-} _RemoteManager_GetNodeSecurity_presult__isset;
-
-class RemoteManager_GetNodeSecurity_presult {
- public:
-
-
-  virtual ~RemoteManager_GetNodeSecurity_presult() throw() {}
-
-  int8_t* success;
-
-  _RemoteManager_GetNodeSecurity_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -10520,17 +10764,18 @@ class RemoteManager_SoftReset_presult {
 };
 
 typedef struct _RemoteManager_BeginControllerCommand_args__isset {
-  _RemoteManager_BeginControllerCommand_args__isset() : _homeId(false), _command(false), _highPower(false), _nodeId(false) {}
+  _RemoteManager_BeginControllerCommand_args__isset() : _homeId(false), _command(false), _highPower(false), _nodeId(false), _arg(false) {}
   bool _homeId;
   bool _command;
   bool _highPower;
   bool _nodeId;
+  bool _arg;
 } _RemoteManager_BeginControllerCommand_args__isset;
 
 class RemoteManager_BeginControllerCommand_args {
  public:
 
-  RemoteManager_BeginControllerCommand_args() : _homeId(0), _highPower(0), _nodeId(0) {
+  RemoteManager_BeginControllerCommand_args() : _homeId(0), _highPower(0), _nodeId(0), _arg(0) {
   }
 
   virtual ~RemoteManager_BeginControllerCommand_args() throw() {}
@@ -10539,6 +10784,7 @@ class RemoteManager_BeginControllerCommand_args {
   DriverControllerCommand::type _command;
   bool _highPower;
   int8_t _nodeId;
+  int8_t _arg;
 
   _RemoteManager_BeginControllerCommand_args__isset __isset;
 
@@ -10558,6 +10804,10 @@ class RemoteManager_BeginControllerCommand_args {
     _nodeId = val;
   }
 
+  void __set__arg(const int8_t val) {
+    _arg = val;
+  }
+
   bool operator == (const RemoteManager_BeginControllerCommand_args & rhs) const
   {
     if (!(_homeId == rhs._homeId))
@@ -10567,6 +10817,8 @@ class RemoteManager_BeginControllerCommand_args {
     if (!(_highPower == rhs._highPower))
       return false;
     if (!(_nodeId == rhs._nodeId))
+      return false;
+    if (!(_arg == rhs._arg))
       return false;
     return true;
   }
@@ -10592,6 +10844,7 @@ class RemoteManager_BeginControllerCommand_pargs {
   const DriverControllerCommand::type* _command;
   const bool* _highPower;
   const int8_t* _nodeId;
+  const int8_t* _arg;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
@@ -14895,18 +15148,24 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool IsNodeListeningDevice(const int32_t _homeId, const int8_t _nodeId);
   void send_IsNodeListeningDevice(const int32_t _homeId, const int8_t _nodeId);
   bool recv_IsNodeListeningDevice();
+  bool IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId);
+  void send_IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId);
+  bool recv_IsNodeFrequentListeningDevice();
+  bool IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId);
+  void send_IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId);
+  bool recv_IsNodeBeamingDevice();
   bool IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId);
   void send_IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId);
   bool recv_IsNodeRoutingDevice();
+  bool IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId);
+  void send_IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId);
+  bool recv_IsNodeSecurityDevice();
   int32_t GetNodeMaxBaudRate(const int32_t _homeId, const int8_t _nodeId);
   void send_GetNodeMaxBaudRate(const int32_t _homeId, const int8_t _nodeId);
   int32_t recv_GetNodeMaxBaudRate();
   int8_t GetNodeVersion(const int32_t _homeId, const int8_t _nodeId);
   void send_GetNodeVersion(const int32_t _homeId, const int8_t _nodeId);
   int8_t recv_GetNodeVersion();
-  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId);
-  void send_GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId);
-  int8_t recv_GetNodeSecurity();
   int8_t GetNodeBasic(const int32_t _homeId, const int8_t _nodeId);
   void send_GetNodeBasic(const int32_t _homeId, const int8_t _nodeId);
   int8_t recv_GetNodeBasic();
@@ -15114,8 +15373,8 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   void SoftReset(const int32_t _homeId);
   void send_SoftReset(const int32_t _homeId);
   void recv_SoftReset();
-  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId);
-  void send_BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId);
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg);
+  void send_BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg);
   bool recv_BeginControllerCommand();
   bool CancelControllerCommand(const int32_t _homeId);
   void send_CancelControllerCommand(const int32_t _homeId);
@@ -15255,10 +15514,12 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_RequestNodeState(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_RequestNodeDynamic(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsNodeListeningDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_IsNodeFrequentListeningDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_IsNodeBeamingDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsNodeRoutingDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_IsNodeSecurityDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeMaxBaudRate(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeVersion(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
-  void process_GetNodeSecurity(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeBasic(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeGeneric(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeSpecific(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -15385,10 +15646,12 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["RequestNodeState"] = &RemoteManagerProcessor::process_RequestNodeState;
     processMap_["RequestNodeDynamic"] = &RemoteManagerProcessor::process_RequestNodeDynamic;
     processMap_["IsNodeListeningDevice"] = &RemoteManagerProcessor::process_IsNodeListeningDevice;
+    processMap_["IsNodeFrequentListeningDevice"] = &RemoteManagerProcessor::process_IsNodeFrequentListeningDevice;
+    processMap_["IsNodeBeamingDevice"] = &RemoteManagerProcessor::process_IsNodeBeamingDevice;
     processMap_["IsNodeRoutingDevice"] = &RemoteManagerProcessor::process_IsNodeRoutingDevice;
+    processMap_["IsNodeSecurityDevice"] = &RemoteManagerProcessor::process_IsNodeSecurityDevice;
     processMap_["GetNodeMaxBaudRate"] = &RemoteManagerProcessor::process_GetNodeMaxBaudRate;
     processMap_["GetNodeVersion"] = &RemoteManagerProcessor::process_GetNodeVersion;
-    processMap_["GetNodeSecurity"] = &RemoteManagerProcessor::process_GetNodeSecurity;
     processMap_["GetNodeBasic"] = &RemoteManagerProcessor::process_GetNodeBasic;
     processMap_["GetNodeGeneric"] = &RemoteManagerProcessor::process_GetNodeGeneric;
     processMap_["GetNodeSpecific"] = &RemoteManagerProcessor::process_GetNodeSpecific;
@@ -15694,6 +15957,28 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
+  bool IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->IsNodeFrequentListeningDevice(_homeId, _nodeId);
+      } else {
+        ifaces_[i]->IsNodeFrequentListeningDevice(_homeId, _nodeId);
+      }
+    }
+  }
+
+  bool IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->IsNodeBeamingDevice(_homeId, _nodeId);
+      } else {
+        ifaces_[i]->IsNodeBeamingDevice(_homeId, _nodeId);
+      }
+    }
+  }
+
   bool IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
@@ -15701,6 +15986,17 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->IsNodeRoutingDevice(_homeId, _nodeId);
       } else {
         ifaces_[i]->IsNodeRoutingDevice(_homeId, _nodeId);
+      }
+    }
+  }
+
+  bool IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->IsNodeSecurityDevice(_homeId, _nodeId);
+      } else {
+        ifaces_[i]->IsNodeSecurityDevice(_homeId, _nodeId);
       }
     }
   }
@@ -15723,17 +16019,6 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->GetNodeVersion(_homeId, _nodeId);
       } else {
         ifaces_[i]->GetNodeVersion(_homeId, _nodeId);
-      }
-    }
-  }
-
-  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) {
-    size_t sz = ifaces_.size();
-    for (size_t i = 0; i < sz; ++i) {
-      if (i == sz - 1) {
-        return ifaces_[i]->GetNodeSecurity(_homeId, _nodeId);
-      } else {
-        ifaces_[i]->GetNodeSecurity(_homeId, _nodeId);
       }
     }
   }
@@ -16447,13 +16732,13 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) {
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        return ifaces_[i]->BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+        return ifaces_[i]->BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg);
       } else {
-        ifaces_[i]->BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+        ifaces_[i]->BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg);
       }
     }
   }

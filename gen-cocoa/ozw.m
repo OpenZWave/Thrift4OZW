@@ -6873,6 +6873,608 @@
 
 @end
 
+@interface OpenZWaveIsNodeFrequentListeningDevice_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+  uint8_t ___nodeId;
+
+  BOOL ___homeId_isset;
+  BOOL ___nodeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+@property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+- (uint8_t) _nodeId;
+- (void) set_nodeId: (uint8_t) _nodeId;
+- (BOOL) _nodeIdIsSet;
+
+@end
+
+@implementation OpenZWaveIsNodeFrequentListeningDevice_args
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_nodeId"])
+  {
+    ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
+    ___nodeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+  if (___nodeId_isset)
+  {
+    [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (uint8_t) _nodeId {
+  return ___nodeId;
+}
+
+- (void) set_nodeId: (uint8_t) _nodeId {
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+}
+
+- (BOOL) _nodeIdIsSet {
+  return ___nodeId_isset;
+}
+
+- (void) unset_nodeId {
+  ___nodeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_nodeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsNodeFrequentListeningDevice_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  if (___nodeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+    [outProtocol writeByte: ___nodeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeFrequentListeningDevice_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @",_nodeId:"];
+  [ms appendFormat: @"%i", ___nodeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsNodeFrequentListeningDevice_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveIsNodeFrequentListeningDevice_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsNodeFrequentListeningDevice_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeFrequentListeningDevice_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsNodeBeamingDevice_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+  uint8_t ___nodeId;
+
+  BOOL ___homeId_isset;
+  BOOL ___nodeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+@property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+- (uint8_t) _nodeId;
+- (void) set_nodeId: (uint8_t) _nodeId;
+- (BOOL) _nodeIdIsSet;
+
+@end
+
+@implementation OpenZWaveIsNodeBeamingDevice_args
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_nodeId"])
+  {
+    ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
+    ___nodeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+  if (___nodeId_isset)
+  {
+    [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (uint8_t) _nodeId {
+  return ___nodeId;
+}
+
+- (void) set_nodeId: (uint8_t) _nodeId {
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+}
+
+- (BOOL) _nodeIdIsSet {
+  return ___nodeId_isset;
+}
+
+- (void) unset_nodeId {
+  ___nodeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_nodeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsNodeBeamingDevice_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  if (___nodeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+    [outProtocol writeByte: ___nodeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeBeamingDevice_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @",_nodeId:"];
+  [ms appendFormat: @"%i", ___nodeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsNodeBeamingDevice_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveIsNodeBeamingDevice_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsNodeBeamingDevice_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeBeamingDevice_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @interface OpenZWaveIsNodeRoutingDevice_args : NSObject <NSCoding> {
   int32_t ___homeId;
   uint8_t ___nodeId;
@@ -7166,6 +7768,307 @@
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeRoutingDevice_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsNodeSecurityDevice_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+  uint8_t ___nodeId;
+
+  BOOL ___homeId_isset;
+  BOOL ___nodeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+@property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+- (uint8_t) _nodeId;
+- (void) set_nodeId: (uint8_t) _nodeId;
+- (BOOL) _nodeIdIsSet;
+
+@end
+
+@implementation OpenZWaveIsNodeSecurityDevice_args
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_nodeId"])
+  {
+    ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
+    ___nodeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+  if (___nodeId_isset)
+  {
+    [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (uint8_t) _nodeId {
+  return ___nodeId;
+}
+
+- (void) set_nodeId: (uint8_t) _nodeId {
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+}
+
+- (BOOL) _nodeIdIsSet {
+  return ___nodeId_isset;
+}
+
+- (void) unset_nodeId {
+  ___nodeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_nodeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsNodeSecurityDevice_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  if (___nodeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+    [outProtocol writeByte: ___nodeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeSecurityDevice_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @",_nodeId:"];
+  [ms appendFormat: @"%i", ___nodeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsNodeSecurityDevice_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveIsNodeSecurityDevice_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsNodeSecurityDevice_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsNodeSecurityDevice_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%i", __success];
   [ms appendString: @")"];
@@ -7768,307 +8671,6 @@
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"GetNodeVersion_result("];
-  [ms appendString: @"success:"];
-  [ms appendFormat: @"%i", __success];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface OpenZWaveGetNodeSecurity_args : NSObject <NSCoding> {
-  int32_t ___homeId;
-  uint8_t ___nodeId;
-
-  BOOL ___homeId_isset;
-  BOOL ___nodeId_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
-@property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
-#endif
-
-- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (int32_t) _homeId;
-- (void) set_homeId: (int32_t) _homeId;
-- (BOOL) _homeIdIsSet;
-
-- (uint8_t) _nodeId;
-- (void) set_nodeId: (uint8_t) _nodeId;
-- (BOOL) _nodeIdIsSet;
-
-@end
-
-@implementation OpenZWaveGetNodeSecurity_args
-
-- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId
-{
-  self = [super init];
-  ___homeId = _homeId;
-  ___homeId_isset = YES;
-  ___nodeId = _nodeId;
-  ___nodeId_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"_homeId"])
-  {
-    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
-    ___homeId_isset = YES;
-  }
-  if ([decoder containsValueForKey: @"_nodeId"])
-  {
-    ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
-    ___nodeId_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (___homeId_isset)
-  {
-    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
-  }
-  if (___nodeId_isset)
-  {
-    [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
-  }
-}
-
-- (void) dealloc
-{
-  [super dealloc];
-}
-
-- (int32_t) _homeId {
-  return ___homeId;
-}
-
-- (void) set_homeId: (int32_t) _homeId {
-  ___homeId = _homeId;
-  ___homeId_isset = YES;
-}
-
-- (BOOL) _homeIdIsSet {
-  return ___homeId_isset;
-}
-
-- (void) unset_homeId {
-  ___homeId_isset = NO;
-}
-
-- (uint8_t) _nodeId {
-  return ___nodeId;
-}
-
-- (void) set_nodeId: (uint8_t) _nodeId {
-  ___nodeId = _nodeId;
-  ___nodeId_isset = YES;
-}
-
-- (BOOL) _nodeIdIsSet {
-  return ___nodeId_isset;
-}
-
-- (void) unset_nodeId {
-  ___nodeId_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 1:
-        if (fieldType == TType_I32) {
-          int32_t fieldValue = [inProtocol readI32];
-          [self set_homeId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      case 2:
-        if (fieldType == TType_BYTE) {
-          uint8_t fieldValue = [inProtocol readByte];
-          [self set_nodeId: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetNodeSecurity_args"];
-  if (___homeId_isset) {
-    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: ___homeId];
-    [outProtocol writeFieldEnd];
-  }
-  if (___nodeId_isset) {
-    [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
-    [outProtocol writeByte: ___nodeId];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetNodeSecurity_args("];
-  [ms appendString: @"_homeId:"];
-  [ms appendFormat: @"%i", ___homeId];
-  [ms appendString: @",_nodeId:"];
-  [ms appendFormat: @"%i", ___nodeId];
-  [ms appendString: @")"];
-  return [NSString stringWithString: ms];
-}
-
-@end
-
-@interface OpenZWaveGetNodeSecurity_result : NSObject <NSCoding> {
-  uint8_t __success;
-
-  BOOL __success_isset;
-}
-
-#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, getter=success, setter=setSuccess:) uint8_t success;
-#endif
-
-- (id) initWithSuccess: (uint8_t) success;
-
-- (void) read: (id <TProtocol>) inProtocol;
-- (void) write: (id <TProtocol>) outProtocol;
-
-- (uint8_t) success;
-- (void) setSuccess: (uint8_t) success;
-- (BOOL) successIsSet;
-
-@end
-
-@implementation OpenZWaveGetNodeSecurity_result
-
-- (id) initWithSuccess: (uint8_t) success
-{
-  self = [super init];
-  __success = success;
-  __success_isset = YES;
-  return self;
-}
-
-- (id) initWithCoder: (NSCoder *) decoder
-{
-  self = [super init];
-  if ([decoder containsValueForKey: @"success"])
-  {
-    __success = [decoder decodeIntForKey: @"success"];
-    __success_isset = YES;
-  }
-  return self;
-}
-
-- (void) encodeWithCoder: (NSCoder *) encoder
-{
-  if (__success_isset)
-  {
-    [encoder encodeInt: __success forKey: @"success"];
-  }
-}
-
-- (void) dealloc
-{
-  [super dealloc];
-}
-
-- (uint8_t) success {
-  return __success;
-}
-
-- (void) setSuccess: (uint8_t) success {
-  __success = success;
-  __success_isset = YES;
-}
-
-- (BOOL) successIsSet {
-  return __success_isset;
-}
-
-- (void) unsetSuccess {
-  __success_isset = NO;
-}
-
-- (void) read: (id <TProtocol>) inProtocol
-{
-  NSString * fieldName;
-  int fieldType;
-  int fieldID;
-
-  [inProtocol readStructBeginReturningName: NULL];
-  while (true)
-  {
-    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
-    if (fieldType == TType_STOP) { 
-      break;
-    }
-    switch (fieldID)
-    {
-      case 0:
-        if (fieldType == TType_BYTE) {
-          uint8_t fieldValue = [inProtocol readByte];
-          [self setSuccess: fieldValue];
-        } else { 
-          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        }
-        break;
-      default:
-        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
-        break;
-    }
-    [inProtocol readFieldEnd];
-  }
-  [inProtocol readStructEnd];
-}
-
-- (void) write: (id <TProtocol>) outProtocol {
-  [outProtocol writeStructBeginWithName: @"GetNodeSecurity_result"];
-
-  if (__success_isset) {
-    [outProtocol writeFieldBeginWithName: @"success" type: TType_BYTE fieldID: 0];
-    [outProtocol writeByte: __success];
-    [outProtocol writeFieldEnd];
-  }
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-}
-
-- (NSString *) description {
-  NSMutableString * ms = [NSMutableString stringWithString: @"GetNodeSecurity_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%i", __success];
   [ms appendString: @")"];
@@ -27885,11 +28487,13 @@
   int ___command;
   BOOL ___highPower;
   uint8_t ___nodeId;
+  uint8_t ___arg;
 
   BOOL ___homeId_isset;
   BOOL ___command_isset;
   BOOL ___highPower_isset;
   BOOL ___nodeId_isset;
+  BOOL ___arg_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
@@ -27897,9 +28501,10 @@
 @property (nonatomic, getter=_command, setter=set_command:) int _command;
 @property (nonatomic, getter=_highPower, setter=set_highPower:) BOOL _highPower;
 @property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
+@property (nonatomic, getter=_arg, setter=set_arg:) uint8_t _arg;
 #endif
 
-- (id) initWith_homeId: (int32_t) _homeId _command: (int) _command _highPower: (BOOL) _highPower _nodeId: (uint8_t) _nodeId;
+- (id) initWith_homeId: (int32_t) _homeId _command: (int) _command _highPower: (BOOL) _highPower _nodeId: (uint8_t) _nodeId _arg: (uint8_t) _arg;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -27920,11 +28525,15 @@
 - (void) set_nodeId: (uint8_t) _nodeId;
 - (BOOL) _nodeIdIsSet;
 
+- (uint8_t) _arg;
+- (void) set_arg: (uint8_t) _arg;
+- (BOOL) _argIsSet;
+
 @end
 
 @implementation OpenZWaveBeginControllerCommand_args
 
-- (id) initWith_homeId: (int32_t) _homeId _command: (int) _command _highPower: (BOOL) _highPower _nodeId: (uint8_t) _nodeId
+- (id) initWith_homeId: (int32_t) _homeId _command: (int) _command _highPower: (BOOL) _highPower _nodeId: (uint8_t) _nodeId _arg: (uint8_t) _arg
 {
   self = [super init];
   ___homeId = _homeId;
@@ -27935,6 +28544,8 @@
   ___highPower_isset = YES;
   ___nodeId = _nodeId;
   ___nodeId_isset = YES;
+  ___arg = _arg;
+  ___arg_isset = YES;
   return self;
 }
 
@@ -27961,6 +28572,11 @@
     ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
     ___nodeId_isset = YES;
   }
+  if ([decoder containsValueForKey: @"_arg"])
+  {
+    ___arg = [decoder decodeIntForKey: @"_arg"];
+    ___arg_isset = YES;
+  }
   return self;
 }
 
@@ -27981,6 +28597,10 @@
   if (___nodeId_isset)
   {
     [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
+  }
+  if (___arg_isset)
+  {
+    [encoder encodeInt: ___arg forKey: @"_arg"];
   }
 }
 
@@ -28057,6 +28677,23 @@
   ___nodeId_isset = NO;
 }
 
+- (uint8_t) _arg {
+  return ___arg;
+}
+
+- (void) set_arg: (uint8_t) _arg {
+  ___arg = _arg;
+  ___arg_isset = YES;
+}
+
+- (BOOL) _argIsSet {
+  return ___arg_isset;
+}
+
+- (void) unset_arg {
+  ___arg_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -28104,6 +28741,14 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 5:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_arg: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -28135,6 +28780,11 @@
     [outProtocol writeByte: ___nodeId];
     [outProtocol writeFieldEnd];
   }
+  if (___arg_isset) {
+    [outProtocol writeFieldBeginWithName: @"_arg" type: TType_BYTE fieldID: 5];
+    [outProtocol writeByte: ___arg];
+    [outProtocol writeFieldEnd];
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -28149,6 +28799,8 @@
   [ms appendFormat: @"%i", ___highPower];
   [ms appendString: @",_nodeId:"];
   [ms appendFormat: @"%i", ___nodeId];
+  [ms appendString: @",_arg:"];
+  [ms appendFormat: @"%i", ___arg];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -40052,6 +40704,88 @@
   return [self recv_IsNodeListeningDevice];
 }
 
+- (void) send_IsNodeFrequentListeningDevice: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [outProtocol writeMessageBeginWithName: @"IsNodeFrequentListeningDevice" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"IsNodeFrequentListeningDevice_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+  [outProtocol writeByte: _nodeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_IsNodeFrequentListeningDevice
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveIsNodeFrequentListeningDevice_result * result = [[[OpenZWaveIsNodeFrequentListeningDevice_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"IsNodeFrequentListeningDevice failed: unknown result"];
+}
+
+- (BOOL) IsNodeFrequentListeningDevice: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [self send_IsNodeFrequentListeningDevice: _homeId : _nodeId];
+  return [self recv_IsNodeFrequentListeningDevice];
+}
+
+- (void) send_IsNodeBeamingDevice: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [outProtocol writeMessageBeginWithName: @"IsNodeBeamingDevice" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"IsNodeBeamingDevice_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+  [outProtocol writeByte: _nodeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_IsNodeBeamingDevice
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveIsNodeBeamingDevice_result * result = [[[OpenZWaveIsNodeBeamingDevice_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"IsNodeBeamingDevice failed: unknown result"];
+}
+
+- (BOOL) IsNodeBeamingDevice: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [self send_IsNodeBeamingDevice: _homeId : _nodeId];
+  return [self recv_IsNodeBeamingDevice];
+}
+
 - (void) send_IsNodeRoutingDevice: (int32_t) _homeId : (uint8_t) _nodeId
 {
   [outProtocol writeMessageBeginWithName: @"IsNodeRoutingDevice" type: TMessageType_CALL sequenceID: 0];
@@ -40091,6 +40825,47 @@
 {
   [self send_IsNodeRoutingDevice: _homeId : _nodeId];
   return [self recv_IsNodeRoutingDevice];
+}
+
+- (void) send_IsNodeSecurityDevice: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [outProtocol writeMessageBeginWithName: @"IsNodeSecurityDevice" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"IsNodeSecurityDevice_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+  [outProtocol writeByte: _nodeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_IsNodeSecurityDevice
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveIsNodeSecurityDevice_result * result = [[[OpenZWaveIsNodeSecurityDevice_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"IsNodeSecurityDevice failed: unknown result"];
+}
+
+- (BOOL) IsNodeSecurityDevice: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [self send_IsNodeSecurityDevice: _homeId : _nodeId];
+  return [self recv_IsNodeSecurityDevice];
 }
 
 - (void) send_GetNodeMaxBaudRate: (int32_t) _homeId : (uint8_t) _nodeId
@@ -40173,47 +40948,6 @@
 {
   [self send_GetNodeVersion: _homeId : _nodeId];
   return [self recv_GetNodeVersion];
-}
-
-- (void) send_GetNodeSecurity: (int32_t) _homeId : (uint8_t) _nodeId
-{
-  [outProtocol writeMessageBeginWithName: @"GetNodeSecurity" type: TMessageType_CALL sequenceID: 0];
-  [outProtocol writeStructBeginWithName: @"GetNodeSecurity_args"];
-  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
-  [outProtocol writeI32: _homeId];
-  [outProtocol writeFieldEnd];
-  [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
-  [outProtocol writeByte: _nodeId];
-  [outProtocol writeFieldEnd];
-  [outProtocol writeFieldStop];
-  [outProtocol writeStructEnd];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-}
-
-- (uint8_t) recv_GetNodeSecurity
-{
-  int msgType = 0;
-  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
-  if (msgType == TMessageType_EXCEPTION) {
-    TApplicationException * x = [TApplicationException read: inProtocol];
-    [inProtocol readMessageEnd];
-    @throw x;
-  }
-  OpenZWaveGetNodeSecurity_result * result = [[[OpenZWaveGetNodeSecurity_result alloc] init] autorelease];
-  [result read: inProtocol];
-  [inProtocol readMessageEnd];
-  if ([result successIsSet]) {
-    return [result success];
-  }
-  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
-                                           reason: @"GetNodeSecurity failed: unknown result"];
-}
-
-- (uint8_t) GetNodeSecurity: (int32_t) _homeId : (uint8_t) _nodeId
-{
-  [self send_GetNodeSecurity: _homeId : _nodeId];
-  return [self recv_GetNodeSecurity];
 }
 
 - (void) send_GetNodeBasic: (int32_t) _homeId : (uint8_t) _nodeId
@@ -43039,7 +43773,7 @@
   [self recv_SoftReset];
 }
 
-- (void) send_BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId
+- (void) send_BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId : (uint8_t) _arg
 {
   [outProtocol writeMessageBeginWithName: @"BeginControllerCommand" type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: @"BeginControllerCommand_args"];
@@ -43054,6 +43788,9 @@
   [outProtocol writeFieldEnd];
   [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 4];
   [outProtocol writeByte: _nodeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_arg" type: TType_BYTE fieldID: 5];
+  [outProtocol writeByte: _arg];
   [outProtocol writeFieldEnd];
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
@@ -43080,9 +43817,9 @@
                                            reason: @"BeginControllerCommand failed: unknown result"];
 }
 
-- (BOOL) BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId
+- (BOOL) BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId : (uint8_t) _arg
 {
-  [self send_BeginControllerCommand: _homeId : _command : _highPower : _nodeId];
+  [self send_BeginControllerCommand: _homeId : _command : _highPower : _nodeId : _arg];
   return [self recv_BeginControllerCommand];
 }
 
@@ -44769,12 +45506,36 @@
     [mMethodMap setValue: invocation forKey: @"IsNodeListeningDevice"];
   }
   {
+    SEL s = @selector(process_IsNodeFrequentListeningDevice_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"IsNodeFrequentListeningDevice"];
+  }
+  {
+    SEL s = @selector(process_IsNodeBeamingDevice_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"IsNodeBeamingDevice"];
+  }
+  {
     SEL s = @selector(process_IsNodeRoutingDevice_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"IsNodeRoutingDevice"];
+  }
+  {
+    SEL s = @selector(process_IsNodeSecurityDevice_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"IsNodeSecurityDevice"];
   }
   {
     SEL s = @selector(process_GetNodeMaxBaudRate_withSequenceID:inProtocol:outProtocol:);
@@ -44791,14 +45552,6 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"GetNodeVersion"];
-  }
-  {
-    SEL s = @selector(process_GetNodeSecurity_withSequenceID:inProtocol:outProtocol:);
-    NSMethodSignature * sig = [self methodSignatureForSelector: s];
-    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
-    [invocation setSelector: s];
-    [invocation retainArguments];
-    [mMethodMap setValue: invocation forKey: @"GetNodeSecurity"];
   }
   {
     SEL s = @selector(process_GetNodeBasic_withSequenceID:inProtocol:outProtocol:);
@@ -45978,6 +46731,40 @@
   [args release];
 }
 
+- (void) process_IsNodeFrequentListeningDevice_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveIsNodeFrequentListeningDevice_args * args = [[OpenZWaveIsNodeFrequentListeningDevice_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveIsNodeFrequentListeningDevice_result * result = [[OpenZWaveIsNodeFrequentListeningDevice_result alloc] init];
+  [result setSuccess: [mService IsNodeFrequentListeningDevice: [args _homeId]: [args _nodeId]]];
+  [outProtocol writeMessageBeginWithName: @"IsNodeFrequentListeningDevice"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_IsNodeBeamingDevice_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveIsNodeBeamingDevice_args * args = [[OpenZWaveIsNodeBeamingDevice_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveIsNodeBeamingDevice_result * result = [[OpenZWaveIsNodeBeamingDevice_result alloc] init];
+  [result setSuccess: [mService IsNodeBeamingDevice: [args _homeId]: [args _nodeId]]];
+  [outProtocol writeMessageBeginWithName: @"IsNodeBeamingDevice"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
 - (void) process_IsNodeRoutingDevice_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
 {
   OpenZWaveIsNodeRoutingDevice_args * args = [[OpenZWaveIsNodeRoutingDevice_args alloc] init];
@@ -45986,6 +46773,23 @@
   OpenZWaveIsNodeRoutingDevice_result * result = [[OpenZWaveIsNodeRoutingDevice_result alloc] init];
   [result setSuccess: [mService IsNodeRoutingDevice: [args _homeId]: [args _nodeId]]];
   [outProtocol writeMessageBeginWithName: @"IsNodeRoutingDevice"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_IsNodeSecurityDevice_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveIsNodeSecurityDevice_args * args = [[OpenZWaveIsNodeSecurityDevice_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveIsNodeSecurityDevice_result * result = [[OpenZWaveIsNodeSecurityDevice_result alloc] init];
+  [result setSuccess: [mService IsNodeSecurityDevice: [args _homeId]: [args _nodeId]]];
+  [outProtocol writeMessageBeginWithName: @"IsNodeSecurityDevice"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];
@@ -46020,23 +46824,6 @@
   OpenZWaveGetNodeVersion_result * result = [[OpenZWaveGetNodeVersion_result alloc] init];
   [result setSuccess: [mService GetNodeVersion: [args _homeId]: [args _nodeId]]];
   [outProtocol writeMessageBeginWithName: @"GetNodeVersion"
-                                    type: TMessageType_REPLY
-                              sequenceID: seqID];
-  [result write: outProtocol];
-  [outProtocol writeMessageEnd];
-  [[outProtocol transport] flush];
-  [result release];
-  [args release];
-}
-
-- (void) process_GetNodeSecurity_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
-{
-  OpenZWaveGetNodeSecurity_args * args = [[OpenZWaveGetNodeSecurity_args alloc] init];
-  [args read: inProtocol];
-  [inProtocol readMessageEnd];
-  OpenZWaveGetNodeSecurity_result * result = [[OpenZWaveGetNodeSecurity_result alloc] init];
-  [result setSuccess: [mService GetNodeSecurity: [args _homeId]: [args _nodeId]]];
-  [outProtocol writeMessageBeginWithName: @"GetNodeSecurity"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];
@@ -47225,7 +48012,7 @@
   [args read: inProtocol];
   [inProtocol readMessageEnd];
   OpenZWaveBeginControllerCommand_result * result = [[OpenZWaveBeginControllerCommand_result alloc] init];
-  [result setSuccess: [mService BeginControllerCommand: [args _homeId]: [args _command]: [args _highPower]: [args _nodeId]]];
+  [result setSuccess: [mService BeginControllerCommand: [args _homeId]: [args _command]: [args _highPower]: [args _nodeId]: [args _arg]]];
   [outProtocol writeMessageBeginWithName: @"BeginControllerCommand"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];

@@ -517,10 +517,12 @@ enum OpenZWaveDriverControllerCommand {
 - (BOOL) RequestNodeState: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (BOOL) RequestNodeDynamic: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (BOOL) IsNodeListeningDevice: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
+- (BOOL) IsNodeFrequentListeningDevice: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
+- (BOOL) IsNodeBeamingDevice: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (BOOL) IsNodeRoutingDevice: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
+- (BOOL) IsNodeSecurityDevice: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (int32_t) GetNodeMaxBaudRate: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeVersion: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
-- (uint8_t) GetNodeSecurity: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeBasic: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeGeneric: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeSpecific: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
@@ -590,7 +592,7 @@ enum OpenZWaveDriverControllerCommand {
 - (void) RemoveAssociation: (int32_t) _homeId : (uint8_t) _nodeId : (uint8_t) _groupIdx : (uint8_t) _targetNodeId;  // throws TException
 - (void) ResetController: (int32_t) _homeId;  // throws TException
 - (void) SoftReset: (int32_t) _homeId;  // throws TException
-- (BOOL) BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId;  // throws TException
+- (BOOL) BeginControllerCommand: (int32_t) _homeId : (int) _command : (BOOL) _highPower : (uint8_t) _nodeId : (uint8_t) _arg;  // throws TException
 - (BOOL) CancelControllerCommand: (int32_t) _homeId;  // throws TException
 - (uint8_t) GetNumScenes;  // throws TException
 - (OpenZWaveGetAllScenesReturnStruct *) GetAllScenes;  // throws TException

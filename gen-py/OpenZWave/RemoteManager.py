@@ -227,12 +227,52 @@ class Iface:
     """
     pass
 
+  def IsNodeFrequentListeningDevice(self, _homeId, _nodeId):
+    """
+    \brief Get whether the node is a frequent listening device that goes to sleep but
+    can be woken up by a beam. Useful to determine node and controller consistency.
+    \param _homeId The Home ID of the Z-Wave controller that manages the node.
+    \param _nodeId The ID of the node to query.
+    \return True if it is a frequent listening node.
+
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    pass
+
+  def IsNodeBeamingDevice(self, _homeId, _nodeId):
+    """
+    \brief Get whether the node is a beam capable device.
+    \param _homeId The Home ID of the Z-Wave controller that manages the node.
+    \param _nodeId The ID of the node to query.
+    \return True if it is a frequent listening node.
+
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    pass
+
   def IsNodeRoutingDevice(self, _homeId, _nodeId):
     """
     \brief Get whether the node is a routing device that passes messages to other nodes
     \param _homeId The Home ID of the Z-Wave controller that manages the node.
     \param _nodeId The ID of the node to query.
     \return True if the node is a routing device
+
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    pass
+
+  def IsNodeSecurityDevice(self, _homeId, _nodeId):
+    """
+    \brief Get the security attribute for a node. True if node supports security features.
+    \param _homeId The Home ID of the Z-Wave controller that manages the node.
+    \param _nodeId The ID of the node to query.
+    \return true if security features implemented.
 
     Parameters:
      - _homeId
@@ -259,19 +299,6 @@ class Iface:
     \param _homeId The Home ID of the Z-Wave controller that manages the node.
     \param _nodeId The ID of the node to query.
     \return the node's version number
-
-    Parameters:
-     - _homeId
-     - _nodeId
-    """
-    pass
-
-  def GetNodeSecurity(self, _homeId, _nodeId):
-    """
-    \brief Get the security byte for a node.  Bit meanings are still to be determined.
-    \param _homeId The Home ID of the Z-Wave controller that manages the node.
-    \param _nodeId The ID of the node to query.
-    \return the node's security byte
 
     Parameters:
      - _homeId
@@ -1350,7 +1377,7 @@ class Iface:
     """
     pass
 
-  def BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId):
+  def BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId, _arg):
     """
     * \brief Start a controller command process.
     * \param _homeId The Home ID of the Z-Wave controller.
@@ -1400,6 +1427,7 @@ class Iface:
      - _command
      - _highPower
      - _nodeId
+     - _arg
     """
     pass
 
@@ -2517,6 +2545,81 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "IsNodeListeningDevice failed: unknown result");
 
+  def IsNodeFrequentListeningDevice(self, _homeId, _nodeId):
+    """
+    \brief Get whether the node is a frequent listening device that goes to sleep but
+    can be woken up by a beam. Useful to determine node and controller consistency.
+    \param _homeId The Home ID of the Z-Wave controller that manages the node.
+    \param _nodeId The ID of the node to query.
+    \return True if it is a frequent listening node.
+
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    self.send_IsNodeFrequentListeningDevice(_homeId, _nodeId)
+    return self.recv_IsNodeFrequentListeningDevice()
+
+  def send_IsNodeFrequentListeningDevice(self, _homeId, _nodeId):
+    self._oprot.writeMessageBegin('IsNodeFrequentListeningDevice', TMessageType.CALL, self._seqid)
+    args = IsNodeFrequentListeningDevice_args()
+    args._homeId = _homeId
+    args._nodeId = _nodeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_IsNodeFrequentListeningDevice(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = IsNodeFrequentListeningDevice_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "IsNodeFrequentListeningDevice failed: unknown result");
+
+  def IsNodeBeamingDevice(self, _homeId, _nodeId):
+    """
+    \brief Get whether the node is a beam capable device.
+    \param _homeId The Home ID of the Z-Wave controller that manages the node.
+    \param _nodeId The ID of the node to query.
+    \return True if it is a frequent listening node.
+
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    self.send_IsNodeBeamingDevice(_homeId, _nodeId)
+    return self.recv_IsNodeBeamingDevice()
+
+  def send_IsNodeBeamingDevice(self, _homeId, _nodeId):
+    self._oprot.writeMessageBegin('IsNodeBeamingDevice', TMessageType.CALL, self._seqid)
+    args = IsNodeBeamingDevice_args()
+    args._homeId = _homeId
+    args._nodeId = _nodeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_IsNodeBeamingDevice(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = IsNodeBeamingDevice_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "IsNodeBeamingDevice failed: unknown result");
+
   def IsNodeRoutingDevice(self, _homeId, _nodeId):
     """
     \brief Get whether the node is a routing device that passes messages to other nodes
@@ -2553,6 +2656,43 @@ class Client(Iface):
     if result.success is not None:
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "IsNodeRoutingDevice failed: unknown result");
+
+  def IsNodeSecurityDevice(self, _homeId, _nodeId):
+    """
+    \brief Get the security attribute for a node. True if node supports security features.
+    \param _homeId The Home ID of the Z-Wave controller that manages the node.
+    \param _nodeId The ID of the node to query.
+    \return true if security features implemented.
+
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    self.send_IsNodeSecurityDevice(_homeId, _nodeId)
+    return self.recv_IsNodeSecurityDevice()
+
+  def send_IsNodeSecurityDevice(self, _homeId, _nodeId):
+    self._oprot.writeMessageBegin('IsNodeSecurityDevice', TMessageType.CALL, self._seqid)
+    args = IsNodeSecurityDevice_args()
+    args._homeId = _homeId
+    args._nodeId = _nodeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_IsNodeSecurityDevice(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = IsNodeSecurityDevice_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "IsNodeSecurityDevice failed: unknown result");
 
   def GetNodeMaxBaudRate(self, _homeId, _nodeId):
     """
@@ -2627,43 +2767,6 @@ class Client(Iface):
     if result.success is not None:
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetNodeVersion failed: unknown result");
-
-  def GetNodeSecurity(self, _homeId, _nodeId):
-    """
-    \brief Get the security byte for a node.  Bit meanings are still to be determined.
-    \param _homeId The Home ID of the Z-Wave controller that manages the node.
-    \param _nodeId The ID of the node to query.
-    \return the node's security byte
-
-    Parameters:
-     - _homeId
-     - _nodeId
-    """
-    self.send_GetNodeSecurity(_homeId, _nodeId)
-    return self.recv_GetNodeSecurity()
-
-  def send_GetNodeSecurity(self, _homeId, _nodeId):
-    self._oprot.writeMessageBegin('GetNodeSecurity', TMessageType.CALL, self._seqid)
-    args = GetNodeSecurity_args()
-    args._homeId = _homeId
-    args._nodeId = _nodeId
-    args.write(self._oprot)
-    self._oprot.writeMessageEnd()
-    self._oprot.trans.flush()
-
-  def recv_GetNodeSecurity(self, ):
-    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
-    if mtype == TMessageType.EXCEPTION:
-      x = TApplicationException()
-      x.read(self._iprot)
-      self._iprot.readMessageEnd()
-      raise x
-    result = GetNodeSecurity_result()
-    result.read(self._iprot)
-    self._iprot.readMessageEnd()
-    if result.success is not None:
-      return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetNodeSecurity failed: unknown result");
 
   def GetNodeBasic(self, _homeId, _nodeId):
     """
@@ -5348,7 +5451,7 @@ class Client(Iface):
     self._iprot.readMessageEnd()
     return
 
-  def BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId):
+  def BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId, _arg):
     """
     * \brief Start a controller command process.
     * \param _homeId The Home ID of the Z-Wave controller.
@@ -5398,17 +5501,19 @@ class Client(Iface):
      - _command
      - _highPower
      - _nodeId
+     - _arg
     """
-    self.send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
+    self.send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg)
     return self.recv_BeginControllerCommand()
 
-  def send_BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId):
+  def send_BeginControllerCommand(self, _homeId, _command, _highPower, _nodeId, _arg):
     self._oprot.writeMessageBegin('BeginControllerCommand', TMessageType.CALL, self._seqid)
     args = BeginControllerCommand_args()
     args._homeId = _homeId
     args._command = _command
     args._highPower = _highPower
     args._nodeId = _nodeId
+    args._arg = _arg
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -6816,10 +6921,12 @@ class Processor(Iface, TProcessor):
     self._processMap["RequestNodeState"] = Processor.process_RequestNodeState
     self._processMap["RequestNodeDynamic"] = Processor.process_RequestNodeDynamic
     self._processMap["IsNodeListeningDevice"] = Processor.process_IsNodeListeningDevice
+    self._processMap["IsNodeFrequentListeningDevice"] = Processor.process_IsNodeFrequentListeningDevice
+    self._processMap["IsNodeBeamingDevice"] = Processor.process_IsNodeBeamingDevice
     self._processMap["IsNodeRoutingDevice"] = Processor.process_IsNodeRoutingDevice
+    self._processMap["IsNodeSecurityDevice"] = Processor.process_IsNodeSecurityDevice
     self._processMap["GetNodeMaxBaudRate"] = Processor.process_GetNodeMaxBaudRate
     self._processMap["GetNodeVersion"] = Processor.process_GetNodeVersion
-    self._processMap["GetNodeSecurity"] = Processor.process_GetNodeSecurity
     self._processMap["GetNodeBasic"] = Processor.process_GetNodeBasic
     self._processMap["GetNodeGeneric"] = Processor.process_GetNodeGeneric
     self._processMap["GetNodeSpecific"] = Processor.process_GetNodeSpecific
@@ -7129,6 +7236,28 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
+  def process_IsNodeFrequentListeningDevice(self, seqid, iprot, oprot):
+    args = IsNodeFrequentListeningDevice_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = IsNodeFrequentListeningDevice_result()
+    result.success = self._handler.IsNodeFrequentListeningDevice(args._homeId, args._nodeId)
+    oprot.writeMessageBegin("IsNodeFrequentListeningDevice", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_IsNodeBeamingDevice(self, seqid, iprot, oprot):
+    args = IsNodeBeamingDevice_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = IsNodeBeamingDevice_result()
+    result.success = self._handler.IsNodeBeamingDevice(args._homeId, args._nodeId)
+    oprot.writeMessageBegin("IsNodeBeamingDevice", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
   def process_IsNodeRoutingDevice(self, seqid, iprot, oprot):
     args = IsNodeRoutingDevice_args()
     args.read(iprot)
@@ -7136,6 +7265,17 @@ class Processor(Iface, TProcessor):
     result = IsNodeRoutingDevice_result()
     result.success = self._handler.IsNodeRoutingDevice(args._homeId, args._nodeId)
     oprot.writeMessageBegin("IsNodeRoutingDevice", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_IsNodeSecurityDevice(self, seqid, iprot, oprot):
+    args = IsNodeSecurityDevice_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = IsNodeSecurityDevice_result()
+    result.success = self._handler.IsNodeSecurityDevice(args._homeId, args._nodeId)
+    oprot.writeMessageBegin("IsNodeSecurityDevice", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7158,17 +7298,6 @@ class Processor(Iface, TProcessor):
     result = GetNodeVersion_result()
     result.success = self._handler.GetNodeVersion(args._homeId, args._nodeId)
     oprot.writeMessageBegin("GetNodeVersion", TMessageType.REPLY, seqid)
-    result.write(oprot)
-    oprot.writeMessageEnd()
-    oprot.trans.flush()
-
-  def process_GetNodeSecurity(self, seqid, iprot, oprot):
-    args = GetNodeSecurity_args()
-    args.read(iprot)
-    iprot.readMessageEnd()
-    result = GetNodeSecurity_result()
-    result.success = self._handler.GetNodeSecurity(args._homeId, args._nodeId)
-    oprot.writeMessageBegin("GetNodeSecurity", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7937,7 +8066,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = BeginControllerCommand_result()
-    result.success = self._handler.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId)
+    result.success = self._handler.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId, args._arg)
     oprot.writeMessageBegin("BeginControllerCommand", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -10364,6 +10493,268 @@ class IsNodeListeningDevice_result:
   def __ne__(self, other):
     return not (self == other)
 
+class IsNodeFrequentListeningDevice_args:
+  """
+  Attributes:
+   - _homeId
+   - _nodeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+    (2, TType.BYTE, '_nodeId', None, None, ), # 2
+  )
+
+  def __init__(self, _homeId=None, _nodeId=None,):
+    self._homeId = _homeId
+    self._nodeId = _nodeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BYTE:
+          self._nodeId = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsNodeFrequentListeningDevice_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    if self._nodeId is not None:
+      oprot.writeFieldBegin('_nodeId', TType.BYTE, 2)
+      oprot.writeByte(self._nodeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsNodeFrequentListeningDevice_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BOOL:
+          self.success = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsNodeFrequentListeningDevice_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BOOL, 0)
+      oprot.writeBool(self.success)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsNodeBeamingDevice_args:
+  """
+  Attributes:
+   - _homeId
+   - _nodeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+    (2, TType.BYTE, '_nodeId', None, None, ), # 2
+  )
+
+  def __init__(self, _homeId=None, _nodeId=None,):
+    self._homeId = _homeId
+    self._nodeId = _nodeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BYTE:
+          self._nodeId = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsNodeBeamingDevice_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    if self._nodeId is not None:
+      oprot.writeFieldBegin('_nodeId', TType.BYTE, 2)
+      oprot.writeByte(self._nodeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsNodeBeamingDevice_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BOOL:
+          self.success = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsNodeBeamingDevice_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BOOL, 0)
+      oprot.writeBool(self.success)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
 class IsNodeRoutingDevice_args:
   """
   Attributes:
@@ -10473,6 +10864,137 @@ class IsNodeRoutingDevice_result:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('IsNodeRoutingDevice_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BOOL, 0)
+      oprot.writeBool(self.success)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsNodeSecurityDevice_args:
+  """
+  Attributes:
+   - _homeId
+   - _nodeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+    (2, TType.BYTE, '_nodeId', None, None, ), # 2
+  )
+
+  def __init__(self, _homeId=None, _nodeId=None,):
+    self._homeId = _homeId
+    self._nodeId = _nodeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BYTE:
+          self._nodeId = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsNodeSecurityDevice_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    if self._nodeId is not None:
+      oprot.writeFieldBegin('_nodeId', TType.BYTE, 2)
+      oprot.writeByte(self._nodeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsNodeSecurityDevice_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BOOL:
+          self.success = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsNodeSecurityDevice_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -10735,137 +11257,6 @@ class GetNodeVersion_result:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('GetNodeVersion_result')
-    if self.success is not None:
-      oprot.writeFieldBegin('success', TType.BYTE, 0)
-      oprot.writeByte(self.success)
-      oprot.writeFieldEnd()
-    oprot.writeFieldStop()
-    oprot.writeStructEnd()
-
-  def validate(self):
-    return
-
-
-  def __repr__(self):
-    L = ['%s=%r' % (key, value)
-      for key, value in self.__dict__.iteritems()]
-    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-  def __eq__(self, other):
-    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-  def __ne__(self, other):
-    return not (self == other)
-
-class GetNodeSecurity_args:
-  """
-  Attributes:
-   - _homeId
-   - _nodeId
-  """
-
-  thrift_spec = (
-    None, # 0
-    (1, TType.I32, '_homeId', None, None, ), # 1
-    (2, TType.BYTE, '_nodeId', None, None, ), # 2
-  )
-
-  def __init__(self, _homeId=None, _nodeId=None,):
-    self._homeId = _homeId
-    self._nodeId = _nodeId
-
-  def read(self, iprot):
-    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
-      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
-      return
-    iprot.readStructBegin()
-    while True:
-      (fname, ftype, fid) = iprot.readFieldBegin()
-      if ftype == TType.STOP:
-        break
-      if fid == 1:
-        if ftype == TType.I32:
-          self._homeId = iprot.readI32();
-        else:
-          iprot.skip(ftype)
-      elif fid == 2:
-        if ftype == TType.BYTE:
-          self._nodeId = iprot.readByte();
-        else:
-          iprot.skip(ftype)
-      else:
-        iprot.skip(ftype)
-      iprot.readFieldEnd()
-    iprot.readStructEnd()
-
-  def write(self, oprot):
-    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
-      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
-      return
-    oprot.writeStructBegin('GetNodeSecurity_args')
-    if self._homeId is not None:
-      oprot.writeFieldBegin('_homeId', TType.I32, 1)
-      oprot.writeI32(self._homeId)
-      oprot.writeFieldEnd()
-    if self._nodeId is not None:
-      oprot.writeFieldBegin('_nodeId', TType.BYTE, 2)
-      oprot.writeByte(self._nodeId)
-      oprot.writeFieldEnd()
-    oprot.writeFieldStop()
-    oprot.writeStructEnd()
-
-  def validate(self):
-    return
-
-
-  def __repr__(self):
-    L = ['%s=%r' % (key, value)
-      for key, value in self.__dict__.iteritems()]
-    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
-
-  def __eq__(self, other):
-    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
-
-  def __ne__(self, other):
-    return not (self == other)
-
-class GetNodeSecurity_result:
-  """
-  Attributes:
-   - success
-  """
-
-  thrift_spec = (
-    (0, TType.BYTE, 'success', None, None, ), # 0
-  )
-
-  def __init__(self, success=None,):
-    self.success = success
-
-  def read(self, iprot):
-    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
-      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
-      return
-    iprot.readStructBegin()
-    while True:
-      (fname, ftype, fid) = iprot.readFieldBegin()
-      if ftype == TType.STOP:
-        break
-      if fid == 0:
-        if ftype == TType.BYTE:
-          self.success = iprot.readByte();
-        else:
-          iprot.skip(ftype)
-      else:
-        iprot.skip(ftype)
-      iprot.readFieldEnd()
-    iprot.readStructEnd()
-
-  def write(self, oprot):
-    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
-      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
-      return
-    oprot.writeStructBegin('GetNodeSecurity_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BYTE, 0)
       oprot.writeByte(self.success)
@@ -19588,6 +19979,7 @@ class BeginControllerCommand_args:
    - _command
    - _highPower
    - _nodeId
+   - _arg
   """
 
   thrift_spec = (
@@ -19596,13 +19988,15 @@ class BeginControllerCommand_args:
     (2, TType.I32, '_command', None, None, ), # 2
     (3, TType.BOOL, '_highPower', None, None, ), # 3
     (4, TType.BYTE, '_nodeId', None, None, ), # 4
+    (5, TType.BYTE, '_arg', None, None, ), # 5
   )
 
-  def __init__(self, _homeId=None, _command=None, _highPower=None, _nodeId=None,):
+  def __init__(self, _homeId=None, _command=None, _highPower=None, _nodeId=None, _arg=None,):
     self._homeId = _homeId
     self._command = _command
     self._highPower = _highPower
     self._nodeId = _nodeId
+    self._arg = _arg
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -19633,6 +20027,11 @@ class BeginControllerCommand_args:
           self._nodeId = iprot.readByte();
         else:
           iprot.skip(ftype)
+      elif fid == 5:
+        if ftype == TType.BYTE:
+          self._arg = iprot.readByte();
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -19658,6 +20057,10 @@ class BeginControllerCommand_args:
     if self._nodeId is not None:
       oprot.writeFieldBegin('_nodeId', TType.BYTE, 4)
       oprot.writeByte(self._nodeId)
+      oprot.writeFieldEnd()
+    if self._arg is not None:
+      oprot.writeFieldBegin('_arg', TType.BYTE, 5)
+      oprot.writeByte(self._arg)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()

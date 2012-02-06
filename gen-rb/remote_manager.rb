@@ -265,6 +265,36 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeListeningDevice failed: unknown result')
           end
 
+          def IsNodeFrequentListeningDevice(_homeId, _nodeId)
+            send_IsNodeFrequentListeningDevice(_homeId, _nodeId)
+            return recv_IsNodeFrequentListeningDevice()
+          end
+
+          def send_IsNodeFrequentListeningDevice(_homeId, _nodeId)
+            send_message('IsNodeFrequentListeningDevice', IsNodeFrequentListeningDevice_args, :_homeId => _homeId, :_nodeId => _nodeId)
+          end
+
+          def recv_IsNodeFrequentListeningDevice()
+            result = receive_message(IsNodeFrequentListeningDevice_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeFrequentListeningDevice failed: unknown result')
+          end
+
+          def IsNodeBeamingDevice(_homeId, _nodeId)
+            send_IsNodeBeamingDevice(_homeId, _nodeId)
+            return recv_IsNodeBeamingDevice()
+          end
+
+          def send_IsNodeBeamingDevice(_homeId, _nodeId)
+            send_message('IsNodeBeamingDevice', IsNodeBeamingDevice_args, :_homeId => _homeId, :_nodeId => _nodeId)
+          end
+
+          def recv_IsNodeBeamingDevice()
+            result = receive_message(IsNodeBeamingDevice_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeBeamingDevice failed: unknown result')
+          end
+
           def IsNodeRoutingDevice(_homeId, _nodeId)
             send_IsNodeRoutingDevice(_homeId, _nodeId)
             return recv_IsNodeRoutingDevice()
@@ -278,6 +308,21 @@ require 'ozw_types'
             result = receive_message(IsNodeRoutingDevice_result)
             return result.success unless result.success.nil?
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeRoutingDevice failed: unknown result')
+          end
+
+          def IsNodeSecurityDevice(_homeId, _nodeId)
+            send_IsNodeSecurityDevice(_homeId, _nodeId)
+            return recv_IsNodeSecurityDevice()
+          end
+
+          def send_IsNodeSecurityDevice(_homeId, _nodeId)
+            send_message('IsNodeSecurityDevice', IsNodeSecurityDevice_args, :_homeId => _homeId, :_nodeId => _nodeId)
+          end
+
+          def recv_IsNodeSecurityDevice()
+            result = receive_message(IsNodeSecurityDevice_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeSecurityDevice failed: unknown result')
           end
 
           def GetNodeMaxBaudRate(_homeId, _nodeId)
@@ -308,21 +353,6 @@ require 'ozw_types'
             result = receive_message(GetNodeVersion_result)
             return result.success unless result.success.nil?
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeVersion failed: unknown result')
-          end
-
-          def GetNodeSecurity(_homeId, _nodeId)
-            send_GetNodeSecurity(_homeId, _nodeId)
-            return recv_GetNodeSecurity()
-          end
-
-          def send_GetNodeSecurity(_homeId, _nodeId)
-            send_message('GetNodeSecurity', GetNodeSecurity_args, :_homeId => _homeId, :_nodeId => _nodeId)
-          end
-
-          def recv_GetNodeSecurity()
-            result = receive_message(GetNodeSecurity_result)
-            return result.success unless result.success.nil?
-            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeSecurity failed: unknown result')
           end
 
           def GetNodeBasic(_homeId, _nodeId)
@@ -1341,13 +1371,13 @@ require 'ozw_types'
             return
           end
 
-          def BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
-            send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
+          def BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg)
+            send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg)
             return recv_BeginControllerCommand()
           end
 
-          def send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId)
-            send_message('BeginControllerCommand', BeginControllerCommand_args, :_homeId => _homeId, :_command => _command, :_highPower => _highPower, :_nodeId => _nodeId)
+          def send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg)
+            send_message('BeginControllerCommand', BeginControllerCommand_args, :_homeId => _homeId, :_command => _command, :_highPower => _highPower, :_nodeId => _nodeId, :_arg => _arg)
           end
 
           def recv_BeginControllerCommand()
@@ -2018,11 +2048,32 @@ require 'ozw_types'
             write_result(result, oprot, 'IsNodeListeningDevice', seqid)
           end
 
+          def process_IsNodeFrequentListeningDevice(seqid, iprot, oprot)
+            args = read_args(iprot, IsNodeFrequentListeningDevice_args)
+            result = IsNodeFrequentListeningDevice_result.new()
+            result.success = @handler.IsNodeFrequentListeningDevice(args._homeId, args._nodeId)
+            write_result(result, oprot, 'IsNodeFrequentListeningDevice', seqid)
+          end
+
+          def process_IsNodeBeamingDevice(seqid, iprot, oprot)
+            args = read_args(iprot, IsNodeBeamingDevice_args)
+            result = IsNodeBeamingDevice_result.new()
+            result.success = @handler.IsNodeBeamingDevice(args._homeId, args._nodeId)
+            write_result(result, oprot, 'IsNodeBeamingDevice', seqid)
+          end
+
           def process_IsNodeRoutingDevice(seqid, iprot, oprot)
             args = read_args(iprot, IsNodeRoutingDevice_args)
             result = IsNodeRoutingDevice_result.new()
             result.success = @handler.IsNodeRoutingDevice(args._homeId, args._nodeId)
             write_result(result, oprot, 'IsNodeRoutingDevice', seqid)
+          end
+
+          def process_IsNodeSecurityDevice(seqid, iprot, oprot)
+            args = read_args(iprot, IsNodeSecurityDevice_args)
+            result = IsNodeSecurityDevice_result.new()
+            result.success = @handler.IsNodeSecurityDevice(args._homeId, args._nodeId)
+            write_result(result, oprot, 'IsNodeSecurityDevice', seqid)
           end
 
           def process_GetNodeMaxBaudRate(seqid, iprot, oprot)
@@ -2037,13 +2088,6 @@ require 'ozw_types'
             result = GetNodeVersion_result.new()
             result.success = @handler.GetNodeVersion(args._homeId, args._nodeId)
             write_result(result, oprot, 'GetNodeVersion', seqid)
-          end
-
-          def process_GetNodeSecurity(seqid, iprot, oprot)
-            args = read_args(iprot, GetNodeSecurity_args)
-            result = GetNodeSecurity_result.new()
-            result.success = @handler.GetNodeSecurity(args._homeId, args._nodeId)
-            write_result(result, oprot, 'GetNodeSecurity', seqid)
           end
 
           def process_GetNodeBasic(seqid, iprot, oprot)
@@ -2532,7 +2576,7 @@ require 'ozw_types'
           def process_BeginControllerCommand(seqid, iprot, oprot)
             args = read_args(iprot, BeginControllerCommand_args)
             result = BeginControllerCommand_result.new()
-            result.success = @handler.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId)
+            result.success = @handler.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId, args._arg)
             write_result(result, oprot, 'BeginControllerCommand', seqid)
           end
 
@@ -3341,6 +3385,74 @@ require 'ozw_types'
           ::Thrift::Struct.generate_accessors self
         end
 
+        class IsNodeFrequentListeningDevice_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+          _NODEID = 2
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsNodeFrequentListeningDevice_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsNodeBeamingDevice_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+          _NODEID = 2
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsNodeBeamingDevice_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
         class IsNodeRoutingDevice_args
           include ::Thrift::Struct, ::Thrift::Struct_Union
           _HOMEID = 1
@@ -3360,6 +3472,40 @@ require 'ozw_types'
         end
 
         class IsNodeRoutingDevice_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsNodeSecurityDevice_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+          _NODEID = 2
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsNodeSecurityDevice_result
           include ::Thrift::Struct, ::Thrift::Struct_Union
           SUCCESS = 0
 
@@ -3428,40 +3574,6 @@ require 'ozw_types'
         end
 
         class GetNodeVersion_result
-          include ::Thrift::Struct, ::Thrift::Struct_Union
-          SUCCESS = 0
-
-          FIELDS = {
-            SUCCESS => {:type => ::Thrift::Types::BYTE, :name => 'success'}
-          }
-
-          def struct_fields; FIELDS; end
-
-          def validate
-          end
-
-          ::Thrift::Struct.generate_accessors self
-        end
-
-        class GetNodeSecurity_args
-          include ::Thrift::Struct, ::Thrift::Struct_Union
-          _HOMEID = 1
-          _NODEID = 2
-
-          FIELDS = {
-            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
-            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
-          }
-
-          def struct_fields; FIELDS; end
-
-          def validate
-          end
-
-          ::Thrift::Struct.generate_accessors self
-        end
-
-        class GetNodeSecurity_result
           include ::Thrift::Struct, ::Thrift::Struct_Union
           SUCCESS = 0
 
@@ -5798,12 +5910,14 @@ require 'ozw_types'
           _COMMAND = 2
           _HIGHPOWER = 3
           _NODEID = 4
+          _ARG = 5
 
           FIELDS = {
             _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
             _COMMAND => {:type => ::Thrift::Types::I32, :name => '_command', :enum_class => OpenZWave::DriverControllerCommand},
             _HIGHPOWER => {:type => ::Thrift::Types::BOOL, :name => '_highPower'},
-            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'},
+            _ARG => {:type => ::Thrift::Types::BYTE, :name => '_arg'}
           }
 
           def struct_fields; FIELDS; end

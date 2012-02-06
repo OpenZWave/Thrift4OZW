@@ -1,5 +1,37 @@
-*** RemoteManager_server.cpp	2012-02-03 22:32:54.973556002 +0200
---- RemoteManager_server.cpp.patched	2012-02-03 22:39:02.509883282 +0200
+*** RemoteManager_server.cpp.orig	2012-02-03 22:25:41.917170312 +0200
+--- RemoteManager_server.cpp.patched	2012-02-03 23:30:55.575837321 +0200
+***************
+*** 15,25 ****
+  using boost::shared_ptr;
+  
+  using namespace OpenZWave;
+  
+  void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
+! 	// FIXME: fill in the blanks (sorry!)
+  }
+  
+  class RemoteManagerHandler : virtual public RemoteManagerIf {
+   public:
+    RemoteManagerHandler() {
+--- 15,32 ----
+  using boost::shared_ptr;
+  
+  using namespace OpenZWave;
+  
+  void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
+!     g_criticalSection.lock();
+!     //
+!     STOMP::hdrmap headers;
+!     headers["ControllerState"] = to_string<uint16_t>(arg1, std::hex);
+!     string empty = ""  ;
+!     stomp_client->send(*notifications_topic, headers, empty);
+!     //
+!     g_criticalSection.unlock();
+  }
+  
+  class RemoteManagerHandler : virtual public RemoteManagerIf {
+   public:
+    RemoteManagerHandler() {
 ***************
 *** 220,233 ****
   	_return =  mgr->GetNodeType((::uint32 const) _homeId, (::uint8 const) _nodeId);
@@ -16,7 +48,7 @@
     void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 220,238 ----
+--- 227,245 ----
   	_return =  mgr->GetNodeType((::uint32 const) _homeId, (::uint8 const) _nodeId);
   	g_criticalSection.unlock();
     }
@@ -52,7 +84,7 @@
     int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 651,669 ----
+--- 658,676 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -88,7 +120,7 @@
     int8_t CreateScene() {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 730,748 ----
+--- 737,755 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -124,7 +156,7 @@
     void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 830,845 ----
+--- 837,852 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -155,7 +187,7 @@
   };
   
   // int main(int argc, char **argv) {
---- 989,999 ----
+--- 996,1006 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }

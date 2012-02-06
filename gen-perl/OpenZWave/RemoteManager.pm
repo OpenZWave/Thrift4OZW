@@ -2197,6 +2197,292 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_args->mk_accessors( qw( _homeId _nodeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  $self->{_nodeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+    if (defined $vals->{_nodeId}) {
+      $self->{_nodeId} = $vals->{_nodeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsNodeFrequentListeningDevice_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_nodeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsNodeFrequentListeningDevice_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_nodeId}) {
+    $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+    $xfer += $output->writeByte($self->{_nodeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsNodeFrequentListeningDevice_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsNodeFrequentListeningDevice_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsNodeBeamingDevice_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsNodeBeamingDevice_args->mk_accessors( qw( _homeId _nodeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  $self->{_nodeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+    if (defined $vals->{_nodeId}) {
+      $self->{_nodeId} = $vals->{_nodeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsNodeBeamingDevice_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_nodeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsNodeBeamingDevice_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_nodeId}) {
+    $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+    $xfer += $output->writeByte($self->{_nodeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsNodeBeamingDevice_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsNodeBeamingDevice_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsNodeBeamingDevice_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsNodeBeamingDevice_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManager_IsNodeRoutingDevice_args;
 use base qw(Class::Accessor);
 OpenZWave::RemoteManager_IsNodeRoutingDevice_args->mk_accessors( qw( _homeId _nodeId ) );
@@ -2330,6 +2616,149 @@ sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
   $xfer += $output->writeStructBegin('RemoteManager_IsNodeRoutingDevice_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsNodeSecurityDevice_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsNodeSecurityDevice_args->mk_accessors( qw( _homeId _nodeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  $self->{_nodeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+    if (defined $vals->{_nodeId}) {
+      $self->{_nodeId} = $vals->{_nodeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsNodeSecurityDevice_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_nodeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsNodeSecurityDevice_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_nodeId}) {
+    $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+    $xfer += $output->writeByte($self->{_nodeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsNodeSecurityDevice_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsNodeSecurityDevice_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsNodeSecurityDevice_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsNodeSecurityDevice_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -2616,149 +3045,6 @@ sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
   $xfer += $output->writeStructBegin('RemoteManager_GetNodeVersion_result');
-  if (defined $self->{success}) {
-    $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
-    $xfer += $output->writeByte($self->{success});
-    $xfer += $output->writeFieldEnd();
-  }
-  $xfer += $output->writeFieldStop();
-  $xfer += $output->writeStructEnd();
-  return $xfer;
-}
-
-package OpenZWave::RemoteManager_GetNodeSecurity_args;
-use base qw(Class::Accessor);
-OpenZWave::RemoteManager_GetNodeSecurity_args->mk_accessors( qw( _homeId _nodeId ) );
-
-sub new {
-  my $classname = shift;
-  my $self      = {};
-  my $vals      = shift || {};
-  $self->{_homeId} = undef;
-  $self->{_nodeId} = undef;
-  if (UNIVERSAL::isa($vals,'HASH')) {
-    if (defined $vals->{_homeId}) {
-      $self->{_homeId} = $vals->{_homeId};
-    }
-    if (defined $vals->{_nodeId}) {
-      $self->{_nodeId} = $vals->{_nodeId};
-    }
-  }
-  return bless ($self, $classname);
-}
-
-sub getName {
-  return 'RemoteManager_GetNodeSecurity_args';
-}
-
-sub read {
-  my ($self, $input) = @_;
-  my $xfer  = 0;
-  my $fname;
-  my $ftype = 0;
-  my $fid   = 0;
-  $xfer += $input->readStructBegin(\$fname);
-  while (1) 
-  {
-    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
-    if ($ftype == TType::STOP) {
-      last;
-    }
-    SWITCH: for($fid)
-    {
-      /^1$/ && do{      if ($ftype == TType::I32) {
-        $xfer += $input->readI32(\$self->{_homeId});
-      } else {
-        $xfer += $input->skip($ftype);
-      }
-      last; };
-      /^2$/ && do{      if ($ftype == TType::BYTE) {
-        $xfer += $input->readByte(\$self->{_nodeId});
-      } else {
-        $xfer += $input->skip($ftype);
-      }
-      last; };
-        $xfer += $input->skip($ftype);
-    }
-    $xfer += $input->readFieldEnd();
-  }
-  $xfer += $input->readStructEnd();
-  return $xfer;
-}
-
-sub write {
-  my ($self, $output) = @_;
-  my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_args');
-  if (defined $self->{_homeId}) {
-    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
-    $xfer += $output->writeI32($self->{_homeId});
-    $xfer += $output->writeFieldEnd();
-  }
-  if (defined $self->{_nodeId}) {
-    $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
-    $xfer += $output->writeByte($self->{_nodeId});
-    $xfer += $output->writeFieldEnd();
-  }
-  $xfer += $output->writeFieldStop();
-  $xfer += $output->writeStructEnd();
-  return $xfer;
-}
-
-package OpenZWave::RemoteManager_GetNodeSecurity_result;
-use base qw(Class::Accessor);
-OpenZWave::RemoteManager_GetNodeSecurity_result->mk_accessors( qw( success ) );
-
-sub new {
-  my $classname = shift;
-  my $self      = {};
-  my $vals      = shift || {};
-  $self->{success} = undef;
-  if (UNIVERSAL::isa($vals,'HASH')) {
-    if (defined $vals->{success}) {
-      $self->{success} = $vals->{success};
-    }
-  }
-  return bless ($self, $classname);
-}
-
-sub getName {
-  return 'RemoteManager_GetNodeSecurity_result';
-}
-
-sub read {
-  my ($self, $input) = @_;
-  my $xfer  = 0;
-  my $fname;
-  my $ftype = 0;
-  my $fid   = 0;
-  $xfer += $input->readStructBegin(\$fname);
-  while (1) 
-  {
-    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
-    if ($ftype == TType::STOP) {
-      last;
-    }
-    SWITCH: for($fid)
-    {
-      /^0$/ && do{      if ($ftype == TType::BYTE) {
-        $xfer += $input->readByte(\$self->{success});
-      } else {
-        $xfer += $input->skip($ftype);
-      }
-      last; };
-        $xfer += $input->skip($ftype);
-    }
-    $xfer += $input->readFieldEnd();
-  }
-  $xfer += $input->readStructEnd();
-  return $xfer;
-}
-
-sub write {
-  my ($self, $output) = @_;
-  my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
     $xfer += $output->writeByte($self->{success});
@@ -12255,7 +12541,7 @@ sub write {
 
 package OpenZWave::RemoteManager_BeginControllerCommand_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_BeginControllerCommand_args->mk_accessors( qw( _homeId _command _highPower _nodeId ) );
+OpenZWave::RemoteManager_BeginControllerCommand_args->mk_accessors( qw( _homeId _command _highPower _nodeId _arg ) );
 
 sub new {
   my $classname = shift;
@@ -12265,6 +12551,7 @@ sub new {
   $self->{_command} = undef;
   $self->{_highPower} = undef;
   $self->{_nodeId} = undef;
+  $self->{_arg} = undef;
   if (UNIVERSAL::isa($vals,'HASH')) {
     if (defined $vals->{_homeId}) {
       $self->{_homeId} = $vals->{_homeId};
@@ -12277,6 +12564,9 @@ sub new {
     }
     if (defined $vals->{_nodeId}) {
       $self->{_nodeId} = $vals->{_nodeId};
+    }
+    if (defined $vals->{_arg}) {
+      $self->{_arg} = $vals->{_arg};
     }
   }
   return bless ($self, $classname);
@@ -12325,6 +12615,12 @@ sub read {
         $xfer += $input->skip($ftype);
       }
       last; };
+      /^5$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_arg});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
         $xfer += $input->skip($ftype);
     }
     $xfer += $input->readFieldEnd();
@@ -12355,6 +12651,11 @@ sub write {
   if (defined $self->{_nodeId}) {
     $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 4);
     $xfer += $output->writeByte($self->{_nodeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_arg}) {
+    $xfer += $output->writeFieldBegin('_arg', TType::BYTE, 5);
+    $xfer += $output->writeByte($self->{_arg});
     $xfer += $output->writeFieldEnd();
   }
   $xfer += $output->writeFieldStop();
@@ -17718,7 +18019,31 @@ sub IsNodeListeningDevice{
   die 'implement interface';
 }
 
+sub IsNodeFrequentListeningDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  die 'implement interface';
+}
+
+sub IsNodeBeamingDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  die 'implement interface';
+}
+
 sub IsNodeRoutingDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  die 'implement interface';
+}
+
+sub IsNodeSecurityDevice{
   my $self = shift;
   my $_homeId = shift;
   my $_nodeId = shift;
@@ -17735,14 +18060,6 @@ sub GetNodeMaxBaudRate{
 }
 
 sub GetNodeVersion{
-  my $self = shift;
-  my $_homeId = shift;
-  my $_nodeId = shift;
-
-  die 'implement interface';
-}
-
-sub GetNodeSecurity{
   my $self = shift;
   my $_homeId = shift;
   my $_nodeId = shift;
@@ -18302,6 +18619,7 @@ sub BeginControllerCommand{
   my $_command = shift;
   my $_highPower = shift;
   my $_nodeId = shift;
+  my $_arg = shift;
 
   die 'implement interface';
 }
@@ -18730,12 +19048,36 @@ sub IsNodeListeningDevice{
   return $self->{impl}->IsNodeListeningDevice($_homeId, $_nodeId);
 }
 
+sub IsNodeFrequentListeningDevice{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
+  return $self->{impl}->IsNodeFrequentListeningDevice($_homeId, $_nodeId);
+}
+
+sub IsNodeBeamingDevice{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
+  return $self->{impl}->IsNodeBeamingDevice($_homeId, $_nodeId);
+}
+
 sub IsNodeRoutingDevice{
   my ($self, $request) = @_;
 
   my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
   my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
   return $self->{impl}->IsNodeRoutingDevice($_homeId, $_nodeId);
+}
+
+sub IsNodeSecurityDevice{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
+  return $self->{impl}->IsNodeSecurityDevice($_homeId, $_nodeId);
 }
 
 sub GetNodeMaxBaudRate{
@@ -18752,14 +19094,6 @@ sub GetNodeVersion{
   my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
   my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
   return $self->{impl}->GetNodeVersion($_homeId, $_nodeId);
-}
-
-sub GetNodeSecurity{
-  my ($self, $request) = @_;
-
-  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
-  my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
-  return $self->{impl}->GetNodeSecurity($_homeId, $_nodeId);
 }
 
 sub GetNodeBasic{
@@ -19315,7 +19649,8 @@ sub BeginControllerCommand{
   my $_command = ($request->{'_command'}) ? $request->{'_command'} : undef;
   my $_highPower = ($request->{'_highPower'}) ? $request->{'_highPower'} : undef;
   my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
-  return $self->{impl}->BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+  my $_arg = ($request->{'_arg'}) ? $request->{'_arg'} : undef;
+  return $self->{impl}->BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId, $_arg);
 }
 
 sub CancelControllerCommand{
@@ -20355,6 +20690,98 @@ sub recv_IsNodeListeningDevice{
   }
   die "IsNodeListeningDevice failed: unknown result";
 }
+sub IsNodeFrequentListeningDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+    $self->send_IsNodeFrequentListeningDevice($_homeId, $_nodeId);
+  return $self->recv_IsNodeFrequentListeningDevice();
+}
+
+sub send_IsNodeFrequentListeningDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  $self->{output}->writeMessageBegin('IsNodeFrequentListeningDevice', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_args();
+  $args->{_homeId} = $_homeId;
+  $args->{_nodeId} = $_nodeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_IsNodeFrequentListeningDevice{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "IsNodeFrequentListeningDevice failed: unknown result";
+}
+sub IsNodeBeamingDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+    $self->send_IsNodeBeamingDevice($_homeId, $_nodeId);
+  return $self->recv_IsNodeBeamingDevice();
+}
+
+sub send_IsNodeBeamingDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  $self->{output}->writeMessageBegin('IsNodeBeamingDevice', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_IsNodeBeamingDevice_args();
+  $args->{_homeId} = $_homeId;
+  $args->{_nodeId} = $_nodeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_IsNodeBeamingDevice{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_IsNodeBeamingDevice_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "IsNodeBeamingDevice failed: unknown result";
+}
 sub IsNodeRoutingDevice{
   my $self = shift;
   my $_homeId = shift;
@@ -20400,6 +20827,52 @@ sub recv_IsNodeRoutingDevice{
     return $result->{success};
   }
   die "IsNodeRoutingDevice failed: unknown result";
+}
+sub IsNodeSecurityDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+    $self->send_IsNodeSecurityDevice($_homeId, $_nodeId);
+  return $self->recv_IsNodeSecurityDevice();
+}
+
+sub send_IsNodeSecurityDevice{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  $self->{output}->writeMessageBegin('IsNodeSecurityDevice', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_IsNodeSecurityDevice_args();
+  $args->{_homeId} = $_homeId;
+  $args->{_nodeId} = $_nodeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_IsNodeSecurityDevice{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_IsNodeSecurityDevice_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "IsNodeSecurityDevice failed: unknown result";
 }
 sub GetNodeMaxBaudRate{
   my $self = shift;
@@ -20492,52 +20965,6 @@ sub recv_GetNodeVersion{
     return $result->{success};
   }
   die "GetNodeVersion failed: unknown result";
-}
-sub GetNodeSecurity{
-  my $self = shift;
-  my $_homeId = shift;
-  my $_nodeId = shift;
-
-    $self->send_GetNodeSecurity($_homeId, $_nodeId);
-  return $self->recv_GetNodeSecurity();
-}
-
-sub send_GetNodeSecurity{
-  my $self = shift;
-  my $_homeId = shift;
-  my $_nodeId = shift;
-
-  $self->{output}->writeMessageBegin('GetNodeSecurity', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_GetNodeSecurity_args();
-  $args->{_homeId} = $_homeId;
-  $args->{_nodeId} = $_nodeId;
-  $args->write($self->{output});
-  $self->{output}->writeMessageEnd();
-  $self->{output}->getTransport()->flush();
-}
-
-sub recv_GetNodeSecurity{
-  my $self = shift;
-
-  my $rseqid = 0;
-  my $fname;
-  my $mtype = 0;
-
-  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
-  if ($mtype == TMessageType::EXCEPTION) {
-    my $x = new TApplicationException();
-    $x->read($self->{input});
-    $self->{input}->readMessageEnd();
-    die $x;
-  }
-  my $result = new OpenZWave::RemoteManager_GetNodeSecurity_result();
-  $result->read($self->{input});
-  $self->{input}->readMessageEnd();
-
-  if (defined $result->{success} ) {
-    return $result->{success};
-  }
-  die "GetNodeSecurity failed: unknown result";
 }
 sub GetNodeBasic{
   my $self = shift;
@@ -23644,8 +24071,9 @@ sub BeginControllerCommand{
   my $_command = shift;
   my $_highPower = shift;
   my $_nodeId = shift;
+  my $_arg = shift;
 
-    $self->send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+    $self->send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId, $_arg);
   return $self->recv_BeginControllerCommand();
 }
 
@@ -23655,6 +24083,7 @@ sub send_BeginControllerCommand{
   my $_command = shift;
   my $_highPower = shift;
   my $_nodeId = shift;
+  my $_arg = shift;
 
   $self->{output}->writeMessageBegin('BeginControllerCommand', TMessageType::CALL, $self->{seqid});
   my $args = new OpenZWave::RemoteManager_BeginControllerCommand_args();
@@ -23662,6 +24091,7 @@ sub send_BeginControllerCommand{
   $args->{_command} = $_command;
   $args->{_highPower} = $_highPower;
   $args->{_nodeId} = $_nodeId;
+  $args->{_arg} = $_arg;
   $args->write($self->{output});
   $self->{output}->writeMessageEnd();
   $self->{output}->getTransport()->flush();
@@ -25601,6 +26031,32 @@ sub process_IsNodeListeningDevice {
     $output->getTransport()->flush();
 }
 
+sub process_IsNodeFrequentListeningDevice {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_IsNodeFrequentListeningDevice_result();
+    $result->{success} = $self->{handler}->IsNodeFrequentListeningDevice($args->_homeId, $args->_nodeId);
+    $output->writeMessageBegin('IsNodeFrequentListeningDevice', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_IsNodeBeamingDevice {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_IsNodeBeamingDevice_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_IsNodeBeamingDevice_result();
+    $result->{success} = $self->{handler}->IsNodeBeamingDevice($args->_homeId, $args->_nodeId);
+    $output->writeMessageBegin('IsNodeBeamingDevice', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
 sub process_IsNodeRoutingDevice {
     my ($self, $seqid, $input, $output) = @_;
     my $args = new OpenZWave::RemoteManager_IsNodeRoutingDevice_args();
@@ -25609,6 +26065,19 @@ sub process_IsNodeRoutingDevice {
     my $result = new OpenZWave::RemoteManager_IsNodeRoutingDevice_result();
     $result->{success} = $self->{handler}->IsNodeRoutingDevice($args->_homeId, $args->_nodeId);
     $output->writeMessageBegin('IsNodeRoutingDevice', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_IsNodeSecurityDevice {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_IsNodeSecurityDevice_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_IsNodeSecurityDevice_result();
+    $result->{success} = $self->{handler}->IsNodeSecurityDevice($args->_homeId, $args->_nodeId);
+    $output->writeMessageBegin('IsNodeSecurityDevice', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -25635,19 +26104,6 @@ sub process_GetNodeVersion {
     my $result = new OpenZWave::RemoteManager_GetNodeVersion_result();
     $result->{success} = $self->{handler}->GetNodeVersion($args->_homeId, $args->_nodeId);
     $output->writeMessageBegin('GetNodeVersion', TMessageType::REPLY, $seqid);
-    $result->write($output);
-    $output->writeMessageEnd();
-    $output->getTransport()->flush();
-}
-
-sub process_GetNodeSecurity {
-    my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_GetNodeSecurity_args();
-    $args->read($input);
-    $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_GetNodeSecurity_result();
-    $result->{success} = $self->{handler}->GetNodeSecurity($args->_homeId, $args->_nodeId);
-    $output->writeMessageBegin('GetNodeSecurity', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -26556,7 +27012,7 @@ sub process_BeginControllerCommand {
     $args->read($input);
     $input->readMessageEnd();
     my $result = new OpenZWave::RemoteManager_BeginControllerCommand_result();
-    $result->{success} = $self->{handler}->BeginControllerCommand($args->_homeId, $args->_command, $args->_highPower, $args->_nodeId);
+    $result->{success} = $self->{handler}->BeginControllerCommand($args->_homeId, $args->_command, $args->_highPower, $args->_nodeId, $args->_arg);
     $output->writeMessageBegin('BeginControllerCommand', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();

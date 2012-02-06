@@ -38,10 +38,12 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  bool RequestNodeState(i32 _homeId, byte _nodeId)'
   print '  bool RequestNodeDynamic(i32 _homeId, byte _nodeId)'
   print '  bool IsNodeListeningDevice(i32 _homeId, byte _nodeId)'
+  print '  bool IsNodeFrequentListeningDevice(i32 _homeId, byte _nodeId)'
+  print '  bool IsNodeBeamingDevice(i32 _homeId, byte _nodeId)'
   print '  bool IsNodeRoutingDevice(i32 _homeId, byte _nodeId)'
+  print '  bool IsNodeSecurityDevice(i32 _homeId, byte _nodeId)'
   print '  i32 GetNodeMaxBaudRate(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeVersion(i32 _homeId, byte _nodeId)'
-  print '  byte GetNodeSecurity(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeBasic(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeGeneric(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeSpecific(i32 _homeId, byte _nodeId)'
@@ -111,7 +113,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  void RemoveAssociation(i32 _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)'
   print '  void ResetController(i32 _homeId)'
   print '  void SoftReset(i32 _homeId)'
-  print '  bool BeginControllerCommand(i32 _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId)'
+  print '  bool BeginControllerCommand(i32 _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)'
   print '  bool CancelControllerCommand(i32 _homeId)'
   print '  byte GetNumScenes()'
   print '  GetAllScenesReturnStruct GetAllScenes()'
@@ -300,11 +302,29 @@ elif cmd == 'IsNodeListeningDevice':
     sys.exit(1)
   pp.pprint(client.IsNodeListeningDevice(eval(args[0]),eval(args[1]),))
 
+elif cmd == 'IsNodeFrequentListeningDevice':
+  if len(args) != 2:
+    print 'IsNodeFrequentListeningDevice requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.IsNodeFrequentListeningDevice(eval(args[0]),eval(args[1]),))
+
+elif cmd == 'IsNodeBeamingDevice':
+  if len(args) != 2:
+    print 'IsNodeBeamingDevice requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.IsNodeBeamingDevice(eval(args[0]),eval(args[1]),))
+
 elif cmd == 'IsNodeRoutingDevice':
   if len(args) != 2:
     print 'IsNodeRoutingDevice requires 2 args'
     sys.exit(1)
   pp.pprint(client.IsNodeRoutingDevice(eval(args[0]),eval(args[1]),))
+
+elif cmd == 'IsNodeSecurityDevice':
+  if len(args) != 2:
+    print 'IsNodeSecurityDevice requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.IsNodeSecurityDevice(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'GetNodeMaxBaudRate':
   if len(args) != 2:
@@ -317,12 +337,6 @@ elif cmd == 'GetNodeVersion':
     print 'GetNodeVersion requires 2 args'
     sys.exit(1)
   pp.pprint(client.GetNodeVersion(eval(args[0]),eval(args[1]),))
-
-elif cmd == 'GetNodeSecurity':
-  if len(args) != 2:
-    print 'GetNodeSecurity requires 2 args'
-    sys.exit(1)
-  pp.pprint(client.GetNodeSecurity(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'GetNodeBasic':
   if len(args) != 2:
@@ -739,10 +753,10 @@ elif cmd == 'SoftReset':
   pp.pprint(client.SoftReset(eval(args[0]),))
 
 elif cmd == 'BeginControllerCommand':
-  if len(args) != 4:
-    print 'BeginControllerCommand requires 4 args'
+  if len(args) != 5:
+    print 'BeginControllerCommand requires 5 args'
     sys.exit(1)
-  pp.pprint(client.BeginControllerCommand(eval(args[0]),eval(args[1]),eval(args[2]),eval(args[3]),))
+  pp.pprint(client.BeginControllerCommand(eval(args[0]),eval(args[1]),eval(args[2]),eval(args[3]),eval(args[4]),))
 
 elif cmd == 'CancelControllerCommand':
   if len(args) != 1:

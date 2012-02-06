@@ -338,6 +338,25 @@ service RemoteManager {
 		 */
 		//bool IsNodeListeningDevice( uint32 const _homeId, uint8 const _nodeId );
     bool IsNodeListeningDevice( 1:i32 _homeId, 2:byte _nodeId );
+    
+		/**
+		 * \brief Get whether the node is a frequent listening device that goes to sleep but
+		 * can be woken up by a beam. Useful to determine node and controller consistency.
+		 * \param _homeId The Home ID of the Z-Wave controller that manages the node.
+		 * \param _nodeId The ID of the node to query.
+		 * \return True if it is a frequent listening node.
+		 */
+		//bool IsNodeFrequentListeningDevice( uint32 const _homeId, uint8 const _nodeId );
+	bool IsNodeFrequentListeningDevice( 1:i32 _homeId, 2:byte _nodeId );
+
+		/**
+		 * \brief Get whether the node is a beam capable device.
+		 * \param _homeId The Home ID of the Z-Wave controller that manages the node.
+		 * \param _nodeId The ID of the node to query.
+		 * \return True if it is a frequent listening node.
+		 */
+		//bool IsNodeBeamingDevice( uint32 const _homeId, uint8 const _nodeId );
+	bool IsNodeBeamingDevice( 1:i32 _homeId, 2:byte _nodeId );
 
 		/**
 		 * \brief Get whether the node is a routing device that passes messages to other nodes
@@ -347,6 +366,15 @@ service RemoteManager {
 		 */
 		//bool IsNodeRoutingDevice( uint32 const _homeId, uint8 const _nodeId );
     bool IsNodeRoutingDevice( 1:i32 _homeId, 2:byte _nodeId );
+
+        /**
+		 * \brief Get the security attribute for a node. True if node supports security features.
+		 * \param _homeId The Home ID of the Z-Wave controller that manages the node.
+		 * \param _nodeId The ID of the node to query.
+		 * \return true if security features implemented.
+		 */
+		//bool IsNodeSecurityDevice( uint32 const _homeId, uint8 const _nodeId );
+	bool IsNodeSecurityDevice( 1:i32 _homeId, 2:byte _nodeId );
 
 		/**
 		 * \brief Get the maximum baud rate of a node's communications
@@ -373,7 +401,8 @@ service RemoteManager {
 		 * \return the node's security byte
 		 */
 		//uint8 GetNodeSecurity( uint32 const _homeId, uint8 const _nodeId );
-    byte GetNodeSecurity( 1:i32 _homeId, 2:byte _nodeId );
+	// REMOVED in OZW main trunk rev410
+    //byte GetNodeSecurity( 1:i32 _homeId, 2:byte _nodeId );
     
 		/**
 		 * \brief Get the basic type of a node.
@@ -1297,9 +1326,9 @@ service RemoteManager {
 		 * - Driver::ControllerState_InProgress - the controller is in the process of adding or removing the chosen node.  It is now too late to cancel the command.
 		 * - Driver::ControllerState_Complete - the controller has finished adding or removing the node, and the command is complete.
 		 * - Driver::ControllerState_Failed - will be sent if the command fails for any reason.
-		 */
-		//bool BeginControllerCommand( uint32 const _homeId, Driver::ControllerCommand _command, Driver::pfnControllerCallback_t _callback = NULL, void* _context = NULL, bool _highPower = false, uint8 _nodeId = 0xff );]
-		bool BeginControllerCommand( 1:i32 _homeId, 2:DriverControllerCommand  _command, 3:bool _highPower, 4:byte _nodeId );
+		 */		
+		//bool BeginControllerCommand( uint32 const _homeId, Driver::ControllerCommand _command, Driver::pfnControllerCallback_t _callback = NULL, void* _context = NULL, bool _highPower = false, uint8 _nodeId = 0xff, uint8 _arg = 0 );
+		bool BeginControllerCommand( 1:i32 _homeId, 2:DriverControllerCommand  _command, 3:bool _highPower, 4:byte _nodeId, 5:byte _arg );
 
 		/**
 		 * \brief Cancels any in-progress command running on a controller.

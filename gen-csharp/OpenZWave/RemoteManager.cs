@@ -33,10 +33,12 @@ namespace OpenZWave
       bool RequestNodeState(int _homeId, byte _nodeId);
       bool RequestNodeDynamic(int _homeId, byte _nodeId);
       bool IsNodeListeningDevice(int _homeId, byte _nodeId);
+      bool IsNodeFrequentListeningDevice(int _homeId, byte _nodeId);
+      bool IsNodeBeamingDevice(int _homeId, byte _nodeId);
       bool IsNodeRoutingDevice(int _homeId, byte _nodeId);
+      bool IsNodeSecurityDevice(int _homeId, byte _nodeId);
       int GetNodeMaxBaudRate(int _homeId, byte _nodeId);
       byte GetNodeVersion(int _homeId, byte _nodeId);
-      byte GetNodeSecurity(int _homeId, byte _nodeId);
       byte GetNodeBasic(int _homeId, byte _nodeId);
       byte GetNodeGeneric(int _homeId, byte _nodeId);
       byte GetNodeSpecific(int _homeId, byte _nodeId);
@@ -106,7 +108,7 @@ namespace OpenZWave
       void RemoveAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId);
       void ResetController(int _homeId);
       void SoftReset(int _homeId);
-      bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId);
+      bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg);
       bool CancelControllerCommand(int _homeId);
       byte GetNumScenes();
       GetAllScenesReturnStruct GetAllScenes();
@@ -728,6 +730,74 @@ namespace OpenZWave
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsNodeListeningDevice failed: unknown result");
       }
 
+      public bool IsNodeFrequentListeningDevice(int _homeId, byte _nodeId)
+      {
+        send_IsNodeFrequentListeningDevice(_homeId, _nodeId);
+        return recv_IsNodeFrequentListeningDevice();
+      }
+
+      public void send_IsNodeFrequentListeningDevice(int _homeId, byte _nodeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("IsNodeFrequentListeningDevice", TMessageType.Call, seqid_));
+        IsNodeFrequentListeningDevice_args args = new IsNodeFrequentListeningDevice_args();
+        args._homeId = _homeId;
+        args._nodeId = _nodeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_IsNodeFrequentListeningDevice()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        IsNodeFrequentListeningDevice_result result = new IsNodeFrequentListeningDevice_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsNodeFrequentListeningDevice failed: unknown result");
+      }
+
+      public bool IsNodeBeamingDevice(int _homeId, byte _nodeId)
+      {
+        send_IsNodeBeamingDevice(_homeId, _nodeId);
+        return recv_IsNodeBeamingDevice();
+      }
+
+      public void send_IsNodeBeamingDevice(int _homeId, byte _nodeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("IsNodeBeamingDevice", TMessageType.Call, seqid_));
+        IsNodeBeamingDevice_args args = new IsNodeBeamingDevice_args();
+        args._homeId = _homeId;
+        args._nodeId = _nodeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_IsNodeBeamingDevice()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        IsNodeBeamingDevice_result result = new IsNodeBeamingDevice_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsNodeBeamingDevice failed: unknown result");
+      }
+
       public bool IsNodeRoutingDevice(int _homeId, byte _nodeId)
       {
         send_IsNodeRoutingDevice(_homeId, _nodeId);
@@ -760,6 +830,40 @@ namespace OpenZWave
           return result.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsNodeRoutingDevice failed: unknown result");
+      }
+
+      public bool IsNodeSecurityDevice(int _homeId, byte _nodeId)
+      {
+        send_IsNodeSecurityDevice(_homeId, _nodeId);
+        return recv_IsNodeSecurityDevice();
+      }
+
+      public void send_IsNodeSecurityDevice(int _homeId, byte _nodeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("IsNodeSecurityDevice", TMessageType.Call, seqid_));
+        IsNodeSecurityDevice_args args = new IsNodeSecurityDevice_args();
+        args._homeId = _homeId;
+        args._nodeId = _nodeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_IsNodeSecurityDevice()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        IsNodeSecurityDevice_result result = new IsNodeSecurityDevice_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsNodeSecurityDevice failed: unknown result");
       }
 
       public int GetNodeMaxBaudRate(int _homeId, byte _nodeId)
@@ -828,40 +932,6 @@ namespace OpenZWave
           return result.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetNodeVersion failed: unknown result");
-      }
-
-      public byte GetNodeSecurity(int _homeId, byte _nodeId)
-      {
-        send_GetNodeSecurity(_homeId, _nodeId);
-        return recv_GetNodeSecurity();
-      }
-
-      public void send_GetNodeSecurity(int _homeId, byte _nodeId)
-      {
-        oprot_.WriteMessageBegin(new TMessage("GetNodeSecurity", TMessageType.Call, seqid_));
-        GetNodeSecurity_args args = new GetNodeSecurity_args();
-        args._homeId = _homeId;
-        args._nodeId = _nodeId;
-        args.Write(oprot_);
-        oprot_.WriteMessageEnd();
-        oprot_.Transport.Flush();
-      }
-
-      public byte recv_GetNodeSecurity()
-      {
-        TMessage msg = iprot_.ReadMessageBegin();
-        if (msg.Type == TMessageType.Exception) {
-          TApplicationException x = TApplicationException.Read(iprot_);
-          iprot_.ReadMessageEnd();
-          throw x;
-        }
-        GetNodeSecurity_result result = new GetNodeSecurity_result();
-        result.Read(iprot_);
-        iprot_.ReadMessageEnd();
-        if (result.__isset.success) {
-          return result.Success;
-        }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetNodeSecurity failed: unknown result");
       }
 
       public byte GetNodeBasic(int _homeId, byte _nodeId)
@@ -3147,13 +3217,13 @@ namespace OpenZWave
         return;
       }
 
-      public bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId)
+      public bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)
       {
-        send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+        send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg);
         return recv_BeginControllerCommand();
       }
 
-      public void send_BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId)
+      public void send_BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)
       {
         oprot_.WriteMessageBegin(new TMessage("BeginControllerCommand", TMessageType.Call, seqid_));
         BeginControllerCommand_args args = new BeginControllerCommand_args();
@@ -3161,6 +3231,7 @@ namespace OpenZWave
         args._command = _command;
         args._highPower = _highPower;
         args._nodeId = _nodeId;
+        args._arg = _arg;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         oprot_.Transport.Flush();
@@ -4425,10 +4496,12 @@ namespace OpenZWave
         processMap_["RequestNodeState"] = RequestNodeState_Process;
         processMap_["RequestNodeDynamic"] = RequestNodeDynamic_Process;
         processMap_["IsNodeListeningDevice"] = IsNodeListeningDevice_Process;
+        processMap_["IsNodeFrequentListeningDevice"] = IsNodeFrequentListeningDevice_Process;
+        processMap_["IsNodeBeamingDevice"] = IsNodeBeamingDevice_Process;
         processMap_["IsNodeRoutingDevice"] = IsNodeRoutingDevice_Process;
+        processMap_["IsNodeSecurityDevice"] = IsNodeSecurityDevice_Process;
         processMap_["GetNodeMaxBaudRate"] = GetNodeMaxBaudRate_Process;
         processMap_["GetNodeVersion"] = GetNodeVersion_Process;
-        processMap_["GetNodeSecurity"] = GetNodeSecurity_Process;
         processMap_["GetNodeBasic"] = GetNodeBasic_Process;
         processMap_["GetNodeGeneric"] = GetNodeGeneric_Process;
         processMap_["GetNodeSpecific"] = GetNodeSpecific_Process;
@@ -4788,6 +4861,32 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
+      public void IsNodeFrequentListeningDevice_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        IsNodeFrequentListeningDevice_args args = new IsNodeFrequentListeningDevice_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        IsNodeFrequentListeningDevice_result result = new IsNodeFrequentListeningDevice_result();
+        result.Success = iface_.IsNodeFrequentListeningDevice(args._homeId, args._nodeId);
+        oprot.WriteMessageBegin(new TMessage("IsNodeFrequentListeningDevice", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void IsNodeBeamingDevice_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        IsNodeBeamingDevice_args args = new IsNodeBeamingDevice_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        IsNodeBeamingDevice_result result = new IsNodeBeamingDevice_result();
+        result.Success = iface_.IsNodeBeamingDevice(args._homeId, args._nodeId);
+        oprot.WriteMessageBegin(new TMessage("IsNodeBeamingDevice", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
       public void IsNodeRoutingDevice_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
         IsNodeRoutingDevice_args args = new IsNodeRoutingDevice_args();
@@ -4796,6 +4895,19 @@ namespace OpenZWave
         IsNodeRoutingDevice_result result = new IsNodeRoutingDevice_result();
         result.Success = iface_.IsNodeRoutingDevice(args._homeId, args._nodeId);
         oprot.WriteMessageBegin(new TMessage("IsNodeRoutingDevice", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void IsNodeSecurityDevice_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        IsNodeSecurityDevice_args args = new IsNodeSecurityDevice_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        IsNodeSecurityDevice_result result = new IsNodeSecurityDevice_result();
+        result.Success = iface_.IsNodeSecurityDevice(args._homeId, args._nodeId);
+        oprot.WriteMessageBegin(new TMessage("IsNodeSecurityDevice", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -4822,19 +4934,6 @@ namespace OpenZWave
         GetNodeVersion_result result = new GetNodeVersion_result();
         result.Success = iface_.GetNodeVersion(args._homeId, args._nodeId);
         oprot.WriteMessageBegin(new TMessage("GetNodeVersion", TMessageType.Reply, seqid)); 
-        result.Write(oprot);
-        oprot.WriteMessageEnd();
-        oprot.Transport.Flush();
-      }
-
-      public void GetNodeSecurity_Process(int seqid, TProtocol iprot, TProtocol oprot)
-      {
-        GetNodeSecurity_args args = new GetNodeSecurity_args();
-        args.Read(iprot);
-        iprot.ReadMessageEnd();
-        GetNodeSecurity_result result = new GetNodeSecurity_result();
-        result.Success = iface_.GetNodeSecurity(args._homeId, args._nodeId);
-        oprot.WriteMessageBegin(new TMessage("GetNodeSecurity", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -5743,7 +5842,7 @@ namespace OpenZWave
         args.Read(iprot);
         iprot.ReadMessageEnd();
         BeginControllerCommand_result result = new BeginControllerCommand_result();
-        result.Success = iface_.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId);
+        result.Success = iface_.BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId, args._arg);
         oprot.WriteMessageBegin(new TMessage("BeginControllerCommand", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
@@ -9079,6 +9178,404 @@ namespace OpenZWave
 
 
     [Serializable]
+    public partial class IsNodeFrequentListeningDevice_args : TBase
+    {
+      private int __homeId;
+      private byte __nodeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+      public byte _nodeId
+      {
+        get
+        {
+          return __nodeId;
+        }
+        set
+        {
+          __isset._nodeId = true;
+          this.__nodeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+        public bool _nodeId;
+      }
+
+      public IsNodeFrequentListeningDevice_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Byte) {
+                _nodeId = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsNodeFrequentListeningDevice_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._nodeId) {
+          field.Name = "_nodeId";
+          field.Type = TType.Byte;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_nodeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsNodeFrequentListeningDevice_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(",_nodeId: ");
+        sb.Append(_nodeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsNodeFrequentListeningDevice_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public IsNodeFrequentListeningDevice_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsNodeFrequentListeningDevice_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsNodeFrequentListeningDevice_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsNodeBeamingDevice_args : TBase
+    {
+      private int __homeId;
+      private byte __nodeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+      public byte _nodeId
+      {
+        get
+        {
+          return __nodeId;
+        }
+        set
+        {
+          __isset._nodeId = true;
+          this.__nodeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+        public bool _nodeId;
+      }
+
+      public IsNodeBeamingDevice_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Byte) {
+                _nodeId = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsNodeBeamingDevice_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._nodeId) {
+          field.Name = "_nodeId";
+          field.Type = TType.Byte;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_nodeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsNodeBeamingDevice_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(",_nodeId: ");
+        sb.Append(_nodeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsNodeBeamingDevice_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public IsNodeBeamingDevice_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsNodeBeamingDevice_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsNodeBeamingDevice_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
     public partial class IsNodeRoutingDevice_args : TBase
     {
       private int __homeId;
@@ -9268,6 +9765,205 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("IsNodeRoutingDevice_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsNodeSecurityDevice_args : TBase
+    {
+      private int __homeId;
+      private byte __nodeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+      public byte _nodeId
+      {
+        get
+        {
+          return __nodeId;
+        }
+        set
+        {
+          __isset._nodeId = true;
+          this.__nodeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+        public bool _nodeId;
+      }
+
+      public IsNodeSecurityDevice_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Byte) {
+                _nodeId = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsNodeSecurityDevice_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._nodeId) {
+          field.Name = "_nodeId";
+          field.Type = TType.Byte;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_nodeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsNodeSecurityDevice_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(",_nodeId: ");
+        sb.Append(_nodeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsNodeSecurityDevice_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public IsNodeSecurityDevice_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsNodeSecurityDevice_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsNodeSecurityDevice_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -9666,205 +10362,6 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("GetNodeVersion_result(");
-        sb.Append("Success: ");
-        sb.Append(Success);
-        sb.Append(")");
-        return sb.ToString();
-      }
-
-    }
-
-
-    [Serializable]
-    public partial class GetNodeSecurity_args : TBase
-    {
-      private int __homeId;
-      private byte __nodeId;
-
-      public int _homeId
-      {
-        get
-        {
-          return __homeId;
-        }
-        set
-        {
-          __isset._homeId = true;
-          this.__homeId = value;
-        }
-      }
-
-      public byte _nodeId
-      {
-        get
-        {
-          return __nodeId;
-        }
-        set
-        {
-          __isset._nodeId = true;
-          this.__nodeId = value;
-        }
-      }
-
-
-      public Isset __isset;
-      [Serializable]
-      public struct Isset {
-        public bool _homeId;
-        public bool _nodeId;
-      }
-
-      public GetNodeSecurity_args() {
-      }
-
-      public void Read (TProtocol iprot)
-      {
-        TField field;
-        iprot.ReadStructBegin();
-        while (true)
-        {
-          field = iprot.ReadFieldBegin();
-          if (field.Type == TType.Stop) { 
-            break;
-          }
-          switch (field.ID)
-          {
-            case 1:
-              if (field.Type == TType.I32) {
-                _homeId = iprot.ReadI32();
-              } else { 
-                TProtocolUtil.Skip(iprot, field.Type);
-              }
-              break;
-            case 2:
-              if (field.Type == TType.Byte) {
-                _nodeId = iprot.ReadByte();
-              } else { 
-                TProtocolUtil.Skip(iprot, field.Type);
-              }
-              break;
-            default: 
-              TProtocolUtil.Skip(iprot, field.Type);
-              break;
-          }
-          iprot.ReadFieldEnd();
-        }
-        iprot.ReadStructEnd();
-      }
-
-      public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetNodeSecurity_args");
-        oprot.WriteStructBegin(struc);
-        TField field = new TField();
-        if (__isset._homeId) {
-          field.Name = "_homeId";
-          field.Type = TType.I32;
-          field.ID = 1;
-          oprot.WriteFieldBegin(field);
-          oprot.WriteI32(_homeId);
-          oprot.WriteFieldEnd();
-        }
-        if (__isset._nodeId) {
-          field.Name = "_nodeId";
-          field.Type = TType.Byte;
-          field.ID = 2;
-          oprot.WriteFieldBegin(field);
-          oprot.WriteByte(_nodeId);
-          oprot.WriteFieldEnd();
-        }
-        oprot.WriteFieldStop();
-        oprot.WriteStructEnd();
-      }
-
-      public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetNodeSecurity_args(");
-        sb.Append("_homeId: ");
-        sb.Append(_homeId);
-        sb.Append(",_nodeId: ");
-        sb.Append(_nodeId);
-        sb.Append(")");
-        return sb.ToString();
-      }
-
-    }
-
-
-    [Serializable]
-    public partial class GetNodeSecurity_result : TBase
-    {
-      private byte _success;
-
-      public byte Success
-      {
-        get
-        {
-          return _success;
-        }
-        set
-        {
-          __isset.success = true;
-          this._success = value;
-        }
-      }
-
-
-      public Isset __isset;
-      [Serializable]
-      public struct Isset {
-        public bool success;
-      }
-
-      public GetNodeSecurity_result() {
-      }
-
-      public void Read (TProtocol iprot)
-      {
-        TField field;
-        iprot.ReadStructBegin();
-        while (true)
-        {
-          field = iprot.ReadFieldBegin();
-          if (field.Type == TType.Stop) { 
-            break;
-          }
-          switch (field.ID)
-          {
-            case 0:
-              if (field.Type == TType.Byte) {
-                Success = iprot.ReadByte();
-              } else { 
-                TProtocolUtil.Skip(iprot, field.Type);
-              }
-              break;
-            default: 
-              TProtocolUtil.Skip(iprot, field.Type);
-              break;
-          }
-          iprot.ReadFieldEnd();
-        }
-        iprot.ReadStructEnd();
-      }
-
-      public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetNodeSecurity_result");
-        oprot.WriteStructBegin(struc);
-        TField field = new TField();
-
-        if (this.__isset.success) {
-          field.Name = "Success";
-          field.Type = TType.Byte;
-          field.ID = 0;
-          oprot.WriteFieldBegin(field);
-          oprot.WriteByte(Success);
-          oprot.WriteFieldEnd();
-        }
-        oprot.WriteFieldStop();
-        oprot.WriteStructEnd();
-      }
-
-      public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetNodeSecurity_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -22781,6 +23278,7 @@ namespace OpenZWave
       private DriverControllerCommand __command;
       private bool __highPower;
       private byte __nodeId;
+      private byte __arg;
 
       public int _homeId
       {
@@ -22834,6 +23332,19 @@ namespace OpenZWave
         }
       }
 
+      public byte _arg
+      {
+        get
+        {
+          return __arg;
+        }
+        set
+        {
+          __isset._arg = true;
+          this.__arg = value;
+        }
+      }
+
 
       public Isset __isset;
       [Serializable]
@@ -22842,6 +23353,7 @@ namespace OpenZWave
         public bool _command;
         public bool _highPower;
         public bool _nodeId;
+        public bool _arg;
       }
 
       public BeginControllerCommand_args() {
@@ -22883,6 +23395,13 @@ namespace OpenZWave
             case 4:
               if (field.Type == TType.Byte) {
                 _nodeId = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 5:
+              if (field.Type == TType.Byte) {
+                _arg = iprot.ReadByte();
               } else { 
                 TProtocolUtil.Skip(iprot, field.Type);
               }
@@ -22932,6 +23451,14 @@ namespace OpenZWave
           oprot.WriteByte(_nodeId);
           oprot.WriteFieldEnd();
         }
+        if (__isset._arg) {
+          field.Name = "_arg";
+          field.Type = TType.Byte;
+          field.ID = 5;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_arg);
+          oprot.WriteFieldEnd();
+        }
         oprot.WriteFieldStop();
         oprot.WriteStructEnd();
       }
@@ -22946,6 +23473,8 @@ namespace OpenZWave
         sb.Append(_highPower);
         sb.Append(",_nodeId: ");
         sb.Append(_nodeId);
+        sb.Append(",_arg: ");
+        sb.Append(_arg);
         sb.Append(")");
         return sb.ToString();
       }

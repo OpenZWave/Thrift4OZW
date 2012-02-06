@@ -90,6 +90,14 @@ Callbacks = {}
 a = RootNode.classes("RemoteManagerHandler").methods.find(:access => :public)
 b = RootNode.namespaces("OpenZWave").classes("Manager").methods.find(:access => :public)
 puts "RemoteManagerHandler: #{a.entries.size} public methods, OpenZWave::Manager: #{b.entries.size} public methods"
+if (a.entries.size != b.entries.size) then
+    a_names = a.collect{ |meth|
+        (md = OverloadedRE.match(meth.name))? md[1] :  meth.name
+    }.uniq
+    b_names = b.collect{ |meth| meth.name }.uniq
+    puts "  Missing OpenZWave::Manager method mappings from RemoteManagerHandler:"
+    puts "\t" + (b_names - a_names).join("\n\t") 
+end
 
 RootNode.classes("RemoteManagerHandler").methods.each { |meth|
     # find line number, insert critical section enter code

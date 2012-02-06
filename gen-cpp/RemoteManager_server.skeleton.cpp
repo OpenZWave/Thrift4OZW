@@ -107,9 +107,24 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("IsNodeListeningDevice\n");
   }
 
+  bool IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId) {
+    // Your implementation goes here
+    printf("IsNodeFrequentListeningDevice\n");
+  }
+
+  bool IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId) {
+    // Your implementation goes here
+    printf("IsNodeBeamingDevice\n");
+  }
+
   bool IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId) {
     // Your implementation goes here
     printf("IsNodeRoutingDevice\n");
+  }
+
+  bool IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId) {
+    // Your implementation goes here
+    printf("IsNodeSecurityDevice\n");
   }
 
   int32_t GetNodeMaxBaudRate(const int32_t _homeId, const int8_t _nodeId) {
@@ -120,11 +135,6 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   int8_t GetNodeVersion(const int32_t _homeId, const int8_t _nodeId) {
     // Your implementation goes here
     printf("GetNodeVersion\n");
-  }
-
-  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) {
-    // Your implementation goes here
-    printf("GetNodeSecurity\n");
   }
 
   int8_t GetNodeBasic(const int32_t _homeId, const int8_t _nodeId) {
@@ -472,7 +482,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("SoftReset\n");
   }
 
-  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) {
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg) {
     // Your implementation goes here
     printf("BeginControllerCommand\n");
   }

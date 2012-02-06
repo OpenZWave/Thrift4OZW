@@ -2693,6 +2693,350 @@ uint32_t RemoteManager_IsNodeListeningDevice_presult::read(::apache::thrift::pro
   return xfer;
 }
 
+uint32_t RemoteManager_IsNodeFrequentListeningDevice_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->_homeId);
+          this->__isset._homeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_nodeId);
+          this->__isset._nodeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeFrequentListeningDevice_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeFrequentListeningDevice_args");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->_homeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte(this->_nodeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeFrequentListeningDevice_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeFrequentListeningDevice_pargs");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((*(this->_homeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte((*(this->_nodeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeFrequentListeningDevice_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeFrequentListeningDevice_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeFrequentListeningDevice_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
+    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeFrequentListeningDevice_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeBeamingDevice_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->_homeId);
+          this->__isset._homeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_nodeId);
+          this->__isset._nodeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeBeamingDevice_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeBeamingDevice_args");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->_homeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte(this->_nodeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeBeamingDevice_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeBeamingDevice_pargs");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((*(this->_homeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte((*(this->_nodeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeBeamingDevice_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeBeamingDevice_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeBeamingDevice_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
+    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeBeamingDevice_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
 uint32_t RemoteManager_IsNodeRoutingDevice_args::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
@@ -2826,6 +3170,178 @@ uint32_t RemoteManager_IsNodeRoutingDevice_result::write(::apache::thrift::proto
 }
 
 uint32_t RemoteManager_IsNodeRoutingDevice_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeSecurityDevice_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->_homeId);
+          this->__isset._homeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_nodeId);
+          this->__isset._nodeId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeSecurityDevice_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeSecurityDevice_args");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->_homeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte(this->_nodeId);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeSecurityDevice_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeSecurityDevice_pargs");
+  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((*(this->_homeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte((*(this->_nodeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeSecurityDevice_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeSecurityDevice_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_IsNodeSecurityDevice_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
+    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsNodeSecurityDevice_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -3170,178 +3686,6 @@ uint32_t RemoteManager_GetNodeVersion_result::write(::apache::thrift::protocol::
 }
 
 uint32_t RemoteManager_GetNodeVersion_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BYTE) {
-          xfer += iprot->readByte((*(this->success)));
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RemoteManager_GetNodeSecurity_args::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-        if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->_homeId);
-          this->__isset._homeId = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      case 2:
-        if (ftype == ::apache::thrift::protocol::T_BYTE) {
-          xfer += iprot->readByte(this->_nodeId);
-          this->__isset._nodeId = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RemoteManager_GetNodeSecurity_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RemoteManager_GetNodeSecurity_args");
-  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->_homeId);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
-  xfer += oprot->writeByte(this->_nodeId);
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RemoteManager_GetNodeSecurity_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
-  uint32_t xfer = 0;
-  xfer += oprot->writeStructBegin("RemoteManager_GetNodeSecurity_pargs");
-  xfer += oprot->writeFieldBegin("_homeId", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->_homeId)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 2);
-  xfer += oprot->writeByte((*(this->_nodeId)));
-  xfer += oprot->writeFieldEnd();
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RemoteManager_GetNodeSecurity_result::read(::apache::thrift::protocol::TProtocol* iprot) {
-
-  uint32_t xfer = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TType ftype;
-  int16_t fid;
-
-  xfer += iprot->readStructBegin(fname);
-
-  using ::apache::thrift::protocol::TProtocolException;
-
-
-  while (true)
-  {
-    xfer += iprot->readFieldBegin(fname, ftype, fid);
-    if (ftype == ::apache::thrift::protocol::T_STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-        if (ftype == ::apache::thrift::protocol::T_BYTE) {
-          xfer += iprot->readByte(this->success);
-          this->__isset.success = true;
-        } else {
-          xfer += iprot->skip(ftype);
-        }
-        break;
-      default:
-        xfer += iprot->skip(ftype);
-        break;
-    }
-    xfer += iprot->readFieldEnd();
-  }
-
-  xfer += iprot->readStructEnd();
-
-  return xfer;
-}
-
-uint32_t RemoteManager_GetNodeSecurity_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
-
-  uint32_t xfer = 0;
-
-  xfer += oprot->writeStructBegin("RemoteManager_GetNodeSecurity_result");
-
-  if (this->__isset.success) {
-    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BYTE, 0);
-    xfer += oprot->writeByte(this->success);
-    xfer += oprot->writeFieldEnd();
-  }
-  xfer += oprot->writeFieldStop();
-  xfer += oprot->writeStructEnd();
-  return xfer;
-}
-
-uint32_t RemoteManager_GetNodeSecurity_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -14820,6 +15164,14 @@ uint32_t RemoteManager_BeginControllerCommand_args::read(::apache::thrift::proto
           xfer += iprot->skip(ftype);
         }
         break;
+      case 5:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_arg);
+          this->__isset._arg = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -14847,6 +15199,9 @@ uint32_t RemoteManager_BeginControllerCommand_args::write(::apache::thrift::prot
   xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 4);
   xfer += oprot->writeByte(this->_nodeId);
   xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_arg", ::apache::thrift::protocol::T_BYTE, 5);
+  xfer += oprot->writeByte(this->_arg);
+  xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
@@ -14866,6 +15221,9 @@ uint32_t RemoteManager_BeginControllerCommand_pargs::write(::apache::thrift::pro
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldBegin("_nodeId", ::apache::thrift::protocol::T_BYTE, 4);
   xfer += oprot->writeByte((*(this->_nodeId)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_arg", ::apache::thrift::protocol::T_BYTE, 5);
+  xfer += oprot->writeByte((*(this->_arg)));
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -22125,6 +22483,124 @@ bool RemoteManagerClient::recv_IsNodeListeningDevice()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsNodeListeningDevice failed: unknown result");
 }
 
+bool RemoteManagerClient::IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId)
+{
+  send_IsNodeFrequentListeningDevice(_homeId, _nodeId);
+  return recv_IsNodeFrequentListeningDevice();
+}
+
+void RemoteManagerClient::send_IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("IsNodeFrequentListeningDevice", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_IsNodeFrequentListeningDevice_pargs args;
+  args._homeId = &_homeId;
+  args._nodeId = &_nodeId;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+bool RemoteManagerClient::recv_IsNodeFrequentListeningDevice()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("IsNodeFrequentListeningDevice") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  bool _return;
+  RemoteManager_IsNodeFrequentListeningDevice_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    return _return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsNodeFrequentListeningDevice failed: unknown result");
+}
+
+bool RemoteManagerClient::IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId)
+{
+  send_IsNodeBeamingDevice(_homeId, _nodeId);
+  return recv_IsNodeBeamingDevice();
+}
+
+void RemoteManagerClient::send_IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("IsNodeBeamingDevice", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_IsNodeBeamingDevice_pargs args;
+  args._homeId = &_homeId;
+  args._nodeId = &_nodeId;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+bool RemoteManagerClient::recv_IsNodeBeamingDevice()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("IsNodeBeamingDevice") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  bool _return;
+  RemoteManager_IsNodeBeamingDevice_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    return _return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsNodeBeamingDevice failed: unknown result");
+}
+
 bool RemoteManagerClient::IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId)
 {
   send_IsNodeRoutingDevice(_homeId, _nodeId);
@@ -22182,6 +22658,65 @@ bool RemoteManagerClient::recv_IsNodeRoutingDevice()
     return _return;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsNodeRoutingDevice failed: unknown result");
+}
+
+bool RemoteManagerClient::IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId)
+{
+  send_IsNodeSecurityDevice(_homeId, _nodeId);
+  return recv_IsNodeSecurityDevice();
+}
+
+void RemoteManagerClient::send_IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("IsNodeSecurityDevice", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_IsNodeSecurityDevice_pargs args;
+  args._homeId = &_homeId;
+  args._nodeId = &_nodeId;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+bool RemoteManagerClient::recv_IsNodeSecurityDevice()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("IsNodeSecurityDevice") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  bool _return;
+  RemoteManager_IsNodeSecurityDevice_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    return _return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsNodeSecurityDevice failed: unknown result");
 }
 
 int32_t RemoteManagerClient::GetNodeMaxBaudRate(const int32_t _homeId, const int8_t _nodeId)
@@ -22300,65 +22835,6 @@ int8_t RemoteManagerClient::recv_GetNodeVersion()
     return _return;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetNodeVersion failed: unknown result");
-}
-
-int8_t RemoteManagerClient::GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId)
-{
-  send_GetNodeSecurity(_homeId, _nodeId);
-  return recv_GetNodeSecurity();
-}
-
-void RemoteManagerClient::send_GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId)
-{
-  int32_t cseqid = 0;
-  oprot_->writeMessageBegin("GetNodeSecurity", ::apache::thrift::protocol::T_CALL, cseqid);
-
-  RemoteManager_GetNodeSecurity_pargs args;
-  args._homeId = &_homeId;
-  args._nodeId = &_nodeId;
-  args.write(oprot_);
-
-  oprot_->writeMessageEnd();
-  oprot_->getTransport()->writeEnd();
-  oprot_->getTransport()->flush();
-}
-
-int8_t RemoteManagerClient::recv_GetNodeSecurity()
-{
-
-  int32_t rseqid = 0;
-  std::string fname;
-  ::apache::thrift::protocol::TMessageType mtype;
-
-  iprot_->readMessageBegin(fname, mtype, rseqid);
-  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
-    ::apache::thrift::TApplicationException x;
-    x.read(iprot_);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-    throw x;
-  }
-  if (mtype != ::apache::thrift::protocol::T_REPLY) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  if (fname.compare("GetNodeSecurity") != 0) {
-    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
-    iprot_->readMessageEnd();
-    iprot_->getTransport()->readEnd();
-  }
-  int8_t _return;
-  RemoteManager_GetNodeSecurity_presult result;
-  result.success = &_return;
-  result.read(iprot_);
-  iprot_->readMessageEnd();
-  iprot_->getTransport()->readEnd();
-
-  if (result.__isset.success) {
-    return _return;
-  }
-  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetNodeSecurity failed: unknown result");
 }
 
 int8_t RemoteManagerClient::GetNodeBasic(const int32_t _homeId, const int8_t _nodeId)
@@ -26331,13 +26807,13 @@ void RemoteManagerClient::recv_SoftReset()
   return;
 }
 
-bool RemoteManagerClient::BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId)
+bool RemoteManagerClient::BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg)
 {
-  send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+  send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg);
   return recv_BeginControllerCommand();
 }
 
-void RemoteManagerClient::send_BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId)
+void RemoteManagerClient::send_BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("BeginControllerCommand", ::apache::thrift::protocol::T_CALL, cseqid);
@@ -26347,6 +26823,7 @@ void RemoteManagerClient::send_BeginControllerCommand(const int32_t _homeId, con
   args._command = &_command;
   args._highPower = &_highPower;
   args._nodeId = &_nodeId;
+  args._arg = &_arg;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -29469,6 +29946,114 @@ void RemoteManagerProcessor::process_IsNodeListeningDevice(int32_t seqid, ::apac
   }
 }
 
+void RemoteManagerProcessor::process_IsNodeFrequentListeningDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.IsNodeFrequentListeningDevice", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.IsNodeFrequentListeningDevice");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.IsNodeFrequentListeningDevice");
+  }
+
+  RemoteManager_IsNodeFrequentListeningDevice_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.IsNodeFrequentListeningDevice", bytes);
+  }
+
+  RemoteManager_IsNodeFrequentListeningDevice_result result;
+  try {
+    result.success = iface_->IsNodeFrequentListeningDevice(args._homeId, args._nodeId);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.IsNodeFrequentListeningDevice");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("IsNodeFrequentListeningDevice", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.IsNodeFrequentListeningDevice");
+  }
+
+  oprot->writeMessageBegin("IsNodeFrequentListeningDevice", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.IsNodeFrequentListeningDevice", bytes);
+  }
+}
+
+void RemoteManagerProcessor::process_IsNodeBeamingDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.IsNodeBeamingDevice", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.IsNodeBeamingDevice");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.IsNodeBeamingDevice");
+  }
+
+  RemoteManager_IsNodeBeamingDevice_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.IsNodeBeamingDevice", bytes);
+  }
+
+  RemoteManager_IsNodeBeamingDevice_result result;
+  try {
+    result.success = iface_->IsNodeBeamingDevice(args._homeId, args._nodeId);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.IsNodeBeamingDevice");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("IsNodeBeamingDevice", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.IsNodeBeamingDevice");
+  }
+
+  oprot->writeMessageBegin("IsNodeBeamingDevice", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.IsNodeBeamingDevice", bytes);
+  }
+}
+
 void RemoteManagerProcessor::process_IsNodeRoutingDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
 {
   void* ctx = NULL;
@@ -29520,6 +30105,60 @@ void RemoteManagerProcessor::process_IsNodeRoutingDevice(int32_t seqid, ::apache
 
   if (eventHandler_.get() != NULL) {
     eventHandler_->postWrite(ctx, "RemoteManager.IsNodeRoutingDevice", bytes);
+  }
+}
+
+void RemoteManagerProcessor::process_IsNodeSecurityDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.IsNodeSecurityDevice", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.IsNodeSecurityDevice");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.IsNodeSecurityDevice");
+  }
+
+  RemoteManager_IsNodeSecurityDevice_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.IsNodeSecurityDevice", bytes);
+  }
+
+  RemoteManager_IsNodeSecurityDevice_result result;
+  try {
+    result.success = iface_->IsNodeSecurityDevice(args._homeId, args._nodeId);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.IsNodeSecurityDevice");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("IsNodeSecurityDevice", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.IsNodeSecurityDevice");
+  }
+
+  oprot->writeMessageBegin("IsNodeSecurityDevice", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.IsNodeSecurityDevice", bytes);
   }
 }
 
@@ -29628,60 +30267,6 @@ void RemoteManagerProcessor::process_GetNodeVersion(int32_t seqid, ::apache::thr
 
   if (eventHandler_.get() != NULL) {
     eventHandler_->postWrite(ctx, "RemoteManager.GetNodeVersion", bytes);
-  }
-}
-
-void RemoteManagerProcessor::process_GetNodeSecurity(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
-{
-  void* ctx = NULL;
-  if (eventHandler_.get() != NULL) {
-    ctx = eventHandler_->getContext("RemoteManager.GetNodeSecurity", callContext);
-  }
-  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.GetNodeSecurity");
-
-  if (eventHandler_.get() != NULL) {
-    eventHandler_->preRead(ctx, "RemoteManager.GetNodeSecurity");
-  }
-
-  RemoteManager_GetNodeSecurity_args args;
-  args.read(iprot);
-  iprot->readMessageEnd();
-  uint32_t bytes = iprot->getTransport()->readEnd();
-
-  if (eventHandler_.get() != NULL) {
-    eventHandler_->postRead(ctx, "RemoteManager.GetNodeSecurity", bytes);
-  }
-
-  RemoteManager_GetNodeSecurity_result result;
-  try {
-    result.success = iface_->GetNodeSecurity(args._homeId, args._nodeId);
-    result.__isset.success = true;
-  } catch (const std::exception& e) {
-    if (eventHandler_.get() != NULL) {
-      eventHandler_->handlerError(ctx, "RemoteManager.GetNodeSecurity");
-    }
-
-    ::apache::thrift::TApplicationException x(e.what());
-    oprot->writeMessageBegin("GetNodeSecurity", ::apache::thrift::protocol::T_EXCEPTION, seqid);
-    x.write(oprot);
-    oprot->writeMessageEnd();
-    oprot->getTransport()->writeEnd();
-    oprot->getTransport()->flush();
-    return;
-  }
-
-  if (eventHandler_.get() != NULL) {
-    eventHandler_->preWrite(ctx, "RemoteManager.GetNodeSecurity");
-  }
-
-  oprot->writeMessageBegin("GetNodeSecurity", ::apache::thrift::protocol::T_REPLY, seqid);
-  result.write(oprot);
-  oprot->writeMessageEnd();
-  bytes = oprot->getTransport()->writeEnd();
-  oprot->getTransport()->flush();
-
-  if (eventHandler_.get() != NULL) {
-    eventHandler_->postWrite(ctx, "RemoteManager.GetNodeSecurity", bytes);
   }
 }
 
@@ -33415,7 +34000,7 @@ void RemoteManagerProcessor::process_BeginControllerCommand(int32_t seqid, ::apa
 
   RemoteManager_BeginControllerCommand_result result;
   try {
-    result.success = iface_->BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId);
+    result.success = iface_->BeginControllerCommand(args._homeId, args._command, args._highPower, args._nodeId, args._arg);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (eventHandler_.get() != NULL) {

@@ -17,7 +17,14 @@ using boost::shared_ptr;
 using namespace OpenZWave;
 
 void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
-	// FIXME: fill in the blanks (sorry!)
+    g_criticalSection.lock();
+    //
+    STOMP::hdrmap headers;
+    headers["ControllerState"] = to_string<uint16_t>(arg1, std::hex);
+    string empty = ""  ;
+    stomp_client->send(*notifications_topic, headers, empty);
+    //
+    g_criticalSection.unlock();
 }
 
 class RemoteManagerHandler : virtual public RemoteManagerIf {
@@ -158,10 +165,34 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  bool IsNodeFrequentListeningDevice(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsNodeFrequentListeningDevice((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  bool IsNodeBeamingDevice(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsNodeBeamingDevice((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
   bool IsNodeRoutingDevice(const int32_t _homeId, const int8_t _nodeId) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->IsNodeRoutingDevice((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  bool IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsNodeSecurityDevice((::uint32 const) _homeId, (::uint8 const) _nodeId);
 	g_criticalSection.unlock();
 	return(function_result);
   }
@@ -178,14 +209,6 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	::int8_t function_result =  mgr->GetNodeVersion((::uint32 const) _homeId, (::uint8 const) _nodeId);
-	g_criticalSection.unlock();
-	return(function_result);
-  }
-
-  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) {
-	Manager* mgr = Manager::Get();
-	g_criticalSection.lock();
-	::int8_t function_result =  mgr->GetNodeSecurity((::uint32 const) _homeId, (::uint8 const) _nodeId);
 	g_criticalSection.unlock();
 	return(function_result);
   }
@@ -707,10 +730,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
-  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId) {
+  bool BeginControllerCommand(const int32_t _homeId, const DriverControllerCommand::type _command, const bool _highPower, const int8_t _nodeId, const int8_t _arg) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	bool function_result =  mgr->BeginControllerCommand((::uint32 const) _homeId, (OpenZWave::Driver::ControllerCommand) _command, &BeginControllerCommand_callback, (void*) this, (bool) _highPower, (::uint8) _nodeId);
+	bool function_result =  mgr->BeginControllerCommand((::uint32 const) _homeId, (OpenZWave::Driver::ControllerCommand) _command, &BeginControllerCommand_callback, (void*) this, (bool) _highPower, (::uint8) _nodeId, (::uint8) _arg);
 	g_criticalSection.unlock();
 	return(function_result);
   }

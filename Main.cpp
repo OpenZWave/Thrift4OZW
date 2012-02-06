@@ -405,7 +405,7 @@ int main(int argc, char *argv[]) {
 	// Add a Z-Wave Driver
 	Manager::Get()->AddDriver( ozw_port );
 	//Manager::Get()->AddDriver( "HID Controller", Driver::ControllerInterface_Hid );
-
+	
 	// THRIFT: initialize RemoteManager
     shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
     shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
@@ -419,7 +419,10 @@ int main(int argc, char *argv[]) {
 	// Now we just wait for the driver to become ready, and then write out the loaded config.
     boost::unique_lock<boost::mutex> initLock(initMutex);
 	initCond.wait(initLock);
-
+	usleep(500);
+	cout << "------------------------------------------------------------------------" << endl;
+	cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
+	cout << "------------------------------------------------------------------------" << endl;
 	// start up the Thrift RemoteManager server 
     server.serve();
     return 0;

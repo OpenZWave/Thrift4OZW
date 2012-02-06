@@ -167,6 +167,24 @@ function_info('IsNodeListeningDevice', reply_type) ->
 function_info('IsNodeListeningDevice', exceptions) ->
   {struct, []}
 ;
+% IsNodeFrequentListeningDevice(This, _homeId, _nodeId)
+function_info('IsNodeFrequentListeningDevice', params_type) ->
+  {struct, [{1, i32}, {2, byte}]}
+;
+function_info('IsNodeFrequentListeningDevice', reply_type) ->
+  bool;
+function_info('IsNodeFrequentListeningDevice', exceptions) ->
+  {struct, []}
+;
+% IsNodeBeamingDevice(This, _homeId, _nodeId)
+function_info('IsNodeBeamingDevice', params_type) ->
+  {struct, [{1, i32}, {2, byte}]}
+;
+function_info('IsNodeBeamingDevice', reply_type) ->
+  bool;
+function_info('IsNodeBeamingDevice', exceptions) ->
+  {struct, []}
+;
 % IsNodeRoutingDevice(This, _homeId, _nodeId)
 function_info('IsNodeRoutingDevice', params_type) ->
   {struct, [{1, i32}, {2, byte}]}
@@ -174,6 +192,15 @@ function_info('IsNodeRoutingDevice', params_type) ->
 function_info('IsNodeRoutingDevice', reply_type) ->
   bool;
 function_info('IsNodeRoutingDevice', exceptions) ->
+  {struct, []}
+;
+% IsNodeSecurityDevice(This, _homeId, _nodeId)
+function_info('IsNodeSecurityDevice', params_type) ->
+  {struct, [{1, i32}, {2, byte}]}
+;
+function_info('IsNodeSecurityDevice', reply_type) ->
+  bool;
+function_info('IsNodeSecurityDevice', exceptions) ->
   {struct, []}
 ;
 % GetNodeMaxBaudRate(This, _homeId, _nodeId)
@@ -192,15 +219,6 @@ function_info('GetNodeVersion', params_type) ->
 function_info('GetNodeVersion', reply_type) ->
   byte;
 function_info('GetNodeVersion', exceptions) ->
-  {struct, []}
-;
-% GetNodeSecurity(This, _homeId, _nodeId)
-function_info('GetNodeSecurity', params_type) ->
-  {struct, [{1, i32}, {2, byte}]}
-;
-function_info('GetNodeSecurity', reply_type) ->
-  byte;
-function_info('GetNodeSecurity', exceptions) ->
   {struct, []}
 ;
 % GetNodeBasic(This, _homeId, _nodeId)
@@ -824,9 +842,9 @@ function_info('SoftReset', reply_type) ->
 function_info('SoftReset', exceptions) ->
   {struct, []}
 ;
-% BeginControllerCommand(This, _homeId, _command, _highPower, _nodeId)
+% BeginControllerCommand(This, _homeId, _command, _highPower, _nodeId, _arg)
 function_info('BeginControllerCommand', params_type) ->
-  {struct, [{1, i32}, {2, i32}, {3, bool}, {4, byte}]}
+  {struct, [{1, i32}, {2, i32}, {3, bool}, {4, byte}, {5, byte}]}
 ;
 function_info('BeginControllerCommand', reply_type) ->
   bool;

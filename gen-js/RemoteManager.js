@@ -1789,6 +1789,244 @@ OpenZWave.RemoteManager_IsNodeListeningDevice_result.prototype.write = function(
   return;
 };
 
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_args = function(args) {
+  this._homeId = null;
+  this._nodeId = null;
+  if (args) {
+    if (args._homeId !== undefined) {
+      this._homeId = args._homeId;
+    }
+    if (args._nodeId !== undefined) {
+      this._nodeId = args._nodeId;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_args.prototype = {};
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this._homeId = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.BYTE) {
+        this._nodeId = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsNodeFrequentListeningDevice_args');
+  if (this._homeId) {
+    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
+    output.writeI32(this._homeId);
+    output.writeFieldEnd();
+  }
+  if (this._nodeId) {
+    output.writeFieldBegin('_nodeId', Thrift.Type.BYTE, 2);
+    output.writeByte(this._nodeId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_result.prototype = {};
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsNodeFrequentListeningDevice_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeBeamingDevice_args = function(args) {
+  this._homeId = null;
+  this._nodeId = null;
+  if (args) {
+    if (args._homeId !== undefined) {
+      this._homeId = args._homeId;
+    }
+    if (args._nodeId !== undefined) {
+      this._nodeId = args._nodeId;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsNodeBeamingDevice_args.prototype = {};
+OpenZWave.RemoteManager_IsNodeBeamingDevice_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this._homeId = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.BYTE) {
+        this._nodeId = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeBeamingDevice_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsNodeBeamingDevice_args');
+  if (this._homeId) {
+    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
+    output.writeI32(this._homeId);
+    output.writeFieldEnd();
+  }
+  if (this._nodeId) {
+    output.writeFieldBegin('_nodeId', Thrift.Type.BYTE, 2);
+    output.writeByte(this._nodeId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeBeamingDevice_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsNodeBeamingDevice_result.prototype = {};
+OpenZWave.RemoteManager_IsNodeBeamingDevice_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeBeamingDevice_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsNodeBeamingDevice_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.RemoteManager_IsNodeRoutingDevice_args = function(args) {
   this._homeId = null;
   this._nodeId = null;
@@ -1898,6 +2136,125 @@ OpenZWave.RemoteManager_IsNodeRoutingDevice_result.prototype.read = function(inp
 
 OpenZWave.RemoteManager_IsNodeRoutingDevice_result.prototype.write = function(output) {
   output.writeStructBegin('RemoteManager_IsNodeRoutingDevice_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeSecurityDevice_args = function(args) {
+  this._homeId = null;
+  this._nodeId = null;
+  if (args) {
+    if (args._homeId !== undefined) {
+      this._homeId = args._homeId;
+    }
+    if (args._nodeId !== undefined) {
+      this._nodeId = args._nodeId;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsNodeSecurityDevice_args.prototype = {};
+OpenZWave.RemoteManager_IsNodeSecurityDevice_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this._homeId = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.BYTE) {
+        this._nodeId = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeSecurityDevice_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsNodeSecurityDevice_args');
+  if (this._homeId) {
+    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
+    output.writeI32(this._homeId);
+    output.writeFieldEnd();
+  }
+  if (this._nodeId) {
+    output.writeFieldBegin('_nodeId', Thrift.Type.BYTE, 2);
+    output.writeByte(this._nodeId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeSecurityDevice_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsNodeSecurityDevice_result.prototype = {};
+OpenZWave.RemoteManager_IsNodeSecurityDevice_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsNodeSecurityDevice_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsNodeSecurityDevice_result');
   if (this.success) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -2136,125 +2493,6 @@ OpenZWave.RemoteManager_GetNodeVersion_result.prototype.read = function(input) {
 
 OpenZWave.RemoteManager_GetNodeVersion_result.prototype.write = function(output) {
   output.writeStructBegin('RemoteManager_GetNodeVersion_result');
-  if (this.success) {
-    output.writeFieldBegin('success', Thrift.Type.BYTE, 0);
-    output.writeByte(this.success);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-OpenZWave.RemoteManager_GetNodeSecurity_args = function(args) {
-  this._homeId = null;
-  this._nodeId = null;
-  if (args) {
-    if (args._homeId !== undefined) {
-      this._homeId = args._homeId;
-    }
-    if (args._nodeId !== undefined) {
-      this._nodeId = args._nodeId;
-    }
-  }
-};
-OpenZWave.RemoteManager_GetNodeSecurity_args.prototype = {};
-OpenZWave.RemoteManager_GetNodeSecurity_args.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 1:
-      if (ftype == Thrift.Type.I32) {
-        this._homeId = input.readI32().value;
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 2:
-      if (ftype == Thrift.Type.BYTE) {
-        this._nodeId = input.readByte().value;
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-OpenZWave.RemoteManager_GetNodeSecurity_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetNodeSecurity_args');
-  if (this._homeId) {
-    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
-    output.writeI32(this._homeId);
-    output.writeFieldEnd();
-  }
-  if (this._nodeId) {
-    output.writeFieldBegin('_nodeId', Thrift.Type.BYTE, 2);
-    output.writeByte(this._nodeId);
-    output.writeFieldEnd();
-  }
-  output.writeFieldStop();
-  output.writeStructEnd();
-  return;
-};
-
-OpenZWave.RemoteManager_GetNodeSecurity_result = function(args) {
-  this.success = null;
-  if (args) {
-    if (args.success !== undefined) {
-      this.success = args.success;
-    }
-  }
-};
-OpenZWave.RemoteManager_GetNodeSecurity_result.prototype = {};
-OpenZWave.RemoteManager_GetNodeSecurity_result.prototype.read = function(input) {
-  input.readStructBegin();
-  while (true)
-  {
-    var ret = input.readFieldBegin();
-    var fname = ret.fname;
-    var ftype = ret.ftype;
-    var fid = ret.fid;
-    if (ftype == Thrift.Type.STOP) {
-      break;
-    }
-    switch (fid)
-    {
-      case 0:
-      if (ftype == Thrift.Type.BYTE) {
-        this.success = input.readByte().value;
-      } else {
-        input.skip(ftype);
-      }
-      break;
-      case 0:
-        input.skip(ftype);
-        break;
-      default:
-        input.skip(ftype);
-    }
-    input.readFieldEnd();
-  }
-  input.readStructEnd();
-  return;
-};
-
-OpenZWave.RemoteManager_GetNodeSecurity_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetNodeSecurity_result');
   if (this.success) {
     output.writeFieldBegin('success', Thrift.Type.BYTE, 0);
     output.writeByte(this.success);
@@ -10037,6 +10275,7 @@ OpenZWave.RemoteManager_BeginControllerCommand_args = function(args) {
   this._command = null;
   this._highPower = null;
   this._nodeId = null;
+  this._arg = null;
   if (args) {
     if (args._homeId !== undefined) {
       this._homeId = args._homeId;
@@ -10049,6 +10288,9 @@ OpenZWave.RemoteManager_BeginControllerCommand_args = function(args) {
     }
     if (args._nodeId !== undefined) {
       this._nodeId = args._nodeId;
+    }
+    if (args._arg !== undefined) {
+      this._arg = args._arg;
     }
   }
 };
@@ -10094,6 +10336,13 @@ OpenZWave.RemoteManager_BeginControllerCommand_args.prototype.read = function(in
         input.skip(ftype);
       }
       break;
+      case 5:
+      if (ftype == Thrift.Type.BYTE) {
+        this._arg = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -10123,6 +10372,11 @@ OpenZWave.RemoteManager_BeginControllerCommand_args.prototype.write = function(o
   if (this._nodeId) {
     output.writeFieldBegin('_nodeId', Thrift.Type.BYTE, 4);
     output.writeByte(this._nodeId);
+    output.writeFieldEnd();
+  }
+  if (this._arg) {
+    output.writeFieldBegin('_arg', Thrift.Type.BYTE, 5);
+    output.writeByte(this._arg);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -15059,6 +15313,76 @@ OpenZWave.RemoteManagerClient.prototype.recv_IsNodeListeningDevice = function() 
   }
   throw 'IsNodeListeningDevice failed: unknown result';
 };
+OpenZWave.RemoteManagerClient.prototype.IsNodeFrequentListeningDevice = function(_homeId, _nodeId) {
+  this.send_IsNodeFrequentListeningDevice(_homeId, _nodeId);
+  return this.recv_IsNodeFrequentListeningDevice();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_IsNodeFrequentListeningDevice = function(_homeId, _nodeId) {
+  this.output.writeMessageBegin('IsNodeFrequentListeningDevice', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_args();
+  args._homeId = _homeId;
+  args._nodeId = _nodeId;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_IsNodeFrequentListeningDevice = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_IsNodeFrequentListeningDevice_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'IsNodeFrequentListeningDevice failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.IsNodeBeamingDevice = function(_homeId, _nodeId) {
+  this.send_IsNodeBeamingDevice(_homeId, _nodeId);
+  return this.recv_IsNodeBeamingDevice();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_IsNodeBeamingDevice = function(_homeId, _nodeId) {
+  this.output.writeMessageBegin('IsNodeBeamingDevice', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_IsNodeBeamingDevice_args();
+  args._homeId = _homeId;
+  args._nodeId = _nodeId;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_IsNodeBeamingDevice = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_IsNodeBeamingDevice_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'IsNodeBeamingDevice failed: unknown result';
+};
 OpenZWave.RemoteManagerClient.prototype.IsNodeRoutingDevice = function(_homeId, _nodeId) {
   this.send_IsNodeRoutingDevice(_homeId, _nodeId);
   return this.recv_IsNodeRoutingDevice();
@@ -15093,6 +15417,41 @@ OpenZWave.RemoteManagerClient.prototype.recv_IsNodeRoutingDevice = function() {
     return result.success;
   }
   throw 'IsNodeRoutingDevice failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.IsNodeSecurityDevice = function(_homeId, _nodeId) {
+  this.send_IsNodeSecurityDevice(_homeId, _nodeId);
+  return this.recv_IsNodeSecurityDevice();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_IsNodeSecurityDevice = function(_homeId, _nodeId) {
+  this.output.writeMessageBegin('IsNodeSecurityDevice', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_IsNodeSecurityDevice_args();
+  args._homeId = _homeId;
+  args._nodeId = _nodeId;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_IsNodeSecurityDevice = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_IsNodeSecurityDevice_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'IsNodeSecurityDevice failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.GetNodeMaxBaudRate = function(_homeId, _nodeId) {
   this.send_GetNodeMaxBaudRate(_homeId, _nodeId);
@@ -15163,41 +15522,6 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetNodeVersion = function() {
     return result.success;
   }
   throw 'GetNodeVersion failed: unknown result';
-};
-OpenZWave.RemoteManagerClient.prototype.GetNodeSecurity = function(_homeId, _nodeId) {
-  this.send_GetNodeSecurity(_homeId, _nodeId);
-  return this.recv_GetNodeSecurity();
-};
-
-OpenZWave.RemoteManagerClient.prototype.send_GetNodeSecurity = function(_homeId, _nodeId) {
-  this.output.writeMessageBegin('GetNodeSecurity', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_GetNodeSecurity_args();
-  args._homeId = _homeId;
-  args._nodeId = _nodeId;
-  args.write(this.output);
-  this.output.writeMessageEnd();
-  return this.output.getTransport().flush();
-};
-
-OpenZWave.RemoteManagerClient.prototype.recv_GetNodeSecurity = function() {
-  var ret = this.input.readMessageBegin();
-  var fname = ret.fname;
-  var mtype = ret.mtype;
-  var rseqid = ret.rseqid;
-  if (mtype == Thrift.MessageType.EXCEPTION) {
-    var x = new Thrift.TApplicationException();
-    x.read(this.input);
-    this.input.readMessageEnd();
-    throw x;
-  }
-  var result = new OpenZWave.RemoteManager_GetNodeSecurity_result();
-  result.read(this.input);
-  this.input.readMessageEnd();
-
-  if (null !== result.success) {
-    return result.success;
-  }
-  throw 'GetNodeSecurity failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.GetNodeBasic = function(_homeId, _nodeId) {
   this.send_GetNodeBasic(_homeId, _nodeId);
@@ -17551,18 +17875,19 @@ OpenZWave.RemoteManagerClient.prototype.recv_SoftReset = function() {
 
   return;
 };
-OpenZWave.RemoteManagerClient.prototype.BeginControllerCommand = function(_homeId, _command, _highPower, _nodeId) {
-  this.send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId);
+OpenZWave.RemoteManagerClient.prototype.BeginControllerCommand = function(_homeId, _command, _highPower, _nodeId, _arg) {
+  this.send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg);
   return this.recv_BeginControllerCommand();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_BeginControllerCommand = function(_homeId, _command, _highPower, _nodeId) {
+OpenZWave.RemoteManagerClient.prototype.send_BeginControllerCommand = function(_homeId, _command, _highPower, _nodeId, _arg) {
   this.output.writeMessageBegin('BeginControllerCommand', Thrift.MessageType.CALL, this.seqid);
   var args = new OpenZWave.RemoteManager_BeginControllerCommand_args();
   args._homeId = _homeId;
   args._command = _command;
   args._highPower = _highPower;
   args._nodeId = _nodeId;
+  args._arg = _arg;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();

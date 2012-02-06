@@ -26,10 +26,12 @@ interface RemoteManagerIf {
   public function RequestNodeState($_homeId, $_nodeId);
   public function RequestNodeDynamic($_homeId, $_nodeId);
   public function IsNodeListeningDevice($_homeId, $_nodeId);
+  public function IsNodeFrequentListeningDevice($_homeId, $_nodeId);
+  public function IsNodeBeamingDevice($_homeId, $_nodeId);
   public function IsNodeRoutingDevice($_homeId, $_nodeId);
+  public function IsNodeSecurityDevice($_homeId, $_nodeId);
   public function GetNodeMaxBaudRate($_homeId, $_nodeId);
   public function GetNodeVersion($_homeId, $_nodeId);
-  public function GetNodeSecurity($_homeId, $_nodeId);
   public function GetNodeBasic($_homeId, $_nodeId);
   public function GetNodeGeneric($_homeId, $_nodeId);
   public function GetNodeSpecific($_homeId, $_nodeId);
@@ -99,7 +101,7 @@ interface RemoteManagerIf {
   public function RemoveAssociation($_homeId, $_nodeId, $_groupIdx, $_targetNodeId);
   public function ResetController($_homeId);
   public function SoftReset($_homeId);
-  public function BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+  public function BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId, $_arg);
   public function CancelControllerCommand($_homeId);
   public function GetNumScenes();
   public function GetAllScenes();
@@ -1013,6 +1015,110 @@ class RemoteManagerClient implements RemoteManagerIf {
     throw new Exception("IsNodeListeningDevice failed: unknown result");
   }
 
+  public function IsNodeFrequentListeningDevice($_homeId, $_nodeId)
+  {
+    $this->send_IsNodeFrequentListeningDevice($_homeId, $_nodeId);
+    return $this->recv_IsNodeFrequentListeningDevice();
+  }
+
+  public function send_IsNodeFrequentListeningDevice($_homeId, $_nodeId)
+  {
+    $args = new RemoteManager_IsNodeFrequentListeningDevice_args();
+    $args->_homeId = $_homeId;
+    $args->_nodeId = $_nodeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'IsNodeFrequentListeningDevice', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('IsNodeFrequentListeningDevice', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_IsNodeFrequentListeningDevice()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_IsNodeFrequentListeningDevice_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_IsNodeFrequentListeningDevice_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("IsNodeFrequentListeningDevice failed: unknown result");
+  }
+
+  public function IsNodeBeamingDevice($_homeId, $_nodeId)
+  {
+    $this->send_IsNodeBeamingDevice($_homeId, $_nodeId);
+    return $this->recv_IsNodeBeamingDevice();
+  }
+
+  public function send_IsNodeBeamingDevice($_homeId, $_nodeId)
+  {
+    $args = new RemoteManager_IsNodeBeamingDevice_args();
+    $args->_homeId = $_homeId;
+    $args->_nodeId = $_nodeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'IsNodeBeamingDevice', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('IsNodeBeamingDevice', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_IsNodeBeamingDevice()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_IsNodeBeamingDevice_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_IsNodeBeamingDevice_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("IsNodeBeamingDevice failed: unknown result");
+  }
+
   public function IsNodeRoutingDevice($_homeId, $_nodeId)
   {
     $this->send_IsNodeRoutingDevice($_homeId, $_nodeId);
@@ -1063,6 +1169,58 @@ class RemoteManagerClient implements RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("IsNodeRoutingDevice failed: unknown result");
+  }
+
+  public function IsNodeSecurityDevice($_homeId, $_nodeId)
+  {
+    $this->send_IsNodeSecurityDevice($_homeId, $_nodeId);
+    return $this->recv_IsNodeSecurityDevice();
+  }
+
+  public function send_IsNodeSecurityDevice($_homeId, $_nodeId)
+  {
+    $args = new RemoteManager_IsNodeSecurityDevice_args();
+    $args->_homeId = $_homeId;
+    $args->_nodeId = $_nodeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'IsNodeSecurityDevice', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('IsNodeSecurityDevice', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_IsNodeSecurityDevice()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_IsNodeSecurityDevice_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_IsNodeSecurityDevice_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("IsNodeSecurityDevice failed: unknown result");
   }
 
   public function GetNodeMaxBaudRate($_homeId, $_nodeId)
@@ -1167,58 +1325,6 @@ class RemoteManagerClient implements RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("GetNodeVersion failed: unknown result");
-  }
-
-  public function GetNodeSecurity($_homeId, $_nodeId)
-  {
-    $this->send_GetNodeSecurity($_homeId, $_nodeId);
-    return $this->recv_GetNodeSecurity();
-  }
-
-  public function send_GetNodeSecurity($_homeId, $_nodeId)
-  {
-    $args = new RemoteManager_GetNodeSecurity_args();
-    $args->_homeId = $_homeId;
-    $args->_nodeId = $_nodeId;
-    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
-    if ($bin_accel)
-    {
-      thrift_protocol_write_binary($this->output_, 'GetNodeSecurity', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
-    }
-    else
-    {
-      $this->output_->writeMessageBegin('GetNodeSecurity', TMessageType::CALL, $this->seqid_);
-      $args->write($this->output_);
-      $this->output_->writeMessageEnd();
-      $this->output_->getTransport()->flush();
-    }
-  }
-
-  public function recv_GetNodeSecurity()
-  {
-    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
-    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_GetNodeSecurity_result', $this->input_->isStrictRead());
-    else
-    {
-      $rseqid = 0;
-      $fname = null;
-      $mtype = 0;
-
-      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
-      if ($mtype == TMessageType::EXCEPTION) {
-        $x = new TApplicationException();
-        $x->read($this->input_);
-        $this->input_->readMessageEnd();
-        throw $x;
-      }
-      $result = new RemoteManager_GetNodeSecurity_result();
-      $result->read($this->input_);
-      $this->input_->readMessageEnd();
-    }
-    if ($result->success !== null) {
-      return $result->success;
-    }
-    throw new Exception("GetNodeSecurity failed: unknown result");
   }
 
   public function GetNodeBasic($_homeId, $_nodeId)
@@ -4746,19 +4852,20 @@ class RemoteManagerClient implements RemoteManagerIf {
     return;
   }
 
-  public function BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId)
+  public function BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId, $_arg)
   {
-    $this->send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId);
+    $this->send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId, $_arg);
     return $this->recv_BeginControllerCommand();
   }
 
-  public function send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId)
+  public function send_BeginControllerCommand($_homeId, $_command, $_highPower, $_nodeId, $_arg)
   {
     $args = new RemoteManager_BeginControllerCommand_args();
     $args->_homeId = $_homeId;
     $args->_command = $_command;
     $args->_highPower = $_highPower;
     $args->_nodeId = $_nodeId;
+    $args->_arg = $_arg;
     $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -9149,6 +9256,334 @@ class RemoteManager_IsNodeListeningDevice_result {
 
 }
 
+class RemoteManager_IsNodeFrequentListeningDevice_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+  public $_nodeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => '_nodeId',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+      if (isset($vals['_nodeId'])) {
+        $this->_nodeId = $vals['_nodeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsNodeFrequentListeningDevice_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_nodeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsNodeFrequentListeningDevice_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_nodeId !== null) {
+      $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->_nodeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsNodeFrequentListeningDevice_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsNodeFrequentListeningDevice_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsNodeFrequentListeningDevice_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+      $xfer += $output->writeBool($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsNodeBeamingDevice_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+  public $_nodeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => '_nodeId',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+      if (isset($vals['_nodeId'])) {
+        $this->_nodeId = $vals['_nodeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsNodeBeamingDevice_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_nodeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsNodeBeamingDevice_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_nodeId !== null) {
+      $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->_nodeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsNodeBeamingDevice_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsNodeBeamingDevice_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsNodeBeamingDevice_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+      $xfer += $output->writeBool($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class RemoteManager_IsNodeRoutingDevice_args {
   static $_TSPEC;
 
@@ -9301,6 +9736,170 @@ class RemoteManager_IsNodeRoutingDevice_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('RemoteManager_IsNodeRoutingDevice_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+      $xfer += $output->writeBool($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsNodeSecurityDevice_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+  public $_nodeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => '_nodeId',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+      if (isset($vals['_nodeId'])) {
+        $this->_nodeId = $vals['_nodeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsNodeSecurityDevice_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_nodeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsNodeSecurityDevice_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_nodeId !== null) {
+      $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->_nodeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsNodeSecurityDevice_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsNodeSecurityDevice_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsNodeSecurityDevice_result');
     if ($this->success !== null) {
       $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
       $xfer += $output->writeBool($this->success);
@@ -9629,170 +10228,6 @@ class RemoteManager_GetNodeVersion_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('RemoteManager_GetNodeVersion_result');
-    if ($this->success !== null) {
-      $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
-      $xfer += $output->writeByte($this->success);
-      $xfer += $output->writeFieldEnd();
-    }
-    $xfer += $output->writeFieldStop();
-    $xfer += $output->writeStructEnd();
-    return $xfer;
-  }
-
-}
-
-class RemoteManager_GetNodeSecurity_args {
-  static $_TSPEC;
-
-  public $_homeId = null;
-  public $_nodeId = null;
-
-  public function __construct($vals=null) {
-    if (!isset(self::$_TSPEC)) {
-      self::$_TSPEC = array(
-        1 => array(
-          'var' => '_homeId',
-          'type' => TType::I32,
-          ),
-        2 => array(
-          'var' => '_nodeId',
-          'type' => TType::BYTE,
-          ),
-        );
-    }
-    if (is_array($vals)) {
-      if (isset($vals['_homeId'])) {
-        $this->_homeId = $vals['_homeId'];
-      }
-      if (isset($vals['_nodeId'])) {
-        $this->_nodeId = $vals['_nodeId'];
-      }
-    }
-  }
-
-  public function getName() {
-    return 'RemoteManager_GetNodeSecurity_args';
-  }
-
-  public function read($input)
-  {
-    $xfer = 0;
-    $fname = null;
-    $ftype = 0;
-    $fid = 0;
-    $xfer += $input->readStructBegin($fname);
-    while (true)
-    {
-      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
-      if ($ftype == TType::STOP) {
-        break;
-      }
-      switch ($fid)
-      {
-        case 1:
-          if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->_homeId);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        case 2:
-          if ($ftype == TType::BYTE) {
-            $xfer += $input->readByte($this->_nodeId);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        default:
-          $xfer += $input->skip($ftype);
-          break;
-      }
-      $xfer += $input->readFieldEnd();
-    }
-    $xfer += $input->readStructEnd();
-    return $xfer;
-  }
-
-  public function write($output) {
-    $xfer = 0;
-    $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_args');
-    if ($this->_homeId !== null) {
-      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
-      $xfer += $output->writeI32($this->_homeId);
-      $xfer += $output->writeFieldEnd();
-    }
-    if ($this->_nodeId !== null) {
-      $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
-      $xfer += $output->writeByte($this->_nodeId);
-      $xfer += $output->writeFieldEnd();
-    }
-    $xfer += $output->writeFieldStop();
-    $xfer += $output->writeStructEnd();
-    return $xfer;
-  }
-
-}
-
-class RemoteManager_GetNodeSecurity_result {
-  static $_TSPEC;
-
-  public $success = null;
-
-  public function __construct($vals=null) {
-    if (!isset(self::$_TSPEC)) {
-      self::$_TSPEC = array(
-        0 => array(
-          'var' => 'success',
-          'type' => TType::BYTE,
-          ),
-        );
-    }
-    if (is_array($vals)) {
-      if (isset($vals['success'])) {
-        $this->success = $vals['success'];
-      }
-    }
-  }
-
-  public function getName() {
-    return 'RemoteManager_GetNodeSecurity_result';
-  }
-
-  public function read($input)
-  {
-    $xfer = 0;
-    $fname = null;
-    $ftype = 0;
-    $fid = 0;
-    $xfer += $input->readStructBegin($fname);
-    while (true)
-    {
-      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
-      if ($ftype == TType::STOP) {
-        break;
-      }
-      switch ($fid)
-      {
-        case 0:
-          if ($ftype == TType::BYTE) {
-            $xfer += $input->readByte($this->success);
-          } else {
-            $xfer += $input->skip($ftype);
-          }
-          break;
-        default:
-          $xfer += $input->skip($ftype);
-          break;
-      }
-      $xfer += $input->readFieldEnd();
-    }
-    $xfer += $input->readStructEnd();
-    return $xfer;
-  }
-
-  public function write($output) {
-    $xfer = 0;
-    $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_result');
     if ($this->success !== null) {
       $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
       $xfer += $output->writeByte($this->success);
@@ -20835,6 +21270,7 @@ class RemoteManager_BeginControllerCommand_args {
   public $_command = null;
   public $_highPower = null;
   public $_nodeId = null;
+  public $_arg = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -20855,6 +21291,10 @@ class RemoteManager_BeginControllerCommand_args {
           'var' => '_nodeId',
           'type' => TType::BYTE,
           ),
+        5 => array(
+          'var' => '_arg',
+          'type' => TType::BYTE,
+          ),
         );
     }
     if (is_array($vals)) {
@@ -20869,6 +21309,9 @@ class RemoteManager_BeginControllerCommand_args {
       }
       if (isset($vals['_nodeId'])) {
         $this->_nodeId = $vals['_nodeId'];
+      }
+      if (isset($vals['_arg'])) {
+        $this->_arg = $vals['_arg'];
       }
     }
   }
@@ -20920,6 +21363,13 @@ class RemoteManager_BeginControllerCommand_args {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 5:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_arg);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -20951,6 +21401,11 @@ class RemoteManager_BeginControllerCommand_args {
     if ($this->_nodeId !== null) {
       $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 4);
       $xfer += $output->writeByte($this->_nodeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_arg !== null) {
+      $xfer += $output->writeFieldBegin('_arg', TType::BYTE, 5);
+      $xfer += $output->writeByte($this->_arg);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
