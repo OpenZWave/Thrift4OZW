@@ -1910,6 +1910,21 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'ActivateScene failed: unknown result')
           end
 
+          def GetDriverStatistics(_homeId)
+            send_GetDriverStatistics(_homeId)
+            return recv_GetDriverStatistics()
+          end
+
+          def send_GetDriverStatistics(_homeId)
+            send_message('GetDriverStatistics', GetDriverStatistics_args, :_homeId => _homeId)
+          end
+
+          def recv_GetDriverStatistics()
+            result = receive_message(GetDriverStatistics_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetDriverStatistics failed: unknown result')
+          end
+
           def SendAllValues()
             send_SendAllValues()
             recv_SendAllValues()
@@ -2823,6 +2838,13 @@ require 'ozw_types'
             result = ActivateScene_result.new()
             result.success = @handler.ActivateScene(args._sceneId)
             write_result(result, oprot, 'ActivateScene', seqid)
+          end
+
+          def process_GetDriverStatistics(seqid, iprot, oprot)
+            args = read_args(iprot, GetDriverStatistics_args)
+            result = GetDriverStatistics_result.new()
+            result.success = @handler.GetDriverStatistics(args._homeId)
+            write_result(result, oprot, 'GetDriverStatistics', seqid)
           end
 
           def process_SendAllValues(seqid, iprot, oprot)
@@ -7137,6 +7159,38 @@ require 'ozw_types'
 
           FIELDS = {
             SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class GetDriverStatistics_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class GetDriverStatistics_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => OpenZWave::GetDriverStatisticsReturnStruct}
           }
 
           def struct_fields; FIELDS; end

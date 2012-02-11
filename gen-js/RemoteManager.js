@@ -14676,6 +14676,113 @@ OpenZWave.RemoteManager_ActivateScene_result.prototype.write = function(output) 
   return;
 };
 
+OpenZWave.RemoteManager_GetDriverStatistics_args = function(args) {
+  this._homeId = null;
+  if (args) {
+    if (args._homeId !== undefined) {
+      this._homeId = args._homeId;
+    }
+  }
+};
+OpenZWave.RemoteManager_GetDriverStatistics_args.prototype = {};
+OpenZWave.RemoteManager_GetDriverStatistics_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this._homeId = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_GetDriverStatistics_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetDriverStatistics_args');
+  if (this._homeId) {
+    output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
+    output.writeI32(this._homeId);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_GetDriverStatistics_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_GetDriverStatistics_result.prototype = {};
+OpenZWave.RemoteManager_GetDriverStatistics_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.STRUCT) {
+        this.success = new OpenZWave.GetDriverStatisticsReturnStruct();
+        this.success.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_GetDriverStatistics_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetDriverStatistics_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
+    this.success.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.RemoteManager_SendAllValues_args = function(args) {
 };
 OpenZWave.RemoteManager_SendAllValues_args.prototype = {};
@@ -19138,6 +19245,40 @@ OpenZWave.RemoteManagerClient.prototype.recv_ActivateScene = function() {
     return result.success;
   }
   throw 'ActivateScene failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.GetDriverStatistics = function(_homeId) {
+  this.send_GetDriverStatistics(_homeId);
+  return this.recv_GetDriverStatistics();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_GetDriverStatistics = function(_homeId) {
+  this.output.writeMessageBegin('GetDriverStatistics', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_GetDriverStatistics_args();
+  args._homeId = _homeId;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_GetDriverStatistics = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_GetDriverStatistics_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'GetDriverStatistics failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.SendAllValues = function() {
   this.send_SendAllValues();

@@ -142,6 +142,7 @@ class RemoteManagerIf {
   virtual void SetSceneLabel(const int8_t _sceneId, const std::string& _value) = 0;
   virtual bool SceneExists(const int8_t _sceneId) = 0;
   virtual bool ActivateScene(const int8_t _sceneId) = 0;
+  virtual void GetDriverStatistics(GetDriverStatisticsReturnStruct& _return, const int32_t _homeId) = 0;
   virtual void SendAllValues() = 0;
 };
 
@@ -598,6 +599,9 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   bool ActivateScene(const int8_t /* _sceneId */) {
     bool _return = false;
     return _return;
+  }
+  void GetDriverStatistics(GetDriverStatisticsReturnStruct& /* _return */, const int32_t /* _homeId */) {
+    return;
   }
   void SendAllValues() {
     return;
@@ -15003,6 +15007,114 @@ class RemoteManager_ActivateScene_presult {
 
 };
 
+typedef struct _RemoteManager_GetDriverStatistics_args__isset {
+  _RemoteManager_GetDriverStatistics_args__isset() : _homeId(false) {}
+  bool _homeId;
+} _RemoteManager_GetDriverStatistics_args__isset;
+
+class RemoteManager_GetDriverStatistics_args {
+ public:
+
+  RemoteManager_GetDriverStatistics_args() : _homeId(0) {
+  }
+
+  virtual ~RemoteManager_GetDriverStatistics_args() throw() {}
+
+  int32_t _homeId;
+
+  _RemoteManager_GetDriverStatistics_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  bool operator == (const RemoteManager_GetDriverStatistics_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_GetDriverStatistics_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_GetDriverStatistics_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_GetDriverStatistics_pargs {
+ public:
+
+
+  virtual ~RemoteManager_GetDriverStatistics_pargs() throw() {}
+
+  const int32_t* _homeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_GetDriverStatistics_result__isset {
+  _RemoteManager_GetDriverStatistics_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_GetDriverStatistics_result__isset;
+
+class RemoteManager_GetDriverStatistics_result {
+ public:
+
+  RemoteManager_GetDriverStatistics_result() {
+  }
+
+  virtual ~RemoteManager_GetDriverStatistics_result() throw() {}
+
+  GetDriverStatisticsReturnStruct success;
+
+  _RemoteManager_GetDriverStatistics_result__isset __isset;
+
+  void __set_success(const GetDriverStatisticsReturnStruct& val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_GetDriverStatistics_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_GetDriverStatistics_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_GetDriverStatistics_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_GetDriverStatistics_presult__isset {
+  _RemoteManager_GetDriverStatistics_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_GetDriverStatistics_presult__isset;
+
+class RemoteManager_GetDriverStatistics_presult {
+ public:
+
+
+  virtual ~RemoteManager_GetDriverStatistics_presult() throw() {}
+
+  GetDriverStatisticsReturnStruct* success;
+
+  _RemoteManager_GetDriverStatistics_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 
 class RemoteManager_SendAllValues_args {
  public:
@@ -15481,6 +15593,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool ActivateScene(const int8_t _sceneId);
   void send_ActivateScene(const int8_t _sceneId);
   bool recv_ActivateScene();
+  void GetDriverStatistics(GetDriverStatisticsReturnStruct& _return, const int32_t _homeId);
+  void send_GetDriverStatistics(const int32_t _homeId);
+  void recv_GetDriverStatistics(GetDriverStatisticsReturnStruct& _return);
   void SendAllValues();
   void send_SendAllValues();
   void recv_SendAllValues();
@@ -15625,6 +15740,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_SetSceneLabel(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SceneExists(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_ActivateScene(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_GetDriverStatistics(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SendAllValues(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
  public:
   RemoteManagerProcessor(boost::shared_ptr<RemoteManagerIf> iface) :
@@ -15757,6 +15873,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["SetSceneLabel"] = &RemoteManagerProcessor::process_SetSceneLabel;
     processMap_["SceneExists"] = &RemoteManagerProcessor::process_SceneExists;
     processMap_["ActivateScene"] = &RemoteManagerProcessor::process_ActivateScene;
+    processMap_["GetDriverStatistics"] = &RemoteManagerProcessor::process_GetDriverStatistics;
     processMap_["SendAllValues"] = &RemoteManagerProcessor::process_SendAllValues;
   }
 
@@ -17131,6 +17248,18 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->ActivateScene(_sceneId);
       } else {
         ifaces_[i]->ActivateScene(_sceneId);
+      }
+    }
+  }
+
+  void GetDriverStatistics(GetDriverStatisticsReturnStruct& _return, const int32_t _homeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        ifaces_[i]->GetDriverStatistics(_return, _homeId);
+        return;
+      } else {
+        ifaces_[i]->GetDriverStatistics(_return, _homeId);
       }
     }
   }

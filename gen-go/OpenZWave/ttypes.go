@@ -611,6 +611,928 @@ func (p *RemoteValueID) TStructFields() thrift.TFieldContainer {
 
 /**
  * Attributes:
+ *  - SSOFCnt
+ *  - SACKWaiting
+ *  - SReadAborts
+ *  - SBadChecksum
+ *  - SReadCnt
+ *  - SWriteCnt
+ *  - SCANCnt
+ *  - SNAKCnt
+ *  - SACKCnt
+ *  - SOOFCnt
+ *  - SDropped
+ *  - SRetries
+ *  - SControllerReadCnt
+ *  - SControllerWriteCnt
+ */
+type DriverData struct {
+  thrift.TStruct
+  SSOFCnt int32 "s_SOFCnt"; // 1
+  SACKWaiting int32 "s_ACKWaiting"; // 2
+  SReadAborts int32 "s_readAborts"; // 3
+  SBadChecksum int32 "s_badChecksum"; // 4
+  SReadCnt int32 "s_readCnt"; // 5
+  SWriteCnt int32 "s_writeCnt"; // 6
+  SCANCnt int32 "s_CANCnt"; // 7
+  SNAKCnt int32 "s_NAKCnt"; // 8
+  SACKCnt int32 "s_ACKCnt"; // 9
+  SOOFCnt int32 "s_OOFCnt"; // 10
+  SDropped int32 "s_dropped"; // 11
+  SRetries int32 "s_retries"; // 12
+  SControllerReadCnt int32 "s_controllerReadCnt"; // 13
+  SControllerWriteCnt int32 "s_controllerWriteCnt"; // 14
+}
+
+func NewDriverData() *DriverData {
+  output := &DriverData{
+    TStruct:thrift.NewTStruct("DriverData", []thrift.TField{
+    thrift.NewTField("s_SOFCnt", thrift.I32, 1),
+    thrift.NewTField("s_ACKWaiting", thrift.I32, 2),
+    thrift.NewTField("s_readAborts", thrift.I32, 3),
+    thrift.NewTField("s_badChecksum", thrift.I32, 4),
+    thrift.NewTField("s_readCnt", thrift.I32, 5),
+    thrift.NewTField("s_writeCnt", thrift.I32, 6),
+    thrift.NewTField("s_CANCnt", thrift.I32, 7),
+    thrift.NewTField("s_NAKCnt", thrift.I32, 8),
+    thrift.NewTField("s_ACKCnt", thrift.I32, 9),
+    thrift.NewTField("s_OOFCnt", thrift.I32, 10),
+    thrift.NewTField("s_dropped", thrift.I32, 11),
+    thrift.NewTField("s_retries", thrift.I32, 12),
+    thrift.NewTField("s_controllerReadCnt", thrift.I32, 13),
+    thrift.NewTField("s_controllerWriteCnt", thrift.I32, 14),
+    }),
+  }
+  {
+  }
+  return output
+}
+
+func (p *DriverData) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  _, err = iprot.ReadStructBegin()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  for {
+    fieldName, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+    if fieldId < 0 {
+      fieldId = int16(p.FieldIdFromFieldName(fieldName))
+    } else if fieldName == "" {
+      fieldName = p.FieldNameFromFieldId(int(fieldId))
+    }
+    if fieldTypeId == thrift.GENERIC {
+      fieldTypeId = p.FieldFromFieldId(int(fieldId)).TypeId()
+    }
+    if err != nil {
+      return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err)
+    }
+    if fieldTypeId == thrift.STOP { break; }
+    if fieldId == 1 || fieldName == "s_SOFCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField1(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField1(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 2 || fieldName == "s_ACKWaiting" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField2(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField2(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 3 || fieldName == "s_readAborts" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField3(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField3(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 4 || fieldName == "s_badChecksum" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField4(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField4(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 5 || fieldName == "s_readCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField5(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField5(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 6 || fieldName == "s_writeCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField6(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField6(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 7 || fieldName == "s_CANCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField7(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField7(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 8 || fieldName == "s_NAKCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField8(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField8(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 9 || fieldName == "s_ACKCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField9(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField9(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 10 || fieldName == "s_OOFCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField10(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField10(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 11 || fieldName == "s_dropped" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField11(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField11(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 12 || fieldName == "s_retries" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField12(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField12(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 13 || fieldName == "s_controllerReadCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField13(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField13(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else if fieldId == 14 || fieldName == "s_controllerWriteCnt" {
+      if fieldTypeId == thrift.I32 {
+        err = p.ReadField14(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField14(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else {
+      err = iprot.Skip(fieldTypeId)
+      if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+    }
+    err = iprot.ReadFieldEnd()
+    if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+  }
+  err = iprot.ReadStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v14, err15 := iprot.ReadI32()
+  if err15 != nil { return thrift.NewTProtocolExceptionReadField(1, "s_SOFCnt", p.ThriftName(), err15); }
+  p.SSOFCnt = v14
+  return err
+}
+
+func (p *DriverData) ReadFieldSSOFCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField1(iprot)
+}
+
+func (p *DriverData) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v16, err17 := iprot.ReadI32()
+  if err17 != nil { return thrift.NewTProtocolExceptionReadField(2, "s_ACKWaiting", p.ThriftName(), err17); }
+  p.SACKWaiting = v16
+  return err
+}
+
+func (p *DriverData) ReadFieldSACKWaiting(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField2(iprot)
+}
+
+func (p *DriverData) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v18, err19 := iprot.ReadI32()
+  if err19 != nil { return thrift.NewTProtocolExceptionReadField(3, "s_readAborts", p.ThriftName(), err19); }
+  p.SReadAborts = v18
+  return err
+}
+
+func (p *DriverData) ReadFieldSReadAborts(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField3(iprot)
+}
+
+func (p *DriverData) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v20, err21 := iprot.ReadI32()
+  if err21 != nil { return thrift.NewTProtocolExceptionReadField(4, "s_badChecksum", p.ThriftName(), err21); }
+  p.SBadChecksum = v20
+  return err
+}
+
+func (p *DriverData) ReadFieldSBadChecksum(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField4(iprot)
+}
+
+func (p *DriverData) ReadField5(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v22, err23 := iprot.ReadI32()
+  if err23 != nil { return thrift.NewTProtocolExceptionReadField(5, "s_readCnt", p.ThriftName(), err23); }
+  p.SReadCnt = v22
+  return err
+}
+
+func (p *DriverData) ReadFieldSReadCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField5(iprot)
+}
+
+func (p *DriverData) ReadField6(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v24, err25 := iprot.ReadI32()
+  if err25 != nil { return thrift.NewTProtocolExceptionReadField(6, "s_writeCnt", p.ThriftName(), err25); }
+  p.SWriteCnt = v24
+  return err
+}
+
+func (p *DriverData) ReadFieldSWriteCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField6(iprot)
+}
+
+func (p *DriverData) ReadField7(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v26, err27 := iprot.ReadI32()
+  if err27 != nil { return thrift.NewTProtocolExceptionReadField(7, "s_CANCnt", p.ThriftName(), err27); }
+  p.SCANCnt = v26
+  return err
+}
+
+func (p *DriverData) ReadFieldSCANCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField7(iprot)
+}
+
+func (p *DriverData) ReadField8(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v28, err29 := iprot.ReadI32()
+  if err29 != nil { return thrift.NewTProtocolExceptionReadField(8, "s_NAKCnt", p.ThriftName(), err29); }
+  p.SNAKCnt = v28
+  return err
+}
+
+func (p *DriverData) ReadFieldSNAKCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField8(iprot)
+}
+
+func (p *DriverData) ReadField9(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v30, err31 := iprot.ReadI32()
+  if err31 != nil { return thrift.NewTProtocolExceptionReadField(9, "s_ACKCnt", p.ThriftName(), err31); }
+  p.SACKCnt = v30
+  return err
+}
+
+func (p *DriverData) ReadFieldSACKCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField9(iprot)
+}
+
+func (p *DriverData) ReadField10(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v32, err33 := iprot.ReadI32()
+  if err33 != nil { return thrift.NewTProtocolExceptionReadField(10, "s_OOFCnt", p.ThriftName(), err33); }
+  p.SOOFCnt = v32
+  return err
+}
+
+func (p *DriverData) ReadFieldSOOFCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField10(iprot)
+}
+
+func (p *DriverData) ReadField11(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v34, err35 := iprot.ReadI32()
+  if err35 != nil { return thrift.NewTProtocolExceptionReadField(11, "s_dropped", p.ThriftName(), err35); }
+  p.SDropped = v34
+  return err
+}
+
+func (p *DriverData) ReadFieldSDropped(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField11(iprot)
+}
+
+func (p *DriverData) ReadField12(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v36, err37 := iprot.ReadI32()
+  if err37 != nil { return thrift.NewTProtocolExceptionReadField(12, "s_retries", p.ThriftName(), err37); }
+  p.SRetries = v36
+  return err
+}
+
+func (p *DriverData) ReadFieldSRetries(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField12(iprot)
+}
+
+func (p *DriverData) ReadField13(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v38, err39 := iprot.ReadI32()
+  if err39 != nil { return thrift.NewTProtocolExceptionReadField(13, "s_controllerReadCnt", p.ThriftName(), err39); }
+  p.SControllerReadCnt = v38
+  return err
+}
+
+func (p *DriverData) ReadFieldSControllerReadCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField13(iprot)
+}
+
+func (p *DriverData) ReadField14(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v40, err41 := iprot.ReadI32()
+  if err41 != nil { return thrift.NewTProtocolExceptionReadField(14, "s_controllerWriteCnt", p.ThriftName(), err41); }
+  p.SControllerWriteCnt = v40
+  return err
+}
+
+func (p *DriverData) ReadFieldSControllerWriteCnt(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField14(iprot)
+}
+
+func (p *DriverData) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("DriverData")
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  err = p.WriteField1(oprot)
+  if err != nil { return err }
+  err = p.WriteField2(oprot)
+  if err != nil { return err }
+  err = p.WriteField3(oprot)
+  if err != nil { return err }
+  err = p.WriteField4(oprot)
+  if err != nil { return err }
+  err = p.WriteField5(oprot)
+  if err != nil { return err }
+  err = p.WriteField6(oprot)
+  if err != nil { return err }
+  err = p.WriteField7(oprot)
+  if err != nil { return err }
+  err = p.WriteField8(oprot)
+  if err != nil { return err }
+  err = p.WriteField9(oprot)
+  if err != nil { return err }
+  err = p.WriteField10(oprot)
+  if err != nil { return err }
+  err = p.WriteField11(oprot)
+  if err != nil { return err }
+  err = p.WriteField12(oprot)
+  if err != nil { return err }
+  err = p.WriteField13(oprot)
+  if err != nil { return err }
+  err = p.WriteField14(oprot)
+  if err != nil { return err }
+  err = oprot.WriteFieldStop()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "STOP", p.ThriftName(), err); }
+  err = oprot.WriteStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteField1(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_SOFCnt", thrift.I32, 1)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "s_SOFCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SSOFCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "s_SOFCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "s_SOFCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSSOFCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField1(oprot)
+}
+
+func (p *DriverData) WriteField2(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_ACKWaiting", thrift.I32, 2)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "s_ACKWaiting", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SACKWaiting))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "s_ACKWaiting", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "s_ACKWaiting", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSACKWaiting(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField2(oprot)
+}
+
+func (p *DriverData) WriteField3(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_readAborts", thrift.I32, 3)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(3, "s_readAborts", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SReadAborts))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(3, "s_readAborts", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(3, "s_readAborts", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSReadAborts(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField3(oprot)
+}
+
+func (p *DriverData) WriteField4(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_badChecksum", thrift.I32, 4)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(4, "s_badChecksum", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SBadChecksum))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(4, "s_badChecksum", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(4, "s_badChecksum", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSBadChecksum(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField4(oprot)
+}
+
+func (p *DriverData) WriteField5(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_readCnt", thrift.I32, 5)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(5, "s_readCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SReadCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(5, "s_readCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(5, "s_readCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSReadCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField5(oprot)
+}
+
+func (p *DriverData) WriteField6(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_writeCnt", thrift.I32, 6)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(6, "s_writeCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SWriteCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(6, "s_writeCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(6, "s_writeCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSWriteCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField6(oprot)
+}
+
+func (p *DriverData) WriteField7(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_CANCnt", thrift.I32, 7)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(7, "s_CANCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SCANCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(7, "s_CANCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(7, "s_CANCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSCANCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField7(oprot)
+}
+
+func (p *DriverData) WriteField8(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_NAKCnt", thrift.I32, 8)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(8, "s_NAKCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SNAKCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(8, "s_NAKCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(8, "s_NAKCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSNAKCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField8(oprot)
+}
+
+func (p *DriverData) WriteField9(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_ACKCnt", thrift.I32, 9)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(9, "s_ACKCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SACKCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(9, "s_ACKCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(9, "s_ACKCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSACKCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField9(oprot)
+}
+
+func (p *DriverData) WriteField10(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_OOFCnt", thrift.I32, 10)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(10, "s_OOFCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SOOFCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(10, "s_OOFCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(10, "s_OOFCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSOOFCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField10(oprot)
+}
+
+func (p *DriverData) WriteField11(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_dropped", thrift.I32, 11)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(11, "s_dropped", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SDropped))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(11, "s_dropped", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(11, "s_dropped", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSDropped(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField11(oprot)
+}
+
+func (p *DriverData) WriteField12(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_retries", thrift.I32, 12)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(12, "s_retries", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SRetries))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(12, "s_retries", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(12, "s_retries", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSRetries(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField12(oprot)
+}
+
+func (p *DriverData) WriteField13(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_controllerReadCnt", thrift.I32, 13)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(13, "s_controllerReadCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SControllerReadCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(13, "s_controllerReadCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(13, "s_controllerReadCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSControllerReadCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField13(oprot)
+}
+
+func (p *DriverData) WriteField14(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteFieldBegin("s_controllerWriteCnt", thrift.I32, 14)
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(14, "s_controllerWriteCnt", p.ThriftName(), err); }
+  err = oprot.WriteI32(int32(p.SControllerWriteCnt))
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(14, "s_controllerWriteCnt", p.ThriftName(), err); }
+  err = oprot.WriteFieldEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(14, "s_controllerWriteCnt", p.ThriftName(), err); }
+  return err
+}
+
+func (p *DriverData) WriteFieldSControllerWriteCnt(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField14(oprot)
+}
+
+func (p *DriverData) TStructName() string {
+  return "DriverData"
+}
+
+func (p *DriverData) ThriftName() string {
+  return "DriverData"
+}
+
+func (p *DriverData) String() string {
+  if p == nil {
+    return "<nil>"
+  }
+  return fmt.Sprintf("DriverData(%+v)", *p)
+}
+
+func (p *DriverData) CompareTo(other interface{}) (int, bool) {
+  if other == nil {
+    return 1, true
+  }
+  data, ok := other.(*DriverData)
+  if !ok {
+    return 0, false
+  }
+  if p.SSOFCnt != data.SSOFCnt {
+    if p.SSOFCnt < data.SSOFCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SACKWaiting != data.SACKWaiting {
+    if p.SACKWaiting < data.SACKWaiting {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SReadAborts != data.SReadAborts {
+    if p.SReadAborts < data.SReadAborts {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SBadChecksum != data.SBadChecksum {
+    if p.SBadChecksum < data.SBadChecksum {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SReadCnt != data.SReadCnt {
+    if p.SReadCnt < data.SReadCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SWriteCnt != data.SWriteCnt {
+    if p.SWriteCnt < data.SWriteCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SCANCnt != data.SCANCnt {
+    if p.SCANCnt < data.SCANCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SNAKCnt != data.SNAKCnt {
+    if p.SNAKCnt < data.SNAKCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SACKCnt != data.SACKCnt {
+    if p.SACKCnt < data.SACKCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SOOFCnt != data.SOOFCnt {
+    if p.SOOFCnt < data.SOOFCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SDropped != data.SDropped {
+    if p.SDropped < data.SDropped {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SRetries != data.SRetries {
+    if p.SRetries < data.SRetries {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SControllerReadCnt != data.SControllerReadCnt {
+    if p.SControllerReadCnt < data.SControllerReadCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  if p.SControllerWriteCnt != data.SControllerWriteCnt {
+    if p.SControllerWriteCnt < data.SControllerWriteCnt {
+      return -1, true
+    }
+    return 1, true
+  }
+  return 0, true
+}
+
+func (p *DriverData) AttributeByFieldId(id int) interface{} {
+  switch id {
+  default: return nil
+  case 1: return p.SSOFCnt
+  case 2: return p.SACKWaiting
+  case 3: return p.SReadAborts
+  case 4: return p.SBadChecksum
+  case 5: return p.SReadCnt
+  case 6: return p.SWriteCnt
+  case 7: return p.SCANCnt
+  case 8: return p.SNAKCnt
+  case 9: return p.SACKCnt
+  case 10: return p.SOOFCnt
+  case 11: return p.SDropped
+  case 12: return p.SRetries
+  case 13: return p.SControllerReadCnt
+  case 14: return p.SControllerWriteCnt
+  }
+  return nil
+}
+
+func (p *DriverData) TStructFields() thrift.TFieldContainer {
+  return thrift.NewTFieldContainer([]thrift.TField{
+    thrift.NewTField("s_SOFCnt", thrift.I32, 1),
+    thrift.NewTField("s_ACKWaiting", thrift.I32, 2),
+    thrift.NewTField("s_readAborts", thrift.I32, 3),
+    thrift.NewTField("s_badChecksum", thrift.I32, 4),
+    thrift.NewTField("s_readCnt", thrift.I32, 5),
+    thrift.NewTField("s_writeCnt", thrift.I32, 6),
+    thrift.NewTField("s_CANCnt", thrift.I32, 7),
+    thrift.NewTField("s_NAKCnt", thrift.I32, 8),
+    thrift.NewTField("s_ACKCnt", thrift.I32, 9),
+    thrift.NewTField("s_OOFCnt", thrift.I32, 10),
+    thrift.NewTField("s_dropped", thrift.I32, 11),
+    thrift.NewTField("s_retries", thrift.I32, 12),
+    thrift.NewTField("s_controllerReadCnt", thrift.I32, 13),
+    thrift.NewTField("s_controllerWriteCnt", thrift.I32, 14),
+    })
+}
+
+/**
+ * Attributes:
+ *  - _data
+ */
+type GetDriverStatisticsReturnStruct struct {
+  thrift.TStruct
+  _data *DriverData "_data"; // 1
+}
+
+func NewGetDriverStatisticsReturnStruct() *GetDriverStatisticsReturnStruct {
+  output := &GetDriverStatisticsReturnStruct{
+    TStruct:thrift.NewTStruct("GetDriverStatisticsReturnStruct", []thrift.TField{
+    thrift.NewTField("_data", thrift.STRUCT, 1),
+    }),
+  }
+  {
+  }
+  return output
+}
+
+func (p *GetDriverStatisticsReturnStruct) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  _, err = iprot.ReadStructBegin()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  for {
+    fieldName, fieldTypeId, fieldId, err := iprot.ReadFieldBegin()
+    if fieldId < 0 {
+      fieldId = int16(p.FieldIdFromFieldName(fieldName))
+    } else if fieldName == "" {
+      fieldName = p.FieldNameFromFieldId(int(fieldId))
+    }
+    if fieldTypeId == thrift.GENERIC {
+      fieldTypeId = p.FieldFromFieldId(int(fieldId)).TypeId()
+    }
+    if err != nil {
+      return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err)
+    }
+    if fieldTypeId == thrift.STOP { break; }
+    if fieldId == 1 || fieldName == "_data" {
+      if fieldTypeId == thrift.STRUCT {
+        err = p.ReadField1(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else if fieldTypeId == thrift.VOID {
+        err = iprot.Skip(fieldTypeId)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      } else {
+        err = p.ReadField1(iprot)
+        if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+      }
+    } else {
+      err = iprot.Skip(fieldTypeId)
+      if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+    }
+    err = iprot.ReadFieldEnd()
+    if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
+  }
+  err = iprot.ReadStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *GetDriverStatisticsReturnStruct) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  p._data = NewDriverData()
+  err44 := p._data.Read(iprot)
+  if err44 != nil { return thrift.NewTProtocolExceptionReadStruct("p._dataDriverData", err44); }
+  return err
+}
+
+func (p *GetDriverStatisticsReturnStruct) ReadField_data(iprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.ReadField1(iprot)
+}
+
+func (p *GetDriverStatisticsReturnStruct) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("GetDriverStatisticsReturnStruct")
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  err = p.WriteField1(oprot)
+  if err != nil { return err }
+  err = oprot.WriteFieldStop()
+  if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "STOP", p.ThriftName(), err); }
+  err = oprot.WriteStructEnd()
+  if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
+  return err
+}
+
+func (p *GetDriverStatisticsReturnStruct) WriteField1(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  if p._data != nil {
+    err = oprot.WriteFieldBegin("_data", thrift.STRUCT, 1)
+    if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "_data", p.ThriftName(), err); }
+    err = p._data.Write(oprot)
+    if err != nil { return thrift.NewTProtocolExceptionWriteStruct("DriverData", err); }
+    err = oprot.WriteFieldEnd()
+    if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "_data", p.ThriftName(), err); }
+  }
+  return err
+}
+
+func (p *GetDriverStatisticsReturnStruct) WriteField_data(oprot thrift.TProtocol) (thrift.TProtocolException) {
+  return p.WriteField1(oprot)
+}
+
+func (p *GetDriverStatisticsReturnStruct) TStructName() string {
+  return "GetDriverStatisticsReturnStruct"
+}
+
+func (p *GetDriverStatisticsReturnStruct) ThriftName() string {
+  return "GetDriverStatisticsReturnStruct"
+}
+
+func (p *GetDriverStatisticsReturnStruct) String() string {
+  if p == nil {
+    return "<nil>"
+  }
+  return fmt.Sprintf("GetDriverStatisticsReturnStruct(%+v)", *p)
+}
+
+func (p *GetDriverStatisticsReturnStruct) CompareTo(other interface{}) (int, bool) {
+  if other == nil {
+    return 1, true
+  }
+  data, ok := other.(*GetDriverStatisticsReturnStruct)
+  if !ok {
+    return 0, false
+  }
+  if cmp, ok := p._data.CompareTo(data._data); !ok || cmp != 0 {
+    return cmp, ok
+  }
+  return 0, true
+}
+
+func (p *GetDriverStatisticsReturnStruct) AttributeByFieldId(id int) interface{} {
+  switch id {
+  default: return nil
+  case 1: return p._data
+  }
+  return nil
+}
+
+func (p *GetDriverStatisticsReturnStruct) TStructFields() thrift.TFieldContainer {
+  return thrift.NewTFieldContainer([]thrift.TField{
+    thrift.NewTField("_data", thrift.STRUCT, 1),
+    })
+}
+
+/**
+ * Attributes:
  *  - Retval
  *  - OHours
  *  - OMinutes
@@ -712,9 +1634,9 @@ func (p *GetSwitchPointReturnStruct) Read(iprot thrift.TProtocol) (err thrift.TP
 }
 
 func (p *GetSwitchPointReturnStruct) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v14, err15 := iprot.ReadBool()
-  if err15 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err15); }
-  p.Retval = v14
+  v45, err46 := iprot.ReadBool()
+  if err46 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err46); }
+  p.Retval = v45
   return err
 }
 
@@ -723,9 +1645,9 @@ func (p *GetSwitchPointReturnStruct) ReadFieldRetval(iprot thrift.TProtocol) (th
 }
 
 func (p *GetSwitchPointReturnStruct) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v16, err17 := iprot.ReadByte()
-  if err17 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_hours", p.ThriftName(), err17); }
-  p.OHours = v16
+  v47, err48 := iprot.ReadByte()
+  if err48 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_hours", p.ThriftName(), err48); }
+  p.OHours = v47
   return err
 }
 
@@ -734,9 +1656,9 @@ func (p *GetSwitchPointReturnStruct) ReadFieldOHours(iprot thrift.TProtocol) (th
 }
 
 func (p *GetSwitchPointReturnStruct) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v18, err19 := iprot.ReadByte()
-  if err19 != nil { return thrift.NewTProtocolExceptionReadField(3, "o_minutes", p.ThriftName(), err19); }
-  p.OMinutes = v18
+  v49, err50 := iprot.ReadByte()
+  if err50 != nil { return thrift.NewTProtocolExceptionReadField(3, "o_minutes", p.ThriftName(), err50); }
+  p.OMinutes = v49
   return err
 }
 
@@ -745,9 +1667,9 @@ func (p *GetSwitchPointReturnStruct) ReadFieldOMinutes(iprot thrift.TProtocol) (
 }
 
 func (p *GetSwitchPointReturnStruct) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v20, err21 := iprot.ReadByte()
-  if err21 != nil { return thrift.NewTProtocolExceptionReadField(4, "o_setback", p.ThriftName(), err21); }
-  p.OSetback = v20
+  v51, err52 := iprot.ReadByte()
+  if err52 != nil { return thrift.NewTProtocolExceptionReadField(4, "o_setback", p.ThriftName(), err52); }
+  p.OSetback = v51
   return err
 }
 
@@ -971,9 +1893,9 @@ func (p *BoolBool) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) 
 }
 
 func (p *BoolBool) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v22, err23 := iprot.ReadBool()
-  if err23 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err23); }
-  p.Retval = v22
+  v53, err54 := iprot.ReadBool()
+  if err54 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err54); }
+  p.Retval = v53
   return err
 }
 
@@ -982,9 +1904,9 @@ func (p *BoolBool) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtocolExce
 }
 
 func (p *BoolBool) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v24, err25 := iprot.ReadBool()
-  if err25 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err25); }
-  p.OValue = v24
+  v55, err56 := iprot.ReadBool()
+  if err56 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err56); }
+  p.OValue = v55
   return err
 }
 
@@ -1157,9 +2079,9 @@ func (p *BoolUInt8) Read(iprot thrift.TProtocol) (err thrift.TProtocolException)
 }
 
 func (p *BoolUInt8) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v26, err27 := iprot.ReadBool()
-  if err27 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err27); }
-  p.Retval = v26
+  v57, err58 := iprot.ReadBool()
+  if err58 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err58); }
+  p.Retval = v57
   return err
 }
 
@@ -1168,9 +2090,9 @@ func (p *BoolUInt8) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtocolExc
 }
 
 func (p *BoolUInt8) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v28, err29 := iprot.ReadByte()
-  if err29 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err29); }
-  p.OValue = v28
+  v59, err60 := iprot.ReadByte()
+  if err60 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err60); }
+  p.OValue = v59
   return err
 }
 
@@ -1346,9 +2268,9 @@ func (p *BoolFloat) Read(iprot thrift.TProtocol) (err thrift.TProtocolException)
 }
 
 func (p *BoolFloat) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v30, err31 := iprot.ReadBool()
-  if err31 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err31); }
-  p.Retval = v30
+  v61, err62 := iprot.ReadBool()
+  if err62 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err62); }
+  p.Retval = v61
   return err
 }
 
@@ -1357,9 +2279,9 @@ func (p *BoolFloat) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtocolExc
 }
 
 func (p *BoolFloat) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v32, err33 := iprot.ReadDouble()
-  if err33 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err33); }
-  p.OValue = v32
+  v63, err64 := iprot.ReadDouble()
+  if err64 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err64); }
+  p.OValue = v63
   return err
 }
 
@@ -1535,9 +2457,9 @@ func (p *BoolInt) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
 }
 
 func (p *BoolInt) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v34, err35 := iprot.ReadBool()
-  if err35 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err35); }
-  p.Retval = v34
+  v65, err66 := iprot.ReadBool()
+  if err66 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err66); }
+  p.Retval = v65
   return err
 }
 
@@ -1546,9 +2468,9 @@ func (p *BoolInt) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtocolExcep
 }
 
 func (p *BoolInt) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v36, err37 := iprot.ReadI32()
-  if err37 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err37); }
-  p.OValue = v36
+  v67, err68 := iprot.ReadI32()
+  if err68 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err68); }
+  p.OValue = v67
   return err
 }
 
@@ -1724,9 +2646,9 @@ func (p *BoolInt16) Read(iprot thrift.TProtocol) (err thrift.TProtocolException)
 }
 
 func (p *BoolInt16) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v38, err39 := iprot.ReadBool()
-  if err39 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err39); }
-  p.Retval = v38
+  v69, err70 := iprot.ReadBool()
+  if err70 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err70); }
+  p.Retval = v69
   return err
 }
 
@@ -1735,9 +2657,9 @@ func (p *BoolInt16) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtocolExc
 }
 
 func (p *BoolInt16) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v40, err41 := iprot.ReadI16()
-  if err41 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err41); }
-  p.OValue = v40
+  v71, err72 := iprot.ReadI16()
+  if err72 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err72); }
+  p.OValue = v71
   return err
 }
 
@@ -1913,9 +2835,9 @@ func (p *BoolString) Read(iprot thrift.TProtocol) (err thrift.TProtocolException
 }
 
 func (p *BoolString) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v42, err43 := iprot.ReadBool()
-  if err43 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err43); }
-  p.Retval = v42
+  v73, err74 := iprot.ReadBool()
+  if err74 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err74); }
+  p.Retval = v73
   return err
 }
 
@@ -1924,9 +2846,9 @@ func (p *BoolString) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtocolEx
 }
 
 func (p *BoolString) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v44, err45 := iprot.ReadString()
-  if err45 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err45); }
-  p.OValue = v44
+  v75, err76 := iprot.ReadString()
+  if err76 != nil { return thrift.NewTProtocolExceptionReadField(2, "o_value", p.ThriftName(), err76); }
+  p.OValue = v75
   return err
 }
 
@@ -2102,9 +3024,9 @@ func (p *BoolListString) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcep
 }
 
 func (p *BoolListString) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v46, err47 := iprot.ReadBool()
-  if err47 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err47); }
-  p.Retval = v46
+  v77, err78 := iprot.ReadBool()
+  if err78 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err78); }
+  p.Retval = v77
   return err
 }
 
@@ -2113,16 +3035,16 @@ func (p *BoolListString) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *BoolListString) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  _etype53, _size50, err := iprot.ReadListBegin()
+  _etype84, _size81, err := iprot.ReadListBegin()
   if err != nil {
     return thrift.NewTProtocolExceptionReadField(-1, "p.OValue", "", err)
   }
-  p.OValue = thrift.NewTList(_etype53, _size50)
-  for _i54:= 0; _i54 < _size50; _i54++ {
-    v56, err57 := iprot.ReadString()
-    if err57 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem55", "", err57); }
-    _elem55 := v56
-    p.OValue.Push(_elem55)
+  p.OValue = thrift.NewTList(_etype84, _size81)
+  for _i85:= 0; _i85 < _size81; _i85++ {
+    v87, err88 := iprot.ReadString()
+    if err88 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem86", "", err88); }
+    _elem86 := v87
+    p.OValue.Push(_elem86)
   }
   err = iprot.ReadListEnd()
   if err != nil { return thrift.NewTProtocolExceptionReadField(-1, "", "list",err); }
@@ -2167,10 +3089,10 @@ func (p *BoolListString) WriteField2(oprot thrift.TProtocol) (err thrift.TProtoc
     if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "o_value", p.ThriftName(), err); }
     err = oprot.WriteListBegin(thrift.STRING, p.OValue.Len())
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
-    for Iter58 := range p.OValue.Iter() {
-      Iter59 := Iter58.(string)
-      err = oprot.WriteString(string(Iter59))
-      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter59", "", err); }
+    for Iter89 := range p.OValue.Iter() {
+      Iter90 := Iter89.(string)
+      err = oprot.WriteString(string(Iter90))
+      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter90", "", err); }
     }
     err = oprot.WriteListEnd()
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
@@ -2307,9 +3229,9 @@ func (p *UInt32ListByte) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcep
 }
 
 func (p *UInt32ListByte) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v60, err61 := iprot.ReadI32()
-  if err61 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err61); }
-  p.Retval = v60
+  v91, err92 := iprot.ReadI32()
+  if err92 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err92); }
+  p.Retval = v91
   return err
 }
 
@@ -2318,16 +3240,16 @@ func (p *UInt32ListByte) ReadFieldRetval(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *UInt32ListByte) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  _etype67, _size64, err := iprot.ReadListBegin()
+  _etype98, _size95, err := iprot.ReadListBegin()
   if err != nil {
     return thrift.NewTProtocolExceptionReadField(-1, "p._nodeNeighbors", "", err)
   }
-  p._nodeNeighbors = thrift.NewTList(_etype67, _size64)
-  for _i68:= 0; _i68 < _size64; _i68++ {
-    v70, err71 := iprot.ReadByte()
-    if err71 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem69", "", err71); }
-    _elem69 := v70
-    p._nodeNeighbors.Push(_elem69)
+  p._nodeNeighbors = thrift.NewTList(_etype98, _size95)
+  for _i99:= 0; _i99 < _size95; _i99++ {
+    v101, err102 := iprot.ReadByte()
+    if err102 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem100", "", err102); }
+    _elem100 := v101
+    p._nodeNeighbors.Push(_elem100)
   }
   err = iprot.ReadListEnd()
   if err != nil { return thrift.NewTProtocolExceptionReadField(-1, "", "list",err); }
@@ -2372,10 +3294,10 @@ func (p *UInt32ListByte) WriteField2(oprot thrift.TProtocol) (err thrift.TProtoc
     if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_nodeNeighbors", p.ThriftName(), err); }
     err = oprot.WriteListBegin(thrift.BYTE, p._nodeNeighbors.Len())
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
-    for Iter72 := range p._nodeNeighbors.Iter() {
-      Iter73 := Iter72.(byte)
-      err = oprot.WriteByte(byte(Iter73))
-      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter73", "", err); }
+    for Iter103 := range p._nodeNeighbors.Iter() {
+      Iter104 := Iter103.(byte)
+      err = oprot.WriteByte(byte(Iter104))
+      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter104", "", err); }
     }
     err = oprot.WriteListEnd()
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
@@ -2529,9 +3451,9 @@ func (p *BoolGetNodeClassInformation) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *BoolGetNodeClassInformation) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v74, err75 := iprot.ReadBool()
-  if err75 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err75); }
-  p.Retval = v74
+  v105, err106 := iprot.ReadBool()
+  if err106 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err106); }
+  p.Retval = v105
   return err
 }
 
@@ -2540,9 +3462,9 @@ func (p *BoolGetNodeClassInformation) ReadFieldRetval(iprot thrift.TProtocol) (t
 }
 
 func (p *BoolGetNodeClassInformation) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v76, err77 := iprot.ReadString()
-  if err77 != nil { return thrift.NewTProtocolExceptionReadField(2, "_className", p.ThriftName(), err77); }
-  p._className = v76
+  v107, err108 := iprot.ReadString()
+  if err108 != nil { return thrift.NewTProtocolExceptionReadField(2, "_className", p.ThriftName(), err108); }
+  p._className = v107
   return err
 }
 
@@ -2551,9 +3473,9 @@ func (p *BoolGetNodeClassInformation) ReadField_className(iprot thrift.TProtocol
 }
 
 func (p *BoolGetNodeClassInformation) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v78, err79 := iprot.ReadByte()
-  if err79 != nil { return thrift.NewTProtocolExceptionReadField(3, "_classVersion", p.ThriftName(), err79); }
-  p._classVersion = v78
+  v109, err110 := iprot.ReadByte()
+  if err110 != nil { return thrift.NewTProtocolExceptionReadField(3, "_classVersion", p.ThriftName(), err110); }
+  p._classVersion = v109
   return err
 }
 
@@ -2753,9 +3675,9 @@ func (p *GetAssociationsReturnStruct) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *GetAssociationsReturnStruct) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v80, err81 := iprot.ReadI32()
-  if err81 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err81); }
-  p.Retval = v80
+  v111, err112 := iprot.ReadI32()
+  if err112 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err112); }
+  p.Retval = v111
   return err
 }
 
@@ -2764,16 +3686,16 @@ func (p *GetAssociationsReturnStruct) ReadFieldRetval(iprot thrift.TProtocol) (t
 }
 
 func (p *GetAssociationsReturnStruct) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  _etype87, _size84, err := iprot.ReadListBegin()
+  _etype118, _size115, err := iprot.ReadListBegin()
   if err != nil {
     return thrift.NewTProtocolExceptionReadField(-1, "p.OAssociations", "", err)
   }
-  p.OAssociations = thrift.NewTList(_etype87, _size84)
-  for _i88:= 0; _i88 < _size84; _i88++ {
-    v90, err91 := iprot.ReadByte()
-    if err91 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem89", "", err91); }
-    _elem89 := v90
-    p.OAssociations.Push(_elem89)
+  p.OAssociations = thrift.NewTList(_etype118, _size115)
+  for _i119:= 0; _i119 < _size115; _i119++ {
+    v121, err122 := iprot.ReadByte()
+    if err122 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem120", "", err122); }
+    _elem120 := v121
+    p.OAssociations.Push(_elem120)
   }
   err = iprot.ReadListEnd()
   if err != nil { return thrift.NewTProtocolExceptionReadField(-1, "", "list",err); }
@@ -2818,10 +3740,10 @@ func (p *GetAssociationsReturnStruct) WriteField2(oprot thrift.TProtocol) (err t
     if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "o_associations", p.ThriftName(), err); }
     err = oprot.WriteListBegin(thrift.BYTE, p.OAssociations.Len())
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
-    for Iter92 := range p.OAssociations.Iter() {
-      Iter93 := Iter92.(byte)
-      err = oprot.WriteByte(byte(Iter93))
-      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter93", "", err); }
+    for Iter123 := range p.OAssociations.Iter() {
+      Iter124 := Iter123.(byte)
+      err = oprot.WriteByte(byte(Iter124))
+      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter124", "", err); }
     }
     err = oprot.WriteListEnd()
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
@@ -2961,9 +3883,9 @@ func (p *GetAllScenesReturnStruct) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetAllScenesReturnStruct) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v94, err95 := iprot.ReadByte()
-  if err95 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err95); }
-  p.Retval = v94
+  v125, err126 := iprot.ReadByte()
+  if err126 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err126); }
+  p.Retval = v125
   return err
 }
 
@@ -2972,16 +3894,16 @@ func (p *GetAllScenesReturnStruct) ReadFieldRetval(iprot thrift.TProtocol) (thri
 }
 
 func (p *GetAllScenesReturnStruct) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  _etype101, _size98, err := iprot.ReadListBegin()
+  _etype132, _size129, err := iprot.ReadListBegin()
   if err != nil {
     return thrift.NewTProtocolExceptionReadField(-1, "p._sceneIds", "", err)
   }
-  p._sceneIds = thrift.NewTList(_etype101, _size98)
-  for _i102:= 0; _i102 < _size98; _i102++ {
-    v104, err105 := iprot.ReadByte()
-    if err105 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem103", "", err105); }
-    _elem103 := v104
-    p._sceneIds.Push(_elem103)
+  p._sceneIds = thrift.NewTList(_etype132, _size129)
+  for _i133:= 0; _i133 < _size129; _i133++ {
+    v135, err136 := iprot.ReadByte()
+    if err136 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem134", "", err136); }
+    _elem134 := v135
+    p._sceneIds.Push(_elem134)
   }
   err = iprot.ReadListEnd()
   if err != nil { return thrift.NewTProtocolExceptionReadField(-1, "", "list",err); }
@@ -3026,10 +3948,10 @@ func (p *GetAllScenesReturnStruct) WriteField2(oprot thrift.TProtocol) (err thri
     if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_sceneIds", p.ThriftName(), err); }
     err = oprot.WriteListBegin(thrift.BYTE, p._sceneIds.Len())
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
-    for Iter106 := range p._sceneIds.Iter() {
-      Iter107 := Iter106.(byte)
-      err = oprot.WriteByte(byte(Iter107))
-      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter107", "", err); }
+    for Iter137 := range p._sceneIds.Iter() {
+      Iter138 := Iter137.(byte)
+      err = oprot.WriteByte(byte(Iter138))
+      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter138", "", err); }
     }
     err = oprot.WriteListEnd()
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
@@ -3169,9 +4091,9 @@ func (p *SceneGetValuesReturnStruct) Read(iprot thrift.TProtocol) (err thrift.TP
 }
 
 func (p *SceneGetValuesReturnStruct) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v108, err109 := iprot.ReadI32()
-  if err109 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err109); }
-  p.Retval = v108
+  v139, err140 := iprot.ReadI32()
+  if err140 != nil { return thrift.NewTProtocolExceptionReadField(1, "retval", p.ThriftName(), err140); }
+  p.Retval = v139
   return err
 }
 
@@ -3180,16 +4102,16 @@ func (p *SceneGetValuesReturnStruct) ReadFieldRetval(iprot thrift.TProtocol) (th
 }
 
 func (p *SceneGetValuesReturnStruct) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  _etype115, _size112, err := iprot.ReadListBegin()
+  _etype146, _size143, err := iprot.ReadListBegin()
   if err != nil {
     return thrift.NewTProtocolExceptionReadField(-1, "p.OValue", "", err)
   }
-  p.OValue = thrift.NewTList(_etype115, _size112)
-  for _i116:= 0; _i116 < _size112; _i116++ {
-    _elem117 := NewRemoteValueID()
-    err120 := _elem117.Read(iprot)
-    if err120 != nil { return thrift.NewTProtocolExceptionReadStruct("_elem117RemoteValueID", err120); }
-    p.OValue.Push(_elem117)
+  p.OValue = thrift.NewTList(_etype146, _size143)
+  for _i147:= 0; _i147 < _size143; _i147++ {
+    _elem148 := NewRemoteValueID()
+    err151 := _elem148.Read(iprot)
+    if err151 != nil { return thrift.NewTProtocolExceptionReadStruct("_elem148RemoteValueID", err151); }
+    p.OValue.Push(_elem148)
   }
   err = iprot.ReadListEnd()
   if err != nil { return thrift.NewTProtocolExceptionReadField(-1, "", "list",err); }
@@ -3234,9 +4156,9 @@ func (p *SceneGetValuesReturnStruct) WriteField2(oprot thrift.TProtocol) (err th
     if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "o_value", p.ThriftName(), err); }
     err = oprot.WriteListBegin(thrift.STRUCT, p.OValue.Len())
     if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
-    for Iter121 := range p.OValue.Iter() {
-      Iter122 := Iter121.(*RemoteValueID)
-      err = Iter122.Write(oprot)
+    for Iter152 := range p.OValue.Iter() {
+      Iter153 := Iter152.(*RemoteValueID)
+      err = Iter153.Write(oprot)
       if err != nil { return thrift.NewTProtocolExceptionWriteStruct("RemoteValueID", err); }
     }
     err = oprot.WriteListEnd()

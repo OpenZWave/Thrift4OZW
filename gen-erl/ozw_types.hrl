@@ -44,6 +44,27 @@
                         _valueIndex = undefined :: integer(), 
                         _type = undefined :: integer()}).
 
+%% struct driverData
+
+-record(driverData, {s_SOFCnt = undefined :: integer(), 
+                     s_ACKWaiting = undefined :: integer(), 
+                     s_readAborts = undefined :: integer(), 
+                     s_badChecksum = undefined :: integer(), 
+                     s_readCnt = undefined :: integer(), 
+                     s_writeCnt = undefined :: integer(), 
+                     s_CANCnt = undefined :: integer(), 
+                     s_NAKCnt = undefined :: integer(), 
+                     s_ACKCnt = undefined :: integer(), 
+                     s_OOFCnt = undefined :: integer(), 
+                     s_dropped = undefined :: integer(), 
+                     s_retries = undefined :: integer(), 
+                     s_controllerReadCnt = undefined :: integer(), 
+                     s_controllerWriteCnt = undefined :: integer()}).
+
+%% struct getDriverStatisticsReturnStruct
+
+-record(getDriverStatisticsReturnStruct, {_data = #driverData{} :: #driverData{}}).
+
 %% struct getSwitchPointReturnStruct
 
 -record(getSwitchPointReturnStruct, {retval = undefined :: boolean(), 

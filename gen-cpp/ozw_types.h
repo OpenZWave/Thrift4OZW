@@ -89,10 +89,7 @@ class RemoteValueID {
 
   RemoteValueID() : _homeId(0), _nodeId(0), _commandClassId(0), _instance(0), _valueIndex(0) {
   }
-
-  virtual ~RemoteValueID() throw() {}
-
-  // ekarak: constructor from ValueID
+// ekarak: constructor from ValueID
   RemoteValueID(ValueID vid) : 
     _homeId ((int32_t) vid.GetHomeId()), 
     _nodeId ((int8_t) vid.GetNodeId()), 
@@ -105,6 +102,8 @@ class RemoteValueID {
   ValueID toValueID() const {
     return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
   }
+  
+  virtual ~RemoteValueID() throw() {}
 
   int32_t _homeId;
   int8_t _nodeId;
@@ -167,6 +166,192 @@ class RemoteValueID {
   }
 
   bool operator < (const RemoteValueID & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _DriverData__isset {
+  _DriverData__isset() : s_SOFCnt(false), s_ACKWaiting(false), s_readAborts(false), s_badChecksum(false), s_readCnt(false), s_writeCnt(false), s_CANCnt(false), s_NAKCnt(false), s_ACKCnt(false), s_OOFCnt(false), s_dropped(false), s_retries(false), s_controllerReadCnt(false), s_controllerWriteCnt(false) {}
+  bool s_SOFCnt;
+  bool s_ACKWaiting;
+  bool s_readAborts;
+  bool s_badChecksum;
+  bool s_readCnt;
+  bool s_writeCnt;
+  bool s_CANCnt;
+  bool s_NAKCnt;
+  bool s_ACKCnt;
+  bool s_OOFCnt;
+  bool s_dropped;
+  bool s_retries;
+  bool s_controllerReadCnt;
+  bool s_controllerWriteCnt;
+} _DriverData__isset;
+
+class DriverData {
+ public:
+
+  static const char* ascii_fingerprint; // = "FB78EBC5FCC9B4E153E910DEF7648158";
+  static const uint8_t binary_fingerprint[16]; // = {0xFB,0x78,0xEB,0xC5,0xFC,0xC9,0xB4,0xE1,0x53,0xE9,0x10,0xDE,0xF7,0x64,0x81,0x58};
+
+  DriverData() : s_SOFCnt(0), s_ACKWaiting(0), s_readAborts(0), s_badChecksum(0), s_readCnt(0), s_writeCnt(0), s_CANCnt(0), s_NAKCnt(0), s_ACKCnt(0), s_OOFCnt(0), s_dropped(0), s_retries(0), s_controllerReadCnt(0), s_controllerWriteCnt(0) {
+  }
+
+  virtual ~DriverData() throw() {}
+
+  int32_t s_SOFCnt;
+  int32_t s_ACKWaiting;
+  int32_t s_readAborts;
+  int32_t s_badChecksum;
+  int32_t s_readCnt;
+  int32_t s_writeCnt;
+  int32_t s_CANCnt;
+  int32_t s_NAKCnt;
+  int32_t s_ACKCnt;
+  int32_t s_OOFCnt;
+  int32_t s_dropped;
+  int32_t s_retries;
+  int32_t s_controllerReadCnt;
+  int32_t s_controllerWriteCnt;
+
+  _DriverData__isset __isset;
+
+  void __set_s_SOFCnt(const int32_t val) {
+    s_SOFCnt = val;
+  }
+
+  void __set_s_ACKWaiting(const int32_t val) {
+    s_ACKWaiting = val;
+  }
+
+  void __set_s_readAborts(const int32_t val) {
+    s_readAborts = val;
+  }
+
+  void __set_s_badChecksum(const int32_t val) {
+    s_badChecksum = val;
+  }
+
+  void __set_s_readCnt(const int32_t val) {
+    s_readCnt = val;
+  }
+
+  void __set_s_writeCnt(const int32_t val) {
+    s_writeCnt = val;
+  }
+
+  void __set_s_CANCnt(const int32_t val) {
+    s_CANCnt = val;
+  }
+
+  void __set_s_NAKCnt(const int32_t val) {
+    s_NAKCnt = val;
+  }
+
+  void __set_s_ACKCnt(const int32_t val) {
+    s_ACKCnt = val;
+  }
+
+  void __set_s_OOFCnt(const int32_t val) {
+    s_OOFCnt = val;
+  }
+
+  void __set_s_dropped(const int32_t val) {
+    s_dropped = val;
+  }
+
+  void __set_s_retries(const int32_t val) {
+    s_retries = val;
+  }
+
+  void __set_s_controllerReadCnt(const int32_t val) {
+    s_controllerReadCnt = val;
+  }
+
+  void __set_s_controllerWriteCnt(const int32_t val) {
+    s_controllerWriteCnt = val;
+  }
+
+  bool operator == (const DriverData & rhs) const
+  {
+    if (!(s_SOFCnt == rhs.s_SOFCnt))
+      return false;
+    if (!(s_ACKWaiting == rhs.s_ACKWaiting))
+      return false;
+    if (!(s_readAborts == rhs.s_readAborts))
+      return false;
+    if (!(s_badChecksum == rhs.s_badChecksum))
+      return false;
+    if (!(s_readCnt == rhs.s_readCnt))
+      return false;
+    if (!(s_writeCnt == rhs.s_writeCnt))
+      return false;
+    if (!(s_CANCnt == rhs.s_CANCnt))
+      return false;
+    if (!(s_NAKCnt == rhs.s_NAKCnt))
+      return false;
+    if (!(s_ACKCnt == rhs.s_ACKCnt))
+      return false;
+    if (!(s_OOFCnt == rhs.s_OOFCnt))
+      return false;
+    if (!(s_dropped == rhs.s_dropped))
+      return false;
+    if (!(s_retries == rhs.s_retries))
+      return false;
+    if (!(s_controllerReadCnt == rhs.s_controllerReadCnt))
+      return false;
+    if (!(s_controllerWriteCnt == rhs.s_controllerWriteCnt))
+      return false;
+    return true;
+  }
+  bool operator != (const DriverData &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const DriverData & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _GetDriverStatisticsReturnStruct__isset {
+  _GetDriverStatisticsReturnStruct__isset() : _data(false) {}
+  bool _data;
+} _GetDriverStatisticsReturnStruct__isset;
+
+class GetDriverStatisticsReturnStruct {
+ public:
+
+  static const char* ascii_fingerprint; // = "6B08952D44864D64E22DDFCB5D92B48A";
+  static const uint8_t binary_fingerprint[16]; // = {0x6B,0x08,0x95,0x2D,0x44,0x86,0x4D,0x64,0xE2,0x2D,0xDF,0xCB,0x5D,0x92,0xB4,0x8A};
+
+  GetDriverStatisticsReturnStruct() {
+  }
+
+  virtual ~GetDriverStatisticsReturnStruct() throw() {}
+
+  DriverData _data;
+
+  _GetDriverStatisticsReturnStruct__isset __isset;
+
+  void __set__data(const DriverData& val) {
+    _data = val;
+  }
+
+  bool operator == (const GetDriverStatisticsReturnStruct & rhs) const
+  {
+    if (!(_data == rhs._data))
+      return false;
+    return true;
+  }
+  bool operator != (const GetDriverStatisticsReturnStruct &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const GetDriverStatisticsReturnStruct & ) const;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;

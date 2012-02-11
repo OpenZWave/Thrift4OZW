@@ -1683,6 +1683,15 @@ public class RemoteManager {
      */
     public boolean ActivateScene(byte _sceneId) throws org.apache.thrift.TException;
 
+    /**
+     * \brief Retrieve statistics from driver
+     * \param _homeId The Home ID of the driver to obtain counters
+     * \param _data Pointer to structure DriverData to return values
+     * 
+     * @param _homeId
+     */
+    public GetDriverStatisticsReturnStruct GetDriverStatistics(int _homeId) throws org.apache.thrift.TException;
+
     public void SendAllValues() throws org.apache.thrift.TException;
 
   }
@@ -1944,6 +1953,8 @@ public class RemoteManager {
     public void SceneExists(byte _sceneId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SceneExists_call> resultHandler) throws org.apache.thrift.TException;
 
     public void ActivateScene(byte _sceneId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.ActivateScene_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void GetDriverStatistics(int _homeId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.GetDriverStatistics_call> resultHandler) throws org.apache.thrift.TException;
 
     public void SendAllValues(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SendAllValues_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -4960,6 +4971,29 @@ public class RemoteManager {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "ActivateScene failed: unknown result");
+    }
+
+    public GetDriverStatisticsReturnStruct GetDriverStatistics(int _homeId) throws org.apache.thrift.TException
+    {
+      send_GetDriverStatistics(_homeId);
+      return recv_GetDriverStatistics();
+    }
+
+    public void send_GetDriverStatistics(int _homeId) throws org.apache.thrift.TException
+    {
+      GetDriverStatistics_args args = new GetDriverStatistics_args();
+      args.set_homeId(_homeId);
+      sendBase("GetDriverStatistics", args);
+    }
+
+    public GetDriverStatisticsReturnStruct recv_GetDriverStatistics() throws org.apache.thrift.TException
+    {
+      GetDriverStatistics_result result = new GetDriverStatistics_result();
+      receiveBase(result, "GetDriverStatistics");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetDriverStatistics failed: unknown result");
     }
 
     public void SendAllValues() throws org.apache.thrift.TException
@@ -9440,6 +9474,38 @@ public class RemoteManager {
       }
     }
 
+    public void GetDriverStatistics(int _homeId, org.apache.thrift.async.AsyncMethodCallback<GetDriverStatistics_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      GetDriverStatistics_call method_call = new GetDriverStatistics_call(_homeId, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class GetDriverStatistics_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private int _homeId;
+      public GetDriverStatistics_call(int _homeId, org.apache.thrift.async.AsyncMethodCallback<GetDriverStatistics_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this._homeId = _homeId;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("GetDriverStatistics", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        GetDriverStatistics_args args = new GetDriverStatistics_args();
+        args.set_homeId(_homeId);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public GetDriverStatisticsReturnStruct getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_GetDriverStatistics();
+      }
+    }
+
     public void SendAllValues(org.apache.thrift.async.AsyncMethodCallback<SendAllValues_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       SendAllValues_call method_call = new SendAllValues_call(resultHandler, this, ___protocolFactory, ___transport);
@@ -9610,6 +9676,7 @@ public class RemoteManager {
       processMap.put("SetSceneLabel", new SetSceneLabel());
       processMap.put("SceneExists", new SceneExists());
       processMap.put("ActivateScene", new ActivateScene());
+      processMap.put("GetDriverStatistics", new GetDriverStatistics());
       processMap.put("SendAllValues", new SendAllValues());
       return processMap;
     }
@@ -11725,6 +11792,22 @@ public class RemoteManager {
         ActivateScene_result result = new ActivateScene_result();
         result.success = iface.ActivateScene(args._sceneId);
         result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    private static class GetDriverStatistics<I extends Iface> extends org.apache.thrift.ProcessFunction<I, GetDriverStatistics_args> {
+      public GetDriverStatistics() {
+        super("GetDriverStatistics");
+      }
+
+      protected GetDriverStatistics_args getEmptyArgsInstance() {
+        return new GetDriverStatistics_args();
+      }
+
+      protected GetDriverStatistics_result getResult(I iface, GetDriverStatistics_args args) throws org.apache.thrift.TException {
+        GetDriverStatistics_result result = new GetDriverStatistics_result();
+        result.success = iface.GetDriverStatistics(args._homeId);
         return result;
       }
     }
@@ -71014,8 +71097,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -71607,6 +71688,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -76753,6 +76836,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -77518,8 +77603,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -94457,8 +94540,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -95327,6 +95408,598 @@ public class RemoteManager {
 
       sb.append("success:");
       sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class GetDriverStatistics_args implements org.apache.thrift.TBase<GetDriverStatistics_args, GetDriverStatistics_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetDriverStatistics_args");
+
+    private static final org.apache.thrift.protocol.TField _HOME_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_homeId", org.apache.thrift.protocol.TType.I32, (short)1);
+
+    public int _homeId; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      _HOME_ID((short)1, "_homeId");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // _HOME_ID
+            return _HOME_ID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int ___HOMEID_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields._HOME_ID, new org.apache.thrift.meta_data.FieldMetaData("_homeId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetDriverStatistics_args.class, metaDataMap);
+    }
+
+    public GetDriverStatistics_args() {
+    }
+
+    public GetDriverStatistics_args(
+      int _homeId)
+    {
+      this();
+      this._homeId = _homeId;
+      set_homeIdIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetDriverStatistics_args(GetDriverStatistics_args other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      this._homeId = other._homeId;
+    }
+
+    public GetDriverStatistics_args deepCopy() {
+      return new GetDriverStatistics_args(this);
+    }
+
+    @Override
+    public void clear() {
+      set_homeIdIsSet(false);
+      this._homeId = 0;
+    }
+
+    public int get_homeId() {
+      return this._homeId;
+    }
+
+    public GetDriverStatistics_args set_homeId(int _homeId) {
+      this._homeId = _homeId;
+      set_homeIdIsSet(true);
+      return this;
+    }
+
+    public void unset_homeId() {
+      __isset_bit_vector.clear(___HOMEID_ISSET_ID);
+    }
+
+    /** Returns true if field _homeId is set (has been assigned a value) and false otherwise */
+    public boolean isSet_homeId() {
+      return __isset_bit_vector.get(___HOMEID_ISSET_ID);
+    }
+
+    public void set_homeIdIsSet(boolean value) {
+      __isset_bit_vector.set(___HOMEID_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case _HOME_ID:
+        if (value == null) {
+          unset_homeId();
+        } else {
+          set_homeId((Integer)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case _HOME_ID:
+        return Integer.valueOf(get_homeId());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case _HOME_ID:
+        return isSet_homeId();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetDriverStatistics_args)
+        return this.equals((GetDriverStatistics_args)that);
+      return false;
+    }
+
+    public boolean equals(GetDriverStatistics_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present__homeId = true;
+      boolean that_present__homeId = true;
+      if (this_present__homeId || that_present__homeId) {
+        if (!(this_present__homeId && that_present__homeId))
+          return false;
+        if (this._homeId != that._homeId)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(GetDriverStatistics_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      GetDriverStatistics_args typedOther = (GetDriverStatistics_args)other;
+
+      lastComparison = Boolean.valueOf(isSet_homeId()).compareTo(typedOther.isSet_homeId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_homeId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._homeId, typedOther._homeId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 1: // _HOME_ID
+            if (field.type == org.apache.thrift.protocol.TType.I32) {
+              this._homeId = iprot.readI32();
+              set_homeIdIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      validate();
+
+      oprot.writeStructBegin(STRUCT_DESC);
+      oprot.writeFieldBegin(_HOME_ID_FIELD_DESC);
+      oprot.writeI32(this._homeId);
+      oprot.writeFieldEnd();
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetDriverStatistics_args(");
+      boolean first = true;
+
+      sb.append("_homeId:");
+      sb.append(this._homeId);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class GetDriverStatistics_result implements org.apache.thrift.TBase<GetDriverStatistics_result, GetDriverStatistics_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("GetDriverStatistics_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.STRUCT, (short)0);
+
+    public GetDriverStatisticsReturnStruct success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, GetDriverStatisticsReturnStruct.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(GetDriverStatistics_result.class, metaDataMap);
+    }
+
+    public GetDriverStatistics_result() {
+    }
+
+    public GetDriverStatistics_result(
+      GetDriverStatisticsReturnStruct success)
+    {
+      this();
+      this.success = success;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public GetDriverStatistics_result(GetDriverStatistics_result other) {
+      if (other.isSetSuccess()) {
+        this.success = new GetDriverStatisticsReturnStruct(other.success);
+      }
+    }
+
+    public GetDriverStatistics_result deepCopy() {
+      return new GetDriverStatistics_result(this);
+    }
+
+    @Override
+    public void clear() {
+      this.success = null;
+    }
+
+    public GetDriverStatisticsReturnStruct getSuccess() {
+      return this.success;
+    }
+
+    public GetDriverStatistics_result setSuccess(GetDriverStatisticsReturnStruct success) {
+      this.success = success;
+      return this;
+    }
+
+    public void unsetSuccess() {
+      this.success = null;
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return this.success != null;
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      if (!value) {
+        this.success = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((GetDriverStatisticsReturnStruct)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return getSuccess();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof GetDriverStatistics_result)
+        return this.equals((GetDriverStatistics_result)that);
+      return false;
+    }
+
+    public boolean equals(GetDriverStatistics_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true && this.isSetSuccess();
+      boolean that_present_success = true && that.isSetSuccess();
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (!this.success.equals(that.success))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(GetDriverStatistics_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      GetDriverStatistics_result typedOther = (GetDriverStatistics_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 0: // SUCCESS
+            if (field.type == org.apache.thrift.protocol.TType.STRUCT) {
+              this.success = new GetDriverStatisticsReturnStruct();
+              this.success.read(iprot);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      oprot.writeStructBegin(STRUCT_DESC);
+
+      if (this.isSetSuccess()) {
+        oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+        this.success.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("GetDriverStatistics_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      if (this.success == null) {
+        sb.append("null");
+      } else {
+        sb.append(this.success);
+      }
       first = false;
       sb.append(")");
       return sb.toString();

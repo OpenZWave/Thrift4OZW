@@ -209,6 +209,257 @@ uint32_t RemoteValueID::write(::apache::thrift::protocol::TProtocol* oprot) cons
   return xfer;
 }
 
+const char* DriverData::ascii_fingerprint = "FB78EBC5FCC9B4E153E910DEF7648158";
+const uint8_t DriverData::binary_fingerprint[16] = {0xFB,0x78,0xEB,0xC5,0xFC,0xC9,0xB4,0xE1,0x53,0xE9,0x10,0xDE,0xF7,0x64,0x81,0x58};
+
+uint32_t DriverData::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_SOFCnt);
+          this->__isset.s_SOFCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_ACKWaiting);
+          this->__isset.s_ACKWaiting = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 3:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_readAborts);
+          this->__isset.s_readAborts = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 4:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_badChecksum);
+          this->__isset.s_badChecksum = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 5:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_readCnt);
+          this->__isset.s_readCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 6:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_writeCnt);
+          this->__isset.s_writeCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 7:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_CANCnt);
+          this->__isset.s_CANCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 8:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_NAKCnt);
+          this->__isset.s_NAKCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 9:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_ACKCnt);
+          this->__isset.s_ACKCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 10:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_OOFCnt);
+          this->__isset.s_OOFCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 11:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_dropped);
+          this->__isset.s_dropped = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 12:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_retries);
+          this->__isset.s_retries = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 13:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_controllerReadCnt);
+          this->__isset.s_controllerReadCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 14:
+        if (ftype == ::apache::thrift::protocol::T_I32) {
+          xfer += iprot->readI32(this->s_controllerWriteCnt);
+          this->__isset.s_controllerWriteCnt = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t DriverData::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("DriverData");
+  xfer += oprot->writeFieldBegin("s_SOFCnt", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->s_SOFCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_ACKWaiting", ::apache::thrift::protocol::T_I32, 2);
+  xfer += oprot->writeI32(this->s_ACKWaiting);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_readAborts", ::apache::thrift::protocol::T_I32, 3);
+  xfer += oprot->writeI32(this->s_readAborts);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_badChecksum", ::apache::thrift::protocol::T_I32, 4);
+  xfer += oprot->writeI32(this->s_badChecksum);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_readCnt", ::apache::thrift::protocol::T_I32, 5);
+  xfer += oprot->writeI32(this->s_readCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_writeCnt", ::apache::thrift::protocol::T_I32, 6);
+  xfer += oprot->writeI32(this->s_writeCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_CANCnt", ::apache::thrift::protocol::T_I32, 7);
+  xfer += oprot->writeI32(this->s_CANCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_NAKCnt", ::apache::thrift::protocol::T_I32, 8);
+  xfer += oprot->writeI32(this->s_NAKCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_ACKCnt", ::apache::thrift::protocol::T_I32, 9);
+  xfer += oprot->writeI32(this->s_ACKCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_OOFCnt", ::apache::thrift::protocol::T_I32, 10);
+  xfer += oprot->writeI32(this->s_OOFCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_dropped", ::apache::thrift::protocol::T_I32, 11);
+  xfer += oprot->writeI32(this->s_dropped);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_retries", ::apache::thrift::protocol::T_I32, 12);
+  xfer += oprot->writeI32(this->s_retries);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_controllerReadCnt", ::apache::thrift::protocol::T_I32, 13);
+  xfer += oprot->writeI32(this->s_controllerReadCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("s_controllerWriteCnt", ::apache::thrift::protocol::T_I32, 14);
+  xfer += oprot->writeI32(this->s_controllerWriteCnt);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+const char* GetDriverStatisticsReturnStruct::ascii_fingerprint = "6B08952D44864D64E22DDFCB5D92B48A";
+const uint8_t GetDriverStatisticsReturnStruct::binary_fingerprint[16] = {0x6B,0x08,0x95,0x2D,0x44,0x86,0x4D,0x64,0xE2,0x2D,0xDF,0xCB,0x5D,0x92,0xB4,0x8A};
+
+uint32_t GetDriverStatisticsReturnStruct::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_data.read(iprot);
+          this->__isset._data = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t GetDriverStatisticsReturnStruct::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("GetDriverStatisticsReturnStruct");
+  xfer += oprot->writeFieldBegin("_data", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_data.write(oprot);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
 const char* GetSwitchPointReturnStruct::ascii_fingerprint = "D02F029A9CC8B0BD109ADDA9910FC412";
 const uint8_t GetSwitchPointReturnStruct::binary_fingerprint[16] = {0xD0,0x2F,0x02,0x9A,0x9C,0xC8,0xB0,0xBD,0x10,0x9A,0xDD,0xA9,0x91,0x0F,0xC4,0x12};
 

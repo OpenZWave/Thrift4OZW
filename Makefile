@@ -58,6 +58,8 @@ all: main
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
 	ruby1.9.1 create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
+	cp gen-cpp/RemoteManager_server.cpp gen-cpp/RemoteManager_server.cpp.orig
+	cp gen-cpp/ozw_types.h gen-cpp/ozw_types.h.orig
 	patch -p0 gen-cpp/RemoteManager_server.cpp < gen-cpp/RemoteManager_server.cpp.patch
 	patch -p0 gen-cpp/ozw_types.h <gen-cpp/ozw_types.h.patch
     
@@ -103,4 +105,10 @@ bindist: main
 
 clean:
 	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager.cpp gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
+
+thrift: gen-cpp/RemoteManager.cpp
+
+patchdiffs:
+	- diff -C5 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h.patched > gen-cpp/ozw_types.h.patch
+	- diff -C5 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp.patched > gen-cpp/RemoteManager_server.cpp.patch
 

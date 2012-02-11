@@ -313,6 +313,415 @@ class RemoteValueID {
 
 }
 
+class DriverData {
+  static $_TSPEC;
+
+  public $s_SOFCnt = null;
+  public $s_ACKWaiting = null;
+  public $s_readAborts = null;
+  public $s_badChecksum = null;
+  public $s_readCnt = null;
+  public $s_writeCnt = null;
+  public $s_CANCnt = null;
+  public $s_NAKCnt = null;
+  public $s_ACKCnt = null;
+  public $s_OOFCnt = null;
+  public $s_dropped = null;
+  public $s_retries = null;
+  public $s_controllerReadCnt = null;
+  public $s_controllerWriteCnt = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => 's_SOFCnt',
+          'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => 's_ACKWaiting',
+          'type' => TType::I32,
+          ),
+        3 => array(
+          'var' => 's_readAborts',
+          'type' => TType::I32,
+          ),
+        4 => array(
+          'var' => 's_badChecksum',
+          'type' => TType::I32,
+          ),
+        5 => array(
+          'var' => 's_readCnt',
+          'type' => TType::I32,
+          ),
+        6 => array(
+          'var' => 's_writeCnt',
+          'type' => TType::I32,
+          ),
+        7 => array(
+          'var' => 's_CANCnt',
+          'type' => TType::I32,
+          ),
+        8 => array(
+          'var' => 's_NAKCnt',
+          'type' => TType::I32,
+          ),
+        9 => array(
+          'var' => 's_ACKCnt',
+          'type' => TType::I32,
+          ),
+        10 => array(
+          'var' => 's_OOFCnt',
+          'type' => TType::I32,
+          ),
+        11 => array(
+          'var' => 's_dropped',
+          'type' => TType::I32,
+          ),
+        12 => array(
+          'var' => 's_retries',
+          'type' => TType::I32,
+          ),
+        13 => array(
+          'var' => 's_controllerReadCnt',
+          'type' => TType::I32,
+          ),
+        14 => array(
+          'var' => 's_controllerWriteCnt',
+          'type' => TType::I32,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['s_SOFCnt'])) {
+        $this->s_SOFCnt = $vals['s_SOFCnt'];
+      }
+      if (isset($vals['s_ACKWaiting'])) {
+        $this->s_ACKWaiting = $vals['s_ACKWaiting'];
+      }
+      if (isset($vals['s_readAborts'])) {
+        $this->s_readAborts = $vals['s_readAborts'];
+      }
+      if (isset($vals['s_badChecksum'])) {
+        $this->s_badChecksum = $vals['s_badChecksum'];
+      }
+      if (isset($vals['s_readCnt'])) {
+        $this->s_readCnt = $vals['s_readCnt'];
+      }
+      if (isset($vals['s_writeCnt'])) {
+        $this->s_writeCnt = $vals['s_writeCnt'];
+      }
+      if (isset($vals['s_CANCnt'])) {
+        $this->s_CANCnt = $vals['s_CANCnt'];
+      }
+      if (isset($vals['s_NAKCnt'])) {
+        $this->s_NAKCnt = $vals['s_NAKCnt'];
+      }
+      if (isset($vals['s_ACKCnt'])) {
+        $this->s_ACKCnt = $vals['s_ACKCnt'];
+      }
+      if (isset($vals['s_OOFCnt'])) {
+        $this->s_OOFCnt = $vals['s_OOFCnt'];
+      }
+      if (isset($vals['s_dropped'])) {
+        $this->s_dropped = $vals['s_dropped'];
+      }
+      if (isset($vals['s_retries'])) {
+        $this->s_retries = $vals['s_retries'];
+      }
+      if (isset($vals['s_controllerReadCnt'])) {
+        $this->s_controllerReadCnt = $vals['s_controllerReadCnt'];
+      }
+      if (isset($vals['s_controllerWriteCnt'])) {
+        $this->s_controllerWriteCnt = $vals['s_controllerWriteCnt'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'DriverData';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_SOFCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_ACKWaiting);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 3:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_readAborts);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 4:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_badChecksum);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 5:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_readCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 6:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_writeCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 7:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_CANCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 8:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_NAKCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 9:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_ACKCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 10:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_OOFCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 11:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_dropped);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 12:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_retries);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 13:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_controllerReadCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 14:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->s_controllerWriteCnt);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('DriverData');
+    if ($this->s_SOFCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_SOFCnt', TType::I32, 1);
+      $xfer += $output->writeI32($this->s_SOFCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_ACKWaiting !== null) {
+      $xfer += $output->writeFieldBegin('s_ACKWaiting', TType::I32, 2);
+      $xfer += $output->writeI32($this->s_ACKWaiting);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_readAborts !== null) {
+      $xfer += $output->writeFieldBegin('s_readAborts', TType::I32, 3);
+      $xfer += $output->writeI32($this->s_readAborts);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_badChecksum !== null) {
+      $xfer += $output->writeFieldBegin('s_badChecksum', TType::I32, 4);
+      $xfer += $output->writeI32($this->s_badChecksum);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_readCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_readCnt', TType::I32, 5);
+      $xfer += $output->writeI32($this->s_readCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_writeCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_writeCnt', TType::I32, 6);
+      $xfer += $output->writeI32($this->s_writeCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_CANCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_CANCnt', TType::I32, 7);
+      $xfer += $output->writeI32($this->s_CANCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_NAKCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_NAKCnt', TType::I32, 8);
+      $xfer += $output->writeI32($this->s_NAKCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_ACKCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_ACKCnt', TType::I32, 9);
+      $xfer += $output->writeI32($this->s_ACKCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_OOFCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_OOFCnt', TType::I32, 10);
+      $xfer += $output->writeI32($this->s_OOFCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_dropped !== null) {
+      $xfer += $output->writeFieldBegin('s_dropped', TType::I32, 11);
+      $xfer += $output->writeI32($this->s_dropped);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_retries !== null) {
+      $xfer += $output->writeFieldBegin('s_retries', TType::I32, 12);
+      $xfer += $output->writeI32($this->s_retries);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_controllerReadCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_controllerReadCnt', TType::I32, 13);
+      $xfer += $output->writeI32($this->s_controllerReadCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->s_controllerWriteCnt !== null) {
+      $xfer += $output->writeFieldBegin('s_controllerWriteCnt', TType::I32, 14);
+      $xfer += $output->writeI32($this->s_controllerWriteCnt);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class GetDriverStatisticsReturnStruct {
+  static $_TSPEC;
+
+  public $_data = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_data',
+          'type' => TType::STRUCT,
+          'class' => 'DriverData',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_data'])) {
+        $this->_data = $vals['_data'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'GetDriverStatisticsReturnStruct';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->_data = new DriverData();
+            $xfer += $this->_data->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('GetDriverStatisticsReturnStruct');
+    if ($this->_data !== null) {
+      if (!is_object($this->_data)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('_data', TType::STRUCT, 1);
+      $xfer += $this->_data->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class GetSwitchPointReturnStruct {
   static $_TSPEC;
 

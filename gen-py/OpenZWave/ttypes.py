@@ -263,6 +263,283 @@ class RemoteValueID:
   def __ne__(self, other):
     return not (self == other)
 
+class DriverData:
+  """
+  Attributes:
+   - s_SOFCnt
+   - s_ACKWaiting
+   - s_readAborts
+   - s_badChecksum
+   - s_readCnt
+   - s_writeCnt
+   - s_CANCnt
+   - s_NAKCnt
+   - s_ACKCnt
+   - s_OOFCnt
+   - s_dropped
+   - s_retries
+   - s_controllerReadCnt
+   - s_controllerWriteCnt
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, 's_SOFCnt', None, None, ), # 1
+    (2, TType.I32, 's_ACKWaiting', None, None, ), # 2
+    (3, TType.I32, 's_readAborts', None, None, ), # 3
+    (4, TType.I32, 's_badChecksum', None, None, ), # 4
+    (5, TType.I32, 's_readCnt', None, None, ), # 5
+    (6, TType.I32, 's_writeCnt', None, None, ), # 6
+    (7, TType.I32, 's_CANCnt', None, None, ), # 7
+    (8, TType.I32, 's_NAKCnt', None, None, ), # 8
+    (9, TType.I32, 's_ACKCnt', None, None, ), # 9
+    (10, TType.I32, 's_OOFCnt', None, None, ), # 10
+    (11, TType.I32, 's_dropped', None, None, ), # 11
+    (12, TType.I32, 's_retries', None, None, ), # 12
+    (13, TType.I32, 's_controllerReadCnt', None, None, ), # 13
+    (14, TType.I32, 's_controllerWriteCnt', None, None, ), # 14
+  )
+
+  def __init__(self, s_SOFCnt=None, s_ACKWaiting=None, s_readAborts=None, s_badChecksum=None, s_readCnt=None, s_writeCnt=None, s_CANCnt=None, s_NAKCnt=None, s_ACKCnt=None, s_OOFCnt=None, s_dropped=None, s_retries=None, s_controllerReadCnt=None, s_controllerWriteCnt=None,):
+    self.s_SOFCnt = s_SOFCnt
+    self.s_ACKWaiting = s_ACKWaiting
+    self.s_readAborts = s_readAborts
+    self.s_badChecksum = s_badChecksum
+    self.s_readCnt = s_readCnt
+    self.s_writeCnt = s_writeCnt
+    self.s_CANCnt = s_CANCnt
+    self.s_NAKCnt = s_NAKCnt
+    self.s_ACKCnt = s_ACKCnt
+    self.s_OOFCnt = s_OOFCnt
+    self.s_dropped = s_dropped
+    self.s_retries = s_retries
+    self.s_controllerReadCnt = s_controllerReadCnt
+    self.s_controllerWriteCnt = s_controllerWriteCnt
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self.s_SOFCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.I32:
+          self.s_ACKWaiting = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 3:
+        if ftype == TType.I32:
+          self.s_readAborts = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 4:
+        if ftype == TType.I32:
+          self.s_badChecksum = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 5:
+        if ftype == TType.I32:
+          self.s_readCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 6:
+        if ftype == TType.I32:
+          self.s_writeCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 7:
+        if ftype == TType.I32:
+          self.s_CANCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 8:
+        if ftype == TType.I32:
+          self.s_NAKCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 9:
+        if ftype == TType.I32:
+          self.s_ACKCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 10:
+        if ftype == TType.I32:
+          self.s_OOFCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 11:
+        if ftype == TType.I32:
+          self.s_dropped = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 12:
+        if ftype == TType.I32:
+          self.s_retries = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 13:
+        if ftype == TType.I32:
+          self.s_controllerReadCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 14:
+        if ftype == TType.I32:
+          self.s_controllerWriteCnt = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('DriverData')
+    if self.s_SOFCnt is not None:
+      oprot.writeFieldBegin('s_SOFCnt', TType.I32, 1)
+      oprot.writeI32(self.s_SOFCnt)
+      oprot.writeFieldEnd()
+    if self.s_ACKWaiting is not None:
+      oprot.writeFieldBegin('s_ACKWaiting', TType.I32, 2)
+      oprot.writeI32(self.s_ACKWaiting)
+      oprot.writeFieldEnd()
+    if self.s_readAborts is not None:
+      oprot.writeFieldBegin('s_readAborts', TType.I32, 3)
+      oprot.writeI32(self.s_readAborts)
+      oprot.writeFieldEnd()
+    if self.s_badChecksum is not None:
+      oprot.writeFieldBegin('s_badChecksum', TType.I32, 4)
+      oprot.writeI32(self.s_badChecksum)
+      oprot.writeFieldEnd()
+    if self.s_readCnt is not None:
+      oprot.writeFieldBegin('s_readCnt', TType.I32, 5)
+      oprot.writeI32(self.s_readCnt)
+      oprot.writeFieldEnd()
+    if self.s_writeCnt is not None:
+      oprot.writeFieldBegin('s_writeCnt', TType.I32, 6)
+      oprot.writeI32(self.s_writeCnt)
+      oprot.writeFieldEnd()
+    if self.s_CANCnt is not None:
+      oprot.writeFieldBegin('s_CANCnt', TType.I32, 7)
+      oprot.writeI32(self.s_CANCnt)
+      oprot.writeFieldEnd()
+    if self.s_NAKCnt is not None:
+      oprot.writeFieldBegin('s_NAKCnt', TType.I32, 8)
+      oprot.writeI32(self.s_NAKCnt)
+      oprot.writeFieldEnd()
+    if self.s_ACKCnt is not None:
+      oprot.writeFieldBegin('s_ACKCnt', TType.I32, 9)
+      oprot.writeI32(self.s_ACKCnt)
+      oprot.writeFieldEnd()
+    if self.s_OOFCnt is not None:
+      oprot.writeFieldBegin('s_OOFCnt', TType.I32, 10)
+      oprot.writeI32(self.s_OOFCnt)
+      oprot.writeFieldEnd()
+    if self.s_dropped is not None:
+      oprot.writeFieldBegin('s_dropped', TType.I32, 11)
+      oprot.writeI32(self.s_dropped)
+      oprot.writeFieldEnd()
+    if self.s_retries is not None:
+      oprot.writeFieldBegin('s_retries', TType.I32, 12)
+      oprot.writeI32(self.s_retries)
+      oprot.writeFieldEnd()
+    if self.s_controllerReadCnt is not None:
+      oprot.writeFieldBegin('s_controllerReadCnt', TType.I32, 13)
+      oprot.writeI32(self.s_controllerReadCnt)
+      oprot.writeFieldEnd()
+    if self.s_controllerWriteCnt is not None:
+      oprot.writeFieldBegin('s_controllerWriteCnt', TType.I32, 14)
+      oprot.writeI32(self.s_controllerWriteCnt)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class GetDriverStatisticsReturnStruct:
+  """
+  Attributes:
+   - _data
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.STRUCT, '_data', (DriverData, DriverData.thrift_spec), None, ), # 1
+  )
+
+  def __init__(self, _data=None,):
+    self._data = _data
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.STRUCT:
+          self._data = DriverData()
+          self._data.read(iprot)
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('GetDriverStatisticsReturnStruct')
+    if self._data is not None:
+      oprot.writeFieldBegin('_data', TType.STRUCT, 1)
+      self._data.write(oprot)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
 class GetSwitchPointReturnStruct:
   """
   Attributes:

@@ -189,6 +189,318 @@ OpenZWave.RemoteValueID.prototype.write = function(output) {
   return;
 };
 
+OpenZWave.DriverData = function(args) {
+  this.s_SOFCnt = null;
+  this.s_ACKWaiting = null;
+  this.s_readAborts = null;
+  this.s_badChecksum = null;
+  this.s_readCnt = null;
+  this.s_writeCnt = null;
+  this.s_CANCnt = null;
+  this.s_NAKCnt = null;
+  this.s_ACKCnt = null;
+  this.s_OOFCnt = null;
+  this.s_dropped = null;
+  this.s_retries = null;
+  this.s_controllerReadCnt = null;
+  this.s_controllerWriteCnt = null;
+  if (args) {
+    if (args.s_SOFCnt !== undefined) {
+      this.s_SOFCnt = args.s_SOFCnt;
+    }
+    if (args.s_ACKWaiting !== undefined) {
+      this.s_ACKWaiting = args.s_ACKWaiting;
+    }
+    if (args.s_readAborts !== undefined) {
+      this.s_readAborts = args.s_readAborts;
+    }
+    if (args.s_badChecksum !== undefined) {
+      this.s_badChecksum = args.s_badChecksum;
+    }
+    if (args.s_readCnt !== undefined) {
+      this.s_readCnt = args.s_readCnt;
+    }
+    if (args.s_writeCnt !== undefined) {
+      this.s_writeCnt = args.s_writeCnt;
+    }
+    if (args.s_CANCnt !== undefined) {
+      this.s_CANCnt = args.s_CANCnt;
+    }
+    if (args.s_NAKCnt !== undefined) {
+      this.s_NAKCnt = args.s_NAKCnt;
+    }
+    if (args.s_ACKCnt !== undefined) {
+      this.s_ACKCnt = args.s_ACKCnt;
+    }
+    if (args.s_OOFCnt !== undefined) {
+      this.s_OOFCnt = args.s_OOFCnt;
+    }
+    if (args.s_dropped !== undefined) {
+      this.s_dropped = args.s_dropped;
+    }
+    if (args.s_retries !== undefined) {
+      this.s_retries = args.s_retries;
+    }
+    if (args.s_controllerReadCnt !== undefined) {
+      this.s_controllerReadCnt = args.s_controllerReadCnt;
+    }
+    if (args.s_controllerWriteCnt !== undefined) {
+      this.s_controllerWriteCnt = args.s_controllerWriteCnt;
+    }
+  }
+};
+OpenZWave.DriverData.prototype = {};
+OpenZWave.DriverData.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.I32) {
+        this.s_SOFCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.I32) {
+        this.s_ACKWaiting = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.I32) {
+        this.s_readAborts = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 4:
+      if (ftype == Thrift.Type.I32) {
+        this.s_badChecksum = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 5:
+      if (ftype == Thrift.Type.I32) {
+        this.s_readCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 6:
+      if (ftype == Thrift.Type.I32) {
+        this.s_writeCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 7:
+      if (ftype == Thrift.Type.I32) {
+        this.s_CANCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 8:
+      if (ftype == Thrift.Type.I32) {
+        this.s_NAKCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 9:
+      if (ftype == Thrift.Type.I32) {
+        this.s_ACKCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 10:
+      if (ftype == Thrift.Type.I32) {
+        this.s_OOFCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 11:
+      if (ftype == Thrift.Type.I32) {
+        this.s_dropped = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 12:
+      if (ftype == Thrift.Type.I32) {
+        this.s_retries = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 13:
+      if (ftype == Thrift.Type.I32) {
+        this.s_controllerReadCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 14:
+      if (ftype == Thrift.Type.I32) {
+        this.s_controllerWriteCnt = input.readI32().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.DriverData.prototype.write = function(output) {
+  output.writeStructBegin('DriverData');
+  if (this.s_SOFCnt) {
+    output.writeFieldBegin('s_SOFCnt', Thrift.Type.I32, 1);
+    output.writeI32(this.s_SOFCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_ACKWaiting) {
+    output.writeFieldBegin('s_ACKWaiting', Thrift.Type.I32, 2);
+    output.writeI32(this.s_ACKWaiting);
+    output.writeFieldEnd();
+  }
+  if (this.s_readAborts) {
+    output.writeFieldBegin('s_readAborts', Thrift.Type.I32, 3);
+    output.writeI32(this.s_readAborts);
+    output.writeFieldEnd();
+  }
+  if (this.s_badChecksum) {
+    output.writeFieldBegin('s_badChecksum', Thrift.Type.I32, 4);
+    output.writeI32(this.s_badChecksum);
+    output.writeFieldEnd();
+  }
+  if (this.s_readCnt) {
+    output.writeFieldBegin('s_readCnt', Thrift.Type.I32, 5);
+    output.writeI32(this.s_readCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_writeCnt) {
+    output.writeFieldBegin('s_writeCnt', Thrift.Type.I32, 6);
+    output.writeI32(this.s_writeCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_CANCnt) {
+    output.writeFieldBegin('s_CANCnt', Thrift.Type.I32, 7);
+    output.writeI32(this.s_CANCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_NAKCnt) {
+    output.writeFieldBegin('s_NAKCnt', Thrift.Type.I32, 8);
+    output.writeI32(this.s_NAKCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_ACKCnt) {
+    output.writeFieldBegin('s_ACKCnt', Thrift.Type.I32, 9);
+    output.writeI32(this.s_ACKCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_OOFCnt) {
+    output.writeFieldBegin('s_OOFCnt', Thrift.Type.I32, 10);
+    output.writeI32(this.s_OOFCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_dropped) {
+    output.writeFieldBegin('s_dropped', Thrift.Type.I32, 11);
+    output.writeI32(this.s_dropped);
+    output.writeFieldEnd();
+  }
+  if (this.s_retries) {
+    output.writeFieldBegin('s_retries', Thrift.Type.I32, 12);
+    output.writeI32(this.s_retries);
+    output.writeFieldEnd();
+  }
+  if (this.s_controllerReadCnt) {
+    output.writeFieldBegin('s_controllerReadCnt', Thrift.Type.I32, 13);
+    output.writeI32(this.s_controllerReadCnt);
+    output.writeFieldEnd();
+  }
+  if (this.s_controllerWriteCnt) {
+    output.writeFieldBegin('s_controllerWriteCnt', Thrift.Type.I32, 14);
+    output.writeI32(this.s_controllerWriteCnt);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.GetDriverStatisticsReturnStruct = function(args) {
+  this._data = null;
+  if (args) {
+    if (args._data !== undefined) {
+      this._data = args._data;
+    }
+  }
+};
+OpenZWave.GetDriverStatisticsReturnStruct.prototype = {};
+OpenZWave.GetDriverStatisticsReturnStruct.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this._data = new OpenZWave.DriverData();
+        this._data.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.GetDriverStatisticsReturnStruct.prototype.write = function(output) {
+  output.writeStructBegin('GetDriverStatisticsReturnStruct');
+  if (this._data) {
+    output.writeFieldBegin('_data', Thrift.Type.STRUCT, 1);
+    this._data.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.GetSwitchPointReturnStruct = function(args) {
   this.retval = null;
   this.o_hours = null;

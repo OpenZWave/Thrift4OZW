@@ -66,21 +66,36 @@ enum DriverControllerCommand {
 }
     
 struct RemoteValueID {
-			1:i32 _homeId,
-			2:byte _nodeId,
-			3:RemoteValueGenre _genre,
-			4:byte _commandClassId,
-			5:byte _instance,
-			6:byte _valueIndex,
-			7:RemoteValueType _type
+    1:i32   _homeId,
+    2:byte  _nodeId,
+    3:RemoteValueGenre _genre,
+    4:byte  _commandClassId,
+    5:byte  _instance,
+    6:byte  _valueIndex,
+    7:RemoteValueType _type
 }
-//typedef i64 RemoteValueID
 
-//~ struct RemoteValueID {
-    //~ 1: i32 m_id;
-    //~ 2: i32 m_id1;
-    //~ 3: i32 m_homeId;
-//~ }
+// Used in GetDriverStatistics
+struct DriverData {
+    1:i32 s_SOFCnt;			// Number of SOF bytes received
+    2:i32 s_ACKWaiting;			// Number of unsolcited messages while waiting for an ACK
+    3:i32 s_readAborts;			// Number of times read were aborted due to timeouts
+    4:i32 s_badChecksum;			// Number of bad checksums
+    5:i32 s_readCnt;			// Number of messages successfully read
+    6:i32 s_writeCnt;			// Number of messages successfully sent
+    7:i32 s_CANCnt;			// Number of CAN bytes received
+    8:i32 s_NAKCnt;			// Number of NAK bytes received
+    9:i32 s_ACKCnt;			// Number of ACK bytes received
+    10:i32 s_OOFCnt;			// Number of bytes out of framing
+    11:i32 s_dropped;			// Number of messages dropped & not delivered
+    12:i32 s_retries;			// Number of messages retransmitted
+    13:i32 s_controllerReadCnt;		// Number of controller messages read
+    14:i32 s_controllerWriteCnt;		// Number of controller messages sent
+}
+
+struct GetDriverStatisticsReturnStruct {
+    1:DriverData _data;
+}
 
 struct GetSwitchPointReturnStruct {
     1:bool retval;
@@ -393,16 +408,6 @@ service RemoteManager {
 		 */
 		//uint8 GetNodeVersion( uint32 const _homeId, uint8 const _nodeId );
     byte GetNodeVersion( 1:i32 _homeId, 2:byte _nodeId );
-
-		/**
-		 * \brief Get the security byte for a node.  Bit meanings are still to be determined.
-		 * \param _homeId The Home ID of the Z-Wave controller that manages the node.
-		 * \param _nodeId The ID of the node to query.
-		 * \return the node's security byte
-		 */
-		//uint8 GetNodeSecurity( uint32 const _homeId, uint8 const _nodeId );
-	// REMOVED in OZW main trunk rev410
-    //byte GetNodeSecurity( 1:i32 _homeId, 2:byte _nodeId );
     
 		/**
 		 * \brief Get the basic type of a node.
@@ -1725,6 +1730,17 @@ service RemoteManager {
 		 */
 		//bool ActivateScene( uint8 const _sceneId );
     bool ActivateScene( 1:byte _sceneId );
+
+	//-----------------------------------------------------------------------------
+	// Statistics interface
+	//-----------------------------------------------------------------------------
+		/**
+		 * \brief Retrieve statistics from driver
+		 * \param _homeId The Home ID of the driver to obtain counters
+		 * \param _data Pointer to structure DriverData to return values
+		 */
+		//void GetDriverStatistics( uint32 const _homeId, Driver::DriverData* _data );
+    GetDriverStatisticsReturnStruct GetDriverStatistics( 1:i32 _homeId );
 
 
     // ----------------------- ekarak: and a little extra candy server for missing functionality from OZW

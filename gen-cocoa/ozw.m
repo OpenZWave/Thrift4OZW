@@ -382,6 +382,782 @@
 
 @end
 
+@implementation OpenZWaveDriverData
+
+- (id) initWithS_SOFCnt: (int32_t) s_SOFCnt s_ACKWaiting: (int32_t) s_ACKWaiting s_readAborts: (int32_t) s_readAborts s_badChecksum: (int32_t) s_badChecksum s_readCnt: (int32_t) s_readCnt s_writeCnt: (int32_t) s_writeCnt s_CANCnt: (int32_t) s_CANCnt s_NAKCnt: (int32_t) s_NAKCnt s_ACKCnt: (int32_t) s_ACKCnt s_OOFCnt: (int32_t) s_OOFCnt s_dropped: (int32_t) s_dropped s_retries: (int32_t) s_retries s_controllerReadCnt: (int32_t) s_controllerReadCnt s_controllerWriteCnt: (int32_t) s_controllerWriteCnt
+{
+  self = [super init];
+  __s_SOFCnt = s_SOFCnt;
+  __s_SOFCnt_isset = YES;
+  __s_ACKWaiting = s_ACKWaiting;
+  __s_ACKWaiting_isset = YES;
+  __s_readAborts = s_readAborts;
+  __s_readAborts_isset = YES;
+  __s_badChecksum = s_badChecksum;
+  __s_badChecksum_isset = YES;
+  __s_readCnt = s_readCnt;
+  __s_readCnt_isset = YES;
+  __s_writeCnt = s_writeCnt;
+  __s_writeCnt_isset = YES;
+  __s_CANCnt = s_CANCnt;
+  __s_CANCnt_isset = YES;
+  __s_NAKCnt = s_NAKCnt;
+  __s_NAKCnt_isset = YES;
+  __s_ACKCnt = s_ACKCnt;
+  __s_ACKCnt_isset = YES;
+  __s_OOFCnt = s_OOFCnt;
+  __s_OOFCnt_isset = YES;
+  __s_dropped = s_dropped;
+  __s_dropped_isset = YES;
+  __s_retries = s_retries;
+  __s_retries_isset = YES;
+  __s_controllerReadCnt = s_controllerReadCnt;
+  __s_controllerReadCnt_isset = YES;
+  __s_controllerWriteCnt = s_controllerWriteCnt;
+  __s_controllerWriteCnt_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"s_SOFCnt"])
+  {
+    __s_SOFCnt = [decoder decodeInt32ForKey: @"s_SOFCnt"];
+    __s_SOFCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_ACKWaiting"])
+  {
+    __s_ACKWaiting = [decoder decodeInt32ForKey: @"s_ACKWaiting"];
+    __s_ACKWaiting_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_readAborts"])
+  {
+    __s_readAborts = [decoder decodeInt32ForKey: @"s_readAborts"];
+    __s_readAborts_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_badChecksum"])
+  {
+    __s_badChecksum = [decoder decodeInt32ForKey: @"s_badChecksum"];
+    __s_badChecksum_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_readCnt"])
+  {
+    __s_readCnt = [decoder decodeInt32ForKey: @"s_readCnt"];
+    __s_readCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_writeCnt"])
+  {
+    __s_writeCnt = [decoder decodeInt32ForKey: @"s_writeCnt"];
+    __s_writeCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_CANCnt"])
+  {
+    __s_CANCnt = [decoder decodeInt32ForKey: @"s_CANCnt"];
+    __s_CANCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_NAKCnt"])
+  {
+    __s_NAKCnt = [decoder decodeInt32ForKey: @"s_NAKCnt"];
+    __s_NAKCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_ACKCnt"])
+  {
+    __s_ACKCnt = [decoder decodeInt32ForKey: @"s_ACKCnt"];
+    __s_ACKCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_OOFCnt"])
+  {
+    __s_OOFCnt = [decoder decodeInt32ForKey: @"s_OOFCnt"];
+    __s_OOFCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_dropped"])
+  {
+    __s_dropped = [decoder decodeInt32ForKey: @"s_dropped"];
+    __s_dropped_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_retries"])
+  {
+    __s_retries = [decoder decodeInt32ForKey: @"s_retries"];
+    __s_retries_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_controllerReadCnt"])
+  {
+    __s_controllerReadCnt = [decoder decodeInt32ForKey: @"s_controllerReadCnt"];
+    __s_controllerReadCnt_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"s_controllerWriteCnt"])
+  {
+    __s_controllerWriteCnt = [decoder decodeInt32ForKey: @"s_controllerWriteCnt"];
+    __s_controllerWriteCnt_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__s_SOFCnt_isset)
+  {
+    [encoder encodeInt32: __s_SOFCnt forKey: @"s_SOFCnt"];
+  }
+  if (__s_ACKWaiting_isset)
+  {
+    [encoder encodeInt32: __s_ACKWaiting forKey: @"s_ACKWaiting"];
+  }
+  if (__s_readAborts_isset)
+  {
+    [encoder encodeInt32: __s_readAborts forKey: @"s_readAborts"];
+  }
+  if (__s_badChecksum_isset)
+  {
+    [encoder encodeInt32: __s_badChecksum forKey: @"s_badChecksum"];
+  }
+  if (__s_readCnt_isset)
+  {
+    [encoder encodeInt32: __s_readCnt forKey: @"s_readCnt"];
+  }
+  if (__s_writeCnt_isset)
+  {
+    [encoder encodeInt32: __s_writeCnt forKey: @"s_writeCnt"];
+  }
+  if (__s_CANCnt_isset)
+  {
+    [encoder encodeInt32: __s_CANCnt forKey: @"s_CANCnt"];
+  }
+  if (__s_NAKCnt_isset)
+  {
+    [encoder encodeInt32: __s_NAKCnt forKey: @"s_NAKCnt"];
+  }
+  if (__s_ACKCnt_isset)
+  {
+    [encoder encodeInt32: __s_ACKCnt forKey: @"s_ACKCnt"];
+  }
+  if (__s_OOFCnt_isset)
+  {
+    [encoder encodeInt32: __s_OOFCnt forKey: @"s_OOFCnt"];
+  }
+  if (__s_dropped_isset)
+  {
+    [encoder encodeInt32: __s_dropped forKey: @"s_dropped"];
+  }
+  if (__s_retries_isset)
+  {
+    [encoder encodeInt32: __s_retries forKey: @"s_retries"];
+  }
+  if (__s_controllerReadCnt_isset)
+  {
+    [encoder encodeInt32: __s_controllerReadCnt forKey: @"s_controllerReadCnt"];
+  }
+  if (__s_controllerWriteCnt_isset)
+  {
+    [encoder encodeInt32: __s_controllerWriteCnt forKey: @"s_controllerWriteCnt"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) s_SOFCnt {
+  return __s_SOFCnt;
+}
+
+- (void) setS_SOFCnt: (int32_t) s_SOFCnt {
+  __s_SOFCnt = s_SOFCnt;
+  __s_SOFCnt_isset = YES;
+}
+
+- (BOOL) s_SOFCntIsSet {
+  return __s_SOFCnt_isset;
+}
+
+- (void) unsetS_SOFCnt {
+  __s_SOFCnt_isset = NO;
+}
+
+- (int32_t) s_ACKWaiting {
+  return __s_ACKWaiting;
+}
+
+- (void) setS_ACKWaiting: (int32_t) s_ACKWaiting {
+  __s_ACKWaiting = s_ACKWaiting;
+  __s_ACKWaiting_isset = YES;
+}
+
+- (BOOL) s_ACKWaitingIsSet {
+  return __s_ACKWaiting_isset;
+}
+
+- (void) unsetS_ACKWaiting {
+  __s_ACKWaiting_isset = NO;
+}
+
+- (int32_t) s_readAborts {
+  return __s_readAborts;
+}
+
+- (void) setS_readAborts: (int32_t) s_readAborts {
+  __s_readAborts = s_readAborts;
+  __s_readAborts_isset = YES;
+}
+
+- (BOOL) s_readAbortsIsSet {
+  return __s_readAborts_isset;
+}
+
+- (void) unsetS_readAborts {
+  __s_readAborts_isset = NO;
+}
+
+- (int32_t) s_badChecksum {
+  return __s_badChecksum;
+}
+
+- (void) setS_badChecksum: (int32_t) s_badChecksum {
+  __s_badChecksum = s_badChecksum;
+  __s_badChecksum_isset = YES;
+}
+
+- (BOOL) s_badChecksumIsSet {
+  return __s_badChecksum_isset;
+}
+
+- (void) unsetS_badChecksum {
+  __s_badChecksum_isset = NO;
+}
+
+- (int32_t) s_readCnt {
+  return __s_readCnt;
+}
+
+- (void) setS_readCnt: (int32_t) s_readCnt {
+  __s_readCnt = s_readCnt;
+  __s_readCnt_isset = YES;
+}
+
+- (BOOL) s_readCntIsSet {
+  return __s_readCnt_isset;
+}
+
+- (void) unsetS_readCnt {
+  __s_readCnt_isset = NO;
+}
+
+- (int32_t) s_writeCnt {
+  return __s_writeCnt;
+}
+
+- (void) setS_writeCnt: (int32_t) s_writeCnt {
+  __s_writeCnt = s_writeCnt;
+  __s_writeCnt_isset = YES;
+}
+
+- (BOOL) s_writeCntIsSet {
+  return __s_writeCnt_isset;
+}
+
+- (void) unsetS_writeCnt {
+  __s_writeCnt_isset = NO;
+}
+
+- (int32_t) s_CANCnt {
+  return __s_CANCnt;
+}
+
+- (void) setS_CANCnt: (int32_t) s_CANCnt {
+  __s_CANCnt = s_CANCnt;
+  __s_CANCnt_isset = YES;
+}
+
+- (BOOL) s_CANCntIsSet {
+  return __s_CANCnt_isset;
+}
+
+- (void) unsetS_CANCnt {
+  __s_CANCnt_isset = NO;
+}
+
+- (int32_t) s_NAKCnt {
+  return __s_NAKCnt;
+}
+
+- (void) setS_NAKCnt: (int32_t) s_NAKCnt {
+  __s_NAKCnt = s_NAKCnt;
+  __s_NAKCnt_isset = YES;
+}
+
+- (BOOL) s_NAKCntIsSet {
+  return __s_NAKCnt_isset;
+}
+
+- (void) unsetS_NAKCnt {
+  __s_NAKCnt_isset = NO;
+}
+
+- (int32_t) s_ACKCnt {
+  return __s_ACKCnt;
+}
+
+- (void) setS_ACKCnt: (int32_t) s_ACKCnt {
+  __s_ACKCnt = s_ACKCnt;
+  __s_ACKCnt_isset = YES;
+}
+
+- (BOOL) s_ACKCntIsSet {
+  return __s_ACKCnt_isset;
+}
+
+- (void) unsetS_ACKCnt {
+  __s_ACKCnt_isset = NO;
+}
+
+- (int32_t) s_OOFCnt {
+  return __s_OOFCnt;
+}
+
+- (void) setS_OOFCnt: (int32_t) s_OOFCnt {
+  __s_OOFCnt = s_OOFCnt;
+  __s_OOFCnt_isset = YES;
+}
+
+- (BOOL) s_OOFCntIsSet {
+  return __s_OOFCnt_isset;
+}
+
+- (void) unsetS_OOFCnt {
+  __s_OOFCnt_isset = NO;
+}
+
+- (int32_t) s_dropped {
+  return __s_dropped;
+}
+
+- (void) setS_dropped: (int32_t) s_dropped {
+  __s_dropped = s_dropped;
+  __s_dropped_isset = YES;
+}
+
+- (BOOL) s_droppedIsSet {
+  return __s_dropped_isset;
+}
+
+- (void) unsetS_dropped {
+  __s_dropped_isset = NO;
+}
+
+- (int32_t) s_retries {
+  return __s_retries;
+}
+
+- (void) setS_retries: (int32_t) s_retries {
+  __s_retries = s_retries;
+  __s_retries_isset = YES;
+}
+
+- (BOOL) s_retriesIsSet {
+  return __s_retries_isset;
+}
+
+- (void) unsetS_retries {
+  __s_retries_isset = NO;
+}
+
+- (int32_t) s_controllerReadCnt {
+  return __s_controllerReadCnt;
+}
+
+- (void) setS_controllerReadCnt: (int32_t) s_controllerReadCnt {
+  __s_controllerReadCnt = s_controllerReadCnt;
+  __s_controllerReadCnt_isset = YES;
+}
+
+- (BOOL) s_controllerReadCntIsSet {
+  return __s_controllerReadCnt_isset;
+}
+
+- (void) unsetS_controllerReadCnt {
+  __s_controllerReadCnt_isset = NO;
+}
+
+- (int32_t) s_controllerWriteCnt {
+  return __s_controllerWriteCnt;
+}
+
+- (void) setS_controllerWriteCnt: (int32_t) s_controllerWriteCnt {
+  __s_controllerWriteCnt = s_controllerWriteCnt;
+  __s_controllerWriteCnt_isset = YES;
+}
+
+- (BOOL) s_controllerWriteCntIsSet {
+  return __s_controllerWriteCnt_isset;
+}
+
+- (void) unsetS_controllerWriteCnt {
+  __s_controllerWriteCnt_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_SOFCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_ACKWaiting: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 3:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_readAborts: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 4:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_badChecksum: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 5:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_readCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 6:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_writeCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 7:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_CANCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 8:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_NAKCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 9:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_ACKCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 10:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_OOFCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 11:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_dropped: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 12:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_retries: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 13:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_controllerReadCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 14:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self setS_controllerWriteCnt: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"DriverData"];
+  if (__s_SOFCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_SOFCnt" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: __s_SOFCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_ACKWaiting_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_ACKWaiting" type: TType_I32 fieldID: 2];
+    [outProtocol writeI32: __s_ACKWaiting];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_readAborts_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_readAborts" type: TType_I32 fieldID: 3];
+    [outProtocol writeI32: __s_readAborts];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_badChecksum_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_badChecksum" type: TType_I32 fieldID: 4];
+    [outProtocol writeI32: __s_badChecksum];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_readCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_readCnt" type: TType_I32 fieldID: 5];
+    [outProtocol writeI32: __s_readCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_writeCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_writeCnt" type: TType_I32 fieldID: 6];
+    [outProtocol writeI32: __s_writeCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_CANCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_CANCnt" type: TType_I32 fieldID: 7];
+    [outProtocol writeI32: __s_CANCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_NAKCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_NAKCnt" type: TType_I32 fieldID: 8];
+    [outProtocol writeI32: __s_NAKCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_ACKCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_ACKCnt" type: TType_I32 fieldID: 9];
+    [outProtocol writeI32: __s_ACKCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_OOFCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_OOFCnt" type: TType_I32 fieldID: 10];
+    [outProtocol writeI32: __s_OOFCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_dropped_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_dropped" type: TType_I32 fieldID: 11];
+    [outProtocol writeI32: __s_dropped];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_retries_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_retries" type: TType_I32 fieldID: 12];
+    [outProtocol writeI32: __s_retries];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_controllerReadCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_controllerReadCnt" type: TType_I32 fieldID: 13];
+    [outProtocol writeI32: __s_controllerReadCnt];
+    [outProtocol writeFieldEnd];
+  }
+  if (__s_controllerWriteCnt_isset) {
+    [outProtocol writeFieldBeginWithName: @"s_controllerWriteCnt" type: TType_I32 fieldID: 14];
+    [outProtocol writeI32: __s_controllerWriteCnt];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"DriverData("];
+  [ms appendString: @"s_SOFCnt:"];
+  [ms appendFormat: @"%i", __s_SOFCnt];
+  [ms appendString: @",s_ACKWaiting:"];
+  [ms appendFormat: @"%i", __s_ACKWaiting];
+  [ms appendString: @",s_readAborts:"];
+  [ms appendFormat: @"%i", __s_readAborts];
+  [ms appendString: @",s_badChecksum:"];
+  [ms appendFormat: @"%i", __s_badChecksum];
+  [ms appendString: @",s_readCnt:"];
+  [ms appendFormat: @"%i", __s_readCnt];
+  [ms appendString: @",s_writeCnt:"];
+  [ms appendFormat: @"%i", __s_writeCnt];
+  [ms appendString: @",s_CANCnt:"];
+  [ms appendFormat: @"%i", __s_CANCnt];
+  [ms appendString: @",s_NAKCnt:"];
+  [ms appendFormat: @"%i", __s_NAKCnt];
+  [ms appendString: @",s_ACKCnt:"];
+  [ms appendFormat: @"%i", __s_ACKCnt];
+  [ms appendString: @",s_OOFCnt:"];
+  [ms appendFormat: @"%i", __s_OOFCnt];
+  [ms appendString: @",s_dropped:"];
+  [ms appendFormat: @"%i", __s_dropped];
+  [ms appendString: @",s_retries:"];
+  [ms appendFormat: @"%i", __s_retries];
+  [ms appendString: @",s_controllerReadCnt:"];
+  [ms appendFormat: @"%i", __s_controllerReadCnt];
+  [ms appendString: @",s_controllerWriteCnt:"];
+  [ms appendFormat: @"%i", __s_controllerWriteCnt];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@implementation OpenZWaveGetDriverStatisticsReturnStruct
+
+- (id) initWith_data: (OpenZWaveDriverData *) _data
+{
+  self = [super init];
+  ___data = [_data retain];
+  ___data_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_data"])
+  {
+    ___data = [[decoder decodeObjectForKey: @"_data"] retain];
+    ___data_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___data_isset)
+  {
+    [encoder encodeObject: ___data forKey: @"_data"];
+  }
+}
+
+- (void) dealloc
+{
+  [___data release];
+  [super dealloc];
+}
+
+- (OpenZWaveDriverData *) _data {
+  return [[___data retain] autorelease];
+}
+
+- (void) set_data: (OpenZWaveDriverData *) _data {
+  [_data retain];
+  [___data release];
+  ___data = _data;
+  ___data_isset = YES;
+}
+
+- (BOOL) _dataIsSet {
+  return ___data_isset;
+}
+
+- (void) unset_data {
+  [___data release];
+  ___data = nil;
+  ___data_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          OpenZWaveDriverData *fieldValue = [[OpenZWaveDriverData alloc] init];
+          [fieldValue read: inProtocol];
+          [self set_data: fieldValue];
+          [fieldValue release];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetDriverStatisticsReturnStruct"];
+  if (___data_isset) {
+    if (___data != nil) {
+      [outProtocol writeFieldBeginWithName: @"_data" type: TType_STRUCT fieldID: 1];
+      [___data write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetDriverStatisticsReturnStruct("];
+  [ms appendString: @"_data:"];
+  [ms appendFormat: @"%@", ___data];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @implementation OpenZWaveGetSwitchPointReturnStruct
 
 - (id) initWithRetval: (BOOL) retval o_hours: (uint8_t) o_hours o_minutes: (uint8_t) o_minutes o_setback: (uint8_t) o_setback
@@ -39911,6 +40687,266 @@
 
 @end
 
+@interface OpenZWaveGetDriverStatistics_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+
+  BOOL ___homeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+@end
+
+@implementation OpenZWaveGetDriverStatistics_args
+
+- (id) initWith_homeId: (int32_t) _homeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetDriverStatistics_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetDriverStatistics_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveGetDriverStatistics_result : NSObject <NSCoding> {
+  OpenZWaveGetDriverStatisticsReturnStruct * __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=success, setter=setSuccess:) OpenZWaveGetDriverStatisticsReturnStruct * success;
+#endif
+
+- (id) initWithSuccess: (OpenZWaveGetDriverStatisticsReturnStruct *) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (OpenZWaveGetDriverStatisticsReturnStruct *) success;
+- (void) setSuccess: (OpenZWaveGetDriverStatisticsReturnStruct *) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveGetDriverStatistics_result
+
+- (id) initWithSuccess: (OpenZWaveGetDriverStatisticsReturnStruct *) success
+{
+  self = [super init];
+  __success = [success retain];
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [[decoder decodeObjectForKey: @"success"] retain];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeObject: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [__success release];
+  [super dealloc];
+}
+
+- (OpenZWaveGetDriverStatisticsReturnStruct *) success {
+  return [[__success retain] autorelease];
+}
+
+- (void) setSuccess: (OpenZWaveGetDriverStatisticsReturnStruct *) success {
+  [success retain];
+  [__success release];
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  [__success release];
+  __success = nil;
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_STRUCT) {
+          OpenZWaveGetDriverStatisticsReturnStruct *fieldValue = [[OpenZWaveGetDriverStatisticsReturnStruct alloc] init];
+          [fieldValue read: inProtocol];
+          [self setSuccess: fieldValue];
+          [fieldValue release];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetDriverStatistics_result"];
+
+  if (__success_isset) {
+    if (__success != nil) {
+      [outProtocol writeFieldBeginWithName: @"success" type: TType_STRUCT fieldID: 0];
+      [__success write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetDriverStatistics_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%@", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @interface OpenZWaveSendAllValues_args : NSObject <NSCoding> {
 }
 
@@ -45326,6 +46362,44 @@
   return [self recv_ActivateScene];
 }
 
+- (void) send_GetDriverStatistics: (int32_t) _homeId
+{
+  [outProtocol writeMessageBeginWithName: @"GetDriverStatistics" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"GetDriverStatistics_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (OpenZWaveGetDriverStatisticsReturnStruct *) recv_GetDriverStatistics
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveGetDriverStatistics_result * result = [[[OpenZWaveGetDriverStatistics_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"GetDriverStatistics failed: unknown result"];
+}
+
+- (OpenZWaveGetDriverStatisticsReturnStruct *) GetDriverStatistics: (int32_t) _homeId
+{
+  [self send_GetDriverStatistics: _homeId];
+  return [self recv_GetDriverStatistics];
+}
+
 - (void) send_SendAllValues
 {
   [outProtocol writeMessageBeginWithName: @"SendAllValues" type: TMessageType_CALL sequenceID: 0];
@@ -46392,6 +47466,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"ActivateScene"];
+  }
+  {
+    SEL s = @selector(process_GetDriverStatistics_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"GetDriverStatistics"];
   }
   {
     SEL s = @selector(process_SendAllValues_withSequenceID:inProtocol:outProtocol:);
@@ -48609,6 +49691,23 @@
   OpenZWaveActivateScene_result * result = [[OpenZWaveActivateScene_result alloc] init];
   [result setSuccess: [mService ActivateScene: [args _sceneId]]];
   [outProtocol writeMessageBeginWithName: @"ActivateScene"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_GetDriverStatistics_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveGetDriverStatistics_args * args = [[OpenZWaveGetDriverStatistics_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveGetDriverStatistics_result * result = [[OpenZWaveGetDriverStatistics_result alloc] init];
+  [result setSuccess: [mService GetDriverStatistics: [args _homeId]]];
+  [outProtocol writeMessageBeginWithName: @"GetDriverStatistics"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

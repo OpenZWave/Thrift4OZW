@@ -1013,8 +1013,17 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void GetDriverStatistics(GetDriverStatisticsReturnStruct& _return, const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
+	g_criticalSection.unlock();
+  }
+
   void SendAllValues() {
+    g_criticalSection.lock();
     send_all_values();
+    g_criticalSection.unlock();
   }
 
 };

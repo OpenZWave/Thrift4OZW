@@ -195,6 +195,330 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::DriverData;
+use base qw(Class::Accessor);
+OpenZWave::DriverData->mk_accessors( qw( s_SOFCnt s_ACKWaiting s_readAborts s_badChecksum s_readCnt s_writeCnt s_CANCnt s_NAKCnt s_ACKCnt s_OOFCnt s_dropped s_retries s_controllerReadCnt s_controllerWriteCnt ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{s_SOFCnt} = undef;
+  $self->{s_ACKWaiting} = undef;
+  $self->{s_readAborts} = undef;
+  $self->{s_badChecksum} = undef;
+  $self->{s_readCnt} = undef;
+  $self->{s_writeCnt} = undef;
+  $self->{s_CANCnt} = undef;
+  $self->{s_NAKCnt} = undef;
+  $self->{s_ACKCnt} = undef;
+  $self->{s_OOFCnt} = undef;
+  $self->{s_dropped} = undef;
+  $self->{s_retries} = undef;
+  $self->{s_controllerReadCnt} = undef;
+  $self->{s_controllerWriteCnt} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{s_SOFCnt}) {
+      $self->{s_SOFCnt} = $vals->{s_SOFCnt};
+    }
+    if (defined $vals->{s_ACKWaiting}) {
+      $self->{s_ACKWaiting} = $vals->{s_ACKWaiting};
+    }
+    if (defined $vals->{s_readAborts}) {
+      $self->{s_readAborts} = $vals->{s_readAborts};
+    }
+    if (defined $vals->{s_badChecksum}) {
+      $self->{s_badChecksum} = $vals->{s_badChecksum};
+    }
+    if (defined $vals->{s_readCnt}) {
+      $self->{s_readCnt} = $vals->{s_readCnt};
+    }
+    if (defined $vals->{s_writeCnt}) {
+      $self->{s_writeCnt} = $vals->{s_writeCnt};
+    }
+    if (defined $vals->{s_CANCnt}) {
+      $self->{s_CANCnt} = $vals->{s_CANCnt};
+    }
+    if (defined $vals->{s_NAKCnt}) {
+      $self->{s_NAKCnt} = $vals->{s_NAKCnt};
+    }
+    if (defined $vals->{s_ACKCnt}) {
+      $self->{s_ACKCnt} = $vals->{s_ACKCnt};
+    }
+    if (defined $vals->{s_OOFCnt}) {
+      $self->{s_OOFCnt} = $vals->{s_OOFCnt};
+    }
+    if (defined $vals->{s_dropped}) {
+      $self->{s_dropped} = $vals->{s_dropped};
+    }
+    if (defined $vals->{s_retries}) {
+      $self->{s_retries} = $vals->{s_retries};
+    }
+    if (defined $vals->{s_controllerReadCnt}) {
+      $self->{s_controllerReadCnt} = $vals->{s_controllerReadCnt};
+    }
+    if (defined $vals->{s_controllerWriteCnt}) {
+      $self->{s_controllerWriteCnt} = $vals->{s_controllerWriteCnt};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'DriverData';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_SOFCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_ACKWaiting});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^3$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_readAborts});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^4$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_badChecksum});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^5$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_readCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^6$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_writeCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^7$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_CANCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^8$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_NAKCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^9$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_ACKCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^10$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_OOFCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^11$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_dropped});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^12$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_retries});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^13$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_controllerReadCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^14$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{s_controllerWriteCnt});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('DriverData');
+  if (defined $self->{s_SOFCnt}) {
+    $xfer += $output->writeFieldBegin('s_SOFCnt', TType::I32, 1);
+    $xfer += $output->writeI32($self->{s_SOFCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_ACKWaiting}) {
+    $xfer += $output->writeFieldBegin('s_ACKWaiting', TType::I32, 2);
+    $xfer += $output->writeI32($self->{s_ACKWaiting});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_readAborts}) {
+    $xfer += $output->writeFieldBegin('s_readAborts', TType::I32, 3);
+    $xfer += $output->writeI32($self->{s_readAborts});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_badChecksum}) {
+    $xfer += $output->writeFieldBegin('s_badChecksum', TType::I32, 4);
+    $xfer += $output->writeI32($self->{s_badChecksum});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_readCnt}) {
+    $xfer += $output->writeFieldBegin('s_readCnt', TType::I32, 5);
+    $xfer += $output->writeI32($self->{s_readCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_writeCnt}) {
+    $xfer += $output->writeFieldBegin('s_writeCnt', TType::I32, 6);
+    $xfer += $output->writeI32($self->{s_writeCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_CANCnt}) {
+    $xfer += $output->writeFieldBegin('s_CANCnt', TType::I32, 7);
+    $xfer += $output->writeI32($self->{s_CANCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_NAKCnt}) {
+    $xfer += $output->writeFieldBegin('s_NAKCnt', TType::I32, 8);
+    $xfer += $output->writeI32($self->{s_NAKCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_ACKCnt}) {
+    $xfer += $output->writeFieldBegin('s_ACKCnt', TType::I32, 9);
+    $xfer += $output->writeI32($self->{s_ACKCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_OOFCnt}) {
+    $xfer += $output->writeFieldBegin('s_OOFCnt', TType::I32, 10);
+    $xfer += $output->writeI32($self->{s_OOFCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_dropped}) {
+    $xfer += $output->writeFieldBegin('s_dropped', TType::I32, 11);
+    $xfer += $output->writeI32($self->{s_dropped});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_retries}) {
+    $xfer += $output->writeFieldBegin('s_retries', TType::I32, 12);
+    $xfer += $output->writeI32($self->{s_retries});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_controllerReadCnt}) {
+    $xfer += $output->writeFieldBegin('s_controllerReadCnt', TType::I32, 13);
+    $xfer += $output->writeI32($self->{s_controllerReadCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{s_controllerWriteCnt}) {
+    $xfer += $output->writeFieldBegin('s_controllerWriteCnt', TType::I32, 14);
+    $xfer += $output->writeI32($self->{s_controllerWriteCnt});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::GetDriverStatisticsReturnStruct;
+use base qw(Class::Accessor);
+OpenZWave::GetDriverStatisticsReturnStruct->mk_accessors( qw( _data ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_data} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_data}) {
+      $self->{_data} = $vals->{_data};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'GetDriverStatisticsReturnStruct';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::STRUCT) {
+        $self->{_data} = new OpenZWave::DriverData();
+        $xfer += $self->{_data}->read($input);
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('GetDriverStatisticsReturnStruct');
+  if (defined $self->{_data}) {
+    $xfer += $output->writeFieldBegin('_data', TType::STRUCT, 1);
+    $xfer += $self->{_data}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::GetSwitchPointReturnStruct;
 use base qw(Class::Accessor);
 OpenZWave::GetSwitchPointReturnStruct->mk_accessors( qw( retval o_hours o_minutes o_setback ) );

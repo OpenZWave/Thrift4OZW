@@ -144,6 +144,7 @@ namespace OpenZWave
       void SetSceneLabel(byte _sceneId, string _value);
       bool SceneExists(byte _sceneId);
       bool ActivateScene(byte _sceneId);
+      GetDriverStatisticsReturnStruct GetDriverStatistics(int _homeId);
       void SendAllValues();
     }
 
@@ -4445,6 +4446,39 @@ namespace OpenZWave
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "ActivateScene failed: unknown result");
       }
 
+      public GetDriverStatisticsReturnStruct GetDriverStatistics(int _homeId)
+      {
+        send_GetDriverStatistics(_homeId);
+        return recv_GetDriverStatistics();
+      }
+
+      public void send_GetDriverStatistics(int _homeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("GetDriverStatistics", TMessageType.Call, seqid_));
+        GetDriverStatistics_args args = new GetDriverStatistics_args();
+        args._homeId = _homeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public GetDriverStatisticsReturnStruct recv_GetDriverStatistics()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        GetDriverStatistics_result result = new GetDriverStatistics_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetDriverStatistics failed: unknown result");
+      }
+
       public void SendAllValues()
       {
         send_SendAllValues();
@@ -4607,6 +4641,7 @@ namespace OpenZWave
         processMap_["SetSceneLabel"] = SetSceneLabel_Process;
         processMap_["SceneExists"] = SceneExists_Process;
         processMap_["ActivateScene"] = ActivateScene_Process;
+        processMap_["GetDriverStatistics"] = GetDriverStatistics_Process;
         processMap_["SendAllValues"] = SendAllValues_Process;
       }
 
@@ -6299,6 +6334,19 @@ namespace OpenZWave
         ActivateScene_result result = new ActivateScene_result();
         result.Success = iface_.ActivateScene(args._sceneId);
         oprot.WriteMessageBegin(new TMessage("ActivateScene", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void GetDriverStatistics_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        GetDriverStatistics_args args = new GetDriverStatistics_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        GetDriverStatistics_result result = new GetDriverStatistics_result();
+        result.Success = iface_.GetDriverStatistics(args._homeId);
+        oprot.WriteMessageBegin(new TMessage("GetDriverStatistics", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -30649,6 +30697,176 @@ namespace OpenZWave
         StringBuilder sb = new StringBuilder("ActivateScene_result(");
         sb.Append("Success: ");
         sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class GetDriverStatistics_args : TBase
+    {
+      private int __homeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+      }
+
+      public GetDriverStatistics_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("GetDriverStatistics_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("GetDriverStatistics_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class GetDriverStatistics_result : TBase
+    {
+      private GetDriverStatisticsReturnStruct _success;
+
+      public GetDriverStatisticsReturnStruct Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public GetDriverStatistics_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Struct) {
+                Success = new GetDriverStatisticsReturnStruct();
+                Success.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("GetDriverStatistics_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          if (Success != null) {
+            field.Name = "Success";
+            field.Type = TType.Struct;
+            field.ID = 0;
+            oprot.WriteFieldBegin(field);
+            Success.Write(oprot);
+            oprot.WriteFieldEnd();
+          }
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("GetDriverStatistics_result(");
+        sb.Append("Success: ");
+        sb.Append(Success== null ? "<null>" : Success.ToString());
         sb.Append(")");
         return sb.ToString();
       }

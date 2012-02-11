@@ -149,6 +149,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  void SetSceneLabel(byte _sceneId, string _value)'
   print '  bool SceneExists(byte _sceneId)'
   print '  bool ActivateScene(byte _sceneId)'
+  print '  GetDriverStatisticsReturnStruct GetDriverStatistics(i32 _homeId)'
   print '  void SendAllValues()'
   print ''
   sys.exit(0)
@@ -967,6 +968,12 @@ elif cmd == 'ActivateScene':
     print 'ActivateScene requires 1 args'
     sys.exit(1)
   pp.pprint(client.ActivateScene(eval(args[0]),))
+
+elif cmd == 'GetDriverStatistics':
+  if len(args) != 1:
+    print 'GetDriverStatistics requires 1 args'
+    sys.exit(1)
+  pp.pprint(client.GetDriverStatistics(eval(args[0]),))
 
 elif cmd == 'SendAllValues':
   if len(args) != 0:

@@ -114,6 +114,139 @@ enum OpenZWaveDriverControllerCommand {
 
 @end
 
+@interface OpenZWaveDriverData : NSObject <NSCoding> {
+  int32_t __s_SOFCnt;
+  int32_t __s_ACKWaiting;
+  int32_t __s_readAborts;
+  int32_t __s_badChecksum;
+  int32_t __s_readCnt;
+  int32_t __s_writeCnt;
+  int32_t __s_CANCnt;
+  int32_t __s_NAKCnt;
+  int32_t __s_ACKCnt;
+  int32_t __s_OOFCnt;
+  int32_t __s_dropped;
+  int32_t __s_retries;
+  int32_t __s_controllerReadCnt;
+  int32_t __s_controllerWriteCnt;
+
+  BOOL __s_SOFCnt_isset;
+  BOOL __s_ACKWaiting_isset;
+  BOOL __s_readAborts_isset;
+  BOOL __s_badChecksum_isset;
+  BOOL __s_readCnt_isset;
+  BOOL __s_writeCnt_isset;
+  BOOL __s_CANCnt_isset;
+  BOOL __s_NAKCnt_isset;
+  BOOL __s_ACKCnt_isset;
+  BOOL __s_OOFCnt_isset;
+  BOOL __s_dropped_isset;
+  BOOL __s_retries_isset;
+  BOOL __s_controllerReadCnt_isset;
+  BOOL __s_controllerWriteCnt_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=s_SOFCnt, setter=setS_SOFCnt:) int32_t s_SOFCnt;
+@property (nonatomic, getter=s_ACKWaiting, setter=setS_ACKWaiting:) int32_t s_ACKWaiting;
+@property (nonatomic, getter=s_readAborts, setter=setS_readAborts:) int32_t s_readAborts;
+@property (nonatomic, getter=s_badChecksum, setter=setS_badChecksum:) int32_t s_badChecksum;
+@property (nonatomic, getter=s_readCnt, setter=setS_readCnt:) int32_t s_readCnt;
+@property (nonatomic, getter=s_writeCnt, setter=setS_writeCnt:) int32_t s_writeCnt;
+@property (nonatomic, getter=s_CANCnt, setter=setS_CANCnt:) int32_t s_CANCnt;
+@property (nonatomic, getter=s_NAKCnt, setter=setS_NAKCnt:) int32_t s_NAKCnt;
+@property (nonatomic, getter=s_ACKCnt, setter=setS_ACKCnt:) int32_t s_ACKCnt;
+@property (nonatomic, getter=s_OOFCnt, setter=setS_OOFCnt:) int32_t s_OOFCnt;
+@property (nonatomic, getter=s_dropped, setter=setS_dropped:) int32_t s_dropped;
+@property (nonatomic, getter=s_retries, setter=setS_retries:) int32_t s_retries;
+@property (nonatomic, getter=s_controllerReadCnt, setter=setS_controllerReadCnt:) int32_t s_controllerReadCnt;
+@property (nonatomic, getter=s_controllerWriteCnt, setter=setS_controllerWriteCnt:) int32_t s_controllerWriteCnt;
+#endif
+
+- (id) initWithS_SOFCnt: (int32_t) s_SOFCnt s_ACKWaiting: (int32_t) s_ACKWaiting s_readAborts: (int32_t) s_readAborts s_badChecksum: (int32_t) s_badChecksum s_readCnt: (int32_t) s_readCnt s_writeCnt: (int32_t) s_writeCnt s_CANCnt: (int32_t) s_CANCnt s_NAKCnt: (int32_t) s_NAKCnt s_ACKCnt: (int32_t) s_ACKCnt s_OOFCnt: (int32_t) s_OOFCnt s_dropped: (int32_t) s_dropped s_retries: (int32_t) s_retries s_controllerReadCnt: (int32_t) s_controllerReadCnt s_controllerWriteCnt: (int32_t) s_controllerWriteCnt;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) s_SOFCnt;
+- (void) setS_SOFCnt: (int32_t) s_SOFCnt;
+- (BOOL) s_SOFCntIsSet;
+
+- (int32_t) s_ACKWaiting;
+- (void) setS_ACKWaiting: (int32_t) s_ACKWaiting;
+- (BOOL) s_ACKWaitingIsSet;
+
+- (int32_t) s_readAborts;
+- (void) setS_readAborts: (int32_t) s_readAborts;
+- (BOOL) s_readAbortsIsSet;
+
+- (int32_t) s_badChecksum;
+- (void) setS_badChecksum: (int32_t) s_badChecksum;
+- (BOOL) s_badChecksumIsSet;
+
+- (int32_t) s_readCnt;
+- (void) setS_readCnt: (int32_t) s_readCnt;
+- (BOOL) s_readCntIsSet;
+
+- (int32_t) s_writeCnt;
+- (void) setS_writeCnt: (int32_t) s_writeCnt;
+- (BOOL) s_writeCntIsSet;
+
+- (int32_t) s_CANCnt;
+- (void) setS_CANCnt: (int32_t) s_CANCnt;
+- (BOOL) s_CANCntIsSet;
+
+- (int32_t) s_NAKCnt;
+- (void) setS_NAKCnt: (int32_t) s_NAKCnt;
+- (BOOL) s_NAKCntIsSet;
+
+- (int32_t) s_ACKCnt;
+- (void) setS_ACKCnt: (int32_t) s_ACKCnt;
+- (BOOL) s_ACKCntIsSet;
+
+- (int32_t) s_OOFCnt;
+- (void) setS_OOFCnt: (int32_t) s_OOFCnt;
+- (BOOL) s_OOFCntIsSet;
+
+- (int32_t) s_dropped;
+- (void) setS_dropped: (int32_t) s_dropped;
+- (BOOL) s_droppedIsSet;
+
+- (int32_t) s_retries;
+- (void) setS_retries: (int32_t) s_retries;
+- (BOOL) s_retriesIsSet;
+
+- (int32_t) s_controllerReadCnt;
+- (void) setS_controllerReadCnt: (int32_t) s_controllerReadCnt;
+- (BOOL) s_controllerReadCntIsSet;
+
+- (int32_t) s_controllerWriteCnt;
+- (void) setS_controllerWriteCnt: (int32_t) s_controllerWriteCnt;
+- (BOOL) s_controllerWriteCntIsSet;
+
+@end
+
+@interface OpenZWaveGetDriverStatisticsReturnStruct : NSObject <NSCoding> {
+  OpenZWaveDriverData * ___data;
+
+  BOOL ___data_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=_data, setter=set_data:) OpenZWaveDriverData * _data;
+#endif
+
+- (id) initWith_data: (OpenZWaveDriverData *) _data;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (OpenZWaveDriverData *) _data;
+- (void) set_data: (OpenZWaveDriverData *) _data;
+- (BOOL) _dataIsSet;
+
+@end
+
 @interface OpenZWaveGetSwitchPointReturnStruct : NSObject <NSCoding> {
   BOOL __retval;
   uint8_t __o_hours;
@@ -628,6 +761,7 @@ enum OpenZWaveDriverControllerCommand {
 - (void) SetSceneLabel: (uint8_t) _sceneId : (NSString *) _value;  // throws TException
 - (BOOL) SceneExists: (uint8_t) _sceneId;  // throws TException
 - (BOOL) ActivateScene: (uint8_t) _sceneId;  // throws TException
+- (OpenZWaveGetDriverStatisticsReturnStruct *) GetDriverStatistics: (int32_t) _homeId;  // throws TException
 - (void) SendAllValues;  // throws TException
 @end
 

@@ -662,6 +662,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("ActivateScene\n");
   }
 
+  void GetDriverStatistics(GetDriverStatisticsReturnStruct& _return, const int32_t _homeId) {
+    // Your implementation goes here
+    printf("GetDriverStatistics\n");
+  }
+
   void SendAllValues() {
     // Your implementation goes here
     printf("SendAllValues\n");

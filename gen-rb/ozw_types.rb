@@ -100,6 +100,64 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
+    class DriverData
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      S_SOFCNT = 1
+      S_ACKWAITING = 2
+      S_READABORTS = 3
+      S_BADCHECKSUM = 4
+      S_READCNT = 5
+      S_WRITECNT = 6
+      S_CANCNT = 7
+      S_NAKCNT = 8
+      S_ACKCNT = 9
+      S_OOFCNT = 10
+      S_DROPPED = 11
+      S_RETRIES = 12
+      S_CONTROLLERREADCNT = 13
+      S_CONTROLLERWRITECNT = 14
+
+      FIELDS = {
+        S_SOFCNT => {:type => ::Thrift::Types::I32, :name => 's_SOFCnt'},
+        S_ACKWAITING => {:type => ::Thrift::Types::I32, :name => 's_ACKWaiting'},
+        S_READABORTS => {:type => ::Thrift::Types::I32, :name => 's_readAborts'},
+        S_BADCHECKSUM => {:type => ::Thrift::Types::I32, :name => 's_badChecksum'},
+        S_READCNT => {:type => ::Thrift::Types::I32, :name => 's_readCnt'},
+        S_WRITECNT => {:type => ::Thrift::Types::I32, :name => 's_writeCnt'},
+        S_CANCNT => {:type => ::Thrift::Types::I32, :name => 's_CANCnt'},
+        S_NAKCNT => {:type => ::Thrift::Types::I32, :name => 's_NAKCnt'},
+        S_ACKCNT => {:type => ::Thrift::Types::I32, :name => 's_ACKCnt'},
+        S_OOFCNT => {:type => ::Thrift::Types::I32, :name => 's_OOFCnt'},
+        S_DROPPED => {:type => ::Thrift::Types::I32, :name => 's_dropped'},
+        S_RETRIES => {:type => ::Thrift::Types::I32, :name => 's_retries'},
+        S_CONTROLLERREADCNT => {:type => ::Thrift::Types::I32, :name => 's_controllerReadCnt'},
+        S_CONTROLLERWRITECNT => {:type => ::Thrift::Types::I32, :name => 's_controllerWriteCnt'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetDriverStatisticsReturnStruct
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _DATA = 1
+
+      FIELDS = {
+        _DATA => {:type => ::Thrift::Types::STRUCT, :name => '_data', :class => OpenZWave::DriverData}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
     class GetSwitchPointReturnStruct
       include ::Thrift::Struct, ::Thrift::Struct_Union
       RETVAL = 1

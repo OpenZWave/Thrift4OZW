@@ -14,6 +14,14 @@ struct_info('remoteValueID') ->
   {struct, [{1, i32}, {2, byte}, {3, i32}, {4, byte}, {5, byte}, {6, byte}, {7, i32}]}
 ;
 
+struct_info('driverData') ->
+  {struct, [{1, i32}, {2, i32}, {3, i32}, {4, i32}, {5, i32}, {6, i32}, {7, i32}, {8, i32}, {9, i32}, {10, i32}, {11, i32}, {12, i32}, {13, i32}, {14, i32}]}
+;
+
+struct_info('getDriverStatisticsReturnStruct') ->
+  {struct, [{1, {struct, {'ozw_types', 'driverData'}}}]}
+;
+
 struct_info('getSwitchPointReturnStruct') ->
   {struct, [{1, bool}, {2, byte}, {3, byte}, {4, byte}]}
 ;
@@ -70,6 +78,14 @@ struct_info('i am a dummy struct') -> undefined.
 
 struct_info_ext('remoteValueID') ->
   {struct, [{1, undefined, i32, '_homeId', undefined}, {2, undefined, byte, '_nodeId', undefined}, {3, undefined, i32, '_genre', undefined}, {4, undefined, byte, '_commandClassId', undefined}, {5, undefined, byte, '_instance', undefined}, {6, undefined, byte, '_valueIndex', undefined}, {7, undefined, i32, '_type', undefined}]}
+;
+
+struct_info_ext('driverData') ->
+  {struct, [{1, undefined, i32, 's_SOFCnt', undefined}, {2, undefined, i32, 's_ACKWaiting', undefined}, {3, undefined, i32, 's_readAborts', undefined}, {4, undefined, i32, 's_badChecksum', undefined}, {5, undefined, i32, 's_readCnt', undefined}, {6, undefined, i32, 's_writeCnt', undefined}, {7, undefined, i32, 's_CANCnt', undefined}, {8, undefined, i32, 's_NAKCnt', undefined}, {9, undefined, i32, 's_ACKCnt', undefined}, {10, undefined, i32, 's_OOFCnt', undefined}, {11, undefined, i32, 's_dropped', undefined}, {12, undefined, i32, 's_retries', undefined}, {13, undefined, i32, 's_controllerReadCnt', undefined}, {14, undefined, i32, 's_controllerWriteCnt', undefined}]}
+;
+
+struct_info_ext('getDriverStatisticsReturnStruct') ->
+  {struct, [{1, undefined, {struct, {'ozw_types', 'driverData'}}, '_data', #driverData{}}]}
 ;
 
 struct_info_ext('getSwitchPointReturnStruct') ->

@@ -17800,6 +17800,135 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_GetDriverStatistics_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_GetDriverStatistics_args->mk_accessors( qw( _homeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_GetDriverStatistics_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_GetDriverStatistics_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_GetDriverStatistics_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_GetDriverStatistics_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_GetDriverStatistics_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::STRUCT) {
+        $self->{success} = new OpenZWave::GetDriverStatisticsReturnStruct();
+        $xfer += $self->{success}->read($input);
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_GetDriverStatistics_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
+    $xfer += $self->{success}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManager_SendAllValues_args;
 use base qw(Class::Accessor);
 
@@ -18908,6 +19037,13 @@ sub ActivateScene{
   die 'implement interface';
 }
 
+sub GetDriverStatistics{
+  my $self = shift;
+  my $_homeId = shift;
+
+  die 'implement interface';
+}
+
 sub SendAllValues{
   my $self = shift;
 
@@ -19935,6 +20071,13 @@ sub ActivateScene{
 
   my $_sceneId = ($request->{'_sceneId'}) ? $request->{'_sceneId'} : undef;
   return $self->{impl}->ActivateScene($_sceneId);
+}
+
+sub GetDriverStatistics{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  return $self->{impl}->GetDriverStatistics($_homeId);
 }
 
 sub SendAllValues{
@@ -25739,6 +25882,49 @@ sub recv_ActivateScene{
   }
   die "ActivateScene failed: unknown result";
 }
+sub GetDriverStatistics{
+  my $self = shift;
+  my $_homeId = shift;
+
+    $self->send_GetDriverStatistics($_homeId);
+  return $self->recv_GetDriverStatistics();
+}
+
+sub send_GetDriverStatistics{
+  my $self = shift;
+  my $_homeId = shift;
+
+  $self->{output}->writeMessageBegin('GetDriverStatistics', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_GetDriverStatistics_args();
+  $args->{_homeId} = $_homeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_GetDriverStatistics{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_GetDriverStatistics_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "GetDriverStatistics failed: unknown result";
+}
 sub SendAllValues{
   my $self = shift;
 
@@ -27469,6 +27655,19 @@ sub process_ActivateScene {
     my $result = new OpenZWave::RemoteManager_ActivateScene_result();
     $result->{success} = $self->{handler}->ActivateScene($args->_sceneId);
     $output->writeMessageBegin('ActivateScene', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_GetDriverStatistics {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_GetDriverStatistics_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_GetDriverStatistics_result();
+    $result->{success} = $self->{handler}->GetDriverStatistics($args->_homeId);
+    $output->writeMessageBegin('GetDriverStatistics', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

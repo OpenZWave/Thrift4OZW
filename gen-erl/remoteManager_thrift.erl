@@ -1166,6 +1166,15 @@ function_info('ActivateScene', reply_type) ->
 function_info('ActivateScene', exceptions) ->
   {struct, []}
 ;
+% GetDriverStatistics(This, _homeId)
+function_info('GetDriverStatistics', params_type) ->
+  {struct, [{1, i32}]}
+;
+function_info('GetDriverStatistics', reply_type) ->
+  {struct, {'ozw_types', 'getDriverStatisticsReturnStruct'}};
+function_info('GetDriverStatistics', exceptions) ->
+  {struct, []}
+;
 % SendAllValues(This)
 function_info('SendAllValues', params_type) ->
   {struct, []}
