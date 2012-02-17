@@ -93,6 +93,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  bool SetValue_Int16(RemoteValueID _id, i16 _value)'
   print '  bool SetValue_String(RemoteValueID _id, string _value)'
   print '  bool SetValueListSelection(RemoteValueID _id, string _selectedItem)'
+  print '  bool RefreshValue(RemoteValueID _id)'
   print '  bool PressButton(RemoteValueID _id)'
   print '  bool ReleaseButton(RemoteValueID _id)'
   print '  byte GetNumSwitchPoints(RemoteValueID _id)'
@@ -632,6 +633,12 @@ elif cmd == 'SetValueListSelection':
     print 'SetValueListSelection requires 2 args'
     sys.exit(1)
   pp.pprint(client.SetValueListSelection(eval(args[0]),args[1],))
+
+elif cmd == 'RefreshValue':
+  if len(args) != 1:
+    print 'RefreshValue requires 1 args'
+    sys.exit(1)
+  pp.pprint(client.RefreshValue(eval(args[0]),))
 
 elif cmd == 'PressButton':
   if len(args) != 1:

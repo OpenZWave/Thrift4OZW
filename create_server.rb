@@ -38,8 +38,8 @@ def abspath(path)
     return (path[0] == ".") ? File.expand_path(path) : path
 end
 
-OZWRoot = abspath("../open-zwave")
-ThriftInc = abspath("/usr/local/include/thrift")
+#OZWRoot = abspath("../open-zwave")
+#ThriftInc = abspath("/usr/local/include/thrift")
 
 GetoptLong.new(
   [ "--ozwroot",    GetoptLong::REQUIRED_ARGUMENT ],
@@ -65,6 +65,18 @@ MANAGER_INCLUDES = [
     File.join(OZWRoot, 'cpp', "src", "platform")
 ]
 
+# API calls intentionally ignored by this script
+MANAGER_API_IGNORE = %w{
+	Create
+	Get
+	Destroy
+	GetOptions
+	AddDriver
+	RemoveDriver
+	AddWatcher
+	RemoveWatcher
+}
+
 #
 # must load all source files in a single batch (RbGCCXML gets confused otherwise...)
 #
@@ -89,14 +101,21 @@ Callbacks = {}
 
 a = RootNode.classes("RemoteManagerHandler").methods.find(:access => :public)
 b = RootNode.namespaces("OpenZWave").classes("Manager").methods.find(:access => :public)
-puts "RemoteManagerHandler: #{a.entries.size} public methods, OpenZWave::Manager: #{b.entries.size} public methods"
+puts "RemoteManagerHandler: #{a.entries.size} public methods"
+puts "OpenZWave::Manager:   #{b.entries.size} public methods"
+puts "  --//--  ignored :   #{MANAGER_API_IGNORE.size} methods"
 if (a.entries.size != b.entries.size) then
     a_names = a.collect{ |meth|
-        (md = OverloadedRE.match(meth.name))? md[1] :  meth.name
+        (md = OverloadedRE.match(meth.name))? md[1] : meth.name
     }.uniq
     b_names = b.collect{ |meth| meth.name }.uniq
-    puts "  Missing OpenZWave::Manager method mappings from RemoteManagerHandler:"
-    puts "\t" + (b_names - a_names).join("\n\t") 
+    missing = b_names - a_names - MANAGER_API_IGNORE
+    if missing.size > 0 then
+        puts "\n-----------------------------------------------------------------------"
+        puts "  Missing OpenZWave::Manager method mappings from RemoteManagerHandler:"
+        puts "-----------------------------------------------------------------------"
+        puts "\n\t" + missing.join("\n\t") 
+    end
 end
 
 RootNode.classes("RemoteManagerHandler").methods.each { |meth|

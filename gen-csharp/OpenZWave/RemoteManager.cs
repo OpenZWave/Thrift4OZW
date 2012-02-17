@@ -88,6 +88,7 @@ namespace OpenZWave
       bool SetValue_Int16(RemoteValueID _id, short _value);
       bool SetValue_String(RemoteValueID _id, string _value);
       bool SetValueListSelection(RemoteValueID _id, string _selectedItem);
+      bool RefreshValue(RemoteValueID _id);
       bool PressButton(RemoteValueID _id);
       bool ReleaseButton(RemoteValueID _id);
       byte GetNumSwitchPoints(RemoteValueID _id);
@@ -2559,6 +2560,39 @@ namespace OpenZWave
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValueListSelection failed: unknown result");
       }
 
+      public bool RefreshValue(RemoteValueID _id)
+      {
+        send_RefreshValue(_id);
+        return recv_RefreshValue();
+      }
+
+      public void send_RefreshValue(RemoteValueID _id)
+      {
+        oprot_.WriteMessageBegin(new TMessage("RefreshValue", TMessageType.Call, seqid_));
+        RefreshValue_args args = new RefreshValue_args();
+        args._id = _id;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_RefreshValue()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        RefreshValue_result result = new RefreshValue_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "RefreshValue failed: unknown result");
+      }
+
       public bool PressButton(RemoteValueID _id)
       {
         send_PressButton(_id);
@@ -4585,6 +4619,7 @@ namespace OpenZWave
         processMap_["SetValue_Int16"] = SetValue_Int16_Process;
         processMap_["SetValue_String"] = SetValue_String_Process;
         processMap_["SetValueListSelection"] = SetValueListSelection_Process;
+        processMap_["RefreshValue"] = RefreshValue_Process;
         processMap_["PressButton"] = PressButton_Process;
         processMap_["ReleaseButton"] = ReleaseButton_Process;
         processMap_["GetNumSwitchPoints"] = GetNumSwitchPoints_Process;
@@ -5606,6 +5641,19 @@ namespace OpenZWave
         SetValueListSelection_result result = new SetValueListSelection_result();
         result.Success = iface_.SetValueListSelection(args._id, args._selectedItem);
         oprot.WriteMessageBegin(new TMessage("SetValueListSelection", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void RefreshValue_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        RefreshValue_args args = new RefreshValue_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        RefreshValue_result result = new RefreshValue_result();
+        result.Success = iface_.RefreshValue(args._id);
+        oprot.WriteMessageBegin(new TMessage("RefreshValue", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -19473,6 +19521,174 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("SetValueListSelection_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class RefreshValue_args : TBase
+    {
+      private RemoteValueID __id;
+
+      public RemoteValueID _id
+      {
+        get
+        {
+          return __id;
+        }
+        set
+        {
+          __isset._id = true;
+          this.__id = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _id;
+      }
+
+      public RefreshValue_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                _id = new RemoteValueID();
+                _id.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("RefreshValue_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (_id != null && __isset._id) {
+          field.Name = "_id";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          _id.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("RefreshValue_args(");
+        sb.Append("_id: ");
+        sb.Append(_id== null ? "<null>" : _id.ToString());
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class RefreshValue_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public RefreshValue_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("RefreshValue_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("RefreshValue_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");

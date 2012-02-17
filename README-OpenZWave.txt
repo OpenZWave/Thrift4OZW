@@ -5,7 +5,8 @@ OK folks, after several months of tweaking I can now talk to my ZWave devices
 at the leisure of Ruby's friendly IRB interpreter. So can you, in any language you 
 choose (Cocoa, C#, Erlang, Go, Java, JS, Perl, PHP, Python, Ruby...). Here's how:
 
-- First get a copy of the code:    https://github.com/ekarak/Thrift4OZW/zipball/master
+- First get a copy of the code:    
+    # wget https://github.com/ekarak/Thrift4OZW/zipball/master
 - Then unzip it to a folder, preferrably next to OZW's root folder (open-zwave-read-only)
 My folder hierarchy is:
 /home/
@@ -15,54 +16,43 @@ My folder hierarchy is:
             open-zwave-read-only (the main OZW trunk)
             openzwave-control-panel (other OZW subproject)
 
-- Skip to next section if you're running Linux 32-bit and just want to try talking to the library 
-(a precompiled binary is included)
-- Take a look at ozw.thrift , it's the Thrift interface definition file. Most (not all!) of Manager 
-(124 out of 138) public methods are exposed.
+- Skip to next section if you're running Linux x86/32-bit and just want to try talking
+to the OpenZWave library (a precompiled binary is included)
+- Take a look at ozw.thrift, it's the Thrift interface definition file. All of the useful 
+public Manager methods (130 out of 137) are exposed. (Constructors/destructors are not exposed)
 - Install SMC (http://smc.sf.net) , and Poco  (http://www.pocoproject.org), both development 
 versions (with headers)
 - I assume you have Ruby >=1.9.1 installed with RbGCCXML and Nokogiri (gem install rbgccxml)
 - Inspect the Makefile, change directories (unless your username is ekarak!)
 - Run make, cross fingers, pop champagne.
 - The generated code is patched twice (I know, I know, this sucks) in order for the compilation 
-to succeed:
+of the C++ openzwave daemon to succeed:
 
 1) these constructors/converters are patched in class RemoteValueID (gen-cpp/ozw_types.h) :
-// ekarak: constructor from ValueID
-  RemoteValueID(ValueID vid) : 
-    _homeId ((int32_t) vid.GetHomeId()), 
-    _nodeId ((int8_t) vid.GetNodeId()), 
-    _genre  ((RemoteValueGenre::type) vid.GetGenre()),
-    _commandClassId((int8_t) vid.GetCommandClassId()), 
-      _instance ((int8_t) vid.GetInstance()), 
-      _valueIndex((int8_t) vid.GetIndex()),
-    _type ((RemoteValueType::type) vid.GetType()) { }
-// ekarak: converter to ValueID
-ValueID toValueID() const {
-    return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
-}
+  RemoteValueID(ValueID vid);
+  ValueID toValueID();
 
 2) Inspect each function marked with a warning during the server generation phase. 
-There are two or three functions in OZW that use C-ish arguments and need manual handling. 
+There are some functions in OZW that use C-ish arguments and need manual handling. 
 (GetNodeNeighbors is an example I can think of). 
 See gen-cpp/RemoteManager_server.cpp.patch to see the changes I made in order to have 
 meaningful results from OpenZWave to the Thrift server.
 
 
 ---------------------------------------------------------------------
-TALKING TO THE OPENZWAVE THRIFT SERVER 
+TALKING TO THE OPENZWAVE THRIFT SERVER (ozwd)
 ---------------------------------------------------------------------
 OK, you have the server binary (./ozwd) either precompiled or you did it yourself. Fine.
 - Install a STOMP Server (gem install stompserver), or if you're on Ruby 1.9 install 
 stompserver_ng from git:
-    git clone git://github.com/gmallard/stompserver_ng.git
-    cd stompserver_ng
-    sudo ruby1.9.1 setup.rb
-Then, run it with the debug flag (stompserver_ng -d). It will route all notifications 
-from OZW to anywhere you want it to.
-- Hook up your favourite USB controller at /dev/ttyUSB0 (sorry its hardcoded for the
+    # git clone git://github.com/gmallard/stompserver_ng.git
+    # cd stompserver_ng
+    # sudo ruby1.9.1 setup.rb
+Then, run it with the debug flag (stompserver_ng -d). This will launch the STOMP server
+which will route all notifications from OZW to anywhere you want it to.
+- Hook up your ZWave USB controller at /dev/ttyUSB0 (sorry its hardcoded for the
     time being, see Main.cpp)
-- Fire up ./main, preferrably in a debugger (gdb ./main)
+- Fire up ./ozwd, preferrably in a debugger (gdb ./ozwd)
 
 The server tries to connect to the Stomp Server (localhost:61613) and then starts 
 the OpenZWave engine.  When all ZWave processing is done, it also fires up the 
@@ -113,11 +103,21 @@ irb(main):014:0> OZWmgr.SetValue_UInt8(Rvid,25)
 irb(main):015:0> OZWmgr.SetValue_UInt8(Rvid,0)
 => true
 
+-------------------
+STOMP Notifications
+-------------------
+Also take a look at monitor.rb, its a basic STOMP client in Ruby listening for OpenZWave 
+notifications. The script uses the BitStruct library to break down ValueIDs into fields. 
+Take into account that you should keep all ValueID's in a Hash or Array for subsequent 
+calls to OpenZWave.
 
-You can try using the server from other languages. I've posted the generated 
-Thrift code for all languages it can generate client code, Read Thrift's tutorial 
-(more info at http://thrift.apache.org) and you should be able to talk 
-to OpenZWave from your language of choice with minimal effort.
+----------------------------
+OpenZWave + other languages
+----------------------------
+You can try using the server from other languages. I've posted the generated Thrift code 
+for all languages it can generate client code, Read Thrift's tutorial (more info at 
+http://thrift.apache.org) and you should be able to talk to OpenZWave from your 
+language of choice with minimal effort.
 
 That's it for the time being.
 Elias

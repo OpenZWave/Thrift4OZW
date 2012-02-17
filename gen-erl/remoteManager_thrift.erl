@@ -662,6 +662,15 @@ function_info('SetValueListSelection', reply_type) ->
 function_info('SetValueListSelection', exceptions) ->
   {struct, []}
 ;
+% RefreshValue(This, _id)
+function_info('RefreshValue', params_type) ->
+  {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}
+;
+function_info('RefreshValue', reply_type) ->
+  bool;
+function_info('RefreshValue', exceptions) ->
+  {struct, []}
+;
 % PressButton(This, _id)
 function_info('PressButton', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}

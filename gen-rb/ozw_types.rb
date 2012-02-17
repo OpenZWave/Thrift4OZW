@@ -61,11 +61,15 @@ module OpenZWave
       ControllerCommand_AssignReturnRoute = 13
       # < Assign a network return routes to a device.
       ControllerCommand_DeleteAllReturnRoutes = 14
-      VALUE_MAP = {0 => "ControllerCommand_None", 1 => "ControllerCommand_AddController", 2 => "ControllerCommand_AddDevice", 3 => "ControllerCommand_CreateNewPrimary", 4 => "ControllerCommand_ReceiveConfiguration", 5 => "ControllerCommand_RemoveController", 6 => "ControllerCommand_RemoveDevice", 7 => "ControllerCommand_RemoveFailedNode", 8 => "ControllerCommand_HasNodeFailed", 9 => "ControllerCommand_ReplaceFailedNode", 10 => "ControllerCommand_TransferPrimaryRole", 11 => "ControllerCommand_RequestNetworkUpdate", 12 => "ControllerCommand_RequestNodeNeighborUpdate", 13 => "ControllerCommand_AssignReturnRoute", 14 => "ControllerCommand_DeleteAllReturnRoutes"}
-      VALID_VALUES = Set.new([ControllerCommand_None, ControllerCommand_AddController, ControllerCommand_AddDevice, ControllerCommand_CreateNewPrimary, ControllerCommand_ReceiveConfiguration, ControllerCommand_RemoveController, ControllerCommand_RemoveDevice, ControllerCommand_RemoveFailedNode, ControllerCommand_HasNodeFailed, ControllerCommand_ReplaceFailedNode, ControllerCommand_TransferPrimaryRole, ControllerCommand_RequestNetworkUpdate, ControllerCommand_RequestNodeNeighborUpdate, ControllerCommand_AssignReturnRoute, ControllerCommand_DeleteAllReturnRoutes]).freeze
+      # < Delete all return routes from a device.
+      ControllerCommand_CreateButton = 15
+      # Create a handheld button id.
+      ControllerCommand_DeleteButton = 16
+      VALUE_MAP = {0 => "ControllerCommand_None", 1 => "ControllerCommand_AddController", 2 => "ControllerCommand_AddDevice", 3 => "ControllerCommand_CreateNewPrimary", 4 => "ControllerCommand_ReceiveConfiguration", 5 => "ControllerCommand_RemoveController", 6 => "ControllerCommand_RemoveDevice", 7 => "ControllerCommand_RemoveFailedNode", 8 => "ControllerCommand_HasNodeFailed", 9 => "ControllerCommand_ReplaceFailedNode", 10 => "ControllerCommand_TransferPrimaryRole", 11 => "ControllerCommand_RequestNetworkUpdate", 12 => "ControllerCommand_RequestNodeNeighborUpdate", 13 => "ControllerCommand_AssignReturnRoute", 14 => "ControllerCommand_DeleteAllReturnRoutes", 15 => "ControllerCommand_CreateButton", 16 => "ControllerCommand_DeleteButton"}
+      VALID_VALUES = Set.new([ControllerCommand_None, ControllerCommand_AddController, ControllerCommand_AddDevice, ControllerCommand_CreateNewPrimary, ControllerCommand_ReceiveConfiguration, ControllerCommand_RemoveController, ControllerCommand_RemoveDevice, ControllerCommand_RemoveFailedNode, ControllerCommand_HasNodeFailed, ControllerCommand_ReplaceFailedNode, ControllerCommand_TransferPrimaryRole, ControllerCommand_RequestNetworkUpdate, ControllerCommand_RequestNodeNeighborUpdate, ControllerCommand_AssignReturnRoute, ControllerCommand_DeleteAllReturnRoutes, ControllerCommand_CreateButton, ControllerCommand_DeleteButton]).freeze
     end
 
-    # < Delete all return routes from a device.
+    # Delete a handheld button id.
     class RemoteValueID
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _HOMEID = 1

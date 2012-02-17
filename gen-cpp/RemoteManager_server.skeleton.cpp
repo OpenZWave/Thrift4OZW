@@ -382,6 +382,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("SetValueListSelection\n");
   }
 
+  bool RefreshValue(const RemoteValueID& _id) {
+    // Your implementation goes here
+    printf("RefreshValue\n");
+  }
+
   bool PressButton(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("PressButton\n");

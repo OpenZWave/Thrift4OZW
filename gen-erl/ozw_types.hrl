@@ -33,6 +33,8 @@
 -define(ozw_DriverControllerCommand_ControllerCommand_RequestNodeNeighborUpdate, 12).
 -define(ozw_DriverControllerCommand_ControllerCommand_AssignReturnRoute, 13).
 -define(ozw_DriverControllerCommand_ControllerCommand_DeleteAllReturnRoutes, 14).
+-define(ozw_DriverControllerCommand_ControllerCommand_CreateButton, 15).
+-define(ozw_DriverControllerCommand_ControllerCommand_DeleteButton, 16).
 
 %% struct remoteValueID
 

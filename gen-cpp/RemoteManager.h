@@ -86,6 +86,7 @@ class RemoteManagerIf {
   virtual bool SetValue_Int16(const RemoteValueID& _id, const int16_t _value) = 0;
   virtual bool SetValue_String(const RemoteValueID& _id, const std::string& _value) = 0;
   virtual bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem) = 0;
+  virtual bool RefreshValue(const RemoteValueID& _id) = 0;
   virtual bool PressButton(const RemoteValueID& _id) = 0;
   virtual bool ReleaseButton(const RemoteValueID& _id) = 0;
   virtual int8_t GetNumSwitchPoints(const RemoteValueID& _id) = 0;
@@ -397,6 +398,10 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     return _return;
   }
   bool SetValueListSelection(const RemoteValueID& /* _id */, const std::string& /* _selectedItem */) {
+    bool _return = false;
+    return _return;
+  }
+  bool RefreshValue(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
@@ -8553,6 +8558,114 @@ class RemoteManager_SetValueListSelection_presult {
 
 };
 
+typedef struct _RemoteManager_RefreshValue_args__isset {
+  _RemoteManager_RefreshValue_args__isset() : _id(false) {}
+  bool _id;
+} _RemoteManager_RefreshValue_args__isset;
+
+class RemoteManager_RefreshValue_args {
+ public:
+
+  RemoteManager_RefreshValue_args() {
+  }
+
+  virtual ~RemoteManager_RefreshValue_args() throw() {}
+
+  RemoteValueID _id;
+
+  _RemoteManager_RefreshValue_args__isset __isset;
+
+  void __set__id(const RemoteValueID& val) {
+    _id = val;
+  }
+
+  bool operator == (const RemoteManager_RefreshValue_args & rhs) const
+  {
+    if (!(_id == rhs._id))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_RefreshValue_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_RefreshValue_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_RefreshValue_pargs {
+ public:
+
+
+  virtual ~RemoteManager_RefreshValue_pargs() throw() {}
+
+  const RemoteValueID* _id;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_RefreshValue_result__isset {
+  _RemoteManager_RefreshValue_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_RefreshValue_result__isset;
+
+class RemoteManager_RefreshValue_result {
+ public:
+
+  RemoteManager_RefreshValue_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_RefreshValue_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_RefreshValue_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_RefreshValue_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_RefreshValue_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_RefreshValue_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_RefreshValue_presult__isset {
+  _RemoteManager_RefreshValue_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_RefreshValue_presult__isset;
+
+class RemoteManager_RefreshValue_presult {
+ public:
+
+
+  virtual ~RemoteManager_RefreshValue_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_RefreshValue_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 typedef struct _RemoteManager_PressButton_args__isset {
   _RemoteManager_PressButton_args__isset() : _id(false) {}
   bool _id;
@@ -15425,6 +15538,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem);
   void send_SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem);
   bool recv_SetValueListSelection();
+  bool RefreshValue(const RemoteValueID& _id);
+  void send_RefreshValue(const RemoteValueID& _id);
+  bool recv_RefreshValue();
   bool PressButton(const RemoteValueID& _id);
   void send_PressButton(const RemoteValueID& _id);
   bool recv_PressButton();
@@ -15684,6 +15800,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_SetValue_Int16(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SetValue_String(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SetValueListSelection(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_RefreshValue(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_PressButton(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_ReleaseButton(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNumSwitchPoints(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -15817,6 +15934,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["SetValue_Int16"] = &RemoteManagerProcessor::process_SetValue_Int16;
     processMap_["SetValue_String"] = &RemoteManagerProcessor::process_SetValue_String;
     processMap_["SetValueListSelection"] = &RemoteManagerProcessor::process_SetValueListSelection;
+    processMap_["RefreshValue"] = &RemoteManagerProcessor::process_RefreshValue;
     processMap_["PressButton"] = &RemoteManagerProcessor::process_PressButton;
     processMap_["ReleaseButton"] = &RemoteManagerProcessor::process_ReleaseButton;
     processMap_["GetNumSwitchPoints"] = &RemoteManagerProcessor::process_GetNumSwitchPoints;
@@ -16658,6 +16776,17 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->SetValueListSelection(_id, _selectedItem);
       } else {
         ifaces_[i]->SetValueListSelection(_id, _selectedItem);
+      }
+    }
+  }
+
+  bool RefreshValue(const RemoteValueID& _id) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->RefreshValue(_id);
+      } else {
+        ifaces_[i]->RefreshValue(_id);
       }
     }
   }

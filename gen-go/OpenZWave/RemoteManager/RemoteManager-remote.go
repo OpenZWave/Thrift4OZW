@@ -20,40 +20,40 @@ func Usage() {
   flag.PrintDefaults()
   fmt.Fprint(os.Stderr, "Functions:\n")
   fmt.Fprint(os.Stderr, "  WriteConfig(_homeId int32) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetControllerNodeId(_homeId int32) (retval1727 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsPrimaryController(_homeId int32) (retval1728 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsStaticUpdateController(_homeId int32) (retval1729 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsBridgeController(_homeId int32) (retval1730 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetLibraryVersion(_homeId int32) (retval1731 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetLibraryTypeName(_homeId int32) (retval1732 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetSendQueueCount(_homeId int32) (retval1733 int32, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetPollInterval() (retval1734 int32, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetControllerNodeId(_homeId int32) (retval1738 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsPrimaryController(_homeId int32) (retval1739 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsStaticUpdateController(_homeId int32) (retval1740 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsBridgeController(_homeId int32) (retval1741 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetLibraryVersion(_homeId int32) (retval1742 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetLibraryTypeName(_homeId int32) (retval1743 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetSendQueueCount(_homeId int32) (retval1744 int32, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetPollInterval() (retval1745 int32, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetPollInterval(_seconds int32) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  EnablePoll(_valueId *RemoteValueID) (retval1736 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  DisablePoll(_valueId *RemoteValueID) (retval1737 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  isPolled(_valueId *RemoteValueID) (retval1738 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  RefreshNodeInfo(_homeId int32, _nodeId byte) (retval1739 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  RequestNodeState(_homeId int32, _nodeId byte) (retval1740 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  RequestNodeDynamic(_homeId int32, _nodeId byte) (retval1741 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsNodeListeningDevice(_homeId int32, _nodeId byte) (retval1742 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsNodeFrequentListeningDevice(_homeId int32, _nodeId byte) (retval1743 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsNodeBeamingDevice(_homeId int32, _nodeId byte) (retval1744 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsNodeRoutingDevice(_homeId int32, _nodeId byte) (retval1745 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsNodeSecurityDevice(_homeId int32, _nodeId byte) (retval1746 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeMaxBaudRate(_homeId int32, _nodeId byte) (retval1747 int32, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeVersion(_homeId int32, _nodeId byte) (retval1748 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeBasic(_homeId int32, _nodeId byte) (retval1749 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeGeneric(_homeId int32, _nodeId byte) (retval1750 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeSpecific(_homeId int32, _nodeId byte) (retval1751 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeType(_homeId int32, _nodeId byte) (retval1752 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeNeighbors(_homeId int32, _nodeId byte) (retval1753 *UInt32ListByte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeManufacturerName(_homeId int32, _nodeId byte) (retval1754 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeProductName(_homeId int32, _nodeId byte) (retval1755 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeName(_homeId int32, _nodeId byte) (retval1756 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeLocation(_homeId int32, _nodeId byte) (retval1757 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeManufacturerId(_homeId int32, _nodeId byte) (retval1758 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeProductType(_homeId int32, _nodeId byte) (retval1759 string, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeProductId(_homeId int32, _nodeId byte) (retval1760 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  EnablePoll(_valueId *RemoteValueID) (retval1747 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  DisablePoll(_valueId *RemoteValueID) (retval1748 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  isPolled(_valueId *RemoteValueID) (retval1749 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RefreshNodeInfo(_homeId int32, _nodeId byte) (retval1750 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RequestNodeState(_homeId int32, _nodeId byte) (retval1751 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RequestNodeDynamic(_homeId int32, _nodeId byte) (retval1752 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsNodeListeningDevice(_homeId int32, _nodeId byte) (retval1753 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsNodeFrequentListeningDevice(_homeId int32, _nodeId byte) (retval1754 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsNodeBeamingDevice(_homeId int32, _nodeId byte) (retval1755 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsNodeRoutingDevice(_homeId int32, _nodeId byte) (retval1756 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsNodeSecurityDevice(_homeId int32, _nodeId byte) (retval1757 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeMaxBaudRate(_homeId int32, _nodeId byte) (retval1758 int32, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeVersion(_homeId int32, _nodeId byte) (retval1759 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeBasic(_homeId int32, _nodeId byte) (retval1760 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeGeneric(_homeId int32, _nodeId byte) (retval1761 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeSpecific(_homeId int32, _nodeId byte) (retval1762 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeType(_homeId int32, _nodeId byte) (retval1763 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeNeighbors(_homeId int32, _nodeId byte) (retval1764 *UInt32ListByte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeManufacturerName(_homeId int32, _nodeId byte) (retval1765 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeProductName(_homeId int32, _nodeId byte) (retval1766 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeName(_homeId int32, _nodeId byte) (retval1767 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeLocation(_homeId int32, _nodeId byte) (retval1768 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeManufacturerId(_homeId int32, _nodeId byte) (retval1769 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeProductType(_homeId int32, _nodeId byte) (retval1770 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeProductId(_homeId int32, _nodeId byte) (retval1771 string, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetNodeManufacturerName(_homeId int32, _nodeId byte, _manufacturerName string) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetNodeProductName(_homeId int32, _nodeId byte, _productName string) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetNodeName(_homeId int32, _nodeId byte, _nodeName string) (err os.Error)\n")
@@ -61,93 +61,94 @@ func Usage() {
   fmt.Fprint(os.Stderr, "  SetNodeOn(_homeId int32, _nodeId byte) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetNodeOff(_homeId int32, _nodeId byte) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetNodeLevel(_homeId int32, _nodeId byte, _level byte) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsNodeInfoReceived(_homeId int32, _nodeId byte) (retval1768 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNodeClassInformation(_homeId int32, _nodeId byte, _commandClassId byte) (retval1769 *BoolGetNodeClassInformation, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueLabel(_id *RemoteValueID) (retval1770 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsNodeInfoReceived(_homeId int32, _nodeId byte) (retval1779 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNodeClassInformation(_homeId int32, _nodeId byte, _commandClassId byte) (retval1780 *BoolGetNodeClassInformation, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueLabel(_id *RemoteValueID) (retval1781 string, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetValueLabel(_id *RemoteValueID, _value string) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueUnits(_id *RemoteValueID) (retval1772 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueUnits(_id *RemoteValueID) (retval1783 string, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetValueUnits(_id *RemoteValueID, _value string) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueHelp(_id *RemoteValueID) (retval1774 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueHelp(_id *RemoteValueID) (retval1785 string, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetValueHelp(_id *RemoteValueID, _value string) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueMin(_id *RemoteValueID) (retval1776 int32, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueMax(_id *RemoteValueID) (retval1777 int32, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsValueReadOnly(_id *RemoteValueID) (retval1778 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsValueWriteOnly(_id *RemoteValueID) (retval1779 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  IsValueSet(_id *RemoteValueID) (retval1780 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueAsBool(_id *RemoteValueID) (retval1781 *BoolBool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueAsByte(_id *RemoteValueID) (retval1782 *BoolUInt8, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueAsFloat(_id *RemoteValueID) (retval1783 *BoolFloat, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueAsInt(_id *RemoteValueID) (retval1784 *BoolInt, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueAsShort(_id *RemoteValueID) (retval1785 *BoolInt16, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueAsString(_id *RemoteValueID) (retval1786 *BoolString, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueListSelection_String(_id *RemoteValueID) (retval1787 *BoolString, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueListSelection_Int32(_id *RemoteValueID) (retval1788 *BoolInt, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueListItems(_id *RemoteValueID) (retval1789 *BoolListString, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetValueFloatPrecision(_id *RemoteValueID) (retval1790 *BoolUInt8, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValue_Bool(_id *RemoteValueID, _value bool) (retval1791 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValue_UInt8(_id *RemoteValueID, _value byte) (retval1792 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValue_Float(_id *RemoteValueID, _value float64) (retval1793 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValue_Int32(_id *RemoteValueID, _value int32) (retval1794 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValue_Int16(_id *RemoteValueID, _value int16) (retval1795 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValue_String(_id *RemoteValueID, _value string) (retval1796 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetValueListSelection(_id *RemoteValueID, _selectedItem string) (retval1797 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  PressButton(_id *RemoteValueID) (retval1798 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  ReleaseButton(_id *RemoteValueID) (retval1799 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNumSwitchPoints(_id *RemoteValueID) (retval1800 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte, _setback byte) (retval1801 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  RemoveSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte) (retval1802 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueMin(_id *RemoteValueID) (retval1787 int32, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueMax(_id *RemoteValueID) (retval1788 int32, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsValueReadOnly(_id *RemoteValueID) (retval1789 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsValueWriteOnly(_id *RemoteValueID) (retval1790 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  IsValueSet(_id *RemoteValueID) (retval1791 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueAsBool(_id *RemoteValueID) (retval1792 *BoolBool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueAsByte(_id *RemoteValueID) (retval1793 *BoolUInt8, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueAsFloat(_id *RemoteValueID) (retval1794 *BoolFloat, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueAsInt(_id *RemoteValueID) (retval1795 *BoolInt, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueAsShort(_id *RemoteValueID) (retval1796 *BoolInt16, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueAsString(_id *RemoteValueID) (retval1797 *BoolString, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueListSelection_String(_id *RemoteValueID) (retval1798 *BoolString, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueListSelection_Int32(_id *RemoteValueID) (retval1799 *BoolInt, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueListItems(_id *RemoteValueID) (retval1800 *BoolListString, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetValueFloatPrecision(_id *RemoteValueID) (retval1801 *BoolUInt8, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValue_Bool(_id *RemoteValueID, _value bool) (retval1802 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValue_UInt8(_id *RemoteValueID, _value byte) (retval1803 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValue_Float(_id *RemoteValueID, _value float64) (retval1804 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValue_Int32(_id *RemoteValueID, _value int32) (retval1805 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValue_Int16(_id *RemoteValueID, _value int16) (retval1806 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValue_String(_id *RemoteValueID, _value string) (retval1807 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetValueListSelection(_id *RemoteValueID, _selectedItem string) (retval1808 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RefreshValue(_id *RemoteValueID) (retval1809 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  PressButton(_id *RemoteValueID) (retval1810 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  ReleaseButton(_id *RemoteValueID) (retval1811 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNumSwitchPoints(_id *RemoteValueID) (retval1812 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte, _setback byte) (retval1813 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RemoveSwitchPoint(_id *RemoteValueID, _hours byte, _minutes byte) (retval1814 bool, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  ClearSwitchPoints(_id *RemoteValueID) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetSwitchPoint(_id *RemoteValueID, _idx byte) (retval1804 *GetSwitchPointReturnStruct, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetSwitchPoint(_id *RemoteValueID, _idx byte) (retval1816 *GetSwitchPointReturnStruct, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SwitchAllOn(_homeId int32) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SwitchAllOff(_homeId int32) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetConfigParam(_homeId int32, _nodeId byte, _param byte, _value int32, _size byte) (retval1807 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetConfigParam(_homeId int32, _nodeId byte, _param byte, _value int32, _size byte) (retval1819 bool, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  RequestConfigParam(_homeId int32, _nodeId byte, _param byte) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  RequestAllConfigParams(_homeId int32, _nodeId byte) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNumGroups(_homeId int32, _nodeId byte) (retval1810 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval1811 *GetAssociationsReturnStruct, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetMaxAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval1812 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetGroupLabel(_homeId int32, _nodeId byte, _groupIdx byte) (retval1813 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNumGroups(_homeId int32, _nodeId byte) (retval1822 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval1823 *GetAssociationsReturnStruct, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetMaxAssociations(_homeId int32, _nodeId byte, _groupIdx byte) (retval1824 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetGroupLabel(_homeId int32, _nodeId byte, _groupIdx byte) (retval1825 string, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  AddAssociation(_homeId int32, _nodeId byte, _groupIdx byte, _targetNodeId byte) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  RemoveAssociation(_homeId int32, _nodeId byte, _groupIdx byte, _targetNodeId byte) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  ResetController(_homeId int32) (err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SoftReset(_homeId int32) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  BeginControllerCommand(_homeId int32, _command DriverControllerCommand, _highPower bool, _nodeId byte, _arg byte) (retval1818 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  CancelControllerCommand(_homeId int32) (retval1819 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetNumScenes() (retval1820 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetAllScenes() (retval1821 *GetAllScenesReturnStruct, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  CreateScene() (retval1822 byte, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  RemoveScene(_sceneId byte) (retval1823 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValue_Bool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval1824 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValue_Uint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval1825 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValue_Float(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval1826 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValue_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1827 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValue_Int16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval1828 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValue_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1829 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValueListSelection_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1830 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  AddSceneValueListSelection_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1831 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  RemoveSceneValue(_sceneId byte, _valueId *RemoteValueID) (retval1832 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValues(_sceneId byte) (retval1833 *SceneGetValuesReturnStruct, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueAsBool(_sceneId byte, _valueId *RemoteValueID) (retval1834 *BoolBool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueAsByte(_sceneId byte, _valueId *RemoteValueID) (retval1835 *BoolUInt8, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueAsFloat(_sceneId byte, _valueId *RemoteValueID) (retval1836 *BoolFloat, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueAsInt(_sceneId byte, _valueId *RemoteValueID) (retval1837 *BoolInt, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueAsShort(_sceneId byte, _valueId *RemoteValueID) (retval1838 *BoolInt16, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueAsString(_sceneId byte, _valueId *RemoteValueID) (retval1839 *BoolString, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueListSelection_String(_sceneId byte, _valueId *RemoteValueID) (retval1840 *BoolString, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneGetValueListSelection_Int32(_sceneId byte, _valueId *RemoteValueID) (retval1841 *BoolInt, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValue_Bool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval1842 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValue_Uint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval1843 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValue_Float(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval1844 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValue_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1845 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValue_Int16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval1846 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValue_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1847 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValueListSelection_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1848 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SetSceneValueListSelection_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1849 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetSceneLabel(_sceneId byte) (retval1850 string, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  BeginControllerCommand(_homeId int32, _command DriverControllerCommand, _highPower bool, _nodeId byte, _arg byte) (retval1830 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  CancelControllerCommand(_homeId int32) (retval1831 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetNumScenes() (retval1832 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetAllScenes() (retval1833 *GetAllScenesReturnStruct, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  CreateScene() (retval1834 byte, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RemoveScene(_sceneId byte) (retval1835 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValue_Bool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval1836 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValue_Uint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval1837 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValue_Float(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval1838 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValue_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1839 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValue_Int16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval1840 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValue_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1841 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValueListSelection_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1842 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  AddSceneValueListSelection_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1843 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  RemoveSceneValue(_sceneId byte, _valueId *RemoteValueID) (retval1844 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValues(_sceneId byte) (retval1845 *SceneGetValuesReturnStruct, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueAsBool(_sceneId byte, _valueId *RemoteValueID) (retval1846 *BoolBool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueAsByte(_sceneId byte, _valueId *RemoteValueID) (retval1847 *BoolUInt8, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueAsFloat(_sceneId byte, _valueId *RemoteValueID) (retval1848 *BoolFloat, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueAsInt(_sceneId byte, _valueId *RemoteValueID) (retval1849 *BoolInt, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueAsShort(_sceneId byte, _valueId *RemoteValueID) (retval1850 *BoolInt16, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueAsString(_sceneId byte, _valueId *RemoteValueID) (retval1851 *BoolString, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueListSelection_String(_sceneId byte, _valueId *RemoteValueID) (retval1852 *BoolString, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneGetValueListSelection_Int32(_sceneId byte, _valueId *RemoteValueID) (retval1853 *BoolInt, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValue_Bool(_sceneId byte, _valueId *RemoteValueID, _value bool) (retval1854 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValue_Uint8(_sceneId byte, _valueId *RemoteValueID, _value byte) (retval1855 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValue_Float(_sceneId byte, _valueId *RemoteValueID, _value float64) (retval1856 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValue_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1857 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValue_Int16(_sceneId byte, _valueId *RemoteValueID, _value int16) (retval1858 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValue_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1859 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValueListSelection_String(_sceneId byte, _valueId *RemoteValueID, _value string) (retval1860 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SetSceneValueListSelection_Int32(_sceneId byte, _valueId *RemoteValueID, _value int32) (retval1861 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetSceneLabel(_sceneId byte) (retval1862 string, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SetSceneLabel(_sceneId byte, _value string) (err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  SceneExists(_sceneId byte) (retval1852 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  ActivateScene(_sceneId byte) (retval1853 bool, err os.Error)\n")
-  fmt.Fprint(os.Stderr, "  GetDriverStatistics(_homeId int32) (retval1854 *GetDriverStatisticsReturnStruct, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  SceneExists(_sceneId byte) (retval1864 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  ActivateScene(_sceneId byte) (retval1865 bool, err os.Error)\n")
+  fmt.Fprint(os.Stderr, "  GetDriverStatistics(_homeId int32) (retval1866 *GetDriverStatisticsReturnStruct, err os.Error)\n")
   fmt.Fprint(os.Stderr, "  SendAllValues() (err os.Error)\n")
   fmt.Fprint(os.Stderr, "\n")
   os.Exit(0)
@@ -244,8 +245,8 @@ func main() {
       fmt.Fprint(os.Stderr, "WriteConfig requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1856 := (strconv.Atoi(flag.Arg(1)))
-    if err1856 != nil {
+    tmp0, err1868 := (strconv.Atoi(flag.Arg(1)))
+    if err1868 != nil {
       Usage()
       return
     }
@@ -259,8 +260,8 @@ func main() {
       fmt.Fprint(os.Stderr, "GetControllerNodeId requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1857 := (strconv.Atoi(flag.Arg(1)))
-    if err1857 != nil {
+    tmp0, err1869 := (strconv.Atoi(flag.Arg(1)))
+    if err1869 != nil {
       Usage()
       return
     }
@@ -274,8 +275,8 @@ func main() {
       fmt.Fprint(os.Stderr, "IsPrimaryController requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1858 := (strconv.Atoi(flag.Arg(1)))
-    if err1858 != nil {
+    tmp0, err1870 := (strconv.Atoi(flag.Arg(1)))
+    if err1870 != nil {
       Usage()
       return
     }
@@ -289,8 +290,8 @@ func main() {
       fmt.Fprint(os.Stderr, "IsStaticUpdateController requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1859 := (strconv.Atoi(flag.Arg(1)))
-    if err1859 != nil {
+    tmp0, err1871 := (strconv.Atoi(flag.Arg(1)))
+    if err1871 != nil {
       Usage()
       return
     }
@@ -304,8 +305,8 @@ func main() {
       fmt.Fprint(os.Stderr, "IsBridgeController requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1860 := (strconv.Atoi(flag.Arg(1)))
-    if err1860 != nil {
+    tmp0, err1872 := (strconv.Atoi(flag.Arg(1)))
+    if err1872 != nil {
       Usage()
       return
     }
@@ -319,8 +320,8 @@ func main() {
       fmt.Fprint(os.Stderr, "GetLibraryVersion requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1861 := (strconv.Atoi(flag.Arg(1)))
-    if err1861 != nil {
+    tmp0, err1873 := (strconv.Atoi(flag.Arg(1)))
+    if err1873 != nil {
       Usage()
       return
     }
@@ -334,8 +335,8 @@ func main() {
       fmt.Fprint(os.Stderr, "GetLibraryTypeName requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1862 := (strconv.Atoi(flag.Arg(1)))
-    if err1862 != nil {
+    tmp0, err1874 := (strconv.Atoi(flag.Arg(1)))
+    if err1874 != nil {
       Usage()
       return
     }
@@ -349,8 +350,8 @@ func main() {
       fmt.Fprint(os.Stderr, "GetSendQueueCount requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1863 := (strconv.Atoi(flag.Arg(1)))
-    if err1863 != nil {
+    tmp0, err1875 := (strconv.Atoi(flag.Arg(1)))
+    if err1875 != nil {
       Usage()
       return
     }
@@ -372,8 +373,8 @@ func main() {
       fmt.Fprint(os.Stderr, "SetPollInterval requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err1864 := (strconv.Atoi(flag.Arg(1)))
-    if err1864 != nil {
+    tmp0, err1876 := (strconv.Atoi(flag.Arg(1)))
+    if err1876 != nil {
       Usage()
       return
     }
@@ -385,56 +386,6 @@ func main() {
   case "EnablePoll":
     if flag.NArg() - 1 != 1 {
       fmt.Fprint(os.Stderr, "EnablePoll requires 1 args\n")
-      flag.Usage()
-    }
-    arg1865 := flag.Arg(1)
-    mbTrans1866 := thrift.NewTMemoryBufferLen(len(arg1865))
-    defer mbTrans1866.Close()
-    _, err1867 := mbTrans1866.WriteString(arg1865)
-    if err1867 != nil {
-      Usage()
-      return
-    }
-    factory1868 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1869 := factory1868.GetProtocol(mbTrans1866)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err1870 := argvalue0.Read(jsProt1869)
-    if err1870 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.EnablePoll(value0))
-    fmt.Print("\n")
-    break
-  case "DisablePoll":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "DisablePoll requires 1 args\n")
-      flag.Usage()
-    }
-    arg1871 := flag.Arg(1)
-    mbTrans1872 := thrift.NewTMemoryBufferLen(len(arg1871))
-    defer mbTrans1872.Close()
-    _, err1873 := mbTrans1872.WriteString(arg1871)
-    if err1873 != nil {
-      Usage()
-      return
-    }
-    factory1874 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1875 := factory1874.GetProtocol(mbTrans1872)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err1876 := argvalue0.Read(jsProt1875)
-    if err1876 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.DisablePoll(value0))
-    fmt.Print("\n")
-    break
-  case "isPolled":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "IsPolled requires 1 args\n")
       flag.Usage()
     }
     arg1877 := flag.Arg(1)
@@ -454,144 +405,62 @@ func main() {
       return
     }
     value0 := argvalue0
+    fmt.Print(client.EnablePoll(value0))
+    fmt.Print("\n")
+    break
+  case "DisablePoll":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "DisablePoll requires 1 args\n")
+      flag.Usage()
+    }
+    arg1883 := flag.Arg(1)
+    mbTrans1884 := thrift.NewTMemoryBufferLen(len(arg1883))
+    defer mbTrans1884.Close()
+    _, err1885 := mbTrans1884.WriteString(arg1883)
+    if err1885 != nil {
+      Usage()
+      return
+    }
+    factory1886 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1887 := factory1886.GetProtocol(mbTrans1884)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err1888 := argvalue0.Read(jsProt1887)
+    if err1888 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    fmt.Print(client.DisablePoll(value0))
+    fmt.Print("\n")
+    break
+  case "isPolled":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "IsPolled requires 1 args\n")
+      flag.Usage()
+    }
+    arg1889 := flag.Arg(1)
+    mbTrans1890 := thrift.NewTMemoryBufferLen(len(arg1889))
+    defer mbTrans1890.Close()
+    _, err1891 := mbTrans1890.WriteString(arg1889)
+    if err1891 != nil {
+      Usage()
+      return
+    }
+    factory1892 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1893 := factory1892.GetProtocol(mbTrans1890)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err1894 := argvalue0.Read(jsProt1893)
+    if err1894 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
     fmt.Print(client.IsPolled(value0))
     fmt.Print("\n")
     break
   case "RefreshNodeInfo":
     if flag.NArg() - 1 != 2 {
       fmt.Fprint(os.Stderr, "RefreshNodeInfo requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1883 := (strconv.Atoi(flag.Arg(1)))
-    if err1883 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1884 := (strconv.Atoi(flag.Arg(2)))
-    if err1884 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.RefreshNodeInfo(value0, value1))
-    fmt.Print("\n")
-    break
-  case "RequestNodeState":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "RequestNodeState requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1885 := (strconv.Atoi(flag.Arg(1)))
-    if err1885 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1886 := (strconv.Atoi(flag.Arg(2)))
-    if err1886 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.RequestNodeState(value0, value1))
-    fmt.Print("\n")
-    break
-  case "RequestNodeDynamic":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "RequestNodeDynamic requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1887 := (strconv.Atoi(flag.Arg(1)))
-    if err1887 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1888 := (strconv.Atoi(flag.Arg(2)))
-    if err1888 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.RequestNodeDynamic(value0, value1))
-    fmt.Print("\n")
-    break
-  case "IsNodeListeningDevice":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "IsNodeListeningDevice requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1889 := (strconv.Atoi(flag.Arg(1)))
-    if err1889 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1890 := (strconv.Atoi(flag.Arg(2)))
-    if err1890 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.IsNodeListeningDevice(value0, value1))
-    fmt.Print("\n")
-    break
-  case "IsNodeFrequentListeningDevice":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "IsNodeFrequentListeningDevice requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1891 := (strconv.Atoi(flag.Arg(1)))
-    if err1891 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1892 := (strconv.Atoi(flag.Arg(2)))
-    if err1892 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.IsNodeFrequentListeningDevice(value0, value1))
-    fmt.Print("\n")
-    break
-  case "IsNodeBeamingDevice":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "IsNodeBeamingDevice requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1893 := (strconv.Atoi(flag.Arg(1)))
-    if err1893 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1894 := (strconv.Atoi(flag.Arg(2)))
-    if err1894 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.IsNodeBeamingDevice(value0, value1))
-    fmt.Print("\n")
-    break
-  case "IsNodeRoutingDevice":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "IsNodeRoutingDevice requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1895 := (strconv.Atoi(flag.Arg(1)))
@@ -608,12 +477,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.IsNodeRoutingDevice(value0, value1))
+    fmt.Print(client.RefreshNodeInfo(value0, value1))
     fmt.Print("\n")
     break
-  case "IsNodeSecurityDevice":
+  case "RequestNodeState":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "IsNodeSecurityDevice requires 2 args\n")
+      fmt.Fprint(os.Stderr, "RequestNodeState requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1897 := (strconv.Atoi(flag.Arg(1)))
@@ -630,12 +499,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.IsNodeSecurityDevice(value0, value1))
+    fmt.Print(client.RequestNodeState(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeMaxBaudRate":
+  case "RequestNodeDynamic":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeMaxBaudRate requires 2 args\n")
+      fmt.Fprint(os.Stderr, "RequestNodeDynamic requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1899 := (strconv.Atoi(flag.Arg(1)))
@@ -652,12 +521,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeMaxBaudRate(value0, value1))
+    fmt.Print(client.RequestNodeDynamic(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeVersion":
+  case "IsNodeListeningDevice":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeVersion requires 2 args\n")
+      fmt.Fprint(os.Stderr, "IsNodeListeningDevice requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1901 := (strconv.Atoi(flag.Arg(1)))
@@ -674,12 +543,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeVersion(value0, value1))
+    fmt.Print(client.IsNodeListeningDevice(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeBasic":
+  case "IsNodeFrequentListeningDevice":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeBasic requires 2 args\n")
+      fmt.Fprint(os.Stderr, "IsNodeFrequentListeningDevice requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1903 := (strconv.Atoi(flag.Arg(1)))
@@ -696,12 +565,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeBasic(value0, value1))
+    fmt.Print(client.IsNodeFrequentListeningDevice(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeGeneric":
+  case "IsNodeBeamingDevice":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeGeneric requires 2 args\n")
+      fmt.Fprint(os.Stderr, "IsNodeBeamingDevice requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1905 := (strconv.Atoi(flag.Arg(1)))
@@ -718,12 +587,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeGeneric(value0, value1))
+    fmt.Print(client.IsNodeBeamingDevice(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeSpecific":
+  case "IsNodeRoutingDevice":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeSpecific requires 2 args\n")
+      fmt.Fprint(os.Stderr, "IsNodeRoutingDevice requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1907 := (strconv.Atoi(flag.Arg(1)))
@@ -740,12 +609,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeSpecific(value0, value1))
+    fmt.Print(client.IsNodeRoutingDevice(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeType":
+  case "IsNodeSecurityDevice":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeType requires 2 args\n")
+      fmt.Fprint(os.Stderr, "IsNodeSecurityDevice requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1909 := (strconv.Atoi(flag.Arg(1)))
@@ -762,12 +631,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeType(value0, value1))
+    fmt.Print(client.IsNodeSecurityDevice(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeNeighbors":
+  case "GetNodeMaxBaudRate":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeNeighbors requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeMaxBaudRate requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1911 := (strconv.Atoi(flag.Arg(1)))
@@ -784,12 +653,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeNeighbors(value0, value1))
+    fmt.Print(client.GetNodeMaxBaudRate(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeManufacturerName":
+  case "GetNodeVersion":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeManufacturerName requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeVersion requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1913 := (strconv.Atoi(flag.Arg(1)))
@@ -806,12 +675,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeManufacturerName(value0, value1))
+    fmt.Print(client.GetNodeVersion(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeProductName":
+  case "GetNodeBasic":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeProductName requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeBasic requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1915 := (strconv.Atoi(flag.Arg(1)))
@@ -828,12 +697,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeProductName(value0, value1))
+    fmt.Print(client.GetNodeBasic(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeName":
+  case "GetNodeGeneric":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeName requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeGeneric requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1917 := (strconv.Atoi(flag.Arg(1)))
@@ -850,12 +719,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeName(value0, value1))
+    fmt.Print(client.GetNodeGeneric(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeLocation":
+  case "GetNodeSpecific":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeLocation requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeSpecific requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1919 := (strconv.Atoi(flag.Arg(1)))
@@ -872,12 +741,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeLocation(value0, value1))
+    fmt.Print(client.GetNodeSpecific(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeManufacturerId":
+  case "GetNodeType":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeManufacturerId requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeType requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1921 := (strconv.Atoi(flag.Arg(1)))
@@ -894,12 +763,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeManufacturerId(value0, value1))
+    fmt.Print(client.GetNodeType(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeProductType":
+  case "GetNodeNeighbors":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeProductType requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeNeighbors requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1923 := (strconv.Atoi(flag.Arg(1)))
@@ -916,12 +785,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeProductType(value0, value1))
+    fmt.Print(client.GetNodeNeighbors(value0, value1))
     fmt.Print("\n")
     break
-  case "GetNodeProductId":
+  case "GetNodeManufacturerName":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNodeProductId requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeManufacturerName requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1925 := (strconv.Atoi(flag.Arg(1)))
@@ -938,12 +807,12 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.GetNodeProductId(value0, value1))
+    fmt.Print(client.GetNodeManufacturerName(value0, value1))
     fmt.Print("\n")
     break
-  case "SetNodeManufacturerName":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "SetNodeManufacturerName requires 3 args\n")
+  case "GetNodeProductName":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "GetNodeProductName requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1927 := (strconv.Atoi(flag.Arg(1)))
@@ -960,38 +829,56 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    argvalue2 := flag.Arg(3)
-    value2 := argvalue2
-    fmt.Print(client.SetNodeManufacturerName(value0, value1, value2))
+    fmt.Print(client.GetNodeProductName(value0, value1))
     fmt.Print("\n")
     break
-  case "SetNodeProductName":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "SetNodeProductName requires 3 args\n")
+  case "GetNodeName":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "GetNodeName requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err1930 := (strconv.Atoi(flag.Arg(1)))
-    if err1930 != nil {
+    tmp0, err1929 := (strconv.Atoi(flag.Arg(1)))
+    if err1929 != nil {
       Usage()
       return
     }
     argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err1931 := (strconv.Atoi(flag.Arg(2)))
-    if err1931 != nil {
+    tmp1, err1930 := (strconv.Atoi(flag.Arg(2)))
+    if err1930 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    argvalue2 := flag.Arg(3)
-    value2 := argvalue2
-    fmt.Print(client.SetNodeProductName(value0, value1, value2))
+    fmt.Print(client.GetNodeName(value0, value1))
     fmt.Print("\n")
     break
-  case "SetNodeName":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "SetNodeName requires 3 args\n")
+  case "GetNodeLocation":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "GetNodeLocation requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err1931 := (strconv.Atoi(flag.Arg(1)))
+    if err1931 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1932 := (strconv.Atoi(flag.Arg(2)))
+    if err1932 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.GetNodeLocation(value0, value1))
+    fmt.Print("\n")
+    break
+  case "GetNodeManufacturerId":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "GetNodeManufacturerId requires 2 args\n")
       flag.Usage()
     }
     tmp0, err1933 := (strconv.Atoi(flag.Arg(1)))
@@ -1008,38 +895,56 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    argvalue2 := flag.Arg(3)
-    value2 := argvalue2
-    fmt.Print(client.SetNodeName(value0, value1, value2))
+    fmt.Print(client.GetNodeManufacturerId(value0, value1))
     fmt.Print("\n")
     break
-  case "SetNodeLocation":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "SetNodeLocation requires 3 args\n")
+  case "GetNodeProductType":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "GetNodeProductType requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err1936 := (strconv.Atoi(flag.Arg(1)))
-    if err1936 != nil {
+    tmp0, err1935 := (strconv.Atoi(flag.Arg(1)))
+    if err1935 != nil {
       Usage()
       return
     }
     argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err1937 := (strconv.Atoi(flag.Arg(2)))
-    if err1937 != nil {
+    tmp1, err1936 := (strconv.Atoi(flag.Arg(2)))
+    if err1936 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    argvalue2 := flag.Arg(3)
-    value2 := argvalue2
-    fmt.Print(client.SetNodeLocation(value0, value1, value2))
+    fmt.Print(client.GetNodeProductType(value0, value1))
     fmt.Print("\n")
     break
-  case "SetNodeOn":
+  case "GetNodeProductId":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "SetNodeOn requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetNodeProductId requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err1937 := (strconv.Atoi(flag.Arg(1)))
+    if err1937 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1938 := (strconv.Atoi(flag.Arg(2)))
+    if err1938 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.GetNodeProductId(value0, value1))
+    fmt.Print("\n")
+    break
+  case "SetNodeManufacturerName":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "SetNodeManufacturerName requires 3 args\n")
       flag.Usage()
     }
     tmp0, err1939 := (strconv.Atoi(flag.Arg(1)))
@@ -1056,85 +961,62 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.SetNodeOn(value0, value1))
+    argvalue2 := flag.Arg(3)
+    value2 := argvalue2
+    fmt.Print(client.SetNodeManufacturerName(value0, value1, value2))
     fmt.Print("\n")
     break
-  case "SetNodeOff":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "SetNodeOff requires 2 args\n")
+  case "SetNodeProductName":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "SetNodeProductName requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err1941 := (strconv.Atoi(flag.Arg(1)))
-    if err1941 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1942 := (strconv.Atoi(flag.Arg(2)))
+    tmp0, err1942 := (strconv.Atoi(flag.Arg(1)))
     if err1942 != nil {
       Usage()
       return
     }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.SetNodeOff(value0, value1))
-    fmt.Print("\n")
-    break
-  case "SetNodeLevel":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "SetNodeLevel requires 3 args\n")
-      flag.Usage()
-    }
-    tmp0, err1943 := (strconv.Atoi(flag.Arg(1)))
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1943 := (strconv.Atoi(flag.Arg(2)))
     if err1943 != nil {
       Usage()
       return
     }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err1944 := (strconv.Atoi(flag.Arg(2)))
-    if err1944 != nil {
-      Usage()
-      return
-    }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    tmp2, err1945 := (strconv.Atoi(flag.Arg(3)))
+    argvalue2 := flag.Arg(3)
+    value2 := argvalue2
+    fmt.Print(client.SetNodeProductName(value0, value1, value2))
+    fmt.Print("\n")
+    break
+  case "SetNodeName":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "SetNodeName requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err1945 := (strconv.Atoi(flag.Arg(1)))
     if err1945 != nil {
       Usage()
       return
     }
-    argvalue2 := byte(tmp2)
-    value2 := argvalue2
-    fmt.Print(client.SetNodeLevel(value0, value1, value2))
-    fmt.Print("\n")
-    break
-  case "IsNodeInfoReceived":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "IsNodeInfoReceived requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err1946 := (strconv.Atoi(flag.Arg(1)))
-    if err1946 != nil {
-      Usage()
-      return
-    }
     argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err1947 := (strconv.Atoi(flag.Arg(2)))
-    if err1947 != nil {
+    tmp1, err1946 := (strconv.Atoi(flag.Arg(2)))
+    if err1946 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    fmt.Print(client.IsNodeInfoReceived(value0, value1))
+    argvalue2 := flag.Arg(3)
+    value2 := argvalue2
+    fmt.Print(client.SetNodeName(value0, value1, value2))
     fmt.Print("\n")
     break
-  case "GetNodeClassInformation":
+  case "SetNodeLocation":
     if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "GetNodeClassInformation requires 3 args\n")
+      fmt.Fprint(os.Stderr, "SetNodeLocation requires 3 args\n")
       flag.Usage()
     }
     tmp0, err1948 := (strconv.Atoi(flag.Arg(1)))
@@ -1151,8 +1033,127 @@ func main() {
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    tmp2, err1950 := (strconv.Atoi(flag.Arg(3)))
-    if err1950 != nil {
+    argvalue2 := flag.Arg(3)
+    value2 := argvalue2
+    fmt.Print(client.SetNodeLocation(value0, value1, value2))
+    fmt.Print("\n")
+    break
+  case "SetNodeOn":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "SetNodeOn requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err1951 := (strconv.Atoi(flag.Arg(1)))
+    if err1951 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1952 := (strconv.Atoi(flag.Arg(2)))
+    if err1952 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.SetNodeOn(value0, value1))
+    fmt.Print("\n")
+    break
+  case "SetNodeOff":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "SetNodeOff requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err1953 := (strconv.Atoi(flag.Arg(1)))
+    if err1953 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1954 := (strconv.Atoi(flag.Arg(2)))
+    if err1954 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.SetNodeOff(value0, value1))
+    fmt.Print("\n")
+    break
+  case "SetNodeLevel":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "SetNodeLevel requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err1955 := (strconv.Atoi(flag.Arg(1)))
+    if err1955 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1956 := (strconv.Atoi(flag.Arg(2)))
+    if err1956 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    tmp2, err1957 := (strconv.Atoi(flag.Arg(3)))
+    if err1957 != nil {
+      Usage()
+      return
+    }
+    argvalue2 := byte(tmp2)
+    value2 := argvalue2
+    fmt.Print(client.SetNodeLevel(value0, value1, value2))
+    fmt.Print("\n")
+    break
+  case "IsNodeInfoReceived":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "IsNodeInfoReceived requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err1958 := (strconv.Atoi(flag.Arg(1)))
+    if err1958 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1959 := (strconv.Atoi(flag.Arg(2)))
+    if err1959 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.IsNodeInfoReceived(value0, value1))
+    fmt.Print("\n")
+    break
+  case "GetNodeClassInformation":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "GetNodeClassInformation requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err1960 := (strconv.Atoi(flag.Arg(1)))
+    if err1960 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err1961 := (strconv.Atoi(flag.Arg(2)))
+    if err1961 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    tmp2, err1962 := (strconv.Atoi(flag.Arg(3)))
+    if err1962 != nil {
       Usage()
       return
     }
@@ -1166,19 +1167,19 @@ func main() {
       fmt.Fprint(os.Stderr, "GetValueLabel requires 1 args\n")
       flag.Usage()
     }
-    arg1951 := flag.Arg(1)
-    mbTrans1952 := thrift.NewTMemoryBufferLen(len(arg1951))
-    defer mbTrans1952.Close()
-    _, err1953 := mbTrans1952.WriteString(arg1951)
-    if err1953 != nil {
+    arg1963 := flag.Arg(1)
+    mbTrans1964 := thrift.NewTMemoryBufferLen(len(arg1963))
+    defer mbTrans1964.Close()
+    _, err1965 := mbTrans1964.WriteString(arg1963)
+    if err1965 != nil {
       Usage()
       return
     }
-    factory1954 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1955 := factory1954.GetProtocol(mbTrans1952)
+    factory1966 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1967 := factory1966.GetProtocol(mbTrans1964)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err1956 := argvalue0.Read(jsProt1955)
-    if err1956 != nil {
+    err1968 := argvalue0.Read(jsProt1967)
+    if err1968 != nil {
       Usage()
       return
     }
@@ -1191,19 +1192,19 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueLabel requires 2 args\n")
       flag.Usage()
     }
-    arg1957 := flag.Arg(1)
-    mbTrans1958 := thrift.NewTMemoryBufferLen(len(arg1957))
-    defer mbTrans1958.Close()
-    _, err1959 := mbTrans1958.WriteString(arg1957)
-    if err1959 != nil {
+    arg1969 := flag.Arg(1)
+    mbTrans1970 := thrift.NewTMemoryBufferLen(len(arg1969))
+    defer mbTrans1970.Close()
+    _, err1971 := mbTrans1970.WriteString(arg1969)
+    if err1971 != nil {
       Usage()
       return
     }
-    factory1960 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1961 := factory1960.GetProtocol(mbTrans1958)
+    factory1972 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1973 := factory1972.GetProtocol(mbTrans1970)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err1962 := argvalue0.Read(jsProt1961)
-    if err1962 != nil {
+    err1974 := argvalue0.Read(jsProt1973)
+    if err1974 != nil {
       Usage()
       return
     }
@@ -1218,19 +1219,19 @@ func main() {
       fmt.Fprint(os.Stderr, "GetValueUnits requires 1 args\n")
       flag.Usage()
     }
-    arg1964 := flag.Arg(1)
-    mbTrans1965 := thrift.NewTMemoryBufferLen(len(arg1964))
-    defer mbTrans1965.Close()
-    _, err1966 := mbTrans1965.WriteString(arg1964)
-    if err1966 != nil {
+    arg1976 := flag.Arg(1)
+    mbTrans1977 := thrift.NewTMemoryBufferLen(len(arg1976))
+    defer mbTrans1977.Close()
+    _, err1978 := mbTrans1977.WriteString(arg1976)
+    if err1978 != nil {
       Usage()
       return
     }
-    factory1967 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1968 := factory1967.GetProtocol(mbTrans1965)
+    factory1979 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1980 := factory1979.GetProtocol(mbTrans1977)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err1969 := argvalue0.Read(jsProt1968)
-    if err1969 != nil {
+    err1981 := argvalue0.Read(jsProt1980)
+    if err1981 != nil {
       Usage()
       return
     }
@@ -1243,19 +1244,19 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueUnits requires 2 args\n")
       flag.Usage()
     }
-    arg1970 := flag.Arg(1)
-    mbTrans1971 := thrift.NewTMemoryBufferLen(len(arg1970))
-    defer mbTrans1971.Close()
-    _, err1972 := mbTrans1971.WriteString(arg1970)
-    if err1972 != nil {
+    arg1982 := flag.Arg(1)
+    mbTrans1983 := thrift.NewTMemoryBufferLen(len(arg1982))
+    defer mbTrans1983.Close()
+    _, err1984 := mbTrans1983.WriteString(arg1982)
+    if err1984 != nil {
       Usage()
       return
     }
-    factory1973 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1974 := factory1973.GetProtocol(mbTrans1971)
+    factory1985 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1986 := factory1985.GetProtocol(mbTrans1983)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err1975 := argvalue0.Read(jsProt1974)
-    if err1975 != nil {
+    err1987 := argvalue0.Read(jsProt1986)
+    if err1987 != nil {
       Usage()
       return
     }
@@ -1270,19 +1271,19 @@ func main() {
       fmt.Fprint(os.Stderr, "GetValueHelp requires 1 args\n")
       flag.Usage()
     }
-    arg1977 := flag.Arg(1)
-    mbTrans1978 := thrift.NewTMemoryBufferLen(len(arg1977))
-    defer mbTrans1978.Close()
-    _, err1979 := mbTrans1978.WriteString(arg1977)
-    if err1979 != nil {
+    arg1989 := flag.Arg(1)
+    mbTrans1990 := thrift.NewTMemoryBufferLen(len(arg1989))
+    defer mbTrans1990.Close()
+    _, err1991 := mbTrans1990.WriteString(arg1989)
+    if err1991 != nil {
       Usage()
       return
     }
-    factory1980 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1981 := factory1980.GetProtocol(mbTrans1978)
+    factory1992 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1993 := factory1992.GetProtocol(mbTrans1990)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err1982 := argvalue0.Read(jsProt1981)
-    if err1982 != nil {
+    err1994 := argvalue0.Read(jsProt1993)
+    if err1994 != nil {
       Usage()
       return
     }
@@ -1295,19 +1296,19 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueHelp requires 2 args\n")
       flag.Usage()
     }
-    arg1983 := flag.Arg(1)
-    mbTrans1984 := thrift.NewTMemoryBufferLen(len(arg1983))
-    defer mbTrans1984.Close()
-    _, err1985 := mbTrans1984.WriteString(arg1983)
-    if err1985 != nil {
+    arg1995 := flag.Arg(1)
+    mbTrans1996 := thrift.NewTMemoryBufferLen(len(arg1995))
+    defer mbTrans1996.Close()
+    _, err1997 := mbTrans1996.WriteString(arg1995)
+    if err1997 != nil {
       Usage()
       return
     }
-    factory1986 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1987 := factory1986.GetProtocol(mbTrans1984)
+    factory1998 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt1999 := factory1998.GetProtocol(mbTrans1996)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err1988 := argvalue0.Read(jsProt1987)
-    if err1988 != nil {
+    err2000 := argvalue0.Read(jsProt1999)
+    if err2000 != nil {
       Usage()
       return
     }
@@ -1320,56 +1321,6 @@ func main() {
   case "GetValueMin":
     if flag.NArg() - 1 != 1 {
       fmt.Fprint(os.Stderr, "GetValueMin requires 1 args\n")
-      flag.Usage()
-    }
-    arg1990 := flag.Arg(1)
-    mbTrans1991 := thrift.NewTMemoryBufferLen(len(arg1990))
-    defer mbTrans1991.Close()
-    _, err1992 := mbTrans1991.WriteString(arg1990)
-    if err1992 != nil {
-      Usage()
-      return
-    }
-    factory1993 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt1994 := factory1993.GetProtocol(mbTrans1991)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err1995 := argvalue0.Read(jsProt1994)
-    if err1995 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.GetValueMin(value0))
-    fmt.Print("\n")
-    break
-  case "GetValueMax":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueMax requires 1 args\n")
-      flag.Usage()
-    }
-    arg1996 := flag.Arg(1)
-    mbTrans1997 := thrift.NewTMemoryBufferLen(len(arg1996))
-    defer mbTrans1997.Close()
-    _, err1998 := mbTrans1997.WriteString(arg1996)
-    if err1998 != nil {
-      Usage()
-      return
-    }
-    factory1999 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2000 := factory1999.GetProtocol(mbTrans1997)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err2001 := argvalue0.Read(jsProt2000)
-    if err2001 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.GetValueMax(value0))
-    fmt.Print("\n")
-    break
-  case "IsValueReadOnly":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "IsValueReadOnly requires 1 args\n")
       flag.Usage()
     }
     arg2002 := flag.Arg(1)
@@ -1389,12 +1340,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.IsValueReadOnly(value0))
+    fmt.Print(client.GetValueMin(value0))
     fmt.Print("\n")
     break
-  case "IsValueWriteOnly":
+  case "GetValueMax":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "IsValueWriteOnly requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueMax requires 1 args\n")
       flag.Usage()
     }
     arg2008 := flag.Arg(1)
@@ -1414,12 +1365,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.IsValueWriteOnly(value0))
+    fmt.Print(client.GetValueMax(value0))
     fmt.Print("\n")
     break
-  case "IsValueSet":
+  case "IsValueReadOnly":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "IsValueSet requires 1 args\n")
+      fmt.Fprint(os.Stderr, "IsValueReadOnly requires 1 args\n")
       flag.Usage()
     }
     arg2014 := flag.Arg(1)
@@ -1439,12 +1390,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.IsValueSet(value0))
+    fmt.Print(client.IsValueReadOnly(value0))
     fmt.Print("\n")
     break
-  case "GetValueAsBool":
+  case "IsValueWriteOnly":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueAsBool requires 1 args\n")
+      fmt.Fprint(os.Stderr, "IsValueWriteOnly requires 1 args\n")
       flag.Usage()
     }
     arg2020 := flag.Arg(1)
@@ -1464,12 +1415,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueAsBool(value0))
+    fmt.Print(client.IsValueWriteOnly(value0))
     fmt.Print("\n")
     break
-  case "GetValueAsByte":
+  case "IsValueSet":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueAsByte requires 1 args\n")
+      fmt.Fprint(os.Stderr, "IsValueSet requires 1 args\n")
       flag.Usage()
     }
     arg2026 := flag.Arg(1)
@@ -1489,12 +1440,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueAsByte(value0))
+    fmt.Print(client.IsValueSet(value0))
     fmt.Print("\n")
     break
-  case "GetValueAsFloat":
+  case "GetValueAsBool":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueAsFloat requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueAsBool requires 1 args\n")
       flag.Usage()
     }
     arg2032 := flag.Arg(1)
@@ -1514,12 +1465,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueAsFloat(value0))
+    fmt.Print(client.GetValueAsBool(value0))
     fmt.Print("\n")
     break
-  case "GetValueAsInt":
+  case "GetValueAsByte":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueAsInt requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueAsByte requires 1 args\n")
       flag.Usage()
     }
     arg2038 := flag.Arg(1)
@@ -1539,12 +1490,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueAsInt(value0))
+    fmt.Print(client.GetValueAsByte(value0))
     fmt.Print("\n")
     break
-  case "GetValueAsShort":
+  case "GetValueAsFloat":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueAsShort requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueAsFloat requires 1 args\n")
       flag.Usage()
     }
     arg2044 := flag.Arg(1)
@@ -1564,12 +1515,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueAsShort(value0))
+    fmt.Print(client.GetValueAsFloat(value0))
     fmt.Print("\n")
     break
-  case "GetValueAsString":
+  case "GetValueAsInt":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueAsString requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueAsInt requires 1 args\n")
       flag.Usage()
     }
     arg2050 := flag.Arg(1)
@@ -1589,12 +1540,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueAsString(value0))
+    fmt.Print(client.GetValueAsInt(value0))
     fmt.Print("\n")
     break
-  case "GetValueListSelection_String":
+  case "GetValueAsShort":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueListSelectionString requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueAsShort requires 1 args\n")
       flag.Usage()
     }
     arg2056 := flag.Arg(1)
@@ -1614,12 +1565,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueListSelectionString(value0))
+    fmt.Print(client.GetValueAsShort(value0))
     fmt.Print("\n")
     break
-  case "GetValueListSelection_Int32":
+  case "GetValueAsString":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueListSelectionInt32 requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueAsString requires 1 args\n")
       flag.Usage()
     }
     arg2062 := flag.Arg(1)
@@ -1639,12 +1590,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueListSelectionInt32(value0))
+    fmt.Print(client.GetValueAsString(value0))
     fmt.Print("\n")
     break
-  case "GetValueListItems":
+  case "GetValueListSelection_String":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueListItems requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueListSelectionString requires 1 args\n")
       flag.Usage()
     }
     arg2068 := flag.Arg(1)
@@ -1664,12 +1615,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueListItems(value0))
+    fmt.Print(client.GetValueListSelectionString(value0))
     fmt.Print("\n")
     break
-  case "GetValueFloatPrecision":
+  case "GetValueListSelection_Int32":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetValueFloatPrecision requires 1 args\n")
+      fmt.Fprint(os.Stderr, "GetValueListSelectionInt32 requires 1 args\n")
       flag.Usage()
     }
     arg2074 := flag.Arg(1)
@@ -1689,12 +1640,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetValueFloatPrecision(value0))
+    fmt.Print(client.GetValueListSelectionInt32(value0))
     fmt.Print("\n")
     break
-  case "SetValue_Bool":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "SetValueBool requires 2 args\n")
+  case "GetValueListItems":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "GetValueListItems requires 1 args\n")
       flag.Usage()
     }
     arg2080 := flag.Arg(1)
@@ -1714,6 +1665,56 @@ func main() {
       return
     }
     value0 := argvalue0
+    fmt.Print(client.GetValueListItems(value0))
+    fmt.Print("\n")
+    break
+  case "GetValueFloatPrecision":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "GetValueFloatPrecision requires 1 args\n")
+      flag.Usage()
+    }
+    arg2086 := flag.Arg(1)
+    mbTrans2087 := thrift.NewTMemoryBufferLen(len(arg2086))
+    defer mbTrans2087.Close()
+    _, err2088 := mbTrans2087.WriteString(arg2086)
+    if err2088 != nil {
+      Usage()
+      return
+    }
+    factory2089 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2090 := factory2089.GetProtocol(mbTrans2087)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2091 := argvalue0.Read(jsProt2090)
+    if err2091 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    fmt.Print(client.GetValueFloatPrecision(value0))
+    fmt.Print("\n")
+    break
+  case "SetValue_Bool":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "SetValueBool requires 2 args\n")
+      flag.Usage()
+    }
+    arg2092 := flag.Arg(1)
+    mbTrans2093 := thrift.NewTMemoryBufferLen(len(arg2092))
+    defer mbTrans2093.Close()
+    _, err2094 := mbTrans2093.WriteString(arg2092)
+    if err2094 != nil {
+      Usage()
+      return
+    }
+    factory2095 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2096 := factory2095.GetProtocol(mbTrans2093)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2097 := argvalue0.Read(jsProt2096)
+    if err2097 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
     argvalue1 := flag.Arg(2) == "true"
     value1 := argvalue1
     fmt.Print(client.SetValueBool(value0, value1))
@@ -1724,25 +1725,25 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueUInt8 requires 2 args\n")
       flag.Usage()
     }
-    arg2087 := flag.Arg(1)
-    mbTrans2088 := thrift.NewTMemoryBufferLen(len(arg2087))
-    defer mbTrans2088.Close()
-    _, err2089 := mbTrans2088.WriteString(arg2087)
-    if err2089 != nil {
+    arg2099 := flag.Arg(1)
+    mbTrans2100 := thrift.NewTMemoryBufferLen(len(arg2099))
+    defer mbTrans2100.Close()
+    _, err2101 := mbTrans2100.WriteString(arg2099)
+    if err2101 != nil {
       Usage()
       return
     }
-    factory2090 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2091 := factory2090.GetProtocol(mbTrans2088)
+    factory2102 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2103 := factory2102.GetProtocol(mbTrans2100)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err2092 := argvalue0.Read(jsProt2091)
-    if err2092 != nil {
+    err2104 := argvalue0.Read(jsProt2103)
+    if err2104 != nil {
       Usage()
       return
     }
     value0 := argvalue0
-    tmp1, err2093 := (strconv.Atoi(flag.Arg(2)))
-    if err2093 != nil {
+    tmp1, err2105 := (strconv.Atoi(flag.Arg(2)))
+    if err2105 != nil {
       Usage()
       return
     }
@@ -1756,25 +1757,25 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueFloat requires 2 args\n")
       flag.Usage()
     }
-    arg2094 := flag.Arg(1)
-    mbTrans2095 := thrift.NewTMemoryBufferLen(len(arg2094))
-    defer mbTrans2095.Close()
-    _, err2096 := mbTrans2095.WriteString(arg2094)
-    if err2096 != nil {
+    arg2106 := flag.Arg(1)
+    mbTrans2107 := thrift.NewTMemoryBufferLen(len(arg2106))
+    defer mbTrans2107.Close()
+    _, err2108 := mbTrans2107.WriteString(arg2106)
+    if err2108 != nil {
       Usage()
       return
     }
-    factory2097 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2098 := factory2097.GetProtocol(mbTrans2095)
+    factory2109 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2110 := factory2109.GetProtocol(mbTrans2107)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err2099 := argvalue0.Read(jsProt2098)
-    if err2099 != nil {
+    err2111 := argvalue0.Read(jsProt2110)
+    if err2111 != nil {
       Usage()
       return
     }
     value0 := argvalue0
-    argvalue1, err2100 := (strconv.Atof64(flag.Arg(2)))
-    if err2100 != nil {
+    argvalue1, err2112 := (strconv.Atof64(flag.Arg(2)))
+    if err2112 != nil {
       Usage()
       return
     }
@@ -1787,25 +1788,25 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueInt32 requires 2 args\n")
       flag.Usage()
     }
-    arg2101 := flag.Arg(1)
-    mbTrans2102 := thrift.NewTMemoryBufferLen(len(arg2101))
-    defer mbTrans2102.Close()
-    _, err2103 := mbTrans2102.WriteString(arg2101)
-    if err2103 != nil {
+    arg2113 := flag.Arg(1)
+    mbTrans2114 := thrift.NewTMemoryBufferLen(len(arg2113))
+    defer mbTrans2114.Close()
+    _, err2115 := mbTrans2114.WriteString(arg2113)
+    if err2115 != nil {
       Usage()
       return
     }
-    factory2104 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2105 := factory2104.GetProtocol(mbTrans2102)
+    factory2116 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2117 := factory2116.GetProtocol(mbTrans2114)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err2106 := argvalue0.Read(jsProt2105)
-    if err2106 != nil {
+    err2118 := argvalue0.Read(jsProt2117)
+    if err2118 != nil {
       Usage()
       return
     }
     value0 := argvalue0
-    tmp1, err2107 := (strconv.Atoi(flag.Arg(2)))
-    if err2107 != nil {
+    tmp1, err2119 := (strconv.Atoi(flag.Arg(2)))
+    if err2119 != nil {
       Usage()
       return
     }
@@ -1819,25 +1820,25 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueInt16 requires 2 args\n")
       flag.Usage()
     }
-    arg2108 := flag.Arg(1)
-    mbTrans2109 := thrift.NewTMemoryBufferLen(len(arg2108))
-    defer mbTrans2109.Close()
-    _, err2110 := mbTrans2109.WriteString(arg2108)
-    if err2110 != nil {
+    arg2120 := flag.Arg(1)
+    mbTrans2121 := thrift.NewTMemoryBufferLen(len(arg2120))
+    defer mbTrans2121.Close()
+    _, err2122 := mbTrans2121.WriteString(arg2120)
+    if err2122 != nil {
       Usage()
       return
     }
-    factory2111 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2112 := factory2111.GetProtocol(mbTrans2109)
+    factory2123 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2124 := factory2123.GetProtocol(mbTrans2121)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err2113 := argvalue0.Read(jsProt2112)
-    if err2113 != nil {
+    err2125 := argvalue0.Read(jsProt2124)
+    if err2125 != nil {
       Usage()
       return
     }
     value0 := argvalue0
-    tmp1, err2114 := (strconv.Atoi(flag.Arg(2)))
-    if err2114 != nil {
+    tmp1, err2126 := (strconv.Atoi(flag.Arg(2)))
+    if err2126 != nil {
       Usage()
       return
     }
@@ -1851,19 +1852,19 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueString requires 2 args\n")
       flag.Usage()
     }
-    arg2115 := flag.Arg(1)
-    mbTrans2116 := thrift.NewTMemoryBufferLen(len(arg2115))
-    defer mbTrans2116.Close()
-    _, err2117 := mbTrans2116.WriteString(arg2115)
-    if err2117 != nil {
+    arg2127 := flag.Arg(1)
+    mbTrans2128 := thrift.NewTMemoryBufferLen(len(arg2127))
+    defer mbTrans2128.Close()
+    _, err2129 := mbTrans2128.WriteString(arg2127)
+    if err2129 != nil {
       Usage()
       return
     }
-    factory2118 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2119 := factory2118.GetProtocol(mbTrans2116)
+    factory2130 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2131 := factory2130.GetProtocol(mbTrans2128)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err2120 := argvalue0.Read(jsProt2119)
-    if err2120 != nil {
+    err2132 := argvalue0.Read(jsProt2131)
+    if err2132 != nil {
       Usage()
       return
     }
@@ -1878,19 +1879,19 @@ func main() {
       fmt.Fprint(os.Stderr, "SetValueListSelection requires 2 args\n")
       flag.Usage()
     }
-    arg2122 := flag.Arg(1)
-    mbTrans2123 := thrift.NewTMemoryBufferLen(len(arg2122))
-    defer mbTrans2123.Close()
-    _, err2124 := mbTrans2123.WriteString(arg2122)
-    if err2124 != nil {
+    arg2134 := flag.Arg(1)
+    mbTrans2135 := thrift.NewTMemoryBufferLen(len(arg2134))
+    defer mbTrans2135.Close()
+    _, err2136 := mbTrans2135.WriteString(arg2134)
+    if err2136 != nil {
       Usage()
       return
     }
-    factory2125 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2126 := factory2125.GetProtocol(mbTrans2123)
+    factory2137 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2138 := factory2137.GetProtocol(mbTrans2135)
     argvalue0 := OpenZWave.NewRemoteValueID()
-    err2127 := argvalue0.Read(jsProt2126)
-    if err2127 != nil {
+    err2139 := argvalue0.Read(jsProt2138)
+    if err2139 != nil {
       Usage()
       return
     }
@@ -1900,59 +1901,9 @@ func main() {
     fmt.Print(client.SetValueListSelection(value0, value1))
     fmt.Print("\n")
     break
-  case "PressButton":
+  case "RefreshValue":
     if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "PressButton requires 1 args\n")
-      flag.Usage()
-    }
-    arg2129 := flag.Arg(1)
-    mbTrans2130 := thrift.NewTMemoryBufferLen(len(arg2129))
-    defer mbTrans2130.Close()
-    _, err2131 := mbTrans2130.WriteString(arg2129)
-    if err2131 != nil {
-      Usage()
-      return
-    }
-    factory2132 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2133 := factory2132.GetProtocol(mbTrans2130)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err2134 := argvalue0.Read(jsProt2133)
-    if err2134 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.PressButton(value0))
-    fmt.Print("\n")
-    break
-  case "ReleaseButton":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "ReleaseButton requires 1 args\n")
-      flag.Usage()
-    }
-    arg2135 := flag.Arg(1)
-    mbTrans2136 := thrift.NewTMemoryBufferLen(len(arg2135))
-    defer mbTrans2136.Close()
-    _, err2137 := mbTrans2136.WriteString(arg2135)
-    if err2137 != nil {
-      Usage()
-      return
-    }
-    factory2138 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2139 := factory2138.GetProtocol(mbTrans2136)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err2140 := argvalue0.Read(jsProt2139)
-    if err2140 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.ReleaseButton(value0))
-    fmt.Print("\n")
-    break
-  case "GetNumSwitchPoints":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "GetNumSwitchPoints requires 1 args\n")
+      fmt.Fprint(os.Stderr, "RefreshValue requires 1 args\n")
       flag.Usage()
     }
     arg2141 := flag.Arg(1)
@@ -1972,12 +1923,12 @@ func main() {
       return
     }
     value0 := argvalue0
-    fmt.Print(client.GetNumSwitchPoints(value0))
+    fmt.Print(client.RefreshValue(value0))
     fmt.Print("\n")
     break
-  case "SetSwitchPoint":
-    if flag.NArg() - 1 != 4 {
-      fmt.Fprint(os.Stderr, "SetSwitchPoint requires 4 args\n")
+  case "PressButton":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "PressButton requires 1 args\n")
       flag.Usage()
     }
     arg2147 := flag.Arg(1)
@@ -1997,22 +1948,97 @@ func main() {
       return
     }
     value0 := argvalue0
-    tmp1, err2153 := (strconv.Atoi(flag.Arg(2)))
-    if err2153 != nil {
+    fmt.Print(client.PressButton(value0))
+    fmt.Print("\n")
+    break
+  case "ReleaseButton":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "ReleaseButton requires 1 args\n")
+      flag.Usage()
+    }
+    arg2153 := flag.Arg(1)
+    mbTrans2154 := thrift.NewTMemoryBufferLen(len(arg2153))
+    defer mbTrans2154.Close()
+    _, err2155 := mbTrans2154.WriteString(arg2153)
+    if err2155 != nil {
+      Usage()
+      return
+    }
+    factory2156 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2157 := factory2156.GetProtocol(mbTrans2154)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2158 := argvalue0.Read(jsProt2157)
+    if err2158 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    fmt.Print(client.ReleaseButton(value0))
+    fmt.Print("\n")
+    break
+  case "GetNumSwitchPoints":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "GetNumSwitchPoints requires 1 args\n")
+      flag.Usage()
+    }
+    arg2159 := flag.Arg(1)
+    mbTrans2160 := thrift.NewTMemoryBufferLen(len(arg2159))
+    defer mbTrans2160.Close()
+    _, err2161 := mbTrans2160.WriteString(arg2159)
+    if err2161 != nil {
+      Usage()
+      return
+    }
+    factory2162 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2163 := factory2162.GetProtocol(mbTrans2160)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2164 := argvalue0.Read(jsProt2163)
+    if err2164 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    fmt.Print(client.GetNumSwitchPoints(value0))
+    fmt.Print("\n")
+    break
+  case "SetSwitchPoint":
+    if flag.NArg() - 1 != 4 {
+      fmt.Fprint(os.Stderr, "SetSwitchPoint requires 4 args\n")
+      flag.Usage()
+    }
+    arg2165 := flag.Arg(1)
+    mbTrans2166 := thrift.NewTMemoryBufferLen(len(arg2165))
+    defer mbTrans2166.Close()
+    _, err2167 := mbTrans2166.WriteString(arg2165)
+    if err2167 != nil {
+      Usage()
+      return
+    }
+    factory2168 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2169 := factory2168.GetProtocol(mbTrans2166)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2170 := argvalue0.Read(jsProt2169)
+    if err2170 != nil {
+      Usage()
+      return
+    }
+    value0 := argvalue0
+    tmp1, err2171 := (strconv.Atoi(flag.Arg(2)))
+    if err2171 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    tmp2, err2154 := (strconv.Atoi(flag.Arg(3)))
-    if err2154 != nil {
+    tmp2, err2172 := (strconv.Atoi(flag.Arg(3)))
+    if err2172 != nil {
       Usage()
       return
     }
     argvalue2 := byte(tmp2)
     value2 := argvalue2
-    tmp3, err2155 := (strconv.Atoi(flag.Arg(4)))
-    if err2155 != nil {
+    tmp3, err2173 := (strconv.Atoi(flag.Arg(4)))
+    if err2173 != nil {
       Usage()
       return
     }
@@ -2026,138 +2052,22 @@ func main() {
       fmt.Fprint(os.Stderr, "RemoveSwitchPoint requires 3 args\n")
       flag.Usage()
     }
-    arg2156 := flag.Arg(1)
-    mbTrans2157 := thrift.NewTMemoryBufferLen(len(arg2156))
-    defer mbTrans2157.Close()
-    _, err2158 := mbTrans2157.WriteString(arg2156)
-    if err2158 != nil {
-      Usage()
-      return
-    }
-    factory2159 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2160 := factory2159.GetProtocol(mbTrans2157)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err2161 := argvalue0.Read(jsProt2160)
-    if err2161 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    tmp1, err2162 := (strconv.Atoi(flag.Arg(2)))
-    if err2162 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    tmp2, err2163 := (strconv.Atoi(flag.Arg(3)))
-    if err2163 != nil {
-      Usage()
-      return
-    }
-    argvalue2 := byte(tmp2)
-    value2 := argvalue2
-    fmt.Print(client.RemoveSwitchPoint(value0, value1, value2))
-    fmt.Print("\n")
-    break
-  case "ClearSwitchPoints":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "ClearSwitchPoints requires 1 args\n")
-      flag.Usage()
-    }
-    arg2164 := flag.Arg(1)
-    mbTrans2165 := thrift.NewTMemoryBufferLen(len(arg2164))
-    defer mbTrans2165.Close()
-    _, err2166 := mbTrans2165.WriteString(arg2164)
-    if err2166 != nil {
-      Usage()
-      return
-    }
-    factory2167 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2168 := factory2167.GetProtocol(mbTrans2165)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err2169 := argvalue0.Read(jsProt2168)
-    if err2169 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    fmt.Print(client.ClearSwitchPoints(value0))
-    fmt.Print("\n")
-    break
-  case "GetSwitchPoint":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetSwitchPoint requires 2 args\n")
-      flag.Usage()
-    }
-    arg2170 := flag.Arg(1)
-    mbTrans2171 := thrift.NewTMemoryBufferLen(len(arg2170))
-    defer mbTrans2171.Close()
-    _, err2172 := mbTrans2171.WriteString(arg2170)
-    if err2172 != nil {
-      Usage()
-      return
-    }
-    factory2173 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2174 := factory2173.GetProtocol(mbTrans2171)
-    argvalue0 := OpenZWave.NewRemoteValueID()
-    err2175 := argvalue0.Read(jsProt2174)
-    if err2175 != nil {
-      Usage()
-      return
-    }
-    value0 := argvalue0
-    tmp1, err2176 := (strconv.Atoi(flag.Arg(2)))
+    arg2174 := flag.Arg(1)
+    mbTrans2175 := thrift.NewTMemoryBufferLen(len(arg2174))
+    defer mbTrans2175.Close()
+    _, err2176 := mbTrans2175.WriteString(arg2174)
     if err2176 != nil {
       Usage()
       return
     }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.GetSwitchPoint(value0, value1))
-    fmt.Print("\n")
-    break
-  case "SwitchAllOn":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "SwitchAllOn requires 1 args\n")
-      flag.Usage()
-    }
-    tmp0, err2177 := (strconv.Atoi(flag.Arg(1)))
-    if err2177 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    fmt.Print(client.SwitchAllOn(value0))
-    fmt.Print("\n")
-    break
-  case "SwitchAllOff":
-    if flag.NArg() - 1 != 1 {
-      fmt.Fprint(os.Stderr, "SwitchAllOff requires 1 args\n")
-      flag.Usage()
-    }
-    tmp0, err2178 := (strconv.Atoi(flag.Arg(1)))
-    if err2178 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    fmt.Print(client.SwitchAllOff(value0))
-    fmt.Print("\n")
-    break
-  case "SetConfigParam":
-    if flag.NArg() - 1 != 5 {
-      fmt.Fprint(os.Stderr, "SetConfigParam requires 5 args\n")
-      flag.Usage()
-    }
-    tmp0, err2179 := (strconv.Atoi(flag.Arg(1)))
+    factory2177 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2178 := factory2177.GetProtocol(mbTrans2175)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2179 := argvalue0.Read(jsProt2178)
     if err2179 != nil {
       Usage()
       return
     }
-    argvalue0 := int32(tmp0)
     value0 := argvalue0
     tmp1, err2180 := (strconv.Atoi(flag.Arg(2)))
     if err2180 != nil {
@@ -2173,157 +2083,99 @@ func main() {
     }
     argvalue2 := byte(tmp2)
     value2 := argvalue2
-    tmp3, err2182 := (strconv.Atoi(flag.Arg(4)))
-    if err2182 != nil {
-      Usage()
-      return
-    }
-    argvalue3 := int32(tmp3)
-    value3 := argvalue3
-    tmp4, err2183 := (strconv.Atoi(flag.Arg(5)))
-    if err2183 != nil {
-      Usage()
-      return
-    }
-    argvalue4 := byte(tmp4)
-    value4 := argvalue4
-    fmt.Print(client.SetConfigParam(value0, value1, value2, value3, value4))
+    fmt.Print(client.RemoveSwitchPoint(value0, value1, value2))
     fmt.Print("\n")
     break
-  case "RequestConfigParam":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "RequestConfigParam requires 3 args\n")
+  case "ClearSwitchPoints":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "ClearSwitchPoints requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2184 := (strconv.Atoi(flag.Arg(1)))
+    arg2182 := flag.Arg(1)
+    mbTrans2183 := thrift.NewTMemoryBufferLen(len(arg2182))
+    defer mbTrans2183.Close()
+    _, err2184 := mbTrans2183.WriteString(arg2182)
     if err2184 != nil {
       Usage()
       return
     }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err2185 := (strconv.Atoi(flag.Arg(2)))
-    if err2185 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    tmp2, err2186 := (strconv.Atoi(flag.Arg(3)))
-    if err2186 != nil {
-      Usage()
-      return
-    }
-    argvalue2 := byte(tmp2)
-    value2 := argvalue2
-    fmt.Print(client.RequestConfigParam(value0, value1, value2))
-    fmt.Print("\n")
-    break
-  case "RequestAllConfigParams":
-    if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "RequestAllConfigParams requires 2 args\n")
-      flag.Usage()
-    }
-    tmp0, err2187 := (strconv.Atoi(flag.Arg(1)))
+    factory2185 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2186 := factory2185.GetProtocol(mbTrans2183)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2187 := argvalue0.Read(jsProt2186)
     if err2187 != nil {
       Usage()
       return
     }
-    argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err2188 := (strconv.Atoi(flag.Arg(2)))
-    if err2188 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.RequestAllConfigParams(value0, value1))
+    fmt.Print(client.ClearSwitchPoints(value0))
     fmt.Print("\n")
     break
-  case "GetNumGroups":
+  case "GetSwitchPoint":
     if flag.NArg() - 1 != 2 {
-      fmt.Fprint(os.Stderr, "GetNumGroups requires 2 args\n")
+      fmt.Fprint(os.Stderr, "GetSwitchPoint requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2189 := (strconv.Atoi(flag.Arg(1)))
-    if err2189 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err2190 := (strconv.Atoi(flag.Arg(2)))
+    arg2188 := flag.Arg(1)
+    mbTrans2189 := thrift.NewTMemoryBufferLen(len(arg2188))
+    defer mbTrans2189.Close()
+    _, err2190 := mbTrans2189.WriteString(arg2188)
     if err2190 != nil {
       Usage()
       return
     }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    fmt.Print(client.GetNumGroups(value0, value1))
-    fmt.Print("\n")
-    break
-  case "GetAssociations":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "GetAssociations requires 3 args\n")
-      flag.Usage()
-    }
-    tmp0, err2191 := (strconv.Atoi(flag.Arg(1)))
-    if err2191 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
-    value0 := argvalue0
-    tmp1, err2192 := (strconv.Atoi(flag.Arg(2)))
-    if err2192 != nil {
-      Usage()
-      return
-    }
-    argvalue1 := byte(tmp1)
-    value1 := argvalue1
-    tmp2, err2193 := (strconv.Atoi(flag.Arg(3)))
+    factory2191 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2192 := factory2191.GetProtocol(mbTrans2189)
+    argvalue0 := OpenZWave.NewRemoteValueID()
+    err2193 := argvalue0.Read(jsProt2192)
     if err2193 != nil {
       Usage()
       return
     }
-    argvalue2 := byte(tmp2)
-    value2 := argvalue2
-    fmt.Print(client.GetAssociations(value0, value1, value2))
-    fmt.Print("\n")
-    break
-  case "GetMaxAssociations":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "GetMaxAssociations requires 3 args\n")
-      flag.Usage()
-    }
-    tmp0, err2194 := (strconv.Atoi(flag.Arg(1)))
-    if err2194 != nil {
-      Usage()
-      return
-    }
-    argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err2195 := (strconv.Atoi(flag.Arg(2)))
-    if err2195 != nil {
+    tmp1, err2194 := (strconv.Atoi(flag.Arg(2)))
+    if err2194 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    tmp2, err2196 := (strconv.Atoi(flag.Arg(3)))
+    fmt.Print(client.GetSwitchPoint(value0, value1))
+    fmt.Print("\n")
+    break
+  case "SwitchAllOn":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "SwitchAllOn requires 1 args\n")
+      flag.Usage()
+    }
+    tmp0, err2195 := (strconv.Atoi(flag.Arg(1)))
+    if err2195 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    fmt.Print(client.SwitchAllOn(value0))
+    fmt.Print("\n")
+    break
+  case "SwitchAllOff":
+    if flag.NArg() - 1 != 1 {
+      fmt.Fprint(os.Stderr, "SwitchAllOff requires 1 args\n")
+      flag.Usage()
+    }
+    tmp0, err2196 := (strconv.Atoi(flag.Arg(1)))
     if err2196 != nil {
       Usage()
       return
     }
-    argvalue2 := byte(tmp2)
-    value2 := argvalue2
-    fmt.Print(client.GetMaxAssociations(value0, value1, value2))
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    fmt.Print(client.SwitchAllOff(value0))
     fmt.Print("\n")
     break
-  case "GetGroupLabel":
-    if flag.NArg() - 1 != 3 {
-      fmt.Fprint(os.Stderr, "GetGroupLabel requires 3 args\n")
+  case "SetConfigParam":
+    if flag.NArg() - 1 != 5 {
+      fmt.Fprint(os.Stderr, "SetConfigParam requires 5 args\n")
       flag.Usage()
     }
     tmp0, err2197 := (strconv.Atoi(flag.Arg(1)))
@@ -2347,6 +2199,180 @@ func main() {
     }
     argvalue2 := byte(tmp2)
     value2 := argvalue2
+    tmp3, err2200 := (strconv.Atoi(flag.Arg(4)))
+    if err2200 != nil {
+      Usage()
+      return
+    }
+    argvalue3 := int32(tmp3)
+    value3 := argvalue3
+    tmp4, err2201 := (strconv.Atoi(flag.Arg(5)))
+    if err2201 != nil {
+      Usage()
+      return
+    }
+    argvalue4 := byte(tmp4)
+    value4 := argvalue4
+    fmt.Print(client.SetConfigParam(value0, value1, value2, value3, value4))
+    fmt.Print("\n")
+    break
+  case "RequestConfigParam":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "RequestConfigParam requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err2202 := (strconv.Atoi(flag.Arg(1)))
+    if err2202 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err2203 := (strconv.Atoi(flag.Arg(2)))
+    if err2203 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    tmp2, err2204 := (strconv.Atoi(flag.Arg(3)))
+    if err2204 != nil {
+      Usage()
+      return
+    }
+    argvalue2 := byte(tmp2)
+    value2 := argvalue2
+    fmt.Print(client.RequestConfigParam(value0, value1, value2))
+    fmt.Print("\n")
+    break
+  case "RequestAllConfigParams":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "RequestAllConfigParams requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err2205 := (strconv.Atoi(flag.Arg(1)))
+    if err2205 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err2206 := (strconv.Atoi(flag.Arg(2)))
+    if err2206 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.RequestAllConfigParams(value0, value1))
+    fmt.Print("\n")
+    break
+  case "GetNumGroups":
+    if flag.NArg() - 1 != 2 {
+      fmt.Fprint(os.Stderr, "GetNumGroups requires 2 args\n")
+      flag.Usage()
+    }
+    tmp0, err2207 := (strconv.Atoi(flag.Arg(1)))
+    if err2207 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err2208 := (strconv.Atoi(flag.Arg(2)))
+    if err2208 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    fmt.Print(client.GetNumGroups(value0, value1))
+    fmt.Print("\n")
+    break
+  case "GetAssociations":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "GetAssociations requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err2209 := (strconv.Atoi(flag.Arg(1)))
+    if err2209 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err2210 := (strconv.Atoi(flag.Arg(2)))
+    if err2210 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    tmp2, err2211 := (strconv.Atoi(flag.Arg(3)))
+    if err2211 != nil {
+      Usage()
+      return
+    }
+    argvalue2 := byte(tmp2)
+    value2 := argvalue2
+    fmt.Print(client.GetAssociations(value0, value1, value2))
+    fmt.Print("\n")
+    break
+  case "GetMaxAssociations":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "GetMaxAssociations requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err2212 := (strconv.Atoi(flag.Arg(1)))
+    if err2212 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err2213 := (strconv.Atoi(flag.Arg(2)))
+    if err2213 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    tmp2, err2214 := (strconv.Atoi(flag.Arg(3)))
+    if err2214 != nil {
+      Usage()
+      return
+    }
+    argvalue2 := byte(tmp2)
+    value2 := argvalue2
+    fmt.Print(client.GetMaxAssociations(value0, value1, value2))
+    fmt.Print("\n")
+    break
+  case "GetGroupLabel":
+    if flag.NArg() - 1 != 3 {
+      fmt.Fprint(os.Stderr, "GetGroupLabel requires 3 args\n")
+      flag.Usage()
+    }
+    tmp0, err2215 := (strconv.Atoi(flag.Arg(1)))
+    if err2215 != nil {
+      Usage()
+      return
+    }
+    argvalue0 := int32(tmp0)
+    value0 := argvalue0
+    tmp1, err2216 := (strconv.Atoi(flag.Arg(2)))
+    if err2216 != nil {
+      Usage()
+      return
+    }
+    argvalue1 := byte(tmp1)
+    value1 := argvalue1
+    tmp2, err2217 := (strconv.Atoi(flag.Arg(3)))
+    if err2217 != nil {
+      Usage()
+      return
+    }
+    argvalue2 := byte(tmp2)
+    value2 := argvalue2
     fmt.Print(client.GetGroupLabel(value0, value1, value2))
     fmt.Print("\n")
     break
@@ -2355,29 +2381,29 @@ func main() {
       fmt.Fprint(os.Stderr, "AddAssociation requires 4 args\n")
       flag.Usage()
     }
-    tmp0, err2200 := (strconv.Atoi(flag.Arg(1)))
-    if err2200 != nil {
+    tmp0, err2218 := (strconv.Atoi(flag.Arg(1)))
+    if err2218 != nil {
       Usage()
       return
     }
     argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err2201 := (strconv.Atoi(flag.Arg(2)))
-    if err2201 != nil {
+    tmp1, err2219 := (strconv.Atoi(flag.Arg(2)))
+    if err2219 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    tmp2, err2202 := (strconv.Atoi(flag.Arg(3)))
-    if err2202 != nil {
+    tmp2, err2220 := (strconv.Atoi(flag.Arg(3)))
+    if err2220 != nil {
       Usage()
       return
     }
     argvalue2 := byte(tmp2)
     value2 := argvalue2
-    tmp3, err2203 := (strconv.Atoi(flag.Arg(4)))
-    if err2203 != nil {
+    tmp3, err2221 := (strconv.Atoi(flag.Arg(4)))
+    if err2221 != nil {
       Usage()
       return
     }
@@ -2391,29 +2417,29 @@ func main() {
       fmt.Fprint(os.Stderr, "RemoveAssociation requires 4 args\n")
       flag.Usage()
     }
-    tmp0, err2204 := (strconv.Atoi(flag.Arg(1)))
-    if err2204 != nil {
+    tmp0, err2222 := (strconv.Atoi(flag.Arg(1)))
+    if err2222 != nil {
       Usage()
       return
     }
     argvalue0 := int32(tmp0)
     value0 := argvalue0
-    tmp1, err2205 := (strconv.Atoi(flag.Arg(2)))
-    if err2205 != nil {
+    tmp1, err2223 := (strconv.Atoi(flag.Arg(2)))
+    if err2223 != nil {
       Usage()
       return
     }
     argvalue1 := byte(tmp1)
     value1 := argvalue1
-    tmp2, err2206 := (strconv.Atoi(flag.Arg(3)))
-    if err2206 != nil {
+    tmp2, err2224 := (strconv.Atoi(flag.Arg(3)))
+    if err2224 != nil {
       Usage()
       return
     }
     argvalue2 := byte(tmp2)
     value2 := argvalue2
-    tmp3, err2207 := (strconv.Atoi(flag.Arg(4)))
-    if err2207 != nil {
+    tmp3, err2225 := (strconv.Atoi(flag.Arg(4)))
+    if err2225 != nil {
       Usage()
       return
     }
@@ -2427,8 +2453,8 @@ func main() {
       fmt.Fprint(os.Stderr, "ResetController requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2208 := (strconv.Atoi(flag.Arg(1)))
-    if err2208 != nil {
+    tmp0, err2226 := (strconv.Atoi(flag.Arg(1)))
+    if err2226 != nil {
       Usage()
       return
     }
@@ -2442,8 +2468,8 @@ func main() {
       fmt.Fprint(os.Stderr, "SoftReset requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2209 := (strconv.Atoi(flag.Arg(1)))
-    if err2209 != nil {
+    tmp0, err2227 := (strconv.Atoi(flag.Arg(1)))
+    if err2227 != nil {
       Usage()
       return
     }
@@ -2457,8 +2483,8 @@ func main() {
       fmt.Fprint(os.Stderr, "BeginControllerCommand requires 5 args\n")
       flag.Usage()
     }
-    tmp0, err2210 := (strconv.Atoi(flag.Arg(1)))
-    if err2210 != nil {
+    tmp0, err2228 := (strconv.Atoi(flag.Arg(1)))
+    if err2228 != nil {
       Usage()
       return
     }
@@ -2473,15 +2499,15 @@ func main() {
     value1 := argvalue1
     argvalue2 := flag.Arg(3) == "true"
     value2 := argvalue2
-    tmp3, err2212 := (strconv.Atoi(flag.Arg(4)))
-    if err2212 != nil {
+    tmp3, err2230 := (strconv.Atoi(flag.Arg(4)))
+    if err2230 != nil {
       Usage()
       return
     }
     argvalue3 := byte(tmp3)
     value3 := argvalue3
-    tmp4, err2213 := (strconv.Atoi(flag.Arg(5)))
-    if err2213 != nil {
+    tmp4, err2231 := (strconv.Atoi(flag.Arg(5)))
+    if err2231 != nil {
       Usage()
       return
     }
@@ -2495,8 +2521,8 @@ func main() {
       fmt.Fprint(os.Stderr, "CancelControllerCommand requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2214 := (strconv.Atoi(flag.Arg(1)))
-    if err2214 != nil {
+    tmp0, err2232 := (strconv.Atoi(flag.Arg(1)))
+    if err2232 != nil {
       Usage()
       return
     }
@@ -2534,8 +2560,8 @@ func main() {
       fmt.Fprint(os.Stderr, "RemoveScene requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2215 := (strconv.Atoi(flag.Arg(1)))
-    if err2215 != nil {
+    tmp0, err2233 := (strconv.Atoi(flag.Arg(1)))
+    if err2233 != nil {
       Usage()
       return
     }
@@ -2549,26 +2575,26 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueBool requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2216 := (strconv.Atoi(flag.Arg(1)))
-    if err2216 != nil {
+    tmp0, err2234 := (strconv.Atoi(flag.Arg(1)))
+    if err2234 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2217 := flag.Arg(2)
-    mbTrans2218 := thrift.NewTMemoryBufferLen(len(arg2217))
-    defer mbTrans2218.Close()
-    _, err2219 := mbTrans2218.WriteString(arg2217)
-    if err2219 != nil {
+    arg2235 := flag.Arg(2)
+    mbTrans2236 := thrift.NewTMemoryBufferLen(len(arg2235))
+    defer mbTrans2236.Close()
+    _, err2237 := mbTrans2236.WriteString(arg2235)
+    if err2237 != nil {
       Usage()
       return
     }
-    factory2220 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2221 := factory2220.GetProtocol(mbTrans2218)
+    factory2238 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2239 := factory2238.GetProtocol(mbTrans2236)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2222 := argvalue1.Read(jsProt2221)
-    if err2222 != nil {
+    err2240 := argvalue1.Read(jsProt2239)
+    if err2240 != nil {
       Usage()
       return
     }
@@ -2583,32 +2609,32 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueUint8 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2224 := (strconv.Atoi(flag.Arg(1)))
-    if err2224 != nil {
+    tmp0, err2242 := (strconv.Atoi(flag.Arg(1)))
+    if err2242 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2225 := flag.Arg(2)
-    mbTrans2226 := thrift.NewTMemoryBufferLen(len(arg2225))
-    defer mbTrans2226.Close()
-    _, err2227 := mbTrans2226.WriteString(arg2225)
-    if err2227 != nil {
+    arg2243 := flag.Arg(2)
+    mbTrans2244 := thrift.NewTMemoryBufferLen(len(arg2243))
+    defer mbTrans2244.Close()
+    _, err2245 := mbTrans2244.WriteString(arg2243)
+    if err2245 != nil {
       Usage()
       return
     }
-    factory2228 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2229 := factory2228.GetProtocol(mbTrans2226)
+    factory2246 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2247 := factory2246.GetProtocol(mbTrans2244)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2230 := argvalue1.Read(jsProt2229)
-    if err2230 != nil {
+    err2248 := argvalue1.Read(jsProt2247)
+    if err2248 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2231 := (strconv.Atoi(flag.Arg(3)))
-    if err2231 != nil {
+    tmp2, err2249 := (strconv.Atoi(flag.Arg(3)))
+    if err2249 != nil {
       Usage()
       return
     }
@@ -2622,32 +2648,32 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueFloat requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2232 := (strconv.Atoi(flag.Arg(1)))
-    if err2232 != nil {
+    tmp0, err2250 := (strconv.Atoi(flag.Arg(1)))
+    if err2250 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2233 := flag.Arg(2)
-    mbTrans2234 := thrift.NewTMemoryBufferLen(len(arg2233))
-    defer mbTrans2234.Close()
-    _, err2235 := mbTrans2234.WriteString(arg2233)
-    if err2235 != nil {
+    arg2251 := flag.Arg(2)
+    mbTrans2252 := thrift.NewTMemoryBufferLen(len(arg2251))
+    defer mbTrans2252.Close()
+    _, err2253 := mbTrans2252.WriteString(arg2251)
+    if err2253 != nil {
       Usage()
       return
     }
-    factory2236 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2237 := factory2236.GetProtocol(mbTrans2234)
+    factory2254 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2255 := factory2254.GetProtocol(mbTrans2252)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2238 := argvalue1.Read(jsProt2237)
-    if err2238 != nil {
+    err2256 := argvalue1.Read(jsProt2255)
+    if err2256 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    argvalue2, err2239 := (strconv.Atof64(flag.Arg(3)))
-    if err2239 != nil {
+    argvalue2, err2257 := (strconv.Atof64(flag.Arg(3)))
+    if err2257 != nil {
       Usage()
       return
     }
@@ -2660,32 +2686,32 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueInt32 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2240 := (strconv.Atoi(flag.Arg(1)))
-    if err2240 != nil {
+    tmp0, err2258 := (strconv.Atoi(flag.Arg(1)))
+    if err2258 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2241 := flag.Arg(2)
-    mbTrans2242 := thrift.NewTMemoryBufferLen(len(arg2241))
-    defer mbTrans2242.Close()
-    _, err2243 := mbTrans2242.WriteString(arg2241)
-    if err2243 != nil {
+    arg2259 := flag.Arg(2)
+    mbTrans2260 := thrift.NewTMemoryBufferLen(len(arg2259))
+    defer mbTrans2260.Close()
+    _, err2261 := mbTrans2260.WriteString(arg2259)
+    if err2261 != nil {
       Usage()
       return
     }
-    factory2244 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2245 := factory2244.GetProtocol(mbTrans2242)
+    factory2262 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2263 := factory2262.GetProtocol(mbTrans2260)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2246 := argvalue1.Read(jsProt2245)
-    if err2246 != nil {
+    err2264 := argvalue1.Read(jsProt2263)
+    if err2264 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2247 := (strconv.Atoi(flag.Arg(3)))
-    if err2247 != nil {
+    tmp2, err2265 := (strconv.Atoi(flag.Arg(3)))
+    if err2265 != nil {
       Usage()
       return
     }
@@ -2699,32 +2725,32 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueInt16 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2248 := (strconv.Atoi(flag.Arg(1)))
-    if err2248 != nil {
+    tmp0, err2266 := (strconv.Atoi(flag.Arg(1)))
+    if err2266 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2249 := flag.Arg(2)
-    mbTrans2250 := thrift.NewTMemoryBufferLen(len(arg2249))
-    defer mbTrans2250.Close()
-    _, err2251 := mbTrans2250.WriteString(arg2249)
-    if err2251 != nil {
+    arg2267 := flag.Arg(2)
+    mbTrans2268 := thrift.NewTMemoryBufferLen(len(arg2267))
+    defer mbTrans2268.Close()
+    _, err2269 := mbTrans2268.WriteString(arg2267)
+    if err2269 != nil {
       Usage()
       return
     }
-    factory2252 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2253 := factory2252.GetProtocol(mbTrans2250)
+    factory2270 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2271 := factory2270.GetProtocol(mbTrans2268)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2254 := argvalue1.Read(jsProt2253)
-    if err2254 != nil {
+    err2272 := argvalue1.Read(jsProt2271)
+    if err2272 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2255 := (strconv.Atoi(flag.Arg(3)))
-    if err2255 != nil {
+    tmp2, err2273 := (strconv.Atoi(flag.Arg(3)))
+    if err2273 != nil {
       Usage()
       return
     }
@@ -2738,26 +2764,26 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueString requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2256 := (strconv.Atoi(flag.Arg(1)))
-    if err2256 != nil {
+    tmp0, err2274 := (strconv.Atoi(flag.Arg(1)))
+    if err2274 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2257 := flag.Arg(2)
-    mbTrans2258 := thrift.NewTMemoryBufferLen(len(arg2257))
-    defer mbTrans2258.Close()
-    _, err2259 := mbTrans2258.WriteString(arg2257)
-    if err2259 != nil {
+    arg2275 := flag.Arg(2)
+    mbTrans2276 := thrift.NewTMemoryBufferLen(len(arg2275))
+    defer mbTrans2276.Close()
+    _, err2277 := mbTrans2276.WriteString(arg2275)
+    if err2277 != nil {
       Usage()
       return
     }
-    factory2260 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2261 := factory2260.GetProtocol(mbTrans2258)
+    factory2278 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2279 := factory2278.GetProtocol(mbTrans2276)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2262 := argvalue1.Read(jsProt2261)
-    if err2262 != nil {
+    err2280 := argvalue1.Read(jsProt2279)
+    if err2280 != nil {
       Usage()
       return
     }
@@ -2772,26 +2798,26 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueListSelectionString requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2264 := (strconv.Atoi(flag.Arg(1)))
-    if err2264 != nil {
+    tmp0, err2282 := (strconv.Atoi(flag.Arg(1)))
+    if err2282 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2265 := flag.Arg(2)
-    mbTrans2266 := thrift.NewTMemoryBufferLen(len(arg2265))
-    defer mbTrans2266.Close()
-    _, err2267 := mbTrans2266.WriteString(arg2265)
-    if err2267 != nil {
+    arg2283 := flag.Arg(2)
+    mbTrans2284 := thrift.NewTMemoryBufferLen(len(arg2283))
+    defer mbTrans2284.Close()
+    _, err2285 := mbTrans2284.WriteString(arg2283)
+    if err2285 != nil {
       Usage()
       return
     }
-    factory2268 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2269 := factory2268.GetProtocol(mbTrans2266)
+    factory2286 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2287 := factory2286.GetProtocol(mbTrans2284)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2270 := argvalue1.Read(jsProt2269)
-    if err2270 != nil {
+    err2288 := argvalue1.Read(jsProt2287)
+    if err2288 != nil {
       Usage()
       return
     }
@@ -2806,32 +2832,32 @@ func main() {
       fmt.Fprint(os.Stderr, "AddSceneValueListSelectionInt32 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2272 := (strconv.Atoi(flag.Arg(1)))
-    if err2272 != nil {
+    tmp0, err2290 := (strconv.Atoi(flag.Arg(1)))
+    if err2290 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2273 := flag.Arg(2)
-    mbTrans2274 := thrift.NewTMemoryBufferLen(len(arg2273))
-    defer mbTrans2274.Close()
-    _, err2275 := mbTrans2274.WriteString(arg2273)
-    if err2275 != nil {
+    arg2291 := flag.Arg(2)
+    mbTrans2292 := thrift.NewTMemoryBufferLen(len(arg2291))
+    defer mbTrans2292.Close()
+    _, err2293 := mbTrans2292.WriteString(arg2291)
+    if err2293 != nil {
       Usage()
       return
     }
-    factory2276 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2277 := factory2276.GetProtocol(mbTrans2274)
+    factory2294 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2295 := factory2294.GetProtocol(mbTrans2292)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2278 := argvalue1.Read(jsProt2277)
-    if err2278 != nil {
+    err2296 := argvalue1.Read(jsProt2295)
+    if err2296 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2279 := (strconv.Atoi(flag.Arg(3)))
-    if err2279 != nil {
+    tmp2, err2297 := (strconv.Atoi(flag.Arg(3)))
+    if err2297 != nil {
       Usage()
       return
     }
@@ -2845,26 +2871,26 @@ func main() {
       fmt.Fprint(os.Stderr, "RemoveSceneValue requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2280 := (strconv.Atoi(flag.Arg(1)))
-    if err2280 != nil {
+    tmp0, err2298 := (strconv.Atoi(flag.Arg(1)))
+    if err2298 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2281 := flag.Arg(2)
-    mbTrans2282 := thrift.NewTMemoryBufferLen(len(arg2281))
-    defer mbTrans2282.Close()
-    _, err2283 := mbTrans2282.WriteString(arg2281)
-    if err2283 != nil {
+    arg2299 := flag.Arg(2)
+    mbTrans2300 := thrift.NewTMemoryBufferLen(len(arg2299))
+    defer mbTrans2300.Close()
+    _, err2301 := mbTrans2300.WriteString(arg2299)
+    if err2301 != nil {
       Usage()
       return
     }
-    factory2284 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2285 := factory2284.GetProtocol(mbTrans2282)
+    factory2302 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2303 := factory2302.GetProtocol(mbTrans2300)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2286 := argvalue1.Read(jsProt2285)
-    if err2286 != nil {
+    err2304 := argvalue1.Read(jsProt2303)
+    if err2304 != nil {
       Usage()
       return
     }
@@ -2877,8 +2903,8 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValues requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2287 := (strconv.Atoi(flag.Arg(1)))
-    if err2287 != nil {
+    tmp0, err2305 := (strconv.Atoi(flag.Arg(1)))
+    if err2305 != nil {
       Usage()
       return
     }
@@ -2892,26 +2918,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueAsBool requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2288 := (strconv.Atoi(flag.Arg(1)))
-    if err2288 != nil {
+    tmp0, err2306 := (strconv.Atoi(flag.Arg(1)))
+    if err2306 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2289 := flag.Arg(2)
-    mbTrans2290 := thrift.NewTMemoryBufferLen(len(arg2289))
-    defer mbTrans2290.Close()
-    _, err2291 := mbTrans2290.WriteString(arg2289)
-    if err2291 != nil {
+    arg2307 := flag.Arg(2)
+    mbTrans2308 := thrift.NewTMemoryBufferLen(len(arg2307))
+    defer mbTrans2308.Close()
+    _, err2309 := mbTrans2308.WriteString(arg2307)
+    if err2309 != nil {
       Usage()
       return
     }
-    factory2292 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2293 := factory2292.GetProtocol(mbTrans2290)
+    factory2310 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2311 := factory2310.GetProtocol(mbTrans2308)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2294 := argvalue1.Read(jsProt2293)
-    if err2294 != nil {
+    err2312 := argvalue1.Read(jsProt2311)
+    if err2312 != nil {
       Usage()
       return
     }
@@ -2924,26 +2950,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueAsByte requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2295 := (strconv.Atoi(flag.Arg(1)))
-    if err2295 != nil {
+    tmp0, err2313 := (strconv.Atoi(flag.Arg(1)))
+    if err2313 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2296 := flag.Arg(2)
-    mbTrans2297 := thrift.NewTMemoryBufferLen(len(arg2296))
-    defer mbTrans2297.Close()
-    _, err2298 := mbTrans2297.WriteString(arg2296)
-    if err2298 != nil {
+    arg2314 := flag.Arg(2)
+    mbTrans2315 := thrift.NewTMemoryBufferLen(len(arg2314))
+    defer mbTrans2315.Close()
+    _, err2316 := mbTrans2315.WriteString(arg2314)
+    if err2316 != nil {
       Usage()
       return
     }
-    factory2299 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2300 := factory2299.GetProtocol(mbTrans2297)
+    factory2317 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2318 := factory2317.GetProtocol(mbTrans2315)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2301 := argvalue1.Read(jsProt2300)
-    if err2301 != nil {
+    err2319 := argvalue1.Read(jsProt2318)
+    if err2319 != nil {
       Usage()
       return
     }
@@ -2956,26 +2982,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueAsFloat requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2302 := (strconv.Atoi(flag.Arg(1)))
-    if err2302 != nil {
+    tmp0, err2320 := (strconv.Atoi(flag.Arg(1)))
+    if err2320 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2303 := flag.Arg(2)
-    mbTrans2304 := thrift.NewTMemoryBufferLen(len(arg2303))
-    defer mbTrans2304.Close()
-    _, err2305 := mbTrans2304.WriteString(arg2303)
-    if err2305 != nil {
+    arg2321 := flag.Arg(2)
+    mbTrans2322 := thrift.NewTMemoryBufferLen(len(arg2321))
+    defer mbTrans2322.Close()
+    _, err2323 := mbTrans2322.WriteString(arg2321)
+    if err2323 != nil {
       Usage()
       return
     }
-    factory2306 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2307 := factory2306.GetProtocol(mbTrans2304)
+    factory2324 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2325 := factory2324.GetProtocol(mbTrans2322)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2308 := argvalue1.Read(jsProt2307)
-    if err2308 != nil {
+    err2326 := argvalue1.Read(jsProt2325)
+    if err2326 != nil {
       Usage()
       return
     }
@@ -2988,26 +3014,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueAsInt requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2309 := (strconv.Atoi(flag.Arg(1)))
-    if err2309 != nil {
+    tmp0, err2327 := (strconv.Atoi(flag.Arg(1)))
+    if err2327 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2310 := flag.Arg(2)
-    mbTrans2311 := thrift.NewTMemoryBufferLen(len(arg2310))
-    defer mbTrans2311.Close()
-    _, err2312 := mbTrans2311.WriteString(arg2310)
-    if err2312 != nil {
+    arg2328 := flag.Arg(2)
+    mbTrans2329 := thrift.NewTMemoryBufferLen(len(arg2328))
+    defer mbTrans2329.Close()
+    _, err2330 := mbTrans2329.WriteString(arg2328)
+    if err2330 != nil {
       Usage()
       return
     }
-    factory2313 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2314 := factory2313.GetProtocol(mbTrans2311)
+    factory2331 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2332 := factory2331.GetProtocol(mbTrans2329)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2315 := argvalue1.Read(jsProt2314)
-    if err2315 != nil {
+    err2333 := argvalue1.Read(jsProt2332)
+    if err2333 != nil {
       Usage()
       return
     }
@@ -3020,26 +3046,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueAsShort requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2316 := (strconv.Atoi(flag.Arg(1)))
-    if err2316 != nil {
+    tmp0, err2334 := (strconv.Atoi(flag.Arg(1)))
+    if err2334 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2317 := flag.Arg(2)
-    mbTrans2318 := thrift.NewTMemoryBufferLen(len(arg2317))
-    defer mbTrans2318.Close()
-    _, err2319 := mbTrans2318.WriteString(arg2317)
-    if err2319 != nil {
+    arg2335 := flag.Arg(2)
+    mbTrans2336 := thrift.NewTMemoryBufferLen(len(arg2335))
+    defer mbTrans2336.Close()
+    _, err2337 := mbTrans2336.WriteString(arg2335)
+    if err2337 != nil {
       Usage()
       return
     }
-    factory2320 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2321 := factory2320.GetProtocol(mbTrans2318)
+    factory2338 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2339 := factory2338.GetProtocol(mbTrans2336)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2322 := argvalue1.Read(jsProt2321)
-    if err2322 != nil {
+    err2340 := argvalue1.Read(jsProt2339)
+    if err2340 != nil {
       Usage()
       return
     }
@@ -3052,26 +3078,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueAsString requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2323 := (strconv.Atoi(flag.Arg(1)))
-    if err2323 != nil {
+    tmp0, err2341 := (strconv.Atoi(flag.Arg(1)))
+    if err2341 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2324 := flag.Arg(2)
-    mbTrans2325 := thrift.NewTMemoryBufferLen(len(arg2324))
-    defer mbTrans2325.Close()
-    _, err2326 := mbTrans2325.WriteString(arg2324)
-    if err2326 != nil {
+    arg2342 := flag.Arg(2)
+    mbTrans2343 := thrift.NewTMemoryBufferLen(len(arg2342))
+    defer mbTrans2343.Close()
+    _, err2344 := mbTrans2343.WriteString(arg2342)
+    if err2344 != nil {
       Usage()
       return
     }
-    factory2327 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2328 := factory2327.GetProtocol(mbTrans2325)
+    factory2345 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2346 := factory2345.GetProtocol(mbTrans2343)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2329 := argvalue1.Read(jsProt2328)
-    if err2329 != nil {
+    err2347 := argvalue1.Read(jsProt2346)
+    if err2347 != nil {
       Usage()
       return
     }
@@ -3084,26 +3110,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueListSelectionString requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2330 := (strconv.Atoi(flag.Arg(1)))
-    if err2330 != nil {
+    tmp0, err2348 := (strconv.Atoi(flag.Arg(1)))
+    if err2348 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2331 := flag.Arg(2)
-    mbTrans2332 := thrift.NewTMemoryBufferLen(len(arg2331))
-    defer mbTrans2332.Close()
-    _, err2333 := mbTrans2332.WriteString(arg2331)
-    if err2333 != nil {
+    arg2349 := flag.Arg(2)
+    mbTrans2350 := thrift.NewTMemoryBufferLen(len(arg2349))
+    defer mbTrans2350.Close()
+    _, err2351 := mbTrans2350.WriteString(arg2349)
+    if err2351 != nil {
       Usage()
       return
     }
-    factory2334 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2335 := factory2334.GetProtocol(mbTrans2332)
+    factory2352 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2353 := factory2352.GetProtocol(mbTrans2350)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2336 := argvalue1.Read(jsProt2335)
-    if err2336 != nil {
+    err2354 := argvalue1.Read(jsProt2353)
+    if err2354 != nil {
       Usage()
       return
     }
@@ -3116,26 +3142,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneGetValueListSelectionInt32 requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2337 := (strconv.Atoi(flag.Arg(1)))
-    if err2337 != nil {
+    tmp0, err2355 := (strconv.Atoi(flag.Arg(1)))
+    if err2355 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2338 := flag.Arg(2)
-    mbTrans2339 := thrift.NewTMemoryBufferLen(len(arg2338))
-    defer mbTrans2339.Close()
-    _, err2340 := mbTrans2339.WriteString(arg2338)
-    if err2340 != nil {
+    arg2356 := flag.Arg(2)
+    mbTrans2357 := thrift.NewTMemoryBufferLen(len(arg2356))
+    defer mbTrans2357.Close()
+    _, err2358 := mbTrans2357.WriteString(arg2356)
+    if err2358 != nil {
       Usage()
       return
     }
-    factory2341 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2342 := factory2341.GetProtocol(mbTrans2339)
+    factory2359 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2360 := factory2359.GetProtocol(mbTrans2357)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2343 := argvalue1.Read(jsProt2342)
-    if err2343 != nil {
+    err2361 := argvalue1.Read(jsProt2360)
+    if err2361 != nil {
       Usage()
       return
     }
@@ -3148,26 +3174,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueBool requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2344 := (strconv.Atoi(flag.Arg(1)))
-    if err2344 != nil {
+    tmp0, err2362 := (strconv.Atoi(flag.Arg(1)))
+    if err2362 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2345 := flag.Arg(2)
-    mbTrans2346 := thrift.NewTMemoryBufferLen(len(arg2345))
-    defer mbTrans2346.Close()
-    _, err2347 := mbTrans2346.WriteString(arg2345)
-    if err2347 != nil {
+    arg2363 := flag.Arg(2)
+    mbTrans2364 := thrift.NewTMemoryBufferLen(len(arg2363))
+    defer mbTrans2364.Close()
+    _, err2365 := mbTrans2364.WriteString(arg2363)
+    if err2365 != nil {
       Usage()
       return
     }
-    factory2348 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2349 := factory2348.GetProtocol(mbTrans2346)
+    factory2366 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2367 := factory2366.GetProtocol(mbTrans2364)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2350 := argvalue1.Read(jsProt2349)
-    if err2350 != nil {
+    err2368 := argvalue1.Read(jsProt2367)
+    if err2368 != nil {
       Usage()
       return
     }
@@ -3182,32 +3208,32 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueUint8 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2352 := (strconv.Atoi(flag.Arg(1)))
-    if err2352 != nil {
+    tmp0, err2370 := (strconv.Atoi(flag.Arg(1)))
+    if err2370 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2353 := flag.Arg(2)
-    mbTrans2354 := thrift.NewTMemoryBufferLen(len(arg2353))
-    defer mbTrans2354.Close()
-    _, err2355 := mbTrans2354.WriteString(arg2353)
-    if err2355 != nil {
+    arg2371 := flag.Arg(2)
+    mbTrans2372 := thrift.NewTMemoryBufferLen(len(arg2371))
+    defer mbTrans2372.Close()
+    _, err2373 := mbTrans2372.WriteString(arg2371)
+    if err2373 != nil {
       Usage()
       return
     }
-    factory2356 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2357 := factory2356.GetProtocol(mbTrans2354)
+    factory2374 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2375 := factory2374.GetProtocol(mbTrans2372)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2358 := argvalue1.Read(jsProt2357)
-    if err2358 != nil {
+    err2376 := argvalue1.Read(jsProt2375)
+    if err2376 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2359 := (strconv.Atoi(flag.Arg(3)))
-    if err2359 != nil {
+    tmp2, err2377 := (strconv.Atoi(flag.Arg(3)))
+    if err2377 != nil {
       Usage()
       return
     }
@@ -3221,32 +3247,32 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueFloat requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2360 := (strconv.Atoi(flag.Arg(1)))
-    if err2360 != nil {
+    tmp0, err2378 := (strconv.Atoi(flag.Arg(1)))
+    if err2378 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2361 := flag.Arg(2)
-    mbTrans2362 := thrift.NewTMemoryBufferLen(len(arg2361))
-    defer mbTrans2362.Close()
-    _, err2363 := mbTrans2362.WriteString(arg2361)
-    if err2363 != nil {
+    arg2379 := flag.Arg(2)
+    mbTrans2380 := thrift.NewTMemoryBufferLen(len(arg2379))
+    defer mbTrans2380.Close()
+    _, err2381 := mbTrans2380.WriteString(arg2379)
+    if err2381 != nil {
       Usage()
       return
     }
-    factory2364 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2365 := factory2364.GetProtocol(mbTrans2362)
+    factory2382 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2383 := factory2382.GetProtocol(mbTrans2380)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2366 := argvalue1.Read(jsProt2365)
-    if err2366 != nil {
+    err2384 := argvalue1.Read(jsProt2383)
+    if err2384 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    argvalue2, err2367 := (strconv.Atof64(flag.Arg(3)))
-    if err2367 != nil {
+    argvalue2, err2385 := (strconv.Atof64(flag.Arg(3)))
+    if err2385 != nil {
       Usage()
       return
     }
@@ -3259,32 +3285,32 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueInt32 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2368 := (strconv.Atoi(flag.Arg(1)))
-    if err2368 != nil {
+    tmp0, err2386 := (strconv.Atoi(flag.Arg(1)))
+    if err2386 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2369 := flag.Arg(2)
-    mbTrans2370 := thrift.NewTMemoryBufferLen(len(arg2369))
-    defer mbTrans2370.Close()
-    _, err2371 := mbTrans2370.WriteString(arg2369)
-    if err2371 != nil {
+    arg2387 := flag.Arg(2)
+    mbTrans2388 := thrift.NewTMemoryBufferLen(len(arg2387))
+    defer mbTrans2388.Close()
+    _, err2389 := mbTrans2388.WriteString(arg2387)
+    if err2389 != nil {
       Usage()
       return
     }
-    factory2372 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2373 := factory2372.GetProtocol(mbTrans2370)
+    factory2390 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2391 := factory2390.GetProtocol(mbTrans2388)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2374 := argvalue1.Read(jsProt2373)
-    if err2374 != nil {
+    err2392 := argvalue1.Read(jsProt2391)
+    if err2392 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2375 := (strconv.Atoi(flag.Arg(3)))
-    if err2375 != nil {
+    tmp2, err2393 := (strconv.Atoi(flag.Arg(3)))
+    if err2393 != nil {
       Usage()
       return
     }
@@ -3298,32 +3324,32 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueInt16 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2376 := (strconv.Atoi(flag.Arg(1)))
-    if err2376 != nil {
+    tmp0, err2394 := (strconv.Atoi(flag.Arg(1)))
+    if err2394 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2377 := flag.Arg(2)
-    mbTrans2378 := thrift.NewTMemoryBufferLen(len(arg2377))
-    defer mbTrans2378.Close()
-    _, err2379 := mbTrans2378.WriteString(arg2377)
-    if err2379 != nil {
+    arg2395 := flag.Arg(2)
+    mbTrans2396 := thrift.NewTMemoryBufferLen(len(arg2395))
+    defer mbTrans2396.Close()
+    _, err2397 := mbTrans2396.WriteString(arg2395)
+    if err2397 != nil {
       Usage()
       return
     }
-    factory2380 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2381 := factory2380.GetProtocol(mbTrans2378)
+    factory2398 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2399 := factory2398.GetProtocol(mbTrans2396)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2382 := argvalue1.Read(jsProt2381)
-    if err2382 != nil {
+    err2400 := argvalue1.Read(jsProt2399)
+    if err2400 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2383 := (strconv.Atoi(flag.Arg(3)))
-    if err2383 != nil {
+    tmp2, err2401 := (strconv.Atoi(flag.Arg(3)))
+    if err2401 != nil {
       Usage()
       return
     }
@@ -3337,26 +3363,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueString requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2384 := (strconv.Atoi(flag.Arg(1)))
-    if err2384 != nil {
+    tmp0, err2402 := (strconv.Atoi(flag.Arg(1)))
+    if err2402 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2385 := flag.Arg(2)
-    mbTrans2386 := thrift.NewTMemoryBufferLen(len(arg2385))
-    defer mbTrans2386.Close()
-    _, err2387 := mbTrans2386.WriteString(arg2385)
-    if err2387 != nil {
+    arg2403 := flag.Arg(2)
+    mbTrans2404 := thrift.NewTMemoryBufferLen(len(arg2403))
+    defer mbTrans2404.Close()
+    _, err2405 := mbTrans2404.WriteString(arg2403)
+    if err2405 != nil {
       Usage()
       return
     }
-    factory2388 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2389 := factory2388.GetProtocol(mbTrans2386)
+    factory2406 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2407 := factory2406.GetProtocol(mbTrans2404)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2390 := argvalue1.Read(jsProt2389)
-    if err2390 != nil {
+    err2408 := argvalue1.Read(jsProt2407)
+    if err2408 != nil {
       Usage()
       return
     }
@@ -3371,26 +3397,26 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueListSelectionString requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2392 := (strconv.Atoi(flag.Arg(1)))
-    if err2392 != nil {
+    tmp0, err2410 := (strconv.Atoi(flag.Arg(1)))
+    if err2410 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2393 := flag.Arg(2)
-    mbTrans2394 := thrift.NewTMemoryBufferLen(len(arg2393))
-    defer mbTrans2394.Close()
-    _, err2395 := mbTrans2394.WriteString(arg2393)
-    if err2395 != nil {
+    arg2411 := flag.Arg(2)
+    mbTrans2412 := thrift.NewTMemoryBufferLen(len(arg2411))
+    defer mbTrans2412.Close()
+    _, err2413 := mbTrans2412.WriteString(arg2411)
+    if err2413 != nil {
       Usage()
       return
     }
-    factory2396 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2397 := factory2396.GetProtocol(mbTrans2394)
+    factory2414 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2415 := factory2414.GetProtocol(mbTrans2412)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2398 := argvalue1.Read(jsProt2397)
-    if err2398 != nil {
+    err2416 := argvalue1.Read(jsProt2415)
+    if err2416 != nil {
       Usage()
       return
     }
@@ -3405,32 +3431,32 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneValueListSelectionInt32 requires 3 args\n")
       flag.Usage()
     }
-    tmp0, err2400 := (strconv.Atoi(flag.Arg(1)))
-    if err2400 != nil {
+    tmp0, err2418 := (strconv.Atoi(flag.Arg(1)))
+    if err2418 != nil {
       Usage()
       return
     }
     argvalue0 := byte(tmp0)
     value0 := argvalue0
-    arg2401 := flag.Arg(2)
-    mbTrans2402 := thrift.NewTMemoryBufferLen(len(arg2401))
-    defer mbTrans2402.Close()
-    _, err2403 := mbTrans2402.WriteString(arg2401)
-    if err2403 != nil {
+    arg2419 := flag.Arg(2)
+    mbTrans2420 := thrift.NewTMemoryBufferLen(len(arg2419))
+    defer mbTrans2420.Close()
+    _, err2421 := mbTrans2420.WriteString(arg2419)
+    if err2421 != nil {
       Usage()
       return
     }
-    factory2404 := thrift.NewTSimpleJSONProtocolFactory()
-    jsProt2405 := factory2404.GetProtocol(mbTrans2402)
+    factory2422 := thrift.NewTSimpleJSONProtocolFactory()
+    jsProt2423 := factory2422.GetProtocol(mbTrans2420)
     argvalue1 := OpenZWave.NewRemoteValueID()
-    err2406 := argvalue1.Read(jsProt2405)
-    if err2406 != nil {
+    err2424 := argvalue1.Read(jsProt2423)
+    if err2424 != nil {
       Usage()
       return
     }
     value1 := argvalue1
-    tmp2, err2407 := (strconv.Atoi(flag.Arg(3)))
-    if err2407 != nil {
+    tmp2, err2425 := (strconv.Atoi(flag.Arg(3)))
+    if err2425 != nil {
       Usage()
       return
     }
@@ -3444,8 +3470,8 @@ func main() {
       fmt.Fprint(os.Stderr, "GetSceneLabel requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2408 := (strconv.Atoi(flag.Arg(1)))
-    if err2408 != nil {
+    tmp0, err2426 := (strconv.Atoi(flag.Arg(1)))
+    if err2426 != nil {
       Usage()
       return
     }
@@ -3459,8 +3485,8 @@ func main() {
       fmt.Fprint(os.Stderr, "SetSceneLabel requires 2 args\n")
       flag.Usage()
     }
-    tmp0, err2409 := (strconv.Atoi(flag.Arg(1)))
-    if err2409 != nil {
+    tmp0, err2427 := (strconv.Atoi(flag.Arg(1)))
+    if err2427 != nil {
       Usage()
       return
     }
@@ -3476,8 +3502,8 @@ func main() {
       fmt.Fprint(os.Stderr, "SceneExists requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2411 := (strconv.Atoi(flag.Arg(1)))
-    if err2411 != nil {
+    tmp0, err2429 := (strconv.Atoi(flag.Arg(1)))
+    if err2429 != nil {
       Usage()
       return
     }
@@ -3491,8 +3517,8 @@ func main() {
       fmt.Fprint(os.Stderr, "ActivateScene requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2412 := (strconv.Atoi(flag.Arg(1)))
-    if err2412 != nil {
+    tmp0, err2430 := (strconv.Atoi(flag.Arg(1)))
+    if err2430 != nil {
       Usage()
       return
     }
@@ -3506,8 +3532,8 @@ func main() {
       fmt.Fprint(os.Stderr, "GetDriverStatistics requires 1 args\n")
       flag.Usage()
     }
-    tmp0, err2413 := (strconv.Atoi(flag.Arg(1)))
-    if err2413 != nil {
+    tmp0, err2431 := (strconv.Atoi(flag.Arg(1)))
+    if err2431 != nil {
       Usage()
       return
     }

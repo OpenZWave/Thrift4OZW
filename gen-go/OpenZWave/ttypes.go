@@ -119,6 +119,8 @@ const (
   ControllerCommand_RequestNodeNeighborUpdate DriverControllerCommand = 12
   ControllerCommand_AssignReturnRoute DriverControllerCommand = 13
   ControllerCommand_DeleteAllReturnRoutes DriverControllerCommand = 14
+  ControllerCommand_CreateButton DriverControllerCommand = 15
+  ControllerCommand_DeleteButton DriverControllerCommand = 16
 )
 func (p DriverControllerCommand) String() string {
   switch p {
@@ -137,6 +139,8 @@ func (p DriverControllerCommand) String() string {
   case ControllerCommand_RequestNodeNeighborUpdate: return "ControllerCommand_RequestNodeNeighborUpdate"
   case ControllerCommand_AssignReturnRoute: return "ControllerCommand_AssignReturnRoute"
   case ControllerCommand_DeleteAllReturnRoutes: return "ControllerCommand_DeleteAllReturnRoutes"
+  case ControllerCommand_CreateButton: return "ControllerCommand_CreateButton"
+  case ControllerCommand_DeleteButton: return "ControllerCommand_DeleteButton"
   }
   return ""
 }
@@ -158,6 +162,8 @@ func FromDriverControllerCommandString(s string) DriverControllerCommand {
   case "ControllerCommand_RequestNodeNeighborUpdate": return ControllerCommand_RequestNodeNeighborUpdate
   case "ControllerCommand_AssignReturnRoute": return ControllerCommand_AssignReturnRoute
   case "ControllerCommand_DeleteAllReturnRoutes": return ControllerCommand_DeleteAllReturnRoutes
+  case "ControllerCommand_CreateButton": return ControllerCommand_CreateButton
+  case "ControllerCommand_DeleteButton": return ControllerCommand_DeleteButton
   }
   return DriverControllerCommand(-10000)
 }
@@ -171,7 +177,7 @@ func (p DriverControllerCommand) IsEnum() bool {
 }
 
 /**
- * < Delete all return routes from a device.
+ * Delete a handheld button id.
  * 
  * Attributes:
  *  - _homeId

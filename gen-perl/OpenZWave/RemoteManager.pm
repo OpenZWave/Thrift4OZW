@@ -9742,6 +9742,135 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_RefreshValue_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_RefreshValue_args->mk_accessors( qw( _id ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_id} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_id}) {
+      $self->{_id} = $vals->{_id};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_RefreshValue_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::STRUCT) {
+        $self->{_id} = new OpenZWave::RemoteValueID();
+        $xfer += $self->{_id}->read($input);
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_RefreshValue_args');
+  if (defined $self->{_id}) {
+    $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
+    $xfer += $self->{_id}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_RefreshValue_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_RefreshValue_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_RefreshValue_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_RefreshValue_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManager_PressButton_args;
 use base qw(Class::Accessor);
 OpenZWave::RemoteManager_PressButton_args->mk_accessors( qw( _id ) );
@@ -18576,6 +18705,13 @@ sub SetValueListSelection{
   die 'implement interface';
 }
 
+sub RefreshValue{
+  my $self = shift;
+  my $_id = shift;
+
+  die 'implement interface';
+}
+
 sub PressButton{
   my $self = shift;
   my $_id = shift;
@@ -19610,6 +19746,13 @@ sub SetValueListSelection{
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   my $_selectedItem = ($request->{'_selectedItem'}) ? $request->{'_selectedItem'} : undef;
   return $self->{impl}->SetValueListSelection($_id, $_selectedItem);
+}
+
+sub RefreshValue{
+  my ($self, $request) = @_;
+
+  my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
+  return $self->{impl}->RefreshValue($_id);
 }
 
 sub PressButton{
@@ -23297,6 +23440,49 @@ sub recv_SetValueListSelection{
   }
   die "SetValueListSelection failed: unknown result";
 }
+sub RefreshValue{
+  my $self = shift;
+  my $_id = shift;
+
+    $self->send_RefreshValue($_id);
+  return $self->recv_RefreshValue();
+}
+
+sub send_RefreshValue{
+  my $self = shift;
+  my $_id = shift;
+
+  $self->{output}->writeMessageBegin('RefreshValue', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_RefreshValue_args();
+  $args->{_id} = $_id;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_RefreshValue{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_RefreshValue_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "RefreshValue failed: unknown result";
+}
 sub PressButton{
   my $self = shift;
   my $_id = shift;
@@ -26927,6 +27113,19 @@ sub process_SetValueListSelection {
     my $result = new OpenZWave::RemoteManager_SetValueListSelection_result();
     $result->{success} = $self->{handler}->SetValueListSelection($args->_id, $args->_selectedItem);
     $output->writeMessageBegin('SetValueListSelection', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_RefreshValue {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_RefreshValue_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_RefreshValue_result();
+    $result->{success} = $self->{handler}->RefreshValue($args->_id);
+    $output->writeMessageBegin('RefreshValue', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

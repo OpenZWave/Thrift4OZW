@@ -64,7 +64,9 @@ int _kDriverControllerCommandValues[] = {
   DriverControllerCommand::ControllerCommand_RequestNetworkUpdate,
   DriverControllerCommand::ControllerCommand_RequestNodeNeighborUpdate,
   DriverControllerCommand::ControllerCommand_AssignReturnRoute,
-  DriverControllerCommand::ControllerCommand_DeleteAllReturnRoutes
+  DriverControllerCommand::ControllerCommand_DeleteAllReturnRoutes,
+  DriverControllerCommand::ControllerCommand_CreateButton,
+  DriverControllerCommand::ControllerCommand_DeleteButton
 };
 const char* _kDriverControllerCommandNames[] = {
   "ControllerCommand_None",
@@ -81,9 +83,11 @@ const char* _kDriverControllerCommandNames[] = {
   "ControllerCommand_RequestNetworkUpdate",
   "ControllerCommand_RequestNodeNeighborUpdate",
   "ControllerCommand_AssignReturnRoute",
-  "ControllerCommand_DeleteAllReturnRoutes"
+  "ControllerCommand_DeleteAllReturnRoutes",
+  "ControllerCommand_CreateButton",
+  "ControllerCommand_DeleteButton"
 };
-const std::map<int, const char*> _DriverControllerCommand_VALUES_TO_NAMES(::apache::thrift::TEnumIterator(15, _kDriverControllerCommandValues, _kDriverControllerCommandNames), ::apache::thrift::TEnumIterator(-1, NULL, NULL));
+const std::map<int, const char*> _DriverControllerCommand_VALUES_TO_NAMES(::apache::thrift::TEnumIterator(17, _kDriverControllerCommandValues, _kDriverControllerCommandNames), ::apache::thrift::TEnumIterator(-1, NULL, NULL));
 
 const char* RemoteValueID::ascii_fingerprint = "A30F44ED1C2FF443554DFCCDE82F70EE";
 const uint8_t RemoteValueID::binary_fingerprint[16] = {0xA3,0x0F,0x44,0xED,0x1C,0x2F,0xF4,0x43,0x55,0x4D,0xFC,0xCD,0xE8,0x2F,0x70,0xEE};

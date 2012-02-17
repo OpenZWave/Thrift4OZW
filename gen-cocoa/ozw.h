@@ -48,7 +48,9 @@ enum OpenZWaveDriverControllerCommand {
   DriverControllerCommand_ControllerCommand_RequestNetworkUpdate = 11,
   DriverControllerCommand_ControllerCommand_RequestNodeNeighborUpdate = 12,
   DriverControllerCommand_ControllerCommand_AssignReturnRoute = 13,
-  DriverControllerCommand_ControllerCommand_DeleteAllReturnRoutes = 14
+  DriverControllerCommand_ControllerCommand_DeleteAllReturnRoutes = 14,
+  DriverControllerCommand_ControllerCommand_CreateButton = 15,
+  DriverControllerCommand_ControllerCommand_DeleteButton = 16
 };
 
 @interface OpenZWaveRemoteValueID : NSObject <NSCoding> {
@@ -705,6 +707,7 @@ enum OpenZWaveDriverControllerCommand {
 - (BOOL) SetValue_Int16: (OpenZWaveRemoteValueID *) _id : (int16_t) _value;  // throws TException
 - (BOOL) SetValue_String: (OpenZWaveRemoteValueID *) _id : (NSString *) _value;  // throws TException
 - (BOOL) SetValueListSelection: (OpenZWaveRemoteValueID *) _id : (NSString *) _selectedItem;  // throws TException
+- (BOOL) RefreshValue: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (BOOL) PressButton: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (BOOL) ReleaseButton: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (uint8_t) GetNumSwitchPoints: (OpenZWaveRemoteValueID *) _id;  // throws TException

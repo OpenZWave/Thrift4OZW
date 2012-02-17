@@ -41,6 +41,8 @@ use constant ControllerCommand_RequestNetworkUpdate => 11;
 use constant ControllerCommand_RequestNodeNeighborUpdate => 12;
 use constant ControllerCommand_AssignReturnRoute => 13;
 use constant ControllerCommand_DeleteAllReturnRoutes => 14;
+use constant ControllerCommand_CreateButton => 15;
+use constant ControllerCommand_DeleteButton => 16;
 package OpenZWave::RemoteValueID;
 use base qw(Class::Accessor);
 OpenZWave::RemoteValueID->mk_accessors( qw( _homeId _nodeId _genre _commandClassId _instance _valueIndex _type ) );

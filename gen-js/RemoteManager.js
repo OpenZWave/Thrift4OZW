@@ -7986,6 +7986,113 @@ OpenZWave.RemoteManager_SetValueListSelection_result.prototype.write = function(
   return;
 };
 
+OpenZWave.RemoteManager_RefreshValue_args = function(args) {
+  this._id = null;
+  if (args) {
+    if (args._id !== undefined) {
+      this._id = args._id;
+    }
+  }
+};
+OpenZWave.RemoteManager_RefreshValue_args.prototype = {};
+OpenZWave.RemoteManager_RefreshValue_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this._id = new OpenZWave.RemoteValueID();
+        this._id.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_RefreshValue_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_RefreshValue_args');
+  if (this._id) {
+    output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
+    this._id.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_RefreshValue_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_RefreshValue_result.prototype = {};
+OpenZWave.RemoteManager_RefreshValue_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_RefreshValue_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_RefreshValue_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.RemoteManager_PressButton_args = function(args) {
   this._id = null;
   if (args) {
@@ -17302,6 +17409,40 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValueListSelection = function() 
     return result.success;
   }
   throw 'SetValueListSelection failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.RefreshValue = function(_id) {
+  this.send_RefreshValue(_id);
+  return this.recv_RefreshValue();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_RefreshValue = function(_id) {
+  this.output.writeMessageBegin('RefreshValue', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_RefreshValue_args();
+  args._id = _id;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_RefreshValue = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_RefreshValue_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'RefreshValue failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.PressButton = function(_id) {
   this.send_PressButton(_id);

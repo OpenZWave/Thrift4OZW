@@ -64,7 +64,9 @@ struct DriverControllerCommand {
     ControllerCommand_RequestNetworkUpdate = 11,
     ControllerCommand_RequestNodeNeighborUpdate = 12,
     ControllerCommand_AssignReturnRoute = 13,
-    ControllerCommand_DeleteAllReturnRoutes = 14
+    ControllerCommand_DeleteAllReturnRoutes = 14,
+    ControllerCommand_CreateButton = 15,
+    ControllerCommand_DeleteButton = 16
   };
 };
 

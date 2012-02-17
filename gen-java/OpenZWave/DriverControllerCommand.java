@@ -67,7 +67,15 @@ public enum DriverControllerCommand implements org.apache.thrift.TEnum {
   /**
    * < Assign a network return routes to a device.
    */
-  ControllerCommand_DeleteAllReturnRoutes(14);
+  ControllerCommand_DeleteAllReturnRoutes(14),
+  /**
+   * < Delete all return routes from a device.
+   */
+  ControllerCommand_CreateButton(15),
+  /**
+   * Create a handheld button id.
+   */
+  ControllerCommand_DeleteButton(16);
 
   private final int value;
 
@@ -118,6 +126,10 @@ public enum DriverControllerCommand implements org.apache.thrift.TEnum {
         return ControllerCommand_AssignReturnRoute;
       case 14:
         return ControllerCommand_DeleteAllReturnRoutes;
+      case 15:
+        return ControllerCommand_CreateButton;
+      case 16:
+        return ControllerCommand_DeleteButton;
       default:
         return null;
     }

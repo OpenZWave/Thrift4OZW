@@ -91,6 +91,8 @@ class DriverControllerCommand:
   ControllerCommand_RequestNodeNeighborUpdate = 12
   ControllerCommand_AssignReturnRoute = 13
   ControllerCommand_DeleteAllReturnRoutes = 14
+  ControllerCommand_CreateButton = 15
+  ControllerCommand_DeleteButton = 16
 
   _VALUES_TO_NAMES = {
     0: "ControllerCommand_None",
@@ -108,6 +110,8 @@ class DriverControllerCommand:
     12: "ControllerCommand_RequestNodeNeighborUpdate",
     13: "ControllerCommand_AssignReturnRoute",
     14: "ControllerCommand_DeleteAllReturnRoutes",
+    15: "ControllerCommand_CreateButton",
+    16: "ControllerCommand_DeleteButton",
   }
 
   _NAMES_TO_VALUES = {
@@ -126,12 +130,14 @@ class DriverControllerCommand:
     "ControllerCommand_RequestNodeNeighborUpdate": 12,
     "ControllerCommand_AssignReturnRoute": 13,
     "ControllerCommand_DeleteAllReturnRoutes": 14,
+    "ControllerCommand_CreateButton": 15,
+    "ControllerCommand_DeleteButton": 16,
   }
 
 
 class RemoteValueID:
   """
-  < Delete all return routes from a device.
+  Delete a handheld button id.
 
   Attributes:
    - _homeId

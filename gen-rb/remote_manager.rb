@@ -1080,6 +1080,21 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValueListSelection failed: unknown result')
           end
 
+          def RefreshValue(_id)
+            send_RefreshValue(_id)
+            return recv_RefreshValue()
+          end
+
+          def send_RefreshValue(_id)
+            send_message('RefreshValue', RefreshValue_args, :_id => _id)
+          end
+
+          def recv_RefreshValue()
+            result = receive_message(RefreshValue_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'RefreshValue failed: unknown result')
+          end
+
           def PressButton(_id)
             send_PressButton(_id)
             return recv_PressButton()
@@ -2446,6 +2461,13 @@ require 'ozw_types'
             result = SetValueListSelection_result.new()
             result.success = @handler.SetValueListSelection(args._id, args._selectedItem)
             write_result(result, oprot, 'SetValueListSelection', seqid)
+          end
+
+          def process_RefreshValue(seqid, iprot, oprot)
+            args = read_args(iprot, RefreshValue_args)
+            result = RefreshValue_result.new()
+            result.success = @handler.RefreshValue(args._id)
+            write_result(result, oprot, 'RefreshValue', seqid)
           end
 
           def process_PressButton(seqid, iprot, oprot)
@@ -5228,6 +5250,38 @@ require 'ozw_types'
         end
 
         class SetValueListSelection_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class RefreshValue_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _ID = 1
+
+          FIELDS = {
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class RefreshValue_result
           include ::Thrift::Struct, ::Thrift::Struct_Union
           SUCCESS = 0
 

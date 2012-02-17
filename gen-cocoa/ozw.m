@@ -23444,6 +23444,266 @@
 
 @end
 
+@interface OpenZWaveRefreshValue_args : NSObject <NSCoding> {
+  OpenZWaveRemoteValueID * ___id;
+
+  BOOL ___id_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=_id, setter=set_id:) OpenZWaveRemoteValueID * _id;
+#endif
+
+- (id) initWith_id: (OpenZWaveRemoteValueID *) _id;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (OpenZWaveRemoteValueID *) _id;
+- (void) set_id: (OpenZWaveRemoteValueID *) _id;
+- (BOOL) _idIsSet;
+
+@end
+
+@implementation OpenZWaveRefreshValue_args
+
+- (id) initWith_id: (OpenZWaveRemoteValueID *) _id
+{
+  self = [super init];
+  ___id = [_id retain];
+  ___id_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_id"])
+  {
+    ___id = [[decoder decodeObjectForKey: @"_id"] retain];
+    ___id_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___id_isset)
+  {
+    [encoder encodeObject: ___id forKey: @"_id"];
+  }
+}
+
+- (void) dealloc
+{
+  [___id release];
+  [super dealloc];
+}
+
+- (OpenZWaveRemoteValueID *) _id {
+  return [[___id retain] autorelease];
+}
+
+- (void) set_id: (OpenZWaveRemoteValueID *) _id {
+  [_id retain];
+  [___id release];
+  ___id = _id;
+  ___id_isset = YES;
+}
+
+- (BOOL) _idIsSet {
+  return ___id_isset;
+}
+
+- (void) unset_id {
+  [___id release];
+  ___id = nil;
+  ___id_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          OpenZWaveRemoteValueID *fieldValue = [[OpenZWaveRemoteValueID alloc] init];
+          [fieldValue read: inProtocol];
+          [self set_id: fieldValue];
+          [fieldValue release];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"RefreshValue_args"];
+  if (___id_isset) {
+    if (___id != nil) {
+      [outProtocol writeFieldBeginWithName: @"_id" type: TType_STRUCT fieldID: 1];
+      [___id write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"RefreshValue_args("];
+  [ms appendString: @"_id:"];
+  [ms appendFormat: @"%@", ___id];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveRefreshValue_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveRefreshValue_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"RefreshValue_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"RefreshValue_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @interface OpenZWavePressButton_args : NSObject <NSCoding> {
   OpenZWaveRemoteValueID * ___id;
 
@@ -43993,6 +44253,46 @@
   return [self recv_SetValueListSelection];
 }
 
+- (void) send_RefreshValue: (OpenZWaveRemoteValueID *) _id
+{
+  [outProtocol writeMessageBeginWithName: @"RefreshValue" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"RefreshValue_args"];
+  if (_id != nil)  {
+    [outProtocol writeFieldBeginWithName: @"_id" type: TType_STRUCT fieldID: 1];
+    [_id write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_RefreshValue
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveRefreshValue_result * result = [[[OpenZWaveRefreshValue_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"RefreshValue failed: unknown result"];
+}
+
+- (BOOL) RefreshValue: (OpenZWaveRemoteValueID *) _id
+{
+  [self send_RefreshValue: _id];
+  return [self recv_RefreshValue];
+}
+
 - (void) send_PressButton: (OpenZWaveRemoteValueID *) _id
 {
   [outProtocol writeMessageBeginWithName: @"PressButton" type: TMessageType_CALL sequenceID: 0];
@@ -47020,6 +47320,14 @@
     [mMethodMap setValue: invocation forKey: @"SetValueListSelection"];
   }
   {
+    SEL s = @selector(process_RefreshValue_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"RefreshValue"];
+  }
+  {
     SEL s = @selector(process_PressButton_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
@@ -48739,6 +49047,23 @@
   OpenZWaveSetValueListSelection_result * result = [[OpenZWaveSetValueListSelection_result alloc] init];
   [result setSuccess: [mService SetValueListSelection: [args _id]: [args _selectedItem]]];
   [outProtocol writeMessageBeginWithName: @"SetValueListSelection"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_RefreshValue_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveRefreshValue_args * args = [[OpenZWaveRefreshValue_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveRefreshValue_result * result = [[OpenZWaveRefreshValue_result alloc] init];
+  [result setSuccess: [mService RefreshValue: [args _id]]];
+  [outProtocol writeMessageBeginWithName: @"RefreshValue"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

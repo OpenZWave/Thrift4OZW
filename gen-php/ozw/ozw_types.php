@@ -84,6 +84,8 @@ $GLOBALS['E_DriverControllerCommand'] = array(
   'ControllerCommand_RequestNodeNeighborUpdate' => 12,
   'ControllerCommand_AssignReturnRoute' => 13,
   'ControllerCommand_DeleteAllReturnRoutes' => 14,
+  'ControllerCommand_CreateButton' => 15,
+  'ControllerCommand_DeleteButton' => 16,
 );
 
 final class DriverControllerCommand {
@@ -102,6 +104,8 @@ final class DriverControllerCommand {
   const ControllerCommand_RequestNodeNeighborUpdate = 12;
   const ControllerCommand_AssignReturnRoute = 13;
   const ControllerCommand_DeleteAllReturnRoutes = 14;
+  const ControllerCommand_CreateButton = 15;
+  const ControllerCommand_DeleteButton = 16;
   static public $__names = array(
     0 => 'ControllerCommand_None',
     1 => 'ControllerCommand_AddController',
@@ -118,6 +122,8 @@ final class DriverControllerCommand {
     12 => 'ControllerCommand_RequestNodeNeighborUpdate',
     13 => 'ControllerCommand_AssignReturnRoute',
     14 => 'ControllerCommand_DeleteAllReturnRoutes',
+    15 => 'ControllerCommand_CreateButton',
+    16 => 'ControllerCommand_DeleteButton',
   );
 }
 
