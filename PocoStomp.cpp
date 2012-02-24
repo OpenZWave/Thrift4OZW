@@ -454,7 +454,7 @@ void  PocoStomp::run()
         //
         m_mutex->unlock();
         //
-        Poco::Thread::sleep(50);
+        Poco::Thread::sleep(25);
     }
 }
 

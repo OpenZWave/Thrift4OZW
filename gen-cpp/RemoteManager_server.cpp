@@ -94,6 +94,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void LogDriverStatistics(const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->LogDriverStatistics((::uint32 const) _homeId);
+	g_criticalSection.unlock();
+  }
+
   int32_t GetPollInterval() {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -209,6 +216,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	::int8_t function_result =  mgr->GetNodeVersion((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	::int8_t function_result =  mgr->GetNodeSecurity((::uint32 const) _homeId, (::uint8 const) _nodeId);
 	g_criticalSection.unlock();
 	return(function_result);
   }

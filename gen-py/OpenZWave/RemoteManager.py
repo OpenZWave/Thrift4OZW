@@ -79,6 +79,13 @@ class Iface:
     """
     pass
 
+  def LogDriverStatistics(self, _homeId):
+    """
+    Parameters:
+     - _homeId
+    """
+    pass
+
   def GetPollInterval(self, ):
     pass
 
@@ -183,6 +190,14 @@ class Iface:
     pass
 
   def GetNodeVersion(self, _homeId, _nodeId):
+    """
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    pass
+
+  def GetNodeSecurity(self, _homeId, _nodeId):
     """
     Parameters:
      - _homeId
@@ -1292,6 +1307,34 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetSendQueueCount failed: unknown result");
 
+  def LogDriverStatistics(self, _homeId):
+    """
+    Parameters:
+     - _homeId
+    """
+    self.send_LogDriverStatistics(_homeId)
+    self.recv_LogDriverStatistics()
+
+  def send_LogDriverStatistics(self, _homeId):
+    self._oprot.writeMessageBegin('LogDriverStatistics', TMessageType.CALL, self._seqid)
+    args = LogDriverStatistics_args()
+    args._homeId = _homeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_LogDriverStatistics(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = LogDriverStatistics_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    return
+
   def GetPollInterval(self, ):
     self.send_GetPollInterval()
     return self.recv_GetPollInterval()
@@ -1754,6 +1797,38 @@ class Client(Iface):
     if result.success is not None:
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetNodeVersion failed: unknown result");
+
+  def GetNodeSecurity(self, _homeId, _nodeId):
+    """
+    Parameters:
+     - _homeId
+     - _nodeId
+    """
+    self.send_GetNodeSecurity(_homeId, _nodeId)
+    return self.recv_GetNodeSecurity()
+
+  def send_GetNodeSecurity(self, _homeId, _nodeId):
+    self._oprot.writeMessageBegin('GetNodeSecurity', TMessageType.CALL, self._seqid)
+    args = GetNodeSecurity_args()
+    args._homeId = _homeId
+    args._nodeId = _nodeId
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_GetNodeSecurity(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = GetNodeSecurity_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetNodeSecurity failed: unknown result");
 
   def GetNodeBasic(self, _homeId, _nodeId):
     """
@@ -5164,6 +5239,7 @@ class Processor(Iface, TProcessor):
     self._processMap["GetLibraryVersion"] = Processor.process_GetLibraryVersion
     self._processMap["GetLibraryTypeName"] = Processor.process_GetLibraryTypeName
     self._processMap["GetSendQueueCount"] = Processor.process_GetSendQueueCount
+    self._processMap["LogDriverStatistics"] = Processor.process_LogDriverStatistics
     self._processMap["GetPollInterval"] = Processor.process_GetPollInterval
     self._processMap["SetPollInterval"] = Processor.process_SetPollInterval
     self._processMap["EnablePoll"] = Processor.process_EnablePoll
@@ -5179,6 +5255,7 @@ class Processor(Iface, TProcessor):
     self._processMap["IsNodeSecurityDevice"] = Processor.process_IsNodeSecurityDevice
     self._processMap["GetNodeMaxBaudRate"] = Processor.process_GetNodeMaxBaudRate
     self._processMap["GetNodeVersion"] = Processor.process_GetNodeVersion
+    self._processMap["GetNodeSecurity"] = Processor.process_GetNodeSecurity
     self._processMap["GetNodeBasic"] = Processor.process_GetNodeBasic
     self._processMap["GetNodeGeneric"] = Processor.process_GetNodeGeneric
     self._processMap["GetNodeSpecific"] = Processor.process_GetNodeSpecific
@@ -5391,6 +5468,17 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
+  def process_LogDriverStatistics(self, seqid, iprot, oprot):
+    args = LogDriverStatistics_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = LogDriverStatistics_result()
+    self._handler.LogDriverStatistics(args._homeId)
+    oprot.writeMessageBegin("LogDriverStatistics", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
   def process_GetPollInterval(self, seqid, iprot, oprot):
     args = GetPollInterval_args()
     args.read(iprot)
@@ -5552,6 +5640,17 @@ class Processor(Iface, TProcessor):
     result = GetNodeVersion_result()
     result.success = self._handler.GetNodeVersion(args._homeId, args._nodeId)
     oprot.writeMessageBegin("GetNodeVersion", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_GetNodeSecurity(self, seqid, iprot, oprot):
+    args = GetNodeSecurity_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = GetNodeSecurity_result()
+    result.success = self._handler.GetNodeSecurity(args._homeId, args._nodeId)
+    oprot.writeMessageBegin("GetNodeSecurity", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7682,6 +7781,108 @@ class GetSendQueueCount_result:
   def __ne__(self, other):
     return not (self == other)
 
+class LogDriverStatistics_args:
+  """
+  Attributes:
+   - _homeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+  )
+
+  def __init__(self, _homeId=None,):
+    self._homeId = _homeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('LogDriverStatistics_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class LogDriverStatistics_result:
+
+  thrift_spec = (
+  )
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('LogDriverStatistics_result')
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
 class GetPollInterval_args:
 
   thrift_spec = (
@@ -9533,6 +9734,137 @@ class GetNodeVersion_result:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('GetNodeVersion_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BYTE, 0)
+      oprot.writeByte(self.success)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class GetNodeSecurity_args:
+  """
+  Attributes:
+   - _homeId
+   - _nodeId
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.I32, '_homeId', None, None, ), # 1
+    (2, TType.BYTE, '_nodeId', None, None, ), # 2
+  )
+
+  def __init__(self, _homeId=None, _nodeId=None,):
+    self._homeId = _homeId
+    self._nodeId = _nodeId
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.I32:
+          self._homeId = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BYTE:
+          self._nodeId = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('GetNodeSecurity_args')
+    if self._homeId is not None:
+      oprot.writeFieldBegin('_homeId', TType.I32, 1)
+      oprot.writeI32(self._homeId)
+      oprot.writeFieldEnd()
+    if self._nodeId is not None:
+      oprot.writeFieldBegin('_nodeId', TType.BYTE, 2)
+      oprot.writeByte(self._nodeId)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class GetNodeSecurity_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BYTE, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BYTE:
+          self.success = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('GetNodeSecurity_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BYTE, 0)
       oprot.writeByte(self.success)

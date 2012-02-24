@@ -29,6 +29,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  string GetLibraryVersion(i32 _homeId)'
   print '  string GetLibraryTypeName(i32 _homeId)'
   print '  i32 GetSendQueueCount(i32 _homeId)'
+  print '  void LogDriverStatistics(i32 _homeId)'
   print '  i32 GetPollInterval()'
   print '  void SetPollInterval(i32 _seconds)'
   print '  bool EnablePoll(RemoteValueID _valueId)'
@@ -44,6 +45,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  bool IsNodeSecurityDevice(i32 _homeId, byte _nodeId)'
   print '  i32 GetNodeMaxBaudRate(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeVersion(i32 _homeId, byte _nodeId)'
+  print '  byte GetNodeSecurity(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeBasic(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeGeneric(i32 _homeId, byte _nodeId)'
   print '  byte GetNodeSpecific(i32 _homeId, byte _nodeId)'
@@ -250,6 +252,12 @@ elif cmd == 'GetSendQueueCount':
     sys.exit(1)
   pp.pprint(client.GetSendQueueCount(eval(args[0]),))
 
+elif cmd == 'LogDriverStatistics':
+  if len(args) != 1:
+    print 'LogDriverStatistics requires 1 args'
+    sys.exit(1)
+  pp.pprint(client.LogDriverStatistics(eval(args[0]),))
+
 elif cmd == 'GetPollInterval':
   if len(args) != 0:
     print 'GetPollInterval requires 0 args'
@@ -339,6 +347,12 @@ elif cmd == 'GetNodeVersion':
     print 'GetNodeVersion requires 2 args'
     sys.exit(1)
   pp.pprint(client.GetNodeVersion(eval(args[0]),eval(args[1]),))
+
+elif cmd == 'GetNodeSecurity':
+  if len(args) != 2:
+    print 'GetNodeSecurity requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.GetNodeSecurity(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'GetNodeBasic':
   if len(args) != 2:

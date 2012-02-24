@@ -131,6 +131,20 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetSendQueueCount failed: unknown result')
           end
 
+          def LogDriverStatistics(_homeId)
+            send_LogDriverStatistics(_homeId)
+            recv_LogDriverStatistics()
+          end
+
+          def send_LogDriverStatistics(_homeId)
+            send_message('LogDriverStatistics', LogDriverStatistics_args, :_homeId => _homeId)
+          end
+
+          def recv_LogDriverStatistics()
+            result = receive_message(LogDriverStatistics_result)
+            return
+          end
+
           def GetPollInterval()
             send_GetPollInterval()
             return recv_GetPollInterval()
@@ -353,6 +367,21 @@ require 'ozw_types'
             result = receive_message(GetNodeVersion_result)
             return result.success unless result.success.nil?
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeVersion failed: unknown result')
+          end
+
+          def GetNodeSecurity(_homeId, _nodeId)
+            send_GetNodeSecurity(_homeId, _nodeId)
+            return recv_GetNodeSecurity()
+          end
+
+          def send_GetNodeSecurity(_homeId, _nodeId)
+            send_message('GetNodeSecurity', GetNodeSecurity_args, :_homeId => _homeId, :_nodeId => _nodeId)
+          end
+
+          def recv_GetNodeSecurity()
+            result = receive_message(GetNodeSecurity_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeSecurity failed: unknown result')
           end
 
           def GetNodeBasic(_homeId, _nodeId)
@@ -2015,6 +2044,13 @@ require 'ozw_types'
             write_result(result, oprot, 'GetSendQueueCount', seqid)
           end
 
+          def process_LogDriverStatistics(seqid, iprot, oprot)
+            args = read_args(iprot, LogDriverStatistics_args)
+            result = LogDriverStatistics_result.new()
+            @handler.LogDriverStatistics(args._homeId)
+            write_result(result, oprot, 'LogDriverStatistics', seqid)
+          end
+
           def process_GetPollInterval(seqid, iprot, oprot)
             args = read_args(iprot, GetPollInterval_args)
             result = GetPollInterval_result.new()
@@ -2118,6 +2154,13 @@ require 'ozw_types'
             result = GetNodeVersion_result.new()
             result.success = @handler.GetNodeVersion(args._homeId, args._nodeId)
             write_result(result, oprot, 'GetNodeVersion', seqid)
+          end
+
+          def process_GetNodeSecurity(seqid, iprot, oprot)
+            args = read_args(iprot, GetNodeSecurity_args)
+            result = GetNodeSecurity_result.new()
+            result.success = @handler.GetNodeSecurity(args._homeId, args._nodeId)
+            write_result(result, oprot, 'GetNodeSecurity', seqid)
           end
 
           def process_GetNodeBasic(seqid, iprot, oprot)
@@ -3135,6 +3178,37 @@ require 'ozw_types'
           ::Thrift::Struct.generate_accessors self
         end
 
+        class LogDriverStatistics_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class LogDriverStatistics_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+
+          FIELDS = {
+
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
         class GetPollInterval_args
           include ::Thrift::Struct, ::Thrift::Struct_Union
 
@@ -3618,6 +3692,40 @@ require 'ozw_types'
         end
 
         class GetNodeVersion_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BYTE, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class GetNodeSecurity_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _HOMEID = 1
+          _NODEID = 2
+
+          FIELDS = {
+            _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+            _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class GetNodeSecurity_result
           include ::Thrift::Struct, ::Thrift::Struct_Union
           SUCCESS = 0
 

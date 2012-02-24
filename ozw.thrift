@@ -198,7 +198,6 @@ service RemoteManager {
     //uint8 GetControllerNodeId( uint32 const _homeId );
     byte GetControllerNodeId( 1:i32 _homeId );
     
-    
     //bool IsPrimaryController( uint32 const _homeId );
     bool IsPrimaryController(1: i32 _homeId );
     
@@ -216,6 +215,9 @@ service RemoteManager {
 
     //int32 GetSendQueueCount( uint32 const _homeId );
     i32 GetSendQueueCount( 1:i32 _homeId );
+    
+    //void LogDriverStatistics( uint32 const _homeId );
+    void LogDriverStatistics( 1:i32 _homeId );
 
 	//-----------------------------------------------------------------------------
 	//	Polling Z-Wave devices
@@ -268,6 +270,9 @@ service RemoteManager {
     //uint8 GetNodeVersion( uint32 const _homeId, uint8 const _nodeId );
     byte GetNodeVersion( 1:i32 _homeId, 2:byte _nodeId );
     
+    //uint8 GetNodeSecurity( uint32 const _homeId, uint8 const _nodeId );
+    byte GetNodeSecurity( 1:i32 _homeId, 2:byte _nodeId );
+    		
 	//uint8 GetNodeBasic( uint32 const _homeId, uint8 const _nodeId );
     byte GetNodeBasic( 1:i32 _homeId, 2:byte _nodeId );
 		
@@ -461,7 +466,6 @@ service RemoteManager {
 	//-----------------------------------------------------------------------------
 	void SwitchAllOn( 1:i32 _homeId );
 	void SwitchAllOff( 1:i32 _homeId );
-
 
 
 	//-----------------------------------------------------------------------------

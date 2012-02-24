@@ -643,6 +643,7 @@ enum OpenZWaveDriverControllerCommand {
 - (NSString *) GetLibraryVersion: (int32_t) _homeId;  // throws TException
 - (NSString *) GetLibraryTypeName: (int32_t) _homeId;  // throws TException
 - (int32_t) GetSendQueueCount: (int32_t) _homeId;  // throws TException
+- (void) LogDriverStatistics: (int32_t) _homeId;  // throws TException
 - (int32_t) GetPollInterval;  // throws TException
 - (void) SetPollInterval: (int32_t) _seconds;  // throws TException
 - (BOOL) EnablePoll: (OpenZWaveRemoteValueID *) _valueId;  // throws TException
@@ -658,6 +659,7 @@ enum OpenZWaveDriverControllerCommand {
 - (BOOL) IsNodeSecurityDevice: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (int32_t) GetNodeMaxBaudRate: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeVersion: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
+- (uint8_t) GetNodeSecurity: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeBasic: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeGeneric: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (uint8_t) GetNodeSpecific: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException

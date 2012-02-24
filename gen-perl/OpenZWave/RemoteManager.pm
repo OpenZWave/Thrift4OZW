@@ -1018,6 +1018,116 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_LogDriverStatistics_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_LogDriverStatistics_args->mk_accessors( qw( _homeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_LogDriverStatistics_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_LogDriverStatistics_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_LogDriverStatistics_result;
+use base qw(Class::Accessor);
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_LogDriverStatistics_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_LogDriverStatistics_result');
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManager_GetPollInterval_args;
 use base qw(Class::Accessor);
 
@@ -3045,6 +3155,149 @@ sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
   $xfer += $output->writeStructBegin('RemoteManager_GetNodeVersion_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
+    $xfer += $output->writeByte($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_GetNodeSecurity_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_GetNodeSecurity_args->mk_accessors( qw( _homeId _nodeId ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_homeId} = undef;
+  $self->{_nodeId} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_homeId}) {
+      $self->{_homeId} = $vals->{_homeId};
+    }
+    if (defined $vals->{_nodeId}) {
+      $self->{_nodeId} = $vals->{_nodeId};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_GetNodeSecurity_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::I32) {
+        $xfer += $input->readI32(\$self->{_homeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_nodeId});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_args');
+  if (defined $self->{_homeId}) {
+    $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_homeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_nodeId}) {
+    $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+    $xfer += $output->writeByte($self->{_nodeId});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_GetNodeSecurity_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_GetNodeSecurity_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_GetNodeSecurity_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
     $xfer += $output->writeByte($self->{success});
@@ -18211,6 +18464,13 @@ sub GetSendQueueCount{
   die 'implement interface';
 }
 
+sub LogDriverStatistics{
+  my $self = shift;
+  my $_homeId = shift;
+
+  die 'implement interface';
+}
+
 sub GetPollInterval{
   my $self = shift;
 
@@ -18318,6 +18578,14 @@ sub GetNodeMaxBaudRate{
 }
 
 sub GetNodeVersion{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  die 'implement interface';
+}
+
+sub GetNodeSecurity{
   my $self = shift;
   my $_homeId = shift;
   my $_nodeId = shift;
@@ -19254,6 +19522,13 @@ sub GetSendQueueCount{
   return $self->{impl}->GetSendQueueCount($_homeId);
 }
 
+sub LogDriverStatistics{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  return $self->{impl}->LogDriverStatistics($_homeId);
+}
+
 sub GetPollInterval{
   my ($self, $request) = @_;
 
@@ -19366,6 +19641,14 @@ sub GetNodeVersion{
   my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
   my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
   return $self->{impl}->GetNodeVersion($_homeId, $_nodeId);
+}
+
+sub GetNodeSecurity{
+  my ($self, $request) = @_;
+
+  my $_homeId = ($request->{'_homeId'}) ? $request->{'_homeId'} : undef;
+  my $_nodeId = ($request->{'_nodeId'}) ? $request->{'_nodeId'} : undef;
+  return $self->{impl}->GetNodeSecurity($_homeId, $_nodeId);
 }
 
 sub GetNodeBasic{
@@ -20583,6 +20866,46 @@ sub recv_GetSendQueueCount{
   }
   die "GetSendQueueCount failed: unknown result";
 }
+sub LogDriverStatistics{
+  my $self = shift;
+  my $_homeId = shift;
+
+    $self->send_LogDriverStatistics($_homeId);
+  $self->recv_LogDriverStatistics();
+}
+
+sub send_LogDriverStatistics{
+  my $self = shift;
+  my $_homeId = shift;
+
+  $self->{output}->writeMessageBegin('LogDriverStatistics', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_LogDriverStatistics_args();
+  $args->{_homeId} = $_homeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_LogDriverStatistics{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_LogDriverStatistics_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  return;
+}
 sub GetPollInterval{
   my $self = shift;
 
@@ -21251,6 +21574,52 @@ sub recv_GetNodeVersion{
     return $result->{success};
   }
   die "GetNodeVersion failed: unknown result";
+}
+sub GetNodeSecurity{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+    $self->send_GetNodeSecurity($_homeId, $_nodeId);
+  return $self->recv_GetNodeSecurity();
+}
+
+sub send_GetNodeSecurity{
+  my $self = shift;
+  my $_homeId = shift;
+  my $_nodeId = shift;
+
+  $self->{output}->writeMessageBegin('GetNodeSecurity', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_GetNodeSecurity_args();
+  $args->{_homeId} = $_homeId;
+  $args->{_nodeId} = $_nodeId;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_GetNodeSecurity{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_GetNodeSecurity_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "GetNodeSecurity failed: unknown result";
 }
 sub GetNodeBasic{
   my $self = shift;
@@ -26286,6 +26655,19 @@ sub process_GetSendQueueCount {
     $output->getTransport()->flush();
 }
 
+sub process_LogDriverStatistics {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_LogDriverStatistics_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_LogDriverStatistics_result();
+    $self->{handler}->LogDriverStatistics($args->_homeId);
+    $output->writeMessageBegin('LogDriverStatistics', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
 sub process_GetPollInterval {
     my ($self, $seqid, $input, $output) = @_;
     my $args = new OpenZWave::RemoteManager_GetPollInterval_args();
@@ -26476,6 +26858,19 @@ sub process_GetNodeVersion {
     my $result = new OpenZWave::RemoteManager_GetNodeVersion_result();
     $result->{success} = $self->{handler}->GetNodeVersion($args->_homeId, $args->_nodeId);
     $output->writeMessageBegin('GetNodeVersion', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_GetNodeSecurity {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_GetNodeSecurity_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_GetNodeSecurity_result();
+    $result->{success} = $self->{handler}->GetNodeSecurity($args->_homeId, $args->_nodeId);
+    $output->writeMessageBegin('GetNodeSecurity', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

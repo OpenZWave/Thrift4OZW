@@ -22,6 +22,7 @@ class RemoteManagerIf {
   virtual void GetLibraryVersion(std::string& _return, const int32_t _homeId) = 0;
   virtual void GetLibraryTypeName(std::string& _return, const int32_t _homeId) = 0;
   virtual int32_t GetSendQueueCount(const int32_t _homeId) = 0;
+  virtual void LogDriverStatistics(const int32_t _homeId) = 0;
   virtual int32_t GetPollInterval() = 0;
   virtual void SetPollInterval(const int32_t _seconds) = 0;
   virtual bool EnablePoll(const RemoteValueID& _valueId) = 0;
@@ -37,6 +38,7 @@ class RemoteManagerIf {
   virtual bool IsNodeSecurityDevice(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int32_t GetNodeMaxBaudRate(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeVersion(const int32_t _homeId, const int8_t _nodeId) = 0;
+  virtual int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeBasic(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeGeneric(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual int8_t GetNodeSpecific(const int32_t _homeId, const int8_t _nodeId) = 0;
@@ -179,6 +181,9 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     int32_t _return = 0;
     return _return;
   }
+  void LogDriverStatistics(const int32_t /* _homeId */) {
+    return;
+  }
   int32_t GetPollInterval() {
     int32_t _return = 0;
     return _return;
@@ -235,6 +240,10 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     return _return;
   }
   int8_t GetNodeVersion(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
+    int8_t _return = 0;
+    return _return;
+  }
+  int8_t GetNodeSecurity(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
     int8_t _return = 0;
     return _return;
   }
@@ -1452,6 +1461,94 @@ class RemoteManager_GetSendQueueCount_presult {
   int32_t* success;
 
   _RemoteManager_GetSendQueueCount_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_LogDriverStatistics_args__isset {
+  _RemoteManager_LogDriverStatistics_args__isset() : _homeId(false) {}
+  bool _homeId;
+} _RemoteManager_LogDriverStatistics_args__isset;
+
+class RemoteManager_LogDriverStatistics_args {
+ public:
+
+  RemoteManager_LogDriverStatistics_args() : _homeId(0) {
+  }
+
+  virtual ~RemoteManager_LogDriverStatistics_args() throw() {}
+
+  int32_t _homeId;
+
+  _RemoteManager_LogDriverStatistics_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  bool operator == (const RemoteManager_LogDriverStatistics_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_LogDriverStatistics_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_LogDriverStatistics_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_LogDriverStatistics_pargs {
+ public:
+
+
+  virtual ~RemoteManager_LogDriverStatistics_pargs() throw() {}
+
+  const int32_t* _homeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_LogDriverStatistics_result {
+ public:
+
+  RemoteManager_LogDriverStatistics_result() {
+  }
+
+  virtual ~RemoteManager_LogDriverStatistics_result() throw() {}
+
+
+  bool operator == (const RemoteManager_LogDriverStatistics_result & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const RemoteManager_LogDriverStatistics_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_LogDriverStatistics_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_LogDriverStatistics_presult {
+ public:
+
+
+  virtual ~RemoteManager_LogDriverStatistics_presult() throw() {}
+
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -3128,6 +3225,123 @@ class RemoteManager_GetNodeVersion_presult {
   int8_t* success;
 
   _RemoteManager_GetNodeVersion_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_GetNodeSecurity_args__isset {
+  _RemoteManager_GetNodeSecurity_args__isset() : _homeId(false), _nodeId(false) {}
+  bool _homeId;
+  bool _nodeId;
+} _RemoteManager_GetNodeSecurity_args__isset;
+
+class RemoteManager_GetNodeSecurity_args {
+ public:
+
+  RemoteManager_GetNodeSecurity_args() : _homeId(0), _nodeId(0) {
+  }
+
+  virtual ~RemoteManager_GetNodeSecurity_args() throw() {}
+
+  int32_t _homeId;
+  int8_t _nodeId;
+
+  _RemoteManager_GetNodeSecurity_args__isset __isset;
+
+  void __set__homeId(const int32_t val) {
+    _homeId = val;
+  }
+
+  void __set__nodeId(const int8_t val) {
+    _nodeId = val;
+  }
+
+  bool operator == (const RemoteManager_GetNodeSecurity_args & rhs) const
+  {
+    if (!(_homeId == rhs._homeId))
+      return false;
+    if (!(_nodeId == rhs._nodeId))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_GetNodeSecurity_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_GetNodeSecurity_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_GetNodeSecurity_pargs {
+ public:
+
+
+  virtual ~RemoteManager_GetNodeSecurity_pargs() throw() {}
+
+  const int32_t* _homeId;
+  const int8_t* _nodeId;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_GetNodeSecurity_result__isset {
+  _RemoteManager_GetNodeSecurity_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_GetNodeSecurity_result__isset;
+
+class RemoteManager_GetNodeSecurity_result {
+ public:
+
+  RemoteManager_GetNodeSecurity_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_GetNodeSecurity_result() throw() {}
+
+  int8_t success;
+
+  _RemoteManager_GetNodeSecurity_result__isset __isset;
+
+  void __set_success(const int8_t val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_GetNodeSecurity_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_GetNodeSecurity_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_GetNodeSecurity_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_GetNodeSecurity_presult__isset {
+  _RemoteManager_GetNodeSecurity_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_GetNodeSecurity_presult__isset;
+
+class RemoteManager_GetNodeSecurity_presult {
+ public:
+
+
+  virtual ~RemoteManager_GetNodeSecurity_presult() throw() {}
+
+  int8_t* success;
+
+  _RemoteManager_GetNodeSecurity_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -15346,6 +15560,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   int32_t GetSendQueueCount(const int32_t _homeId);
   void send_GetSendQueueCount(const int32_t _homeId);
   int32_t recv_GetSendQueueCount();
+  void LogDriverStatistics(const int32_t _homeId);
+  void send_LogDriverStatistics(const int32_t _homeId);
+  void recv_LogDriverStatistics();
   int32_t GetPollInterval();
   void send_GetPollInterval();
   int32_t recv_GetPollInterval();
@@ -15391,6 +15608,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   int8_t GetNodeVersion(const int32_t _homeId, const int8_t _nodeId);
   void send_GetNodeVersion(const int32_t _homeId, const int8_t _nodeId);
   int8_t recv_GetNodeVersion();
+  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId);
+  void send_GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId);
+  int8_t recv_GetNodeSecurity();
   int8_t GetNodeBasic(const int32_t _homeId, const int8_t _nodeId);
   void send_GetNodeBasic(const int32_t _homeId, const int8_t _nodeId);
   int8_t recv_GetNodeBasic();
@@ -15736,6 +15956,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_GetLibraryVersion(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetLibraryTypeName(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetSendQueueCount(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_LogDriverStatistics(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetPollInterval(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SetPollInterval(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_EnablePoll(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -15751,6 +15972,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_IsNodeSecurityDevice(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeMaxBaudRate(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeVersion(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_GetNodeSecurity(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeBasic(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeGeneric(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNodeSpecific(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -15870,6 +16092,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["GetLibraryVersion"] = &RemoteManagerProcessor::process_GetLibraryVersion;
     processMap_["GetLibraryTypeName"] = &RemoteManagerProcessor::process_GetLibraryTypeName;
     processMap_["GetSendQueueCount"] = &RemoteManagerProcessor::process_GetSendQueueCount;
+    processMap_["LogDriverStatistics"] = &RemoteManagerProcessor::process_LogDriverStatistics;
     processMap_["GetPollInterval"] = &RemoteManagerProcessor::process_GetPollInterval;
     processMap_["SetPollInterval"] = &RemoteManagerProcessor::process_SetPollInterval;
     processMap_["EnablePoll"] = &RemoteManagerProcessor::process_EnablePoll;
@@ -15885,6 +16108,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["IsNodeSecurityDevice"] = &RemoteManagerProcessor::process_IsNodeSecurityDevice;
     processMap_["GetNodeMaxBaudRate"] = &RemoteManagerProcessor::process_GetNodeMaxBaudRate;
     processMap_["GetNodeVersion"] = &RemoteManagerProcessor::process_GetNodeVersion;
+    processMap_["GetNodeSecurity"] = &RemoteManagerProcessor::process_GetNodeSecurity;
     processMap_["GetNodeBasic"] = &RemoteManagerProcessor::process_GetNodeBasic;
     processMap_["GetNodeGeneric"] = &RemoteManagerProcessor::process_GetNodeGeneric;
     processMap_["GetNodeSpecific"] = &RemoteManagerProcessor::process_GetNodeSpecific;
@@ -16097,6 +16321,13 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
+  void LogDriverStatistics(const int32_t _homeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      ifaces_[i]->LogDriverStatistics(_homeId);
+    }
+  }
+
   int32_t GetPollInterval() {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
@@ -16254,6 +16485,17 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->GetNodeVersion(_homeId, _nodeId);
       } else {
         ifaces_[i]->GetNodeVersion(_homeId, _nodeId);
+      }
+    }
+  }
+
+  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->GetNodeSecurity(_homeId, _nodeId);
+      } else {
+        ifaces_[i]->GetNodeSecurity(_homeId, _nodeId);
       }
     }
   }

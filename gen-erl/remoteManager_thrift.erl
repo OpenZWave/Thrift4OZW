@@ -86,6 +86,15 @@ function_info('GetSendQueueCount', reply_type) ->
 function_info('GetSendQueueCount', exceptions) ->
   {struct, []}
 ;
+% LogDriverStatistics(This, _homeId)
+function_info('LogDriverStatistics', params_type) ->
+  {struct, [{1, i32}]}
+;
+function_info('LogDriverStatistics', reply_type) ->
+  {struct, []};
+function_info('LogDriverStatistics', exceptions) ->
+  {struct, []}
+;
 % GetPollInterval(This)
 function_info('GetPollInterval', params_type) ->
   {struct, []}
@@ -219,6 +228,15 @@ function_info('GetNodeVersion', params_type) ->
 function_info('GetNodeVersion', reply_type) ->
   byte;
 function_info('GetNodeVersion', exceptions) ->
+  {struct, []}
+;
+% GetNodeSecurity(This, _homeId, _nodeId)
+function_info('GetNodeSecurity', params_type) ->
+  {struct, [{1, i32}, {2, byte}]}
+;
+function_info('GetNodeSecurity', reply_type) ->
+  byte;
+function_info('GetNodeSecurity', exceptions) ->
   {struct, []}
 ;
 % GetNodeBasic(This, _homeId, _nodeId)

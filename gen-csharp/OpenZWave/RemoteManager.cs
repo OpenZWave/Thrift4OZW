@@ -24,6 +24,7 @@ namespace OpenZWave
       string GetLibraryVersion(int _homeId);
       string GetLibraryTypeName(int _homeId);
       int GetSendQueueCount(int _homeId);
+      void LogDriverStatistics(int _homeId);
       int GetPollInterval();
       void SetPollInterval(int _seconds);
       bool EnablePoll(RemoteValueID _valueId);
@@ -39,6 +40,7 @@ namespace OpenZWave
       bool IsNodeSecurityDevice(int _homeId, byte _nodeId);
       int GetNodeMaxBaudRate(int _homeId, byte _nodeId);
       byte GetNodeVersion(int _homeId, byte _nodeId);
+      byte GetNodeSecurity(int _homeId, byte _nodeId);
       byte GetNodeBasic(int _homeId, byte _nodeId);
       byte GetNodeGeneric(int _homeId, byte _nodeId);
       byte GetNodeSpecific(int _homeId, byte _nodeId);
@@ -433,6 +435,36 @@ namespace OpenZWave
           return result.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetSendQueueCount failed: unknown result");
+      }
+
+      public void LogDriverStatistics(int _homeId)
+      {
+        send_LogDriverStatistics(_homeId);
+        recv_LogDriverStatistics();
+      }
+
+      public void send_LogDriverStatistics(int _homeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("LogDriverStatistics", TMessageType.Call, seqid_));
+        LogDriverStatistics_args args = new LogDriverStatistics_args();
+        args._homeId = _homeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public void recv_LogDriverStatistics()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        LogDriverStatistics_result result = new LogDriverStatistics_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        return;
       }
 
       public int GetPollInterval()
@@ -934,6 +966,40 @@ namespace OpenZWave
           return result.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetNodeVersion failed: unknown result");
+      }
+
+      public byte GetNodeSecurity(int _homeId, byte _nodeId)
+      {
+        send_GetNodeSecurity(_homeId, _nodeId);
+        return recv_GetNodeSecurity();
+      }
+
+      public void send_GetNodeSecurity(int _homeId, byte _nodeId)
+      {
+        oprot_.WriteMessageBegin(new TMessage("GetNodeSecurity", TMessageType.Call, seqid_));
+        GetNodeSecurity_args args = new GetNodeSecurity_args();
+        args._homeId = _homeId;
+        args._nodeId = _nodeId;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public byte recv_GetNodeSecurity()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        GetNodeSecurity_result result = new GetNodeSecurity_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetNodeSecurity failed: unknown result");
       }
 
       public byte GetNodeBasic(int _homeId, byte _nodeId)
@@ -4555,6 +4621,7 @@ namespace OpenZWave
         processMap_["GetLibraryVersion"] = GetLibraryVersion_Process;
         processMap_["GetLibraryTypeName"] = GetLibraryTypeName_Process;
         processMap_["GetSendQueueCount"] = GetSendQueueCount_Process;
+        processMap_["LogDriverStatistics"] = LogDriverStatistics_Process;
         processMap_["GetPollInterval"] = GetPollInterval_Process;
         processMap_["SetPollInterval"] = SetPollInterval_Process;
         processMap_["EnablePoll"] = EnablePoll_Process;
@@ -4570,6 +4637,7 @@ namespace OpenZWave
         processMap_["IsNodeSecurityDevice"] = IsNodeSecurityDevice_Process;
         processMap_["GetNodeMaxBaudRate"] = GetNodeMaxBaudRate_Process;
         processMap_["GetNodeVersion"] = GetNodeVersion_Process;
+        processMap_["GetNodeSecurity"] = GetNodeSecurity_Process;
         processMap_["GetNodeBasic"] = GetNodeBasic_Process;
         processMap_["GetNodeGeneric"] = GetNodeGeneric_Process;
         processMap_["GetNodeSpecific"] = GetNodeSpecific_Process;
@@ -4814,6 +4882,19 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
+      public void LogDriverStatistics_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        LogDriverStatistics_args args = new LogDriverStatistics_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        LogDriverStatistics_result result = new LogDriverStatistics_result();
+        iface_.LogDriverStatistics(args._homeId);
+        oprot.WriteMessageBegin(new TMessage("LogDriverStatistics", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
       public void GetPollInterval_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
         GetPollInterval_args args = new GetPollInterval_args();
@@ -5004,6 +5085,19 @@ namespace OpenZWave
         GetNodeVersion_result result = new GetNodeVersion_result();
         result.Success = iface_.GetNodeVersion(args._homeId, args._nodeId);
         oprot.WriteMessageBegin(new TMessage("GetNodeVersion", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void GetNodeSecurity_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        GetNodeSecurity_args args = new GetNodeSecurity_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        GetNodeSecurity_result result = new GetNodeSecurity_result();
+        result.Success = iface_.GetNodeSecurity(args._homeId, args._nodeId);
+        oprot.WriteMessageBegin(new TMessage("GetNodeSecurity", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -7710,6 +7804,134 @@ namespace OpenZWave
         StringBuilder sb = new StringBuilder("GetSendQueueCount_result(");
         sb.Append("Success: ");
         sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class LogDriverStatistics_args : TBase
+    {
+      private int __homeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+      }
+
+      public LogDriverStatistics_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("LogDriverStatistics_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("LogDriverStatistics_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class LogDriverStatistics_result : TBase
+    {
+
+      public LogDriverStatistics_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("LogDriverStatistics_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("LogDriverStatistics_result(");
         sb.Append(")");
         return sb.ToString();
       }
@@ -10458,6 +10680,205 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("GetNodeVersion_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class GetNodeSecurity_args : TBase
+    {
+      private int __homeId;
+      private byte __nodeId;
+
+      public int _homeId
+      {
+        get
+        {
+          return __homeId;
+        }
+        set
+        {
+          __isset._homeId = true;
+          this.__homeId = value;
+        }
+      }
+
+      public byte _nodeId
+      {
+        get
+        {
+          return __nodeId;
+        }
+        set
+        {
+          __isset._nodeId = true;
+          this.__nodeId = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _homeId;
+        public bool _nodeId;
+      }
+
+      public GetNodeSecurity_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.I32) {
+                _homeId = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Byte) {
+                _nodeId = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("GetNodeSecurity_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (__isset._homeId) {
+          field.Name = "_homeId";
+          field.Type = TType.I32;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteI32(_homeId);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._nodeId) {
+          field.Name = "_nodeId";
+          field.Type = TType.Byte;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_nodeId);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("GetNodeSecurity_args(");
+        sb.Append("_homeId: ");
+        sb.Append(_homeId);
+        sb.Append(",_nodeId: ");
+        sb.Append(_nodeId);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class GetNodeSecurity_result : TBase
+    {
+      private byte _success;
+
+      public byte Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public GetNodeSecurity_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Byte) {
+                Success = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("GetNodeSecurity_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Byte;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("GetNodeSecurity_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");

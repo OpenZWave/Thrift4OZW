@@ -5295,6 +5295,191 @@
 
 @end
 
+@interface OpenZWaveLogDriverStatistics_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+
+  BOOL ___homeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+@end
+
+@implementation OpenZWaveLogDriverStatistics_args
+
+- (id) initWith_homeId: (int32_t) _homeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LogDriverStatistics_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LogDriverStatistics_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveLogDriverStatistics_result : NSObject <NSCoding> {
+}
+
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+@end
+
+@implementation OpenZWaveLogDriverStatistics_result
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"LogDriverStatistics_result"];
+
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"LogDriverStatistics_result("];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @interface OpenZWaveGetPollInterval_args : NSObject <NSCoding> {
 }
 
@@ -9447,6 +9632,307 @@
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"GetNodeVersion_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveGetNodeSecurity_args : NSObject <NSCoding> {
+  int32_t ___homeId;
+  uint8_t ___nodeId;
+
+  BOOL ___homeId_isset;
+  BOOL ___nodeId_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=_homeId, setter=set_homeId:) int32_t _homeId;
+@property (nonatomic, getter=_nodeId, setter=set_nodeId:) uint8_t _nodeId;
+#endif
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (int32_t) _homeId;
+- (void) set_homeId: (int32_t) _homeId;
+- (BOOL) _homeIdIsSet;
+
+- (uint8_t) _nodeId;
+- (void) set_nodeId: (uint8_t) _nodeId;
+- (BOOL) _nodeIdIsSet;
+
+@end
+
+@implementation OpenZWaveGetNodeSecurity_args
+
+- (id) initWith_homeId: (int32_t) _homeId _nodeId: (uint8_t) _nodeId
+{
+  self = [super init];
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_homeId"])
+  {
+    ___homeId = [decoder decodeInt32ForKey: @"_homeId"];
+    ___homeId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_nodeId"])
+  {
+    ___nodeId = [decoder decodeIntForKey: @"_nodeId"];
+    ___nodeId_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___homeId_isset)
+  {
+    [encoder encodeInt32: ___homeId forKey: @"_homeId"];
+  }
+  if (___nodeId_isset)
+  {
+    [encoder encodeInt: ___nodeId forKey: @"_nodeId"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (int32_t) _homeId {
+  return ___homeId;
+}
+
+- (void) set_homeId: (int32_t) _homeId {
+  ___homeId = _homeId;
+  ___homeId_isset = YES;
+}
+
+- (BOOL) _homeIdIsSet {
+  return ___homeId_isset;
+}
+
+- (void) unset_homeId {
+  ___homeId_isset = NO;
+}
+
+- (uint8_t) _nodeId {
+  return ___nodeId;
+}
+
+- (void) set_nodeId: (uint8_t) _nodeId {
+  ___nodeId = _nodeId;
+  ___nodeId_isset = YES;
+}
+
+- (BOOL) _nodeIdIsSet {
+  return ___nodeId_isset;
+}
+
+- (void) unset_nodeId {
+  ___nodeId_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_I32) {
+          int32_t fieldValue = [inProtocol readI32];
+          [self set_homeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_nodeId: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetNodeSecurity_args"];
+  if (___homeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___homeId];
+    [outProtocol writeFieldEnd];
+  }
+  if (___nodeId_isset) {
+    [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+    [outProtocol writeByte: ___nodeId];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNodeSecurity_args("];
+  [ms appendString: @"_homeId:"];
+  [ms appendFormat: @"%i", ___homeId];
+  [ms appendString: @",_nodeId:"];
+  [ms appendFormat: @"%i", ___nodeId];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveGetNodeSecurity_result : NSObject <NSCoding> {
+  uint8_t __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) uint8_t success;
+#endif
+
+- (id) initWithSuccess: (uint8_t) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (uint8_t) success;
+- (void) setSuccess: (uint8_t) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveGetNodeSecurity_result
+
+- (id) initWithSuccess: (uint8_t) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeIntForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeInt: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (uint8_t) success {
+  return __success;
+}
+
+- (void) setSuccess: (uint8_t) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"GetNodeSecurity_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BYTE fieldID: 0];
+    [outProtocol writeByte: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"GetNodeSecurity_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%i", __success];
   [ms appendString: @")"];
@@ -41647,6 +42133,40 @@
   return [self recv_GetSendQueueCount];
 }
 
+- (void) send_LogDriverStatistics: (int32_t) _homeId
+{
+  [outProtocol writeMessageBeginWithName: @"LogDriverStatistics" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"LogDriverStatistics_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (void) recv_LogDriverStatistics
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveLogDriverStatistics_result * result = [[[OpenZWaveLogDriverStatistics_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  return;
+}
+
+- (void) LogDriverStatistics: (int32_t) _homeId
+{
+  [self send_LogDriverStatistics: _homeId];
+  [self recv_LogDriverStatistics];
+}
+
 - (void) send_GetPollInterval
 {
   [outProtocol writeMessageBeginWithName: @"GetPollInterval" type: TMessageType_CALL sequenceID: 0];
@@ -42244,6 +42764,47 @@
 {
   [self send_GetNodeVersion: _homeId : _nodeId];
   return [self recv_GetNodeVersion];
+}
+
+- (void) send_GetNodeSecurity: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [outProtocol writeMessageBeginWithName: @"GetNodeSecurity" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"GetNodeSecurity_args"];
+  [outProtocol writeFieldBeginWithName: @"_homeId" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _homeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_nodeId" type: TType_BYTE fieldID: 2];
+  [outProtocol writeByte: _nodeId];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (uint8_t) recv_GetNodeSecurity
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveGetNodeSecurity_result * result = [[[OpenZWaveGetNodeSecurity_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"GetNodeSecurity failed: unknown result"];
+}
+
+- (uint8_t) GetNodeSecurity: (int32_t) _homeId : (uint8_t) _nodeId
+{
+  [self send_GetNodeSecurity: _homeId : _nodeId];
+  return [self recv_GetNodeSecurity];
 }
 
 - (void) send_GetNodeBasic: (int32_t) _homeId : (uint8_t) _nodeId
@@ -46808,6 +47369,14 @@
     [mMethodMap setValue: invocation forKey: @"GetSendQueueCount"];
   }
   {
+    SEL s = @selector(process_LogDriverStatistics_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"LogDriverStatistics"];
+  }
+  {
     SEL s = @selector(process_GetPollInterval_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
@@ -46926,6 +47495,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"GetNodeVersion"];
+  }
+  {
+    SEL s = @selector(process_GetNodeSecurity_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"GetNodeSecurity"];
   }
   {
     SEL s = @selector(process_GetNodeBasic_withSequenceID:inProtocol:outProtocol:);
@@ -47968,6 +48545,23 @@
   [args release];
 }
 
+- (void) process_LogDriverStatistics_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveLogDriverStatistics_args * args = [[OpenZWaveLogDriverStatistics_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveLogDriverStatistics_result * result = [[OpenZWaveLogDriverStatistics_result alloc] init];
+  [mService LogDriverStatistics: [args _homeId]];
+  [outProtocol writeMessageBeginWithName: @"LogDriverStatistics"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
 - (void) process_GetPollInterval_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
 {
   OpenZWaveGetPollInterval_args * args = [[OpenZWaveGetPollInterval_args alloc] init];
@@ -48214,6 +48808,23 @@
   OpenZWaveGetNodeVersion_result * result = [[OpenZWaveGetNodeVersion_result alloc] init];
   [result setSuccess: [mService GetNodeVersion: [args _homeId]: [args _nodeId]]];
   [outProtocol writeMessageBeginWithName: @"GetNodeVersion"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_GetNodeSecurity_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveGetNodeSecurity_args * args = [[OpenZWaveGetNodeSecurity_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveGetNodeSecurity_result * result = [[OpenZWaveGetNodeSecurity_result alloc] init];
+  [result setSuccess: [mService GetNodeSecurity: [args _homeId]: [args _nodeId]]];
+  [outProtocol writeMessageBeginWithName: @"GetNodeSecurity"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

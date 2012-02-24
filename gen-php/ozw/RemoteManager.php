@@ -17,6 +17,7 @@ interface RemoteManagerIf {
   public function GetLibraryVersion($_homeId);
   public function GetLibraryTypeName($_homeId);
   public function GetSendQueueCount($_homeId);
+  public function LogDriverStatistics($_homeId);
   public function GetPollInterval();
   public function SetPollInterval($_seconds);
   public function EnablePoll($_valueId);
@@ -32,6 +33,7 @@ interface RemoteManagerIf {
   public function IsNodeSecurityDevice($_homeId, $_nodeId);
   public function GetNodeMaxBaudRate($_homeId, $_nodeId);
   public function GetNodeVersion($_homeId, $_nodeId);
+  public function GetNodeSecurity($_homeId, $_nodeId);
   public function GetNodeBasic($_homeId, $_nodeId);
   public function GetNodeGeneric($_homeId, $_nodeId);
   public function GetNodeSpecific($_homeId, $_nodeId);
@@ -556,6 +558,54 @@ class RemoteManagerClient implements RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("GetSendQueueCount failed: unknown result");
+  }
+
+  public function LogDriverStatistics($_homeId)
+  {
+    $this->send_LogDriverStatistics($_homeId);
+    $this->recv_LogDriverStatistics();
+  }
+
+  public function send_LogDriverStatistics($_homeId)
+  {
+    $args = new RemoteManager_LogDriverStatistics_args();
+    $args->_homeId = $_homeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'LogDriverStatistics', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('LogDriverStatistics', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_LogDriverStatistics()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_LogDriverStatistics_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_LogDriverStatistics_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    return;
   }
 
   public function GetPollInterval()
@@ -1327,6 +1377,58 @@ class RemoteManagerClient implements RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("GetNodeVersion failed: unknown result");
+  }
+
+  public function GetNodeSecurity($_homeId, $_nodeId)
+  {
+    $this->send_GetNodeSecurity($_homeId, $_nodeId);
+    return $this->recv_GetNodeSecurity();
+  }
+
+  public function send_GetNodeSecurity($_homeId, $_nodeId)
+  {
+    $args = new RemoteManager_GetNodeSecurity_args();
+    $args->_homeId = $_homeId;
+    $args->_nodeId = $_nodeId;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'GetNodeSecurity', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('GetNodeSecurity', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_GetNodeSecurity()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_GetNodeSecurity_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_GetNodeSecurity_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("GetNodeSecurity failed: unknown result");
   }
 
   public function GetNodeBasic($_homeId, $_nodeId)
@@ -8013,6 +8115,128 @@ class RemoteManager_GetSendQueueCount_result {
 
 }
 
+class RemoteManager_LogDriverStatistics_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_LogDriverStatistics_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_LogDriverStatistics_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_LogDriverStatistics_result {
+  static $_TSPEC;
+
+
+  public function __construct() {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        );
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_LogDriverStatistics_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_LogDriverStatistics_result');
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
 class RemoteManager_GetPollInterval_args {
   static $_TSPEC;
 
@@ -10332,6 +10556,170 @@ class RemoteManager_GetNodeVersion_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('RemoteManager_GetNodeVersion_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
+      $xfer += $output->writeByte($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_GetNodeSecurity_args {
+  static $_TSPEC;
+
+  public $_homeId = null;
+  public $_nodeId = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_homeId',
+          'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => '_nodeId',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_homeId'])) {
+        $this->_homeId = $vals['_homeId'];
+      }
+      if (isset($vals['_nodeId'])) {
+        $this->_nodeId = $vals['_nodeId'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_GetNodeSecurity_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::I32) {
+            $xfer += $input->readI32($this->_homeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_nodeId);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_args');
+    if ($this->_homeId !== null) {
+      $xfer += $output->writeFieldBegin('_homeId', TType::I32, 1);
+      $xfer += $output->writeI32($this->_homeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_nodeId !== null) {
+      $xfer += $output->writeFieldBegin('_nodeId', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->_nodeId);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_GetNodeSecurity_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_GetNodeSecurity_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_GetNodeSecurity_result');
     if ($this->success !== null) {
       $xfer += $output->writeFieldBegin('success', TType::BYTE, 0);
       $xfer += $output->writeByte($this->success);
