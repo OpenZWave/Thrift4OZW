@@ -1240,16 +1240,20 @@ sub write {
 
 package OpenZWave::RemoteManager_SetPollInterval_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetPollInterval_args->mk_accessors( qw( _seconds ) );
+OpenZWave::RemoteManager_SetPollInterval_args->mk_accessors( qw( _milliseconds _bIntervalBetweenPolls ) );
 
 sub new {
   my $classname = shift;
   my $self      = {};
   my $vals      = shift || {};
-  $self->{_seconds} = undef;
+  $self->{_milliseconds} = undef;
+  $self->{_bIntervalBetweenPolls} = undef;
   if (UNIVERSAL::isa($vals,'HASH')) {
-    if (defined $vals->{_seconds}) {
-      $self->{_seconds} = $vals->{_seconds};
+    if (defined $vals->{_milliseconds}) {
+      $self->{_milliseconds} = $vals->{_milliseconds};
+    }
+    if (defined $vals->{_bIntervalBetweenPolls}) {
+      $self->{_bIntervalBetweenPolls} = $vals->{_bIntervalBetweenPolls};
     }
   }
   return bless ($self, $classname);
@@ -1275,7 +1279,13 @@ sub read {
     SWITCH: for($fid)
     {
       /^1$/ && do{      if ($ftype == TType::I32) {
-        $xfer += $input->readI32(\$self->{_seconds});
+        $xfer += $input->readI32(\$self->{_milliseconds});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{_bIntervalBetweenPolls});
       } else {
         $xfer += $input->skip($ftype);
       }
@@ -1292,9 +1302,14 @@ sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
   $xfer += $output->writeStructBegin('RemoteManager_SetPollInterval_args');
-  if (defined $self->{_seconds}) {
-    $xfer += $output->writeFieldBegin('_seconds', TType::I32, 1);
-    $xfer += $output->writeI32($self->{_seconds});
+  if (defined $self->{_milliseconds}) {
+    $xfer += $output->writeFieldBegin('_milliseconds', TType::I32, 1);
+    $xfer += $output->writeI32($self->{_milliseconds});
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_bIntervalBetweenPolls}) {
+    $xfer += $output->writeFieldBegin('_bIntervalBetweenPolls', TType::BOOL, 2);
+    $xfer += $output->writeBool($self->{_bIntervalBetweenPolls});
     $xfer += $output->writeFieldEnd();
   }
   $xfer += $output->writeFieldStop();
@@ -1350,16 +1365,20 @@ sub write {
 
 package OpenZWave::RemoteManager_EnablePoll_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_EnablePoll_args->mk_accessors( qw( _valueId ) );
+OpenZWave::RemoteManager_EnablePoll_args->mk_accessors( qw( _valueId _intensity ) );
 
 sub new {
   my $classname = shift;
   my $self      = {};
   my $vals      = shift || {};
   $self->{_valueId} = undef;
+  $self->{_intensity} = 1;
   if (UNIVERSAL::isa($vals,'HASH')) {
     if (defined $vals->{_valueId}) {
       $self->{_valueId} = $vals->{_valueId};
+    }
+    if (defined $vals->{_intensity}) {
+      $self->{_intensity} = $vals->{_intensity};
     }
   }
   return bless ($self, $classname);
@@ -1391,6 +1410,12 @@ sub read {
         $xfer += $input->skip($ftype);
       }
       last; };
+      /^2$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_intensity});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
         $xfer += $input->skip($ftype);
     }
     $xfer += $input->readFieldEnd();
@@ -1406,6 +1431,11 @@ sub write {
   if (defined $self->{_valueId}) {
     $xfer += $output->writeFieldBegin('_valueId', TType::STRUCT, 1);
     $xfer += $self->{_valueId}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_intensity}) {
+    $xfer += $output->writeFieldBegin('_intensity', TType::BYTE, 2);
+    $xfer += $output->writeByte($self->{_intensity});
     $xfer += $output->writeFieldEnd();
   }
   $xfer += $output->writeFieldStop();
@@ -1730,6 +1760,132 @@ sub write {
     $xfer += $output->writeBool($self->{success});
     $xfer += $output->writeFieldEnd();
   }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_SetPollIntensity_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_SetPollIntensity_args->mk_accessors( qw( _valueId _intensity ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_valueId} = undef;
+  $self->{_intensity} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_valueId}) {
+      $self->{_valueId} = $vals->{_valueId};
+    }
+    if (defined $vals->{_intensity}) {
+      $self->{_intensity} = $vals->{_intensity};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_SetPollIntensity_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::STRUCT) {
+        $self->{_valueId} = new OpenZWave::RemoteValueID();
+        $xfer += $self->{_valueId}->read($input);
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BYTE) {
+        $xfer += $input->readByte(\$self->{_intensity});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_SetPollIntensity_args');
+  if (defined $self->{_valueId}) {
+    $xfer += $output->writeFieldBegin('_valueId', TType::STRUCT, 1);
+    $xfer += $self->{_valueId}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_intensity}) {
+    $xfer += $output->writeFieldBegin('_intensity', TType::BYTE, 2);
+    $xfer += $output->writeByte($self->{_intensity});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_SetPollIntensity_result;
+use base qw(Class::Accessor);
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_SetPollIntensity_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_SetPollIntensity_result');
   $xfer += $output->writeFieldStop();
   $xfer += $output->writeStructEnd();
   return $xfer;
@@ -7677,6 +7833,135 @@ sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
   $xfer += $output->writeStructBegin('RemoteManager_IsValueSet_result');
+  if (defined $self->{success}) {
+    $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+    $xfer += $output->writeBool($self->{success});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsValuePolled_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsValuePolled_args->mk_accessors( qw( _id ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_id} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_id}) {
+      $self->{_id} = $vals->{_id};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsValuePolled_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::STRUCT) {
+        $self->{_id} = new OpenZWave::RemoteValueID();
+        $xfer += $self->{_id}->read($input);
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsValuePolled_args');
+  if (defined $self->{_id}) {
+    $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
+    $xfer += $self->{_id}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_IsValuePolled_result;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_IsValuePolled_result->mk_accessors( qw( success ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{success} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{success}) {
+      $self->{success} = $vals->{success};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_IsValuePolled_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^0$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{success});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_IsValuePolled_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -18479,7 +18764,8 @@ sub GetPollInterval{
 
 sub SetPollInterval{
   my $self = shift;
-  my $_seconds = shift;
+  my $_milliseconds = shift;
+  my $_bIntervalBetweenPolls = shift;
 
   die 'implement interface';
 }
@@ -18487,6 +18773,7 @@ sub SetPollInterval{
 sub EnablePoll{
   my $self = shift;
   my $_valueId = shift;
+  my $_intensity = shift;
 
   die 'implement interface';
 }
@@ -18501,6 +18788,14 @@ sub DisablePoll{
 sub isPolled{
   my $self = shift;
   my $_valueId = shift;
+
+  die 'implement interface';
+}
+
+sub SetPollIntensity{
+  my $self = shift;
+  my $_valueId = shift;
+  my $_intensity = shift;
 
   die 'implement interface';
 }
@@ -18841,6 +19136,13 @@ sub IsValueWriteOnly{
 }
 
 sub IsValueSet{
+  my $self = shift;
+  my $_id = shift;
+
+  die 'implement interface';
+}
+
+sub IsValuePolled{
   my $self = shift;
   my $_id = shift;
 
@@ -19538,15 +19840,17 @@ sub GetPollInterval{
 sub SetPollInterval{
   my ($self, $request) = @_;
 
-  my $_seconds = ($request->{'_seconds'}) ? $request->{'_seconds'} : undef;
-  return $self->{impl}->SetPollInterval($_seconds);
+  my $_milliseconds = ($request->{'_milliseconds'}) ? $request->{'_milliseconds'} : undef;
+  my $_bIntervalBetweenPolls = ($request->{'_bIntervalBetweenPolls'}) ? $request->{'_bIntervalBetweenPolls'} : undef;
+  return $self->{impl}->SetPollInterval($_milliseconds, $_bIntervalBetweenPolls);
 }
 
 sub EnablePoll{
   my ($self, $request) = @_;
 
   my $_valueId = ($request->{'_valueId'}) ? $request->{'_valueId'} : undef;
-  return $self->{impl}->EnablePoll($_valueId);
+  my $_intensity = ($request->{'_intensity'}) ? $request->{'_intensity'} : undef;
+  return $self->{impl}->EnablePoll($_valueId, $_intensity);
 }
 
 sub DisablePoll{
@@ -19561,6 +19865,14 @@ sub isPolled{
 
   my $_valueId = ($request->{'_valueId'}) ? $request->{'_valueId'} : undef;
   return $self->{impl}->isPolled($_valueId);
+}
+
+sub SetPollIntensity{
+  my ($self, $request) = @_;
+
+  my $_valueId = ($request->{'_valueId'}) ? $request->{'_valueId'} : undef;
+  my $_intensity = ($request->{'_intensity'}) ? $request->{'_intensity'} : undef;
+  return $self->{impl}->SetPollIntensity($_valueId, $_intensity);
 }
 
 sub RefreshNodeInfo{
@@ -19903,6 +20215,13 @@ sub IsValueSet{
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   return $self->{impl}->IsValueSet($_id);
+}
+
+sub IsValuePolled{
+  my ($self, $request) = @_;
+
+  my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
+  return $self->{impl}->IsValuePolled($_id);
 }
 
 sub GetValueAsBool{
@@ -20948,19 +21267,22 @@ sub recv_GetPollInterval{
 }
 sub SetPollInterval{
   my $self = shift;
-  my $_seconds = shift;
+  my $_milliseconds = shift;
+  my $_bIntervalBetweenPolls = shift;
 
-    $self->send_SetPollInterval($_seconds);
+    $self->send_SetPollInterval($_milliseconds, $_bIntervalBetweenPolls);
   $self->recv_SetPollInterval();
 }
 
 sub send_SetPollInterval{
   my $self = shift;
-  my $_seconds = shift;
+  my $_milliseconds = shift;
+  my $_bIntervalBetweenPolls = shift;
 
   $self->{output}->writeMessageBegin('SetPollInterval', TMessageType::CALL, $self->{seqid});
   my $args = new OpenZWave::RemoteManager_SetPollInterval_args();
-  $args->{_seconds} = $_seconds;
+  $args->{_milliseconds} = $_milliseconds;
+  $args->{_bIntervalBetweenPolls} = $_bIntervalBetweenPolls;
   $args->write($self->{output});
   $self->{output}->writeMessageEnd();
   $self->{output}->getTransport()->flush();
@@ -20989,18 +21311,21 @@ sub recv_SetPollInterval{
 sub EnablePoll{
   my $self = shift;
   my $_valueId = shift;
+  my $_intensity = shift;
 
-    $self->send_EnablePoll($_valueId);
+    $self->send_EnablePoll($_valueId, $_intensity);
   return $self->recv_EnablePoll();
 }
 
 sub send_EnablePoll{
   my $self = shift;
   my $_valueId = shift;
+  my $_intensity = shift;
 
   $self->{output}->writeMessageBegin('EnablePoll', TMessageType::CALL, $self->{seqid});
   my $args = new OpenZWave::RemoteManager_EnablePoll_args();
   $args->{_valueId} = $_valueId;
+  $args->{_intensity} = $_intensity;
   $args->write($self->{output});
   $self->{output}->writeMessageEnd();
   $self->{output}->getTransport()->flush();
@@ -21114,6 +21439,49 @@ sub recv_isPolled{
     return $result->{success};
   }
   die "isPolled failed: unknown result";
+}
+sub SetPollIntensity{
+  my $self = shift;
+  my $_valueId = shift;
+  my $_intensity = shift;
+
+    $self->send_SetPollIntensity($_valueId, $_intensity);
+  $self->recv_SetPollIntensity();
+}
+
+sub send_SetPollIntensity{
+  my $self = shift;
+  my $_valueId = shift;
+  my $_intensity = shift;
+
+  $self->{output}->writeMessageBegin('SetPollIntensity', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetPollIntensity_args();
+  $args->{_valueId} = $_valueId;
+  $args->{_intensity} = $_intensity;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_SetPollIntensity{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_SetPollIntensity_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  return;
 }
 sub RefreshNodeInfo{
   my $self = shift;
@@ -23056,6 +23424,49 @@ sub recv_IsValueSet{
     return $result->{success};
   }
   die "IsValueSet failed: unknown result";
+}
+sub IsValuePolled{
+  my $self = shift;
+  my $_id = shift;
+
+    $self->send_IsValuePolled($_id);
+  return $self->recv_IsValuePolled();
+}
+
+sub send_IsValuePolled{
+  my $self = shift;
+  my $_id = shift;
+
+  $self->{output}->writeMessageBegin('IsValuePolled', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_IsValuePolled_args();
+  $args->{_id} = $_id;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_IsValuePolled{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_IsValuePolled_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  if (defined $result->{success} ) {
+    return $result->{success};
+  }
+  die "IsValuePolled failed: unknown result";
 }
 sub GetValueAsBool{
   my $self = shift;
@@ -26687,7 +27098,7 @@ sub process_SetPollInterval {
     $args->read($input);
     $input->readMessageEnd();
     my $result = new OpenZWave::RemoteManager_SetPollInterval_result();
-    $self->{handler}->SetPollInterval($args->_seconds);
+    $self->{handler}->SetPollInterval($args->_milliseconds, $args->_bIntervalBetweenPolls);
     $output->writeMessageBegin('SetPollInterval', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
@@ -26700,7 +27111,7 @@ sub process_EnablePoll {
     $args->read($input);
     $input->readMessageEnd();
     my $result = new OpenZWave::RemoteManager_EnablePoll_result();
-    $result->{success} = $self->{handler}->EnablePoll($args->_valueId);
+    $result->{success} = $self->{handler}->EnablePoll($args->_valueId, $args->_intensity);
     $output->writeMessageBegin('EnablePoll', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
@@ -26728,6 +27139,19 @@ sub process_isPolled {
     my $result = new OpenZWave::RemoteManager_isPolled_result();
     $result->{success} = $self->{handler}->isPolled($args->_valueId);
     $output->writeMessageBegin('isPolled', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_SetPollIntensity {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_SetPollIntensity_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_SetPollIntensity_result();
+    $self->{handler}->SetPollIntensity($args->_valueId, $args->_intensity);
+    $output->writeMessageBegin('SetPollIntensity', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -27287,6 +27711,19 @@ sub process_IsValueSet {
     my $result = new OpenZWave::RemoteManager_IsValueSet_result();
     $result->{success} = $self->{handler}->IsValueSet($args->_id);
     $output->writeMessageBegin('IsValueSet', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_IsValuePolled {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_IsValuePolled_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_IsValuePolled_result();
+    $result->{success} = $self->{handler}->IsValuePolled($args->_id);
+    $output->writeMessageBegin('IsValuePolled', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

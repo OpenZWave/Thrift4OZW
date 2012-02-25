@@ -993,10 +993,14 @@ OpenZWave.RemoteManager_GetPollInterval_result.prototype.write = function(output
 };
 
 OpenZWave.RemoteManager_SetPollInterval_args = function(args) {
-  this._seconds = null;
+  this._milliseconds = null;
+  this._bIntervalBetweenPolls = null;
   if (args) {
-    if (args._seconds !== undefined) {
-      this._seconds = args._seconds;
+    if (args._milliseconds !== undefined) {
+      this._milliseconds = args._milliseconds;
+    }
+    if (args._bIntervalBetweenPolls !== undefined) {
+      this._bIntervalBetweenPolls = args._bIntervalBetweenPolls;
     }
   }
 };
@@ -1016,14 +1020,18 @@ OpenZWave.RemoteManager_SetPollInterval_args.prototype.read = function(input) {
     {
       case 1:
       if (ftype == Thrift.Type.I32) {
-        this._seconds = input.readI32().value;
+        this._milliseconds = input.readI32().value;
       } else {
         input.skip(ftype);
       }
       break;
-      case 0:
+      case 2:
+      if (ftype == Thrift.Type.BOOL) {
+        this._bIntervalBetweenPolls = input.readBool().value;
+      } else {
         input.skip(ftype);
-        break;
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -1035,9 +1043,14 @@ OpenZWave.RemoteManager_SetPollInterval_args.prototype.read = function(input) {
 
 OpenZWave.RemoteManager_SetPollInterval_args.prototype.write = function(output) {
   output.writeStructBegin('RemoteManager_SetPollInterval_args');
-  if (this._seconds) {
-    output.writeFieldBegin('_seconds', Thrift.Type.I32, 1);
-    output.writeI32(this._seconds);
+  if (this._milliseconds) {
+    output.writeFieldBegin('_milliseconds', Thrift.Type.I32, 1);
+    output.writeI32(this._milliseconds);
+    output.writeFieldEnd();
+  }
+  if (this._bIntervalBetweenPolls) {
+    output.writeFieldBegin('_bIntervalBetweenPolls', Thrift.Type.BOOL, 2);
+    output.writeBool(this._bIntervalBetweenPolls);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -1075,9 +1088,13 @@ OpenZWave.RemoteManager_SetPollInterval_result.prototype.write = function(output
 
 OpenZWave.RemoteManager_EnablePoll_args = function(args) {
   this._valueId = null;
+  this._intensity = 1;
   if (args) {
     if (args._valueId !== undefined) {
       this._valueId = args._valueId;
+    }
+    if (args._intensity !== undefined) {
+      this._intensity = args._intensity;
     }
   }
 };
@@ -1103,9 +1120,13 @@ OpenZWave.RemoteManager_EnablePoll_args.prototype.read = function(input) {
         input.skip(ftype);
       }
       break;
-      case 0:
+      case 2:
+      if (ftype == Thrift.Type.BYTE) {
+        this._intensity = input.readByte().value;
+      } else {
         input.skip(ftype);
-        break;
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -1120,6 +1141,11 @@ OpenZWave.RemoteManager_EnablePoll_args.prototype.write = function(output) {
   if (this._valueId) {
     output.writeFieldBegin('_valueId', Thrift.Type.STRUCT, 1);
     this._valueId.write(output);
+    output.writeFieldEnd();
+  }
+  if (this._intensity) {
+    output.writeFieldBegin('_intensity', Thrift.Type.BYTE, 2);
+    output.writeByte(this._intensity);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -1389,6 +1415,101 @@ OpenZWave.RemoteManager_isPolled_result.prototype.write = function(output) {
     output.writeBool(this.success);
     output.writeFieldEnd();
   }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetPollIntensity_args = function(args) {
+  this._valueId = null;
+  this._intensity = null;
+  if (args) {
+    if (args._valueId !== undefined) {
+      this._valueId = args._valueId;
+    }
+    if (args._intensity !== undefined) {
+      this._intensity = args._intensity;
+    }
+  }
+};
+OpenZWave.RemoteManager_SetPollIntensity_args.prototype = {};
+OpenZWave.RemoteManager_SetPollIntensity_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this._valueId = new OpenZWave.RemoteValueID();
+        this._valueId.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.BYTE) {
+        this._intensity = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetPollIntensity_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetPollIntensity_args');
+  if (this._valueId) {
+    output.writeFieldBegin('_valueId', Thrift.Type.STRUCT, 1);
+    this._valueId.write(output);
+    output.writeFieldEnd();
+  }
+  if (this._intensity) {
+    output.writeFieldBegin('_intensity', Thrift.Type.BYTE, 2);
+    output.writeByte(this._intensity);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetPollIntensity_result = function(args) {
+};
+OpenZWave.RemoteManager_SetPollIntensity_result.prototype = {};
+OpenZWave.RemoteManager_SetPollIntensity_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    input.skip(ftype);
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetPollIntensity_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetPollIntensity_result');
   output.writeFieldStop();
   output.writeStructEnd();
   return;
@@ -6256,6 +6377,113 @@ OpenZWave.RemoteManager_IsValueSet_result.prototype.read = function(input) {
 
 OpenZWave.RemoteManager_IsValueSet_result.prototype.write = function(output) {
   output.writeStructBegin('RemoteManager_IsValueSet_result');
+  if (this.success) {
+    output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
+    output.writeBool(this.success);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsValuePolled_args = function(args) {
+  this._id = null;
+  if (args) {
+    if (args._id !== undefined) {
+      this._id = args._id;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsValuePolled_args.prototype = {};
+OpenZWave.RemoteManager_IsValuePolled_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this._id = new OpenZWave.RemoteValueID();
+        this._id.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsValuePolled_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsValuePolled_args');
+  if (this._id) {
+    output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
+    this._id.write(output);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsValuePolled_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined) {
+      this.success = args.success;
+    }
+  }
+};
+OpenZWave.RemoteManager_IsValuePolled_result.prototype = {};
+OpenZWave.RemoteManager_IsValuePolled_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.BOOL) {
+        this.success = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_IsValuePolled_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_IsValuePolled_result');
   if (this.success) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -15485,15 +15713,16 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetPollInterval = function() {
   }
   throw 'GetPollInterval failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetPollInterval = function(_seconds) {
-  this.send_SetPollInterval(_seconds);
+OpenZWave.RemoteManagerClient.prototype.SetPollInterval = function(_milliseconds, _bIntervalBetweenPolls) {
+  this.send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls);
   this.recv_SetPollInterval();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetPollInterval = function(_seconds) {
+OpenZWave.RemoteManagerClient.prototype.send_SetPollInterval = function(_milliseconds, _bIntervalBetweenPolls) {
   this.output.writeMessageBegin('SetPollInterval', Thrift.MessageType.CALL, this.seqid);
   var args = new OpenZWave.RemoteManager_SetPollInterval_args();
-  args._seconds = _seconds;
+  args._milliseconds = _milliseconds;
+  args._bIntervalBetweenPolls = _bIntervalBetweenPolls;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();
@@ -15516,15 +15745,16 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetPollInterval = function() {
 
   return;
 };
-OpenZWave.RemoteManagerClient.prototype.EnablePoll = function(_valueId) {
-  this.send_EnablePoll(_valueId);
+OpenZWave.RemoteManagerClient.prototype.EnablePoll = function(_valueId, _intensity) {
+  this.send_EnablePoll(_valueId, _intensity);
   return this.recv_EnablePoll();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_EnablePoll = function(_valueId) {
+OpenZWave.RemoteManagerClient.prototype.send_EnablePoll = function(_valueId, _intensity) {
   this.output.writeMessageBegin('EnablePoll', Thrift.MessageType.CALL, this.seqid);
   var args = new OpenZWave.RemoteManager_EnablePoll_args();
   args._valueId = _valueId;
+  args._intensity = _intensity;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();
@@ -15617,6 +15847,38 @@ OpenZWave.RemoteManagerClient.prototype.recv_isPolled = function() {
     return result.success;
   }
   throw 'isPolled failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.SetPollIntensity = function(_valueId, _intensity) {
+  this.send_SetPollIntensity(_valueId, _intensity);
+  this.recv_SetPollIntensity();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_SetPollIntensity = function(_valueId, _intensity) {
+  this.output.writeMessageBegin('SetPollIntensity', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetPollIntensity_args();
+  args._valueId = _valueId;
+  args._intensity = _intensity;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_SetPollIntensity = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_SetPollIntensity_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  return;
 };
 OpenZWave.RemoteManagerClient.prototype.RefreshNodeInfo = function(_homeId, _nodeId) {
   this.send_RefreshNodeInfo(_homeId, _nodeId);
@@ -17090,6 +17352,40 @@ OpenZWave.RemoteManagerClient.prototype.recv_IsValueSet = function() {
     return result.success;
   }
   throw 'IsValueSet failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.IsValuePolled = function(_id) {
+  this.send_IsValuePolled(_id);
+  return this.recv_IsValuePolled();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_IsValuePolled = function(_id) {
+  this.output.writeMessageBegin('IsValuePolled', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_IsValuePolled_args();
+  args._id = _id;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_IsValuePolled = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_IsValuePolled_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  if (null !== result.success) {
+    return result.success;
+  }
+  throw 'IsValuePolled failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.GetValueAsBool = function(_id) {
   this.send_GetValueAsBool(_id);

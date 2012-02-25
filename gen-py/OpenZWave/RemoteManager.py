@@ -89,17 +89,19 @@ class Iface:
   def GetPollInterval(self, ):
     pass
 
-  def SetPollInterval(self, _seconds):
+  def SetPollInterval(self, _milliseconds, _bIntervalBetweenPolls):
     """
     Parameters:
-     - _seconds
+     - _milliseconds
+     - _bIntervalBetweenPolls
     """
     pass
 
-  def EnablePoll(self, _valueId):
+  def EnablePoll(self, _valueId, _intensity):
     """
     Parameters:
      - _valueId
+     - _intensity
     """
     pass
 
@@ -114,6 +116,14 @@ class Iface:
     """
     Parameters:
      - _valueId
+    """
+    pass
+
+  def SetPollIntensity(self, _valueId, _intensity):
+    """
+    Parameters:
+     - _valueId
+     - _intensity
     """
     pass
 
@@ -453,6 +463,13 @@ class Iface:
     pass
 
   def IsValueSet(self, _id):
+    """
+    Parameters:
+     - _id
+    """
+    pass
+
+  def IsValuePolled(self, _id):
     """
     Parameters:
      - _id
@@ -1360,18 +1377,20 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetPollInterval failed: unknown result");
 
-  def SetPollInterval(self, _seconds):
+  def SetPollInterval(self, _milliseconds, _bIntervalBetweenPolls):
     """
     Parameters:
-     - _seconds
+     - _milliseconds
+     - _bIntervalBetweenPolls
     """
-    self.send_SetPollInterval(_seconds)
+    self.send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls)
     self.recv_SetPollInterval()
 
-  def send_SetPollInterval(self, _seconds):
+  def send_SetPollInterval(self, _milliseconds, _bIntervalBetweenPolls):
     self._oprot.writeMessageBegin('SetPollInterval', TMessageType.CALL, self._seqid)
     args = SetPollInterval_args()
-    args._seconds = _seconds
+    args._milliseconds = _milliseconds
+    args._bIntervalBetweenPolls = _bIntervalBetweenPolls
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -1388,18 +1407,20 @@ class Client(Iface):
     self._iprot.readMessageEnd()
     return
 
-  def EnablePoll(self, _valueId):
+  def EnablePoll(self, _valueId, _intensity):
     """
     Parameters:
      - _valueId
+     - _intensity
     """
-    self.send_EnablePoll(_valueId)
+    self.send_EnablePoll(_valueId, _intensity)
     return self.recv_EnablePoll()
 
-  def send_EnablePoll(self, _valueId):
+  def send_EnablePoll(self, _valueId, _intensity):
     self._oprot.writeMessageBegin('EnablePoll', TMessageType.CALL, self._seqid)
     args = EnablePoll_args()
     args._valueId = _valueId
+    args._intensity = _intensity
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -1477,6 +1498,36 @@ class Client(Iface):
     if result.success is not None:
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "isPolled failed: unknown result");
+
+  def SetPollIntensity(self, _valueId, _intensity):
+    """
+    Parameters:
+     - _valueId
+     - _intensity
+    """
+    self.send_SetPollIntensity(_valueId, _intensity)
+    self.recv_SetPollIntensity()
+
+  def send_SetPollIntensity(self, _valueId, _intensity):
+    self._oprot.writeMessageBegin('SetPollIntensity', TMessageType.CALL, self._seqid)
+    args = SetPollIntensity_args()
+    args._valueId = _valueId
+    args._intensity = _intensity
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_SetPollIntensity(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = SetPollIntensity_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    return
 
   def RefreshNodeInfo(self, _homeId, _nodeId):
     """
@@ -2829,6 +2880,36 @@ class Client(Iface):
     if result.success is not None:
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "IsValueSet failed: unknown result");
+
+  def IsValuePolled(self, _id):
+    """
+    Parameters:
+     - _id
+    """
+    self.send_IsValuePolled(_id)
+    return self.recv_IsValuePolled()
+
+  def send_IsValuePolled(self, _id):
+    self._oprot.writeMessageBegin('IsValuePolled', TMessageType.CALL, self._seqid)
+    args = IsValuePolled_args()
+    args._id = _id
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_IsValuePolled(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = IsValuePolled_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    if result.success is not None:
+      return result.success
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "IsValuePolled failed: unknown result");
 
   def GetValueAsBool(self, _id):
     """
@@ -5245,6 +5326,7 @@ class Processor(Iface, TProcessor):
     self._processMap["EnablePoll"] = Processor.process_EnablePoll
     self._processMap["DisablePoll"] = Processor.process_DisablePoll
     self._processMap["isPolled"] = Processor.process_isPolled
+    self._processMap["SetPollIntensity"] = Processor.process_SetPollIntensity
     self._processMap["RefreshNodeInfo"] = Processor.process_RefreshNodeInfo
     self._processMap["RequestNodeState"] = Processor.process_RequestNodeState
     self._processMap["RequestNodeDynamic"] = Processor.process_RequestNodeDynamic
@@ -5288,6 +5370,7 @@ class Processor(Iface, TProcessor):
     self._processMap["IsValueReadOnly"] = Processor.process_IsValueReadOnly
     self._processMap["IsValueWriteOnly"] = Processor.process_IsValueWriteOnly
     self._processMap["IsValueSet"] = Processor.process_IsValueSet
+    self._processMap["IsValuePolled"] = Processor.process_IsValuePolled
     self._processMap["GetValueAsBool"] = Processor.process_GetValueAsBool
     self._processMap["GetValueAsByte"] = Processor.process_GetValueAsByte
     self._processMap["GetValueAsFloat"] = Processor.process_GetValueAsFloat
@@ -5495,7 +5578,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = SetPollInterval_result()
-    self._handler.SetPollInterval(args._seconds)
+    self._handler.SetPollInterval(args._milliseconds, args._bIntervalBetweenPolls)
     oprot.writeMessageBegin("SetPollInterval", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -5506,7 +5589,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = EnablePoll_result()
-    result.success = self._handler.EnablePoll(args._valueId)
+    result.success = self._handler.EnablePoll(args._valueId, args._intensity)
     oprot.writeMessageBegin("EnablePoll", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -5530,6 +5613,17 @@ class Processor(Iface, TProcessor):
     result = isPolled_result()
     result.success = self._handler.isPolled(args._valueId)
     oprot.writeMessageBegin("isPolled", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_SetPollIntensity(self, seqid, iprot, oprot):
+    args = SetPollIntensity_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = SetPollIntensity_result()
+    self._handler.SetPollIntensity(args._valueId, args._intensity)
+    oprot.writeMessageBegin("SetPollIntensity", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -6003,6 +6097,17 @@ class Processor(Iface, TProcessor):
     result = IsValueSet_result()
     result.success = self._handler.IsValueSet(args._id)
     oprot.writeMessageBegin("IsValueSet", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_IsValuePolled(self, seqid, iprot, oprot):
+    args = IsValuePolled_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = IsValuePolled_result()
+    result.success = self._handler.IsValuePolled(args._id)
+    oprot.writeMessageBegin("IsValuePolled", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7987,16 +8092,19 @@ class GetPollInterval_result:
 class SetPollInterval_args:
   """
   Attributes:
-   - _seconds
+   - _milliseconds
+   - _bIntervalBetweenPolls
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.I32, '_seconds', None, None, ), # 1
+    (1, TType.I32, '_milliseconds', None, None, ), # 1
+    (2, TType.BOOL, '_bIntervalBetweenPolls', None, None, ), # 2
   )
 
-  def __init__(self, _seconds=None,):
-    self._seconds = _seconds
+  def __init__(self, _milliseconds=None, _bIntervalBetweenPolls=None,):
+    self._milliseconds = _milliseconds
+    self._bIntervalBetweenPolls = _bIntervalBetweenPolls
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -8009,7 +8117,12 @@ class SetPollInterval_args:
         break
       if fid == 1:
         if ftype == TType.I32:
-          self._seconds = iprot.readI32();
+          self._milliseconds = iprot.readI32();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BOOL:
+          self._bIntervalBetweenPolls = iprot.readBool();
         else:
           iprot.skip(ftype)
       else:
@@ -8022,9 +8135,13 @@ class SetPollInterval_args:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('SetPollInterval_args')
-    if self._seconds is not None:
-      oprot.writeFieldBegin('_seconds', TType.I32, 1)
-      oprot.writeI32(self._seconds)
+    if self._milliseconds is not None:
+      oprot.writeFieldBegin('_milliseconds', TType.I32, 1)
+      oprot.writeI32(self._milliseconds)
+      oprot.writeFieldEnd()
+    if self._bIntervalBetweenPolls is not None:
+      oprot.writeFieldBegin('_bIntervalBetweenPolls', TType.BOOL, 2)
+      oprot.writeBool(self._bIntervalBetweenPolls)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -8090,15 +8207,18 @@ class EnablePoll_args:
   """
   Attributes:
    - _valueId
+   - _intensity
   """
 
   thrift_spec = (
     None, # 0
     (1, TType.STRUCT, '_valueId', (RemoteValueID, RemoteValueID.thrift_spec), None, ), # 1
+    (2, TType.BYTE, '_intensity', None, 1, ), # 2
   )
 
-  def __init__(self, _valueId=None,):
+  def __init__(self, _valueId=None, _intensity=thrift_spec[2][4],):
     self._valueId = _valueId
+    self._intensity = _intensity
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -8115,6 +8235,11 @@ class EnablePoll_args:
           self._valueId.read(iprot)
         else:
           iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BYTE:
+          self._intensity = iprot.readByte();
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -8128,6 +8253,10 @@ class EnablePoll_args:
     if self._valueId is not None:
       oprot.writeFieldBegin('_valueId', TType.STRUCT, 1)
       self._valueId.write(oprot)
+      oprot.writeFieldEnd()
+    if self._intensity is not None:
+      oprot.writeFieldBegin('_intensity', TType.BYTE, 2)
+      oprot.writeByte(self._intensity)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -8428,6 +8557,121 @@ class isPolled_result:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
       oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class SetPollIntensity_args:
+  """
+  Attributes:
+   - _valueId
+   - _intensity
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.STRUCT, '_valueId', (RemoteValueID, RemoteValueID.thrift_spec), None, ), # 1
+    (2, TType.BYTE, '_intensity', None, None, ), # 2
+  )
+
+  def __init__(self, _valueId=None, _intensity=None,):
+    self._valueId = _valueId
+    self._intensity = _intensity
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.STRUCT:
+          self._valueId = RemoteValueID()
+          self._valueId.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BYTE:
+          self._intensity = iprot.readByte();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('SetPollIntensity_args')
+    if self._valueId is not None:
+      oprot.writeFieldBegin('_valueId', TType.STRUCT, 1)
+      self._valueId.write(oprot)
+      oprot.writeFieldEnd()
+    if self._intensity is not None:
+      oprot.writeFieldBegin('_intensity', TType.BYTE, 2)
+      oprot.writeByte(self._intensity)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class SetPollIntensity_result:
+
+  thrift_spec = (
+  )
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('SetPollIntensity_result')
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 
@@ -13876,6 +14120,126 @@ class IsValueSet_result:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('IsValueSet_result')
+    if self.success is not None:
+      oprot.writeFieldBegin('success', TType.BOOL, 0)
+      oprot.writeBool(self.success)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsValuePolled_args:
+  """
+  Attributes:
+   - _id
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.STRUCT, '_id', (RemoteValueID, RemoteValueID.thrift_spec), None, ), # 1
+  )
+
+  def __init__(self, _id=None,):
+    self._id = _id
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.STRUCT:
+          self._id = RemoteValueID()
+          self._id.read(iprot)
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsValuePolled_args')
+    if self._id is not None:
+      oprot.writeFieldBegin('_id', TType.STRUCT, 1)
+      self._id.write(oprot)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class IsValuePolled_result:
+  """
+  Attributes:
+   - success
+  """
+
+  thrift_spec = (
+    (0, TType.BOOL, 'success', None, None, ), # 0
+  )
+
+  def __init__(self, success=None,):
+    self.success = success
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 0:
+        if ftype == TType.BOOL:
+          self.success = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('IsValuePolled_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)

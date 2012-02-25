@@ -160,13 +160,13 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetPollInterval failed: unknown result')
           end
 
-          def SetPollInterval(_seconds)
-            send_SetPollInterval(_seconds)
+          def SetPollInterval(_milliseconds, _bIntervalBetweenPolls)
+            send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls)
             recv_SetPollInterval()
           end
 
-          def send_SetPollInterval(_seconds)
-            send_message('SetPollInterval', SetPollInterval_args, :_seconds => _seconds)
+          def send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls)
+            send_message('SetPollInterval', SetPollInterval_args, :_milliseconds => _milliseconds, :_bIntervalBetweenPolls => _bIntervalBetweenPolls)
           end
 
           def recv_SetPollInterval()
@@ -174,13 +174,13 @@ require 'ozw_types'
             return
           end
 
-          def EnablePoll(_valueId)
-            send_EnablePoll(_valueId)
+          def EnablePoll(_valueId, _intensity)
+            send_EnablePoll(_valueId, _intensity)
             return recv_EnablePoll()
           end
 
-          def send_EnablePoll(_valueId)
-            send_message('EnablePoll', EnablePoll_args, :_valueId => _valueId)
+          def send_EnablePoll(_valueId, _intensity)
+            send_message('EnablePoll', EnablePoll_args, :_valueId => _valueId, :_intensity => _intensity)
           end
 
           def recv_EnablePoll()
@@ -217,6 +217,20 @@ require 'ozw_types'
             result = receive_message(IsPolled_result)
             return result.success unless result.success.nil?
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'isPolled failed: unknown result')
+          end
+
+          def SetPollIntensity(_valueId, _intensity)
+            send_SetPollIntensity(_valueId, _intensity)
+            recv_SetPollIntensity()
+          end
+
+          def send_SetPollIntensity(_valueId, _intensity)
+            send_message('SetPollIntensity', SetPollIntensity_args, :_valueId => _valueId, :_intensity => _intensity)
+          end
+
+          def recv_SetPollIntensity()
+            result = receive_message(SetPollIntensity_result)
+            return
           end
 
           def RefreshNodeInfo(_homeId, _nodeId)
@@ -852,6 +866,21 @@ require 'ozw_types'
             result = receive_message(IsValueSet_result)
             return result.success unless result.success.nil?
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsValueSet failed: unknown result')
+          end
+
+          def IsValuePolled(_id)
+            send_IsValuePolled(_id)
+            return recv_IsValuePolled()
+          end
+
+          def send_IsValuePolled(_id)
+            send_message('IsValuePolled', IsValuePolled_args, :_id => _id)
+          end
+
+          def recv_IsValuePolled()
+            result = receive_message(IsValuePolled_result)
+            return result.success unless result.success.nil?
+            raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsValuePolled failed: unknown result')
           end
 
           def GetValueAsBool(_id)
@@ -2061,14 +2090,14 @@ require 'ozw_types'
           def process_SetPollInterval(seqid, iprot, oprot)
             args = read_args(iprot, SetPollInterval_args)
             result = SetPollInterval_result.new()
-            @handler.SetPollInterval(args._seconds)
+            @handler.SetPollInterval(args._milliseconds, args._bIntervalBetweenPolls)
             write_result(result, oprot, 'SetPollInterval', seqid)
           end
 
           def process_EnablePoll(seqid, iprot, oprot)
             args = read_args(iprot, EnablePoll_args)
             result = EnablePoll_result.new()
-            result.success = @handler.EnablePoll(args._valueId)
+            result.success = @handler.EnablePoll(args._valueId, args._intensity)
             write_result(result, oprot, 'EnablePoll', seqid)
           end
 
@@ -2084,6 +2113,13 @@ require 'ozw_types'
             result = IsPolled_result.new()
             result.success = @handler.isPolled(args._valueId)
             write_result(result, oprot, 'isPolled', seqid)
+          end
+
+          def process_SetPollIntensity(seqid, iprot, oprot)
+            args = read_args(iprot, SetPollIntensity_args)
+            result = SetPollIntensity_result.new()
+            @handler.SetPollIntensity(args._valueId, args._intensity)
+            write_result(result, oprot, 'SetPollIntensity', seqid)
           end
 
           def process_RefreshNodeInfo(seqid, iprot, oprot)
@@ -2385,6 +2421,13 @@ require 'ozw_types'
             result = IsValueSet_result.new()
             result.success = @handler.IsValueSet(args._id)
             write_result(result, oprot, 'IsValueSet', seqid)
+          end
+
+          def process_IsValuePolled(seqid, iprot, oprot)
+            args = read_args(iprot, IsValuePolled_args)
+            result = IsValuePolled_result.new()
+            result.success = @handler.IsValuePolled(args._id)
+            write_result(result, oprot, 'IsValuePolled', seqid)
           end
 
           def process_GetValueAsBool(seqid, iprot, oprot)
@@ -3242,10 +3285,12 @@ require 'ozw_types'
 
         class SetPollInterval_args
           include ::Thrift::Struct, ::Thrift::Struct_Union
-          _SECONDS = 1
+          _MILLISECONDS = 1
+          _BINTERVALBETWEENPOLLS = 2
 
           FIELDS = {
-            _SECONDS => {:type => ::Thrift::Types::I32, :name => '_seconds'}
+            _MILLISECONDS => {:type => ::Thrift::Types::I32, :name => '_milliseconds'},
+            _BINTERVALBETWEENPOLLS => {:type => ::Thrift::Types::BOOL, :name => '_bIntervalBetweenPolls'}
           }
 
           def struct_fields; FIELDS; end
@@ -3274,9 +3319,11 @@ require 'ozw_types'
         class EnablePoll_args
           include ::Thrift::Struct, ::Thrift::Struct_Union
           _VALUEID = 1
+          _INTENSITY = 2
 
           FIELDS = {
-            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID}
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
+            _INTENSITY => {:type => ::Thrift::Types::BYTE, :name => '_intensity', :default => 1}
           }
 
           def struct_fields; FIELDS; end
@@ -3357,6 +3404,39 @@ require 'ozw_types'
 
           FIELDS = {
             SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class SetPollIntensity_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _VALUEID = 1
+          _INTENSITY = 2
+
+          FIELDS = {
+            _VALUEID => {:type => ::Thrift::Types::STRUCT, :name => '_valueId', :class => OpenZWave::RemoteValueID},
+            _INTENSITY => {:type => ::Thrift::Types::BYTE, :name => '_intensity'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class SetPollIntensity_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+
+          FIELDS = {
+
           }
 
           def struct_fields; FIELDS; end
@@ -4800,6 +4880,38 @@ require 'ozw_types'
         end
 
         class IsValueSet_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          SUCCESS = 0
+
+          FIELDS = {
+            SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsValuePolled_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _ID = 1
+
+          FIELDS = {
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class IsValuePolled_result
           include ::Thrift::Struct, ::Thrift::Struct_Union
           SUCCESS = 0
 

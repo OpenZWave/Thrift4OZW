@@ -26,10 +26,11 @@ namespace OpenZWave
       int GetSendQueueCount(int _homeId);
       void LogDriverStatistics(int _homeId);
       int GetPollInterval();
-      void SetPollInterval(int _seconds);
-      bool EnablePoll(RemoteValueID _valueId);
+      void SetPollInterval(int _milliseconds, bool _bIntervalBetweenPolls);
+      bool EnablePoll(RemoteValueID _valueId, byte _intensity);
       bool DisablePoll(RemoteValueID _valueId);
       bool isPolled(RemoteValueID _valueId);
+      void SetPollIntensity(RemoteValueID _valueId, byte _intensity);
       bool RefreshNodeInfo(int _homeId, byte _nodeId);
       bool RequestNodeState(int _homeId, byte _nodeId);
       bool RequestNodeDynamic(int _homeId, byte _nodeId);
@@ -73,6 +74,7 @@ namespace OpenZWave
       bool IsValueReadOnly(RemoteValueID _id);
       bool IsValueWriteOnly(RemoteValueID _id);
       bool IsValueSet(RemoteValueID _id);
+      bool IsValuePolled(RemoteValueID _id);
       Bool_Bool GetValueAsBool(RemoteValueID _id);
       Bool_UInt8 GetValueAsByte(RemoteValueID _id);
       Bool_Float GetValueAsFloat(RemoteValueID _id);
@@ -499,17 +501,18 @@ namespace OpenZWave
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetPollInterval failed: unknown result");
       }
 
-      public void SetPollInterval(int _seconds)
+      public void SetPollInterval(int _milliseconds, bool _bIntervalBetweenPolls)
       {
-        send_SetPollInterval(_seconds);
+        send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls);
         recv_SetPollInterval();
       }
 
-      public void send_SetPollInterval(int _seconds)
+      public void send_SetPollInterval(int _milliseconds, bool _bIntervalBetweenPolls)
       {
         oprot_.WriteMessageBegin(new TMessage("SetPollInterval", TMessageType.Call, seqid_));
         SetPollInterval_args args = new SetPollInterval_args();
-        args._seconds = _seconds;
+        args._milliseconds = _milliseconds;
+        args._bIntervalBetweenPolls = _bIntervalBetweenPolls;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         oprot_.Transport.Flush();
@@ -529,17 +532,18 @@ namespace OpenZWave
         return;
       }
 
-      public bool EnablePoll(RemoteValueID _valueId)
+      public bool EnablePoll(RemoteValueID _valueId, byte _intensity)
       {
-        send_EnablePoll(_valueId);
+        send_EnablePoll(_valueId, _intensity);
         return recv_EnablePoll();
       }
 
-      public void send_EnablePoll(RemoteValueID _valueId)
+      public void send_EnablePoll(RemoteValueID _valueId, byte _intensity)
       {
         oprot_.WriteMessageBegin(new TMessage("EnablePoll", TMessageType.Call, seqid_));
         EnablePoll_args args = new EnablePoll_args();
         args._valueId = _valueId;
+        args._intensity = _intensity;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
         oprot_.Transport.Flush();
@@ -626,6 +630,37 @@ namespace OpenZWave
           return result.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "isPolled failed: unknown result");
+      }
+
+      public void SetPollIntensity(RemoteValueID _valueId, byte _intensity)
+      {
+        send_SetPollIntensity(_valueId, _intensity);
+        recv_SetPollIntensity();
+      }
+
+      public void send_SetPollIntensity(RemoteValueID _valueId, byte _intensity)
+      {
+        oprot_.WriteMessageBegin(new TMessage("SetPollIntensity", TMessageType.Call, seqid_));
+        SetPollIntensity_args args = new SetPollIntensity_args();
+        args._valueId = _valueId;
+        args._intensity = _intensity;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public void recv_SetPollIntensity()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        SetPollIntensity_result result = new SetPollIntensity_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        return;
       }
 
       public bool RefreshNodeInfo(int _homeId, byte _nodeId)
@@ -2056,6 +2091,39 @@ namespace OpenZWave
           return result.Success;
         }
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsValueSet failed: unknown result");
+      }
+
+      public bool IsValuePolled(RemoteValueID _id)
+      {
+        send_IsValuePolled(_id);
+        return recv_IsValuePolled();
+      }
+
+      public void send_IsValuePolled(RemoteValueID _id)
+      {
+        oprot_.WriteMessageBegin(new TMessage("IsValuePolled", TMessageType.Call, seqid_));
+        IsValuePolled_args args = new IsValuePolled_args();
+        args._id = _id;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public bool recv_IsValuePolled()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        IsValuePolled_result result = new IsValuePolled_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        if (result.__isset.success) {
+          return result.Success;
+        }
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "IsValuePolled failed: unknown result");
       }
 
       public Bool_Bool GetValueAsBool(RemoteValueID _id)
@@ -4627,6 +4695,7 @@ namespace OpenZWave
         processMap_["EnablePoll"] = EnablePoll_Process;
         processMap_["DisablePoll"] = DisablePoll_Process;
         processMap_["isPolled"] = isPolled_Process;
+        processMap_["SetPollIntensity"] = SetPollIntensity_Process;
         processMap_["RefreshNodeInfo"] = RefreshNodeInfo_Process;
         processMap_["RequestNodeState"] = RequestNodeState_Process;
         processMap_["RequestNodeDynamic"] = RequestNodeDynamic_Process;
@@ -4670,6 +4739,7 @@ namespace OpenZWave
         processMap_["IsValueReadOnly"] = IsValueReadOnly_Process;
         processMap_["IsValueWriteOnly"] = IsValueWriteOnly_Process;
         processMap_["IsValueSet"] = IsValueSet_Process;
+        processMap_["IsValuePolled"] = IsValuePolled_Process;
         processMap_["GetValueAsBool"] = GetValueAsBool_Process;
         processMap_["GetValueAsByte"] = GetValueAsByte_Process;
         processMap_["GetValueAsFloat"] = GetValueAsFloat_Process;
@@ -4914,7 +4984,7 @@ namespace OpenZWave
         args.Read(iprot);
         iprot.ReadMessageEnd();
         SetPollInterval_result result = new SetPollInterval_result();
-        iface_.SetPollInterval(args._seconds);
+        iface_.SetPollInterval(args._milliseconds, args._bIntervalBetweenPolls);
         oprot.WriteMessageBegin(new TMessage("SetPollInterval", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
@@ -4927,7 +4997,7 @@ namespace OpenZWave
         args.Read(iprot);
         iprot.ReadMessageEnd();
         EnablePoll_result result = new EnablePoll_result();
-        result.Success = iface_.EnablePoll(args._valueId);
+        result.Success = iface_.EnablePoll(args._valueId, args._intensity);
         oprot.WriteMessageBegin(new TMessage("EnablePoll", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
@@ -4955,6 +5025,19 @@ namespace OpenZWave
         isPolled_result result = new isPolled_result();
         result.Success = iface_.isPolled(args._valueId);
         oprot.WriteMessageBegin(new TMessage("isPolled", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void SetPollIntensity_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        SetPollIntensity_args args = new SetPollIntensity_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        SetPollIntensity_result result = new SetPollIntensity_result();
+        iface_.SetPollIntensity(args._valueId, args._intensity);
+        oprot.WriteMessageBegin(new TMessage("SetPollIntensity", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -5514,6 +5597,19 @@ namespace OpenZWave
         IsValueSet_result result = new IsValueSet_result();
         result.Success = iface_.IsValueSet(args._id);
         oprot.WriteMessageBegin(new TMessage("IsValueSet", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void IsValuePolled_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        IsValuePolled_args args = new IsValuePolled_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        IsValuePolled_result result = new IsValuePolled_result();
+        result.Success = iface_.IsValuePolled(args._id);
+        oprot.WriteMessageBegin(new TMessage("IsValuePolled", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -8070,18 +8166,32 @@ namespace OpenZWave
     [Serializable]
     public partial class SetPollInterval_args : TBase
     {
-      private int __seconds;
+      private int __milliseconds;
+      private bool __bIntervalBetweenPolls;
 
-      public int _seconds
+      public int _milliseconds
       {
         get
         {
-          return __seconds;
+          return __milliseconds;
         }
         set
         {
-          __isset._seconds = true;
-          this.__seconds = value;
+          __isset._milliseconds = true;
+          this.__milliseconds = value;
+        }
+      }
+
+      public bool _bIntervalBetweenPolls
+      {
+        get
+        {
+          return __bIntervalBetweenPolls;
+        }
+        set
+        {
+          __isset._bIntervalBetweenPolls = true;
+          this.__bIntervalBetweenPolls = value;
         }
       }
 
@@ -8089,7 +8199,8 @@ namespace OpenZWave
       public Isset __isset;
       [Serializable]
       public struct Isset {
-        public bool _seconds;
+        public bool _milliseconds;
+        public bool _bIntervalBetweenPolls;
       }
 
       public SetPollInterval_args() {
@@ -8109,7 +8220,14 @@ namespace OpenZWave
           {
             case 1:
               if (field.Type == TType.I32) {
-                _seconds = iprot.ReadI32();
+                _milliseconds = iprot.ReadI32();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Bool) {
+                _bIntervalBetweenPolls = iprot.ReadBool();
               } else { 
                 TProtocolUtil.Skip(iprot, field.Type);
               }
@@ -8127,12 +8245,20 @@ namespace OpenZWave
         TStruct struc = new TStruct("SetPollInterval_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
-        if (__isset._seconds) {
-          field.Name = "_seconds";
+        if (__isset._milliseconds) {
+          field.Name = "_milliseconds";
           field.Type = TType.I32;
           field.ID = 1;
           oprot.WriteFieldBegin(field);
-          oprot.WriteI32(_seconds);
+          oprot.WriteI32(_milliseconds);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._bIntervalBetweenPolls) {
+          field.Name = "_bIntervalBetweenPolls";
+          field.Type = TType.Bool;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(_bIntervalBetweenPolls);
           oprot.WriteFieldEnd();
         }
         oprot.WriteFieldStop();
@@ -8141,8 +8267,10 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("SetPollInterval_args(");
-        sb.Append("_seconds: ");
-        sb.Append(_seconds);
+        sb.Append("_milliseconds: ");
+        sb.Append(_milliseconds);
+        sb.Append(",_bIntervalBetweenPolls: ");
+        sb.Append(_bIntervalBetweenPolls);
         sb.Append(")");
         return sb.ToString();
       }
@@ -8199,6 +8327,7 @@ namespace OpenZWave
     public partial class EnablePoll_args : TBase
     {
       private RemoteValueID __valueId;
+      private byte __intensity;
 
       public RemoteValueID _valueId
       {
@@ -8213,14 +8342,29 @@ namespace OpenZWave
         }
       }
 
+      public byte _intensity
+      {
+        get
+        {
+          return __intensity;
+        }
+        set
+        {
+          __isset._intensity = true;
+          this.__intensity = value;
+        }
+      }
+
 
       public Isset __isset;
       [Serializable]
       public struct Isset {
         public bool _valueId;
+        public bool _intensity;
       }
 
       public EnablePoll_args() {
+        this.__intensity = 1;
       }
 
       public void Read (TProtocol iprot)
@@ -8239,6 +8383,13 @@ namespace OpenZWave
               if (field.Type == TType.Struct) {
                 _valueId = new RemoteValueID();
                 _valueId.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Byte) {
+                _intensity = iprot.ReadByte();
               } else { 
                 TProtocolUtil.Skip(iprot, field.Type);
               }
@@ -8264,6 +8415,14 @@ namespace OpenZWave
           _valueId.Write(oprot);
           oprot.WriteFieldEnd();
         }
+        if (__isset._intensity) {
+          field.Name = "_intensity";
+          field.Type = TType.Byte;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_intensity);
+          oprot.WriteFieldEnd();
+        }
         oprot.WriteFieldStop();
         oprot.WriteStructEnd();
       }
@@ -8272,6 +8431,8 @@ namespace OpenZWave
         StringBuilder sb = new StringBuilder("EnablePoll_args(");
         sb.Append("_valueId: ");
         sb.Append(_valueId== null ? "<null>" : _valueId.ToString());
+        sb.Append(",_intensity: ");
+        sb.Append(_intensity);
         sb.Append(")");
         return sb.ToString();
       }
@@ -8692,6 +8853,167 @@ namespace OpenZWave
         StringBuilder sb = new StringBuilder("isPolled_result(");
         sb.Append("Success: ");
         sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class SetPollIntensity_args : TBase
+    {
+      private RemoteValueID __valueId;
+      private byte __intensity;
+
+      public RemoteValueID _valueId
+      {
+        get
+        {
+          return __valueId;
+        }
+        set
+        {
+          __isset._valueId = true;
+          this.__valueId = value;
+        }
+      }
+
+      public byte _intensity
+      {
+        get
+        {
+          return __intensity;
+        }
+        set
+        {
+          __isset._intensity = true;
+          this.__intensity = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _valueId;
+        public bool _intensity;
+      }
+
+      public SetPollIntensity_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                _valueId = new RemoteValueID();
+                _valueId.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Byte) {
+                _intensity = iprot.ReadByte();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("SetPollIntensity_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (_valueId != null && __isset._valueId) {
+          field.Name = "_valueId";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          _valueId.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._intensity) {
+          field.Name = "_intensity";
+          field.Type = TType.Byte;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteByte(_intensity);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("SetPollIntensity_args(");
+        sb.Append("_valueId: ");
+        sb.Append(_valueId== null ? "<null>" : _valueId.ToString());
+        sb.Append(",_intensity: ");
+        sb.Append(_intensity);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class SetPollIntensity_result : TBase
+    {
+
+      public SetPollIntensity_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("SetPollIntensity_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("SetPollIntensity_result(");
         sb.Append(")");
         return sb.ToString();
       }
@@ -16832,6 +17154,174 @@ namespace OpenZWave
 
       public override string ToString() {
         StringBuilder sb = new StringBuilder("IsValueSet_result(");
+        sb.Append("Success: ");
+        sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsValuePolled_args : TBase
+    {
+      private RemoteValueID __id;
+
+      public RemoteValueID _id
+      {
+        get
+        {
+          return __id;
+        }
+        set
+        {
+          __isset._id = true;
+          this.__id = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _id;
+      }
+
+      public IsValuePolled_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                _id = new RemoteValueID();
+                _id.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsValuePolled_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (_id != null && __isset._id) {
+          field.Name = "_id";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          _id.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsValuePolled_args(");
+        sb.Append("_id: ");
+        sb.Append(_id== null ? "<null>" : _id.ToString());
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class IsValuePolled_result : TBase
+    {
+      private bool _success;
+
+      public bool Success
+      {
+        get
+        {
+          return _success;
+        }
+        set
+        {
+          __isset.success = true;
+          this._success = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool success;
+      }
+
+      public IsValuePolled_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 0:
+              if (field.Type == TType.Bool) {
+                Success = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("IsValuePolled_result");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+
+        if (this.__isset.success) {
+          field.Name = "Success";
+          field.Type = TType.Bool;
+          field.ID = 0;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(Success);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("IsValuePolled_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");

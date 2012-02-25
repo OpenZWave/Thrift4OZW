@@ -5666,52 +5666,70 @@
 @end
 
 @interface OpenZWaveSetPollInterval_args : NSObject <NSCoding> {
-  int32_t ___seconds;
+  int32_t ___milliseconds;
+  BOOL ___bIntervalBetweenPolls;
 
-  BOOL ___seconds_isset;
+  BOOL ___milliseconds_isset;
+  BOOL ___bIntervalBetweenPolls_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
-@property (nonatomic, getter=_seconds, setter=set_seconds:) int32_t _seconds;
+@property (nonatomic, getter=_milliseconds, setter=set_milliseconds:) int32_t _milliseconds;
+@property (nonatomic, getter=_bIntervalBetweenPolls, setter=set_bIntervalBetweenPolls:) BOOL _bIntervalBetweenPolls;
 #endif
 
-- (id) initWith_seconds: (int32_t) _seconds;
+- (id) initWith_milliseconds: (int32_t) _milliseconds _bIntervalBetweenPolls: (BOOL) _bIntervalBetweenPolls;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
 
-- (int32_t) _seconds;
-- (void) set_seconds: (int32_t) _seconds;
-- (BOOL) _secondsIsSet;
+- (int32_t) _milliseconds;
+- (void) set_milliseconds: (int32_t) _milliseconds;
+- (BOOL) _millisecondsIsSet;
+
+- (BOOL) _bIntervalBetweenPolls;
+- (void) set_bIntervalBetweenPolls: (BOOL) _bIntervalBetweenPolls;
+- (BOOL) _bIntervalBetweenPollsIsSet;
 
 @end
 
 @implementation OpenZWaveSetPollInterval_args
 
-- (id) initWith_seconds: (int32_t) _seconds
+- (id) initWith_milliseconds: (int32_t) _milliseconds _bIntervalBetweenPolls: (BOOL) _bIntervalBetweenPolls
 {
   self = [super init];
-  ___seconds = _seconds;
-  ___seconds_isset = YES;
+  ___milliseconds = _milliseconds;
+  ___milliseconds_isset = YES;
+  ___bIntervalBetweenPolls = _bIntervalBetweenPolls;
+  ___bIntervalBetweenPolls_isset = YES;
   return self;
 }
 
 - (id) initWithCoder: (NSCoder *) decoder
 {
   self = [super init];
-  if ([decoder containsValueForKey: @"_seconds"])
+  if ([decoder containsValueForKey: @"_milliseconds"])
   {
-    ___seconds = [decoder decodeInt32ForKey: @"_seconds"];
-    ___seconds_isset = YES;
+    ___milliseconds = [decoder decodeInt32ForKey: @"_milliseconds"];
+    ___milliseconds_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_bIntervalBetweenPolls"])
+  {
+    ___bIntervalBetweenPolls = [decoder decodeBoolForKey: @"_bIntervalBetweenPolls"];
+    ___bIntervalBetweenPolls_isset = YES;
   }
   return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) encoder
 {
-  if (___seconds_isset)
+  if (___milliseconds_isset)
   {
-    [encoder encodeInt32: ___seconds forKey: @"_seconds"];
+    [encoder encodeInt32: ___milliseconds forKey: @"_milliseconds"];
+  }
+  if (___bIntervalBetweenPolls_isset)
+  {
+    [encoder encodeBool: ___bIntervalBetweenPolls forKey: @"_bIntervalBetweenPolls"];
   }
 }
 
@@ -5720,21 +5738,38 @@
   [super dealloc];
 }
 
-- (int32_t) _seconds {
-  return ___seconds;
+- (int32_t) _milliseconds {
+  return ___milliseconds;
 }
 
-- (void) set_seconds: (int32_t) _seconds {
-  ___seconds = _seconds;
-  ___seconds_isset = YES;
+- (void) set_milliseconds: (int32_t) _milliseconds {
+  ___milliseconds = _milliseconds;
+  ___milliseconds_isset = YES;
 }
 
-- (BOOL) _secondsIsSet {
-  return ___seconds_isset;
+- (BOOL) _millisecondsIsSet {
+  return ___milliseconds_isset;
 }
 
-- (void) unset_seconds {
-  ___seconds_isset = NO;
+- (void) unset_milliseconds {
+  ___milliseconds_isset = NO;
+}
+
+- (BOOL) _bIntervalBetweenPolls {
+  return ___bIntervalBetweenPolls;
+}
+
+- (void) set_bIntervalBetweenPolls: (BOOL) _bIntervalBetweenPolls {
+  ___bIntervalBetweenPolls = _bIntervalBetweenPolls;
+  ___bIntervalBetweenPolls_isset = YES;
+}
+
+- (BOOL) _bIntervalBetweenPollsIsSet {
+  return ___bIntervalBetweenPolls_isset;
+}
+
+- (void) unset_bIntervalBetweenPolls {
+  ___bIntervalBetweenPolls_isset = NO;
 }
 
 - (void) read: (id <TProtocol>) inProtocol
@@ -5755,7 +5790,15 @@
       case 1:
         if (fieldType == TType_I32) {
           int32_t fieldValue = [inProtocol readI32];
-          [self set_seconds: fieldValue];
+          [self set_milliseconds: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self set_bIntervalBetweenPolls: fieldValue];
         } else { 
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
@@ -5771,9 +5814,14 @@
 
 - (void) write: (id <TProtocol>) outProtocol {
   [outProtocol writeStructBeginWithName: @"SetPollInterval_args"];
-  if (___seconds_isset) {
-    [outProtocol writeFieldBeginWithName: @"_seconds" type: TType_I32 fieldID: 1];
-    [outProtocol writeI32: ___seconds];
+  if (___milliseconds_isset) {
+    [outProtocol writeFieldBeginWithName: @"_milliseconds" type: TType_I32 fieldID: 1];
+    [outProtocol writeI32: ___milliseconds];
+    [outProtocol writeFieldEnd];
+  }
+  if (___bIntervalBetweenPolls_isset) {
+    [outProtocol writeFieldBeginWithName: @"_bIntervalBetweenPolls" type: TType_BOOL fieldID: 2];
+    [outProtocol writeBool: ___bIntervalBetweenPolls];
     [outProtocol writeFieldEnd];
   }
   [outProtocol writeFieldStop];
@@ -5782,8 +5830,10 @@
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"SetPollInterval_args("];
-  [ms appendString: @"_seconds:"];
-  [ms appendFormat: @"%i", ___seconds];
+  [ms appendString: @"_milliseconds:"];
+  [ms appendFormat: @"%i", ___milliseconds];
+  [ms appendString: @",_bIntervalBetweenPolls:"];
+  [ms appendFormat: @"%i", ___bIntervalBetweenPolls];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -5852,15 +5902,18 @@
 
 @interface OpenZWaveEnablePoll_args : NSObject <NSCoding> {
   OpenZWaveRemoteValueID * ___valueId;
+  uint8_t ___intensity;
 
   BOOL ___valueId_isset;
+  BOOL ___intensity_isset;
 }
 
 #if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
 @property (nonatomic, retain, getter=_valueId, setter=set_valueId:) OpenZWaveRemoteValueID * _valueId;
+@property (nonatomic, getter=_intensity, setter=set_intensity:) uint8_t _intensity;
 #endif
 
-- (id) initWith_valueId: (OpenZWaveRemoteValueID *) _valueId;
+- (id) initWith_valueId: (OpenZWaveRemoteValueID *) _valueId _intensity: (uint8_t) _intensity;
 
 - (void) read: (id <TProtocol>) inProtocol;
 - (void) write: (id <TProtocol>) outProtocol;
@@ -5869,15 +5922,21 @@
 - (void) set_valueId: (OpenZWaveRemoteValueID *) _valueId;
 - (BOOL) _valueIdIsSet;
 
+- (uint8_t) _intensity;
+- (void) set_intensity: (uint8_t) _intensity;
+- (BOOL) _intensityIsSet;
+
 @end
 
 @implementation OpenZWaveEnablePoll_args
 
-- (id) initWith_valueId: (OpenZWaveRemoteValueID *) _valueId
+- (id) initWith_valueId: (OpenZWaveRemoteValueID *) _valueId _intensity: (uint8_t) _intensity
 {
   self = [super init];
   ___valueId = [_valueId retain];
   ___valueId_isset = YES;
+  ___intensity = _intensity;
+  ___intensity_isset = YES;
   return self;
 }
 
@@ -5889,6 +5948,11 @@
     ___valueId = [[decoder decodeObjectForKey: @"_valueId"] retain];
     ___valueId_isset = YES;
   }
+  if ([decoder containsValueForKey: @"_intensity"])
+  {
+    ___intensity = [decoder decodeIntForKey: @"_intensity"];
+    ___intensity_isset = YES;
+  }
   return self;
 }
 
@@ -5897,6 +5961,10 @@
   if (___valueId_isset)
   {
     [encoder encodeObject: ___valueId forKey: @"_valueId"];
+  }
+  if (___intensity_isset)
+  {
+    [encoder encodeInt: ___intensity forKey: @"_intensity"];
   }
 }
 
@@ -5927,6 +5995,23 @@
   ___valueId_isset = NO;
 }
 
+- (uint8_t) _intensity {
+  return ___intensity;
+}
+
+- (void) set_intensity: (uint8_t) _intensity {
+  ___intensity = _intensity;
+  ___intensity_isset = YES;
+}
+
+- (BOOL) _intensityIsSet {
+  return ___intensity_isset;
+}
+
+- (void) unset_intensity {
+  ___intensity_isset = NO;
+}
+
 - (void) read: (id <TProtocol>) inProtocol
 {
   NSString * fieldName;
@@ -5952,6 +6037,14 @@
           [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         }
         break;
+      case 2:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_intensity: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
       default:
         [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
         break;
@@ -5970,6 +6063,11 @@
       [outProtocol writeFieldEnd];
     }
   }
+  if (___intensity_isset) {
+    [outProtocol writeFieldBeginWithName: @"_intensity" type: TType_BYTE fieldID: 2];
+    [outProtocol writeByte: ___intensity];
+    [outProtocol writeFieldEnd];
+  }
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
 }
@@ -5978,6 +6076,8 @@
   NSMutableString * ms = [NSMutableString stringWithString: @"EnablePoll_args("];
   [ms appendString: @"_valueId:"];
   [ms appendFormat: @"%@", ___valueId];
+  [ms appendString: @",_intensity:"];
+  [ms appendFormat: @"%i", ___intensity];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -6624,6 +6724,250 @@
   NSMutableString * ms = [NSMutableString stringWithString: @"IsPolled_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveSetPollIntensity_args : NSObject <NSCoding> {
+  OpenZWaveRemoteValueID * ___valueId;
+  uint8_t ___intensity;
+
+  BOOL ___valueId_isset;
+  BOOL ___intensity_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=_valueId, setter=set_valueId:) OpenZWaveRemoteValueID * _valueId;
+@property (nonatomic, getter=_intensity, setter=set_intensity:) uint8_t _intensity;
+#endif
+
+- (id) initWith_valueId: (OpenZWaveRemoteValueID *) _valueId _intensity: (uint8_t) _intensity;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (OpenZWaveRemoteValueID *) _valueId;
+- (void) set_valueId: (OpenZWaveRemoteValueID *) _valueId;
+- (BOOL) _valueIdIsSet;
+
+- (uint8_t) _intensity;
+- (void) set_intensity: (uint8_t) _intensity;
+- (BOOL) _intensityIsSet;
+
+@end
+
+@implementation OpenZWaveSetPollIntensity_args
+
+- (id) initWith_valueId: (OpenZWaveRemoteValueID *) _valueId _intensity: (uint8_t) _intensity
+{
+  self = [super init];
+  ___valueId = [_valueId retain];
+  ___valueId_isset = YES;
+  ___intensity = _intensity;
+  ___intensity_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_valueId"])
+  {
+    ___valueId = [[decoder decodeObjectForKey: @"_valueId"] retain];
+    ___valueId_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_intensity"])
+  {
+    ___intensity = [decoder decodeIntForKey: @"_intensity"];
+    ___intensity_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___valueId_isset)
+  {
+    [encoder encodeObject: ___valueId forKey: @"_valueId"];
+  }
+  if (___intensity_isset)
+  {
+    [encoder encodeInt: ___intensity forKey: @"_intensity"];
+  }
+}
+
+- (void) dealloc
+{
+  [___valueId release];
+  [super dealloc];
+}
+
+- (OpenZWaveRemoteValueID *) _valueId {
+  return [[___valueId retain] autorelease];
+}
+
+- (void) set_valueId: (OpenZWaveRemoteValueID *) _valueId {
+  [_valueId retain];
+  [___valueId release];
+  ___valueId = _valueId;
+  ___valueId_isset = YES;
+}
+
+- (BOOL) _valueIdIsSet {
+  return ___valueId_isset;
+}
+
+- (void) unset_valueId {
+  [___valueId release];
+  ___valueId = nil;
+  ___valueId_isset = NO;
+}
+
+- (uint8_t) _intensity {
+  return ___intensity;
+}
+
+- (void) set_intensity: (uint8_t) _intensity {
+  ___intensity = _intensity;
+  ___intensity_isset = YES;
+}
+
+- (BOOL) _intensityIsSet {
+  return ___intensity_isset;
+}
+
+- (void) unset_intensity {
+  ___intensity_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          OpenZWaveRemoteValueID *fieldValue = [[OpenZWaveRemoteValueID alloc] init];
+          [fieldValue read: inProtocol];
+          [self set_valueId: fieldValue];
+          [fieldValue release];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BYTE) {
+          uint8_t fieldValue = [inProtocol readByte];
+          [self set_intensity: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SetPollIntensity_args"];
+  if (___valueId_isset) {
+    if (___valueId != nil) {
+      [outProtocol writeFieldBeginWithName: @"_valueId" type: TType_STRUCT fieldID: 1];
+      [___valueId write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (___intensity_isset) {
+    [outProtocol writeFieldBeginWithName: @"_intensity" type: TType_BYTE fieldID: 2];
+    [outProtocol writeByte: ___intensity];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SetPollIntensity_args("];
+  [ms appendString: @"_valueId:"];
+  [ms appendFormat: @"%@", ___valueId];
+  [ms appendString: @",_intensity:"];
+  [ms appendFormat: @"%i", ___intensity];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveSetPollIntensity_result : NSObject <NSCoding> {
+}
+
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+@end
+
+@implementation OpenZWaveSetPollIntensity_result
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SetPollIntensity_result"];
+
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SetPollIntensity_result("];
   [ms appendString: @")"];
   return [NSString stringWithString: ms];
 }
@@ -19048,6 +19392,266 @@
 
 - (NSString *) description {
   NSMutableString * ms = [NSMutableString stringWithString: @"IsValueSet_result("];
+  [ms appendString: @"success:"];
+  [ms appendFormat: @"%i", __success];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsValuePolled_args : NSObject <NSCoding> {
+  OpenZWaveRemoteValueID * ___id;
+
+  BOOL ___id_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=_id, setter=set_id:) OpenZWaveRemoteValueID * _id;
+#endif
+
+- (id) initWith_id: (OpenZWaveRemoteValueID *) _id;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (OpenZWaveRemoteValueID *) _id;
+- (void) set_id: (OpenZWaveRemoteValueID *) _id;
+- (BOOL) _idIsSet;
+
+@end
+
+@implementation OpenZWaveIsValuePolled_args
+
+- (id) initWith_id: (OpenZWaveRemoteValueID *) _id
+{
+  self = [super init];
+  ___id = [_id retain];
+  ___id_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_id"])
+  {
+    ___id = [[decoder decodeObjectForKey: @"_id"] retain];
+    ___id_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___id_isset)
+  {
+    [encoder encodeObject: ___id forKey: @"_id"];
+  }
+}
+
+- (void) dealloc
+{
+  [___id release];
+  [super dealloc];
+}
+
+- (OpenZWaveRemoteValueID *) _id {
+  return [[___id retain] autorelease];
+}
+
+- (void) set_id: (OpenZWaveRemoteValueID *) _id {
+  [_id retain];
+  [___id release];
+  ___id = _id;
+  ___id_isset = YES;
+}
+
+- (BOOL) _idIsSet {
+  return ___id_isset;
+}
+
+- (void) unset_id {
+  [___id release];
+  ___id = nil;
+  ___id_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          OpenZWaveRemoteValueID *fieldValue = [[OpenZWaveRemoteValueID alloc] init];
+          [fieldValue read: inProtocol];
+          [self set_id: fieldValue];
+          [fieldValue release];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsValuePolled_args"];
+  if (___id_isset) {
+    if (___id != nil) {
+      [outProtocol writeFieldBeginWithName: @"_id" type: TType_STRUCT fieldID: 1];
+      [___id write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsValuePolled_args("];
+  [ms appendString: @"_id:"];
+  [ms appendFormat: @"%@", ___id];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveIsValuePolled_result : NSObject <NSCoding> {
+  BOOL __success;
+
+  BOOL __success_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, getter=success, setter=setSuccess:) BOOL success;
+#endif
+
+- (id) initWithSuccess: (BOOL) success;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (BOOL) success;
+- (void) setSuccess: (BOOL) success;
+- (BOOL) successIsSet;
+
+@end
+
+@implementation OpenZWaveIsValuePolled_result
+
+- (id) initWithSuccess: (BOOL) success
+{
+  self = [super init];
+  __success = success;
+  __success_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"success"])
+  {
+    __success = [decoder decodeBoolForKey: @"success"];
+    __success_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (__success_isset)
+  {
+    [encoder encodeBool: __success forKey: @"success"];
+  }
+}
+
+- (void) dealloc
+{
+  [super dealloc];
+}
+
+- (BOOL) success {
+  return __success;
+}
+
+- (void) setSuccess: (BOOL) success {
+  __success = success;
+  __success_isset = YES;
+}
+
+- (BOOL) successIsSet {
+  return __success_isset;
+}
+
+- (void) unsetSuccess {
+  __success_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 0:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self setSuccess: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"IsValuePolled_result"];
+
+  if (__success_isset) {
+    [outProtocol writeFieldBeginWithName: @"success" type: TType_BOOL fieldID: 0];
+    [outProtocol writeBool: __success];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"IsValuePolled_result("];
   [ms appendString: @"success:"];
   [ms appendFormat: @"%i", __success];
   [ms appendString: @")"];
@@ -42202,12 +42806,15 @@
   return [self recv_GetPollInterval];
 }
 
-- (void) send_SetPollInterval: (int32_t) _seconds
+- (void) send_SetPollInterval: (int32_t) _milliseconds : (BOOL) _bIntervalBetweenPolls
 {
   [outProtocol writeMessageBeginWithName: @"SetPollInterval" type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: @"SetPollInterval_args"];
-  [outProtocol writeFieldBeginWithName: @"_seconds" type: TType_I32 fieldID: 1];
-  [outProtocol writeI32: _seconds];
+  [outProtocol writeFieldBeginWithName: @"_milliseconds" type: TType_I32 fieldID: 1];
+  [outProtocol writeI32: _milliseconds];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldBeginWithName: @"_bIntervalBetweenPolls" type: TType_BOOL fieldID: 2];
+  [outProtocol writeBool: _bIntervalBetweenPolls];
   [outProtocol writeFieldEnd];
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
@@ -42230,13 +42837,13 @@
   return;
 }
 
-- (void) SetPollInterval: (int32_t) _seconds
+- (void) SetPollInterval: (int32_t) _milliseconds : (BOOL) _bIntervalBetweenPolls
 {
-  [self send_SetPollInterval: _seconds];
+  [self send_SetPollInterval: _milliseconds : _bIntervalBetweenPolls];
   [self recv_SetPollInterval];
 }
 
-- (void) send_EnablePoll: (OpenZWaveRemoteValueID *) _valueId
+- (void) send_EnablePoll: (OpenZWaveRemoteValueID *) _valueId : (uint8_t) _intensity
 {
   [outProtocol writeMessageBeginWithName: @"EnablePoll" type: TMessageType_CALL sequenceID: 0];
   [outProtocol writeStructBeginWithName: @"EnablePoll_args"];
@@ -42245,6 +42852,9 @@
     [_valueId write: outProtocol];
     [outProtocol writeFieldEnd];
   }
+  [outProtocol writeFieldBeginWithName: @"_intensity" type: TType_BYTE fieldID: 2];
+  [outProtocol writeByte: _intensity];
+  [outProtocol writeFieldEnd];
   [outProtocol writeFieldStop];
   [outProtocol writeStructEnd];
   [outProtocol writeMessageEnd];
@@ -42270,9 +42880,9 @@
                                            reason: @"EnablePoll failed: unknown result"];
 }
 
-- (BOOL) EnablePoll: (OpenZWaveRemoteValueID *) _valueId
+- (BOOL) EnablePoll: (OpenZWaveRemoteValueID *) _valueId : (uint8_t) _intensity
 {
-  [self send_EnablePoll: _valueId];
+  [self send_EnablePoll: _valueId : _intensity];
   return [self recv_EnablePoll];
 }
 
@@ -42354,6 +42964,45 @@
 {
   [self send_isPolled: _valueId];
   return [self recv_isPolled];
+}
+
+- (void) send_SetPollIntensity: (OpenZWaveRemoteValueID *) _valueId : (uint8_t) _intensity
+{
+  [outProtocol writeMessageBeginWithName: @"SetPollIntensity" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"SetPollIntensity_args"];
+  if (_valueId != nil)  {
+    [outProtocol writeFieldBeginWithName: @"_valueId" type: TType_STRUCT fieldID: 1];
+    [_valueId write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldBeginWithName: @"_intensity" type: TType_BYTE fieldID: 2];
+  [outProtocol writeByte: _intensity];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (void) recv_SetPollIntensity
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveSetPollIntensity_result * result = [[[OpenZWaveSetPollIntensity_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  return;
+}
+
+- (void) SetPollIntensity: (OpenZWaveRemoteValueID *) _valueId : (uint8_t) _intensity
+{
+  [self send_SetPollIntensity: _valueId : _intensity];
+  [self recv_SetPollIntensity];
 }
 
 - (void) send_RefreshNodeInfo: (int32_t) _homeId : (uint8_t) _nodeId
@@ -44107,6 +44756,46 @@
 {
   [self send_IsValueSet: _id];
   return [self recv_IsValueSet];
+}
+
+- (void) send_IsValuePolled: (OpenZWaveRemoteValueID *) _id
+{
+  [outProtocol writeMessageBeginWithName: @"IsValuePolled" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"IsValuePolled_args"];
+  if (_id != nil)  {
+    [outProtocol writeFieldBeginWithName: @"_id" type: TType_STRUCT fieldID: 1];
+    [_id write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (BOOL) recv_IsValuePolled
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveIsValuePolled_result * result = [[[OpenZWaveIsValuePolled_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  if ([result successIsSet]) {
+    return [result success];
+  }
+  @throw [TApplicationException exceptionWithType: TApplicationException_MISSING_RESULT
+                                           reason: @"IsValuePolled failed: unknown result"];
+}
+
+- (BOOL) IsValuePolled: (OpenZWaveRemoteValueID *) _id
+{
+  [self send_IsValuePolled: _id];
+  return [self recv_IsValuePolled];
 }
 
 - (void) send_GetValueAsBool: (OpenZWaveRemoteValueID *) _id
@@ -47417,6 +48106,14 @@
     [mMethodMap setValue: invocation forKey: @"isPolled"];
   }
   {
+    SEL s = @selector(process_SetPollIntensity_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"SetPollIntensity"];
+  }
+  {
     SEL s = @selector(process_RefreshNodeInfo_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
@@ -47759,6 +48456,14 @@
     [invocation setSelector: s];
     [invocation retainArguments];
     [mMethodMap setValue: invocation forKey: @"IsValueSet"];
+  }
+  {
+    SEL s = @selector(process_IsValuePolled_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"IsValuePolled"];
   }
   {
     SEL s = @selector(process_GetValueAsBool_withSequenceID:inProtocol:outProtocol:);
@@ -48585,7 +49290,7 @@
   [args read: inProtocol];
   [inProtocol readMessageEnd];
   OpenZWaveSetPollInterval_result * result = [[OpenZWaveSetPollInterval_result alloc] init];
-  [mService SetPollInterval: [args _seconds]];
+  [mService SetPollInterval: [args _milliseconds]: [args _bIntervalBetweenPolls]];
   [outProtocol writeMessageBeginWithName: @"SetPollInterval"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
@@ -48602,7 +49307,7 @@
   [args read: inProtocol];
   [inProtocol readMessageEnd];
   OpenZWaveEnablePoll_result * result = [[OpenZWaveEnablePoll_result alloc] init];
-  [result setSuccess: [mService EnablePoll: [args _valueId]]];
+  [result setSuccess: [mService EnablePoll: [args _valueId]: [args _intensity]]];
   [outProtocol writeMessageBeginWithName: @"EnablePoll"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
@@ -48638,6 +49343,23 @@
   OpenZWaveIsPolled_result * result = [[OpenZWaveIsPolled_result alloc] init];
   [result setSuccess: [mService isPolled: [args _valueId]]];
   [outProtocol writeMessageBeginWithName: @"isPolled"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_SetPollIntensity_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveSetPollIntensity_args * args = [[OpenZWaveSetPollIntensity_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveSetPollIntensity_result * result = [[OpenZWaveSetPollIntensity_result alloc] init];
+  [mService SetPollIntensity: [args _valueId]: [args _intensity]];
+  [outProtocol writeMessageBeginWithName: @"SetPollIntensity"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];
@@ -49369,6 +50091,23 @@
   OpenZWaveIsValueSet_result * result = [[OpenZWaveIsValueSet_result alloc] init];
   [result setSuccess: [mService IsValueSet: [args _id]]];
   [outProtocol writeMessageBeginWithName: @"IsValueSet"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_IsValuePolled_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveIsValuePolled_args * args = [[OpenZWaveIsValuePolled_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveIsValuePolled_result * result = [[OpenZWaveIsValuePolled_result alloc] init];
+  [result setSuccess: [mService IsValuePolled: [args _id]]];
+  [outProtocol writeMessageBeginWithName: @"IsValuePolled"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

@@ -1553,8 +1553,16 @@ uint32_t RemoteManager_SetPollInterval_args::read(::apache::thrift::protocol::TP
     {
       case 1:
         if (ftype == ::apache::thrift::protocol::T_I32) {
-          xfer += iprot->readI32(this->_seconds);
-          this->__isset._seconds = true;
+          xfer += iprot->readI32(this->_milliseconds);
+          this->__isset._milliseconds = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->_bIntervalBetweenPolls);
+          this->__isset._bIntervalBetweenPolls = true;
         } else {
           xfer += iprot->skip(ftype);
         }
@@ -1574,8 +1582,11 @@ uint32_t RemoteManager_SetPollInterval_args::read(::apache::thrift::protocol::TP
 uint32_t RemoteManager_SetPollInterval_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetPollInterval_args");
-  xfer += oprot->writeFieldBegin("_seconds", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32(this->_seconds);
+  xfer += oprot->writeFieldBegin("_milliseconds", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32(this->_milliseconds);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_bIntervalBetweenPolls", ::apache::thrift::protocol::T_BOOL, 2);
+  xfer += oprot->writeBool(this->_bIntervalBetweenPolls);
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1585,8 +1596,11 @@ uint32_t RemoteManager_SetPollInterval_args::write(::apache::thrift::protocol::T
 uint32_t RemoteManager_SetPollInterval_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
   uint32_t xfer = 0;
   xfer += oprot->writeStructBegin("RemoteManager_SetPollInterval_pargs");
-  xfer += oprot->writeFieldBegin("_seconds", ::apache::thrift::protocol::T_I32, 1);
-  xfer += oprot->writeI32((*(this->_seconds)));
+  xfer += oprot->writeFieldBegin("_milliseconds", ::apache::thrift::protocol::T_I32, 1);
+  xfer += oprot->writeI32((*(this->_milliseconds)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_bIntervalBetweenPolls", ::apache::thrift::protocol::T_BOOL, 2);
+  xfer += oprot->writeBool((*(this->_bIntervalBetweenPolls)));
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -1696,6 +1710,14 @@ uint32_t RemoteManager_EnablePoll_args::read(::apache::thrift::protocol::TProtoc
           xfer += iprot->skip(ftype);
         }
         break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_intensity);
+          this->__isset._intensity = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -1714,6 +1736,9 @@ uint32_t RemoteManager_EnablePoll_args::write(::apache::thrift::protocol::TProto
   xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += this->_valueId.write(oprot);
   xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_intensity", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte(this->_intensity);
+  xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
   return xfer;
@@ -1724,6 +1749,9 @@ uint32_t RemoteManager_EnablePoll_pargs::write(::apache::thrift::protocol::TProt
   xfer += oprot->writeStructBegin("RemoteManager_EnablePoll_pargs");
   xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
   xfer += (*(this->_valueId)).write(oprot);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_intensity", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte((*(this->_intensity)));
   xfer += oprot->writeFieldEnd();
   xfer += oprot->writeFieldStop();
   xfer += oprot->writeStructEnd();
@@ -2130,6 +2158,157 @@ uint32_t RemoteManager_isPolled_presult::read(::apache::thrift::protocol::TProto
           xfer += iprot->skip(ftype);
         }
         break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_SetPollIntensity_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_valueId.read(iprot);
+          this->__isset._valueId = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      case 2:
+        if (ftype == ::apache::thrift::protocol::T_BYTE) {
+          xfer += iprot->readByte(this->_intensity);
+          this->__isset._intensity = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_SetPollIntensity_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_SetPollIntensity_args");
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_valueId.write(oprot);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_intensity", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte(this->_intensity);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_SetPollIntensity_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_SetPollIntensity_pargs");
+  xfer += oprot->writeFieldBegin("_valueId", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_valueId)).write(oprot);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldBegin("_intensity", ::apache::thrift::protocol::T_BYTE, 2);
+  xfer += oprot->writeByte((*(this->_intensity)));
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_SetPollIntensity_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_SetPollIntensity_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_SetPollIntensity_result");
+
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_SetPollIntensity_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
       default:
         xfer += iprot->skip(ftype);
         break;
@@ -9261,6 +9440,164 @@ uint32_t RemoteManager_IsValueSet_result::write(::apache::thrift::protocol::TPro
 }
 
 uint32_t RemoteManager_IsValueSet_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool((*(this->success)));
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsValuePolled_args::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+        if (ftype == ::apache::thrift::protocol::T_STRUCT) {
+          xfer += this->_id.read(iprot);
+          this->__isset._id = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsValuePolled_args::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsValuePolled_args");
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += this->_id.write(oprot);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsValuePolled_pargs::write(::apache::thrift::protocol::TProtocol* oprot) const {
+  uint32_t xfer = 0;
+  xfer += oprot->writeStructBegin("RemoteManager_IsValuePolled_pargs");
+  xfer += oprot->writeFieldBegin("_id", ::apache::thrift::protocol::T_STRUCT, 1);
+  xfer += (*(this->_id)).write(oprot);
+  xfer += oprot->writeFieldEnd();
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsValuePolled_result::read(::apache::thrift::protocol::TProtocol* iprot) {
+
+  uint32_t xfer = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TType ftype;
+  int16_t fid;
+
+  xfer += iprot->readStructBegin(fname);
+
+  using ::apache::thrift::protocol::TProtocolException;
+
+
+  while (true)
+  {
+    xfer += iprot->readFieldBegin(fname, ftype, fid);
+    if (ftype == ::apache::thrift::protocol::T_STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+        if (ftype == ::apache::thrift::protocol::T_BOOL) {
+          xfer += iprot->readBool(this->success);
+          this->__isset.success = true;
+        } else {
+          xfer += iprot->skip(ftype);
+        }
+        break;
+      default:
+        xfer += iprot->skip(ftype);
+        break;
+    }
+    xfer += iprot->readFieldEnd();
+  }
+
+  xfer += iprot->readStructEnd();
+
+  return xfer;
+}
+
+uint32_t RemoteManager_IsValuePolled_result::write(::apache::thrift::protocol::TProtocol* oprot) const {
+
+  uint32_t xfer = 0;
+
+  xfer += oprot->writeStructBegin("RemoteManager_IsValuePolled_result");
+
+  if (this->__isset.success) {
+    xfer += oprot->writeFieldBegin("success", ::apache::thrift::protocol::T_BOOL, 0);
+    xfer += oprot->writeBool(this->success);
+    xfer += oprot->writeFieldEnd();
+  }
+  xfer += oprot->writeFieldStop();
+  xfer += oprot->writeStructEnd();
+  return xfer;
+}
+
+uint32_t RemoteManager_IsValuePolled_presult::read(::apache::thrift::protocol::TProtocol* iprot) {
 
   uint32_t xfer = 0;
   std::string fname;
@@ -22698,19 +23035,20 @@ int32_t RemoteManagerClient::recv_GetPollInterval()
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "GetPollInterval failed: unknown result");
 }
 
-void RemoteManagerClient::SetPollInterval(const int32_t _seconds)
+void RemoteManagerClient::SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls)
 {
-  send_SetPollInterval(_seconds);
+  send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls);
   recv_SetPollInterval();
 }
 
-void RemoteManagerClient::send_SetPollInterval(const int32_t _seconds)
+void RemoteManagerClient::send_SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("SetPollInterval", ::apache::thrift::protocol::T_CALL, cseqid);
 
   RemoteManager_SetPollInterval_pargs args;
-  args._seconds = &_seconds;
+  args._milliseconds = &_milliseconds;
+  args._bIntervalBetweenPolls = &_bIntervalBetweenPolls;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -22751,19 +23089,20 @@ void RemoteManagerClient::recv_SetPollInterval()
   return;
 }
 
-bool RemoteManagerClient::EnablePoll(const RemoteValueID& _valueId)
+bool RemoteManagerClient::EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity)
 {
-  send_EnablePoll(_valueId);
+  send_EnablePoll(_valueId, _intensity);
   return recv_EnablePoll();
 }
 
-void RemoteManagerClient::send_EnablePoll(const RemoteValueID& _valueId)
+void RemoteManagerClient::send_EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity)
 {
   int32_t cseqid = 0;
   oprot_->writeMessageBegin("EnablePoll", ::apache::thrift::protocol::T_CALL, cseqid);
 
   RemoteManager_EnablePoll_pargs args;
   args._valueId = &_valueId;
+  args._intensity = &_intensity;
   args.write(oprot_);
 
   oprot_->writeMessageEnd();
@@ -22923,6 +23262,60 @@ bool RemoteManagerClient::recv_isPolled()
     return _return;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "isPolled failed: unknown result");
+}
+
+void RemoteManagerClient::SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity)
+{
+  send_SetPollIntensity(_valueId, _intensity);
+  recv_SetPollIntensity();
+}
+
+void RemoteManagerClient::send_SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("SetPollIntensity", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_SetPollIntensity_pargs args;
+  args._valueId = &_valueId;
+  args._intensity = &_intensity;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+void RemoteManagerClient::recv_SetPollIntensity()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("SetPollIntensity") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  RemoteManager_SetPollIntensity_presult result;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  return;
 }
 
 bool RemoteManagerClient::RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId)
@@ -25408,6 +25801,64 @@ bool RemoteManagerClient::recv_IsValueSet()
     return _return;
   }
   throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsValueSet failed: unknown result");
+}
+
+bool RemoteManagerClient::IsValuePolled(const RemoteValueID& _id)
+{
+  send_IsValuePolled(_id);
+  return recv_IsValuePolled();
+}
+
+void RemoteManagerClient::send_IsValuePolled(const RemoteValueID& _id)
+{
+  int32_t cseqid = 0;
+  oprot_->writeMessageBegin("IsValuePolled", ::apache::thrift::protocol::T_CALL, cseqid);
+
+  RemoteManager_IsValuePolled_pargs args;
+  args._id = &_id;
+  args.write(oprot_);
+
+  oprot_->writeMessageEnd();
+  oprot_->getTransport()->writeEnd();
+  oprot_->getTransport()->flush();
+}
+
+bool RemoteManagerClient::recv_IsValuePolled()
+{
+
+  int32_t rseqid = 0;
+  std::string fname;
+  ::apache::thrift::protocol::TMessageType mtype;
+
+  iprot_->readMessageBegin(fname, mtype, rseqid);
+  if (mtype == ::apache::thrift::protocol::T_EXCEPTION) {
+    ::apache::thrift::TApplicationException x;
+    x.read(iprot_);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+    throw x;
+  }
+  if (mtype != ::apache::thrift::protocol::T_REPLY) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  if (fname.compare("IsValuePolled") != 0) {
+    iprot_->skip(::apache::thrift::protocol::T_STRUCT);
+    iprot_->readMessageEnd();
+    iprot_->getTransport()->readEnd();
+  }
+  bool _return;
+  RemoteManager_IsValuePolled_presult result;
+  result.success = &_return;
+  result.read(iprot_);
+  iprot_->readMessageEnd();
+  iprot_->getTransport()->readEnd();
+
+  if (result.__isset.success) {
+    return _return;
+  }
+  throw ::apache::thrift::TApplicationException(::apache::thrift::TApplicationException::MISSING_RESULT, "IsValuePolled failed: unknown result");
 }
 
 void RemoteManagerClient::GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id)
@@ -30444,7 +30895,7 @@ void RemoteManagerProcessor::process_SetPollInterval(int32_t seqid, ::apache::th
 
   RemoteManager_SetPollInterval_result result;
   try {
-    iface_->SetPollInterval(args._seconds);
+    iface_->SetPollInterval(args._milliseconds, args._bIntervalBetweenPolls);
   } catch (const std::exception& e) {
     if (eventHandler_.get() != NULL) {
       eventHandler_->handlerError(ctx, "RemoteManager.SetPollInterval");
@@ -30497,7 +30948,7 @@ void RemoteManagerProcessor::process_EnablePoll(int32_t seqid, ::apache::thrift:
 
   RemoteManager_EnablePoll_result result;
   try {
-    result.success = iface_->EnablePoll(args._valueId);
+    result.success = iface_->EnablePoll(args._valueId, args._intensity);
     result.__isset.success = true;
   } catch (const std::exception& e) {
     if (eventHandler_.get() != NULL) {
@@ -30633,6 +31084,59 @@ void RemoteManagerProcessor::process_isPolled(int32_t seqid, ::apache::thrift::p
 
   if (eventHandler_.get() != NULL) {
     eventHandler_->postWrite(ctx, "RemoteManager.isPolled", bytes);
+  }
+}
+
+void RemoteManagerProcessor::process_SetPollIntensity(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.SetPollIntensity", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.SetPollIntensity");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.SetPollIntensity");
+  }
+
+  RemoteManager_SetPollIntensity_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.SetPollIntensity", bytes);
+  }
+
+  RemoteManager_SetPollIntensity_result result;
+  try {
+    iface_->SetPollIntensity(args._valueId, args._intensity);
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.SetPollIntensity");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("SetPollIntensity", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.SetPollIntensity");
+  }
+
+  oprot->writeMessageBegin("SetPollIntensity", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.SetPollIntensity", bytes);
   }
 }
 
@@ -32945,6 +33449,60 @@ void RemoteManagerProcessor::process_IsValueSet(int32_t seqid, ::apache::thrift:
 
   if (eventHandler_.get() != NULL) {
     eventHandler_->postWrite(ctx, "RemoteManager.IsValueSet", bytes);
+  }
+}
+
+void RemoteManagerProcessor::process_IsValuePolled(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext)
+{
+  void* ctx = NULL;
+  if (eventHandler_.get() != NULL) {
+    ctx = eventHandler_->getContext("RemoteManager.IsValuePolled", callContext);
+  }
+  ::apache::thrift::TProcessorContextFreer freer(eventHandler_.get(), ctx, "RemoteManager.IsValuePolled");
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preRead(ctx, "RemoteManager.IsValuePolled");
+  }
+
+  RemoteManager_IsValuePolled_args args;
+  args.read(iprot);
+  iprot->readMessageEnd();
+  uint32_t bytes = iprot->getTransport()->readEnd();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postRead(ctx, "RemoteManager.IsValuePolled", bytes);
+  }
+
+  RemoteManager_IsValuePolled_result result;
+  try {
+    result.success = iface_->IsValuePolled(args._id);
+    result.__isset.success = true;
+  } catch (const std::exception& e) {
+    if (eventHandler_.get() != NULL) {
+      eventHandler_->handlerError(ctx, "RemoteManager.IsValuePolled");
+    }
+
+    ::apache::thrift::TApplicationException x(e.what());
+    oprot->writeMessageBegin("IsValuePolled", ::apache::thrift::protocol::T_EXCEPTION, seqid);
+    x.write(oprot);
+    oprot->writeMessageEnd();
+    oprot->getTransport()->writeEnd();
+    oprot->getTransport()->flush();
+    return;
+  }
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->preWrite(ctx, "RemoteManager.IsValuePolled");
+  }
+
+  oprot->writeMessageBegin("IsValuePolled", ::apache::thrift::protocol::T_REPLY, seqid);
+  result.write(oprot);
+  oprot->writeMessageEnd();
+  bytes = oprot->getTransport()->writeEnd();
+  oprot->getTransport()->flush();
+
+  if (eventHandler_.get() != NULL) {
+    eventHandler_->postWrite(ctx, "RemoteManager.IsValuePolled", bytes);
   }
 }
 

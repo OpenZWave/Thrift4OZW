@@ -19,10 +19,11 @@ interface RemoteManagerIf {
   public function GetSendQueueCount($_homeId);
   public function LogDriverStatistics($_homeId);
   public function GetPollInterval();
-  public function SetPollInterval($_seconds);
-  public function EnablePoll($_valueId);
+  public function SetPollInterval($_milliseconds, $_bIntervalBetweenPolls);
+  public function EnablePoll($_valueId, $_intensity);
   public function DisablePoll($_valueId);
   public function isPolled($_valueId);
+  public function SetPollIntensity($_valueId, $_intensity);
   public function RefreshNodeInfo($_homeId, $_nodeId);
   public function RequestNodeState($_homeId, $_nodeId);
   public function RequestNodeDynamic($_homeId, $_nodeId);
@@ -66,6 +67,7 @@ interface RemoteManagerIf {
   public function IsValueReadOnly($_id);
   public function IsValueWriteOnly($_id);
   public function IsValueSet($_id);
+  public function IsValuePolled($_id);
   public function GetValueAsBool($_id);
   public function GetValueAsByte($_id);
   public function GetValueAsFloat($_id);
@@ -658,16 +660,17 @@ class RemoteManagerClient implements RemoteManagerIf {
     throw new Exception("GetPollInterval failed: unknown result");
   }
 
-  public function SetPollInterval($_seconds)
+  public function SetPollInterval($_milliseconds, $_bIntervalBetweenPolls)
   {
-    $this->send_SetPollInterval($_seconds);
+    $this->send_SetPollInterval($_milliseconds, $_bIntervalBetweenPolls);
     $this->recv_SetPollInterval();
   }
 
-  public function send_SetPollInterval($_seconds)
+  public function send_SetPollInterval($_milliseconds, $_bIntervalBetweenPolls)
   {
     $args = new RemoteManager_SetPollInterval_args();
-    $args->_seconds = $_seconds;
+    $args->_milliseconds = $_milliseconds;
+    $args->_bIntervalBetweenPolls = $_bIntervalBetweenPolls;
     $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -706,16 +709,17 @@ class RemoteManagerClient implements RemoteManagerIf {
     return;
   }
 
-  public function EnablePoll($_valueId)
+  public function EnablePoll($_valueId, $_intensity)
   {
-    $this->send_EnablePoll($_valueId);
+    $this->send_EnablePoll($_valueId, $_intensity);
     return $this->recv_EnablePoll();
   }
 
-  public function send_EnablePoll($_valueId)
+  public function send_EnablePoll($_valueId, $_intensity)
   {
     $args = new RemoteManager_EnablePoll_args();
     $args->_valueId = $_valueId;
+    $args->_intensity = $_intensity;
     $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
     if ($bin_accel)
     {
@@ -857,6 +861,55 @@ class RemoteManagerClient implements RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("isPolled failed: unknown result");
+  }
+
+  public function SetPollIntensity($_valueId, $_intensity)
+  {
+    $this->send_SetPollIntensity($_valueId, $_intensity);
+    $this->recv_SetPollIntensity();
+  }
+
+  public function send_SetPollIntensity($_valueId, $_intensity)
+  {
+    $args = new RemoteManager_SetPollIntensity_args();
+    $args->_valueId = $_valueId;
+    $args->_intensity = $_intensity;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'SetPollIntensity', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('SetPollIntensity', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_SetPollIntensity()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_SetPollIntensity_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_SetPollIntensity_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    return;
   }
 
   public function RefreshNodeInfo($_homeId, $_nodeId)
@@ -3061,6 +3114,57 @@ class RemoteManagerClient implements RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("IsValueSet failed: unknown result");
+  }
+
+  public function IsValuePolled($_id)
+  {
+    $this->send_IsValuePolled($_id);
+    return $this->recv_IsValuePolled();
+  }
+
+  public function send_IsValuePolled($_id)
+  {
+    $args = new RemoteManager_IsValuePolled_args();
+    $args->_id = $_id;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'IsValuePolled', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('IsValuePolled', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_IsValuePolled()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'RemoteManager_IsValuePolled_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new RemoteManager_IsValuePolled_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    if ($result->success !== null) {
+      return $result->success;
+    }
+    throw new Exception("IsValuePolled failed: unknown result");
   }
 
   public function GetValueAsBool($_id)
@@ -8362,20 +8466,28 @@ class RemoteManager_GetPollInterval_result {
 class RemoteManager_SetPollInterval_args {
   static $_TSPEC;
 
-  public $_seconds = null;
+  public $_milliseconds = null;
+  public $_bIntervalBetweenPolls = null;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
       self::$_TSPEC = array(
         1 => array(
-          'var' => '_seconds',
+          'var' => '_milliseconds',
           'type' => TType::I32,
+          ),
+        2 => array(
+          'var' => '_bIntervalBetweenPolls',
+          'type' => TType::BOOL,
           ),
         );
     }
     if (is_array($vals)) {
-      if (isset($vals['_seconds'])) {
-        $this->_seconds = $vals['_seconds'];
+      if (isset($vals['_milliseconds'])) {
+        $this->_milliseconds = $vals['_milliseconds'];
+      }
+      if (isset($vals['_bIntervalBetweenPolls'])) {
+        $this->_bIntervalBetweenPolls = $vals['_bIntervalBetweenPolls'];
       }
     }
   }
@@ -8401,7 +8513,14 @@ class RemoteManager_SetPollInterval_args {
       {
         case 1:
           if ($ftype == TType::I32) {
-            $xfer += $input->readI32($this->_seconds);
+            $xfer += $input->readI32($this->_milliseconds);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->_bIntervalBetweenPolls);
           } else {
             $xfer += $input->skip($ftype);
           }
@@ -8419,9 +8538,14 @@ class RemoteManager_SetPollInterval_args {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('RemoteManager_SetPollInterval_args');
-    if ($this->_seconds !== null) {
-      $xfer += $output->writeFieldBegin('_seconds', TType::I32, 1);
-      $xfer += $output->writeI32($this->_seconds);
+    if ($this->_milliseconds !== null) {
+      $xfer += $output->writeFieldBegin('_milliseconds', TType::I32, 1);
+      $xfer += $output->writeI32($this->_milliseconds);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_bIntervalBetweenPolls !== null) {
+      $xfer += $output->writeFieldBegin('_bIntervalBetweenPolls', TType::BOOL, 2);
+      $xfer += $output->writeBool($this->_bIntervalBetweenPolls);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -8485,6 +8609,7 @@ class RemoteManager_EnablePoll_args {
   static $_TSPEC;
 
   public $_valueId = null;
+  public $_intensity = 1;
 
   public function __construct($vals=null) {
     if (!isset(self::$_TSPEC)) {
@@ -8494,11 +8619,18 @@ class RemoteManager_EnablePoll_args {
           'type' => TType::STRUCT,
           'class' => 'RemoteValueID',
           ),
+        2 => array(
+          'var' => '_intensity',
+          'type' => TType::BYTE,
+          ),
         );
     }
     if (is_array($vals)) {
       if (isset($vals['_valueId'])) {
         $this->_valueId = $vals['_valueId'];
+      }
+      if (isset($vals['_intensity'])) {
+        $this->_intensity = $vals['_intensity'];
       }
     }
   }
@@ -8530,6 +8662,13 @@ class RemoteManager_EnablePoll_args {
             $xfer += $input->skip($ftype);
           }
           break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_intensity);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
         default:
           $xfer += $input->skip($ftype);
           break;
@@ -8549,6 +8688,11 @@ class RemoteManager_EnablePoll_args {
       }
       $xfer += $output->writeFieldBegin('_valueId', TType::STRUCT, 1);
       $xfer += $this->_valueId->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_intensity !== null) {
+      $xfer += $output->writeFieldBegin('_intensity', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->_intensity);
       $xfer += $output->writeFieldEnd();
     }
     $xfer += $output->writeFieldStop();
@@ -8921,6 +9065,153 @@ class RemoteManager_isPolled_result {
       $xfer += $output->writeBool($this->success);
       $xfer += $output->writeFieldEnd();
     }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_SetPollIntensity_args {
+  static $_TSPEC;
+
+  public $_valueId = null;
+  public $_intensity = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_valueId',
+          'type' => TType::STRUCT,
+          'class' => 'RemoteValueID',
+          ),
+        2 => array(
+          'var' => '_intensity',
+          'type' => TType::BYTE,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_valueId'])) {
+        $this->_valueId = $vals['_valueId'];
+      }
+      if (isset($vals['_intensity'])) {
+        $this->_intensity = $vals['_intensity'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_SetPollIntensity_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->_valueId = new RemoteValueID();
+            $xfer += $this->_valueId->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BYTE) {
+            $xfer += $input->readByte($this->_intensity);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_SetPollIntensity_args');
+    if ($this->_valueId !== null) {
+      if (!is_object($this->_valueId)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('_valueId', TType::STRUCT, 1);
+      $xfer += $this->_valueId->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_intensity !== null) {
+      $xfer += $output->writeFieldBegin('_intensity', TType::BYTE, 2);
+      $xfer += $output->writeByte($this->_intensity);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_SetPollIntensity_result {
+  static $_TSPEC;
+
+
+  public function __construct() {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        );
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_SetPollIntensity_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_SetPollIntensity_result');
     $xfer += $output->writeFieldStop();
     $xfer += $output->writeStructEnd();
     return $xfer;
@@ -15773,6 +16064,155 @@ class RemoteManager_IsValueSet_result {
   public function write($output) {
     $xfer = 0;
     $xfer += $output->writeStructBegin('RemoteManager_IsValueSet_result');
+    if ($this->success !== null) {
+      $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
+      $xfer += $output->writeBool($this->success);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsValuePolled_args {
+  static $_TSPEC;
+
+  public $_id = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_id',
+          'type' => TType::STRUCT,
+          'class' => 'RemoteValueID',
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_id'])) {
+        $this->_id = $vals['_id'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsValuePolled_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->_id = new RemoteValueID();
+            $xfer += $this->_id->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsValuePolled_args');
+    if ($this->_id !== null) {
+      if (!is_object($this->_id)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
+      $xfer += $this->_id->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class RemoteManager_IsValuePolled_result {
+  static $_TSPEC;
+
+  public $success = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        0 => array(
+          'var' => 'success',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['success'])) {
+        $this->success = $vals['success'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_IsValuePolled_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 0:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->success);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_IsValuePolled_result');
     if ($this->success !== null) {
       $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
       $xfer += $output->writeBool($this->success);

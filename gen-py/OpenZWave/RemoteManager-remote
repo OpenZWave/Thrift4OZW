@@ -31,10 +31,11 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  i32 GetSendQueueCount(i32 _homeId)'
   print '  void LogDriverStatistics(i32 _homeId)'
   print '  i32 GetPollInterval()'
-  print '  void SetPollInterval(i32 _seconds)'
-  print '  bool EnablePoll(RemoteValueID _valueId)'
+  print '  void SetPollInterval(i32 _milliseconds, bool _bIntervalBetweenPolls)'
+  print '  bool EnablePoll(RemoteValueID _valueId, byte _intensity)'
   print '  bool DisablePoll(RemoteValueID _valueId)'
   print '  bool isPolled(RemoteValueID _valueId)'
+  print '  void SetPollIntensity(RemoteValueID _valueId, byte _intensity)'
   print '  bool RefreshNodeInfo(i32 _homeId, byte _nodeId)'
   print '  bool RequestNodeState(i32 _homeId, byte _nodeId)'
   print '  bool RequestNodeDynamic(i32 _homeId, byte _nodeId)'
@@ -78,6 +79,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  bool IsValueReadOnly(RemoteValueID _id)'
   print '  bool IsValueWriteOnly(RemoteValueID _id)'
   print '  bool IsValueSet(RemoteValueID _id)'
+  print '  bool IsValuePolled(RemoteValueID _id)'
   print '  Bool_Bool GetValueAsBool(RemoteValueID _id)'
   print '  Bool_UInt8 GetValueAsByte(RemoteValueID _id)'
   print '  Bool_Float GetValueAsFloat(RemoteValueID _id)'
@@ -265,16 +267,16 @@ elif cmd == 'GetPollInterval':
   pp.pprint(client.GetPollInterval())
 
 elif cmd == 'SetPollInterval':
-  if len(args) != 1:
-    print 'SetPollInterval requires 1 args'
+  if len(args) != 2:
+    print 'SetPollInterval requires 2 args'
     sys.exit(1)
-  pp.pprint(client.SetPollInterval(eval(args[0]),))
+  pp.pprint(client.SetPollInterval(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'EnablePoll':
-  if len(args) != 1:
-    print 'EnablePoll requires 1 args'
+  if len(args) != 2:
+    print 'EnablePoll requires 2 args'
     sys.exit(1)
-  pp.pprint(client.EnablePoll(eval(args[0]),))
+  pp.pprint(client.EnablePoll(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'DisablePoll':
   if len(args) != 1:
@@ -287,6 +289,12 @@ elif cmd == 'isPolled':
     print 'isPolled requires 1 args'
     sys.exit(1)
   pp.pprint(client.isPolled(eval(args[0]),))
+
+elif cmd == 'SetPollIntensity':
+  if len(args) != 2:
+    print 'SetPollIntensity requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.SetPollIntensity(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'RefreshNodeInfo':
   if len(args) != 2:
@@ -545,6 +553,12 @@ elif cmd == 'IsValueSet':
     print 'IsValueSet requires 1 args'
     sys.exit(1)
   pp.pprint(client.IsValueSet(eval(args[0]),))
+
+elif cmd == 'IsValuePolled':
+  if len(args) != 1:
+    print 'IsValuePolled requires 1 args'
+    sys.exit(1)
+  pp.pprint(client.IsValuePolled(eval(args[0]),))
 
 elif cmd == 'GetValueAsBool':
   if len(args) != 1:

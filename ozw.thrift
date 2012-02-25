@@ -225,11 +225,11 @@ service RemoteManager {
 	//int32 GetPollInterval();
     i32 GetPollInterval();
 
-    //void SetPollInterval( int32 _seconds );
-    void SetPollInterval( 1:i32 _seconds );
+    //void SetPollInterval( int32 _milliseconds, bool _bIntervalBetweenPolls );
+    void SetPollInterval( 1:i32 _milliseconds, 2:bool _bIntervalBetweenPolls );
 
-    //bool EnablePoll( ValueID const _valueId );
-    bool EnablePoll( 1:RemoteValueID _valueId );
+    //bool EnablePoll( ValueID const _valueId, uint8 const _intensity = 1 );
+    bool EnablePoll( 1:RemoteValueID _valueId, 2:byte _intensity = 1 );
 
     //bool DisablePoll( ValueID const _valueId );
     bool DisablePoll( 1:RemoteValueID _valueId );
@@ -237,6 +237,9 @@ service RemoteManager {
 	//bool isPolled( ValueID const _valueId );
     bool isPolled( 1:RemoteValueID _valueId );
         
+    //void SetPollIntensity( ValueID const _valueId, uint8 const _intensity );
+    void SetPollIntensity( 1:RemoteValueID _valueId, 2:byte _intensity );
+    
     //-----------------------------------------------------------------------------
     //	Node information
     //-----------------------------------------------------------------------------
@@ -372,6 +375,9 @@ service RemoteManager {
 	//bool IsValueSet( ValueID const& _id );
     bool IsValueSet( 1:RemoteValueID _id );
 
+    //bool IsValuePolled( ValueID const& _id );
+    bool IsValuePolled( 1:RemoteValueID _id );
+    
 	//bool GetValueAsBool( ValueID const& _id, bool* o_value );
     Bool_Bool GetValueAsBool( 1:RemoteValueID _id);
 

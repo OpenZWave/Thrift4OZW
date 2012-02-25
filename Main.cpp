@@ -372,7 +372,8 @@ int main(int argc, char *argv[]) {
             return 1;
         }     
     }
-    catch (exception& e) {
+    catch (exception& e) 
+    {
         cerr << "Error parsing options: " << e.what() << "\n";
         return 2;
     }
@@ -382,48 +383,65 @@ int main(int argc, char *argv[]) {
         // connect to STOMP server in order to send openzwave notifications 
         stomp_client = new STOMP::PocoStomp(stomp_host, stomp_port);
         stomp_client->connect();
-    } catch (exception& e) {
+    } 
+    catch (exception& e) 
+    {
         cerr << "Error connecting to STOMP: " << e.what() << "\n";
         return 3;
     } 
 
     // OpenZWave initialization
 	//initMutex.lock();
+    try {    
+        // Create the OpenZWave Manager.
+        // The first argument is the path to the config files (where the manufacturer_specific.xml file is located
+        // The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
+        // the log file will appear in the program's working directory.
+        Options::Create(ozw_config_dir, ozw_user, "" );
+        Options::Get()->Lock();
     
-    // Create the OpenZWave Manager.
-	// The first argument is the path to the config files (where the manufacturer_specific.xml file is located
-	// The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
-	// the log file will appear in the program's working directory.
-	Options::Create(ozw_config_dir, ozw_user, "" );
-	Options::Get()->Lock();
+        Manager::Create();
+          
+        // Add a callback handler to the manager. 
+        Manager::Get()->AddWatcher( OnNotification, NULL );
+    
+        // Add a Z-Wave Driver
+        Manager::Get()->AddDriver( ozw_port );
+        //Manager::Get()->AddDriver( "HID Controller", Driver::ControllerInterface_Hid );
+    } 
+    catch (exception& e) 
+    {
+        cerr << "Error initializing OpenZWave: " << e.what() << "\n";
+        return 4;
+    } 
+    
+    try {   
+        // THRIFT: initialize RemoteManager
+        shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
+        shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
+        TServerSocket* ss = new TServerSocket(thrift_port);
+        ss->setRecvTimeout(3000);
+        shared_ptr<TServerTransport> serverTransport(ss);
+        shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
+        shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
+        TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+    
+        // Now we just wait for the driver to become ready, and then write out the loaded config.
+        boost::unique_lock<boost::mutex> initLock(initMutex);
+        initCond.wait(initLock);
+        usleep(500);
+        cout << "------------------------------------------------------------------------" << endl;
+        cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
+        cout << "------------------------------------------------------------------------" << endl;
 
-	Manager::Create();
-      
-    // Add a callback handler to the manager. 
-	Manager::Get()->AddWatcher( OnNotification, NULL );
-
-	// Add a Z-Wave Driver
-	Manager::Get()->AddDriver( ozw_port );
-	//Manager::Get()->AddDriver( "HID Controller", Driver::ControllerInterface_Hid );
-	
-	// THRIFT: initialize RemoteManager
-    shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
-    shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
-    TServerSocket* ss = new TServerSocket(thrift_port);
-    ss->setRecvTimeout(3000);
-    shared_ptr<TServerTransport> serverTransport(ss);
-    shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
-    shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-    TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
-
-	// Now we just wait for the driver to become ready, and then write out the loaded config.
-    boost::unique_lock<boost::mutex> initLock(initMutex);
-	initCond.wait(initLock);
-	usleep(500);
-	cout << "------------------------------------------------------------------------" << endl;
-	cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
-	cout << "------------------------------------------------------------------------" << endl;
-	// start up the Thrift RemoteManager server 
-    server.serve();
+        server.serve();
+        
+    }    
+    catch (exception& e) 
+    {
+        cerr << "Exception in OpenZWave Thrift server: " << e.what() << "\n";
+        return 5;
+    }
+    
     return 0;
 }

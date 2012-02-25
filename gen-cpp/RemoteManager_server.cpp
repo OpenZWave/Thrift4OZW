@@ -109,17 +109,17 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  void SetPollInterval(const int32_t _seconds) {
+  void SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	 mgr->SetPollInterval((::int32) _seconds);
+	 mgr->SetPollInterval((::int32) _milliseconds, (bool) _bIntervalBetweenPolls);
 	g_criticalSection.unlock();
   }
 
-  bool EnablePoll(const RemoteValueID& _valueId) {
+  bool EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	bool function_result =  mgr->EnablePoll(_valueId.toValueID());
+	bool function_result =  mgr->EnablePoll(_valueId.toValueID(), (::uint8 const) _intensity);
 	g_criticalSection.unlock();
 	return(function_result);
   }
@@ -138,6 +138,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	bool function_result =  mgr->isPolled(_valueId.toValueID());
 	g_criticalSection.unlock();
 	return(function_result);
+  }
+
+  void SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->SetPollIntensity(_valueId.toValueID(), (::uint8 const) _intensity);
+	g_criticalSection.unlock();
   }
 
   bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId) {
@@ -462,6 +469,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->IsValueSet(_id.toValueID());
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  bool IsValuePolled(const RemoteValueID& _id) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsValuePolled(_id.toValueID());
 	g_criticalSection.unlock();
 	return(function_result);
   }

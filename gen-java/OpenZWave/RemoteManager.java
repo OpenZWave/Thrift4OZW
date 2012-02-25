@@ -57,13 +57,15 @@ public class RemoteManager {
 
     public int GetPollInterval() throws org.apache.thrift.TException;
 
-    public void SetPollInterval(int _seconds) throws org.apache.thrift.TException;
+    public void SetPollInterval(int _milliseconds, boolean _bIntervalBetweenPolls) throws org.apache.thrift.TException;
 
-    public boolean EnablePoll(RemoteValueID _valueId) throws org.apache.thrift.TException;
+    public boolean EnablePoll(RemoteValueID _valueId, byte _intensity) throws org.apache.thrift.TException;
 
     public boolean DisablePoll(RemoteValueID _valueId) throws org.apache.thrift.TException;
 
     public boolean isPolled(RemoteValueID _valueId) throws org.apache.thrift.TException;
+
+    public void SetPollIntensity(RemoteValueID _valueId, byte _intensity) throws org.apache.thrift.TException;
 
     public boolean RefreshNodeInfo(int _homeId, byte _nodeId) throws org.apache.thrift.TException;
 
@@ -150,6 +152,8 @@ public class RemoteManager {
     public boolean IsValueWriteOnly(RemoteValueID _id) throws org.apache.thrift.TException;
 
     public boolean IsValueSet(RemoteValueID _id) throws org.apache.thrift.TException;
+
+    public boolean IsValuePolled(RemoteValueID _id) throws org.apache.thrift.TException;
 
     public Bool_Bool GetValueAsBool(RemoteValueID _id) throws org.apache.thrift.TException;
 
@@ -327,13 +331,15 @@ public class RemoteManager {
 
     public void GetPollInterval(org.apache.thrift.async.AsyncMethodCallback<AsyncClient.GetPollInterval_call> resultHandler) throws org.apache.thrift.TException;
 
-    public void SetPollInterval(int _seconds, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SetPollInterval_call> resultHandler) throws org.apache.thrift.TException;
+    public void SetPollInterval(int _milliseconds, boolean _bIntervalBetweenPolls, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SetPollInterval_call> resultHandler) throws org.apache.thrift.TException;
 
-    public void EnablePoll(RemoteValueID _valueId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.EnablePoll_call> resultHandler) throws org.apache.thrift.TException;
+    public void EnablePoll(RemoteValueID _valueId, byte _intensity, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.EnablePoll_call> resultHandler) throws org.apache.thrift.TException;
 
     public void DisablePoll(RemoteValueID _valueId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.DisablePoll_call> resultHandler) throws org.apache.thrift.TException;
 
     public void isPolled(RemoteValueID _valueId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.isPolled_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void SetPollIntensity(RemoteValueID _valueId, byte _intensity, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SetPollIntensity_call> resultHandler) throws org.apache.thrift.TException;
 
     public void RefreshNodeInfo(int _homeId, byte _nodeId, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.RefreshNodeInfo_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -420,6 +426,8 @@ public class RemoteManager {
     public void IsValueWriteOnly(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.IsValueWriteOnly_call> resultHandler) throws org.apache.thrift.TException;
 
     public void IsValueSet(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.IsValueSet_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void IsValuePolled(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.IsValuePolled_call> resultHandler) throws org.apache.thrift.TException;
 
     public void GetValueAsBool(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.GetValueAsBool_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -818,16 +826,17 @@ public class RemoteManager {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "GetPollInterval failed: unknown result");
     }
 
-    public void SetPollInterval(int _seconds) throws org.apache.thrift.TException
+    public void SetPollInterval(int _milliseconds, boolean _bIntervalBetweenPolls) throws org.apache.thrift.TException
     {
-      send_SetPollInterval(_seconds);
+      send_SetPollInterval(_milliseconds, _bIntervalBetweenPolls);
       recv_SetPollInterval();
     }
 
-    public void send_SetPollInterval(int _seconds) throws org.apache.thrift.TException
+    public void send_SetPollInterval(int _milliseconds, boolean _bIntervalBetweenPolls) throws org.apache.thrift.TException
     {
       SetPollInterval_args args = new SetPollInterval_args();
-      args.set_seconds(_seconds);
+      args.set_milliseconds(_milliseconds);
+      args.set_bIntervalBetweenPolls(_bIntervalBetweenPolls);
       sendBase("SetPollInterval", args);
     }
 
@@ -838,16 +847,17 @@ public class RemoteManager {
       return;
     }
 
-    public boolean EnablePoll(RemoteValueID _valueId) throws org.apache.thrift.TException
+    public boolean EnablePoll(RemoteValueID _valueId, byte _intensity) throws org.apache.thrift.TException
     {
-      send_EnablePoll(_valueId);
+      send_EnablePoll(_valueId, _intensity);
       return recv_EnablePoll();
     }
 
-    public void send_EnablePoll(RemoteValueID _valueId) throws org.apache.thrift.TException
+    public void send_EnablePoll(RemoteValueID _valueId, byte _intensity) throws org.apache.thrift.TException
     {
       EnablePoll_args args = new EnablePoll_args();
       args.set_valueId(_valueId);
+      args.set_intensity(_intensity);
       sendBase("EnablePoll", args);
     }
 
@@ -905,6 +915,27 @@ public class RemoteManager {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "isPolled failed: unknown result");
+    }
+
+    public void SetPollIntensity(RemoteValueID _valueId, byte _intensity) throws org.apache.thrift.TException
+    {
+      send_SetPollIntensity(_valueId, _intensity);
+      recv_SetPollIntensity();
+    }
+
+    public void send_SetPollIntensity(RemoteValueID _valueId, byte _intensity) throws org.apache.thrift.TException
+    {
+      SetPollIntensity_args args = new SetPollIntensity_args();
+      args.set_valueId(_valueId);
+      args.set_intensity(_intensity);
+      sendBase("SetPollIntensity", args);
+    }
+
+    public void recv_SetPollIntensity() throws org.apache.thrift.TException
+    {
+      SetPollIntensity_result result = new SetPollIntensity_result();
+      receiveBase(result, "SetPollIntensity");
+      return;
     }
 
     public boolean RefreshNodeInfo(int _homeId, byte _nodeId) throws org.apache.thrift.TException
@@ -1905,6 +1936,29 @@ public class RemoteManager {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "IsValueSet failed: unknown result");
+    }
+
+    public boolean IsValuePolled(RemoteValueID _id) throws org.apache.thrift.TException
+    {
+      send_IsValuePolled(_id);
+      return recv_IsValuePolled();
+    }
+
+    public void send_IsValuePolled(RemoteValueID _id) throws org.apache.thrift.TException
+    {
+      IsValuePolled_args args = new IsValuePolled_args();
+      args.set_id(_id);
+      sendBase("IsValuePolled", args);
+    }
+
+    public boolean recv_IsValuePolled() throws org.apache.thrift.TException
+    {
+      IsValuePolled_result result = new IsValuePolled_result();
+      receiveBase(result, "IsValuePolled");
+      if (result.isSetSuccess()) {
+        return result.success;
+      }
+      throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "IsValuePolled failed: unknown result");
     }
 
     public Bool_Bool GetValueAsBool(RemoteValueID _id) throws org.apache.thrift.TException
@@ -4032,24 +4086,27 @@ public class RemoteManager {
       }
     }
 
-    public void SetPollInterval(int _seconds, org.apache.thrift.async.AsyncMethodCallback<SetPollInterval_call> resultHandler) throws org.apache.thrift.TException {
+    public void SetPollInterval(int _milliseconds, boolean _bIntervalBetweenPolls, org.apache.thrift.async.AsyncMethodCallback<SetPollInterval_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      SetPollInterval_call method_call = new SetPollInterval_call(_seconds, resultHandler, this, ___protocolFactory, ___transport);
+      SetPollInterval_call method_call = new SetPollInterval_call(_milliseconds, _bIntervalBetweenPolls, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class SetPollInterval_call extends org.apache.thrift.async.TAsyncMethodCall {
-      private int _seconds;
-      public SetPollInterval_call(int _seconds, org.apache.thrift.async.AsyncMethodCallback<SetPollInterval_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private int _milliseconds;
+      private boolean _bIntervalBetweenPolls;
+      public SetPollInterval_call(int _milliseconds, boolean _bIntervalBetweenPolls, org.apache.thrift.async.AsyncMethodCallback<SetPollInterval_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
-        this._seconds = _seconds;
+        this._milliseconds = _milliseconds;
+        this._bIntervalBetweenPolls = _bIntervalBetweenPolls;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("SetPollInterval", org.apache.thrift.protocol.TMessageType.CALL, 0));
         SetPollInterval_args args = new SetPollInterval_args();
-        args.set_seconds(_seconds);
+        args.set_milliseconds(_milliseconds);
+        args.set_bIntervalBetweenPolls(_bIntervalBetweenPolls);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -4064,24 +4121,27 @@ public class RemoteManager {
       }
     }
 
-    public void EnablePoll(RemoteValueID _valueId, org.apache.thrift.async.AsyncMethodCallback<EnablePoll_call> resultHandler) throws org.apache.thrift.TException {
+    public void EnablePoll(RemoteValueID _valueId, byte _intensity, org.apache.thrift.async.AsyncMethodCallback<EnablePoll_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
-      EnablePoll_call method_call = new EnablePoll_call(_valueId, resultHandler, this, ___protocolFactory, ___transport);
+      EnablePoll_call method_call = new EnablePoll_call(_valueId, _intensity, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
       ___manager.call(method_call);
     }
 
     public static class EnablePoll_call extends org.apache.thrift.async.TAsyncMethodCall {
       private RemoteValueID _valueId;
-      public EnablePoll_call(RemoteValueID _valueId, org.apache.thrift.async.AsyncMethodCallback<EnablePoll_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      private byte _intensity;
+      public EnablePoll_call(RemoteValueID _valueId, byte _intensity, org.apache.thrift.async.AsyncMethodCallback<EnablePoll_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this._valueId = _valueId;
+        this._intensity = _intensity;
       }
 
       public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("EnablePoll", org.apache.thrift.protocol.TMessageType.CALL, 0));
         EnablePoll_args args = new EnablePoll_args();
         args.set_valueId(_valueId);
+        args.set_intensity(_intensity);
         args.write(prot);
         prot.writeMessageEnd();
       }
@@ -4157,6 +4217,41 @@ public class RemoteManager {
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
         return (new Client(prot)).recv_isPolled();
+      }
+    }
+
+    public void SetPollIntensity(RemoteValueID _valueId, byte _intensity, org.apache.thrift.async.AsyncMethodCallback<SetPollIntensity_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      SetPollIntensity_call method_call = new SetPollIntensity_call(_valueId, _intensity, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class SetPollIntensity_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private RemoteValueID _valueId;
+      private byte _intensity;
+      public SetPollIntensity_call(RemoteValueID _valueId, byte _intensity, org.apache.thrift.async.AsyncMethodCallback<SetPollIntensity_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this._valueId = _valueId;
+        this._intensity = _intensity;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("SetPollIntensity", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        SetPollIntensity_args args = new SetPollIntensity_args();
+        args.set_valueId(_valueId);
+        args.set_intensity(_intensity);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_SetPollIntensity();
       }
     }
 
@@ -5656,6 +5751,38 @@ public class RemoteManager {
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
         org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
         return (new Client(prot)).recv_IsValueSet();
+      }
+    }
+
+    public void IsValuePolled(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<IsValuePolled_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      IsValuePolled_call method_call = new IsValuePolled_call(_id, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class IsValuePolled_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private RemoteValueID _id;
+      public IsValuePolled_call(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<IsValuePolled_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this._id = _id;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("IsValuePolled", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        IsValuePolled_args args = new IsValuePolled_args();
+        args.set_id(_id);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public boolean getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        return (new Client(prot)).recv_IsValuePolled();
       }
     }
 
@@ -8343,6 +8470,7 @@ public class RemoteManager {
       processMap.put("EnablePoll", new EnablePoll());
       processMap.put("DisablePoll", new DisablePoll());
       processMap.put("isPolled", new isPolled());
+      processMap.put("SetPollIntensity", new SetPollIntensity());
       processMap.put("RefreshNodeInfo", new RefreshNodeInfo());
       processMap.put("RequestNodeState", new RequestNodeState());
       processMap.put("RequestNodeDynamic", new RequestNodeDynamic());
@@ -8386,6 +8514,7 @@ public class RemoteManager {
       processMap.put("IsValueReadOnly", new IsValueReadOnly());
       processMap.put("IsValueWriteOnly", new IsValueWriteOnly());
       processMap.put("IsValueSet", new IsValueSet());
+      processMap.put("IsValuePolled", new IsValuePolled());
       processMap.put("GetValueAsBool", new GetValueAsBool());
       processMap.put("GetValueAsByte", new GetValueAsByte());
       processMap.put("GetValueAsFloat", new GetValueAsFloat());
@@ -8642,7 +8771,7 @@ public class RemoteManager {
 
       protected SetPollInterval_result getResult(I iface, SetPollInterval_args args) throws org.apache.thrift.TException {
         SetPollInterval_result result = new SetPollInterval_result();
-        iface.SetPollInterval(args._seconds);
+        iface.SetPollInterval(args._milliseconds, args._bIntervalBetweenPolls);
         return result;
       }
     }
@@ -8658,7 +8787,7 @@ public class RemoteManager {
 
       protected EnablePoll_result getResult(I iface, EnablePoll_args args) throws org.apache.thrift.TException {
         EnablePoll_result result = new EnablePoll_result();
-        result.success = iface.EnablePoll(args._valueId);
+        result.success = iface.EnablePoll(args._valueId, args._intensity);
         result.setSuccessIsSet(true);
         return result;
       }
@@ -8694,6 +8823,22 @@ public class RemoteManager {
         isPolled_result result = new isPolled_result();
         result.success = iface.isPolled(args._valueId);
         result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    private static class SetPollIntensity<I extends Iface> extends org.apache.thrift.ProcessFunction<I, SetPollIntensity_args> {
+      public SetPollIntensity() {
+        super("SetPollIntensity");
+      }
+
+      protected SetPollIntensity_args getEmptyArgsInstance() {
+        return new SetPollIntensity_args();
+      }
+
+      protected SetPollIntensity_result getResult(I iface, SetPollIntensity_args args) throws org.apache.thrift.TException {
+        SetPollIntensity_result result = new SetPollIntensity_result();
+        iface.SetPollIntensity(args._valueId, args._intensity);
         return result;
       }
     }
@@ -9401,6 +9546,23 @@ public class RemoteManager {
       protected IsValueSet_result getResult(I iface, IsValueSet_args args) throws org.apache.thrift.TException {
         IsValueSet_result result = new IsValueSet_result();
         result.success = iface.IsValueSet(args._id);
+        result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    private static class IsValuePolled<I extends Iface> extends org.apache.thrift.ProcessFunction<I, IsValuePolled_args> {
+      public IsValuePolled() {
+        super("IsValuePolled");
+      }
+
+      protected IsValuePolled_args getEmptyArgsInstance() {
+        return new IsValuePolled_args();
+      }
+
+      protected IsValuePolled_result getResult(I iface, IsValuePolled_args args) throws org.apache.thrift.TException {
+        IsValuePolled_result result = new IsValuePolled_result();
+        result.success = iface.IsValuePolled(args._id);
         result.setSuccessIsSet(true);
         return result;
       }
@@ -16308,13 +16470,16 @@ public class RemoteManager {
   public static class SetPollInterval_args implements org.apache.thrift.TBase<SetPollInterval_args, SetPollInterval_args._Fields>, java.io.Serializable, Cloneable   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("SetPollInterval_args");
 
-    private static final org.apache.thrift.protocol.TField _SECONDS_FIELD_DESC = new org.apache.thrift.protocol.TField("_seconds", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField _MILLISECONDS_FIELD_DESC = new org.apache.thrift.protocol.TField("_milliseconds", org.apache.thrift.protocol.TType.I32, (short)1);
+    private static final org.apache.thrift.protocol.TField _B_INTERVAL_BETWEEN_POLLS_FIELD_DESC = new org.apache.thrift.protocol.TField("_bIntervalBetweenPolls", org.apache.thrift.protocol.TType.BOOL, (short)2);
 
-    public int _seconds; // required
+    public int _milliseconds; // required
+    public boolean _bIntervalBetweenPolls; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      _SECONDS((short)1, "_seconds");
+      _MILLISECONDS((short)1, "_milliseconds"),
+      _B_INTERVAL_BETWEEN_POLLS((short)2, "_bIntervalBetweenPolls");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -16329,8 +16494,10 @@ public class RemoteManager {
        */
       public static _Fields findByThriftId(int fieldId) {
         switch(fieldId) {
-          case 1: // _SECONDS
-            return _SECONDS;
+          case 1: // _MILLISECONDS
+            return _MILLISECONDS;
+          case 2: // _B_INTERVAL_BETWEEN_POLLS
+            return _B_INTERVAL_BETWEEN_POLLS;
           default:
             return null;
         }
@@ -16371,14 +16538,17 @@ public class RemoteManager {
     }
 
     // isset id assignments
-    private static final int ___SECONDS_ISSET_ID = 0;
-    private BitSet __isset_bit_vector = new BitSet(1);
+    private static final int ___MILLISECONDS_ISSET_ID = 0;
+    private static final int ___BINTERVALBETWEENPOLLS_ISSET_ID = 1;
+    private BitSet __isset_bit_vector = new BitSet(2);
 
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-      tmpMap.put(_Fields._SECONDS, new org.apache.thrift.meta_data.FieldMetaData("_seconds", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+      tmpMap.put(_Fields._MILLISECONDS, new org.apache.thrift.meta_data.FieldMetaData("_milliseconds", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
+      tmpMap.put(_Fields._B_INTERVAL_BETWEEN_POLLS, new org.apache.thrift.meta_data.FieldMetaData("_bIntervalBetweenPolls", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SetPollInterval_args.class, metaDataMap);
     }
@@ -16387,11 +16557,14 @@ public class RemoteManager {
     }
 
     public SetPollInterval_args(
-      int _seconds)
+      int _milliseconds,
+      boolean _bIntervalBetweenPolls)
     {
       this();
-      this._seconds = _seconds;
-      set_secondsIsSet(true);
+      this._milliseconds = _milliseconds;
+      set_millisecondsIsSet(true);
+      this._bIntervalBetweenPolls = _bIntervalBetweenPolls;
+      set_bIntervalBetweenPollsIsSet(true);
     }
 
     /**
@@ -16400,7 +16573,8 @@ public class RemoteManager {
     public SetPollInterval_args(SetPollInterval_args other) {
       __isset_bit_vector.clear();
       __isset_bit_vector.or(other.__isset_bit_vector);
-      this._seconds = other._seconds;
+      this._milliseconds = other._milliseconds;
+      this._bIntervalBetweenPolls = other._bIntervalBetweenPolls;
     }
 
     public SetPollInterval_args deepCopy() {
@@ -16409,40 +16583,73 @@ public class RemoteManager {
 
     @Override
     public void clear() {
-      set_secondsIsSet(false);
-      this._seconds = 0;
+      set_millisecondsIsSet(false);
+      this._milliseconds = 0;
+      set_bIntervalBetweenPollsIsSet(false);
+      this._bIntervalBetweenPolls = false;
     }
 
-    public int get_seconds() {
-      return this._seconds;
+    public int get_milliseconds() {
+      return this._milliseconds;
     }
 
-    public SetPollInterval_args set_seconds(int _seconds) {
-      this._seconds = _seconds;
-      set_secondsIsSet(true);
+    public SetPollInterval_args set_milliseconds(int _milliseconds) {
+      this._milliseconds = _milliseconds;
+      set_millisecondsIsSet(true);
       return this;
     }
 
-    public void unset_seconds() {
-      __isset_bit_vector.clear(___SECONDS_ISSET_ID);
+    public void unset_milliseconds() {
+      __isset_bit_vector.clear(___MILLISECONDS_ISSET_ID);
     }
 
-    /** Returns true if field _seconds is set (has been assigned a value) and false otherwise */
-    public boolean isSet_seconds() {
-      return __isset_bit_vector.get(___SECONDS_ISSET_ID);
+    /** Returns true if field _milliseconds is set (has been assigned a value) and false otherwise */
+    public boolean isSet_milliseconds() {
+      return __isset_bit_vector.get(___MILLISECONDS_ISSET_ID);
     }
 
-    public void set_secondsIsSet(boolean value) {
-      __isset_bit_vector.set(___SECONDS_ISSET_ID, value);
+    public void set_millisecondsIsSet(boolean value) {
+      __isset_bit_vector.set(___MILLISECONDS_ISSET_ID, value);
+    }
+
+    public boolean is_bIntervalBetweenPolls() {
+      return this._bIntervalBetweenPolls;
+    }
+
+    public SetPollInterval_args set_bIntervalBetweenPolls(boolean _bIntervalBetweenPolls) {
+      this._bIntervalBetweenPolls = _bIntervalBetweenPolls;
+      set_bIntervalBetweenPollsIsSet(true);
+      return this;
+    }
+
+    public void unset_bIntervalBetweenPolls() {
+      __isset_bit_vector.clear(___BINTERVALBETWEENPOLLS_ISSET_ID);
+    }
+
+    /** Returns true if field _bIntervalBetweenPolls is set (has been assigned a value) and false otherwise */
+    public boolean isSet_bIntervalBetweenPolls() {
+      return __isset_bit_vector.get(___BINTERVALBETWEENPOLLS_ISSET_ID);
+    }
+
+    public void set_bIntervalBetweenPollsIsSet(boolean value) {
+      __isset_bit_vector.set(___BINTERVALBETWEENPOLLS_ISSET_ID, value);
     }
 
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
-      case _SECONDS:
+      case _MILLISECONDS:
         if (value == null) {
-          unset_seconds();
+          unset_milliseconds();
         } else {
-          set_seconds((Integer)value);
+          set_milliseconds((Integer)value);
+        }
+        break;
+
+      case _B_INTERVAL_BETWEEN_POLLS:
+        if (value == null) {
+          unset_bIntervalBetweenPolls();
+        } else {
+          set_bIntervalBetweenPolls((Boolean)value);
         }
         break;
 
@@ -16451,8 +16658,11 @@ public class RemoteManager {
 
     public Object getFieldValue(_Fields field) {
       switch (field) {
-      case _SECONDS:
-        return Integer.valueOf(get_seconds());
+      case _MILLISECONDS:
+        return Integer.valueOf(get_milliseconds());
+
+      case _B_INTERVAL_BETWEEN_POLLS:
+        return Boolean.valueOf(is_bIntervalBetweenPolls());
 
       }
       throw new IllegalStateException();
@@ -16465,8 +16675,10 @@ public class RemoteManager {
       }
 
       switch (field) {
-      case _SECONDS:
-        return isSet_seconds();
+      case _MILLISECONDS:
+        return isSet_milliseconds();
+      case _B_INTERVAL_BETWEEN_POLLS:
+        return isSet_bIntervalBetweenPolls();
       }
       throw new IllegalStateException();
     }
@@ -16484,12 +16696,21 @@ public class RemoteManager {
       if (that == null)
         return false;
 
-      boolean this_present__seconds = true;
-      boolean that_present__seconds = true;
-      if (this_present__seconds || that_present__seconds) {
-        if (!(this_present__seconds && that_present__seconds))
+      boolean this_present__milliseconds = true;
+      boolean that_present__milliseconds = true;
+      if (this_present__milliseconds || that_present__milliseconds) {
+        if (!(this_present__milliseconds && that_present__milliseconds))
           return false;
-        if (this._seconds != that._seconds)
+        if (this._milliseconds != that._milliseconds)
+          return false;
+      }
+
+      boolean this_present__bIntervalBetweenPolls = true;
+      boolean that_present__bIntervalBetweenPolls = true;
+      if (this_present__bIntervalBetweenPolls || that_present__bIntervalBetweenPolls) {
+        if (!(this_present__bIntervalBetweenPolls && that_present__bIntervalBetweenPolls))
+          return false;
+        if (this._bIntervalBetweenPolls != that._bIntervalBetweenPolls)
           return false;
       }
 
@@ -16509,12 +16730,22 @@ public class RemoteManager {
       int lastComparison = 0;
       SetPollInterval_args typedOther = (SetPollInterval_args)other;
 
-      lastComparison = Boolean.valueOf(isSet_seconds()).compareTo(typedOther.isSet_seconds());
+      lastComparison = Boolean.valueOf(isSet_milliseconds()).compareTo(typedOther.isSet_milliseconds());
       if (lastComparison != 0) {
         return lastComparison;
       }
-      if (isSet_seconds()) {
-        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._seconds, typedOther._seconds);
+      if (isSet_milliseconds()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._milliseconds, typedOther._milliseconds);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSet_bIntervalBetweenPolls()).compareTo(typedOther.isSet_bIntervalBetweenPolls());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_bIntervalBetweenPolls()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._bIntervalBetweenPolls, typedOther._bIntervalBetweenPolls);
         if (lastComparison != 0) {
           return lastComparison;
         }
@@ -16536,10 +16767,18 @@ public class RemoteManager {
           break;
         }
         switch (field.id) {
-          case 1: // _SECONDS
+          case 1: // _MILLISECONDS
             if (field.type == org.apache.thrift.protocol.TType.I32) {
-              this._seconds = iprot.readI32();
-              set_secondsIsSet(true);
+              this._milliseconds = iprot.readI32();
+              set_millisecondsIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case 2: // _B_INTERVAL_BETWEEN_POLLS
+            if (field.type == org.apache.thrift.protocol.TType.BOOL) {
+              this._bIntervalBetweenPolls = iprot.readBool();
+              set_bIntervalBetweenPollsIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
             }
@@ -16559,8 +16798,11 @@ public class RemoteManager {
       validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
-      oprot.writeFieldBegin(_SECONDS_FIELD_DESC);
-      oprot.writeI32(this._seconds);
+      oprot.writeFieldBegin(_MILLISECONDS_FIELD_DESC);
+      oprot.writeI32(this._milliseconds);
+      oprot.writeFieldEnd();
+      oprot.writeFieldBegin(_B_INTERVAL_BETWEEN_POLLS_FIELD_DESC);
+      oprot.writeBool(this._bIntervalBetweenPolls);
       oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
@@ -16571,8 +16813,12 @@ public class RemoteManager {
       StringBuilder sb = new StringBuilder("SetPollInterval_args(");
       boolean first = true;
 
-      sb.append("_seconds:");
-      sb.append(this._seconds);
+      sb.append("_milliseconds:");
+      sb.append(this._milliseconds);
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_bIntervalBetweenPolls:");
+      sb.append(this._bIntervalBetweenPolls);
       first = false;
       sb.append(")");
       return sb.toString();
@@ -16807,12 +17053,15 @@ public class RemoteManager {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("EnablePoll_args");
 
     private static final org.apache.thrift.protocol.TField _VALUE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_valueId", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField _INTENSITY_FIELD_DESC = new org.apache.thrift.protocol.TField("_intensity", org.apache.thrift.protocol.TType.BYTE, (short)2);
 
     public RemoteValueID _valueId; // required
+    public byte _intensity; // required
 
     /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
     public enum _Fields implements org.apache.thrift.TFieldIdEnum {
-      _VALUE_ID((short)1, "_valueId");
+      _VALUE_ID((short)1, "_valueId"),
+      _INTENSITY((short)2, "_intensity");
 
       private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -16829,6 +17078,8 @@ public class RemoteManager {
         switch(fieldId) {
           case 1: // _VALUE_ID
             return _VALUE_ID;
+          case 2: // _INTENSITY
+            return _INTENSITY;
           default:
             return null;
         }
@@ -16869,33 +17120,45 @@ public class RemoteManager {
     }
 
     // isset id assignments
+    private static final int ___INTENSITY_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
 
     public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
     static {
       Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
       tmpMap.put(_Fields._VALUE_ID, new org.apache.thrift.meta_data.FieldMetaData("_valueId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
           new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, RemoteValueID.class)));
+      tmpMap.put(_Fields._INTENSITY, new org.apache.thrift.meta_data.FieldMetaData("_intensity", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BYTE)));
       metaDataMap = Collections.unmodifiableMap(tmpMap);
       org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(EnablePoll_args.class, metaDataMap);
     }
 
     public EnablePoll_args() {
+      this._intensity = (byte)1;
+
     }
 
     public EnablePoll_args(
-      RemoteValueID _valueId)
+      RemoteValueID _valueId,
+      byte _intensity)
     {
       this();
       this._valueId = _valueId;
+      this._intensity = _intensity;
+      set_intensityIsSet(true);
     }
 
     /**
      * Performs a deep copy on <i>other</i>.
      */
     public EnablePoll_args(EnablePoll_args other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
       if (other.isSet_valueId()) {
         this._valueId = new RemoteValueID(other._valueId);
       }
+      this._intensity = other._intensity;
     }
 
     public EnablePoll_args deepCopy() {
@@ -16905,6 +17168,8 @@ public class RemoteManager {
     @Override
     public void clear() {
       this._valueId = null;
+      this._intensity = (byte)1;
+
     }
 
     public RemoteValueID get_valueId() {
@@ -16931,6 +17196,29 @@ public class RemoteManager {
       }
     }
 
+    public byte get_intensity() {
+      return this._intensity;
+    }
+
+    public EnablePoll_args set_intensity(byte _intensity) {
+      this._intensity = _intensity;
+      set_intensityIsSet(true);
+      return this;
+    }
+
+    public void unset_intensity() {
+      __isset_bit_vector.clear(___INTENSITY_ISSET_ID);
+    }
+
+    /** Returns true if field _intensity is set (has been assigned a value) and false otherwise */
+    public boolean isSet_intensity() {
+      return __isset_bit_vector.get(___INTENSITY_ISSET_ID);
+    }
+
+    public void set_intensityIsSet(boolean value) {
+      __isset_bit_vector.set(___INTENSITY_ISSET_ID, value);
+    }
+
     public void setFieldValue(_Fields field, Object value) {
       switch (field) {
       case _VALUE_ID:
@@ -16941,6 +17229,14 @@ public class RemoteManager {
         }
         break;
 
+      case _INTENSITY:
+        if (value == null) {
+          unset_intensity();
+        } else {
+          set_intensity((Byte)value);
+        }
+        break;
+
       }
     }
 
@@ -16948,6 +17244,9 @@ public class RemoteManager {
       switch (field) {
       case _VALUE_ID:
         return get_valueId();
+
+      case _INTENSITY:
+        return Byte.valueOf(get_intensity());
 
       }
       throw new IllegalStateException();
@@ -16962,6 +17261,8 @@ public class RemoteManager {
       switch (field) {
       case _VALUE_ID:
         return isSet_valueId();
+      case _INTENSITY:
+        return isSet_intensity();
       }
       throw new IllegalStateException();
     }
@@ -16985,6 +17286,15 @@ public class RemoteManager {
         if (!(this_present__valueId && that_present__valueId))
           return false;
         if (!this._valueId.equals(that._valueId))
+          return false;
+      }
+
+      boolean this_present__intensity = true;
+      boolean that_present__intensity = true;
+      if (this_present__intensity || that_present__intensity) {
+        if (!(this_present__intensity && that_present__intensity))
+          return false;
+        if (this._intensity != that._intensity)
           return false;
       }
 
@@ -17014,6 +17324,16 @@ public class RemoteManager {
           return lastComparison;
         }
       }
+      lastComparison = Boolean.valueOf(isSet_intensity()).compareTo(typedOther.isSet_intensity());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_intensity()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._intensity, typedOther._intensity);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
       return 0;
     }
 
@@ -17039,6 +17359,14 @@ public class RemoteManager {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
             }
             break;
+          case 2: // _INTENSITY
+            if (field.type == org.apache.thrift.protocol.TType.BYTE) {
+              this._intensity = iprot.readByte();
+              set_intensityIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
         }
@@ -17059,6 +17387,9 @@ public class RemoteManager {
         this._valueId.write(oprot);
         oprot.writeFieldEnd();
       }
+      oprot.writeFieldBegin(_INTENSITY_FIELD_DESC);
+      oprot.writeByte(this._intensity);
+      oprot.writeFieldEnd();
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -17074,6 +17405,10 @@ public class RemoteManager {
       } else {
         sb.append(this._valueId);
       }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_intensity:");
+      sb.append(this._intensity);
       first = false;
       sb.append(")");
       return sb.toString();
@@ -17093,6 +17428,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -18559,6 +18896,594 @@ public class RemoteManager {
       sb.append("success:");
       sb.append(this.success);
       first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class SetPollIntensity_args implements org.apache.thrift.TBase<SetPollIntensity_args, SetPollIntensity_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("SetPollIntensity_args");
+
+    private static final org.apache.thrift.protocol.TField _VALUE_ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_valueId", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField _INTENSITY_FIELD_DESC = new org.apache.thrift.protocol.TField("_intensity", org.apache.thrift.protocol.TType.BYTE, (short)2);
+
+    public RemoteValueID _valueId; // required
+    public byte _intensity; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      _VALUE_ID((short)1, "_valueId"),
+      _INTENSITY((short)2, "_intensity");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // _VALUE_ID
+            return _VALUE_ID;
+          case 2: // _INTENSITY
+            return _INTENSITY;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int ___INTENSITY_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields._VALUE_ID, new org.apache.thrift.meta_data.FieldMetaData("_valueId", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, RemoteValueID.class)));
+      tmpMap.put(_Fields._INTENSITY, new org.apache.thrift.meta_data.FieldMetaData("_intensity", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BYTE)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SetPollIntensity_args.class, metaDataMap);
+    }
+
+    public SetPollIntensity_args() {
+    }
+
+    public SetPollIntensity_args(
+      RemoteValueID _valueId,
+      byte _intensity)
+    {
+      this();
+      this._valueId = _valueId;
+      this._intensity = _intensity;
+      set_intensityIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public SetPollIntensity_args(SetPollIntensity_args other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      if (other.isSet_valueId()) {
+        this._valueId = new RemoteValueID(other._valueId);
+      }
+      this._intensity = other._intensity;
+    }
+
+    public SetPollIntensity_args deepCopy() {
+      return new SetPollIntensity_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this._valueId = null;
+      set_intensityIsSet(false);
+      this._intensity = 0;
+    }
+
+    public RemoteValueID get_valueId() {
+      return this._valueId;
+    }
+
+    public SetPollIntensity_args set_valueId(RemoteValueID _valueId) {
+      this._valueId = _valueId;
+      return this;
+    }
+
+    public void unset_valueId() {
+      this._valueId = null;
+    }
+
+    /** Returns true if field _valueId is set (has been assigned a value) and false otherwise */
+    public boolean isSet_valueId() {
+      return this._valueId != null;
+    }
+
+    public void set_valueIdIsSet(boolean value) {
+      if (!value) {
+        this._valueId = null;
+      }
+    }
+
+    public byte get_intensity() {
+      return this._intensity;
+    }
+
+    public SetPollIntensity_args set_intensity(byte _intensity) {
+      this._intensity = _intensity;
+      set_intensityIsSet(true);
+      return this;
+    }
+
+    public void unset_intensity() {
+      __isset_bit_vector.clear(___INTENSITY_ISSET_ID);
+    }
+
+    /** Returns true if field _intensity is set (has been assigned a value) and false otherwise */
+    public boolean isSet_intensity() {
+      return __isset_bit_vector.get(___INTENSITY_ISSET_ID);
+    }
+
+    public void set_intensityIsSet(boolean value) {
+      __isset_bit_vector.set(___INTENSITY_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case _VALUE_ID:
+        if (value == null) {
+          unset_valueId();
+        } else {
+          set_valueId((RemoteValueID)value);
+        }
+        break;
+
+      case _INTENSITY:
+        if (value == null) {
+          unset_intensity();
+        } else {
+          set_intensity((Byte)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case _VALUE_ID:
+        return get_valueId();
+
+      case _INTENSITY:
+        return Byte.valueOf(get_intensity());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case _VALUE_ID:
+        return isSet_valueId();
+      case _INTENSITY:
+        return isSet_intensity();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof SetPollIntensity_args)
+        return this.equals((SetPollIntensity_args)that);
+      return false;
+    }
+
+    public boolean equals(SetPollIntensity_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present__valueId = true && this.isSet_valueId();
+      boolean that_present__valueId = true && that.isSet_valueId();
+      if (this_present__valueId || that_present__valueId) {
+        if (!(this_present__valueId && that_present__valueId))
+          return false;
+        if (!this._valueId.equals(that._valueId))
+          return false;
+      }
+
+      boolean this_present__intensity = true;
+      boolean that_present__intensity = true;
+      if (this_present__intensity || that_present__intensity) {
+        if (!(this_present__intensity && that_present__intensity))
+          return false;
+        if (this._intensity != that._intensity)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(SetPollIntensity_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      SetPollIntensity_args typedOther = (SetPollIntensity_args)other;
+
+      lastComparison = Boolean.valueOf(isSet_valueId()).compareTo(typedOther.isSet_valueId());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_valueId()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._valueId, typedOther._valueId);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSet_intensity()).compareTo(typedOther.isSet_intensity());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_intensity()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._intensity, typedOther._intensity);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 1: // _VALUE_ID
+            if (field.type == org.apache.thrift.protocol.TType.STRUCT) {
+              this._valueId = new RemoteValueID();
+              this._valueId.read(iprot);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          case 2: // _INTENSITY
+            if (field.type == org.apache.thrift.protocol.TType.BYTE) {
+              this._intensity = iprot.readByte();
+              set_intensityIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      validate();
+
+      oprot.writeStructBegin(STRUCT_DESC);
+      if (this._valueId != null) {
+        oprot.writeFieldBegin(_VALUE_ID_FIELD_DESC);
+        this._valueId.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldBegin(_INTENSITY_FIELD_DESC);
+      oprot.writeByte(this._intensity);
+      oprot.writeFieldEnd();
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("SetPollIntensity_args(");
+      boolean first = true;
+
+      sb.append("_valueId:");
+      if (this._valueId == null) {
+        sb.append("null");
+      } else {
+        sb.append(this._valueId);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_intensity:");
+      sb.append(this._intensity);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class SetPollIntensity_result implements org.apache.thrift.TBase<SetPollIntensity_result, SetPollIntensity_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("SetPollIntensity_result");
+
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SetPollIntensity_result.class, metaDataMap);
+    }
+
+    public SetPollIntensity_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public SetPollIntensity_result(SetPollIntensity_result other) {
+    }
+
+    public SetPollIntensity_result deepCopy() {
+      return new SetPollIntensity_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof SetPollIntensity_result)
+        return this.equals((SetPollIntensity_result)that);
+      return false;
+    }
+
+    public boolean equals(SetPollIntensity_result that) {
+      if (that == null)
+        return false;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(SetPollIntensity_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      SetPollIntensity_result typedOther = (SetPollIntensity_result)other;
+
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      oprot.writeStructBegin(STRUCT_DESC);
+
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("SetPollIntensity_result(");
+      boolean first = true;
+
       sb.append(")");
       return sb.toString();
     }
@@ -31143,8 +32068,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -31820,6 +32743,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -46593,6 +47518,600 @@ public class RemoteManager {
     @Override
     public String toString() {
       StringBuilder sb = new StringBuilder("IsValueSet_result(");
+      boolean first = true;
+
+      sb.append("success:");
+      sb.append(this.success);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class IsValuePolled_args implements org.apache.thrift.TBase<IsValuePolled_args, IsValuePolled_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("IsValuePolled_args");
+
+    private static final org.apache.thrift.protocol.TField _ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_id", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+
+    public RemoteValueID _id; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      _ID((short)1, "_id");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // _ID
+            return _ID;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields._ID, new org.apache.thrift.meta_data.FieldMetaData("_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, RemoteValueID.class)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(IsValuePolled_args.class, metaDataMap);
+    }
+
+    public IsValuePolled_args() {
+    }
+
+    public IsValuePolled_args(
+      RemoteValueID _id)
+    {
+      this();
+      this._id = _id;
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public IsValuePolled_args(IsValuePolled_args other) {
+      if (other.isSet_id()) {
+        this._id = new RemoteValueID(other._id);
+      }
+    }
+
+    public IsValuePolled_args deepCopy() {
+      return new IsValuePolled_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this._id = null;
+    }
+
+    public RemoteValueID get_id() {
+      return this._id;
+    }
+
+    public IsValuePolled_args set_id(RemoteValueID _id) {
+      this._id = _id;
+      return this;
+    }
+
+    public void unset_id() {
+      this._id = null;
+    }
+
+    /** Returns true if field _id is set (has been assigned a value) and false otherwise */
+    public boolean isSet_id() {
+      return this._id != null;
+    }
+
+    public void set_idIsSet(boolean value) {
+      if (!value) {
+        this._id = null;
+      }
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case _ID:
+        if (value == null) {
+          unset_id();
+        } else {
+          set_id((RemoteValueID)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case _ID:
+        return get_id();
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case _ID:
+        return isSet_id();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof IsValuePolled_args)
+        return this.equals((IsValuePolled_args)that);
+      return false;
+    }
+
+    public boolean equals(IsValuePolled_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present__id = true && this.isSet_id();
+      boolean that_present__id = true && that.isSet_id();
+      if (this_present__id || that_present__id) {
+        if (!(this_present__id && that_present__id))
+          return false;
+        if (!this._id.equals(that._id))
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(IsValuePolled_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      IsValuePolled_args typedOther = (IsValuePolled_args)other;
+
+      lastComparison = Boolean.valueOf(isSet_id()).compareTo(typedOther.isSet_id());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_id()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._id, typedOther._id);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 1: // _ID
+            if (field.type == org.apache.thrift.protocol.TType.STRUCT) {
+              this._id = new RemoteValueID();
+              this._id.read(iprot);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      validate();
+
+      oprot.writeStructBegin(STRUCT_DESC);
+      if (this._id != null) {
+        oprot.writeFieldBegin(_ID_FIELD_DESC);
+        this._id.write(oprot);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("IsValuePolled_args(");
+      boolean first = true;
+
+      sb.append("_id:");
+      if (this._id == null) {
+        sb.append("null");
+      } else {
+        sb.append(this._id);
+      }
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+  }
+
+  public static class IsValuePolled_result implements org.apache.thrift.TBase<IsValuePolled_result, IsValuePolled_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("IsValuePolled_result");
+
+    private static final org.apache.thrift.protocol.TField SUCCESS_FIELD_DESC = new org.apache.thrift.protocol.TField("success", org.apache.thrift.protocol.TType.BOOL, (short)0);
+
+    public boolean success; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      SUCCESS((short)0, "success");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 0: // SUCCESS
+            return SUCCESS;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int __SUCCESS_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields.SUCCESS, new org.apache.thrift.meta_data.FieldMetaData("success", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(IsValuePolled_result.class, metaDataMap);
+    }
+
+    public IsValuePolled_result() {
+    }
+
+    public IsValuePolled_result(
+      boolean success)
+    {
+      this();
+      this.success = success;
+      setSuccessIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public IsValuePolled_result(IsValuePolled_result other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      this.success = other.success;
+    }
+
+    public IsValuePolled_result deepCopy() {
+      return new IsValuePolled_result(this);
+    }
+
+    @Override
+    public void clear() {
+      setSuccessIsSet(false);
+      this.success = false;
+    }
+
+    public boolean isSuccess() {
+      return this.success;
+    }
+
+    public IsValuePolled_result setSuccess(boolean success) {
+      this.success = success;
+      setSuccessIsSet(true);
+      return this;
+    }
+
+    public void unsetSuccess() {
+      __isset_bit_vector.clear(__SUCCESS_ISSET_ID);
+    }
+
+    /** Returns true if field success is set (has been assigned a value) and false otherwise */
+    public boolean isSetSuccess() {
+      return __isset_bit_vector.get(__SUCCESS_ISSET_ID);
+    }
+
+    public void setSuccessIsSet(boolean value) {
+      __isset_bit_vector.set(__SUCCESS_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case SUCCESS:
+        if (value == null) {
+          unsetSuccess();
+        } else {
+          setSuccess((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case SUCCESS:
+        return Boolean.valueOf(isSuccess());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case SUCCESS:
+        return isSetSuccess();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof IsValuePolled_result)
+        return this.equals((IsValuePolled_result)that);
+      return false;
+    }
+
+    public boolean equals(IsValuePolled_result that) {
+      if (that == null)
+        return false;
+
+      boolean this_present_success = true;
+      boolean that_present_success = true;
+      if (this_present_success || that_present_success) {
+        if (!(this_present_success && that_present_success))
+          return false;
+        if (this.success != that.success)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(IsValuePolled_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      IsValuePolled_result typedOther = (IsValuePolled_result)other;
+
+      lastComparison = Boolean.valueOf(isSetSuccess()).compareTo(typedOther.isSetSuccess());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSetSuccess()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.success, typedOther.success);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      org.apache.thrift.protocol.TField field;
+      iprot.readStructBegin();
+      while (true)
+      {
+        field = iprot.readFieldBegin();
+        if (field.type == org.apache.thrift.protocol.TType.STOP) { 
+          break;
+        }
+        switch (field.id) {
+          case 0: // SUCCESS
+            if (field.type == org.apache.thrift.protocol.TType.BOOL) {
+              this.success = iprot.readBool();
+              setSuccessIsSet(true);
+            } else { 
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+            }
+            break;
+          default:
+            org.apache.thrift.protocol.TProtocolUtil.skip(iprot, field.type);
+        }
+        iprot.readFieldEnd();
+      }
+      iprot.readStructEnd();
+
+      // check for required fields of primitive type, which can't be checked in the validate method
+      validate();
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      oprot.writeStructBegin(STRUCT_DESC);
+
+      if (this.isSetSuccess()) {
+        oprot.writeFieldBegin(SUCCESS_FIELD_DESC);
+        oprot.writeBool(this.success);
+        oprot.writeFieldEnd();
+      }
+      oprot.writeFieldStop();
+      oprot.writeStructEnd();
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("IsValuePolled_result(");
       boolean first = true;
 
       sb.append("success:");
@@ -94123,8 +95642,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -95303,6 +96820,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);

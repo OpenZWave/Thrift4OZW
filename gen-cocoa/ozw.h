@@ -645,10 +645,11 @@ enum OpenZWaveDriverControllerCommand {
 - (int32_t) GetSendQueueCount: (int32_t) _homeId;  // throws TException
 - (void) LogDriverStatistics: (int32_t) _homeId;  // throws TException
 - (int32_t) GetPollInterval;  // throws TException
-- (void) SetPollInterval: (int32_t) _seconds;  // throws TException
-- (BOOL) EnablePoll: (OpenZWaveRemoteValueID *) _valueId;  // throws TException
+- (void) SetPollInterval: (int32_t) _milliseconds : (BOOL) _bIntervalBetweenPolls;  // throws TException
+- (BOOL) EnablePoll: (OpenZWaveRemoteValueID *) _valueId : (uint8_t) _intensity;  // throws TException
 - (BOOL) DisablePoll: (OpenZWaveRemoteValueID *) _valueId;  // throws TException
 - (BOOL) isPolled: (OpenZWaveRemoteValueID *) _valueId;  // throws TException
+- (void) SetPollIntensity: (OpenZWaveRemoteValueID *) _valueId : (uint8_t) _intensity;  // throws TException
 - (BOOL) RefreshNodeInfo: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (BOOL) RequestNodeState: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
 - (BOOL) RequestNodeDynamic: (int32_t) _homeId : (uint8_t) _nodeId;  // throws TException
@@ -692,6 +693,7 @@ enum OpenZWaveDriverControllerCommand {
 - (BOOL) IsValueReadOnly: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (BOOL) IsValueWriteOnly: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (BOOL) IsValueSet: (OpenZWaveRemoteValueID *) _id;  // throws TException
+- (BOOL) IsValuePolled: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (OpenZWaveBool_Bool *) GetValueAsBool: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (OpenZWaveBool_UInt8 *) GetValueAsByte: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (OpenZWaveBool_Float *) GetValueAsFloat: (OpenZWaveRemoteValueID *) _id;  // throws TException

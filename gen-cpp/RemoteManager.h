@@ -24,10 +24,11 @@ class RemoteManagerIf {
   virtual int32_t GetSendQueueCount(const int32_t _homeId) = 0;
   virtual void LogDriverStatistics(const int32_t _homeId) = 0;
   virtual int32_t GetPollInterval() = 0;
-  virtual void SetPollInterval(const int32_t _seconds) = 0;
-  virtual bool EnablePoll(const RemoteValueID& _valueId) = 0;
+  virtual void SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls) = 0;
+  virtual bool EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity) = 0;
   virtual bool DisablePoll(const RemoteValueID& _valueId) = 0;
   virtual bool isPolled(const RemoteValueID& _valueId) = 0;
+  virtual void SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity) = 0;
   virtual bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool RequestNodeState(const int32_t _homeId, const int8_t _nodeId) = 0;
   virtual bool RequestNodeDynamic(const int32_t _homeId, const int8_t _nodeId) = 0;
@@ -71,6 +72,7 @@ class RemoteManagerIf {
   virtual bool IsValueReadOnly(const RemoteValueID& _id) = 0;
   virtual bool IsValueWriteOnly(const RemoteValueID& _id) = 0;
   virtual bool IsValueSet(const RemoteValueID& _id) = 0;
+  virtual bool IsValuePolled(const RemoteValueID& _id) = 0;
   virtual void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id) = 0;
   virtual void GetValueAsByte(Bool_UInt8& _return, const RemoteValueID& _id) = 0;
   virtual void GetValueAsFloat(Bool_Float& _return, const RemoteValueID& _id) = 0;
@@ -188,10 +190,10 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     int32_t _return = 0;
     return _return;
   }
-  void SetPollInterval(const int32_t /* _seconds */) {
+  void SetPollInterval(const int32_t /* _milliseconds */, const bool /* _bIntervalBetweenPolls */) {
     return;
   }
-  bool EnablePoll(const RemoteValueID& /* _valueId */) {
+  bool EnablePoll(const RemoteValueID& /* _valueId */, const int8_t /* _intensity */) {
     bool _return = false;
     return _return;
   }
@@ -202,6 +204,9 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   bool isPolled(const RemoteValueID& /* _valueId */) {
     bool _return = false;
     return _return;
+  }
+  void SetPollIntensity(const RemoteValueID& /* _valueId */, const int8_t /* _intensity */) {
+    return;
   }
   bool RefreshNodeInfo(const int32_t /* _homeId */, const int8_t /* _nodeId */) {
     bool _return = false;
@@ -349,6 +354,10 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
     return _return;
   }
   bool IsValueSet(const RemoteValueID& /* _id */) {
+    bool _return = false;
+    return _return;
+  }
+  bool IsValuePolled(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
   }
@@ -1649,29 +1658,37 @@ class RemoteManager_GetPollInterval_presult {
 };
 
 typedef struct _RemoteManager_SetPollInterval_args__isset {
-  _RemoteManager_SetPollInterval_args__isset() : _seconds(false) {}
-  bool _seconds;
+  _RemoteManager_SetPollInterval_args__isset() : _milliseconds(false), _bIntervalBetweenPolls(false) {}
+  bool _milliseconds;
+  bool _bIntervalBetweenPolls;
 } _RemoteManager_SetPollInterval_args__isset;
 
 class RemoteManager_SetPollInterval_args {
  public:
 
-  RemoteManager_SetPollInterval_args() : _seconds(0) {
+  RemoteManager_SetPollInterval_args() : _milliseconds(0), _bIntervalBetweenPolls(0) {
   }
 
   virtual ~RemoteManager_SetPollInterval_args() throw() {}
 
-  int32_t _seconds;
+  int32_t _milliseconds;
+  bool _bIntervalBetweenPolls;
 
   _RemoteManager_SetPollInterval_args__isset __isset;
 
-  void __set__seconds(const int32_t val) {
-    _seconds = val;
+  void __set__milliseconds(const int32_t val) {
+    _milliseconds = val;
+  }
+
+  void __set__bIntervalBetweenPolls(const bool val) {
+    _bIntervalBetweenPolls = val;
   }
 
   bool operator == (const RemoteManager_SetPollInterval_args & rhs) const
   {
-    if (!(_seconds == rhs._seconds))
+    if (!(_milliseconds == rhs._milliseconds))
+      return false;
+    if (!(_bIntervalBetweenPolls == rhs._bIntervalBetweenPolls))
       return false;
     return true;
   }
@@ -1693,7 +1710,8 @@ class RemoteManager_SetPollInterval_pargs {
 
   virtual ~RemoteManager_SetPollInterval_pargs() throw() {}
 
-  const int32_t* _seconds;
+  const int32_t* _milliseconds;
+  const bool* _bIntervalBetweenPolls;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
@@ -1737,19 +1755,21 @@ class RemoteManager_SetPollInterval_presult {
 };
 
 typedef struct _RemoteManager_EnablePoll_args__isset {
-  _RemoteManager_EnablePoll_args__isset() : _valueId(false) {}
+  _RemoteManager_EnablePoll_args__isset() : _valueId(false), _intensity(false) {}
   bool _valueId;
+  bool _intensity;
 } _RemoteManager_EnablePoll_args__isset;
 
 class RemoteManager_EnablePoll_args {
  public:
 
-  RemoteManager_EnablePoll_args() {
+  RemoteManager_EnablePoll_args() : _intensity(1) {
   }
 
   virtual ~RemoteManager_EnablePoll_args() throw() {}
 
   RemoteValueID _valueId;
+  int8_t _intensity;
 
   _RemoteManager_EnablePoll_args__isset __isset;
 
@@ -1757,9 +1777,15 @@ class RemoteManager_EnablePoll_args {
     _valueId = val;
   }
 
+  void __set__intensity(const int8_t val) {
+    _intensity = val;
+  }
+
   bool operator == (const RemoteManager_EnablePoll_args & rhs) const
   {
     if (!(_valueId == rhs._valueId))
+      return false;
+    if (!(_intensity == rhs._intensity))
       return false;
     return true;
   }
@@ -1782,6 +1808,7 @@ class RemoteManager_EnablePoll_pargs {
   virtual ~RemoteManager_EnablePoll_pargs() throw() {}
 
   const RemoteValueID* _valueId;
+  const int8_t* _intensity;
 
   uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
 
@@ -2055,6 +2082,103 @@ class RemoteManager_isPolled_presult {
   bool* success;
 
   _RemoteManager_isPolled_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_SetPollIntensity_args__isset {
+  _RemoteManager_SetPollIntensity_args__isset() : _valueId(false), _intensity(false) {}
+  bool _valueId;
+  bool _intensity;
+} _RemoteManager_SetPollIntensity_args__isset;
+
+class RemoteManager_SetPollIntensity_args {
+ public:
+
+  RemoteManager_SetPollIntensity_args() : _intensity(0) {
+  }
+
+  virtual ~RemoteManager_SetPollIntensity_args() throw() {}
+
+  RemoteValueID _valueId;
+  int8_t _intensity;
+
+  _RemoteManager_SetPollIntensity_args__isset __isset;
+
+  void __set__valueId(const RemoteValueID& val) {
+    _valueId = val;
+  }
+
+  void __set__intensity(const int8_t val) {
+    _intensity = val;
+  }
+
+  bool operator == (const RemoteManager_SetPollIntensity_args & rhs) const
+  {
+    if (!(_valueId == rhs._valueId))
+      return false;
+    if (!(_intensity == rhs._intensity))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_SetPollIntensity_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_SetPollIntensity_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SetPollIntensity_pargs {
+ public:
+
+
+  virtual ~RemoteManager_SetPollIntensity_pargs() throw() {}
+
+  const RemoteValueID* _valueId;
+  const int8_t* _intensity;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SetPollIntensity_result {
+ public:
+
+  RemoteManager_SetPollIntensity_result() {
+  }
+
+  virtual ~RemoteManager_SetPollIntensity_result() throw() {}
+
+
+  bool operator == (const RemoteManager_SetPollIntensity_result & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const RemoteManager_SetPollIntensity_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_SetPollIntensity_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SetPollIntensity_presult {
+ public:
+
+
+  virtual ~RemoteManager_SetPollIntensity_presult() throw() {}
+
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -6868,6 +6992,114 @@ class RemoteManager_IsValueSet_presult {
   bool* success;
 
   _RemoteManager_IsValueSet_presult__isset __isset;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
+typedef struct _RemoteManager_IsValuePolled_args__isset {
+  _RemoteManager_IsValuePolled_args__isset() : _id(false) {}
+  bool _id;
+} _RemoteManager_IsValuePolled_args__isset;
+
+class RemoteManager_IsValuePolled_args {
+ public:
+
+  RemoteManager_IsValuePolled_args() {
+  }
+
+  virtual ~RemoteManager_IsValuePolled_args() throw() {}
+
+  RemoteValueID _id;
+
+  _RemoteManager_IsValuePolled_args__isset __isset;
+
+  void __set__id(const RemoteValueID& val) {
+    _id = val;
+  }
+
+  bool operator == (const RemoteManager_IsValuePolled_args & rhs) const
+  {
+    if (!(_id == rhs._id))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsValuePolled_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsValuePolled_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_IsValuePolled_pargs {
+ public:
+
+
+  virtual ~RemoteManager_IsValuePolled_pargs() throw() {}
+
+  const RemoteValueID* _id;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsValuePolled_result__isset {
+  _RemoteManager_IsValuePolled_result__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsValuePolled_result__isset;
+
+class RemoteManager_IsValuePolled_result {
+ public:
+
+  RemoteManager_IsValuePolled_result() : success(0) {
+  }
+
+  virtual ~RemoteManager_IsValuePolled_result() throw() {}
+
+  bool success;
+
+  _RemoteManager_IsValuePolled_result__isset __isset;
+
+  void __set_success(const bool val) {
+    success = val;
+  }
+
+  bool operator == (const RemoteManager_IsValuePolled_result & rhs) const
+  {
+    if (!(success == rhs.success))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_IsValuePolled_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_IsValuePolled_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+typedef struct _RemoteManager_IsValuePolled_presult__isset {
+  _RemoteManager_IsValuePolled_presult__isset() : success(false) {}
+  bool success;
+} _RemoteManager_IsValuePolled_presult__isset;
+
+class RemoteManager_IsValuePolled_presult {
+ public:
+
+
+  virtual ~RemoteManager_IsValuePolled_presult() throw() {}
+
+  bool* success;
+
+  _RemoteManager_IsValuePolled_presult__isset __isset;
 
   uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
 
@@ -15566,11 +15798,11 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   int32_t GetPollInterval();
   void send_GetPollInterval();
   int32_t recv_GetPollInterval();
-  void SetPollInterval(const int32_t _seconds);
-  void send_SetPollInterval(const int32_t _seconds);
+  void SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls);
+  void send_SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls);
   void recv_SetPollInterval();
-  bool EnablePoll(const RemoteValueID& _valueId);
-  void send_EnablePoll(const RemoteValueID& _valueId);
+  bool EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity);
+  void send_EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity);
   bool recv_EnablePoll();
   bool DisablePoll(const RemoteValueID& _valueId);
   void send_DisablePoll(const RemoteValueID& _valueId);
@@ -15578,6 +15810,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool isPolled(const RemoteValueID& _valueId);
   void send_isPolled(const RemoteValueID& _valueId);
   bool recv_isPolled();
+  void SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity);
+  void send_SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity);
+  void recv_SetPollIntensity();
   bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId);
   void send_RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId);
   bool recv_RefreshNodeInfo();
@@ -15707,6 +15942,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool IsValueSet(const RemoteValueID& _id);
   void send_IsValueSet(const RemoteValueID& _id);
   bool recv_IsValueSet();
+  bool IsValuePolled(const RemoteValueID& _id);
+  void send_IsValuePolled(const RemoteValueID& _id);
+  bool recv_IsValuePolled();
   void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id);
   void send_GetValueAsBool(const RemoteValueID& _id);
   void recv_GetValueAsBool(Bool_Bool& _return);
@@ -15962,6 +16200,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_EnablePoll(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_DisablePoll(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_isPolled(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_SetPollIntensity(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_RefreshNodeInfo(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_RequestNodeState(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_RequestNodeDynamic(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -16005,6 +16244,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
   void process_IsValueReadOnly(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsValueWriteOnly(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_IsValueSet(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_IsValuePolled(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetValueAsBool(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetValueAsByte(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetValueAsFloat(int32_t seqid, ::apache::thrift::protocol::TProtocol* iprot, ::apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -16098,6 +16338,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["EnablePoll"] = &RemoteManagerProcessor::process_EnablePoll;
     processMap_["DisablePoll"] = &RemoteManagerProcessor::process_DisablePoll;
     processMap_["isPolled"] = &RemoteManagerProcessor::process_isPolled;
+    processMap_["SetPollIntensity"] = &RemoteManagerProcessor::process_SetPollIntensity;
     processMap_["RefreshNodeInfo"] = &RemoteManagerProcessor::process_RefreshNodeInfo;
     processMap_["RequestNodeState"] = &RemoteManagerProcessor::process_RequestNodeState;
     processMap_["RequestNodeDynamic"] = &RemoteManagerProcessor::process_RequestNodeDynamic;
@@ -16141,6 +16382,7 @@ class RemoteManagerProcessor : virtual public ::apache::thrift::TProcessor {
     processMap_["IsValueReadOnly"] = &RemoteManagerProcessor::process_IsValueReadOnly;
     processMap_["IsValueWriteOnly"] = &RemoteManagerProcessor::process_IsValueWriteOnly;
     processMap_["IsValueSet"] = &RemoteManagerProcessor::process_IsValueSet;
+    processMap_["IsValuePolled"] = &RemoteManagerProcessor::process_IsValuePolled;
     processMap_["GetValueAsBool"] = &RemoteManagerProcessor::process_GetValueAsBool;
     processMap_["GetValueAsByte"] = &RemoteManagerProcessor::process_GetValueAsByte;
     processMap_["GetValueAsFloat"] = &RemoteManagerProcessor::process_GetValueAsFloat;
@@ -16339,20 +16581,20 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
     }
   }
 
-  void SetPollInterval(const int32_t _seconds) {
+  void SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
-      ifaces_[i]->SetPollInterval(_seconds);
+      ifaces_[i]->SetPollInterval(_milliseconds, _bIntervalBetweenPolls);
     }
   }
 
-  bool EnablePoll(const RemoteValueID& _valueId) {
+  bool EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity) {
     size_t sz = ifaces_.size();
     for (size_t i = 0; i < sz; ++i) {
       if (i == sz - 1) {
-        return ifaces_[i]->EnablePoll(_valueId);
+        return ifaces_[i]->EnablePoll(_valueId, _intensity);
       } else {
-        ifaces_[i]->EnablePoll(_valueId);
+        ifaces_[i]->EnablePoll(_valueId, _intensity);
       }
     }
   }
@@ -16376,6 +16618,13 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
       } else {
         ifaces_[i]->isPolled(_valueId);
       }
+    }
+  }
+
+  void SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      ifaces_[i]->SetPollIntensity(_valueId, _intensity);
     }
   }
 
@@ -16821,6 +17070,17 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
         return ifaces_[i]->IsValueSet(_id);
       } else {
         ifaces_[i]->IsValueSet(_id);
+      }
+    }
+  }
+
+  bool IsValuePolled(const RemoteValueID& _id) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      if (i == sz - 1) {
+        return ifaces_[i]->IsValuePolled(_id);
+      } else {
+        ifaces_[i]->IsValuePolled(_id);
       }
     }
   }

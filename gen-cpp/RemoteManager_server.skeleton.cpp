@@ -72,12 +72,12 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("GetPollInterval\n");
   }
 
-  void SetPollInterval(const int32_t _seconds) {
+  void SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls) {
     // Your implementation goes here
     printf("SetPollInterval\n");
   }
 
-  bool EnablePoll(const RemoteValueID& _valueId) {
+  bool EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity) {
     // Your implementation goes here
     printf("EnablePoll\n");
   }
@@ -90,6 +90,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   bool isPolled(const RemoteValueID& _valueId) {
     // Your implementation goes here
     printf("isPolled\n");
+  }
+
+  void SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity) {
+    // Your implementation goes here
+    printf("SetPollIntensity\n");
   }
 
   bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId) {
@@ -305,6 +310,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   bool IsValueSet(const RemoteValueID& _id) {
     // Your implementation goes here
     printf("IsValueSet\n");
+  }
+
+  bool IsValuePolled(const RemoteValueID& _id) {
+    // Your implementation goes here
+    printf("IsValuePolled\n");
   }
 
   void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id) {

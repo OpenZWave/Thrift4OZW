@@ -104,18 +104,18 @@ function_info('GetPollInterval', reply_type) ->
 function_info('GetPollInterval', exceptions) ->
   {struct, []}
 ;
-% SetPollInterval(This, _seconds)
+% SetPollInterval(This, _milliseconds, _bIntervalBetweenPolls)
 function_info('SetPollInterval', params_type) ->
-  {struct, [{1, i32}]}
+  {struct, [{1, i32}, {2, bool}]}
 ;
 function_info('SetPollInterval', reply_type) ->
   {struct, []};
 function_info('SetPollInterval', exceptions) ->
   {struct, []}
 ;
-% EnablePoll(This, _valueId)
+% EnablePoll(This, _valueId, _intensity)
 function_info('EnablePoll', params_type) ->
-  {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}
+  {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}, {2, byte}]}
 ;
 function_info('EnablePoll', reply_type) ->
   bool;
@@ -138,6 +138,15 @@ function_info('isPolled', params_type) ->
 function_info('isPolled', reply_type) ->
   bool;
 function_info('isPolled', exceptions) ->
+  {struct, []}
+;
+% SetPollIntensity(This, _valueId, _intensity)
+function_info('SetPollIntensity', params_type) ->
+  {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}, {2, byte}]}
+;
+function_info('SetPollIntensity', reply_type) ->
+  {struct, []};
+function_info('SetPollIntensity', exceptions) ->
   {struct, []}
 ;
 % RefreshNodeInfo(This, _homeId, _nodeId)
@@ -525,6 +534,15 @@ function_info('IsValueSet', params_type) ->
 function_info('IsValueSet', reply_type) ->
   bool;
 function_info('IsValueSet', exceptions) ->
+  {struct, []}
+;
+% IsValuePolled(This, _id)
+function_info('IsValuePolled', params_type) ->
+  {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}
+;
+function_info('IsValuePolled', reply_type) ->
+  bool;
+function_info('IsValuePolled', exceptions) ->
   {struct, []}
 ;
 % GetValueAsBool(This, _id)
