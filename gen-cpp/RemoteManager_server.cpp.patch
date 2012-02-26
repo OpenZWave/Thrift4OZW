@@ -1,10 +1,10 @@
-*** gen-cpp/RemoteManager_server.cpp.orig	2012-02-07 12:13:45.341123943 +0200
---- gen-cpp/RemoteManager_server.cpp.patched	2012-02-06 17:33:40.534895094 +0200
+*** gen-cpp/RemoteManager_server.cpp.orig	2012-02-26 23:58:12.427952190 +0200
+--- gen-cpp/RemoteManager_server.cpp.patched	2012-02-26 23:48:03.155177508 +0200
 ***************
 *** 15,25 ****
   using boost::shared_ptr;
   
-  using namespace OpenZWave;
+  using namespace  ::OpenZWave;
   
   void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
 ! 	// FIXME: fill in the blanks (sorry!)
@@ -16,7 +16,7 @@
 --- 15,32 ----
   using boost::shared_ptr;
   
-  using namespace OpenZWave;
+  using namespace  ::OpenZWave;
   
   void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
 !     g_criticalSection.lock();
@@ -33,115 +33,7 @@
    public:
     RemoteManagerHandler() {
 ***************
-*** 236,249 ****
-  	_return =  mgr->GetNodeType((::uint32 const) _homeId, (::uint8 const) _nodeId);
-  	g_criticalSection.unlock();
-    }
-  
-    void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-! 	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors);
-  	g_criticalSection.unlock();
-    }
-  
-    void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 243,261 ----
-  	_return =  mgr->GetNodeType((::uint32 const) _homeId, (::uint8 const) _nodeId);
-  	g_criticalSection.unlock();
-    }
-  
-    void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
-+     uint8* arr;
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-! 	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &arr);
-  	g_criticalSection.unlock();
-+     if (_return.retval > 0) {
-+         for (int i=0; i<_return.retval; i++) _return._nodeNeighbors.push_back(arr[i]);
-+         delete arr;
-+     }
-    }
-  
-    void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-***************
-*** 662,675 ****
-  	g_criticalSection.unlock();
-  	return(function_result);
-    }
-  
-    void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-! 	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &_return.o_associations);
-  	g_criticalSection.unlock();
-    }
-  
-    int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 674,692 ----
-  	g_criticalSection.unlock();
-  	return(function_result);
-    }
-  
-    void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-+     uint8* o_associations;
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-! 	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &o_associations);
-  	g_criticalSection.unlock();
-+     if (_return.retval > 0) {
-+         for (int i=0; i<_return.retval; i++) _return.o_associations.push_back(o_associations[i]);
-+         delete o_associations;
-+     }
-    }
-  
-    int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-***************
-*** 736,749 ****
-  	g_criticalSection.unlock();
-  	return(function_result);
-    }
-  
-    void GetAllScenes(GetAllScenesReturnStruct& _return) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-! 	_return.retval =  mgr->GetAllScenes((::uint8**) &_return._sceneIds);
-  	g_criticalSection.unlock();
-    }
-  
-    int8_t CreateScene() {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 753,771 ----
-  	g_criticalSection.unlock();
-  	return(function_result);
-    }
-  
-    void GetAllScenes(GetAllScenesReturnStruct& _return) {
-+     uint8* _sceneIds;
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-! 	_return.retval =  mgr->GetAllScenes((::uint8**) &_sceneIds);
-  	g_criticalSection.unlock();
-+     if (_return.retval>0) {
-+         for (int i=0; i<_return.retval; i++) _return._sceneIds.push_back(_sceneIds[i]);
-+         delete(_sceneIds);
-+     }
-    }
-  
-    int8_t CreateScene() {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
-***************
-*** 831,844 ****
+*** 869,882 ****
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -156,7 +48,7 @@
     void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 853,868 ----
+--- 876,891 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -174,7 +66,7 @@
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
 ***************
-*** 995,1006 ****
+*** 1033,1044 ****
   	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
   	g_criticalSection.unlock();
     }
@@ -187,7 +79,7 @@
   };
   
   // int main(int argc, char **argv) {
---- 1019,1031 ----
+--- 1042,1054 ----
   	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
   	g_criticalSection.unlock();
     }

@@ -14,7 +14,7 @@ using namespace ::apache::thrift::server;
 
 using boost::shared_ptr;
 
-using namespace OpenZWave;
+using namespace  ::OpenZWave;
 
 void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
     g_criticalSection.lock();
@@ -94,6 +94,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void LogDriverStatistics(const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->LogDriverStatistics((::uint32 const) _homeId);
+	g_criticalSection.unlock();
+  }
+
   int32_t GetPollInterval() {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -102,17 +109,17 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  void SetPollInterval(const int32_t _seconds) {
+  void SetPollInterval(const int32_t _milliseconds, const bool _bIntervalBetweenPolls) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	 mgr->SetPollInterval((::int32) _seconds);
+	 mgr->SetPollInterval((::int32) _milliseconds, (bool) _bIntervalBetweenPolls);
 	g_criticalSection.unlock();
   }
 
-  bool EnablePoll(const RemoteValueID& _valueId) {
+  bool EnablePoll(const RemoteValueID& _valueId, const int8_t _intensity) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	bool function_result =  mgr->EnablePoll(_valueId.toValueID());
+	bool function_result =  mgr->EnablePoll(_valueId.toValueID(), (::uint8 const) _intensity);
 	g_criticalSection.unlock();
 	return(function_result);
   }
@@ -131,6 +138,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	bool function_result =  mgr->isPolled(_valueId.toValueID());
 	g_criticalSection.unlock();
 	return(function_result);
+  }
+
+  void SetPollIntensity(const RemoteValueID& _valueId, const int8_t _intensity) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->SetPollIntensity(_valueId.toValueID(), (::uint8 const) _intensity);
+	g_criticalSection.unlock();
   }
 
   bool RefreshNodeInfo(const int32_t _homeId, const int8_t _nodeId) {
@@ -213,6 +227,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  int8_t GetNodeSecurity(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	::int8_t function_result =  mgr->GetNodeSecurity((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
   int8_t GetNodeBasic(const int32_t _homeId, const int8_t _nodeId) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -245,15 +267,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
-    uint8* arr;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &arr);
+	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors);
 	g_criticalSection.unlock();
-    if (_return.retval > 0) {
-        for (int i=0; i<_return.retval; i++) _return._nodeNeighbors.push_back(arr[i]);
-        delete arr;
-    }
   }
 
   void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
@@ -451,6 +468,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  bool IsValuePolled(const RemoteValueID& _id) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsValuePolled(_id.toValueID());
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
   void GetValueAsBool(Bool_Bool& _return, const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -577,6 +602,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  bool RefreshValue(const RemoteValueID& _id) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->RefreshValue(_id.toValueID());
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
   bool PressButton(const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -676,15 +709,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-    uint8* o_associations;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &o_associations);
+	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &_return.o_associations);
 	g_criticalSection.unlock();
-    if (_return.retval > 0) {
-        for (int i=0; i<_return.retval; i++) _return.o_associations.push_back(o_associations[i]);
-        delete o_associations;
-    }
   }
 
   int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
@@ -755,15 +783,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetAllScenes(GetAllScenesReturnStruct& _return) {
-    uint8* _sceneIds;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetAllScenes((::uint8**) &_sceneIds);
+	_return.retval =  mgr->GetAllScenes((::uint8**) &_return._sceneIds);
 	g_criticalSection.unlock();
-    if (_return.retval>0) {
-        for (int i=0; i<_return.retval; i++) _return._sceneIds.push_back(_sceneIds[i]);
-        delete(_sceneIds);
-    }
   }
 
   int8_t CreateScene() {

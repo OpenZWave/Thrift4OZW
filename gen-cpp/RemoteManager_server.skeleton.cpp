@@ -14,7 +14,7 @@ using namespace ::apache::thrift::server;
 
 using boost::shared_ptr;
 
-using namespace OpenZWave;
+using namespace  ::OpenZWave;
 
 class RemoteManagerHandler : virtual public RemoteManagerIf {
  public:

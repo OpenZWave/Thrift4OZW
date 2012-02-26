@@ -20,7 +20,7 @@ DEBUG_LDFLAGS	:= -g
 
 # Change for DEBUG or RELEASE
 CFLAGS	:= -c $(DEBUG_CFLAGS) -DDEBUG_POCOSTOMP
-LDFLAGS	:= $(DEBUG_LDFLAGS)
+LDFLAGS	:= $(DEBUG_LDFLAGS) 
 
 # change directories if needed
 OPENZWAVE := ../open-zwave
