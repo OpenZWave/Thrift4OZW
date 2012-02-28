@@ -548,6 +548,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 
   bool SetValue_Bool(const RemoteValueID& _id, const bool _value) {
 	Manager* mgr = Manager::Get();
+		cout << "SetValue " << _value << endl;
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (bool const) _value);
 	g_criticalSection.unlock();
