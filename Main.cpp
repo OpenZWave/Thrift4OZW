@@ -35,8 +35,11 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "unistd.h"
 // we're using Boost's program_options
 #include <boost/program_options.hpp>
+#include <boost/program_options/parsers.hpp>
+#include <boost/program_options/variables_map.hpp>
 namespace po = boost::program_options;
 
 using namespace ::apache::thrift;
@@ -173,7 +176,8 @@ void OnNotification
         }
             
         /**< A node value has been updated from the Z-Wave network. */
-        case Notification::Type_ValueChanged: {
+        case Notification::Type_ValueChanged:
+        case Notification::Type_ValueRefreshed: {
             send_valueID = true;
         /**< The associations for the node have changed. The application 
         should rebuild any group information it holds about the node. */
@@ -346,7 +350,7 @@ int main(int argc, char *argv[]) {
     string  stomp_host = "localhost";
     int     stomp_port = 61613;
     string  ozw_config_dir = "/home/ekarak/ozw/open-zwave-read-only/config/";
-    string  ozw_user = "";
+    string  ozw_user = string(get_current_dir_name()+'/');
     string  ozw_port = "/dev/ttyUSB0";
     int     thrift_port = 9090;
 
@@ -363,14 +367,15 @@ int main(int argc, char *argv[]) {
             ("ozwport,p",       po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
         ;
         // a boost:program_options variable map
-        po::variables_map vm;
-        po::store(po::parse_command_line(argc, argv, desc), vm);
-        po::notify(vm);    
+        po::variables_map vm;        
+        po::parsed_options l_parsed = po::parse_command_line(argc, argv, desc);
+        po::store(l_parsed, vm);
+        po::notify(vm);
         // exit on help        
         if (vm.count("help")) {
             cout << desc << "\n";
             return 1;
-        }     
+        }
     }
     catch (exception& e) 
     {
@@ -397,6 +402,8 @@ int main(int argc, char *argv[]) {
         // The first argument is the path to the config files (where the manufacturer_specific.xml file is located
         // The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
         // the log file will appear in the program's working directory.
+        cout << "OpenZWave configuration dir: " << ozw_config_dir << std::endl;
+        cout << "OpenZWave user dir: " << ozw_user << std::endl;
         Options::Create(ozw_config_dir, ozw_user, "" );
         Options::Get()->Lock();
     

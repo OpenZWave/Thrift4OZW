@@ -1,5 +1,5 @@
 // Automatically generated OpenZWave::Manager_server wrapper
-// (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
+// (c) 2011-2012 Elias Karakoulakis <elias.karakoulakis@gmail.com>
 
 #include "RemoteManager.h"
 #include <protocol/TBinaryProtocol.h>
@@ -267,10 +267,15 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
+    uint8* arr;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors);
+	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &arr);
 	g_criticalSection.unlock();
+    if (_return.retval > 0) {
+        for (int i=0; i<_return.retval; i++) _return._nodeNeighbors.push_back(arr[i]);
+        delete arr;
+    } 
   }
 
   void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
@@ -532,11 +537,15 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
-  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {
+  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {      
+    std::vector<std::string> o_values;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetValueListItems(_id.toValueID(), (std::vector<std::string, std::allocator<std::string> >*) &_return.o_value);
+	_return.retval =  mgr->GetValueListItems(_id.toValueID(), &o_values);
 	g_criticalSection.unlock();
+    if (_return.retval > 0) {
+        for (int i=0; i< _return.retval; i++) _return.o_value.push_back(std::string(o_values[i]));
+    }
   }
 
   void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
@@ -548,7 +557,6 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 
   bool SetValue_Bool(const RemoteValueID& _id, const bool _value) {
 	Manager* mgr = Manager::Get();
-		cout << "SetValue " << _value << endl;
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (bool const) _value);
 	g_criticalSection.unlock();
@@ -710,10 +718,15 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
+	uint8* o_associations;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &_return.o_associations);
+	_return.retval =  mgr->GetAssociations((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8**) &o_associations);
 	g_criticalSection.unlock();
+    if (_return.retval > 0) {
+        for (int i=0; i<_return.retval; i++) _return.o_associations.push_back(o_associations[i]);
+        delete o_associations;
+    }
   }
 
   int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
@@ -784,10 +797,15 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void GetAllScenes(GetAllScenesReturnStruct& _return) {
+    uint8* _sceneIds;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetAllScenes((::uint8**) &_return._sceneIds);
+	_return.retval =  mgr->GetAllScenes((::uint8**) &_sceneIds);
 	g_criticalSection.unlock();
+    if (_return.retval>0) {
+        for (int i=0; i<_return.retval; i++) _return._sceneIds.push_back(_sceneIds[i]);
+        delete(_sceneIds);
+    }  
   }
 
   int8_t CreateScene() {

@@ -1,5 +1,5 @@
-*** gen-cpp/RemoteManager_server.cpp.orig	2012-02-27 09:48:04.705158988 +0200
---- gen-cpp/RemoteManager_server.cpp.patched	2012-02-28 18:04:33.538600330 +0200
+*** gen-cpp/RemoteManager_server.cpp.orig	2012-02-28 18:11:22.650899098 +0200
+--- gen-cpp/RemoteManager_server.cpp.patched	2012-02-29 16:58:31.394945828 +0200
 ***************
 *** 1,7 ****
   // Automatically generated OpenZWave::Manager_server wrapper
@@ -86,6 +86,43 @@
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
 ***************
+*** 523,537 ****
+  	g_criticalSection.lock();
+  	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (::int32*) &_return.o_value);
+  	g_criticalSection.unlock();
+    }
+  
+!   void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {
+  	Manager* mgr = Manager::Get();
+  	g_criticalSection.lock();
+! 	_return.retval =  mgr->GetValueListItems(_id.toValueID(), (std::vector<std::string, std::allocator<std::string> >*) &_return.o_value);
+  	g_criticalSection.unlock();
+    }
+  
+    void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
+  	Manager* mgr = Manager::Get();
+  	g_criticalSection.lock();
+--- 535,553 ----
+  	g_criticalSection.lock();
+  	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (::int32*) &_return.o_value);
+  	g_criticalSection.unlock();
+    }
+  
+!   void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {      
+!     std::vector<std::string> o_values;
+  	Manager* mgr = Manager::Get();
+  	g_criticalSection.lock();
+! 	_return.retval =  mgr->GetValueListItems(_id.toValueID(), &o_values);
+  	g_criticalSection.unlock();
++     if (_return.retval > 0) {
++         for (int i=0; i< _return.retval; i++) _return.o_value.push_back(std::string(o_values[i]));
++     }
+    }
+  
+    void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
+  	Manager* mgr = Manager::Get();
+  	g_criticalSection.lock();
+***************
 *** 700,713 ****
   	g_criticalSection.unlock();
   	return(function_result);
@@ -101,7 +138,7 @@
     int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 712,730 ----
+--- 716,734 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -137,7 +174,7 @@
     int8_t CreateScene() {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 791,809 ----
+--- 795,813 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -173,7 +210,7 @@
     void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
   	Manager* mgr = Manager::Get();
   	g_criticalSection.lock();
---- 891,906 ----
+--- 895,910 ----
   	g_criticalSection.unlock();
   	return(function_result);
     }
@@ -204,7 +241,7 @@
   };
   
   // int main(int argc, char **argv) {
---- 1057,1069 ----
+--- 1061,1073 ----
   	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
   	g_criticalSection.unlock();
     }

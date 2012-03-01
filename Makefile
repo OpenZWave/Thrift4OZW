@@ -90,7 +90,7 @@ PocoStomp.o:  PocoStomp.cpp PocoStomp.h Stomp_sm.cpp StompSocket.o
 Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
 	g++ $(CFLAGS) -c Main.cpp $(INCLUDES)   
 
-ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o
+ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE)
 	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS)
     
 main: ozwd
@@ -101,11 +101,14 @@ dist:	main
 
 bindist: main
 	rm -f Thrift4OZW_bin_`uname -i`.tar.gz
-	tar -c --exclude=".git" --exclude ".svn" -hvzf Thrift4OZW_bin_`uname -i`.tar.gz main license/ README*
+	tar -c --exclude=".git" --exclude ".svn" -hvzf Thrift4OZW_bin_`uname -i`.tar.gz ozwd license/ README*
 
 clean:
-	rm -f main *.o Stomp_sm.* gen-cpp/RemoteManager.cpp gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
+	rm -f ozwd*.o Stomp_sm.* gen-cpp/RemoteManager.cpp gen-cpp/RemoteManager_server.cpp gen-cpp/ozw_types.h
 
+binclean: 
+	rm -f ozwd *.o  gen-cpp/*.o
+    
 thrift: gen-cpp/RemoteManager.cpp
 
 patchdiffs:

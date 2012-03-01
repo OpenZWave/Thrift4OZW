@@ -537,11 +537,15 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
-  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {
+  void GetValueListItems(Bool_ListString& _return, const RemoteValueID& _id) {      
+    std::vector<std::string> o_values;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetValueListItems(_id.toValueID(), (std::vector<std::string, std::allocator<std::string> >*) &_return.o_value);
+	_return.retval =  mgr->GetValueListItems(_id.toValueID(), &o_values);
 	g_criticalSection.unlock();
+    if (_return.retval > 0) {
+        for (int i=0; i< _return.retval; i++) _return.o_value.push_back(std::string(o_values[i]));
+    }
   }
 
   void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
