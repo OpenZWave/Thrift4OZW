@@ -2,13 +2,13 @@
 Thrift Server Generator
 a.k.a. "fills in the blanks for you"
 ------------------------------------
-(c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
+(c) 2011-2012 Elias Karakoulakis <elias.karakoulakis@gmail.com>
 
 Requirements:
 -------------
-    Apache Thrift >= 0.7.0
-    Ruby >= 1.9.1
-    RbGCCXML (http://rbplusplus.rubyforge.org/rbgccxml/) >= 1.0.2
+    Apache Thrift >= 0.7.0 (currently tested with 0.9.0)
+    Ruby >= 1.9.1 (currently 1.9.2)
+    RbGCCXML (http://rbplusplus.rubyforge.org/rbgccxml/) >= 1.0.3
 
 About the script:
 -----------------
@@ -24,7 +24,7 @@ This little script is a nice complement to Apache Thrift. All it does is to pars
 two sets of files: 1) the C++ server skeleton file produced by Thrift, and 
 2) the headers of the C++ library you want to expose with Thrift. 
 It uses the excellent tool "RbGCCXML" to build an XML-like tree of the two 
-interfaces and  binds them together (*ahem* at least it tries to).
+interfaces and  binds them together (with a little help from you of course!).
 
 So say you want to expose your shiny app/lib to the world. Only problem is 
 it's API is of monstrous size (hundreds of methods) and you need it quick. 
@@ -40,28 +40,32 @@ namespace OpenZWave {
         bool isPolled( ValueID const _valueId );
         void SetPollInterval( int32 _seconds );
         string GetNodeType( uint32 const _homeId, uint8 const _nodeId );
+	bool GetValueListSelection( ValueID const& _id, string* o_value );
+	bool GetValueListSelection( ValueID const& _id, int32* o_value );
         ... etc
     }
 }
 
 You can declare all the API as a Thrift IDL file:
 
-service RemoteManager {
-    bool isPolled( 1:RemoteValueID _valueId );
-    void SetPollInterval( 1:i32 _seconds );
-    string GetNodeType( 1:i32 _homeId, 2:byte _nodeId );
-    ...
+namespace OpenZWave {
+	service RemoteManager {
+		bool isPolled( 1:RemoteValueID _valueId );
+		void SetPollInterval( 1:i32 _seconds );
+		string GetNodeType( 1:i32 _homeId, 2:byte _nodeId );
+		Bool_String GetValueListSelection_String( 1:RemoteValueID _id );
+		Bool_Int GetValueListSelection_Int32( 1:RemoteValueID _id );
+		... etc
+	}
 }
 
 Then you configure & run the script:
 
 ekarak@ekarak-laptop:~/ozw/thrift4ozw$ ruby1.9.1 create_server.rb
-CREATING MAPPING for (bool) IsPrimaryController
-tgt=::uint32 const _homeId, src=RemoteManagerHandler::IsPrimaryController::_homeId
-...tons
+(...tons of debug messages: look out for WARNINGS)
 
-the resulting code tries to map functions (including overloaded ones) from 
-the Thrift skeleton file into the realm of the existing library, so that:
+the script tries to map functions (including overloaded ones) from 
+the Thrift-generated skeleton file into the realm of the existing library, so that:
 
   bool IsPrimaryController(const int32_t _homeId) {
     // Your implementation goes here
@@ -84,7 +88,7 @@ server's thread. Got it? S&S (silly and simple....)
 The produced C++ server file will probably still need some manual tweaking, 
 but that's up to the quality of the library's API. In my case (the OpenZWave 
 library), I only had to write some 15 lines of extra code for 3 methods with 
-"peculiar" arguments, like iterating over a pointer array to fill in a std::vector
+"peculiar" arguments, like iterating over a pointer array to fill in a vector of int's.
 
 For instance, there's the "Manager::GetNodeNeighbors" method:
 (uint32 GetNodeNeighbors( uint32 const _homeId, uint8 const _nodeId, uint8** _nodeNeighbors );
@@ -97,7 +101,7 @@ Its thrift IDL is:
 
 struct UInt32_ListByte {
     1:i32   retval;
-    2:list<byte> _nodeNeighbors;
+    2:list<byte> _nodeNeighbors; // will get mapped onto a std::vector<int> by Thrift
 }
 UInt32_ListByte GetNodeNeighbors( 1:i32 _homeId, 2:byte _nodeId);
 
@@ -106,7 +110,8 @@ And the produced Thrift server code for C++ is:
   void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors); // ERROR, vector<uint8> is not uint8**
+	_return.retval =  mgr->GetNodeNeighbors((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8**) &_return._nodeNeighbors); 
+	// RUNTIME ERROR, vector<uint8> cannot be mapped onto a uint8**
 	g_criticalSection.unlock();
   }
 
@@ -127,18 +132,24 @@ manually write a simple iterator:
     }
   }
 
-
+I'm using a simple patching mechanism in order to store these manual changes. 
+See Makefile for details. In general, all you have to do is: 1) edit the generated 
+server code till it works (compiles and runs ok) 2) copy the manually edited server 
+code (RemoteManager_server.cpp) into a backup (RemoteManager_server.cpp.patched)
+and 3) call "make patchdiffs" to store the patch diffs for future use. 
+All subsequent calls to "make" will use these patches to patch the server code 
+right before compiling it into a binary.
 
 1) The rough requirements are:
 -----------------------------------------------
 Use a universal naming conversion using the underscore('_') for overloaded 
 functions and datatypes. For instance, these OpenZWave::Manager overloaded 
-methods ("GetValueListSelection") must be declared in Thrift as:
+methods (look for "GetValueListSelection") must be declared in Thrift as:
 
-    //(c++) bool GetValueListSelection( ValueID const& _id, int32* o_value );
+    //(C++ API) bool GetValueListSelection( ValueID const& _id, string* o_value );
     Bool_String GetValueListSelection_String( 1:RemoteValueID _id );
 
-    //(c++) bool GetValueListSelection( ValueID const& _id, int32* o_value );
+    //(C++ API) bool GetValueListSelection( ValueID const& _id, int32* o_value );
     Bool_Int GetValueListSelection_Int32( 1:RemoteValueID _id );
 
 This example illustrates the use of underscore in both intended cases:
@@ -147,12 +158,12 @@ returned)
 - the function overloading mechanism (since Thrift doesn't support 
 overloading by its own)
 
-Bool_xxxxx is a simple struct with TWO members:
+Bool_String and Bool_Int are simple Thrift structs with TWO members:
   1: bool retval = the function's result value (bool in our case)
-  2: (string/i32) arg = the last argument, passed as a pointer
-(*FIXME* possible memory leak here!)
+  2: (string or i32) arg = the function's last argument, passed as a pointer
 
-The Thrift function naming scheme maps these two functions as:
+The Thrift function naming scheme maps these two functions to C++ server code as:
+
   void GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id) 
   void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id)
 
@@ -161,14 +172,14 @@ And the script's generated code for these two methods is:
   void GetValueListSelection_String(Bool_String& _return, const RemoteValueID _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	 _return.retval =  mgr->GetValueListSelection(*g_values[_id], (std::string*) &_return.arg);
+	 _return.retval =  mgr->GetValueListSelection(_id.toValueID(), (std::string*) &_return.o_value);
 	g_criticalSection.unlock();
   }
 
   void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	 _return.retval =  mgr->GetValueListSelection(*g_values[_id], (::int32*) &_return.arg);
+	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (::int32*) &_return.o_value);
 	g_criticalSection.unlock();
   }
 
