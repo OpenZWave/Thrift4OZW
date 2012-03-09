@@ -39,7 +39,7 @@ GNUTLS := -lgnutls
 # for Linux uncomment out next two lines
 LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/linux/*.a)
 LIBUSB := -ludev
-LIBPOCO := -lPocoNet -lboost_thread -lboost_program_options
+LIBPOCO := -lPocoNet -lPocoFoundation -lboost_thread -lboost_program_options
 LIBTHRIFT := -lthrift
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
@@ -54,7 +54,7 @@ LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 %.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
 
-all: main
+all: openzwave main
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
 	ruby1.9.1 create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
@@ -90,7 +90,10 @@ PocoStomp.o:  PocoStomp.cpp PocoStomp.h Stomp_sm.cpp StompSocket.o
 Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
 	g++ $(CFLAGS) -c Main.cpp $(INCLUDES)   
 
-ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE)
+openzwave:   
+	cd $(OPENZWAVE)/cpp/build/linux/; make
+
+ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
 	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS)
     
 main: ozwd
