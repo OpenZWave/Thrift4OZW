@@ -37,7 +37,8 @@ INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 GNUTLS := -lgnutls
 
 # for Linux uncomment out next two lines
-LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/linux/*.a)
+LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/openzwave.a
+LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/openzwave.so
 LIBUSB := -ludev
 LIBPOCO := -lPocoNet -lPocoFoundation -lboost_thread -lboost_program_options
 LIBTHRIFT := -lthrift
@@ -46,7 +47,7 @@ LIBTHRIFT := -lthrift
 #LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/mac/*.a)
 #LIBUSB := -framework IOKit -framework CoreFoundation
 
-LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
+LIBS := $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 
 %.o : %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $<
@@ -54,10 +55,10 @@ LIBS := $(LIBZWAVE) $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 %.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
 
-all: openzwave main
+all: openzwave ozwd ozwd.static
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
-	ruby1.9.1 create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
+	ruby create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
 	cp gen-cpp/RemoteManager_server.cpp gen-cpp/RemoteManager_server.cpp.orig
 	cp gen-cpp/ozw_types.h gen-cpp/ozw_types.h.orig
 	patch -p0 gen-cpp/RemoteManager_server.cpp < gen-cpp/RemoteManager_server.cpp.patch
@@ -93,10 +94,11 @@ Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
 openzwave:   
 	cd $(OPENZWAVE)/cpp/build/linux/; make
 
+ozwd.static:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
+	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC) $(LIBS)
+
 ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
-	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS)
-    
-main: ozwd
+	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)
 
 dist:	main
 	rm -f Thrift4OZW.tar.gz
@@ -115,6 +117,5 @@ binclean:
 thrift: gen-cpp/RemoteManager.cpp
 
 patchdiffs:
-	- diff -C5 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h.patched > gen-cpp/ozw_types.h.patch
-	- diff -C5 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp.patched > gen-cpp/RemoteManager_server.cpp.patch
-
+	- diff -C3 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h.patched > gen-cpp/ozw_types.h.patch
+	- diff -C3 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp.patched > gen-cpp/RemoteManager_server.cpp.patch
