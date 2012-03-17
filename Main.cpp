@@ -40,7 +40,11 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #include <boost/program_options.hpp>
 #include <boost/program_options/parsers.hpp>
 #include <boost/program_options/variables_map.hpp>
+// alse we're using boost's filesystem classes
+#include <boost/filesystem.hpp>
+
 namespace po = boost::program_options;
+namespace fs = boost::filesystem;
 
 using namespace ::apache::thrift;
 using namespace ::apache::thrift::protocol;
@@ -347,24 +351,31 @@ void send_all_values() {
 // -----------------------------------------
 int main(int argc, char *argv[]) {
 // -----------------------------------------
-    string  stomp_host = "localhost";
+	string  stomp_host = "localhost";
     int     stomp_port = 61613;
-    string  ozw_config_dir = "/home/ekarak/ozw/open-zwave-read-only/config/";
-    string  ozw_user = string(get_current_dir_name()+'/');
+    //
+    fs::path current_dir = fs::path(get_current_dir_name());
+    fs::path ozw_config_dir = current_dir.parent_path() / "open-zwave-read-only/config/";
+    //
+    string  ozw_conf = ozw_config_dir.generic_string();
+    string  ozw_user = current_dir.generic_string();
     string  ozw_port = "/dev/ttyUSB0";
     int     thrift_port = 9090;
+    //
+    string  ozw_conf_descr = string("OpenZWave manufacturer database (default: ") + ozw_conf + ")";
+    string  ozw_user_descr = string("OpenZWave user config database (default: ") + current_dir.generic_string() + ")";
 
     try {        
         // Declare the supported options.
         po::options_description desc("Project Ansible - OpenZWave orbiter");
         desc.add_options()
             ("help,?", "print this help message")
-            ("stomphost,h",     po::value(&stomp_host), "STOMP server hostname")
-            ("stompport,s",     po::value(&stomp_port), "STOMP server port number")
-            ("thriftport,t",    po::value(&thrift_port), "Thrift service port")
-            ("ozwconf,c",       po::value(&ozw_config_dir), "OpenZWave config/ path (manufacturer database)")
-            ("ozwuser,u",       po::value(&ozw_user), "OpenZWave user path (network & configuration state)")
-            ("ozwport,p",       po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
+            ("stomphost,h",   po::value(&stomp_host), "STOMP server hostname (default: localhost)")
+            ("stompport,s",   po::value(&stomp_port), "STOMP server port number (default: 61613)")
+            ("thriftport,t",    po::value(&thrift_port), "Thrift service port (default: 9090)")
+            ("ozwconf,c",     po::value(&ozw_conf), ozw_conf_descr.c_str())
+            ("ozwuser,u",     po::value(&ozw_user), ozw_user_descr.c_str())
+            ("ozwport,p",      po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
         ;
         // a boost:program_options variable map
         po::variables_map vm;        
@@ -402,9 +413,9 @@ int main(int argc, char *argv[]) {
         // The first argument is the path to the config files (where the manufacturer_specific.xml file is located
         // The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
         // the log file will appear in the program's working directory.
-        cout << "OpenZWave configuration dir: " << ozw_config_dir << std::endl;
+        cout << "OpenZWave configuration dir: " << ozw_conf << std::endl;
         cout << "OpenZWave user dir: " << ozw_user << std::endl;
-        Options::Create(ozw_config_dir, ozw_user, "" );
+        Options::Create(ozw_conf, ozw_user, "" );
         Options::Get()->Lock();
     
         Manager::Create();

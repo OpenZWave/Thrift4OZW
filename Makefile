@@ -37,10 +37,10 @@ INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 GNUTLS := -lgnutls
 
 # for Linux uncomment out next two lines
-LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/openzwave.a
-LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/openzwave.so
+LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.a
+LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.so
 LIBUSB := -ludev
-LIBPOCO := -lPocoNet -lPocoFoundation -lboost_thread -lboost_program_options
+LIBPOCO := -lPocoNet -lPocoFoundation -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
 LIBTHRIFT := -lthrift
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
@@ -91,10 +91,10 @@ PocoStomp.o:  PocoStomp.cpp PocoStomp.h Stomp_sm.cpp StompSocket.o
 Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
 	g++ $(CFLAGS) -c Main.cpp $(INCLUDES)   
 
-openzwave:   
+openzwave: $(LIBZWAVE_STATIC) $(LIBZWAVE_DYNAMIC)
 	cd $(OPENZWAVE)/cpp/build/linux/; make
 
-ozwd.static:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
+ozwd.static: Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
 	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC) $(LIBS)
 
 ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
