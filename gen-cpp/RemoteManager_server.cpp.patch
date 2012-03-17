@@ -1,4 +1,4 @@
-*** gen-cpp/RemoteManager_server.cpp.orig	2012-02-28 18:11:22.650899098 +0200
+*** gen-cpp/RemoteManager_server.cpp.orig	2012-03-12 15:32:33.366163241 +0200
 --- gen-cpp/RemoteManager_server.cpp.patched	2012-02-29 16:58:31.394945828 +0200
 ***************
 *** 1,7 ****

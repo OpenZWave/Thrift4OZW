@@ -43,13 +43,12 @@ def parse_ozw_headers(cpp_src)
         [File.join(cpp_src, "value_classes", "ValueID.h"), "ValueType", valuetypes]
     ].each { | headerfile, enum_name, enum_array |
         puts "Parsing #{headerfile} for enum #{enum_name}..."
-        #~ puts enum_re % enum_name
         foo = File.open(headerfile).read
         if enum = Regexp.new(ENUM_RE % enum_name,  Regexp::EXTENDED | Regexp::IGNORECASE | Regexp::MULTILINE).match(foo) then
             index = 0
-            #~ puts enum[1]
+            #puts enum[1]
             #~ puts '-----------------'
-            enum[1].each { |line|
+            enum[1].each_line { |line|
                 if md = ENUM_RE_LINE.match(line) then
                     #puts md[1..-1].inspect
                     index =  (md[2] and md[3].length > 0) ? md[3].to_i : index+1

@@ -182,6 +182,8 @@ void OnNotification
         /**< The associations for the node have changed. The application 
         should rebuild any group information it holds about the node. */
         }
+        break;
+
         case Notification::Type_Group:
         /**< A new node has been found (not already stored in zwcfg*.xml file) */
         case Notification::Type_NodeNew:
@@ -192,17 +194,16 @@ void OnNotification
         case Notification::Type_NodeProtocolInfo:
         /**< A node has triggered an event.  This is commonly caused when a node sends 
         a Basic_Set command to the controller.  The event value is stored in the notification. */
-        case Notification::Type_NodeEvent:
+/*        case Notification::Type_NodeEvent:
         {
             if( NodeInfo* nodeInfo = GetNodeInfo( _notification ) )
             {
                 // One of the node's association groups has changed
                 // TBD...
-                nodeInfo = nodeInfo;
             }
             break;
         }
-
+*/
 
         /**< A new node has been added to OpenZWave's list.  This may be due 
         to a device being added to the Z-Wave network, or because 
@@ -291,8 +292,7 @@ void OnNotification
         }
 
         default:
-        {
-        }
+        	break;
     }
     
     // now we can send the captured event to STOMP queue

@@ -18,13 +18,19 @@ My folder hierarchy is:
 
 - Skip to next section if you're running Linux x86/32-bit and just want to try talking
 to the OpenZWave library (a precompiled binary is included)
+
 - Take a look at ozw.thrift, it's the Thrift interface definition file. All of the useful 
 public Manager methods (130 out of 137) are exposed. (Constructors/destructors are not exposed)
+
 - Install SMC (http://smc.sf.net) , and Poco  (http://www.pocoproject.org), both development 
 versions (with headers)
-- I assume you have Ruby >=1.9.1 installed with RbGCCXML and Nokogiri (gem install rbgccxml)
+
+- I assume you have Ruby >=1.9.1 installed with RbGCCXML and bit-struct (gem install rbgccxml bit-struct)
+
 - Inspect the Makefile, change directories (unless your username is ekarak!)
+
 - Run make, cross fingers, pop champagne.
+
 - The generated code is patched twice (I know, I know, this sucks) in order for the compilation 
 of the C++ openzwave daemon to succeed:
 
@@ -50,21 +56,40 @@ stompserver_ng from git:
     # sudo ruby1.9.1 setup.rb
 Then, run it with the debug flag (stompserver_ng -d). This will launch the STOMP server
 which will route all notifications from OZW to anywhere you want it to.
-- Hook up your ZWave USB controller at /dev/ttyUSB0 (sorry its hardcoded for the
-    time being, see Main.cpp)
+
+Hook up your ZWave USB controller. Default is set at /dev/ttyUSB0, you can use the 
+-p argument to tell ozwd to look for the controller anywhere else 
+
+Other ozwd command-line flags are:
+
+ekarak@ekarak-laptop ~/ozw/Thrift4OZW $ ./ozwd --help
+Project Ansible - OpenZWave orbiter:
+  -? [ --help ]           print this help message
+  -h [ --stomphost ] arg  STOMP server hostname
+  -s [ --stompport ] arg  STOMP server port number
+  -t [ --thriftport ] arg Thrift service port
+  -c [ --ozwconf ] arg    OpenZWave config/ path (manufacturer database)
+  -u [ --ozwuser ] arg    OpenZWave user path (network & configuration state)
+  -p [ --ozwport ] arg    OpenZWave driver port (e.g. /dev/ttyUSB0)
+  
 - Fire up ./ozwd, preferrably in a debugger (gdb ./ozwd)
 
-The server tries to connect to the Stomp Server (localhost:61613) and then starts 
-the OpenZWave engine.  When all ZWave processing is done, it also fires up the 
+The OpenZWave orbiter tries to connect to the Stomp Server (localhost:61613) and then 
+starts the OpenZWave engine.  When all ZWave processing is done, it also fires up the 
 Thrift server at 127.0.0.1:9090, and listens for requests.
 
-Let's connect from Ruby as an example. First edit ozwthrift.rb and fill in the correct 
-HomeID for your controller. Then fire up the Interactive Ruby Shell and load the 
-bootup code:
+Let's connect from Ruby as an example. We'll be using the Interactive Ruby Shell to load the 
+demo code. It will also load a rudimentary OpenZWave monitor that spits out notifications
+that contain all sort of useful data, along with your ZWave HomeID:
 
-ekarak@ekarak-laptop:~/ozw/Thrift4OZW$ irb1.9.1
-irb(main):001:0> load 'ozwthrift.rb'
-=> true
+ekarak@ekarak-laptop:~/ozw/Thrift4OZW$ irb1.9.1 -I. -r ozwthrift.rb
+Parsing /home/ekarak/ozw/open-zwave-read-only/cpp/src/Notification.h for enum NotificationType...
+Parsing /home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes/ValueID.h for enum ValueGenre...
+Parsing /home/ekarak/ozw/open-zwave-read-only/cpp/src/value_classes/ValueID.h for enum ValueType...
+#<OpenZWave::RemoteManager::Client:0x95d3ff0 @iprot=#<Thrift::BinaryProtocol:0x95d4590 @trans=#<Thrift::BufferedTransport:0x95d45cc @transport=#<Thrift::Socket:0x95d461c @host="localhost", @port=9090, @timeout=nil, @desc="localhost:9090", @handle=#<Socket:fd 7>>, @wbuf="", @rbuf="", @index=0>, @strict_read=true, @strict_write=true, @rbuf="\x00\x00\x00\x00\x00\x00\x00\x00">, @oprot=#<Thrift::BinaryProtocol:0x95d4590 @trans=#<Thrift::BufferedTransport:0x95d45cc @transport=#<Thrift::Socket:0x95d461c @host="localhost", @port=9090, @timeout=nil, @desc="localhost:9090", @handle=#<Socket:fd 7>>, @wbuf="", @rbuf="", @index=0>, @strict_read=true, @strict_write=true, @rbuf="\x00\x00\x00\x00\x00\x00\x00\x00">, @seqid=0>
+
+Go ahead and fire commands at OpenZWave, be sure to set your HomeID first:
+irb(main):002:0> HomeID = 0x00001234 (!!!example!!!)
 
 # Get a node's name
 irb(main):002:0> OZWmgr.GetNodeName(HomeID, 5)
@@ -106,7 +131,7 @@ irb(main):015:0> OZWmgr.SetValue_UInt8(Rvid,0)
 -------------------
 STOMP Notifications
 -------------------
-Also take a look at monitor.rb, its a basic STOMP client in Ruby listening for OpenZWave 
+Also take a look at ozw-monitor.rb, its a basic STOMP client in Ruby listening for OpenZWave 
 notifications. The script uses the BitStruct library to break down ValueIDs into fields. 
 Take into account that you should keep all ValueID's in a Hash or Array for subsequent 
 calls to OpenZWave.

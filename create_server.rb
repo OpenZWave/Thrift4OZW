@@ -114,7 +114,7 @@ if (a.entries.size != b.entries.size) then
         puts "\n-----------------------------------------------------------------------"
         puts "  Missing OpenZWave::Manager method mappings from RemoteManagerHandler:"
         puts "-----------------------------------------------------------------------"
-        puts "\n\t" + missing.join("\n\t") 
+        puts "\n\t" + missing.join("\n\t") + "\n\t" 
     end
 end
 

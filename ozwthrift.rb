@@ -29,14 +29,19 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #
 # ---------------------------
 
+require "onstomp"
 require "thrift"
+
+# load Thrift-generated client code
 $:.push(File.join(Dir.getwd, 'gen-rb'))
 require "ozw_constants"
 require "remote_manager"
 
-port = 9090
-HomeID = 0x00006258
+# load the ZWave monitor
+require 'ozw-monitor'
 
+port = 9090
+  
 transport = Thrift::BufferedTransport.new(Thrift::Socket.new('localhost', port))
 protocol = Thrift::BinaryProtocol.new(transport)
 transport.open()
@@ -44,6 +49,6 @@ transport.open()
 OZWmgr = OpenZWave::RemoteManager::Client.new(protocol)
 puts OZWmgr.inspect
 
-OZWmgr.GetNodeNeighbors(HomeID, 1)
+#OZWmgr.GetNodeNeighbors(HomeID, 1)
 
-OZWmgr.SetNodeOff(HomeID, 5)
+#OZWmgr.SetNodeOff(HomeID, 5)
