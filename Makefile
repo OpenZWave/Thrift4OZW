@@ -98,7 +98,7 @@ ozwd.static:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManage
 	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC) $(LIBS)
 
 ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
-	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)
+	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)	 
 
 dist:	main
 	rm -f Thrift4OZW.tar.gz
@@ -106,6 +106,7 @@ dist:	main
 
 bindist: main
 	rm -f Thrift4OZW_bin_`uname -i`.tar.gz
+	upx ozwd*
 	tar -c --exclude=".git" --exclude ".svn" -hvzf Thrift4OZW_bin_`uname -i`.tar.gz ozwd license/ README*
 
 clean:
