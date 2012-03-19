@@ -351,31 +351,23 @@ void send_all_values() {
 // -----------------------------------------
 int main(int argc, char *argv[]) {
 // -----------------------------------------
-	string  stomp_host = "localhost";
-    int     stomp_port = 61613;
+	string  stomp_host, ozw_port, ozw_conf, ozw_user;
+    int     stomp_port, thrift_port;
     //
     fs::path current_dir = fs::path(get_current_dir_name());
     fs::path ozw_config_dir = current_dir.parent_path() / "open-zwave-read-only/config/";
     //
-    string  ozw_conf = ozw_config_dir.generic_string();
-    string  ozw_user = current_dir.generic_string();
-    string  ozw_port = "/dev/ttyUSB0";
-    int     thrift_port = 9090;
-    //
-    string  ozw_conf_descr = string("OpenZWave manufacturer database (default: ") + ozw_conf + ")";
-    string  ozw_user_descr = string("OpenZWave user config database (default: ") + current_dir.generic_string() + ")";
-
     try {        
         // Declare the supported options.
-        po::options_description desc("Project Ansible - OpenZWave orbiter");
+        po::options_description desc("----------------------------------------\nProject Ansible - OpenZWave orbiter\n----------------------------------------\ncommand-line arguments");
         desc.add_options()
             ("help,?", "print this help message")
-            ("stomphost,h",   po::value(&stomp_host), "STOMP server hostname (default: localhost)")
-            ("stompport,s",   po::value(&stomp_port), "STOMP server port number (default: 61613)")
-            ("thriftport,t",    po::value(&thrift_port), "Thrift service port (default: 9090)")
-            ("ozwconf,c",     po::value(&ozw_conf), ozw_conf_descr.c_str())
-            ("ozwuser,u",     po::value(&ozw_user), ozw_user_descr.c_str())
-            ("ozwport,p",      po::value(&ozw_port), "OpenZWave driver port (e.g. /dev/ttyUSB0)")
+            ("stomphost,h",   po::value<string>(&stomp_host)->default_value("localhost"), "external STOMP server hostname")
+            ("stompport,s",   po::value<int>(&stomp_port)->default_value(61613), "external STOMP server port number")
+            ("thriftport,t",  po::value<int>(&thrift_port)->default_value(9090), "our Thrift service port")
+            ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.generic_string()), "our OpenZWave manufacturer database")
+            ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.generic_string()), "our OpenZWave user config database")
+            ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "our OpenZWave driver port")
         ;
         // a boost:program_options variable map
         po::variables_map vm;        
@@ -438,6 +430,7 @@ int main(int argc, char *argv[]) {
         shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
         shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
         TServerSocket* ss = new TServerSocket(thrift_port);
+        // set 3 seconds timeout value
         ss->setRecvTimeout(3000);
         shared_ptr<TServerTransport> serverTransport(ss);
         shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
@@ -451,9 +444,8 @@ int main(int argc, char *argv[]) {
         cout << "------------------------------------------------------------------------" << endl;
         cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
         cout << "------------------------------------------------------------------------" << endl;
-
+        // ready to serve!
         server.serve();
-        
     }    
     catch (exception& e) 
     {
