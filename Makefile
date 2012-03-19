@@ -18,14 +18,14 @@ RELEASE_CFLAGS  := -Wall -Wno-unknown-pragmas -Wno-format -O3 -DNDEBUG
 
 DEBUG_LDFLAGS	:= -g
 
-# Change for DEBUG or RELEASE
-CFLAGS	:= -c $(DEBUG_CFLAGS) -DDEBUG_POCOSTOMP
-LDFLAGS	:= $(DEBUG_LDFLAGS) 
-
 # change directories if needed
 OPENZWAVE := ../open-zwave
 THRIFT := /usr/local/include/thrift
 SMC := /opt/smc
+
+# Change for DEBUG or RELEASE
+CFLAGS	:= -c $(DEBUG_CFLAGS) -DDEBUG_POCOSTOMP
+LDFLAGS	:= $(DEBUG_LDFLAGS) -L/usr/lib/ -L/usr/local/lib -L/usr/local/lib/thrift -Wl,-rpath=$(OPENZWAVE)/cpp/lib/linux/
 
 INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 	-I $(OPENZWAVE)/cpp/src/value_classes/ -I $(OPENZWAVE)/cpp/src/platform/ \
@@ -36,18 +36,24 @@ INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 # Remove comment below for gnutls support
 GNUTLS := -lgnutls
 
-# for Linux uncomment out next two lines
 LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.a
 LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.so
 LIBUSB := -ludev
-LIBPOCO := -lPocoNet -lPocoFoundation -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
+
+# Poco libs are dynamic only (FIXME: phase out Poco!)
+LIBPOCO := -lPocoNet -lPocoFoundation 
+
+LIBBOOST := -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
+
 LIBTHRIFT := -lthrift
+
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
 #LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/mac/*.a)
 #LIBUSB := -framework IOKit -framework CoreFoundation
 
-LIBS := $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
+LIBS := $(GNUTLS) $(LIBUSB) $(LIBPOCO) $(LIBBOOST) $(LIBTHRIFT)
+
 
 %.o : %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $<
@@ -55,7 +61,8 @@ LIBS := $(GNUTLS) $(LIBTHRIFT) $(LIBUSB) $(LIBPOCO)
 %.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
 
-all: openzwave ozwd ozwd.static
+#all: openzwave ozwd ozwd.static
+all: openzwave ozwd
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
 	ruby create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
@@ -93,12 +100,15 @@ Main.o: Main.cpp Stomp_sm.o gen-cpp/RemoteManager_server.cpp
 
 openzwave: $(LIBZWAVE_STATIC) $(LIBZWAVE_DYNAMIC)
 	cd $(OPENZWAVE)/cpp/build/linux/; make
+	
+#
+# until we can get Poco out of the way, there's no static build yet
+#
+#ozwd.static: Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC)
+#	$(LD) -static -static-libgcc -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS) $(LIBZWAVE_STATIC)
 
-ozwd.static: Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
-	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC) $(LIBS)
-
-ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE) 
-	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)	 
+ozwd:   Main.o  Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) 
+	$(LD) -o $@ $(LDFLAGS) Main.o Stomp_sm.o StompSocket.o PocoStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS) $(LIBZWAVE_DYNAMIC)	 
 
 dist:	main
 	rm -f Thrift4OZW.tar.gz
