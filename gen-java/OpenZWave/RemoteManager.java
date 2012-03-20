@@ -198,6 +198,8 @@ public class RemoteManager {
 
     public boolean RefreshValue(RemoteValueID _id) throws org.apache.thrift.TException;
 
+    public void SetChangeVerified(RemoteValueID _id, boolean _verify) throws org.apache.thrift.TException;
+
     public boolean PressButton(RemoteValueID _id) throws org.apache.thrift.TException;
 
     public boolean ReleaseButton(RemoteValueID _id) throws org.apache.thrift.TException;
@@ -471,6 +473,8 @@ public class RemoteManager {
     public void SetValueListSelection(RemoteValueID _id, String _selectedItem, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SetValueListSelection_call> resultHandler) throws org.apache.thrift.TException;
 
     public void RefreshValue(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.RefreshValue_call> resultHandler) throws org.apache.thrift.TException;
+
+    public void SetChangeVerified(RemoteValueID _id, boolean _verify, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.SetChangeVerified_call> resultHandler) throws org.apache.thrift.TException;
 
     public void PressButton(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<AsyncClient.PressButton_call> resultHandler) throws org.apache.thrift.TException;
 
@@ -2387,6 +2391,27 @@ public class RemoteManager {
         return result.success;
       }
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "RefreshValue failed: unknown result");
+    }
+
+    public void SetChangeVerified(RemoteValueID _id, boolean _verify) throws org.apache.thrift.TException
+    {
+      send_SetChangeVerified(_id, _verify);
+      recv_SetChangeVerified();
+    }
+
+    public void send_SetChangeVerified(RemoteValueID _id, boolean _verify) throws org.apache.thrift.TException
+    {
+      SetChangeVerified_args args = new SetChangeVerified_args();
+      args.set_id(_id);
+      args.set_verify(_verify);
+      sendBase("SetChangeVerified", args);
+    }
+
+    public void recv_SetChangeVerified() throws org.apache.thrift.TException
+    {
+      SetChangeVerified_result result = new SetChangeVerified_result();
+      receiveBase(result, "SetChangeVerified");
+      return;
     }
 
     public boolean PressButton(RemoteValueID _id) throws org.apache.thrift.TException
@@ -6390,6 +6415,41 @@ public class RemoteManager {
       }
     }
 
+    public void SetChangeVerified(RemoteValueID _id, boolean _verify, org.apache.thrift.async.AsyncMethodCallback<SetChangeVerified_call> resultHandler) throws org.apache.thrift.TException {
+      checkReady();
+      SetChangeVerified_call method_call = new SetChangeVerified_call(_id, _verify, resultHandler, this, ___protocolFactory, ___transport);
+      this.___currentMethod = method_call;
+      ___manager.call(method_call);
+    }
+
+    public static class SetChangeVerified_call extends org.apache.thrift.async.TAsyncMethodCall {
+      private RemoteValueID _id;
+      private boolean _verify;
+      public SetChangeVerified_call(RemoteValueID _id, boolean _verify, org.apache.thrift.async.AsyncMethodCallback<SetChangeVerified_call> resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+        super(client, protocolFactory, transport, resultHandler, false);
+        this._id = _id;
+        this._verify = _verify;
+      }
+
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+        prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("SetChangeVerified", org.apache.thrift.protocol.TMessageType.CALL, 0));
+        SetChangeVerified_args args = new SetChangeVerified_args();
+        args.set_id(_id);
+        args.set_verify(_verify);
+        args.write(prot);
+        prot.writeMessageEnd();
+      }
+
+      public void getResult() throws org.apache.thrift.TException {
+        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+          throw new IllegalStateException("Method call not finished!");
+        }
+        org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
+        org.apache.thrift.protocol.TProtocol prot = client.getProtocolFactory().getProtocol(memoryTransport);
+        (new Client(prot)).recv_SetChangeVerified();
+      }
+    }
+
     public void PressButton(RemoteValueID _id, org.apache.thrift.async.AsyncMethodCallback<PressButton_call> resultHandler) throws org.apache.thrift.TException {
       checkReady();
       PressButton_call method_call = new PressButton_call(_id, resultHandler, this, ___protocolFactory, ___transport);
@@ -8540,6 +8600,7 @@ public class RemoteManager {
       processMap.put("SetValue_String", new SetValue_String());
       processMap.put("SetValueListSelection", new SetValueListSelection());
       processMap.put("RefreshValue", new RefreshValue());
+      processMap.put("SetChangeVerified", new SetChangeVerified());
       processMap.put("PressButton", new PressButton());
       processMap.put("ReleaseButton", new ReleaseButton());
       processMap.put("GetNumSwitchPoints", new GetNumSwitchPoints());
@@ -9867,6 +9928,22 @@ public class RemoteManager {
         RefreshValue_result result = new RefreshValue_result();
         result.success = iface.RefreshValue(args._id);
         result.setSuccessIsSet(true);
+        return result;
+      }
+    }
+
+    private static class SetChangeVerified<I extends Iface> extends org.apache.thrift.ProcessFunction<I, SetChangeVerified_args> {
+      public SetChangeVerified() {
+        super("SetChangeVerified");
+      }
+
+      protected SetChangeVerified_args getEmptyArgsInstance() {
+        return new SetChangeVerified_args();
+      }
+
+      protected SetChangeVerified_result getResult(I iface, SetChangeVerified_args args) throws org.apache.thrift.TException {
+        SetChangeVerified_result result = new SetChangeVerified_result();
+        iface.SetChangeVerified(args._id, args._verify);
         return result;
       }
     }
@@ -68390,6 +68467,705 @@ public class RemoteManager {
 
   }
 
+  public static class SetChangeVerified_args implements org.apache.thrift.TBase<SetChangeVerified_args, SetChangeVerified_args._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("SetChangeVerified_args");
+
+    private static final org.apache.thrift.protocol.TField _ID_FIELD_DESC = new org.apache.thrift.protocol.TField("_id", org.apache.thrift.protocol.TType.STRUCT, (short)1);
+    private static final org.apache.thrift.protocol.TField _VERIFY_FIELD_DESC = new org.apache.thrift.protocol.TField("_verify", org.apache.thrift.protocol.TType.BOOL, (short)2);
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new SetChangeVerified_argsStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new SetChangeVerified_argsTupleSchemeFactory());
+    }
+
+    public RemoteValueID _id; // required
+    public boolean _verify; // required
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+      _ID((short)1, "_id"),
+      _VERIFY((short)2, "_verify");
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          case 1: // _ID
+            return _ID;
+          case 2: // _VERIFY
+            return _VERIFY;
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+
+    // isset id assignments
+    private static final int ___VERIFY_ISSET_ID = 0;
+    private BitSet __isset_bit_vector = new BitSet(1);
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      tmpMap.put(_Fields._ID, new org.apache.thrift.meta_data.FieldMetaData("_id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, RemoteValueID.class)));
+      tmpMap.put(_Fields._VERIFY, new org.apache.thrift.meta_data.FieldMetaData("_verify", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+          new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SetChangeVerified_args.class, metaDataMap);
+    }
+
+    public SetChangeVerified_args() {
+    }
+
+    public SetChangeVerified_args(
+      RemoteValueID _id,
+      boolean _verify)
+    {
+      this();
+      this._id = _id;
+      this._verify = _verify;
+      set_verifyIsSet(true);
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public SetChangeVerified_args(SetChangeVerified_args other) {
+      __isset_bit_vector.clear();
+      __isset_bit_vector.or(other.__isset_bit_vector);
+      if (other.isSet_id()) {
+        this._id = new RemoteValueID(other._id);
+      }
+      this._verify = other._verify;
+    }
+
+    public SetChangeVerified_args deepCopy() {
+      return new SetChangeVerified_args(this);
+    }
+
+    @Override
+    public void clear() {
+      this._id = null;
+      set_verifyIsSet(false);
+      this._verify = false;
+    }
+
+    public RemoteValueID get_id() {
+      return this._id;
+    }
+
+    public SetChangeVerified_args set_id(RemoteValueID _id) {
+      this._id = _id;
+      return this;
+    }
+
+    public void unset_id() {
+      this._id = null;
+    }
+
+    /** Returns true if field _id is set (has been assigned a value) and false otherwise */
+    public boolean isSet_id() {
+      return this._id != null;
+    }
+
+    public void set_idIsSet(boolean value) {
+      if (!value) {
+        this._id = null;
+      }
+    }
+
+    public boolean is_verify() {
+      return this._verify;
+    }
+
+    public SetChangeVerified_args set_verify(boolean _verify) {
+      this._verify = _verify;
+      set_verifyIsSet(true);
+      return this;
+    }
+
+    public void unset_verify() {
+      __isset_bit_vector.clear(___VERIFY_ISSET_ID);
+    }
+
+    /** Returns true if field _verify is set (has been assigned a value) and false otherwise */
+    public boolean isSet_verify() {
+      return __isset_bit_vector.get(___VERIFY_ISSET_ID);
+    }
+
+    public void set_verifyIsSet(boolean value) {
+      __isset_bit_vector.set(___VERIFY_ISSET_ID, value);
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      case _ID:
+        if (value == null) {
+          unset_id();
+        } else {
+          set_id((RemoteValueID)value);
+        }
+        break;
+
+      case _VERIFY:
+        if (value == null) {
+          unset_verify();
+        } else {
+          set_verify((Boolean)value);
+        }
+        break;
+
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      case _ID:
+        return get_id();
+
+      case _VERIFY:
+        return Boolean.valueOf(is_verify());
+
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      case _ID:
+        return isSet_id();
+      case _VERIFY:
+        return isSet_verify();
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof SetChangeVerified_args)
+        return this.equals((SetChangeVerified_args)that);
+      return false;
+    }
+
+    public boolean equals(SetChangeVerified_args that) {
+      if (that == null)
+        return false;
+
+      boolean this_present__id = true && this.isSet_id();
+      boolean that_present__id = true && that.isSet_id();
+      if (this_present__id || that_present__id) {
+        if (!(this_present__id && that_present__id))
+          return false;
+        if (!this._id.equals(that._id))
+          return false;
+      }
+
+      boolean this_present__verify = true;
+      boolean that_present__verify = true;
+      if (this_present__verify || that_present__verify) {
+        if (!(this_present__verify && that_present__verify))
+          return false;
+        if (this._verify != that._verify)
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(SetChangeVerified_args other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      SetChangeVerified_args typedOther = (SetChangeVerified_args)other;
+
+      lastComparison = Boolean.valueOf(isSet_id()).compareTo(typedOther.isSet_id());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_id()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._id, typedOther._id);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      lastComparison = Boolean.valueOf(isSet_verify()).compareTo(typedOther.isSet_verify());
+      if (lastComparison != 0) {
+        return lastComparison;
+      }
+      if (isSet_verify()) {
+        lastComparison = org.apache.thrift.TBaseHelper.compareTo(this._verify, typedOther._verify);
+        if (lastComparison != 0) {
+          return lastComparison;
+        }
+      }
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("SetChangeVerified_args(");
+      boolean first = true;
+
+      sb.append("_id:");
+      if (this._id == null) {
+        sb.append("null");
+      } else {
+        sb.append(this._id);
+      }
+      first = false;
+      if (!first) sb.append(", ");
+      sb.append("_verify:");
+      sb.append(this._verify);
+      first = false;
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class SetChangeVerified_argsStandardSchemeFactory implements SchemeFactory {
+      public SetChangeVerified_argsStandardScheme getScheme() {
+        return new SetChangeVerified_argsStandardScheme();
+      }
+    }
+
+    private static class SetChangeVerified_argsStandardScheme extends StandardScheme<SetChangeVerified_args> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, SetChangeVerified_args struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            case 1: // _ID
+              if (schemeField.type == org.apache.thrift.protocol.TType.STRUCT) {
+                struct._id = new RemoteValueID();
+                struct._id.read(iprot);
+                struct.set_idIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            case 2: // _VERIFY
+              if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
+                struct._verify = iprot.readBool();
+                struct.set_verifyIsSet(true);
+              } else { 
+                org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+              }
+              break;
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, SetChangeVerified_args struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        if (struct._id != null) {
+          oprot.writeFieldBegin(_ID_FIELD_DESC);
+          struct._id.write(oprot);
+          oprot.writeFieldEnd();
+        }
+        oprot.writeFieldBegin(_VERIFY_FIELD_DESC);
+        oprot.writeBool(struct._verify);
+        oprot.writeFieldEnd();
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class SetChangeVerified_argsTupleSchemeFactory implements SchemeFactory {
+      public SetChangeVerified_argsTupleScheme getScheme() {
+        return new SetChangeVerified_argsTupleScheme();
+      }
+    }
+
+    private static class SetChangeVerified_argsTupleScheme extends TupleScheme<SetChangeVerified_args> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, SetChangeVerified_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+        BitSet optionals = new BitSet();
+        if (struct.isSet_id()) {
+          optionals.set(0);
+        }
+        if (struct.isSet_verify()) {
+          optionals.set(1);
+        }
+        oprot.writeBitSet(optionals, 2);
+        if (struct.isSet_id()) {
+          struct._id.write(oprot);
+        }
+        if (struct.isSet_verify()) {
+          oprot.writeBool(struct._verify);
+        }
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, SetChangeVerified_args struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+        BitSet incoming = iprot.readBitSet(2);
+        if (incoming.get(0)) {
+          struct._id = new RemoteValueID();
+          struct._id.read(iprot);
+          struct.set_idIsSet(true);
+        }
+        if (incoming.get(1)) {
+          struct._verify = iprot.readBool();
+          struct.set_verifyIsSet(true);
+        }
+      }
+    }
+
+  }
+
+  public static class SetChangeVerified_result implements org.apache.thrift.TBase<SetChangeVerified_result, SetChangeVerified_result._Fields>, java.io.Serializable, Cloneable   {
+    private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("SetChangeVerified_result");
+
+
+    private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
+    static {
+      schemes.put(StandardScheme.class, new SetChangeVerified_resultStandardSchemeFactory());
+      schemes.put(TupleScheme.class, new SetChangeVerified_resultTupleSchemeFactory());
+    }
+
+
+    /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
+    public enum _Fields implements org.apache.thrift.TFieldIdEnum {
+;
+
+      private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
+
+      static {
+        for (_Fields field : EnumSet.allOf(_Fields.class)) {
+          byName.put(field.getFieldName(), field);
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, or null if its not found.
+       */
+      public static _Fields findByThriftId(int fieldId) {
+        switch(fieldId) {
+          default:
+            return null;
+        }
+      }
+
+      /**
+       * Find the _Fields constant that matches fieldId, throwing an exception
+       * if it is not found.
+       */
+      public static _Fields findByThriftIdOrThrow(int fieldId) {
+        _Fields fields = findByThriftId(fieldId);
+        if (fields == null) throw new IllegalArgumentException("Field " + fieldId + " doesn't exist!");
+        return fields;
+      }
+
+      /**
+       * Find the _Fields constant that matches name, or null if its not found.
+       */
+      public static _Fields findByName(String name) {
+        return byName.get(name);
+      }
+
+      private final short _thriftId;
+      private final String _fieldName;
+
+      _Fields(short thriftId, String fieldName) {
+        _thriftId = thriftId;
+        _fieldName = fieldName;
+      }
+
+      public short getThriftFieldId() {
+        return _thriftId;
+      }
+
+      public String getFieldName() {
+        return _fieldName;
+      }
+    }
+    public static final Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
+    static {
+      Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
+      metaDataMap = Collections.unmodifiableMap(tmpMap);
+      org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(SetChangeVerified_result.class, metaDataMap);
+    }
+
+    public SetChangeVerified_result() {
+    }
+
+    /**
+     * Performs a deep copy on <i>other</i>.
+     */
+    public SetChangeVerified_result(SetChangeVerified_result other) {
+    }
+
+    public SetChangeVerified_result deepCopy() {
+      return new SetChangeVerified_result(this);
+    }
+
+    @Override
+    public void clear() {
+    }
+
+    public void setFieldValue(_Fields field, Object value) {
+      switch (field) {
+      }
+    }
+
+    public Object getFieldValue(_Fields field) {
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    /** Returns true if field corresponding to fieldID is set (has been assigned a value) and false otherwise */
+    public boolean isSet(_Fields field) {
+      if (field == null) {
+        throw new IllegalArgumentException();
+      }
+
+      switch (field) {
+      }
+      throw new IllegalStateException();
+    }
+
+    @Override
+    public boolean equals(Object that) {
+      if (that == null)
+        return false;
+      if (that instanceof SetChangeVerified_result)
+        return this.equals((SetChangeVerified_result)that);
+      return false;
+    }
+
+    public boolean equals(SetChangeVerified_result that) {
+      if (that == null)
+        return false;
+
+      return true;
+    }
+
+    @Override
+    public int hashCode() {
+      return 0;
+    }
+
+    public int compareTo(SetChangeVerified_result other) {
+      if (!getClass().equals(other.getClass())) {
+        return getClass().getName().compareTo(other.getClass().getName());
+      }
+
+      int lastComparison = 0;
+      SetChangeVerified_result typedOther = (SetChangeVerified_result)other;
+
+      return 0;
+    }
+
+    public _Fields fieldForId(int fieldId) {
+      return _Fields.findByThriftId(fieldId);
+    }
+
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+      schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
+    }
+
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+      schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
+      }
+
+    @Override
+    public String toString() {
+      StringBuilder sb = new StringBuilder("SetChangeVerified_result(");
+      boolean first = true;
+
+      sb.append(")");
+      return sb.toString();
+    }
+
+    public void validate() throws org.apache.thrift.TException {
+      // check for required fields
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
+      try {
+        write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
+      try {
+        read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
+      } catch (org.apache.thrift.TException te) {
+        throw new java.io.IOException(te);
+      }
+    }
+
+    private static class SetChangeVerified_resultStandardSchemeFactory implements SchemeFactory {
+      public SetChangeVerified_resultStandardScheme getScheme() {
+        return new SetChangeVerified_resultStandardScheme();
+      }
+    }
+
+    private static class SetChangeVerified_resultStandardScheme extends StandardScheme<SetChangeVerified_result> {
+
+      public void read(org.apache.thrift.protocol.TProtocol iprot, SetChangeVerified_result struct) throws org.apache.thrift.TException {
+        org.apache.thrift.protocol.TField schemeField;
+        iprot.readStructBegin();
+        while (true)
+        {
+          schemeField = iprot.readFieldBegin();
+          if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+            break;
+          }
+          switch (schemeField.id) {
+            default:
+              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
+          }
+          iprot.readFieldEnd();
+        }
+        iprot.readStructEnd();
+
+        // check for required fields of primitive type, which can't be checked in the validate method
+        struct.validate();
+      }
+
+      public void write(org.apache.thrift.protocol.TProtocol oprot, SetChangeVerified_result struct) throws org.apache.thrift.TException {
+        struct.validate();
+
+        oprot.writeStructBegin(STRUCT_DESC);
+        oprot.writeFieldStop();
+        oprot.writeStructEnd();
+      }
+
+    }
+
+    private static class SetChangeVerified_resultTupleSchemeFactory implements SchemeFactory {
+      public SetChangeVerified_resultTupleScheme getScheme() {
+        return new SetChangeVerified_resultTupleScheme();
+      }
+    }
+
+    private static class SetChangeVerified_resultTupleScheme extends TupleScheme<SetChangeVerified_result> {
+
+      @Override
+      public void write(org.apache.thrift.protocol.TProtocol prot, SetChangeVerified_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol oprot = (TTupleProtocol) prot;
+      }
+
+      @Override
+      public void read(org.apache.thrift.protocol.TProtocol prot, SetChangeVerified_result struct) throws org.apache.thrift.TException {
+        TTupleProtocol iprot = (TTupleProtocol) prot;
+      }
+    }
+
+  }
+
   public static class PressButton_args implements org.apache.thrift.TBase<PressButton_args, PressButton_args._Fields>, java.io.Serializable, Cloneable   {
     private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("PressButton_args");
 
@@ -110161,8 +110937,6 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
-        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
-        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);
@@ -110909,6 +111683,8 @@ public class RemoteManager {
 
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
+        // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
+        __isset_bit_vector = new BitSet(1);
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
       } catch (org.apache.thrift.TException te) {
         throw new java.io.IOException(te);

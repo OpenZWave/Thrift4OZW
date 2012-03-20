@@ -10409,6 +10409,132 @@ sub write {
   return $xfer;
 }
 
+package OpenZWave::RemoteManager_SetChangeVerified_args;
+use base qw(Class::Accessor);
+OpenZWave::RemoteManager_SetChangeVerified_args->mk_accessors( qw( _id _verify ) );
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  $self->{_id} = undef;
+  $self->{_verify} = undef;
+  if (UNIVERSAL::isa($vals,'HASH')) {
+    if (defined $vals->{_id}) {
+      $self->{_id} = $vals->{_id};
+    }
+    if (defined $vals->{_verify}) {
+      $self->{_verify} = $vals->{_verify};
+    }
+  }
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_SetChangeVerified_args';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+      /^1$/ && do{      if ($ftype == TType::STRUCT) {
+        $self->{_id} = new OpenZWave::RemoteValueID();
+        $xfer += $self->{_id}->read($input);
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+      /^2$/ && do{      if ($ftype == TType::BOOL) {
+        $xfer += $input->readBool(\$self->{_verify});
+      } else {
+        $xfer += $input->skip($ftype);
+      }
+      last; };
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_SetChangeVerified_args');
+  if (defined $self->{_id}) {
+    $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
+    $xfer += $self->{_id}->write($output);
+    $xfer += $output->writeFieldEnd();
+  }
+  if (defined $self->{_verify}) {
+    $xfer += $output->writeFieldBegin('_verify', TType::BOOL, 2);
+    $xfer += $output->writeBool($self->{_verify});
+    $xfer += $output->writeFieldEnd();
+  }
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
+package OpenZWave::RemoteManager_SetChangeVerified_result;
+use base qw(Class::Accessor);
+
+sub new {
+  my $classname = shift;
+  my $self      = {};
+  my $vals      = shift || {};
+  return bless ($self, $classname);
+}
+
+sub getName {
+  return 'RemoteManager_SetChangeVerified_result';
+}
+
+sub read {
+  my ($self, $input) = @_;
+  my $xfer  = 0;
+  my $fname;
+  my $ftype = 0;
+  my $fid   = 0;
+  $xfer += $input->readStructBegin(\$fname);
+  while (1) 
+  {
+    $xfer += $input->readFieldBegin(\$fname, \$ftype, \$fid);
+    if ($ftype == TType::STOP) {
+      last;
+    }
+    SWITCH: for($fid)
+    {
+        $xfer += $input->skip($ftype);
+    }
+    $xfer += $input->readFieldEnd();
+  }
+  $xfer += $input->readStructEnd();
+  return $xfer;
+}
+
+sub write {
+  my ($self, $output) = @_;
+  my $xfer   = 0;
+  $xfer += $output->writeStructBegin('RemoteManager_SetChangeVerified_result');
+  $xfer += $output->writeFieldStop();
+  $xfer += $output->writeStructEnd();
+  return $xfer;
+}
+
 package OpenZWave::RemoteManager_PressButton_args;
 use base qw(Class::Accessor);
 OpenZWave::RemoteManager_PressButton_args->mk_accessors( qw( _id ) );
@@ -19282,6 +19408,14 @@ sub RefreshValue{
   die 'implement interface';
 }
 
+sub SetChangeVerified{
+  my $self = shift;
+  my $_id = shift;
+  my $_verify = shift;
+
+  die 'implement interface';
+}
+
 sub PressButton{
   my $self = shift;
   my $_id = shift;
@@ -20355,6 +20489,14 @@ sub RefreshValue{
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   return $self->{impl}->RefreshValue($_id);
+}
+
+sub SetChangeVerified{
+  my ($self, $request) = @_;
+
+  my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
+  my $_verify = ($request->{'_verify'}) ? $request->{'_verify'} : undef;
+  return $self->{impl}->SetChangeVerified($_id, $_verify);
 }
 
 sub PressButton{
@@ -24263,6 +24405,49 @@ sub recv_RefreshValue{
   }
   die "RefreshValue failed: unknown result";
 }
+sub SetChangeVerified{
+  my $self = shift;
+  my $_id = shift;
+  my $_verify = shift;
+
+    $self->send_SetChangeVerified($_id, $_verify);
+  $self->recv_SetChangeVerified();
+}
+
+sub send_SetChangeVerified{
+  my $self = shift;
+  my $_id = shift;
+  my $_verify = shift;
+
+  $self->{output}->writeMessageBegin('SetChangeVerified', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetChangeVerified_args();
+  $args->{_id} = $_id;
+  $args->{_verify} = $_verify;
+  $args->write($self->{output});
+  $self->{output}->writeMessageEnd();
+  $self->{output}->getTransport()->flush();
+}
+
+sub recv_SetChangeVerified{
+  my $self = shift;
+
+  my $rseqid = 0;
+  my $fname;
+  my $mtype = 0;
+
+  $self->{input}->readMessageBegin(\$fname, \$mtype, \$rseqid);
+  if ($mtype == TMessageType::EXCEPTION) {
+    my $x = new TApplicationException();
+    $x->read($self->{input});
+    $self->{input}->readMessageEnd();
+    die $x;
+  }
+  my $result = new OpenZWave::RemoteManager_SetChangeVerified_result();
+  $result->read($self->{input});
+  $self->{input}->readMessageEnd();
+
+  return;
+}
 sub PressButton{
   my $self = shift;
   my $_id = shift;
@@ -27958,6 +28143,19 @@ sub process_RefreshValue {
     my $result = new OpenZWave::RemoteManager_RefreshValue_result();
     $result->{success} = $self->{handler}->RefreshValue($args->_id);
     $output->writeMessageBegin('RefreshValue', TMessageType::REPLY, $seqid);
+    $result->write($output);
+    $output->writeMessageEnd();
+    $output->getTransport()->flush();
+}
+
+sub process_SetChangeVerified {
+    my ($self, $seqid, $input, $output) = @_;
+    my $args = new OpenZWave::RemoteManager_SetChangeVerified_args();
+    $args->read($input);
+    $input->readMessageEnd();
+    my $result = new OpenZWave::RemoteManager_SetChangeVerified_result();
+    $self->{handler}->SetChangeVerified($args->_id, $args->_verify);
+    $output->writeMessageBegin('SetChangeVerified', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

@@ -441,6 +441,9 @@ service RemoteManager {
     //bool RefreshValue( ValueID const& _id);
     bool RefreshValue( 1:RemoteValueID _id);
 
+    //void SetChangeVerified( ValueID const& _id, bool _verify );
+    void SetChangeVerified( 1:RemoteValueID _id, 2:bool _verify );
+    
 	//bool PressButton( ValueID const& _id );
     bool PressButton( 1:RemoteValueID _id );
 

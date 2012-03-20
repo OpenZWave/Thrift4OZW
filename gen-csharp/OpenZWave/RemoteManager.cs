@@ -94,6 +94,7 @@ namespace OpenZWave
       bool SetValue_String(RemoteValueID _id, string _value);
       bool SetValueListSelection(RemoteValueID _id, string _selectedItem);
       bool RefreshValue(RemoteValueID _id);
+      void SetChangeVerified(RemoteValueID _id, bool _verify);
       bool PressButton(RemoteValueID _id);
       bool ReleaseButton(RemoteValueID _id);
       byte GetNumSwitchPoints(RemoteValueID _id);
@@ -2728,6 +2729,37 @@ namespace OpenZWave
         throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "RefreshValue failed: unknown result");
       }
 
+      public void SetChangeVerified(RemoteValueID _id, bool _verify)
+      {
+        send_SetChangeVerified(_id, _verify);
+        recv_SetChangeVerified();
+      }
+
+      public void send_SetChangeVerified(RemoteValueID _id, bool _verify)
+      {
+        oprot_.WriteMessageBegin(new TMessage("SetChangeVerified", TMessageType.Call, seqid_));
+        SetChangeVerified_args args = new SetChangeVerified_args();
+        args._id = _id;
+        args._verify = _verify;
+        args.Write(oprot_);
+        oprot_.WriteMessageEnd();
+        oprot_.Transport.Flush();
+      }
+
+      public void recv_SetChangeVerified()
+      {
+        TMessage msg = iprot_.ReadMessageBegin();
+        if (msg.Type == TMessageType.Exception) {
+          TApplicationException x = TApplicationException.Read(iprot_);
+          iprot_.ReadMessageEnd();
+          throw x;
+        }
+        SetChangeVerified_result result = new SetChangeVerified_result();
+        result.Read(iprot_);
+        iprot_.ReadMessageEnd();
+        return;
+      }
+
       public bool PressButton(RemoteValueID _id)
       {
         send_PressButton(_id);
@@ -4759,6 +4791,7 @@ namespace OpenZWave
         processMap_["SetValue_String"] = SetValue_String_Process;
         processMap_["SetValueListSelection"] = SetValueListSelection_Process;
         processMap_["RefreshValue"] = RefreshValue_Process;
+        processMap_["SetChangeVerified"] = SetChangeVerified_Process;
         processMap_["PressButton"] = PressButton_Process;
         processMap_["ReleaseButton"] = ReleaseButton_Process;
         processMap_["GetNumSwitchPoints"] = GetNumSwitchPoints_Process;
@@ -5845,6 +5878,19 @@ namespace OpenZWave
         RefreshValue_result result = new RefreshValue_result();
         result.Success = iface_.RefreshValue(args._id);
         oprot.WriteMessageBegin(new TMessage("RefreshValue", TMessageType.Reply, seqid)); 
+        result.Write(oprot);
+        oprot.WriteMessageEnd();
+        oprot.Transport.Flush();
+      }
+
+      public void SetChangeVerified_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      {
+        SetChangeVerified_args args = new SetChangeVerified_args();
+        args.Read(iprot);
+        iprot.ReadMessageEnd();
+        SetChangeVerified_result result = new SetChangeVerified_result();
+        iface_.SetChangeVerified(args._id, args._verify);
+        oprot.WriteMessageBegin(new TMessage("SetChangeVerified", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -20603,6 +20649,167 @@ namespace OpenZWave
         StringBuilder sb = new StringBuilder("RefreshValue_result(");
         sb.Append("Success: ");
         sb.Append(Success);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class SetChangeVerified_args : TBase
+    {
+      private RemoteValueID __id;
+      private bool __verify;
+
+      public RemoteValueID _id
+      {
+        get
+        {
+          return __id;
+        }
+        set
+        {
+          __isset._id = true;
+          this.__id = value;
+        }
+      }
+
+      public bool _verify
+      {
+        get
+        {
+          return __verify;
+        }
+        set
+        {
+          __isset._verify = true;
+          this.__verify = value;
+        }
+      }
+
+
+      public Isset __isset;
+      [Serializable]
+      public struct Isset {
+        public bool _id;
+        public bool _verify;
+      }
+
+      public SetChangeVerified_args() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            case 1:
+              if (field.Type == TType.Struct) {
+                _id = new RemoteValueID();
+                _id.Read(iprot);
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            case 2:
+              if (field.Type == TType.Bool) {
+                _verify = iprot.ReadBool();
+              } else { 
+                TProtocolUtil.Skip(iprot, field.Type);
+              }
+              break;
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("SetChangeVerified_args");
+        oprot.WriteStructBegin(struc);
+        TField field = new TField();
+        if (_id != null && __isset._id) {
+          field.Name = "_id";
+          field.Type = TType.Struct;
+          field.ID = 1;
+          oprot.WriteFieldBegin(field);
+          _id.Write(oprot);
+          oprot.WriteFieldEnd();
+        }
+        if (__isset._verify) {
+          field.Name = "_verify";
+          field.Type = TType.Bool;
+          field.ID = 2;
+          oprot.WriteFieldBegin(field);
+          oprot.WriteBool(_verify);
+          oprot.WriteFieldEnd();
+        }
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("SetChangeVerified_args(");
+        sb.Append("_id: ");
+        sb.Append(_id== null ? "<null>" : _id.ToString());
+        sb.Append(",_verify: ");
+        sb.Append(_verify);
+        sb.Append(")");
+        return sb.ToString();
+      }
+
+    }
+
+
+    [Serializable]
+    public partial class SetChangeVerified_result : TBase
+    {
+
+      public SetChangeVerified_result() {
+      }
+
+      public void Read (TProtocol iprot)
+      {
+        TField field;
+        iprot.ReadStructBegin();
+        while (true)
+        {
+          field = iprot.ReadFieldBegin();
+          if (field.Type == TType.Stop) { 
+            break;
+          }
+          switch (field.ID)
+          {
+            default: 
+              TProtocolUtil.Skip(iprot, field.Type);
+              break;
+          }
+          iprot.ReadFieldEnd();
+        }
+        iprot.ReadStructEnd();
+      }
+
+      public void Write(TProtocol oprot) {
+        TStruct struc = new TStruct("SetChangeVerified_result");
+        oprot.WriteStructBegin(struc);
+
+        oprot.WriteFieldStop();
+        oprot.WriteStructEnd();
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder("SetChangeVerified_result(");
         sb.Append(")");
         return sb.ToString();
       }

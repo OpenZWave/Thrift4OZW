@@ -611,6 +611,14 @@ class Iface:
     """
     pass
 
+  def SetChangeVerified(self, _id, _verify):
+    """
+    Parameters:
+     - _id
+     - _verify
+    """
+    pass
+
   def PressButton(self, _id):
     """
     Parameters:
@@ -3467,6 +3475,36 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "RefreshValue failed: unknown result");
 
+  def SetChangeVerified(self, _id, _verify):
+    """
+    Parameters:
+     - _id
+     - _verify
+    """
+    self.send_SetChangeVerified(_id, _verify)
+    self.recv_SetChangeVerified()
+
+  def send_SetChangeVerified(self, _id, _verify):
+    self._oprot.writeMessageBegin('SetChangeVerified', TMessageType.CALL, self._seqid)
+    args = SetChangeVerified_args()
+    args._id = _id
+    args._verify = _verify
+    args.write(self._oprot)
+    self._oprot.writeMessageEnd()
+    self._oprot.trans.flush()
+
+  def recv_SetChangeVerified(self, ):
+    (fname, mtype, rseqid) = self._iprot.readMessageBegin()
+    if mtype == TMessageType.EXCEPTION:
+      x = TApplicationException()
+      x.read(self._iprot)
+      self._iprot.readMessageEnd()
+      raise x
+    result = SetChangeVerified_result()
+    result.read(self._iprot)
+    self._iprot.readMessageEnd()
+    return
+
   def PressButton(self, _id):
     """
     Parameters:
@@ -5391,6 +5429,7 @@ class Processor(Iface, TProcessor):
     self._processMap["SetValue_String"] = Processor.process_SetValue_String
     self._processMap["SetValueListSelection"] = Processor.process_SetValueListSelection
     self._processMap["RefreshValue"] = Processor.process_RefreshValue
+    self._processMap["SetChangeVerified"] = Processor.process_SetChangeVerified
     self._processMap["PressButton"] = Processor.process_PressButton
     self._processMap["ReleaseButton"] = Processor.process_ReleaseButton
     self._processMap["GetNumSwitchPoints"] = Processor.process_GetNumSwitchPoints
@@ -6308,6 +6347,17 @@ class Processor(Iface, TProcessor):
     result = RefreshValue_result()
     result.success = self._handler.RefreshValue(args._id)
     oprot.writeMessageBegin("RefreshValue", TMessageType.REPLY, seqid)
+    result.write(oprot)
+    oprot.writeMessageEnd()
+    oprot.trans.flush()
+
+  def process_SetChangeVerified(self, seqid, iprot, oprot):
+    args = SetChangeVerified_args()
+    args.read(iprot)
+    iprot.readMessageEnd()
+    result = SetChangeVerified_result()
+    self._handler.SetChangeVerified(args._id, args._verify)
+    oprot.writeMessageBegin("SetChangeVerified", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -16500,6 +16550,121 @@ class RefreshValue_result:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
       oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class SetChangeVerified_args:
+  """
+  Attributes:
+   - _id
+   - _verify
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.STRUCT, '_id', (RemoteValueID, RemoteValueID.thrift_spec), None, ), # 1
+    (2, TType.BOOL, '_verify', None, None, ), # 2
+  )
+
+  def __init__(self, _id=None, _verify=None,):
+    self._id = _id
+    self._verify = _verify
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.STRUCT:
+          self._id = RemoteValueID()
+          self._id.read(iprot)
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.BOOL:
+          self._verify = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('SetChangeVerified_args')
+    if self._id is not None:
+      oprot.writeFieldBegin('_id', TType.STRUCT, 1)
+      self._id.write(oprot)
+      oprot.writeFieldEnd()
+    if self._verify is not None:
+      oprot.writeFieldBegin('_verify', TType.BOOL, 2)
+      oprot.writeBool(self._verify)
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def validate(self):
+    return
+
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
+class SetChangeVerified_result:
+
+  thrift_spec = (
+  )
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('SetChangeVerified_result')
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 

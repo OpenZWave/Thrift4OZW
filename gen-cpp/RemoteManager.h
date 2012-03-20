@@ -92,6 +92,7 @@ class RemoteManagerIf {
   virtual bool SetValue_String(const RemoteValueID& _id, const std::string& _value) = 0;
   virtual bool SetValueListSelection(const RemoteValueID& _id, const std::string& _selectedItem) = 0;
   virtual bool RefreshValue(const RemoteValueID& _id) = 0;
+  virtual void SetChangeVerified(const RemoteValueID& _id, const bool _verify) = 0;
   virtual bool PressButton(const RemoteValueID& _id) = 0;
   virtual bool ReleaseButton(const RemoteValueID& _id) = 0;
   virtual int8_t GetNumSwitchPoints(const RemoteValueID& _id) = 0;
@@ -447,6 +448,9 @@ class RemoteManagerNull : virtual public RemoteManagerIf {
   bool RefreshValue(const RemoteValueID& /* _id */) {
     bool _return = false;
     return _return;
+  }
+  void SetChangeVerified(const RemoteValueID& /* _id */, const bool /* _verify */) {
+    return;
   }
   bool PressButton(const RemoteValueID& /* _id */) {
     bool _return = false;
@@ -9137,6 +9141,103 @@ class RemoteManager_RefreshValue_presult {
 
 };
 
+typedef struct _RemoteManager_SetChangeVerified_args__isset {
+  _RemoteManager_SetChangeVerified_args__isset() : _id(false), _verify(false) {}
+  bool _id;
+  bool _verify;
+} _RemoteManager_SetChangeVerified_args__isset;
+
+class RemoteManager_SetChangeVerified_args {
+ public:
+
+  RemoteManager_SetChangeVerified_args() : _verify(0) {
+  }
+
+  virtual ~RemoteManager_SetChangeVerified_args() throw() {}
+
+  RemoteValueID _id;
+  bool _verify;
+
+  _RemoteManager_SetChangeVerified_args__isset __isset;
+
+  void __set__id(const RemoteValueID& val) {
+    _id = val;
+  }
+
+  void __set__verify(const bool val) {
+    _verify = val;
+  }
+
+  bool operator == (const RemoteManager_SetChangeVerified_args & rhs) const
+  {
+    if (!(_id == rhs._id))
+      return false;
+    if (!(_verify == rhs._verify))
+      return false;
+    return true;
+  }
+  bool operator != (const RemoteManager_SetChangeVerified_args &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_SetChangeVerified_args & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SetChangeVerified_pargs {
+ public:
+
+
+  virtual ~RemoteManager_SetChangeVerified_pargs() throw() {}
+
+  const RemoteValueID* _id;
+  const bool* _verify;
+
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SetChangeVerified_result {
+ public:
+
+  RemoteManager_SetChangeVerified_result() {
+  }
+
+  virtual ~RemoteManager_SetChangeVerified_result() throw() {}
+
+
+  bool operator == (const RemoteManager_SetChangeVerified_result & /* rhs */) const
+  {
+    return true;
+  }
+  bool operator != (const RemoteManager_SetChangeVerified_result &rhs) const {
+    return !(*this == rhs);
+  }
+
+  bool operator < (const RemoteManager_SetChangeVerified_result & ) const;
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+  uint32_t write(::apache::thrift::protocol::TProtocol* oprot) const;
+
+};
+
+
+class RemoteManager_SetChangeVerified_presult {
+ public:
+
+
+  virtual ~RemoteManager_SetChangeVerified_presult() throw() {}
+
+
+  uint32_t read(::apache::thrift::protocol::TProtocol* iprot);
+
+};
+
 typedef struct _RemoteManager_PressButton_args__isset {
   _RemoteManager_PressButton_args__isset() : _id(false) {}
   bool _id;
@@ -16024,6 +16125,9 @@ class RemoteManagerClient : virtual public RemoteManagerIf {
   bool RefreshValue(const RemoteValueID& _id);
   void send_RefreshValue(const RemoteValueID& _id);
   bool recv_RefreshValue();
+  void SetChangeVerified(const RemoteValueID& _id, const bool _verify);
+  void send_SetChangeVerified(const RemoteValueID& _id, const bool _verify);
+  void recv_SetChangeVerified();
   bool PressButton(const RemoteValueID& _id);
   void send_PressButton(const RemoteValueID& _id);
   bool recv_PressButton();
@@ -16288,6 +16392,7 @@ class RemoteManagerProcessor : public ::apache::thrift::TProcessor {
   void process_SetValue_String(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_SetValueListSelection(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_RefreshValue(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
+  void process_SetChangeVerified(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_PressButton(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_ReleaseButton(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
   void process_GetNumSwitchPoints(int32_t seqid, apache::thrift::protocol::TProtocol* iprot, apache::thrift::protocol::TProtocol* oprot, void* callContext);
@@ -16426,6 +16531,7 @@ class RemoteManagerProcessor : public ::apache::thrift::TProcessor {
     processMap_["SetValue_String"] = &RemoteManagerProcessor::process_SetValue_String;
     processMap_["SetValueListSelection"] = &RemoteManagerProcessor::process_SetValueListSelection;
     processMap_["RefreshValue"] = &RemoteManagerProcessor::process_RefreshValue;
+    processMap_["SetChangeVerified"] = &RemoteManagerProcessor::process_SetChangeVerified;
     processMap_["PressButton"] = &RemoteManagerProcessor::process_PressButton;
     processMap_["ReleaseButton"] = &RemoteManagerProcessor::process_ReleaseButton;
     processMap_["GetNumSwitchPoints"] = &RemoteManagerProcessor::process_GetNumSwitchPoints;
@@ -17326,6 +17432,13 @@ class RemoteManagerMultiface : virtual public RemoteManagerIf {
       } else {
         ifaces_[i]->RefreshValue(_id);
       }
+    }
+  }
+
+  void SetChangeVerified(const RemoteValueID& _id, const bool _verify) {
+    size_t sz = ifaces_.size();
+    for (size_t i = 0; i < sz; ++i) {
+      ifaces_[i]->SetChangeVerified(_id, _verify);
     }
   }
 

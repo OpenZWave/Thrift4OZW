@@ -24795,6 +24795,250 @@
 
 @end
 
+@interface OpenZWaveSetChangeVerified_args : NSObject <NSCoding> {
+  OpenZWaveRemoteValueID * ___id;
+  BOOL ___verify;
+
+  BOOL ___id_isset;
+  BOOL ___verify_isset;
+}
+
+#if TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5)
+@property (nonatomic, retain, getter=_id, setter=set_id:) OpenZWaveRemoteValueID * _id;
+@property (nonatomic, getter=_verify, setter=set_verify:) BOOL _verify;
+#endif
+
+- (id) initWith_id: (OpenZWaveRemoteValueID *) _id _verify: (BOOL) _verify;
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+- (OpenZWaveRemoteValueID *) _id;
+- (void) set_id: (OpenZWaveRemoteValueID *) _id;
+- (BOOL) _idIsSet;
+
+- (BOOL) _verify;
+- (void) set_verify: (BOOL) _verify;
+- (BOOL) _verifyIsSet;
+
+@end
+
+@implementation OpenZWaveSetChangeVerified_args
+
+- (id) initWith_id: (OpenZWaveRemoteValueID *) _id _verify: (BOOL) _verify
+{
+  self = [super init];
+  ___id = [_id retain];
+  ___id_isset = YES;
+  ___verify = _verify;
+  ___verify_isset = YES;
+  return self;
+}
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  if ([decoder containsValueForKey: @"_id"])
+  {
+    ___id = [[decoder decodeObjectForKey: @"_id"] retain];
+    ___id_isset = YES;
+  }
+  if ([decoder containsValueForKey: @"_verify"])
+  {
+    ___verify = [decoder decodeBoolForKey: @"_verify"];
+    ___verify_isset = YES;
+  }
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+  if (___id_isset)
+  {
+    [encoder encodeObject: ___id forKey: @"_id"];
+  }
+  if (___verify_isset)
+  {
+    [encoder encodeBool: ___verify forKey: @"_verify"];
+  }
+}
+
+- (void) dealloc
+{
+  [___id release];
+  [super dealloc];
+}
+
+- (OpenZWaveRemoteValueID *) _id {
+  return [[___id retain] autorelease];
+}
+
+- (void) set_id: (OpenZWaveRemoteValueID *) _id {
+  [_id retain];
+  [___id release];
+  ___id = _id;
+  ___id_isset = YES;
+}
+
+- (BOOL) _idIsSet {
+  return ___id_isset;
+}
+
+- (void) unset_id {
+  [___id release];
+  ___id = nil;
+  ___id_isset = NO;
+}
+
+- (BOOL) _verify {
+  return ___verify;
+}
+
+- (void) set_verify: (BOOL) _verify {
+  ___verify = _verify;
+  ___verify_isset = YES;
+}
+
+- (BOOL) _verifyIsSet {
+  return ___verify_isset;
+}
+
+- (void) unset_verify {
+  ___verify_isset = NO;
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      case 1:
+        if (fieldType == TType_STRUCT) {
+          OpenZWaveRemoteValueID *fieldValue = [[OpenZWaveRemoteValueID alloc] init];
+          [fieldValue read: inProtocol];
+          [self set_id: fieldValue];
+          [fieldValue release];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      case 2:
+        if (fieldType == TType_BOOL) {
+          BOOL fieldValue = [inProtocol readBool];
+          [self set_verify: fieldValue];
+        } else { 
+          [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        }
+        break;
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SetChangeVerified_args"];
+  if (___id_isset) {
+    if (___id != nil) {
+      [outProtocol writeFieldBeginWithName: @"_id" type: TType_STRUCT fieldID: 1];
+      [___id write: outProtocol];
+      [outProtocol writeFieldEnd];
+    }
+  }
+  if (___verify_isset) {
+    [outProtocol writeFieldBeginWithName: @"_verify" type: TType_BOOL fieldID: 2];
+    [outProtocol writeBool: ___verify];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SetChangeVerified_args("];
+  [ms appendString: @"_id:"];
+  [ms appendFormat: @"%@", ___id];
+  [ms appendString: @",_verify:"];
+  [ms appendFormat: @"%i", ___verify];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
+@interface OpenZWaveSetChangeVerified_result : NSObject <NSCoding> {
+}
+
+
+- (void) read: (id <TProtocol>) inProtocol;
+- (void) write: (id <TProtocol>) outProtocol;
+
+@end
+
+@implementation OpenZWaveSetChangeVerified_result
+
+- (id) initWithCoder: (NSCoder *) decoder
+{
+  self = [super init];
+  return self;
+}
+
+- (void) encodeWithCoder: (NSCoder *) encoder
+{
+}
+
+- (void) read: (id <TProtocol>) inProtocol
+{
+  NSString * fieldName;
+  int fieldType;
+  int fieldID;
+
+  [inProtocol readStructBeginReturningName: NULL];
+  while (true)
+  {
+    [inProtocol readFieldBeginReturningName: &fieldName type: &fieldType fieldID: &fieldID];
+    if (fieldType == TType_STOP) { 
+      break;
+    }
+    switch (fieldID)
+    {
+      default:
+        [TProtocolUtil skipType: fieldType onProtocol: inProtocol];
+        break;
+    }
+    [inProtocol readFieldEnd];
+  }
+  [inProtocol readStructEnd];
+}
+
+- (void) write: (id <TProtocol>) outProtocol {
+  [outProtocol writeStructBeginWithName: @"SetChangeVerified_result"];
+
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+}
+
+- (NSString *) description {
+  NSMutableString * ms = [NSMutableString stringWithString: @"SetChangeVerified_result("];
+  [ms appendString: @")"];
+  return [NSString stringWithString: ms];
+}
+
+@end
+
 @interface OpenZWavePressButton_args : NSObject <NSCoding> {
   OpenZWaveRemoteValueID * ___id;
 
@@ -45544,6 +45788,45 @@
   return [self recv_RefreshValue];
 }
 
+- (void) send_SetChangeVerified: (OpenZWaveRemoteValueID *) _id : (BOOL) _verify
+{
+  [outProtocol writeMessageBeginWithName: @"SetChangeVerified" type: TMessageType_CALL sequenceID: 0];
+  [outProtocol writeStructBeginWithName: @"SetChangeVerified_args"];
+  if (_id != nil)  {
+    [outProtocol writeFieldBeginWithName: @"_id" type: TType_STRUCT fieldID: 1];
+    [_id write: outProtocol];
+    [outProtocol writeFieldEnd];
+  }
+  [outProtocol writeFieldBeginWithName: @"_verify" type: TType_BOOL fieldID: 2];
+  [outProtocol writeBool: _verify];
+  [outProtocol writeFieldEnd];
+  [outProtocol writeFieldStop];
+  [outProtocol writeStructEnd];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+}
+
+- (void) recv_SetChangeVerified
+{
+  int msgType = 0;
+  [inProtocol readMessageBeginReturningName: nil type: &msgType sequenceID: NULL];
+  if (msgType == TMessageType_EXCEPTION) {
+    TApplicationException * x = [TApplicationException read: inProtocol];
+    [inProtocol readMessageEnd];
+    @throw x;
+  }
+  OpenZWaveSetChangeVerified_result * result = [[[OpenZWaveSetChangeVerified_result alloc] init] autorelease];
+  [result read: inProtocol];
+  [inProtocol readMessageEnd];
+  return;
+}
+
+- (void) SetChangeVerified: (OpenZWaveRemoteValueID *) _id : (BOOL) _verify
+{
+  [self send_SetChangeVerified: _id : _verify];
+  [self recv_SetChangeVerified];
+}
+
 - (void) send_PressButton: (OpenZWaveRemoteValueID *) _id
 {
   [outProtocol writeMessageBeginWithName: @"PressButton" type: TMessageType_CALL sequenceID: 0];
@@ -48611,6 +48894,14 @@
     [mMethodMap setValue: invocation forKey: @"RefreshValue"];
   }
   {
+    SEL s = @selector(process_SetChangeVerified_withSequenceID:inProtocol:outProtocol:);
+    NSMethodSignature * sig = [self methodSignatureForSelector: s];
+    NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
+    [invocation setSelector: s];
+    [invocation retainArguments];
+    [mMethodMap setValue: invocation forKey: @"SetChangeVerified"];
+  }
+  {
     SEL s = @selector(process_PressButton_withSequenceID:inProtocol:outProtocol:);
     NSMethodSignature * sig = [self methodSignatureForSelector: s];
     NSInvocation * invocation = [NSInvocation invocationWithMethodSignature: sig];
@@ -50415,6 +50706,23 @@
   OpenZWaveRefreshValue_result * result = [[OpenZWaveRefreshValue_result alloc] init];
   [result setSuccess: [mService RefreshValue: [args _id]]];
   [outProtocol writeMessageBeginWithName: @"RefreshValue"
+                                    type: TMessageType_REPLY
+                              sequenceID: seqID];
+  [result write: outProtocol];
+  [outProtocol writeMessageEnd];
+  [[outProtocol transport] flush];
+  [result release];
+  [args release];
+}
+
+- (void) process_SetChangeVerified_withSequenceID: (int32_t) seqID inProtocol: (id<TProtocol>) inProtocol outProtocol: (id<TProtocol>) outProtocol
+{
+  OpenZWaveSetChangeVerified_args * args = [[OpenZWaveSetChangeVerified_args alloc] init];
+  [args read: inProtocol];
+  [inProtocol readMessageEnd];
+  OpenZWaveSetChangeVerified_result * result = [[OpenZWaveSetChangeVerified_result alloc] init];
+  [mService SetChangeVerified: [args _id]: [args _verify]];
+  [outProtocol writeMessageBeginWithName: @"SetChangeVerified"
                                     type: TMessageType_REPLY
                               sequenceID: seqID];
   [result write: outProtocol];

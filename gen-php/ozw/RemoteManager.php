@@ -87,6 +87,7 @@ interface OpenZWave_RemoteManagerIf {
   public function SetValue_String($_id, $_value);
   public function SetValueListSelection($_id, $_selectedItem);
   public function RefreshValue($_id);
+  public function SetChangeVerified($_id, $_verify);
   public function PressButton($_id);
   public function ReleaseButton($_id);
   public function GetNumSwitchPoints($_id);
@@ -4091,6 +4092,55 @@ class OpenZWave_RemoteManagerClient implements OpenZWave_RemoteManagerIf {
       return $result->success;
     }
     throw new Exception("RefreshValue failed: unknown result");
+  }
+
+  public function SetChangeVerified($_id, $_verify)
+  {
+    $this->send_SetChangeVerified($_id, $_verify);
+    $this->recv_SetChangeVerified();
+  }
+
+  public function send_SetChangeVerified($_id, $_verify)
+  {
+    $args = new OpenZWave_RemoteManager_SetChangeVerified_args();
+    $args->_id = $_id;
+    $args->_verify = $_verify;
+    $bin_accel = ($this->output_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_write_binary');
+    if ($bin_accel)
+    {
+      thrift_protocol_write_binary($this->output_, 'SetChangeVerified', TMessageType::CALL, $args, $this->seqid_, $this->output_->isStrictWrite());
+    }
+    else
+    {
+      $this->output_->writeMessageBegin('SetChangeVerified', TMessageType::CALL, $this->seqid_);
+      $args->write($this->output_);
+      $this->output_->writeMessageEnd();
+      $this->output_->getTransport()->flush();
+    }
+  }
+
+  public function recv_SetChangeVerified()
+  {
+    $bin_accel = ($this->input_ instanceof TProtocol::$TBINARYPROTOCOLACCELERATED) && function_exists('thrift_protocol_read_binary');
+    if ($bin_accel) $result = thrift_protocol_read_binary($this->input_, 'OpenZWave_RemoteManager_SetChangeVerified_result', $this->input_->isStrictRead());
+    else
+    {
+      $rseqid = 0;
+      $fname = null;
+      $mtype = 0;
+
+      $this->input_->readMessageBegin($fname, $mtype, $rseqid);
+      if ($mtype == TMessageType::EXCEPTION) {
+        $x = new TApplicationException();
+        $x->read($this->input_);
+        $this->input_->readMessageEnd();
+        throw $x;
+      }
+      $result = new OpenZWave_RemoteManager_SetChangeVerified_result();
+      $result->read($this->input_);
+      $this->input_->readMessageEnd();
+    }
+    return;
   }
 
   public function PressButton($_id)
@@ -19091,6 +19141,153 @@ class OpenZWave_RemoteManager_RefreshValue_result {
       $xfer += $output->writeBool($this->success);
       $xfer += $output->writeFieldEnd();
     }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class OpenZWave_RemoteManager_SetChangeVerified_args {
+  static $_TSPEC;
+
+  public $_id = null;
+  public $_verify = null;
+
+  public function __construct($vals=null) {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        1 => array(
+          'var' => '_id',
+          'type' => TType::STRUCT,
+          'class' => 'OpenZWave_RemoteValueID',
+          ),
+        2 => array(
+          'var' => '_verify',
+          'type' => TType::BOOL,
+          ),
+        );
+    }
+    if (is_array($vals)) {
+      if (isset($vals['_id'])) {
+        $this->_id = $vals['_id'];
+      }
+      if (isset($vals['_verify'])) {
+        $this->_verify = $vals['_verify'];
+      }
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_SetChangeVerified_args';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        case 1:
+          if ($ftype == TType::STRUCT) {
+            $this->_id = new OpenZWave_RemoteValueID();
+            $xfer += $this->_id->read($input);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        case 2:
+          if ($ftype == TType::BOOL) {
+            $xfer += $input->readBool($this->_verify);
+          } else {
+            $xfer += $input->skip($ftype);
+          }
+          break;
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_SetChangeVerified_args');
+    if ($this->_id !== null) {
+      if (!is_object($this->_id)) {
+        throw new TProtocolException('Bad type in structure.', TProtocolException::INVALID_DATA);
+      }
+      $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
+      $xfer += $this->_id->write($output);
+      $xfer += $output->writeFieldEnd();
+    }
+    if ($this->_verify !== null) {
+      $xfer += $output->writeFieldBegin('_verify', TType::BOOL, 2);
+      $xfer += $output->writeBool($this->_verify);
+      $xfer += $output->writeFieldEnd();
+    }
+    $xfer += $output->writeFieldStop();
+    $xfer += $output->writeStructEnd();
+    return $xfer;
+  }
+
+}
+
+class OpenZWave_RemoteManager_SetChangeVerified_result {
+  static $_TSPEC;
+
+
+  public function __construct() {
+    if (!isset(self::$_TSPEC)) {
+      self::$_TSPEC = array(
+        );
+    }
+  }
+
+  public function getName() {
+    return 'RemoteManager_SetChangeVerified_result';
+  }
+
+  public function read($input)
+  {
+    $xfer = 0;
+    $fname = null;
+    $ftype = 0;
+    $fid = 0;
+    $xfer += $input->readStructBegin($fname);
+    while (true)
+    {
+      $xfer += $input->readFieldBegin($fname, $ftype, $fid);
+      if ($ftype == TType::STOP) {
+        break;
+      }
+      switch ($fid)
+      {
+        default:
+          $xfer += $input->skip($ftype);
+          break;
+      }
+      $xfer += $input->readFieldEnd();
+    }
+    $xfer += $input->readStructEnd();
+    return $xfer;
+  }
+
+  public function write($output) {
+    $xfer = 0;
+    $xfer += $output->writeStructBegin('RemoteManager_SetChangeVerified_result');
     $xfer += $output->writeFieldStop();
     $xfer += $output->writeStructEnd();
     return $xfer;

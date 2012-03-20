@@ -619,6 +619,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void SetChangeVerified(const RemoteValueID& _id, const bool _verify) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->SetChangeVerified(_id.toValueID(), (bool) _verify);
+	g_criticalSection.unlock();
+  }
+
   bool PressButton(const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();

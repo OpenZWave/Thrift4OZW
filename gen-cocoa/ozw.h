@@ -713,6 +713,7 @@ enum OpenZWaveDriverControllerCommand {
 - (BOOL) SetValue_String: (OpenZWaveRemoteValueID *) _id : (NSString *) _value;  // throws TException
 - (BOOL) SetValueListSelection: (OpenZWaveRemoteValueID *) _id : (NSString *) _selectedItem;  // throws TException
 - (BOOL) RefreshValue: (OpenZWaveRemoteValueID *) _id;  // throws TException
+- (void) SetChangeVerified: (OpenZWaveRemoteValueID *) _id : (BOOL) _verify;  // throws TException
 - (BOOL) PressButton: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (BOOL) ReleaseButton: (OpenZWaveRemoteValueID *) _id;  // throws TException
 - (uint8_t) GetNumSwitchPoints: (OpenZWaveRemoteValueID *) _id;  // throws TException

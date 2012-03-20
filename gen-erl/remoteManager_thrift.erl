@@ -707,6 +707,15 @@ function_info('RefreshValue', reply_type) ->
 function_info('RefreshValue', exceptions) ->
   {struct, []}
 ;
+% SetChangeVerified(This, _id, _verify)
+function_info('SetChangeVerified', params_type) ->
+  {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}, {2, bool}]}
+;
+function_info('SetChangeVerified', reply_type) ->
+  {struct, []};
+function_info('SetChangeVerified', exceptions) ->
+  {struct, []}
+;
 % PressButton(This, _id)
 function_info('PressButton', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}

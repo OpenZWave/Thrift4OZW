@@ -8521,6 +8521,101 @@ OpenZWave.RemoteManager_RefreshValue_result.prototype.write = function(output) {
   return;
 };
 
+OpenZWave.RemoteManager_SetChangeVerified_args = function(args) {
+  this._id = null;
+  this._verify = null;
+  if (args) {
+    if (args._id !== undefined) {
+      this._id = args._id;
+    }
+    if (args._verify !== undefined) {
+      this._verify = args._verify;
+    }
+  }
+};
+OpenZWave.RemoteManager_SetChangeVerified_args.prototype = {};
+OpenZWave.RemoteManager_SetChangeVerified_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRUCT) {
+        this._id = new OpenZWave.RemoteValueID();
+        this._id.read(input);
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.BOOL) {
+        this._verify = input.readBool().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetChangeVerified_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetChangeVerified_args');
+  if (this._id) {
+    output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
+    this._id.write(output);
+    output.writeFieldEnd();
+  }
+  if (this._verify) {
+    output.writeFieldBegin('_verify', Thrift.Type.BOOL, 2);
+    output.writeBool(this._verify);
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetChangeVerified_result = function(args) {
+};
+OpenZWave.RemoteManager_SetChangeVerified_result.prototype = {};
+OpenZWave.RemoteManager_SetChangeVerified_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    input.skip(ftype);
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+OpenZWave.RemoteManager_SetChangeVerified_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetChangeVerified_result');
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 OpenZWave.RemoteManager_PressButton_args = function(args) {
   this._id = null;
   if (args) {
@@ -18005,6 +18100,38 @@ OpenZWave.RemoteManagerClient.prototype.recv_RefreshValue = function() {
     return result.success;
   }
   throw 'RefreshValue failed: unknown result';
+};
+OpenZWave.RemoteManagerClient.prototype.SetChangeVerified = function(_id, _verify) {
+  this.send_SetChangeVerified(_id, _verify);
+  this.recv_SetChangeVerified();
+};
+
+OpenZWave.RemoteManagerClient.prototype.send_SetChangeVerified = function(_id, _verify) {
+  this.output.writeMessageBegin('SetChangeVerified', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetChangeVerified_args();
+  args._id = _id;
+  args._verify = _verify;
+  args.write(this.output);
+  this.output.writeMessageEnd();
+  return this.output.getTransport().flush();
+};
+
+OpenZWave.RemoteManagerClient.prototype.recv_SetChangeVerified = function() {
+  var ret = this.input.readMessageBegin();
+  var fname = ret.fname;
+  var mtype = ret.mtype;
+  var rseqid = ret.rseqid;
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(this.input);
+    this.input.readMessageEnd();
+    throw x;
+  }
+  var result = new OpenZWave.RemoteManager_SetChangeVerified_result();
+  result.read(this.input);
+  this.input.readMessageEnd();
+
+  return;
 };
 OpenZWave.RemoteManagerClient.prototype.PressButton = function(_id) {
   this.send_PressButton(_id);

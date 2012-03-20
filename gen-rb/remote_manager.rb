@@ -1153,6 +1153,20 @@ require 'ozw_types'
             raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'RefreshValue failed: unknown result')
           end
 
+          def SetChangeVerified(_id, _verify)
+            send_SetChangeVerified(_id, _verify)
+            recv_SetChangeVerified()
+          end
+
+          def send_SetChangeVerified(_id, _verify)
+            send_message('SetChangeVerified', SetChangeVerified_args, :_id => _id, :_verify => _verify)
+          end
+
+          def recv_SetChangeVerified()
+            result = receive_message(SetChangeVerified_result)
+            return
+          end
+
           def PressButton(_id)
             send_PressButton(_id)
             return recv_PressButton()
@@ -2554,6 +2568,13 @@ require 'ozw_types'
             result = RefreshValue_result.new()
             result.success = @handler.RefreshValue(args._id)
             write_result(result, oprot, 'RefreshValue', seqid)
+          end
+
+          def process_SetChangeVerified(seqid, iprot, oprot)
+            args = read_args(iprot, SetChangeVerified_args)
+            result = SetChangeVerified_result.new()
+            @handler.SetChangeVerified(args._id, args._verify)
+            write_result(result, oprot, 'SetChangeVerified', seqid)
           end
 
           def process_PressButton(seqid, iprot, oprot)
@@ -5507,6 +5528,39 @@ require 'ozw_types'
 
           FIELDS = {
             SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class SetChangeVerified_args
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+          _ID = 1
+          _VERIFY = 2
+
+          FIELDS = {
+            _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => OpenZWave::RemoteValueID},
+            _VERIFY => {:type => ::Thrift::Types::BOOL, :name => '_verify'}
+          }
+
+          def struct_fields; FIELDS; end
+
+          def validate
+          end
+
+          ::Thrift::Struct.generate_accessors self
+        end
+
+        class SetChangeVerified_result
+          include ::Thrift::Struct, ::Thrift::Struct_Union
+
+          FIELDS = {
+
           }
 
           def struct_fields; FIELDS; end
