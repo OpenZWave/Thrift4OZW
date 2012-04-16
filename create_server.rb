@@ -85,7 +85,7 @@ files = [
     File.join(OZWRoot, 'cpp', "src", "Manager.h")
 ]
 puts "Parsing:" + files.join("\n\t")
-RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES)
+RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES, :cxxflags => "-DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H")
 
 # read skeleton file in memory as an array
 output = File.open("gen-cpp/RemoteManager_server.skeleton.cpp").readlines

@@ -1,26 +1,32 @@
-*** gen-cpp/RemoteManager_server.cpp.orig	2012-03-12 15:32:33.366163241 +0200
---- gen-cpp/RemoteManager_server.cpp.patched	2012-02-29 16:58:31.394945828 +0200
+*** gen-cpp/RemoteManager_server.cpp.orig	2012-04-16 12:30:14.455818161 +0300
+--- gen-cpp/RemoteManager_server.cpp.patched	2012-03-27 20:25:01.384749101 +0300
 ***************
-*** 1,7 ****
+*** 1,11 ****
   // Automatically generated OpenZWave::Manager_server wrapper
 ! // (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
   
   #include "RemoteManager.h"
-  #include <protocol/TBinaryProtocol.h>
-  #include <server/TSimpleServer.h>
-  #include <transport/TServerSocket.h>
---- 1,7 ----
+! #include <thrift/protocol/TBinaryProtocol.h>
+! #include <thrift/server/TSimpleServer.h>
+! #include <thrift/transport/TServerSocket.h>
+! #include <thrift/transport/TBufferTransports.h>
+  
+  using namespace ::apache::thrift;
+  using namespace ::apache::thrift::protocol;
+--- 1,11 ----
   // Automatically generated OpenZWave::Manager_server wrapper
 ! // (c) 2011-2012 Elias Karakoulakis <elias.karakoulakis@gmail.com>
   
   #include "RemoteManager.h"
-  #include <protocol/TBinaryProtocol.h>
-  #include <server/TSimpleServer.h>
-  #include <transport/TServerSocket.h>
-***************
-*** 15,25 ****
-  using boost::shared_ptr;
+! #include <protocol/TBinaryProtocol.h>
+! #include <server/TSimpleServer.h>
+! #include <transport/TServerSocket.h>
+! #include <transport/TBufferTransports.h>
   
+  using namespace ::apache::thrift;
+  using namespace ::apache::thrift::protocol;
+***************
+*** 17,23 ****
   using namespace  ::OpenZWave;
   
   void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
@@ -28,11 +34,7 @@
   }
   
   class RemoteManagerHandler : virtual public RemoteManagerIf {
-   public:
-    RemoteManagerHandler() {
---- 15,32 ----
-  using boost::shared_ptr;
-  
+--- 17,30 ----
   using namespace  ::OpenZWave;
   
   void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
@@ -47,12 +49,8 @@
   }
   
   class RemoteManagerHandler : virtual public RemoteManagerIf {
-   public:
-    RemoteManagerHandler() {
 ***************
-*** 258,271 ****
-  	_return =  mgr->GetNodeType((::uint32 const) _homeId, (::uint8 const) _nodeId);
-  	g_criticalSection.unlock();
+*** 260,269 ****
     }
   
     void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
@@ -63,11 +61,7 @@
     }
   
     void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 265,283 ----
-  	_return =  mgr->GetNodeType((::uint32 const) _homeId, (::uint8 const) _nodeId);
-  	g_criticalSection.unlock();
+--- 267,281 ----
     }
   
     void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId) {
@@ -83,12 +77,8 @@
     }
   
     void GetNodeManufacturerName(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
 ***************
-*** 523,537 ****
-  	g_criticalSection.lock();
-  	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (::int32*) &_return.o_value);
+*** 525,535 ****
   	g_criticalSection.unlock();
     }
   
@@ -100,11 +90,7 @@
     }
   
     void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 535,553 ----
-  	g_criticalSection.lock();
-  	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (::int32*) &_return.o_value);
+--- 537,551 ----
   	g_criticalSection.unlock();
     }
   
@@ -120,12 +106,31 @@
     }
   
     void GetValueFloatPrecision(Bool_UInt8& _return, const RemoteValueID& _id) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
 ***************
-*** 700,713 ****
-  	g_criticalSection.unlock();
-  	return(function_result);
+*** 604,613 ****
+    }
+  
+    void SetChangeVerified(const RemoteValueID& _id, const bool _verify) {
+! 	Manager* mgr = Manager::Get();
+! 	g_criticalSection.lock();
+! 	 mgr->SetChangeVerified(_id.toValueID(), (bool) _verify);
+! 	g_criticalSection.unlock();
+    }
+  
+    bool PressButton(const RemoteValueID& _id) {
+--- 620,629 ----
+    }
+  
+    void SetChangeVerified(const RemoteValueID& _id, const bool _verify) {
+!     Manager* mgr = Manager::Get();
+!     g_criticalSection.lock();
+!      mgr->SetChangeVerified(_id.toValueID(), (bool) _verify);
+!     g_criticalSection.unlock();
+    }
+  
+    bool PressButton(const RemoteValueID& _id) {
+***************
+*** 709,718 ****
     }
   
     void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
@@ -136,11 +141,7 @@
     }
   
     int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 716,734 ----
-  	g_criticalSection.unlock();
-  	return(function_result);
+--- 725,739 ----
     }
   
     void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
@@ -156,12 +157,8 @@
     }
   
     int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
 ***************
-*** 774,787 ****
-  	g_criticalSection.unlock();
-  	return(function_result);
+*** 783,792 ****
     }
   
     void GetAllScenes(GetAllScenesReturnStruct& _return) {
@@ -172,11 +169,7 @@
     }
   
     int8_t CreateScene() {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 795,813 ----
-  	g_criticalSection.unlock();
-  	return(function_result);
+--- 804,818 ----
     }
   
     void GetAllScenes(GetAllScenesReturnStruct& _return) {
@@ -192,12 +185,8 @@
     }
   
     int8_t CreateScene() {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
 ***************
-*** 869,882 ****
-  	g_criticalSection.unlock();
-  	return(function_result);
+*** 878,887 ****
     }
   
     void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId) {
@@ -208,11 +197,7 @@
     }
   
     void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
---- 895,910 ----
-  	g_criticalSection.unlock();
-  	return(function_result);
+--- 904,915 ----
     }
   
     void SceneGetValues(SceneGetValuesReturnStruct& _return, const int8_t _sceneId) {
@@ -225,12 +210,8 @@
     }
   
     void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
-  	Manager* mgr = Manager::Get();
-  	g_criticalSection.lock();
 ***************
-*** 1033,1044 ****
-  	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
-  	g_criticalSection.unlock();
+*** 1042,1049 ****
     }
   
     void SendAllValues() {
@@ -239,19 +220,17 @@
     }
   
   };
-  
-  // int main(int argc, char **argv) {
---- 1061,1073 ----
-  	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
-  	g_criticalSection.unlock();
+--- 1070,1082 ----
     }
   
     void SendAllValues() {
 !     g_criticalSection.lock();
 !     send_all_values();
 !     g_criticalSection.unlock();
+!   }
+! 
+!   void ping() {
+!     // pong...
     }
   
   };
-  
-  // int main(int argc, char **argv) {

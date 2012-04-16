@@ -620,10 +620,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void SetChangeVerified(const RemoteValueID& _id, const bool _verify) {
-	Manager* mgr = Manager::Get();
-	g_criticalSection.lock();
-	 mgr->SetChangeVerified(_id.toValueID(), (bool) _verify);
-	g_criticalSection.unlock();
+    Manager* mgr = Manager::Get();
+    g_criticalSection.lock();
+     mgr->SetChangeVerified(_id.toValueID(), (bool) _verify);
+    g_criticalSection.unlock();
   }
 
   bool PressButton(const RemoteValueID& _id) {
@@ -1070,9 +1070,8 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void SendAllValues() {
-    g_criticalSection.lock();
-    send_all_values();
-    g_criticalSection.unlock();
+    // Your implementation goes here
+    printf("SendAllValues\n");
   }
 
 };

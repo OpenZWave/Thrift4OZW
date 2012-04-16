@@ -42,6 +42,7 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #include <boost/program_options/variables_map.hpp>
 // alse we're using boost's filesystem classes
 #include <boost/filesystem.hpp>
+#include <boost/lexical_cast.hpp>
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -77,8 +78,8 @@ static list<NodeInfo*>     g_nodes;
 // OpenZWave includes
 #include "Notification.h"
 
-// PocoStromp
-#include "PocoStomp.h"
+// Stromp client
+#include "BoostStomp.hpp"
 
 static uint32 g_homeId = 0;
 static bool   g_initFailed = false;
@@ -88,7 +89,7 @@ static boost::condition_variable  initCond ;
 static boost::mutex                     initMutex;
 
 // STOMP statics
-static STOMP::PocoStomp* stomp_client;
+static STOMP::BoostStomp* stomp_client;
 static string*          notifications_topic = new string("/queue/zwave/monitor");
 
 //-----------------------------------------------------------------------------
@@ -354,7 +355,7 @@ int main(int argc, char *argv[]) {
 	string  stomp_host, ozw_port, ozw_conf, ozw_user;
     int     stomp_port, thrift_port;
     //
-    fs::path current_dir = fs::path(get_current_dir_name());
+    fs::path current_dir = fs::path(get_current_dir_name()) / "/";
     fs::path ozw_config_dir = current_dir.parent_path() / "open-zwave-read-only/config/";
     //
     try {        
@@ -389,8 +390,8 @@ int main(int argc, char *argv[]) {
     // ------------------
     try {
         // connect to STOMP server in order to send openzwave notifications 
-        stomp_client = new STOMP::PocoStomp(stomp_host, stomp_port);
-        stomp_client->connect();
+        stomp_client = new STOMP::BoostStomp(stomp_host, stomp_port);
+        //stomp_client->connect();
     } 
     catch (exception& e) 
     {
