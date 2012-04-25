@@ -32,6 +32,7 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #include <server/TSimpleServer.h>
 #include <transport/TServerSocket.h>
 #include <transport/TBufferTransports.h>
+
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -391,7 +392,7 @@ int main(int argc, char *argv[]) {
     try {
         // connect to STOMP server in order to send openzwave notifications 
         stomp_client = new STOMP::BoostStomp(stomp_host, stomp_port);
-        //stomp_client->connect();
+        stomp_client->start();
     } 
     catch (exception& e) 
     {
