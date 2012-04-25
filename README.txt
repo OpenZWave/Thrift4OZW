@@ -10,15 +10,17 @@ This project aims to be a fully functional interface to the OpenZWave library
 OpenZWave's notifications over the network (since Thrift lacks asynchronous
 calls other than exceptions)
 
-Being an experimental project, I have used quite a lot of external tools & libs 
-but they're easy to get rid of if we need to get it going anywhere. These libs are:
+Being an experimental project, I have used some external tools & libs. These are:
 
-
-STOMP client: (PocoStomp.*, Stomp.*)
+BoostStomp - a C++ STOMP client:
 ------------------------------------
-SMC - The State Machine Compiler: in order to model the STOMP client 
-state machine
-PoCo libraries - a very easy and intuitive C++ toolkit ( http://pocoproject.org)
+A homegrown C++ client for STOMP, built using only the Boost libraries.
+Makes use of Boost's ASIO (Asynchronous I/O) model as well as some other 
+useful Boost facilities. It provides the asynchronous notification mechanism 
+used to pass OpenZWave notifications to Thrift4OZW. For more info about 
+BoostStomp, check out its homepage:
+
+    https://github.com/ekarak/BoostStomp
 
 
 Thrift Server Creator (create_server.rb)
