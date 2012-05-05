@@ -220,17 +220,13 @@
     }
   
   };
---- 1070,1082 ----
+--- 1070,1078 ----
     }
   
     void SendAllValues() {
 !     g_criticalSection.lock();
 !     send_all_values();
 !     g_criticalSection.unlock();
-!   }
-! 
-!   void ping() {
-!     // pong...
     }
   
   };

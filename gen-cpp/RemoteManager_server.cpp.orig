@@ -1046,6 +1046,11 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
     printf("SendAllValues\n");
   }
 
+  void ping() {
+    // Your implementation goes here
+    printf("ping\n");
+  }
+
 };
 
 // int main(int argc, char **argv) {

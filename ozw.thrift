@@ -666,4 +666,5 @@ service RemoteManager {
 
     // ----------------------- ekarak: and a little extra candy server for missing functionality from OZW
     void SendAllValues();
+    void ping();
 }

@@ -78,18 +78,15 @@ static list<NodeInfo*>     g_nodes;
 
 // OpenZWave includes
 #include "Notification.h"
-
-// Stromp client
-#include "BoostStomp.hpp"
-
 static uint32 g_homeId = 0;
 static bool   g_initFailed = false;
 //
 
 static boost::condition_variable  initCond ;
-static boost::mutex                     initMutex;
+static boost::mutex               initMutex;
 
-// STOMP statics
+// Stromp client
+#include "BoostStomp.hpp"
 static STOMP::BoostStomp* stomp_client;
 static string*          notifications_topic = new string("/queue/zwave/monitor");
 

@@ -47,8 +47,10 @@ LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.a
 LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.so
 LIBUSB := -ludev
 LIBBOOST := -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
+LIBBOOST_STATIC := -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
 LIBTHRIFT := -lthrift
 LIBBOOSTSTOMP := -lbooststomp
+LIBBOOSTSTOMP_STATIC := $(BOOSTSTOMP)/libbooststomp.a
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
 #LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/mac/*.a)
@@ -93,8 +95,8 @@ openzwave: $(LIBZWAVE_STATIC) $(LIBZWAVE_DYNAMIC)
 booststomp:
 	cd $(BOOSTSTOMP); make
 
-#ozwd.static: Main.o BoostStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC)
-#	$(LD) -static -static-libgcc -o $@ $(LDFLAGS) Main.o  BoostStomp.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS) $(LIBZWAVE_STATIC)
+ozwd.static: Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC)
+	$(CXX) -static -static-libgcc -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o  $(LIBZWAVE_STATIC) $(LIBBOOSTSTOMP_STATIC) $(LIBBOOST_STATIC) -lpthread -ludev -lthrift -lrt
 
 ozwd:   Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) 
 	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS) $(LIBZWAVE_DYNAMIC)	 
