@@ -24,7 +24,7 @@ This little script is a nice complement to Apache Thrift. All it does is to pars
 two sets of files: 1) the C++ server skeleton file produced by Thrift, and 
 2) the headers of the C++ library you want to expose with Thrift. 
 It uses the excellent tool "RbGCCXML" to build an XML-like tree of the two 
-interfaces and  binds them together (with a little help from you of course!).
+interfaces and binds them together (with a little help from you of course!).
 
 So say you want to expose your shiny app/lib to the world. Only problem is 
 it's API is of monstrous size (hundreds of methods) and you need it quick. 

@@ -99,6 +99,33 @@ struct GetDriverStatisticsReturnStruct {
     1:DriverData _data;
 }
 
+struct CommandClassData {
+	1:byte m_commandClassId;
+	2:i32  m_sentCnt;
+	3:i32  m_receivedCnt;
+}
+
+struct NodeData {
+	1:i32 m_sentCnt;
+	2:i32 m_sentFailed;
+	3:i32 m_retries;
+	4:i32 m_receivedCnt;
+	5:i32 m_receivedDups;
+	6:i32 m_rtt;                                   // last round trip if successful in ms
+	7:string m_sentTS;
+	8:string m_receivedTS;
+	9:i32 m_lastRTT;
+	10:i32 m_averageRTT;                            // ms
+	11:byte m_quality;                                // Node quality measure
+	//12:byte[254] m_lastReceivedMessage;
+	12:list<byte>  m_lastReceivedMessage;
+	13:list<CommandClassData> m_ccData;
+}
+		
+struct GetNodeStatisticsReturnStruct {
+    1:NodeData _data;
+}
+
 struct GetSwitchPointReturnStruct {
     1:bool retval;
     2:byte o_hours;
@@ -339,6 +366,12 @@ service RemoteManager {
     //bool GetNodeClassInformation( uint32 const _homeId, uint8 const _nodeId, uint8 const _commandClassId, string *_className = NULL, uint8 *_classVersion = NULL);
     Bool_GetNodeClassInformation GetNodeClassInformation( 1:i32 _homeId, 2:byte _nodeId, 3:byte _commandClassId);
         
+	//bool IsNodeAwake( uint32 const _homeId, uint8 const _nodeId );
+	bool IsNodeAwake( 1:i32 _homeId, 2: byte _nodeId );
+	
+       //bool IsNodeFailed( uint32 const _homeId, uint8 const _nodeId );
+       bool IsNodeFailed( 1:i32 _homeId, 2: byte _nodeId );
+		
 	//-----------------------------------------------------------------------------
 	// Values
 	//-----------------------------------------------------------------------------
@@ -526,6 +559,16 @@ service RemoteManager {
 	//bool CancelControllerCommand( uint32 const _homeId );
 	bool CancelControllerCommand( 1:i32 _homeId );
 
+        //-----------------------------------------------------------------------------
+        // Network commands
+        //-----------------------------------------------------------------------------
+	
+	//void TestNetworkNode( uint32 const _homeId, uint8 const _nodeId, uint32 const _count );
+	void TestNetworkNode( 1:i32 _homeId, 2: byte _nodeId, 3: i32 _count );
+	
+	//void TestNetwork( uint32 const _homeId, uint32 const _count );
+	void TestNetwork( 1:i32 _homeId, 2: i32 _count );
+
 	//-----------------------------------------------------------------------------
 	// Scene commands
 	//-----------------------------------------------------------------------------
@@ -535,6 +578,9 @@ service RemoteManager {
 	//uint8 GetAllScenes( uint8** _sceneIds );
     // ekarak: Notice change of return argument
     GetAllScenesReturnStruct GetAllScenes( );
+
+	// void RemoveAllScenes( uint32 const _homeId );
+	void RemoveAllScenes( 1:i32 _homeId );
 
 	//uint8 CreateScene();
     byte CreateScene();
@@ -661,8 +707,10 @@ service RemoteManager {
 	// Statistics interface
 	//-----------------------------------------------------------------------------
 	//void GetDriverStatistics( uint32 const _homeId, Driver::DriverData* _data );
-    GetDriverStatisticsReturnStruct GetDriverStatistics( 1:i32 _homeId );
+	GetDriverStatisticsReturnStruct GetDriverStatistics( 1:i32 _homeId );
 
+       //void GetNodeStatistics( uint32 const _homeId, uint8 const _nodeId, Node::NodeData* _data );
+	GetNodeStatisticsReturnStruct GetNodeStatistics( 1:i32 _homeId, 2:byte _nodeId);
 
     // ----------------------- ekarak: and a little extra candy server for missing functionality from OZW
     void SendAllValues();

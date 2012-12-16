@@ -379,6 +379,22 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
+  bool IsNodeAwake(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsNodeAwake((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  bool IsNodeFailed(const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	bool function_result =  mgr->IsNodeFailed((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
   void GetValueLabel(std::string& _return, const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -774,6 +790,20 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void TestNetworkNode(const int32_t _homeId, const int8_t _nodeId, const int32_t _count) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->TestNetworkNode((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint32 const) _count);
+	g_criticalSection.unlock();
+  }
+
+  void TestNetwork(const int32_t _homeId, const int32_t _count) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->TestNetwork((::uint32 const) _homeId, (::uint32 const) _count);
+	g_criticalSection.unlock();
+  }
+
   int8_t GetNumScenes() {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -786,6 +816,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	_return.retval =  mgr->GetAllScenes((::uint8**) &_return._sceneIds);
+	g_criticalSection.unlock();
+  }
+
+  void RemoveAllScenes(const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->RemoveAllScenes((::uint32 const) _homeId);
 	g_criticalSection.unlock();
   }
 
@@ -1038,6 +1075,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	 mgr->GetDriverStatistics((::uint32 const) _homeId, (OpenZWave::Driver::DriverData*) &_return._data);
+	g_criticalSection.unlock();
+  }
+
+  void GetNodeStatistics(GetNodeStatisticsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->GetNodeStatistics((::uint32 const) _homeId, (::uint8 const) _nodeId, (OpenZWave::Node::NodeData*) &_return._data);
 	g_criticalSection.unlock();
   }
 

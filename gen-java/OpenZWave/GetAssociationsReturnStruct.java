@@ -423,13 +423,13 @@ public class GetAssociationsReturnStruct implements org.apache.thrift.TBase<GetA
           case 2: // O_ASSOCIATIONS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list16 = iprot.readListBegin();
-                struct.o_associations = new ArrayList<Byte>(_list16.size);
-                for (int _i17 = 0; _i17 < _list16.size; ++_i17)
+                org.apache.thrift.protocol.TList _list32 = iprot.readListBegin();
+                struct.o_associations = new ArrayList<Byte>(_list32.size);
+                for (int _i33 = 0; _i33 < _list32.size; ++_i33)
                 {
-                  byte _elem18; // required
-                  _elem18 = iprot.readByte();
-                  struct.o_associations.add(_elem18);
+                  byte _elem34; // optional
+                  _elem34 = iprot.readByte();
+                  struct.o_associations.add(_elem34);
                 }
                 iprot.readListEnd();
               }
@@ -460,9 +460,9 @@ public class GetAssociationsReturnStruct implements org.apache.thrift.TBase<GetA
         oprot.writeFieldBegin(O_ASSOCIATIONS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, struct.o_associations.size()));
-          for (byte _iter19 : struct.o_associations)
+          for (byte _iter35 : struct.o_associations)
           {
-            oprot.writeByte(_iter19);
+            oprot.writeByte(_iter35);
           }
           oprot.writeListEnd();
         }
@@ -499,9 +499,9 @@ public class GetAssociationsReturnStruct implements org.apache.thrift.TBase<GetA
       if (struct.isSetO_associations()) {
         {
           oprot.writeI32(struct.o_associations.size());
-          for (byte _iter20 : struct.o_associations)
+          for (byte _iter36 : struct.o_associations)
           {
-            oprot.writeByte(_iter20);
+            oprot.writeByte(_iter36);
           }
         }
       }
@@ -517,13 +517,13 @@ public class GetAssociationsReturnStruct implements org.apache.thrift.TBase<GetA
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list21 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
-          struct.o_associations = new ArrayList<Byte>(_list21.size);
-          for (int _i22 = 0; _i22 < _list21.size; ++_i22)
+          org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
+          struct.o_associations = new ArrayList<Byte>(_list37.size);
+          for (int _i38 = 0; _i38 < _list37.size; ++_i38)
           {
-            byte _elem23; // required
-            _elem23 = iprot.readByte();
-            struct.o_associations.add(_elem23);
+            byte _elem39; // optional
+            _elem39 = iprot.readByte();
+            struct.o_associations.add(_elem39);
           }
         }
         struct.setO_associationsIsSet(true);

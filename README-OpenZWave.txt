@@ -22,8 +22,9 @@ to the OpenZWave library (a precompiled binary is included)
 - Take a look at ozw.thrift, it's the Thrift interface definition file. All of the useful 
 public Manager methods (130 out of 137) are exposed. (Constructors/destructors are not exposed)
 
-- Install SMC (http://smc.sf.net) , and Poco  (http://www.pocoproject.org), both development 
-versions (with headers)
+- Make sure you have the necessary required libraries (plus headers)
+	BoostStomp: sister project , a tiny c++ STOMP client library based on Boost
+	Apache Thrift: http://thrift.apache.org, grab sources, configure and make install
 
 - I assume you have Ruby >=1.9.1 installed with RbGCCXML and bit-struct (gem install rbgccxml bit-struct)
 

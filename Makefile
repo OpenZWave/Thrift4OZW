@@ -22,9 +22,12 @@ RELEASE_CFLAGS  := -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-unknown-prag
 DEBUG_LDFLAGS	:= -g
 
 # change directories if needed
-OPENZWAVE := ../open-zwave
-THRIFT := /usr/local/include/thrift
-BOOSTSTOMP := ../BoostStomp
+OPENZWAVE	:= ../open-zwave
+OPENZWAVE_INC	:= $(OPENZWAVE)/cpp/src
+THRIFT		:= /usr/local/include/thrift
+THRIFT_INC	:= /usr/local/include/thrift
+BOOSTSTOMP 	:= ../BoostStomp
+BOOSTSTOMP_INC	:= $(BOOSTSTOMP)
 
 CFLAGS	:= -c $($(TARGET)_CFLAGS) 
 LDFLAGS	:= $($(TARGET)_LDFLAGS) \
@@ -37,7 +40,7 @@ LDFLAGS	:= $($(TARGET)_LDFLAGS) \
 INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 	-I $(OPENZWAVE)/cpp/src/value_classes/ -I $(OPENZWAVE)/cpp/src/platform/ \
 	-I $(OPENZWAVE)/cpp/src/platform/unix -I $(OPENZWAVE)/cpp/tinyxml/ \
-    -I $(THRIFT) -I $(BOOSTSTOMP) \
+    -I $(THRIFT_INC) -I $(BOOSTSTOMP_INC) \
 	-I . -I gen-cpp/
 
 # Remove comment below for gnutls support

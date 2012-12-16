@@ -163,6 +163,82 @@ module OpenZWave
     ::Thrift::Struct.generate_accessors self
   end
 
+  class CommandClassData
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    M_COMMANDCLASSID = 1
+    M_SENTCNT = 2
+    M_RECEIVEDCNT = 3
+
+    FIELDS = {
+      M_COMMANDCLASSID => {:type => ::Thrift::Types::BYTE, :name => 'm_commandClassId'},
+      M_SENTCNT => {:type => ::Thrift::Types::I32, :name => 'm_sentCnt'},
+      M_RECEIVEDCNT => {:type => ::Thrift::Types::I32, :name => 'm_receivedCnt'}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class NodeData
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    M_SENTCNT = 1
+    M_SENTFAILED = 2
+    M_RETRIES = 3
+    M_RECEIVEDCNT = 4
+    M_RECEIVEDDUPS = 5
+    M_RTT = 6
+    M_SENTTS = 7
+    M_RECEIVEDTS = 8
+    M_LASTRTT = 9
+    M_AVERAGERTT = 10
+    M_QUALITY = 11
+    M_LASTRECEIVEDMESSAGE = 12
+    M_CCDATA = 13
+
+    FIELDS = {
+      M_SENTCNT => {:type => ::Thrift::Types::I32, :name => 'm_sentCnt'},
+      M_SENTFAILED => {:type => ::Thrift::Types::I32, :name => 'm_sentFailed'},
+      M_RETRIES => {:type => ::Thrift::Types::I32, :name => 'm_retries'},
+      M_RECEIVEDCNT => {:type => ::Thrift::Types::I32, :name => 'm_receivedCnt'},
+      M_RECEIVEDDUPS => {:type => ::Thrift::Types::I32, :name => 'm_receivedDups'},
+      M_RTT => {:type => ::Thrift::Types::I32, :name => 'm_rtt'},
+      M_SENTTS => {:type => ::Thrift::Types::STRING, :name => 'm_sentTS'},
+      M_RECEIVEDTS => {:type => ::Thrift::Types::STRING, :name => 'm_receivedTS'},
+      M_LASTRTT => {:type => ::Thrift::Types::I32, :name => 'm_lastRTT'},
+      M_AVERAGERTT => {:type => ::Thrift::Types::I32, :name => 'm_averageRTT'},
+      M_QUALITY => {:type => ::Thrift::Types::BYTE, :name => 'm_quality'},
+      M_LASTRECEIVEDMESSAGE => {:type => ::Thrift::Types::LIST, :name => 'm_lastReceivedMessage', :element => {:type => ::Thrift::Types::BYTE}},
+      M_CCDATA => {:type => ::Thrift::Types::LIST, :name => 'm_ccData', :element => {:type => ::Thrift::Types::STRUCT, :class => ::OpenZWave::CommandClassData}}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
+  class GetNodeStatisticsReturnStruct
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    _DATA = 1
+
+    FIELDS = {
+      _DATA => {:type => ::Thrift::Types::STRUCT, :name => '_data', :class => ::OpenZWave::NodeData}
+    }
+
+    def struct_fields; FIELDS; end
+
+    def validate
+    end
+
+    ::Thrift::Struct.generate_accessors self
+  end
+
   class GetSwitchPointReturnStruct
     include ::Thrift::Struct, ::Thrift::Struct_Union
     RETVAL = 1

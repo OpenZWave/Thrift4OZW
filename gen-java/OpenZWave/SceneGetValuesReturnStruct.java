@@ -423,14 +423,14 @@ public class SceneGetValuesReturnStruct implements org.apache.thrift.TBase<Scene
           case 2: // O_VALUE
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list32 = iprot.readListBegin();
-                struct.o_value = new ArrayList<RemoteValueID>(_list32.size);
-                for (int _i33 = 0; _i33 < _list32.size; ++_i33)
+                org.apache.thrift.protocol.TList _list48 = iprot.readListBegin();
+                struct.o_value = new ArrayList<RemoteValueID>(_list48.size);
+                for (int _i49 = 0; _i49 < _list48.size; ++_i49)
                 {
-                  RemoteValueID _elem34; // required
-                  _elem34 = new RemoteValueID();
-                  _elem34.read(iprot);
-                  struct.o_value.add(_elem34);
+                  RemoteValueID _elem50; // optional
+                  _elem50 = new RemoteValueID();
+                  _elem50.read(iprot);
+                  struct.o_value.add(_elem50);
                 }
                 iprot.readListEnd();
               }
@@ -461,9 +461,9 @@ public class SceneGetValuesReturnStruct implements org.apache.thrift.TBase<Scene
         oprot.writeFieldBegin(O_VALUE_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, struct.o_value.size()));
-          for (RemoteValueID _iter35 : struct.o_value)
+          for (RemoteValueID _iter51 : struct.o_value)
           {
-            _iter35.write(oprot);
+            _iter51.write(oprot);
           }
           oprot.writeListEnd();
         }
@@ -500,9 +500,9 @@ public class SceneGetValuesReturnStruct implements org.apache.thrift.TBase<Scene
       if (struct.isSetO_value()) {
         {
           oprot.writeI32(struct.o_value.size());
-          for (RemoteValueID _iter36 : struct.o_value)
+          for (RemoteValueID _iter52 : struct.o_value)
           {
-            _iter36.write(oprot);
+            _iter52.write(oprot);
           }
         }
       }
@@ -518,14 +518,14 @@ public class SceneGetValuesReturnStruct implements org.apache.thrift.TBase<Scene
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list37 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
-          struct.o_value = new ArrayList<RemoteValueID>(_list37.size);
-          for (int _i38 = 0; _i38 < _list37.size; ++_i38)
+          org.apache.thrift.protocol.TList _list53 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.STRUCT, iprot.readI32());
+          struct.o_value = new ArrayList<RemoteValueID>(_list53.size);
+          for (int _i54 = 0; _i54 < _list53.size; ++_i54)
           {
-            RemoteValueID _elem39; // required
-            _elem39 = new RemoteValueID();
-            _elem39.read(iprot);
-            struct.o_value.add(_elem39);
+            RemoteValueID _elem55; // optional
+            _elem55 = new RemoteValueID();
+            _elem55.read(iprot);
+            struct.o_value.add(_elem55);
           }
         }
         struct.setO_valueIsSet(true);

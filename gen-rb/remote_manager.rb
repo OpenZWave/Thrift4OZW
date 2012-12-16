@@ -706,6 +706,36 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeClassInformation failed: unknown result')
       end
 
+      def IsNodeAwake(_homeId, _nodeId)
+        send_IsNodeAwake(_homeId, _nodeId)
+        return recv_IsNodeAwake()
+      end
+
+      def send_IsNodeAwake(_homeId, _nodeId)
+        send_message('IsNodeAwake', IsNodeAwake_args, :_homeId => _homeId, :_nodeId => _nodeId)
+      end
+
+      def recv_IsNodeAwake()
+        result = receive_message(IsNodeAwake_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeAwake failed: unknown result')
+      end
+
+      def IsNodeFailed(_homeId, _nodeId)
+        send_IsNodeFailed(_homeId, _nodeId)
+        return recv_IsNodeFailed()
+      end
+
+      def send_IsNodeFailed(_homeId, _nodeId)
+        send_message('IsNodeFailed', IsNodeFailed_args, :_homeId => _homeId, :_nodeId => _nodeId)
+      end
+
+      def recv_IsNodeFailed()
+        result = receive_message(IsNodeFailed_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'IsNodeFailed failed: unknown result')
+      end
+
       def GetValueLabel(_id)
         send_GetValueLabel(_id)
         return recv_GetValueLabel()
@@ -1488,6 +1518,34 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'CancelControllerCommand failed: unknown result')
       end
 
+      def TestNetworkNode(_homeId, _nodeId, _count)
+        send_TestNetworkNode(_homeId, _nodeId, _count)
+        recv_TestNetworkNode()
+      end
+
+      def send_TestNetworkNode(_homeId, _nodeId, _count)
+        send_message('TestNetworkNode', TestNetworkNode_args, :_homeId => _homeId, :_nodeId => _nodeId, :_count => _count)
+      end
+
+      def recv_TestNetworkNode()
+        result = receive_message(TestNetworkNode_result)
+        return
+      end
+
+      def TestNetwork(_homeId, _count)
+        send_TestNetwork(_homeId, _count)
+        recv_TestNetwork()
+      end
+
+      def send_TestNetwork(_homeId, _count)
+        send_message('TestNetwork', TestNetwork_args, :_homeId => _homeId, :_count => _count)
+      end
+
+      def recv_TestNetwork()
+        result = receive_message(TestNetwork_result)
+        return
+      end
+
       def GetNumScenes()
         send_GetNumScenes()
         return recv_GetNumScenes()
@@ -1516,6 +1574,20 @@ module OpenZWave
         result = receive_message(GetAllScenes_result)
         return result.success unless result.success.nil?
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetAllScenes failed: unknown result')
+      end
+
+      def RemoveAllScenes(_homeId)
+        send_RemoveAllScenes(_homeId)
+        recv_RemoveAllScenes()
+      end
+
+      def send_RemoveAllScenes(_homeId)
+        send_message('RemoveAllScenes', RemoveAllScenes_args, :_homeId => _homeId)
+      end
+
+      def recv_RemoveAllScenes()
+        result = receive_message(RemoveAllScenes_result)
+        return
       end
 
       def CreateScene()
@@ -2012,6 +2084,21 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetDriverStatistics failed: unknown result')
       end
 
+      def GetNodeStatistics(_homeId, _nodeId)
+        send_GetNodeStatistics(_homeId, _nodeId)
+        return recv_GetNodeStatistics()
+      end
+
+      def send_GetNodeStatistics(_homeId, _nodeId)
+        send_message('GetNodeStatistics', GetNodeStatistics_args, :_homeId => _homeId, :_nodeId => _nodeId)
+      end
+
+      def recv_GetNodeStatistics()
+        result = receive_message(GetNodeStatistics_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNodeStatistics failed: unknown result')
+      end
+
       def SendAllValues()
         send_SendAllValues()
         recv_SendAllValues()
@@ -2372,6 +2459,20 @@ module OpenZWave
         result = GetNodeClassInformation_result.new()
         result.success = @handler.GetNodeClassInformation(args._homeId, args._nodeId, args._commandClassId)
         write_result(result, oprot, 'GetNodeClassInformation', seqid)
+      end
+
+      def process_IsNodeAwake(seqid, iprot, oprot)
+        args = read_args(iprot, IsNodeAwake_args)
+        result = IsNodeAwake_result.new()
+        result.success = @handler.IsNodeAwake(args._homeId, args._nodeId)
+        write_result(result, oprot, 'IsNodeAwake', seqid)
+      end
+
+      def process_IsNodeFailed(seqid, iprot, oprot)
+        args = read_args(iprot, IsNodeFailed_args)
+        result = IsNodeFailed_result.new()
+        result.success = @handler.IsNodeFailed(args._homeId, args._nodeId)
+        write_result(result, oprot, 'IsNodeFailed', seqid)
       end
 
       def process_GetValueLabel(seqid, iprot, oprot)
@@ -2745,6 +2846,20 @@ module OpenZWave
         write_result(result, oprot, 'CancelControllerCommand', seqid)
       end
 
+      def process_TestNetworkNode(seqid, iprot, oprot)
+        args = read_args(iprot, TestNetworkNode_args)
+        result = TestNetworkNode_result.new()
+        @handler.TestNetworkNode(args._homeId, args._nodeId, args._count)
+        write_result(result, oprot, 'TestNetworkNode', seqid)
+      end
+
+      def process_TestNetwork(seqid, iprot, oprot)
+        args = read_args(iprot, TestNetwork_args)
+        result = TestNetwork_result.new()
+        @handler.TestNetwork(args._homeId, args._count)
+        write_result(result, oprot, 'TestNetwork', seqid)
+      end
+
       def process_GetNumScenes(seqid, iprot, oprot)
         args = read_args(iprot, GetNumScenes_args)
         result = GetNumScenes_result.new()
@@ -2757,6 +2872,13 @@ module OpenZWave
         result = GetAllScenes_result.new()
         result.success = @handler.GetAllScenes()
         write_result(result, oprot, 'GetAllScenes', seqid)
+      end
+
+      def process_RemoveAllScenes(seqid, iprot, oprot)
+        args = read_args(iprot, RemoveAllScenes_args)
+        result = RemoveAllScenes_result.new()
+        @handler.RemoveAllScenes(args._homeId)
+        write_result(result, oprot, 'RemoveAllScenes', seqid)
       end
 
       def process_CreateScene(seqid, iprot, oprot)
@@ -2988,6 +3110,13 @@ module OpenZWave
         result = GetDriverStatistics_result.new()
         result.success = @handler.GetDriverStatistics(args._homeId)
         write_result(result, oprot, 'GetDriverStatistics', seqid)
+      end
+
+      def process_GetNodeStatistics(seqid, iprot, oprot)
+        args = read_args(iprot, GetNodeStatistics_args)
+        result = GetNodeStatistics_result.new()
+        result.success = @handler.GetNodeStatistics(args._homeId, args._nodeId)
+        write_result(result, oprot, 'GetNodeStatistics', seqid)
       end
 
       def process_SendAllValues(seqid, iprot, oprot)
@@ -4572,6 +4701,74 @@ module OpenZWave
 
       FIELDS = {
         SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::OpenZWave::Bool_GetNodeClassInformation}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class IsNodeAwake_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+      _NODEID = 2
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+        _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class IsNodeAwake_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS = 0
+
+      FIELDS = {
+        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class IsNodeFailed_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+      _NODEID = 2
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+        _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class IsNodeFailed_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS = 0
+
+      FIELDS = {
+        SUCCESS => {:type => ::Thrift::Types::BOOL, :name => 'success'}
       }
 
       def struct_fields; FIELDS; end
@@ -6350,6 +6547,74 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
+    class TestNetworkNode_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+      _NODEID = 2
+      _COUNT = 3
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+        _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'},
+        _COUNT => {:type => ::Thrift::Types::I32, :name => '_count'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class TestNetworkNode_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+
+      FIELDS = {
+
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class TestNetwork_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+      _COUNT = 2
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+        _COUNT => {:type => ::Thrift::Types::I32, :name => '_count'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class TestNetwork_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+
+      FIELDS = {
+
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
     class GetNumScenes_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
 
@@ -6402,6 +6667,37 @@ module OpenZWave
 
       FIELDS = {
         SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::OpenZWave::GetAllScenesReturnStruct}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class RemoveAllScenes_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class RemoveAllScenes_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+
+      FIELDS = {
+
       }
 
       def struct_fields; FIELDS; end
@@ -7540,6 +7836,40 @@ module OpenZWave
 
       FIELDS = {
         SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::OpenZWave::GetDriverStatisticsReturnStruct}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetNodeStatistics_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      _HOMEID = 1
+      _NODEID = 2
+
+      FIELDS = {
+        _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
+        _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
+    class GetNodeStatistics_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS = 0
+
+      FIELDS = {
+        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::OpenZWave::GetNodeStatisticsReturnStruct}
       }
 
       def struct_fields; FIELDS; end

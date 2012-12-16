@@ -423,13 +423,13 @@ public class GetAllScenesReturnStruct implements org.apache.thrift.TBase<GetAllS
           case 2: // _SCENE_IDS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
-                struct._sceneIds = new ArrayList<Byte>(_list24.size);
-                for (int _i25 = 0; _i25 < _list24.size; ++_i25)
+                org.apache.thrift.protocol.TList _list40 = iprot.readListBegin();
+                struct._sceneIds = new ArrayList<Byte>(_list40.size);
+                for (int _i41 = 0; _i41 < _list40.size; ++_i41)
                 {
-                  byte _elem26; // required
-                  _elem26 = iprot.readByte();
-                  struct._sceneIds.add(_elem26);
+                  byte _elem42; // optional
+                  _elem42 = iprot.readByte();
+                  struct._sceneIds.add(_elem42);
                 }
                 iprot.readListEnd();
               }
@@ -460,9 +460,9 @@ public class GetAllScenesReturnStruct implements org.apache.thrift.TBase<GetAllS
         oprot.writeFieldBegin(_SCENE_IDS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, struct._sceneIds.size()));
-          for (byte _iter27 : struct._sceneIds)
+          for (byte _iter43 : struct._sceneIds)
           {
-            oprot.writeByte(_iter27);
+            oprot.writeByte(_iter43);
           }
           oprot.writeListEnd();
         }
@@ -499,9 +499,9 @@ public class GetAllScenesReturnStruct implements org.apache.thrift.TBase<GetAllS
       if (struct.isSet_sceneIds()) {
         {
           oprot.writeI32(struct._sceneIds.size());
-          for (byte _iter28 : struct._sceneIds)
+          for (byte _iter44 : struct._sceneIds)
           {
-            oprot.writeByte(_iter28);
+            oprot.writeByte(_iter44);
           }
         }
       }
@@ -517,13 +517,13 @@ public class GetAllScenesReturnStruct implements org.apache.thrift.TBase<GetAllS
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
-          struct._sceneIds = new ArrayList<Byte>(_list29.size);
-          for (int _i30 = 0; _i30 < _list29.size; ++_i30)
+          org.apache.thrift.protocol.TList _list45 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
+          struct._sceneIds = new ArrayList<Byte>(_list45.size);
+          for (int _i46 = 0; _i46 < _list45.size; ++_i46)
           {
-            byte _elem31; // required
-            _elem31 = iprot.readByte();
-            struct._sceneIds.add(_elem31);
+            byte _elem47; // optional
+            _elem47 = iprot.readByte();
+            struct._sceneIds.add(_elem47);
           }
         }
         struct.set_sceneIdsIsSet(true);

@@ -423,13 +423,13 @@ public class UInt32_ListByte implements org.apache.thrift.TBase<UInt32_ListByte,
           case 2: // _NODE_NEIGHBORS
             if (schemeField.type == org.apache.thrift.protocol.TType.LIST) {
               {
-                org.apache.thrift.protocol.TList _list8 = iprot.readListBegin();
-                struct._nodeNeighbors = new ArrayList<Byte>(_list8.size);
-                for (int _i9 = 0; _i9 < _list8.size; ++_i9)
+                org.apache.thrift.protocol.TList _list24 = iprot.readListBegin();
+                struct._nodeNeighbors = new ArrayList<Byte>(_list24.size);
+                for (int _i25 = 0; _i25 < _list24.size; ++_i25)
                 {
-                  byte _elem10; // required
-                  _elem10 = iprot.readByte();
-                  struct._nodeNeighbors.add(_elem10);
+                  byte _elem26; // optional
+                  _elem26 = iprot.readByte();
+                  struct._nodeNeighbors.add(_elem26);
                 }
                 iprot.readListEnd();
               }
@@ -460,9 +460,9 @@ public class UInt32_ListByte implements org.apache.thrift.TBase<UInt32_ListByte,
         oprot.writeFieldBegin(_NODE_NEIGHBORS_FIELD_DESC);
         {
           oprot.writeListBegin(new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, struct._nodeNeighbors.size()));
-          for (byte _iter11 : struct._nodeNeighbors)
+          for (byte _iter27 : struct._nodeNeighbors)
           {
-            oprot.writeByte(_iter11);
+            oprot.writeByte(_iter27);
           }
           oprot.writeListEnd();
         }
@@ -499,9 +499,9 @@ public class UInt32_ListByte implements org.apache.thrift.TBase<UInt32_ListByte,
       if (struct.isSet_nodeNeighbors()) {
         {
           oprot.writeI32(struct._nodeNeighbors.size());
-          for (byte _iter12 : struct._nodeNeighbors)
+          for (byte _iter28 : struct._nodeNeighbors)
           {
-            oprot.writeByte(_iter12);
+            oprot.writeByte(_iter28);
           }
         }
       }
@@ -517,13 +517,13 @@ public class UInt32_ListByte implements org.apache.thrift.TBase<UInt32_ListByte,
       }
       if (incoming.get(1)) {
         {
-          org.apache.thrift.protocol.TList _list13 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
-          struct._nodeNeighbors = new ArrayList<Byte>(_list13.size);
-          for (int _i14 = 0; _i14 < _list13.size; ++_i14)
+          org.apache.thrift.protocol.TList _list29 = new org.apache.thrift.protocol.TList(org.apache.thrift.protocol.TType.BYTE, iprot.readI32());
+          struct._nodeNeighbors = new ArrayList<Byte>(_list29.size);
+          for (int _i30 = 0; _i30 < _list29.size; ++_i30)
           {
-            byte _elem15; // required
-            _elem15 = iprot.readByte();
-            struct._nodeNeighbors.add(_elem15);
+            byte _elem31; // optional
+            _elem31 = iprot.readByte();
+            struct._nodeNeighbors.add(_elem31);
           }
         }
         struct.set_nodeNeighborsIsSet(true);
