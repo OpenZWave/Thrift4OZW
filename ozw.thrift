@@ -225,6 +225,9 @@ service RemoteManager {
     //uint8 GetControllerNodeId( uint32 const _homeId );
     byte GetControllerNodeId( 1:i32 _homeId );
     
+    //uint8 GetSUCNodeId( uint32 const _homeId );
+    byte GetSUCNodeId( 1:i32 _homeId );
+    
     //bool IsPrimaryController( uint32 const _homeId );
     bool IsPrimaryController(1: i32 _homeId );
     
@@ -246,6 +249,11 @@ service RemoteManager {
     //void LogDriverStatistics( uint32 const _homeId );
     void LogDriverStatistics( 1:i32 _homeId );
 
+    //TODO:: Driver::ControllerInterface GetControllerInterfaceType( uint32 const _homeId );
+
+    //string GetControllerPath( uint32 const _homeId );
+    string GetControllerPath( 1:i32 _homeId );
+    
 	//-----------------------------------------------------------------------------
 	//	Polling Z-Wave devices
 	//-----------------------------------------------------------------------------
@@ -372,6 +380,9 @@ service RemoteManager {
        //bool IsNodeFailed( uint32 const _homeId, uint8 const _nodeId );
        bool IsNodeFailed( 1:i32 _homeId, 2: byte _nodeId );
 		
+	//string GetNodeQueryStage( uint32 const _homeId, uint8 const _nodeId );
+	string GetNodeQueryStage( 1:i32 _homeId, 2:byte _nodeId );
+	
 	//-----------------------------------------------------------------------------
 	// Values
 	//-----------------------------------------------------------------------------
@@ -429,6 +440,8 @@ service RemoteManager {
 	//bool GetValueAsString( ValueID const& _id, string* o_value );
     Bool_String GetValueAsString( 1:RemoteValueID _id );
 		
+	// TODO: bool GetValueAsRaw( ValueID const& _id, uint8** o_value, uint8* o_length );
+	
 	//bool GetValueListSelection( ValueID const& _id, string* o_value );
     // ekarak: thrift does not support function overloading
     Bool_String GetValueListSelection_String( 1:RemoteValueID _id );
@@ -450,7 +463,7 @@ service RemoteManager {
 
 	//bool SetValue( ValueID const& _id, uint8 const _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_UInt8( 1:RemoteValueID _id, 2:byte _value );
+    bool SetValue_UInt8( 1:RemoteValueID _id, 2:byte _value, 3:byte _length);
 
 	//bool SetValue( ValueID const& _id, float const _value );
     // ekarak:  client must ensure value's type
@@ -569,6 +582,12 @@ service RemoteManager {
 	//void TestNetwork( uint32 const _homeId, uint32 const _count );
 	void TestNetwork( 1:i32 _homeId, 2: i32 _count );
 
+	//void HealNetworkNode( uint32 const _homeId, uint8 const _nodeId, bool _doRR );
+	void HealNetworkNode( 1:i32 _homeId, 2:byte _nodeId, 3:bool _doRR );
+	
+	//void HealNetwork( uint32 const _homeId, bool _doRR );
+	void HealNetwork( 1:i32 _homeId, 2:bool _doRR );
+	
 	//-----------------------------------------------------------------------------
 	// Scene commands
 	//-----------------------------------------------------------------------------

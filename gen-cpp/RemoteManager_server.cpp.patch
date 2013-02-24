@@ -29,7 +29,7 @@
 *** 17,23 ****
   using namespace  ::OpenZWave;
   
-  void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
+  void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, OpenZWave::Driver::ControllerError  arg2, void*  arg3) {
 ! 	// FIXME: fill in the blanks (sorry!)
   }
   
@@ -37,7 +37,7 @@
 --- 17,30 ----
   using namespace  ::OpenZWave;
   
-  void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
+  void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, OpenZWave::Driver::ControllerError  arg2, void*  arg3) {
 !     g_criticalSection.lock();
 !     //
 !     STOMP::hdrmap headers;

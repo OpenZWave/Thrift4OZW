@@ -16,7 +16,7 @@ using boost::shared_ptr;
 
 using namespace  ::OpenZWave;
 
-void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, void*  arg2) {
+void BeginControllerCommand_callback(OpenZWave::Driver::ControllerState  arg1, OpenZWave::Driver::ControllerError  arg2, void*  arg3) {
 	// FIXME: fill in the blanks (sorry!)
 }
 
@@ -37,6 +37,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	::int8_t function_result =  mgr->GetControllerNodeId((::uint32 const) _homeId);
+	g_criticalSection.unlock();
+	return(function_result);
+  }
+
+  int8_t GetSUCNodeId(const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	::int8_t function_result =  mgr->GetSUCNodeId((::uint32 const) _homeId);
 	g_criticalSection.unlock();
 	return(function_result);
   }
@@ -91,6 +99,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	 mgr->LogDriverStatistics((::uint32 const) _homeId);
+	g_criticalSection.unlock();
+  }
+
+  void GetControllerPath(std::string& _return, const int32_t _homeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	_return =  mgr->GetControllerPath((::uint32 const) _homeId);
 	g_criticalSection.unlock();
   }
 
@@ -395,6 +410,13 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
+  void GetNodeQueryStage(std::string& _return, const int32_t _homeId, const int8_t _nodeId) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	_return =  mgr->GetNodeQueryStage((::uint32 const) _homeId, (::uint8 const) _nodeId);
+	g_criticalSection.unlock();
+  }
+
   void GetValueLabel(std::string& _return, const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
@@ -563,10 +585,10 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value) {
+  bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value, const int8_t _length) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
-	bool function_result =  mgr->SetValue(_id.toValueID(), (::uint8 const) _value);
+	bool function_result =  mgr->SetValue(_id.toValueID(), (::uint8 const*) &_value, (::uint8 const) _length);
 	g_criticalSection.unlock();
 	return(function_result);
   }
@@ -801,6 +823,20 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	 mgr->TestNetwork((::uint32 const) _homeId, (::uint32 const) _count);
+	g_criticalSection.unlock();
+  }
+
+  void HealNetworkNode(const int32_t _homeId, const int8_t _nodeId, const bool _doRR) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->HealNetworkNode((::uint32 const) _homeId, (::uint8 const) _nodeId, (bool) _doRR);
+	g_criticalSection.unlock();
+  }
+
+  void HealNetwork(const int32_t _homeId, const bool _doRR) {
+	Manager* mgr = Manager::Get();
+	g_criticalSection.lock();
+	 mgr->HealNetwork((::uint32 const) _homeId, (bool) _doRR);
 	g_criticalSection.unlock();
   }
 

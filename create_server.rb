@@ -230,7 +230,7 @@ RootNode.classes("RemoteManagerHandler").methods.each { |meth|
             argmap[a] = {}
             argmap[a][:descriptor] = "(void*) this"
         else
-            raise "Reverse argument mapping: couldn't resolve argument '#{a.name}' in method '#{target_method.name}'!!!"
+            raise "Reverse argument mapping: couldn't resolve argument '#{a.name}' in method '#{meth.name}' (mapped to '#{target_method.name}')!!!"
         end
     }
 

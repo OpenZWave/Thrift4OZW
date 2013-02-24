@@ -49,8 +49,8 @@ GNUTLS := -lgnutls
 LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.a
 LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.so
 LIBUSB := -ludev
-LIBBOOST := -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
-LIBBOOST_STATIC := -lboost_thread -lboost_program_options -lboost_filesystem -lboost_system
+LIBBOOST := -lboost_thread -lboost_program_options -lboost_system -lboost_filesystem
+LIBBOOST_STATIC := -lboost_thread -lboost_program_options -lboost_system -lboost_filesystem 
 LIBTHRIFT := -lthrift
 LIBBOOSTSTOMP := -lbooststomp
 LIBBOOSTSTOMP_STATIC := $(BOOSTSTOMP)/libbooststomp.a
@@ -102,7 +102,7 @@ ozwd.static: Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o g
 	$(CXX) -static -static-libgcc -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o  $(LIBZWAVE_STATIC) $(LIBBOOSTSTOMP_STATIC) $(LIBBOOST_STATIC) -lpthread -ludev -lthrift -lrt
 
 ozwd:   Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) 
-	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS) $(LIBZWAVE_DYNAMIC)	 
+	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)
 
 dist:	main
 	rm -f Thrift4OZW.tar.gz
