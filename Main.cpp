@@ -364,8 +364,8 @@ int main(int argc, char *argv[]) {
             ("stomphost,h",   po::value<string>(&stomp_host)->default_value("localhost"), "external STOMP server hostname")
             ("stompport,s",   po::value<int>(&stomp_port)->default_value(61613), "external STOMP server port number")
             ("thriftport,t",  po::value<int>(&thrift_port)->default_value(9090), "our Thrift service port")
-            ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.generic_string()), "our OpenZWave manufacturer database")
-            ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.generic_string()), "our OpenZWave user config database")
+            ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.string()), "our OpenZWave manufacturer database")
+            ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.string()), "our OpenZWave user config database")
             ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "our OpenZWave driver port")
         ;
         // a boost:program_options variable map
