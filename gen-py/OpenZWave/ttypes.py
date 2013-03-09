@@ -76,66 +76,160 @@ class RemoteValueType:
 
 class DriverControllerCommand:
   ControllerCommand_None = 0
-  ControllerCommand_AddController = 1
-  ControllerCommand_AddDevice = 2
-  ControllerCommand_CreateNewPrimary = 3
-  ControllerCommand_ReceiveConfiguration = 4
-  ControllerCommand_RemoveController = 5
-  ControllerCommand_RemoveDevice = 6
-  ControllerCommand_RemoveFailedNode = 7
-  ControllerCommand_HasNodeFailed = 8
-  ControllerCommand_ReplaceFailedNode = 9
-  ControllerCommand_TransferPrimaryRole = 10
-  ControllerCommand_RequestNetworkUpdate = 11
-  ControllerCommand_RequestNodeNeighborUpdate = 12
-  ControllerCommand_AssignReturnRoute = 13
-  ControllerCommand_DeleteAllReturnRoutes = 14
+  ControllerCommand_AddDevice = 1
+  ControllerCommand_CreateNewPrimary = 2
+  ControllerCommand_ReceiveConfiguration = 3
+  ControllerCommand_RemoveDevice = 4
+  ControllerCommand_RemoveFailedNode = 5
+  ControllerCommand_HasNodeFailed = 6
+  ControllerCommand_ReplaceFailedNode = 7
+  ControllerCommand_TransferPrimaryRole = 8
+  ControllerCommand_RequestNetworkUpdate = 9
+  ControllerCommand_RequestNodeNeighborUpdate = 10
+  ControllerCommand_AssignReturnRoute = 11
+  ControllerCommand_DeleteAllReturnRoutes = 12
+  ControllerCommand_SendNodeInformation = 13
+  ControllerCommand_ReplicationSend = 14
   ControllerCommand_CreateButton = 15
   ControllerCommand_DeleteButton = 16
 
   _VALUES_TO_NAMES = {
     0: "ControllerCommand_None",
-    1: "ControllerCommand_AddController",
-    2: "ControllerCommand_AddDevice",
-    3: "ControllerCommand_CreateNewPrimary",
-    4: "ControllerCommand_ReceiveConfiguration",
-    5: "ControllerCommand_RemoveController",
-    6: "ControllerCommand_RemoveDevice",
-    7: "ControllerCommand_RemoveFailedNode",
-    8: "ControllerCommand_HasNodeFailed",
-    9: "ControllerCommand_ReplaceFailedNode",
-    10: "ControllerCommand_TransferPrimaryRole",
-    11: "ControllerCommand_RequestNetworkUpdate",
-    12: "ControllerCommand_RequestNodeNeighborUpdate",
-    13: "ControllerCommand_AssignReturnRoute",
-    14: "ControllerCommand_DeleteAllReturnRoutes",
+    1: "ControllerCommand_AddDevice",
+    2: "ControllerCommand_CreateNewPrimary",
+    3: "ControllerCommand_ReceiveConfiguration",
+    4: "ControllerCommand_RemoveDevice",
+    5: "ControllerCommand_RemoveFailedNode",
+    6: "ControllerCommand_HasNodeFailed",
+    7: "ControllerCommand_ReplaceFailedNode",
+    8: "ControllerCommand_TransferPrimaryRole",
+    9: "ControllerCommand_RequestNetworkUpdate",
+    10: "ControllerCommand_RequestNodeNeighborUpdate",
+    11: "ControllerCommand_AssignReturnRoute",
+    12: "ControllerCommand_DeleteAllReturnRoutes",
+    13: "ControllerCommand_SendNodeInformation",
+    14: "ControllerCommand_ReplicationSend",
     15: "ControllerCommand_CreateButton",
     16: "ControllerCommand_DeleteButton",
   }
 
   _NAMES_TO_VALUES = {
     "ControllerCommand_None": 0,
-    "ControllerCommand_AddController": 1,
-    "ControllerCommand_AddDevice": 2,
-    "ControllerCommand_CreateNewPrimary": 3,
-    "ControllerCommand_ReceiveConfiguration": 4,
-    "ControllerCommand_RemoveController": 5,
-    "ControllerCommand_RemoveDevice": 6,
-    "ControllerCommand_RemoveFailedNode": 7,
-    "ControllerCommand_HasNodeFailed": 8,
-    "ControllerCommand_ReplaceFailedNode": 9,
-    "ControllerCommand_TransferPrimaryRole": 10,
-    "ControllerCommand_RequestNetworkUpdate": 11,
-    "ControllerCommand_RequestNodeNeighborUpdate": 12,
-    "ControllerCommand_AssignReturnRoute": 13,
-    "ControllerCommand_DeleteAllReturnRoutes": 14,
+    "ControllerCommand_AddDevice": 1,
+    "ControllerCommand_CreateNewPrimary": 2,
+    "ControllerCommand_ReceiveConfiguration": 3,
+    "ControllerCommand_RemoveDevice": 4,
+    "ControllerCommand_RemoveFailedNode": 5,
+    "ControllerCommand_HasNodeFailed": 6,
+    "ControllerCommand_ReplaceFailedNode": 7,
+    "ControllerCommand_TransferPrimaryRole": 8,
+    "ControllerCommand_RequestNetworkUpdate": 9,
+    "ControllerCommand_RequestNodeNeighborUpdate": 10,
+    "ControllerCommand_AssignReturnRoute": 11,
+    "ControllerCommand_DeleteAllReturnRoutes": 12,
+    "ControllerCommand_SendNodeInformation": 13,
+    "ControllerCommand_ReplicationSend": 14,
     "ControllerCommand_CreateButton": 15,
     "ControllerCommand_DeleteButton": 16,
   }
 
+class DriverControllerState:
+  """
+  < Delete id that tracks handheld button presses
+  """
+  ControllerState_Normal = 0
+  ControllerState_Starting = 1
+  ControllerState_Cancel = 2
+  ControllerState_Error = 3
+  ControllerState_Waiting = 4
+  ControllerState_Sleeping = 5
+  ControllerState_InProgress = 6
+  ControllerState_Completed = 7
+  ControllerState_Failed = 8
+  ControllerState_NodeOK = 9
+  ControllerState_NodeFailed = 10
+
+  _VALUES_TO_NAMES = {
+    0: "ControllerState_Normal",
+    1: "ControllerState_Starting",
+    2: "ControllerState_Cancel",
+    3: "ControllerState_Error",
+    4: "ControllerState_Waiting",
+    5: "ControllerState_Sleeping",
+    6: "ControllerState_InProgress",
+    7: "ControllerState_Completed",
+    8: "ControllerState_Failed",
+    9: "ControllerState_NodeOK",
+    10: "ControllerState_NodeFailed",
+  }
+
+  _NAMES_TO_VALUES = {
+    "ControllerState_Normal": 0,
+    "ControllerState_Starting": 1,
+    "ControllerState_Cancel": 2,
+    "ControllerState_Error": 3,
+    "ControllerState_Waiting": 4,
+    "ControllerState_Sleeping": 5,
+    "ControllerState_InProgress": 6,
+    "ControllerState_Completed": 7,
+    "ControllerState_Failed": 8,
+    "ControllerState_NodeOK": 9,
+    "ControllerState_NodeFailed": 10,
+  }
+
+class DriverControllerError:
+  """
+  < Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node has failed.
+  """
+  ControllerError_None = 0
+  ControllerError_ButtonNotFound = 1
+  ControllerError_NodeNotFound = 2
+  ControllerError_NotBridge = 3
+  ControllerError_NotSUC = 4
+  ControllerError_NotSecondary = 5
+  ControllerError_NotPrimary = 6
+  ControllerError_IsPrimary = 7
+  ControllerError_NotFound = 8
+  ControllerError_Busy = 9
+  ControllerError_Failed = 10
+  ControllerError_Disabled = 11
+  ControllerError_Overflow = 12
+
+  _VALUES_TO_NAMES = {
+    0: "ControllerError_None",
+    1: "ControllerError_ButtonNotFound",
+    2: "ControllerError_NodeNotFound",
+    3: "ControllerError_NotBridge",
+    4: "ControllerError_NotSUC",
+    5: "ControllerError_NotSecondary",
+    6: "ControllerError_NotPrimary",
+    7: "ControllerError_IsPrimary",
+    8: "ControllerError_NotFound",
+    9: "ControllerError_Busy",
+    10: "ControllerError_Failed",
+    11: "ControllerError_Disabled",
+    12: "ControllerError_Overflow",
+  }
+
+  _NAMES_TO_VALUES = {
+    "ControllerError_None": 0,
+    "ControllerError_ButtonNotFound": 1,
+    "ControllerError_NodeNotFound": 2,
+    "ControllerError_NotBridge": 3,
+    "ControllerError_NotSUC": 4,
+    "ControllerError_NotSecondary": 5,
+    "ControllerError_NotPrimary": 6,
+    "ControllerError_IsPrimary": 7,
+    "ControllerError_NotFound": 8,
+    "ControllerError_Busy": 9,
+    "ControllerError_Failed": 10,
+    "ControllerError_Disabled": 11,
+    "ControllerError_Overflow": 12,
+  }
+
 class DriverControllerInterface:
   """
-  Delete a handheld button id.
+  < RequestNetworkUpdate error
   """
   ControllerInterface_Unknown = 0
   ControllerInterface_Serial = 1

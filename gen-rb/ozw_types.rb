@@ -34,39 +34,94 @@ module OpenZWave
   module DriverControllerCommand
     ControllerCommand_None = 0
     # < No command.
-    ControllerCommand_AddController = 1
-    # < Add a new controller to the Z-Wave network.  The new controller will be a secondary.
-    ControllerCommand_AddDevice = 2
-    # < Add a new device (but not a controller) to the Z-Wave network.
-    ControllerCommand_CreateNewPrimary = 3
-    # < Add a new controller to the Z-Wave network.  The new controller will be the primary, and the current primary will become a secondary controller.
-    ControllerCommand_ReceiveConfiguration = 4
+    ControllerCommand_AddDevice = 1
+    # < Add a new device or controller to the Z-Wave network.
+    ControllerCommand_CreateNewPrimary = 2
+    # < Add a new controller to the Z-Wave network. Used when old primary fails. Requires SUC.
+    ControllerCommand_ReceiveConfiguration = 3
     # < Receive Z-Wave network configuration information from another controller.
-    ControllerCommand_RemoveController = 5
-    # < Remove a controller from the Z-Wave network.
-    ControllerCommand_RemoveDevice = 6
-    # < Remove a new device (but not a controller) from the Z-Wave network.
-    ControllerCommand_RemoveFailedNode = 7
+    ControllerCommand_RemoveDevice = 4
+    # < Remove a device or controller from the Z-Wave network.
+    ControllerCommand_RemoveFailedNode = 5
     # < Move a node to the controller's failed nodes list. This command will only work if the node cannot respond.
-    ControllerCommand_HasNodeFailed = 8
+    ControllerCommand_HasNodeFailed = 6
     # < Check whether a node is in the controller's failed nodes list.
-    ControllerCommand_ReplaceFailedNode = 9
+    ControllerCommand_ReplaceFailedNode = 7
     # < Replace a non-responding node with another. The node must be in the controller's list of failed nodes for this command to succeed.
-    ControllerCommand_TransferPrimaryRole = 10
+    ControllerCommand_TransferPrimaryRole = 8
     # < Make a different controller the primary.
-    ControllerCommand_RequestNetworkUpdate = 11
+    ControllerCommand_RequestNetworkUpdate = 9
     # < Request network information from the SUC/SIS.
-    ControllerCommand_RequestNodeNeighborUpdate = 12
-    # < Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors
-    ControllerCommand_AssignReturnRoute = 13
+    ControllerCommand_RequestNodeNeighborUpdate = 10
+    # < Get a node to rebuild its neighbour list.  This method also does RequestNodeNeighbors
+    ControllerCommand_AssignReturnRoute = 11
     # < Assign a network return routes to a device.
-    ControllerCommand_DeleteAllReturnRoutes = 14
+    ControllerCommand_DeleteAllReturnRoutes = 12
     # < Delete all return routes from a device.
+    ControllerCommand_SendNodeInformation = 13
+    # < Send a node information frame
+    ControllerCommand_ReplicationSend = 14
+    # < Send information from primary to secondary
     ControllerCommand_CreateButton = 15
-    # Create a handheld button id.
+    # < Create an id that tracks handheld button presses
     ControllerCommand_DeleteButton = 16
-    VALUE_MAP = {0 => "ControllerCommand_None", 1 => "ControllerCommand_AddController", 2 => "ControllerCommand_AddDevice", 3 => "ControllerCommand_CreateNewPrimary", 4 => "ControllerCommand_ReceiveConfiguration", 5 => "ControllerCommand_RemoveController", 6 => "ControllerCommand_RemoveDevice", 7 => "ControllerCommand_RemoveFailedNode", 8 => "ControllerCommand_HasNodeFailed", 9 => "ControllerCommand_ReplaceFailedNode", 10 => "ControllerCommand_TransferPrimaryRole", 11 => "ControllerCommand_RequestNetworkUpdate", 12 => "ControllerCommand_RequestNodeNeighborUpdate", 13 => "ControllerCommand_AssignReturnRoute", 14 => "ControllerCommand_DeleteAllReturnRoutes", 15 => "ControllerCommand_CreateButton", 16 => "ControllerCommand_DeleteButton"}
-    VALID_VALUES = Set.new([ControllerCommand_None, ControllerCommand_AddController, ControllerCommand_AddDevice, ControllerCommand_CreateNewPrimary, ControllerCommand_ReceiveConfiguration, ControllerCommand_RemoveController, ControllerCommand_RemoveDevice, ControllerCommand_RemoveFailedNode, ControllerCommand_HasNodeFailed, ControllerCommand_ReplaceFailedNode, ControllerCommand_TransferPrimaryRole, ControllerCommand_RequestNetworkUpdate, ControllerCommand_RequestNodeNeighborUpdate, ControllerCommand_AssignReturnRoute, ControllerCommand_DeleteAllReturnRoutes, ControllerCommand_CreateButton, ControllerCommand_DeleteButton]).freeze
+    VALUE_MAP = {0 => "ControllerCommand_None", 1 => "ControllerCommand_AddDevice", 2 => "ControllerCommand_CreateNewPrimary", 3 => "ControllerCommand_ReceiveConfiguration", 4 => "ControllerCommand_RemoveDevice", 5 => "ControllerCommand_RemoveFailedNode", 6 => "ControllerCommand_HasNodeFailed", 7 => "ControllerCommand_ReplaceFailedNode", 8 => "ControllerCommand_TransferPrimaryRole", 9 => "ControllerCommand_RequestNetworkUpdate", 10 => "ControllerCommand_RequestNodeNeighborUpdate", 11 => "ControllerCommand_AssignReturnRoute", 12 => "ControllerCommand_DeleteAllReturnRoutes", 13 => "ControllerCommand_SendNodeInformation", 14 => "ControllerCommand_ReplicationSend", 15 => "ControllerCommand_CreateButton", 16 => "ControllerCommand_DeleteButton"}
+    VALID_VALUES = Set.new([ControllerCommand_None, ControllerCommand_AddDevice, ControllerCommand_CreateNewPrimary, ControllerCommand_ReceiveConfiguration, ControllerCommand_RemoveDevice, ControllerCommand_RemoveFailedNode, ControllerCommand_HasNodeFailed, ControllerCommand_ReplaceFailedNode, ControllerCommand_TransferPrimaryRole, ControllerCommand_RequestNetworkUpdate, ControllerCommand_RequestNodeNeighborUpdate, ControllerCommand_AssignReturnRoute, ControllerCommand_DeleteAllReturnRoutes, ControllerCommand_SendNodeInformation, ControllerCommand_ReplicationSend, ControllerCommand_CreateButton, ControllerCommand_DeleteButton]).freeze
+  end
+
+  module DriverControllerState
+    ControllerState_Normal = 0
+    # < No command in progress.
+    ControllerState_Starting = 1
+    # < The command is starting.
+    ControllerState_Cancel = 2
+    # < The command was cancelled.
+    ControllerState_Error = 3
+    # < Command invocation had error(s) and was aborted
+    ControllerState_Waiting = 4
+    # < Controller is waiting for a user action.
+    ControllerState_Sleeping = 5
+    # < Controller command is on a sleep queue wait for device.
+    ControllerState_InProgress = 6
+    # < The controller is communicating with the other device to carry out the command.
+    ControllerState_Completed = 7
+    # < The command has completed successfully.
+    ControllerState_Failed = 8
+    # < The command has failed.
+    ControllerState_NodeOK = 9
+    # < Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node is OK.
+    ControllerState_NodeFailed = 10
+    VALUE_MAP = {0 => "ControllerState_Normal", 1 => "ControllerState_Starting", 2 => "ControllerState_Cancel", 3 => "ControllerState_Error", 4 => "ControllerState_Waiting", 5 => "ControllerState_Sleeping", 6 => "ControllerState_InProgress", 7 => "ControllerState_Completed", 8 => "ControllerState_Failed", 9 => "ControllerState_NodeOK", 10 => "ControllerState_NodeFailed"}
+    VALID_VALUES = Set.new([ControllerState_Normal, ControllerState_Starting, ControllerState_Cancel, ControllerState_Error, ControllerState_Waiting, ControllerState_Sleeping, ControllerState_InProgress, ControllerState_Completed, ControllerState_Failed, ControllerState_NodeOK, ControllerState_NodeFailed]).freeze
+  end
+
+  module DriverControllerError
+    ControllerError_None = 0
+    ControllerError_ButtonNotFound = 1
+    # < Button
+    ControllerError_NodeNotFound = 2
+    # < Button
+    ControllerError_NotBridge = 3
+    # < Button
+    ControllerError_NotSUC = 4
+    # < CreateNewPrimary
+    ControllerError_NotSecondary = 5
+    # < CreateNewPrimary
+    ControllerError_NotPrimary = 6
+    # < RemoveFailedNode, AddNodeToNetwork
+    ControllerError_IsPrimary = 7
+    # < ReceiveConfiguration
+    ControllerError_NotFound = 8
+    # < RemoveFailedNode
+    ControllerError_Busy = 9
+    # < RemoveFailedNode, RequestNetworkUpdate
+    ControllerError_Failed = 10
+    # < RemoveFailedNode, RequestNetworkUpdate
+    ControllerError_Disabled = 11
+    # < RequestNetworkUpdate error
+    ControllerError_Overflow = 12
+    VALUE_MAP = {0 => "ControllerError_None", 1 => "ControllerError_ButtonNotFound", 2 => "ControllerError_NodeNotFound", 3 => "ControllerError_NotBridge", 4 => "ControllerError_NotSUC", 5 => "ControllerError_NotSecondary", 6 => "ControllerError_NotPrimary", 7 => "ControllerError_IsPrimary", 8 => "ControllerError_NotFound", 9 => "ControllerError_Busy", 10 => "ControllerError_Failed", 11 => "ControllerError_Disabled", 12 => "ControllerError_Overflow"}
+    VALID_VALUES = Set.new([ControllerError_None, ControllerError_ButtonNotFound, ControllerError_NodeNotFound, ControllerError_NotBridge, ControllerError_NotSUC, ControllerError_NotSecondary, ControllerError_NotPrimary, ControllerError_IsPrimary, ControllerError_NotFound, ControllerError_Busy, ControllerError_Failed, ControllerError_Disabled, ControllerError_Overflow]).freeze
   end
 
   module DriverControllerInterface

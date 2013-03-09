@@ -16,65 +16,65 @@ public enum DriverControllerCommand implements org.apache.thrift.TEnum {
   /**
    * < No command.
    */
-  ControllerCommand_AddController(1),
+  ControllerCommand_AddDevice(1),
   /**
-   * < Add a new controller to the Z-Wave network.  The new controller will be a secondary.
+   * < Add a new device or controller to the Z-Wave network.
    */
-  ControllerCommand_AddDevice(2),
+  ControllerCommand_CreateNewPrimary(2),
   /**
-   * < Add a new device (but not a controller) to the Z-Wave network.
+   * < Add a new controller to the Z-Wave network. Used when old primary fails. Requires SUC.
    */
-  ControllerCommand_CreateNewPrimary(3),
-  /**
-   * < Add a new controller to the Z-Wave network.  The new controller will be the primary, and the current primary will become a secondary controller.
-   */
-  ControllerCommand_ReceiveConfiguration(4),
+  ControllerCommand_ReceiveConfiguration(3),
   /**
    * < Receive Z-Wave network configuration information from another controller.
    */
-  ControllerCommand_RemoveController(5),
+  ControllerCommand_RemoveDevice(4),
   /**
-   * < Remove a controller from the Z-Wave network.
+   * < Remove a device or controller from the Z-Wave network.
    */
-  ControllerCommand_RemoveDevice(6),
-  /**
-   * < Remove a new device (but not a controller) from the Z-Wave network.
-   */
-  ControllerCommand_RemoveFailedNode(7),
+  ControllerCommand_RemoveFailedNode(5),
   /**
    * < Move a node to the controller's failed nodes list. This command will only work if the node cannot respond.
    */
-  ControllerCommand_HasNodeFailed(8),
+  ControllerCommand_HasNodeFailed(6),
   /**
    * < Check whether a node is in the controller's failed nodes list.
    */
-  ControllerCommand_ReplaceFailedNode(9),
+  ControllerCommand_ReplaceFailedNode(7),
   /**
    * < Replace a non-responding node with another. The node must be in the controller's list of failed nodes for this command to succeed.
    */
-  ControllerCommand_TransferPrimaryRole(10),
+  ControllerCommand_TransferPrimaryRole(8),
   /**
    * < Make a different controller the primary.
    */
-  ControllerCommand_RequestNetworkUpdate(11),
+  ControllerCommand_RequestNetworkUpdate(9),
   /**
    * < Request network information from the SUC/SIS.
    */
-  ControllerCommand_RequestNodeNeighborUpdate(12),
+  ControllerCommand_RequestNodeNeighborUpdate(10),
   /**
-   * < Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors
+   * < Get a node to rebuild its neighbour list.  This method also does RequestNodeNeighbors
    */
-  ControllerCommand_AssignReturnRoute(13),
+  ControllerCommand_AssignReturnRoute(11),
   /**
    * < Assign a network return routes to a device.
    */
-  ControllerCommand_DeleteAllReturnRoutes(14),
+  ControllerCommand_DeleteAllReturnRoutes(12),
   /**
    * < Delete all return routes from a device.
    */
+  ControllerCommand_SendNodeInformation(13),
+  /**
+   * < Send a node information frame
+   */
+  ControllerCommand_ReplicationSend(14),
+  /**
+   * < Send information from primary to secondary
+   */
   ControllerCommand_CreateButton(15),
   /**
-   * Create a handheld button id.
+   * < Create an id that tracks handheld button presses
    */
   ControllerCommand_DeleteButton(16);
 
@@ -100,33 +100,33 @@ public enum DriverControllerCommand implements org.apache.thrift.TEnum {
       case 0:
         return ControllerCommand_None;
       case 1:
-        return ControllerCommand_AddController;
-      case 2:
         return ControllerCommand_AddDevice;
-      case 3:
+      case 2:
         return ControllerCommand_CreateNewPrimary;
-      case 4:
+      case 3:
         return ControllerCommand_ReceiveConfiguration;
-      case 5:
-        return ControllerCommand_RemoveController;
-      case 6:
+      case 4:
         return ControllerCommand_RemoveDevice;
-      case 7:
+      case 5:
         return ControllerCommand_RemoveFailedNode;
-      case 8:
+      case 6:
         return ControllerCommand_HasNodeFailed;
-      case 9:
+      case 7:
         return ControllerCommand_ReplaceFailedNode;
-      case 10:
+      case 8:
         return ControllerCommand_TransferPrimaryRole;
-      case 11:
+      case 9:
         return ControllerCommand_RequestNetworkUpdate;
-      case 12:
+      case 10:
         return ControllerCommand_RequestNodeNeighborUpdate;
-      case 13:
+      case 11:
         return ControllerCommand_AssignReturnRoute;
-      case 14:
+      case 12:
         return ControllerCommand_DeleteAllReturnRoutes;
+      case 13:
+        return ControllerCommand_SendNodeInformation;
+      case 14:
+        return ControllerCommand_ReplicationSend;
       case 15:
         return ControllerCommand_CreateButton;
       case 16:

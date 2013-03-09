@@ -81,7 +81,7 @@ enum DriverControllerState
     ControllerState_Failed,					/**< The command has failed. */
     ControllerState_NodeOK,					/**< Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node is OK. */
     ControllerState_NodeFailed				/**< Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node has failed. */
-};
+}
 
 enum DriverControllerError
 {
@@ -98,7 +98,7 @@ enum DriverControllerError
     ControllerError_Failed,						/**< RemoveFailedNode, RequestNetworkUpdate */
     ControllerError_Disabled,					/**< RequestNetworkUpdate error */
     ControllerError_Overflow					/**< RequestNetworkUpdate error */
-};
+}
 		
 enum DriverControllerInterface {
 	ControllerInterface_Unknown = 0,

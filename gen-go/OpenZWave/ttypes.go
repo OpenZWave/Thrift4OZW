@@ -102,31 +102,29 @@ func (p RemoteValueType) IsEnum() bool {
 type DriverControllerCommand int
 const (
   ControllerCommand_None DriverControllerCommand = 0
-  ControllerCommand_AddController DriverControllerCommand = 1
-  ControllerCommand_AddDevice DriverControllerCommand = 2
-  ControllerCommand_CreateNewPrimary DriverControllerCommand = 3
-  ControllerCommand_ReceiveConfiguration DriverControllerCommand = 4
-  ControllerCommand_RemoveController DriverControllerCommand = 5
-  ControllerCommand_RemoveDevice DriverControllerCommand = 6
-  ControllerCommand_RemoveFailedNode DriverControllerCommand = 7
-  ControllerCommand_HasNodeFailed DriverControllerCommand = 8
-  ControllerCommand_ReplaceFailedNode DriverControllerCommand = 9
-  ControllerCommand_TransferPrimaryRole DriverControllerCommand = 10
-  ControllerCommand_RequestNetworkUpdate DriverControllerCommand = 11
-  ControllerCommand_RequestNodeNeighborUpdate DriverControllerCommand = 12
-  ControllerCommand_AssignReturnRoute DriverControllerCommand = 13
-  ControllerCommand_DeleteAllReturnRoutes DriverControllerCommand = 14
+  ControllerCommand_AddDevice DriverControllerCommand = 1
+  ControllerCommand_CreateNewPrimary DriverControllerCommand = 2
+  ControllerCommand_ReceiveConfiguration DriverControllerCommand = 3
+  ControllerCommand_RemoveDevice DriverControllerCommand = 4
+  ControllerCommand_RemoveFailedNode DriverControllerCommand = 5
+  ControllerCommand_HasNodeFailed DriverControllerCommand = 6
+  ControllerCommand_ReplaceFailedNode DriverControllerCommand = 7
+  ControllerCommand_TransferPrimaryRole DriverControllerCommand = 8
+  ControllerCommand_RequestNetworkUpdate DriverControllerCommand = 9
+  ControllerCommand_RequestNodeNeighborUpdate DriverControllerCommand = 10
+  ControllerCommand_AssignReturnRoute DriverControllerCommand = 11
+  ControllerCommand_DeleteAllReturnRoutes DriverControllerCommand = 12
+  ControllerCommand_SendNodeInformation DriverControllerCommand = 13
+  ControllerCommand_ReplicationSend DriverControllerCommand = 14
   ControllerCommand_CreateButton DriverControllerCommand = 15
   ControllerCommand_DeleteButton DriverControllerCommand = 16
 )
 func (p DriverControllerCommand) String() string {
   switch p {
   case ControllerCommand_None: return "ControllerCommand_None"
-  case ControllerCommand_AddController: return "ControllerCommand_AddController"
   case ControllerCommand_AddDevice: return "ControllerCommand_AddDevice"
   case ControllerCommand_CreateNewPrimary: return "ControllerCommand_CreateNewPrimary"
   case ControllerCommand_ReceiveConfiguration: return "ControllerCommand_ReceiveConfiguration"
-  case ControllerCommand_RemoveController: return "ControllerCommand_RemoveController"
   case ControllerCommand_RemoveDevice: return "ControllerCommand_RemoveDevice"
   case ControllerCommand_RemoveFailedNode: return "ControllerCommand_RemoveFailedNode"
   case ControllerCommand_HasNodeFailed: return "ControllerCommand_HasNodeFailed"
@@ -136,6 +134,8 @@ func (p DriverControllerCommand) String() string {
   case ControllerCommand_RequestNodeNeighborUpdate: return "ControllerCommand_RequestNodeNeighborUpdate"
   case ControllerCommand_AssignReturnRoute: return "ControllerCommand_AssignReturnRoute"
   case ControllerCommand_DeleteAllReturnRoutes: return "ControllerCommand_DeleteAllReturnRoutes"
+  case ControllerCommand_SendNodeInformation: return "ControllerCommand_SendNodeInformation"
+  case ControllerCommand_ReplicationSend: return "ControllerCommand_ReplicationSend"
   case ControllerCommand_CreateButton: return "ControllerCommand_CreateButton"
   case ControllerCommand_DeleteButton: return "ControllerCommand_DeleteButton"
   }
@@ -145,11 +145,9 @@ func (p DriverControllerCommand) String() string {
 func FromDriverControllerCommandString(s string) DriverControllerCommand {
   switch s {
   case "ControllerCommand_None": return ControllerCommand_None
-  case "ControllerCommand_AddController": return ControllerCommand_AddController
   case "ControllerCommand_AddDevice": return ControllerCommand_AddDevice
   case "ControllerCommand_CreateNewPrimary": return ControllerCommand_CreateNewPrimary
   case "ControllerCommand_ReceiveConfiguration": return ControllerCommand_ReceiveConfiguration
-  case "ControllerCommand_RemoveController": return ControllerCommand_RemoveController
   case "ControllerCommand_RemoveDevice": return ControllerCommand_RemoveDevice
   case "ControllerCommand_RemoveFailedNode": return ControllerCommand_RemoveFailedNode
   case "ControllerCommand_HasNodeFailed": return ControllerCommand_HasNodeFailed
@@ -159,6 +157,8 @@ func FromDriverControllerCommandString(s string) DriverControllerCommand {
   case "ControllerCommand_RequestNodeNeighborUpdate": return ControllerCommand_RequestNodeNeighborUpdate
   case "ControllerCommand_AssignReturnRoute": return ControllerCommand_AssignReturnRoute
   case "ControllerCommand_DeleteAllReturnRoutes": return ControllerCommand_DeleteAllReturnRoutes
+  case "ControllerCommand_SendNodeInformation": return ControllerCommand_SendNodeInformation
+  case "ControllerCommand_ReplicationSend": return ControllerCommand_ReplicationSend
   case "ControllerCommand_CreateButton": return ControllerCommand_CreateButton
   case "ControllerCommand_DeleteButton": return ControllerCommand_DeleteButton
   }
@@ -174,7 +174,131 @@ func (p DriverControllerCommand) IsEnum() bool {
 }
 
 /**
- *Delete a handheld button id.
+ *< Delete id that tracks handheld button presses
+ */
+type DriverControllerState int
+const (
+  ControllerState_Normal DriverControllerState = 0
+  ControllerState_Starting DriverControllerState = 1
+  ControllerState_Cancel DriverControllerState = 2
+  ControllerState_Error DriverControllerState = 3
+  ControllerState_Waiting DriverControllerState = 4
+  ControllerState_Sleeping DriverControllerState = 5
+  ControllerState_InProgress DriverControllerState = 6
+  ControllerState_Completed DriverControllerState = 7
+  ControllerState_Failed DriverControllerState = 8
+  ControllerState_NodeOK DriverControllerState = 9
+  ControllerState_NodeFailed DriverControllerState = 10
+)
+func (p DriverControllerState) String() string {
+  switch p {
+  case ControllerState_Normal: return "ControllerState_Normal"
+  case ControllerState_Starting: return "ControllerState_Starting"
+  case ControllerState_Cancel: return "ControllerState_Cancel"
+  case ControllerState_Error: return "ControllerState_Error"
+  case ControllerState_Waiting: return "ControllerState_Waiting"
+  case ControllerState_Sleeping: return "ControllerState_Sleeping"
+  case ControllerState_InProgress: return "ControllerState_InProgress"
+  case ControllerState_Completed: return "ControllerState_Completed"
+  case ControllerState_Failed: return "ControllerState_Failed"
+  case ControllerState_NodeOK: return "ControllerState_NodeOK"
+  case ControllerState_NodeFailed: return "ControllerState_NodeFailed"
+  }
+  return ""
+}
+
+func FromDriverControllerStateString(s string) DriverControllerState {
+  switch s {
+  case "ControllerState_Normal": return ControllerState_Normal
+  case "ControllerState_Starting": return ControllerState_Starting
+  case "ControllerState_Cancel": return ControllerState_Cancel
+  case "ControllerState_Error": return ControllerState_Error
+  case "ControllerState_Waiting": return ControllerState_Waiting
+  case "ControllerState_Sleeping": return ControllerState_Sleeping
+  case "ControllerState_InProgress": return ControllerState_InProgress
+  case "ControllerState_Completed": return ControllerState_Completed
+  case "ControllerState_Failed": return ControllerState_Failed
+  case "ControllerState_NodeOK": return ControllerState_NodeOK
+  case "ControllerState_NodeFailed": return ControllerState_NodeFailed
+  }
+  return DriverControllerState(-10000)
+}
+
+func (p DriverControllerState) Value() int {
+  return int(p)
+}
+
+func (p DriverControllerState) IsEnum() bool {
+  return true
+}
+
+/**
+ *< Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node has failed.
+ */
+type DriverControllerError int
+const (
+  ControllerError_None DriverControllerError = 0
+  ControllerError_ButtonNotFound DriverControllerError = 1
+  ControllerError_NodeNotFound DriverControllerError = 2
+  ControllerError_NotBridge DriverControllerError = 3
+  ControllerError_NotSUC DriverControllerError = 4
+  ControllerError_NotSecondary DriverControllerError = 5
+  ControllerError_NotPrimary DriverControllerError = 6
+  ControllerError_IsPrimary DriverControllerError = 7
+  ControllerError_NotFound DriverControllerError = 8
+  ControllerError_Busy DriverControllerError = 9
+  ControllerError_Failed DriverControllerError = 10
+  ControllerError_Disabled DriverControllerError = 11
+  ControllerError_Overflow DriverControllerError = 12
+)
+func (p DriverControllerError) String() string {
+  switch p {
+  case ControllerError_None: return "ControllerError_None"
+  case ControllerError_ButtonNotFound: return "ControllerError_ButtonNotFound"
+  case ControllerError_NodeNotFound: return "ControllerError_NodeNotFound"
+  case ControllerError_NotBridge: return "ControllerError_NotBridge"
+  case ControllerError_NotSUC: return "ControllerError_NotSUC"
+  case ControllerError_NotSecondary: return "ControllerError_NotSecondary"
+  case ControllerError_NotPrimary: return "ControllerError_NotPrimary"
+  case ControllerError_IsPrimary: return "ControllerError_IsPrimary"
+  case ControllerError_NotFound: return "ControllerError_NotFound"
+  case ControllerError_Busy: return "ControllerError_Busy"
+  case ControllerError_Failed: return "ControllerError_Failed"
+  case ControllerError_Disabled: return "ControllerError_Disabled"
+  case ControllerError_Overflow: return "ControllerError_Overflow"
+  }
+  return ""
+}
+
+func FromDriverControllerErrorString(s string) DriverControllerError {
+  switch s {
+  case "ControllerError_None": return ControllerError_None
+  case "ControllerError_ButtonNotFound": return ControllerError_ButtonNotFound
+  case "ControllerError_NodeNotFound": return ControllerError_NodeNotFound
+  case "ControllerError_NotBridge": return ControllerError_NotBridge
+  case "ControllerError_NotSUC": return ControllerError_NotSUC
+  case "ControllerError_NotSecondary": return ControllerError_NotSecondary
+  case "ControllerError_NotPrimary": return ControllerError_NotPrimary
+  case "ControllerError_IsPrimary": return ControllerError_IsPrimary
+  case "ControllerError_NotFound": return ControllerError_NotFound
+  case "ControllerError_Busy": return ControllerError_Busy
+  case "ControllerError_Failed": return ControllerError_Failed
+  case "ControllerError_Disabled": return ControllerError_Disabled
+  case "ControllerError_Overflow": return ControllerError_Overflow
+  }
+  return DriverControllerError(-10000)
+}
+
+func (p DriverControllerError) Value() int {
+  return int(p)
+}
+
+func (p DriverControllerError) IsEnum() bool {
+  return true
+}
+
+/**
+ *< RequestNetworkUpdate error
  */
 type DriverControllerInterface int
 const (

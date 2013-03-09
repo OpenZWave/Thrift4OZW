@@ -71,11 +71,11 @@ LIBS := $(GNUTLS) $(LIBUSB) $(LIBBOOST) $(LIBTHRIFT) $(LIBBOOSTSTOMP)
 all: openzwave booststomp ozwd
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
-	patch -p0 gen-cpp/ozw_types.h <gen-cpp/ozw_types.h.patch
+	patch -p0 gen-cpp/ozw_types.h < ozw_types.h.patch
 	ruby create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
 	cp gen-cpp/RemoteManager_server.cpp gen-cpp/RemoteManager_server.cpp.orig
 	cp gen-cpp/ozw_types.h gen-cpp/ozw_types.h.orig
-	patch -p0 gen-cpp/RemoteManager_server.cpp < gen-cpp/RemoteManager_server.cpp.patch
+	patch -p0 gen-cpp/RemoteManager_server.cpp < RemoteManager_server.cpp.patch
     
 gen-cpp/RemoteManager.cpp: ozw.thrift
 	thrift --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
@@ -122,5 +122,5 @@ binclean:
 thrift: gen-cpp/RemoteManager.cpp
 
 patchdiffs:
-	- diff -C3 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h.patched > gen-cpp/ozw_types.h.patch
-	- diff -C3 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp.patched > gen-cpp/RemoteManager_server.cpp.patch
+	- diff -C3 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h.patched > ozw_types.h.patch
+	- diff -C3 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp.patched > RemoteManager_server.cpp.patch
