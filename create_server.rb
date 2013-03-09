@@ -163,15 +163,16 @@ begin
 				#~ end
 				boolean_map = []
 				node.arguments[-disambiguation_hints.length..-1].each_with_index { |arg, idx| 
-					do_they_match = arg.cpp_type.to_cpp.match(disambiguation_hints[idx].downcase)
+					do_they_match = arg.cpp_type.to_cpp.include?(disambiguation_hints[idx].downcase)
 					messages << "  arg.cpp_type.to_cpp\t\t== #{arg.cpp_type.to_cpp }"
 					messages << "  disambiguation_hints[#{idx}]\t== #{disambiguation_hints[idx]}"
 					messages << "  matched? #{do_they_match ? 'YES' : 'NO'}"
 					boolean_map << do_they_match
 				}
 				if boolean_map.inject(:&) then
-					messages << "Matched:\t#{target_method_name}\nto overloaded method:#{CGI.unescapeHTML node['demangled']}"
+					messages << "Matched: #{meth.name} => #{CGI.unescapeHTML node['demangled']}"
 					target_method = node 
+					break 
 				end
 				# FIXME:: ListString => list<string>
 			}
@@ -187,12 +188,12 @@ begin
 	    #
 
 	    #Thrift transforms methods with complex return types (string, vector<...>, user-defined structs etc)
-	    # example 1:
+	    # example 1: Basic 1-1 mapping
 	    #   (C++)       string GetLibraryVersion( uint32 const _homeId );
 	    #   (thrift)    string GetLibraryVersion( 1:i32 _homeId );
 	    #   (skeleton)  void GetLibraryVersion(std::string& _return, const int32_t _homeId)
 	    #
-	    # example 2:
+	    # example 2: e
 	    #   (C++)       uint32 GetNodeNeighbors( uint32 const _homeId, uint8 const _nodeId, uint8** _nodeNeighbors );
 	    #   (thrift)    UInt32_NeighborMap GetNodeNeighbors( 1:i32 _homeId, 2:byte _nodeId);
 	    #   (skeleton)  void GetNodeNeighbors(UInt32_ListByte& _return, const int32_t _homeId, const int8_t _nodeId)
@@ -220,42 +221,42 @@ begin
 		# VALUE: hash with
 		#       :descriptor => source argument DESCRIPTOR STRING (eg "_return._className")
 		#       :node => the actual source argument node (Argument or Field)
-	    target_method.arguments.each {|a|   
-		# 1) match directly by name
-		if (arg = meth.arguments.find(:name => a.name )).is_a?RbGCCXML::Argument then
-		    argmap[a] = {}
-		    argmap[a][:descriptor] = arg.name
-		    argmap[a][:node] = arg
-		# 2) else, match as a member of Thrift's special "_return" argument (class struct)
-		elsif (_ret = meth.arguments.find(:name => "_return" )) and 
-		      (_ret.is_a?RbGCCXML::Node) and 
-		      (_ret.cpp_type.base_type.is_a?RbGCCXML::Class) and
-		      (arg = _ret.cpp_type.base_type.variables.find(:name => a.name)).is_a?RbGCCXML::Field  then
-		    argmap[a] = {}
-		    argmap[a][:descriptor] = "_return.#{a.name}"
-		    argmap[a][:node] = arg
-		# 3) else, check if is a _callback or _context argument (callbacks)
-		elsif (a.name =~ /callback/) then
-		    cb_fun = "#{target_method.name}_callback"
-		    messages << "defining #{cb_fun}"
-		    fntype = RbGCCXML::NodeCache.find(a['type']).base_type # => RbGCCXML::PointerType => RbGCCXML::FunctionType
-		    i = 0
-		    fntype_args = fntype.arguments.collect{ |arg| i=i+1; "#{arg.to_cpp} arg#{i}"}.join(', ')            
-		    cb = []
-		    cb << fntype.base_type.return_type.to_cpp + " #{cb_fun}(#{fntype_args}) {"
-		    cb << "\t// FIXME: fill in the blanks (sorry!)"
-		    cb << "}"
-		    Callbacks[cb_fun] = cb.join("\n")
-		    argmap[a] = {}
-		    argmap[a][:descriptor] = "&#{target_method.name}_callback"
-		#
-		elsif (a.name =~ /context/) then
-		    # pass the Thrift server singleton instance as the callback context
-		    argmap[a] = {}
-		    argmap[a][:descriptor] = "(void*) this"
-		else
-		    raise "Reverse argument mapping: couldn't resolve #{target_method.name}::#{a.name} in method (mapped to '#{meth.name}')!!!"
-		end
+		target_method.arguments.each {|a|   
+			# 1) match directly by name
+			if (arg = meth.arguments.find(:name => a.name )).is_a?RbGCCXML::Argument then
+				argmap[a] = {}
+				argmap[a][:descriptor] = arg.name
+				argmap[a][:node] = arg
+			# 2) else, match as a member of Thrift's special "_return" argument (class struct)
+			elsif (_ret = meth.arguments.find(:name => "_return" )) and 
+				  (_ret.is_a?RbGCCXML::Node) and 
+				  (_ret.cpp_type.base_type.is_a?RbGCCXML::Class) and
+				  (arg = _ret.cpp_type.base_type.variables.find(:name => a.name)).is_a?RbGCCXML::Field  then
+				argmap[a] = {}
+				argmap[a][:descriptor] = "_return.#{a.name}"
+				argmap[a][:node] = arg
+			# 3) else, check if is a _callback or _context argument (callbacks)
+			elsif (a.name =~ /callback/) then
+				cb_fun = "#{target_method.name}_callback"
+				messages << "defining #{cb_fun}"
+				fntype = RbGCCXML::NodeCache.find(a['type']).base_type # => RbGCCXML::PointerType => RbGCCXML::FunctionType
+				i = 0
+				fntype_args = fntype.arguments.collect{ |arg| i=i+1; "#{arg.to_cpp} arg#{i}"}.join(', ')            
+				cb = []
+				cb << fntype.base_type.return_type.to_cpp + " #{cb_fun}(#{fntype_args}) {"
+				cb << "\t// FIXME: fill in the blanks (sorry!)"
+				cb << "}"
+				Callbacks[cb_fun] = cb.join("\n")
+				argmap[a] = {}
+				argmap[a][:descriptor] = "&#{target_method.name}_callback"
+			#
+			elsif (a.name =~ /context/) then
+				# pass the Thrift server singleton instance as the callback context
+				argmap[a] = {}
+				argmap[a][:descriptor] = "(void*) this"
+			else
+				raise "Reverse argument mapping: couldn't resolve #{a.name} in #{CGI.unescapeHTML meth['demangled']}"
+			end
 	    }
 
 	    #
@@ -341,6 +342,6 @@ begin
 	puts "Done!"
 
 rescue RuntimeError => err
-	puts messages.join("\n\t")
+	puts messages.join("\n*ERR*=> ")
 	puts err.inspect
 end

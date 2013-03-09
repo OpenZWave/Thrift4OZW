@@ -16,7 +16,6 @@
 -define(ozw_RemoteValueType_ValueType_Short, 6).
 -define(ozw_RemoteValueType_ValueType_String, 7).
 -define(ozw_RemoteValueType_ValueType_Button, 8).
--define(ozw_RemoteValueType_ValueType_Max, 8).
 
 -define(ozw_DriverControllerCommand_ControllerCommand_None, 0).
 -define(ozw_DriverControllerCommand_ControllerCommand_AddController, 1).
@@ -35,6 +34,10 @@
 -define(ozw_DriverControllerCommand_ControllerCommand_DeleteAllReturnRoutes, 14).
 -define(ozw_DriverControllerCommand_ControllerCommand_CreateButton, 15).
 -define(ozw_DriverControllerCommand_ControllerCommand_DeleteButton, 16).
+
+-define(ozw_DriverControllerInterface_ControllerInterface_Unknown, 0).
+-define(ozw_DriverControllerInterface_ControllerInterface_Serial, 1).
+-define(ozw_DriverControllerInterface_ControllerInterface_Hid, 2).
 
 %% struct remoteValueID
 
@@ -134,6 +137,11 @@
 
 -record(bool_ListString, {retval :: boolean(),
                           o_value :: list()}).
+
+%% struct listUInt8_Byte
+
+-record(listUInt8_Byte, {_value :: list(),
+                         _length :: integer()}).
 
 %% struct uInt32_ListByte
 

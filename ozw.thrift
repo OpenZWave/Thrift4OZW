@@ -43,8 +43,7 @@ enum RemoteValueType {
 	ValueType_Schedule=5,
 	ValueType_Short=6,
 	ValueType_String=7,
-	ValueType_Button=8,
-	ValueType_Max=8
+	ValueType_Button=8
 }
 
 enum DriverControllerCommand {
@@ -66,7 +65,13 @@ enum DriverControllerCommand {
     ControllerCommand_CreateButton,             /** Create a handheld button id. */
 	ControllerCommand_DeleteButton             /** Delete a handheld button id. */
 }
-    
+
+enum DriverControllerInterface {
+	ControllerInterface_Unknown = 0,
+	ControllerInterface_Serial,
+	ControllerInterface_Hid
+}
+
 struct RemoteValueID {
     1:i32   _homeId,
     2:byte  _nodeId,
@@ -168,6 +173,11 @@ struct Bool_ListString {
     2:list<string> o_value;
 }
 
+struct ListUInt8_Byte {
+    1:list<byte>  _value;
+    2:byte 		_length;
+}
+
 struct UInt32_ListByte {
     1:i32   retval;
     2:list<byte> _nodeNeighbors;
@@ -250,6 +260,7 @@ service RemoteManager {
     void LogDriverStatistics( 1:i32 _homeId );
 
     //TODO:: Driver::ControllerInterface GetControllerInterfaceType( uint32 const _homeId );
+    i32 GetControllerInterfaceType( 1:i32 _homeId );
 
     //string GetControllerPath( uint32 const _homeId );
     string GetControllerPath( 1:i32 _homeId );
@@ -444,11 +455,11 @@ service RemoteManager {
 	
 	//bool GetValueListSelection( ValueID const& _id, string* o_value );
     // ekarak: thrift does not support function overloading
-    Bool_String GetValueListSelection_String( 1:RemoteValueID _id );
+    Bool_String GetValueListSelection_string( 1:RemoteValueID _id );
 
 	//bool GetValueListSelection( ValueID const& _id, int32* o_value );
     // ekarak: overloading by name mangling
-    Bool_Int GetValueListSelection_Int32( 1:RemoteValueID _id );
+    Bool_Int GetValueListSelection_int32( 1:RemoteValueID _id );
 
 	//bool GetValueListItems( ValueID const& _id, vector<string>* o_value );
     // ekarak: client must ensure value's type is ValueType_List
@@ -459,27 +470,31 @@ service RemoteManager {
 
 	//bool SetValue( ValueID const& _id, bool const _value );
     // ekarak: client must ensure value's type is ValueType_Bool
-    bool SetValue_Bool( 1:RemoteValueID _id, 2:bool _value );
+    bool SetValue_bool( 1:RemoteValueID _id, 2:bool _value );
 
 	//bool SetValue( ValueID const& _id, uint8 const _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_UInt8( 1:RemoteValueID _id, 2:byte _value, 3:byte _length);
+    bool SetValue_uint8( 1:RemoteValueID _id, 2:byte _value);
+
+	//TODO: bool SetValue( ValueID const& _id, uint8 const* _value, uint8 const _length );
+    // ekarak:  client must ensure value's type
+    bool SetValue_uint8_uint8( 1:RemoteValueID _id, 2:byte _value, 3:byte _length);
 
 	//bool SetValue( ValueID const& _id, float const _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_Float( 1:RemoteValueID _id, 2:double _value );
-		
+    bool SetValue_float( 1:RemoteValueID _id, 2:double _value );
+
 	//bool SetValue( ValueID const& _id, int32 const _value );
     // ekarak: client must ensure value's type
-    bool SetValue_Int32( 1:RemoteValueID _id, 2:i32 _value );
+    bool SetValue_int32( 1:RemoteValueID _id, 2:i32 _value );
 
 	//bool SetValue( ValueID const& _id, int16 const _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_Int16( 1:RemoteValueID _id, 2:i16 _value );
+    bool SetValue_int16( 1:RemoteValueID _id, 2:i16 _value );
 
 	//bool SetValue( ValueID const& _id, string const& _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_String( 1:RemoteValueID _id, 2:string _value );
+    bool SetValue_string( 1:RemoteValueID _id, 2:string _value );
     
 	//bool SetValueListSelection( ValueID const& _id, string const& _selectedItem );
     bool SetValueListSelection( 1:RemoteValueID _id, 2:string _selectedItem );
@@ -672,7 +687,7 @@ service RemoteManager {
 
 	//bool SceneGetValueListSelection( uint8 const _sceneId, ValueID const& _valueId, string* o_value );
     // ekarak: Notice change of naming & return argument
-    Bool_String SceneGetValueListSelection_String( 1:byte _sceneId, 2:RemoteValueID  _valueId );
+    Bool_String SceneGetValueListSelection_string( 1:byte _sceneId, 2:RemoteValueID  _valueId );
 
     //bool SceneGetValueListSelection( uint8 const _sceneId, ValueID const& _valueId, int32* o_value );
     // ekarak: Notice change of naming & return argument
@@ -700,11 +715,11 @@ service RemoteManager {
 
 	//bool SetSceneValue( uint8 const _sceneId, ValueID const& _valueId, string const& _value );
     // ekarak: Overloaded function renamed
-    bool SetSceneValue_String( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
+    bool SetSceneValue_string( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
     
 	//bool SetSceneValueListSelection( uint8 const _sceneId, ValueID const& _valueId, string const& _value );
     // ekarak: Overloaded function renamed
-    bool SetSceneValueListSelection_String( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
+    bool SetSceneValueListSelection_string( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
     
 	//bool SetSceneValueListSelection( uint8 const _sceneId, ValueID const& _valueId, int32 const _value );
     // ekarak: Overloaded function renamed
