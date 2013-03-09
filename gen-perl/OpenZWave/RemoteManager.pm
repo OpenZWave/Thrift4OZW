@@ -9565,9 +9565,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_GetValueListSelection_string_args;
+package OpenZWave::RemoteManager_GetValueListSelection_String_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_GetValueListSelection_string_args->mk_accessors( qw( _id ) );
+OpenZWave::RemoteManager_GetValueListSelection_String_args->mk_accessors( qw( _id ) );
 
 sub new {
   my $classname = shift;
@@ -9583,7 +9583,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_GetValueListSelection_string_args';
+  return 'RemoteManager_GetValueListSelection_String_args';
 }
 
 sub read {
@@ -9619,7 +9619,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_string_args');
+  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_String_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
@@ -9630,9 +9630,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_GetValueListSelection_string_result;
+package OpenZWave::RemoteManager_GetValueListSelection_String_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_GetValueListSelection_string_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_GetValueListSelection_String_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -9648,7 +9648,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_GetValueListSelection_string_result';
+  return 'RemoteManager_GetValueListSelection_String_result';
 }
 
 sub read {
@@ -9684,7 +9684,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_string_result');
+  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_String_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
     $xfer += $self->{success}->write($output);
@@ -9695,9 +9695,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_GetValueListSelection_int32_args;
+package OpenZWave::RemoteManager_GetValueListSelection_Int32_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_GetValueListSelection_int32_args->mk_accessors( qw( _id ) );
+OpenZWave::RemoteManager_GetValueListSelection_Int32_args->mk_accessors( qw( _id ) );
 
 sub new {
   my $classname = shift;
@@ -9713,7 +9713,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_GetValueListSelection_int32_args';
+  return 'RemoteManager_GetValueListSelection_Int32_args';
 }
 
 sub read {
@@ -9749,7 +9749,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_int32_args');
+  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_Int32_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
@@ -9760,9 +9760,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_GetValueListSelection_int32_result;
+package OpenZWave::RemoteManager_GetValueListSelection_Int32_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_GetValueListSelection_int32_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_GetValueListSelection_Int32_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -9778,7 +9778,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_GetValueListSelection_int32_result';
+  return 'RemoteManager_GetValueListSelection_Int32_result';
 }
 
 sub read {
@@ -9814,7 +9814,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_int32_result');
+  $xfer += $output->writeStructBegin('RemoteManager_GetValueListSelection_Int32_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
     $xfer += $self->{success}->write($output);
@@ -10085,9 +10085,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_bool_args;
+package OpenZWave::RemoteManager_SetValue_Bool_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_bool_args->mk_accessors( qw( _id _value ) );
+OpenZWave::RemoteManager_SetValue_Bool_args->mk_accessors( qw( _id _value ) );
 
 sub new {
   my $classname = shift;
@@ -10107,7 +10107,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_bool_args';
+  return 'RemoteManager_SetValue_Bool_args';
 }
 
 sub read {
@@ -10149,7 +10149,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_bool_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_Bool_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
@@ -10165,9 +10165,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_bool_result;
+package OpenZWave::RemoteManager_SetValue_Bool_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_bool_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetValue_Bool_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -10183,7 +10183,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_bool_result';
+  return 'RemoteManager_SetValue_Bool_result';
 }
 
 sub read {
@@ -10218,7 +10218,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_bool_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_Bool_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -10229,9 +10229,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_uint8_args;
+package OpenZWave::RemoteManager_SetValue_UInt8_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_uint8_args->mk_accessors( qw( _id _value ) );
+OpenZWave::RemoteManager_SetValue_UInt8_args->mk_accessors( qw( _id _value ) );
 
 sub new {
   my $classname = shift;
@@ -10251,7 +10251,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_uint8_args';
+  return 'RemoteManager_SetValue_UInt8_args';
 }
 
 sub read {
@@ -10293,7 +10293,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_uint8_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_UInt8_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
@@ -10309,9 +10309,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_uint8_result;
+package OpenZWave::RemoteManager_SetValue_UInt8_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_uint8_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetValue_UInt8_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -10327,7 +10327,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_uint8_result';
+  return 'RemoteManager_SetValue_UInt8_result';
 }
 
 sub read {
@@ -10362,7 +10362,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_uint8_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_UInt8_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -10373,9 +10373,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_uint8_uint8_args;
+package OpenZWave::RemoteManager_SetValue_UInt8_UInt8_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_uint8_uint8_args->mk_accessors( qw( _id _value _length ) );
+OpenZWave::RemoteManager_SetValue_UInt8_UInt8_args->mk_accessors( qw( _id _value _length ) );
 
 sub new {
   my $classname = shift;
@@ -10399,7 +10399,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_uint8_uint8_args';
+  return 'RemoteManager_SetValue_UInt8_UInt8_args';
 }
 
 sub read {
@@ -10424,8 +10424,20 @@ sub read {
         $xfer += $input->skip($ftype);
       }
       last; };
-      /^2$/ && do{      if ($ftype == TType::BYTE) {
-        $xfer += $input->readByte(\$self->{_value});
+      /^2$/ && do{      if ($ftype == TType::LIST) {
+        {
+          my $_size56 = 0;
+          $self->{_value} = [];
+          my $_etype59 = 0;
+          $xfer += $input->readListBegin(\$_etype59, \$_size56);
+          for (my $_i60 = 0; $_i60 < $_size56; ++$_i60)
+          {
+            my $elem61 = undef;
+            $xfer += $input->readByte(\$elem61);
+            push(@{$self->{_value}},$elem61);
+          }
+          $xfer += $input->readListEnd();
+        }
       } else {
         $xfer += $input->skip($ftype);
       }
@@ -10447,15 +10459,24 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_uint8_uint8_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_UInt8_UInt8_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
     $xfer += $output->writeFieldEnd();
   }
   if (defined $self->{_value}) {
-    $xfer += $output->writeFieldBegin('_value', TType::BYTE, 2);
-    $xfer += $output->writeByte($self->{_value});
+    $xfer += $output->writeFieldBegin('_value', TType::LIST, 2);
+    {
+      $xfer += $output->writeListBegin(TType::BYTE, scalar(@{$self->{_value}}));
+      {
+        foreach my $iter62 (@{$self->{_value}}) 
+        {
+          $xfer += $output->writeByte($iter62);
+        }
+      }
+      $xfer += $output->writeListEnd();
+    }
     $xfer += $output->writeFieldEnd();
   }
   if (defined $self->{_length}) {
@@ -10468,9 +10489,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_uint8_uint8_result;
+package OpenZWave::RemoteManager_SetValue_UInt8_UInt8_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_uint8_uint8_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetValue_UInt8_UInt8_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -10486,7 +10507,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_uint8_uint8_result';
+  return 'RemoteManager_SetValue_UInt8_UInt8_result';
 }
 
 sub read {
@@ -10521,7 +10542,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_uint8_uint8_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_UInt8_UInt8_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -10532,9 +10553,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_float_args;
+package OpenZWave::RemoteManager_SetValue_Float_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_float_args->mk_accessors( qw( _id _value ) );
+OpenZWave::RemoteManager_SetValue_Float_args->mk_accessors( qw( _id _value ) );
 
 sub new {
   my $classname = shift;
@@ -10554,7 +10575,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_float_args';
+  return 'RemoteManager_SetValue_Float_args';
 }
 
 sub read {
@@ -10596,7 +10617,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_float_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_Float_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
@@ -10612,9 +10633,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_float_result;
+package OpenZWave::RemoteManager_SetValue_Float_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_float_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetValue_Float_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -10630,7 +10651,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_float_result';
+  return 'RemoteManager_SetValue_Float_result';
 }
 
 sub read {
@@ -10665,7 +10686,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_float_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_Float_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -10964,9 +10985,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_string_args;
+package OpenZWave::RemoteManager_SetValue_String_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_string_args->mk_accessors( qw( _id _value ) );
+OpenZWave::RemoteManager_SetValue_String_args->mk_accessors( qw( _id _value ) );
 
 sub new {
   my $classname = shift;
@@ -10986,7 +11007,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_string_args';
+  return 'RemoteManager_SetValue_String_args';
 }
 
 sub read {
@@ -11028,7 +11049,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_string_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_String_args');
   if (defined $self->{_id}) {
     $xfer += $output->writeFieldBegin('_id', TType::STRUCT, 1);
     $xfer += $self->{_id}->write($output);
@@ -11044,9 +11065,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetValue_string_result;
+package OpenZWave::RemoteManager_SetValue_String_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetValue_string_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetValue_String_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -11062,7 +11083,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetValue_string_result';
+  return 'RemoteManager_SetValue_String_result';
 }
 
 sub read {
@@ -11097,7 +11118,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetValue_string_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetValue_String_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -18134,9 +18155,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SceneGetValueListSelection_string_args;
+package OpenZWave::RemoteManager_SceneGetValueListSelection_String_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SceneGetValueListSelection_string_args->mk_accessors( qw( _sceneId _valueId ) );
+OpenZWave::RemoteManager_SceneGetValueListSelection_String_args->mk_accessors( qw( _sceneId _valueId ) );
 
 sub new {
   my $classname = shift;
@@ -18156,7 +18177,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SceneGetValueListSelection_string_args';
+  return 'RemoteManager_SceneGetValueListSelection_String_args';
 }
 
 sub read {
@@ -18198,7 +18219,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SceneGetValueListSelection_string_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SceneGetValueListSelection_String_args');
   if (defined $self->{_sceneId}) {
     $xfer += $output->writeFieldBegin('_sceneId', TType::BYTE, 1);
     $xfer += $output->writeByte($self->{_sceneId});
@@ -18214,9 +18235,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SceneGetValueListSelection_string_result;
+package OpenZWave::RemoteManager_SceneGetValueListSelection_String_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SceneGetValueListSelection_string_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SceneGetValueListSelection_String_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -18232,7 +18253,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SceneGetValueListSelection_string_result';
+  return 'RemoteManager_SceneGetValueListSelection_String_result';
 }
 
 sub read {
@@ -18268,7 +18289,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SceneGetValueListSelection_string_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SceneGetValueListSelection_String_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::STRUCT, 0);
     $xfer += $self->{success}->write($output);
@@ -19219,9 +19240,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetSceneValue_string_args;
+package OpenZWave::RemoteManager_SetSceneValue_String_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetSceneValue_string_args->mk_accessors( qw( _sceneId _valueId _value ) );
+OpenZWave::RemoteManager_SetSceneValue_String_args->mk_accessors( qw( _sceneId _valueId _value ) );
 
 sub new {
   my $classname = shift;
@@ -19245,7 +19266,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetSceneValue_string_args';
+  return 'RemoteManager_SetSceneValue_String_args';
 }
 
 sub read {
@@ -19293,7 +19314,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValue_string_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValue_String_args');
   if (defined $self->{_sceneId}) {
     $xfer += $output->writeFieldBegin('_sceneId', TType::BYTE, 1);
     $xfer += $output->writeByte($self->{_sceneId});
@@ -19314,9 +19335,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetSceneValue_string_result;
+package OpenZWave::RemoteManager_SetSceneValue_String_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetSceneValue_string_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetSceneValue_String_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -19332,7 +19353,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetSceneValue_string_result';
+  return 'RemoteManager_SetSceneValue_String_result';
 }
 
 sub read {
@@ -19367,7 +19388,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValue_string_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValue_String_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -19378,9 +19399,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetSceneValueListSelection_string_args;
+package OpenZWave::RemoteManager_SetSceneValueListSelection_String_args;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetSceneValueListSelection_string_args->mk_accessors( qw( _sceneId _valueId _value ) );
+OpenZWave::RemoteManager_SetSceneValueListSelection_String_args->mk_accessors( qw( _sceneId _valueId _value ) );
 
 sub new {
   my $classname = shift;
@@ -19404,7 +19425,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetSceneValueListSelection_string_args';
+  return 'RemoteManager_SetSceneValueListSelection_String_args';
 }
 
 sub read {
@@ -19452,7 +19473,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValueListSelection_string_args');
+  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValueListSelection_String_args');
   if (defined $self->{_sceneId}) {
     $xfer += $output->writeFieldBegin('_sceneId', TType::BYTE, 1);
     $xfer += $output->writeByte($self->{_sceneId});
@@ -19473,9 +19494,9 @@ sub write {
   return $xfer;
 }
 
-package OpenZWave::RemoteManager_SetSceneValueListSelection_string_result;
+package OpenZWave::RemoteManager_SetSceneValueListSelection_String_result;
 use base qw(Class::Accessor);
-OpenZWave::RemoteManager_SetSceneValueListSelection_string_result->mk_accessors( qw( success ) );
+OpenZWave::RemoteManager_SetSceneValueListSelection_String_result->mk_accessors( qw( success ) );
 
 sub new {
   my $classname = shift;
@@ -19491,7 +19512,7 @@ sub new {
 }
 
 sub getName {
-  return 'RemoteManager_SetSceneValueListSelection_string_result';
+  return 'RemoteManager_SetSceneValueListSelection_String_result';
 }
 
 sub read {
@@ -19526,7 +19547,7 @@ sub read {
 sub write {
   my ($self, $output) = @_;
   my $xfer   = 0;
-  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValueListSelection_string_result');
+  $xfer += $output->writeStructBegin('RemoteManager_SetSceneValueListSelection_String_result');
   if (defined $self->{success}) {
     $xfer += $output->writeFieldBegin('success', TType::BOOL, 0);
     $xfer += $output->writeBool($self->{success});
@@ -21210,14 +21231,14 @@ sub GetValueAsString{
   die 'implement interface';
 }
 
-sub GetValueListSelection_string{
+sub GetValueListSelection_String{
   my $self = shift;
   my $_id = shift;
 
   die 'implement interface';
 }
 
-sub GetValueListSelection_int32{
+sub GetValueListSelection_Int32{
   my $self = shift;
   my $_id = shift;
 
@@ -21238,7 +21259,7 @@ sub GetValueFloatPrecision{
   die 'implement interface';
 }
 
-sub SetValue_bool{
+sub SetValue_Bool{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
@@ -21246,7 +21267,7 @@ sub SetValue_bool{
   die 'implement interface';
 }
 
-sub SetValue_uint8{
+sub SetValue_UInt8{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
@@ -21254,7 +21275,7 @@ sub SetValue_uint8{
   die 'implement interface';
 }
 
-sub SetValue_uint8_uint8{
+sub SetValue_UInt8_UInt8{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
@@ -21263,7 +21284,7 @@ sub SetValue_uint8_uint8{
   die 'implement interface';
 }
 
-sub SetValue_float{
+sub SetValue_Float{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
@@ -21287,7 +21308,7 @@ sub SetValue_int16{
   die 'implement interface';
 }
 
-sub SetValue_string{
+sub SetValue_String{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
@@ -21703,7 +21724,7 @@ sub SceneGetValueAsString{
   die 'implement interface';
 }
 
-sub SceneGetValueListSelection_string{
+sub SceneGetValueListSelection_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
@@ -21764,7 +21785,7 @@ sub SetSceneValue_Int16{
   die 'implement interface';
 }
 
-sub SetSceneValue_string{
+sub SetSceneValue_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
@@ -21773,7 +21794,7 @@ sub SetSceneValue_string{
   die 'implement interface';
 }
 
-sub SetSceneValueListSelection_string{
+sub SetSceneValueListSelection_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
@@ -22402,18 +22423,18 @@ sub GetValueAsString{
   return $self->{impl}->GetValueAsString($_id);
 }
 
-sub GetValueListSelection_string{
+sub GetValueListSelection_String{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
-  return $self->{impl}->GetValueListSelection_string($_id);
+  return $self->{impl}->GetValueListSelection_String($_id);
 }
 
-sub GetValueListSelection_int32{
+sub GetValueListSelection_Int32{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
-  return $self->{impl}->GetValueListSelection_int32($_id);
+  return $self->{impl}->GetValueListSelection_Int32($_id);
 }
 
 sub GetValueListItems{
@@ -22430,37 +22451,37 @@ sub GetValueFloatPrecision{
   return $self->{impl}->GetValueFloatPrecision($_id);
 }
 
-sub SetValue_bool{
+sub SetValue_Bool{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
-  return $self->{impl}->SetValue_bool($_id, $_value);
+  return $self->{impl}->SetValue_Bool($_id, $_value);
 }
 
-sub SetValue_uint8{
+sub SetValue_UInt8{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
-  return $self->{impl}->SetValue_uint8($_id, $_value);
+  return $self->{impl}->SetValue_UInt8($_id, $_value);
 }
 
-sub SetValue_uint8_uint8{
+sub SetValue_UInt8_UInt8{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
   my $_length = ($request->{'_length'}) ? $request->{'_length'} : undef;
-  return $self->{impl}->SetValue_uint8_uint8($_id, $_value, $_length);
+  return $self->{impl}->SetValue_UInt8_UInt8($_id, $_value, $_length);
 }
 
-sub SetValue_float{
+sub SetValue_Float{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
-  return $self->{impl}->SetValue_float($_id, $_value);
+  return $self->{impl}->SetValue_Float($_id, $_value);
 }
 
 sub SetValue_int32{
@@ -22479,12 +22500,12 @@ sub SetValue_int16{
   return $self->{impl}->SetValue_int16($_id, $_value);
 }
 
-sub SetValue_string{
+sub SetValue_String{
   my ($self, $request) = @_;
 
   my $_id = ($request->{'_id'}) ? $request->{'_id'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
-  return $self->{impl}->SetValue_string($_id, $_value);
+  return $self->{impl}->SetValue_String($_id, $_value);
 }
 
 sub SetValueListSelection{
@@ -22895,12 +22916,12 @@ sub SceneGetValueAsString{
   return $self->{impl}->SceneGetValueAsString($_sceneId, $_valueId);
 }
 
-sub SceneGetValueListSelection_string{
+sub SceneGetValueListSelection_String{
   my ($self, $request) = @_;
 
   my $_sceneId = ($request->{'_sceneId'}) ? $request->{'_sceneId'} : undef;
   my $_valueId = ($request->{'_valueId'}) ? $request->{'_valueId'} : undef;
-  return $self->{impl}->SceneGetValueListSelection_string($_sceneId, $_valueId);
+  return $self->{impl}->SceneGetValueListSelection_String($_sceneId, $_valueId);
 }
 
 sub SceneGetValueListSelection_Int32{
@@ -22956,22 +22977,22 @@ sub SetSceneValue_Int16{
   return $self->{impl}->SetSceneValue_Int16($_sceneId, $_valueId, $_value);
 }
 
-sub SetSceneValue_string{
+sub SetSceneValue_String{
   my ($self, $request) = @_;
 
   my $_sceneId = ($request->{'_sceneId'}) ? $request->{'_sceneId'} : undef;
   my $_valueId = ($request->{'_valueId'}) ? $request->{'_valueId'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
-  return $self->{impl}->SetSceneValue_string($_sceneId, $_valueId, $_value);
+  return $self->{impl}->SetSceneValue_String($_sceneId, $_valueId, $_value);
 }
 
-sub SetSceneValueListSelection_string{
+sub SetSceneValueListSelection_String{
   my ($self, $request) = @_;
 
   my $_sceneId = ($request->{'_sceneId'}) ? $request->{'_sceneId'} : undef;
   my $_valueId = ($request->{'_valueId'}) ? $request->{'_valueId'} : undef;
   my $_value = ($request->{'_value'}) ? $request->{'_value'} : undef;
-  return $self->{impl}->SetSceneValueListSelection_string($_sceneId, $_valueId, $_value);
+  return $self->{impl}->SetSceneValueListSelection_String($_sceneId, $_valueId, $_value);
 }
 
 sub SetSceneValueListSelection_Int32{
@@ -26201,27 +26222,27 @@ sub recv_GetValueAsString{
   }
   die "GetValueAsString failed: unknown result";
 }
-sub GetValueListSelection_string{
+sub GetValueListSelection_String{
   my $self = shift;
   my $_id = shift;
 
-    $self->send_GetValueListSelection_string($_id);
-  return $self->recv_GetValueListSelection_string();
+    $self->send_GetValueListSelection_String($_id);
+  return $self->recv_GetValueListSelection_String();
 }
 
-sub send_GetValueListSelection_string{
+sub send_GetValueListSelection_String{
   my $self = shift;
   my $_id = shift;
 
-  $self->{output}->writeMessageBegin('GetValueListSelection_string', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_GetValueListSelection_string_args();
+  $self->{output}->writeMessageBegin('GetValueListSelection_String', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_GetValueListSelection_String_args();
   $args->{_id} = $_id;
   $args->write($self->{output});
   $self->{output}->writeMessageEnd();
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_GetValueListSelection_string{
+sub recv_GetValueListSelection_String{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26235,36 +26256,36 @@ sub recv_GetValueListSelection_string{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_GetValueListSelection_string_result();
+  my $result = new OpenZWave::RemoteManager_GetValueListSelection_String_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "GetValueListSelection_string failed: unknown result";
+  die "GetValueListSelection_String failed: unknown result";
 }
-sub GetValueListSelection_int32{
+sub GetValueListSelection_Int32{
   my $self = shift;
   my $_id = shift;
 
-    $self->send_GetValueListSelection_int32($_id);
-  return $self->recv_GetValueListSelection_int32();
+    $self->send_GetValueListSelection_Int32($_id);
+  return $self->recv_GetValueListSelection_Int32();
 }
 
-sub send_GetValueListSelection_int32{
+sub send_GetValueListSelection_Int32{
   my $self = shift;
   my $_id = shift;
 
-  $self->{output}->writeMessageBegin('GetValueListSelection_int32', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_GetValueListSelection_int32_args();
+  $self->{output}->writeMessageBegin('GetValueListSelection_Int32', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_GetValueListSelection_Int32_args();
   $args->{_id} = $_id;
   $args->write($self->{output});
   $self->{output}->writeMessageEnd();
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_GetValueListSelection_int32{
+sub recv_GetValueListSelection_Int32{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26278,14 +26299,14 @@ sub recv_GetValueListSelection_int32{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_GetValueListSelection_int32_result();
+  my $result = new OpenZWave::RemoteManager_GetValueListSelection_Int32_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "GetValueListSelection_int32 failed: unknown result";
+  die "GetValueListSelection_Int32 failed: unknown result";
 }
 sub GetValueListItems{
   my $self = shift;
@@ -26373,22 +26394,22 @@ sub recv_GetValueFloatPrecision{
   }
   die "GetValueFloatPrecision failed: unknown result";
 }
-sub SetValue_bool{
+sub SetValue_Bool{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-    $self->send_SetValue_bool($_id, $_value);
-  return $self->recv_SetValue_bool();
+    $self->send_SetValue_Bool($_id, $_value);
+  return $self->recv_SetValue_Bool();
 }
 
-sub send_SetValue_bool{
+sub send_SetValue_Bool{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-  $self->{output}->writeMessageBegin('SetValue_bool', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetValue_bool_args();
+  $self->{output}->writeMessageBegin('SetValue_Bool', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetValue_Bool_args();
   $args->{_id} = $_id;
   $args->{_value} = $_value;
   $args->write($self->{output});
@@ -26396,7 +26417,7 @@ sub send_SetValue_bool{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetValue_bool{
+sub recv_SetValue_Bool{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26410,31 +26431,31 @@ sub recv_SetValue_bool{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetValue_bool_result();
+  my $result = new OpenZWave::RemoteManager_SetValue_Bool_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetValue_bool failed: unknown result";
+  die "SetValue_Bool failed: unknown result";
 }
-sub SetValue_uint8{
+sub SetValue_UInt8{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-    $self->send_SetValue_uint8($_id, $_value);
-  return $self->recv_SetValue_uint8();
+    $self->send_SetValue_UInt8($_id, $_value);
+  return $self->recv_SetValue_UInt8();
 }
 
-sub send_SetValue_uint8{
+sub send_SetValue_UInt8{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-  $self->{output}->writeMessageBegin('SetValue_uint8', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetValue_uint8_args();
+  $self->{output}->writeMessageBegin('SetValue_UInt8', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetValue_UInt8_args();
   $args->{_id} = $_id;
   $args->{_value} = $_value;
   $args->write($self->{output});
@@ -26442,7 +26463,7 @@ sub send_SetValue_uint8{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetValue_uint8{
+sub recv_SetValue_UInt8{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26456,33 +26477,33 @@ sub recv_SetValue_uint8{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetValue_uint8_result();
+  my $result = new OpenZWave::RemoteManager_SetValue_UInt8_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetValue_uint8 failed: unknown result";
+  die "SetValue_UInt8 failed: unknown result";
 }
-sub SetValue_uint8_uint8{
+sub SetValue_UInt8_UInt8{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
   my $_length = shift;
 
-    $self->send_SetValue_uint8_uint8($_id, $_value, $_length);
-  return $self->recv_SetValue_uint8_uint8();
+    $self->send_SetValue_UInt8_UInt8($_id, $_value, $_length);
+  return $self->recv_SetValue_UInt8_UInt8();
 }
 
-sub send_SetValue_uint8_uint8{
+sub send_SetValue_UInt8_UInt8{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
   my $_length = shift;
 
-  $self->{output}->writeMessageBegin('SetValue_uint8_uint8', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetValue_uint8_uint8_args();
+  $self->{output}->writeMessageBegin('SetValue_UInt8_UInt8', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetValue_UInt8_UInt8_args();
   $args->{_id} = $_id;
   $args->{_value} = $_value;
   $args->{_length} = $_length;
@@ -26491,7 +26512,7 @@ sub send_SetValue_uint8_uint8{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetValue_uint8_uint8{
+sub recv_SetValue_UInt8_UInt8{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26505,31 +26526,31 @@ sub recv_SetValue_uint8_uint8{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetValue_uint8_uint8_result();
+  my $result = new OpenZWave::RemoteManager_SetValue_UInt8_UInt8_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetValue_uint8_uint8 failed: unknown result";
+  die "SetValue_UInt8_UInt8 failed: unknown result";
 }
-sub SetValue_float{
+sub SetValue_Float{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-    $self->send_SetValue_float($_id, $_value);
-  return $self->recv_SetValue_float();
+    $self->send_SetValue_Float($_id, $_value);
+  return $self->recv_SetValue_Float();
 }
 
-sub send_SetValue_float{
+sub send_SetValue_Float{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-  $self->{output}->writeMessageBegin('SetValue_float', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetValue_float_args();
+  $self->{output}->writeMessageBegin('SetValue_Float', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetValue_Float_args();
   $args->{_id} = $_id;
   $args->{_value} = $_value;
   $args->write($self->{output});
@@ -26537,7 +26558,7 @@ sub send_SetValue_float{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetValue_float{
+sub recv_SetValue_Float{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26551,14 +26572,14 @@ sub recv_SetValue_float{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetValue_float_result();
+  my $result = new OpenZWave::RemoteManager_SetValue_Float_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetValue_float failed: unknown result";
+  die "SetValue_Float failed: unknown result";
 }
 sub SetValue_int32{
   my $self = shift;
@@ -26652,22 +26673,22 @@ sub recv_SetValue_int16{
   }
   die "SetValue_int16 failed: unknown result";
 }
-sub SetValue_string{
+sub SetValue_String{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-    $self->send_SetValue_string($_id, $_value);
-  return $self->recv_SetValue_string();
+    $self->send_SetValue_String($_id, $_value);
+  return $self->recv_SetValue_String();
 }
 
-sub send_SetValue_string{
+sub send_SetValue_String{
   my $self = shift;
   my $_id = shift;
   my $_value = shift;
 
-  $self->{output}->writeMessageBegin('SetValue_string', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetValue_string_args();
+  $self->{output}->writeMessageBegin('SetValue_String', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetValue_String_args();
   $args->{_id} = $_id;
   $args->{_value} = $_value;
   $args->write($self->{output});
@@ -26675,7 +26696,7 @@ sub send_SetValue_string{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetValue_string{
+sub recv_SetValue_String{
   my $self = shift;
 
   my $rseqid = 0;
@@ -26689,14 +26710,14 @@ sub recv_SetValue_string{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetValue_string_result();
+  my $result = new OpenZWave::RemoteManager_SetValue_String_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetValue_string failed: unknown result";
+  die "SetValue_String failed: unknown result";
 }
 sub SetValueListSelection{
   my $self = shift;
@@ -28977,22 +28998,22 @@ sub recv_SceneGetValueAsString{
   }
   die "SceneGetValueAsString failed: unknown result";
 }
-sub SceneGetValueListSelection_string{
+sub SceneGetValueListSelection_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
 
-    $self->send_SceneGetValueListSelection_string($_sceneId, $_valueId);
-  return $self->recv_SceneGetValueListSelection_string();
+    $self->send_SceneGetValueListSelection_String($_sceneId, $_valueId);
+  return $self->recv_SceneGetValueListSelection_String();
 }
 
-sub send_SceneGetValueListSelection_string{
+sub send_SceneGetValueListSelection_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
 
-  $self->{output}->writeMessageBegin('SceneGetValueListSelection_string', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SceneGetValueListSelection_string_args();
+  $self->{output}->writeMessageBegin('SceneGetValueListSelection_String', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SceneGetValueListSelection_String_args();
   $args->{_sceneId} = $_sceneId;
   $args->{_valueId} = $_valueId;
   $args->write($self->{output});
@@ -29000,7 +29021,7 @@ sub send_SceneGetValueListSelection_string{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SceneGetValueListSelection_string{
+sub recv_SceneGetValueListSelection_String{
   my $self = shift;
 
   my $rseqid = 0;
@@ -29014,14 +29035,14 @@ sub recv_SceneGetValueListSelection_string{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SceneGetValueListSelection_string_result();
+  my $result = new OpenZWave::RemoteManager_SceneGetValueListSelection_String_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SceneGetValueListSelection_string failed: unknown result";
+  die "SceneGetValueListSelection_String failed: unknown result";
 }
 sub SceneGetValueListSelection_Int32{
   my $self = shift;
@@ -29314,24 +29335,24 @@ sub recv_SetSceneValue_Int16{
   }
   die "SetSceneValue_Int16 failed: unknown result";
 }
-sub SetSceneValue_string{
+sub SetSceneValue_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
   my $_value = shift;
 
-    $self->send_SetSceneValue_string($_sceneId, $_valueId, $_value);
-  return $self->recv_SetSceneValue_string();
+    $self->send_SetSceneValue_String($_sceneId, $_valueId, $_value);
+  return $self->recv_SetSceneValue_String();
 }
 
-sub send_SetSceneValue_string{
+sub send_SetSceneValue_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
   my $_value = shift;
 
-  $self->{output}->writeMessageBegin('SetSceneValue_string', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetSceneValue_string_args();
+  $self->{output}->writeMessageBegin('SetSceneValue_String', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetSceneValue_String_args();
   $args->{_sceneId} = $_sceneId;
   $args->{_valueId} = $_valueId;
   $args->{_value} = $_value;
@@ -29340,7 +29361,7 @@ sub send_SetSceneValue_string{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetSceneValue_string{
+sub recv_SetSceneValue_String{
   my $self = shift;
 
   my $rseqid = 0;
@@ -29354,33 +29375,33 @@ sub recv_SetSceneValue_string{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetSceneValue_string_result();
+  my $result = new OpenZWave::RemoteManager_SetSceneValue_String_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetSceneValue_string failed: unknown result";
+  die "SetSceneValue_String failed: unknown result";
 }
-sub SetSceneValueListSelection_string{
+sub SetSceneValueListSelection_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
   my $_value = shift;
 
-    $self->send_SetSceneValueListSelection_string($_sceneId, $_valueId, $_value);
-  return $self->recv_SetSceneValueListSelection_string();
+    $self->send_SetSceneValueListSelection_String($_sceneId, $_valueId, $_value);
+  return $self->recv_SetSceneValueListSelection_String();
 }
 
-sub send_SetSceneValueListSelection_string{
+sub send_SetSceneValueListSelection_String{
   my $self = shift;
   my $_sceneId = shift;
   my $_valueId = shift;
   my $_value = shift;
 
-  $self->{output}->writeMessageBegin('SetSceneValueListSelection_string', TMessageType::CALL, $self->{seqid});
-  my $args = new OpenZWave::RemoteManager_SetSceneValueListSelection_string_args();
+  $self->{output}->writeMessageBegin('SetSceneValueListSelection_String', TMessageType::CALL, $self->{seqid});
+  my $args = new OpenZWave::RemoteManager_SetSceneValueListSelection_String_args();
   $args->{_sceneId} = $_sceneId;
   $args->{_valueId} = $_valueId;
   $args->{_value} = $_value;
@@ -29389,7 +29410,7 @@ sub send_SetSceneValueListSelection_string{
   $self->{output}->getTransport()->flush();
 }
 
-sub recv_SetSceneValueListSelection_string{
+sub recv_SetSceneValueListSelection_String{
   my $self = shift;
 
   my $rseqid = 0;
@@ -29403,14 +29424,14 @@ sub recv_SetSceneValueListSelection_string{
     $self->{input}->readMessageEnd();
     die $x;
   }
-  my $result = new OpenZWave::RemoteManager_SetSceneValueListSelection_string_result();
+  my $result = new OpenZWave::RemoteManager_SetSceneValueListSelection_String_result();
   $result->read($self->{input});
   $self->{input}->readMessageEnd();
 
   if (defined $result->{success} ) {
     return $result->{success};
   }
-  die "SetSceneValueListSelection_string failed: unknown result";
+  die "SetSceneValueListSelection_String failed: unknown result";
 }
 sub SetSceneValueListSelection_Int32{
   my $self = shift;
@@ -30753,27 +30774,27 @@ sub process_GetValueAsString {
     $output->getTransport()->flush();
 }
 
-sub process_GetValueListSelection_string {
+sub process_GetValueListSelection_String {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_GetValueListSelection_string_args();
+    my $args = new OpenZWave::RemoteManager_GetValueListSelection_String_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_GetValueListSelection_string_result();
-    $result->{success} = $self->{handler}->GetValueListSelection_string($args->_id);
-    $output->writeMessageBegin('GetValueListSelection_string', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_GetValueListSelection_String_result();
+    $result->{success} = $self->{handler}->GetValueListSelection_String($args->_id);
+    $output->writeMessageBegin('GetValueListSelection_String', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
 }
 
-sub process_GetValueListSelection_int32 {
+sub process_GetValueListSelection_Int32 {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_GetValueListSelection_int32_args();
+    my $args = new OpenZWave::RemoteManager_GetValueListSelection_Int32_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_GetValueListSelection_int32_result();
-    $result->{success} = $self->{handler}->GetValueListSelection_int32($args->_id);
-    $output->writeMessageBegin('GetValueListSelection_int32', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_GetValueListSelection_Int32_result();
+    $result->{success} = $self->{handler}->GetValueListSelection_Int32($args->_id);
+    $output->writeMessageBegin('GetValueListSelection_Int32', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -30805,53 +30826,53 @@ sub process_GetValueFloatPrecision {
     $output->getTransport()->flush();
 }
 
-sub process_SetValue_bool {
+sub process_SetValue_Bool {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetValue_bool_args();
+    my $args = new OpenZWave::RemoteManager_SetValue_Bool_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetValue_bool_result();
-    $result->{success} = $self->{handler}->SetValue_bool($args->_id, $args->_value);
-    $output->writeMessageBegin('SetValue_bool', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetValue_Bool_result();
+    $result->{success} = $self->{handler}->SetValue_Bool($args->_id, $args->_value);
+    $output->writeMessageBegin('SetValue_Bool', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
 }
 
-sub process_SetValue_uint8 {
+sub process_SetValue_UInt8 {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetValue_uint8_args();
+    my $args = new OpenZWave::RemoteManager_SetValue_UInt8_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetValue_uint8_result();
-    $result->{success} = $self->{handler}->SetValue_uint8($args->_id, $args->_value);
-    $output->writeMessageBegin('SetValue_uint8', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetValue_UInt8_result();
+    $result->{success} = $self->{handler}->SetValue_UInt8($args->_id, $args->_value);
+    $output->writeMessageBegin('SetValue_UInt8', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
 }
 
-sub process_SetValue_uint8_uint8 {
+sub process_SetValue_UInt8_UInt8 {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetValue_uint8_uint8_args();
+    my $args = new OpenZWave::RemoteManager_SetValue_UInt8_UInt8_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetValue_uint8_uint8_result();
-    $result->{success} = $self->{handler}->SetValue_uint8_uint8($args->_id, $args->_value, $args->_length);
-    $output->writeMessageBegin('SetValue_uint8_uint8', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetValue_UInt8_UInt8_result();
+    $result->{success} = $self->{handler}->SetValue_UInt8_UInt8($args->_id, $args->_value, $args->_length);
+    $output->writeMessageBegin('SetValue_UInt8_UInt8', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
 }
 
-sub process_SetValue_float {
+sub process_SetValue_Float {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetValue_float_args();
+    my $args = new OpenZWave::RemoteManager_SetValue_Float_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetValue_float_result();
-    $result->{success} = $self->{handler}->SetValue_float($args->_id, $args->_value);
-    $output->writeMessageBegin('SetValue_float', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetValue_Float_result();
+    $result->{success} = $self->{handler}->SetValue_Float($args->_id, $args->_value);
+    $output->writeMessageBegin('SetValue_Float', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -30883,14 +30904,14 @@ sub process_SetValue_int16 {
     $output->getTransport()->flush();
 }
 
-sub process_SetValue_string {
+sub process_SetValue_String {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetValue_string_args();
+    my $args = new OpenZWave::RemoteManager_SetValue_String_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetValue_string_result();
-    $result->{success} = $self->{handler}->SetValue_string($args->_id, $args->_value);
-    $output->writeMessageBegin('SetValue_string', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetValue_String_result();
+    $result->{success} = $self->{handler}->SetValue_String($args->_id, $args->_value);
+    $output->writeMessageBegin('SetValue_String', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -31546,14 +31567,14 @@ sub process_SceneGetValueAsString {
     $output->getTransport()->flush();
 }
 
-sub process_SceneGetValueListSelection_string {
+sub process_SceneGetValueListSelection_String {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SceneGetValueListSelection_string_args();
+    my $args = new OpenZWave::RemoteManager_SceneGetValueListSelection_String_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SceneGetValueListSelection_string_result();
-    $result->{success} = $self->{handler}->SceneGetValueListSelection_string($args->_sceneId, $args->_valueId);
-    $output->writeMessageBegin('SceneGetValueListSelection_string', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SceneGetValueListSelection_String_result();
+    $result->{success} = $self->{handler}->SceneGetValueListSelection_String($args->_sceneId, $args->_valueId);
+    $output->writeMessageBegin('SceneGetValueListSelection_String', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
@@ -31637,27 +31658,27 @@ sub process_SetSceneValue_Int16 {
     $output->getTransport()->flush();
 }
 
-sub process_SetSceneValue_string {
+sub process_SetSceneValue_String {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetSceneValue_string_args();
+    my $args = new OpenZWave::RemoteManager_SetSceneValue_String_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetSceneValue_string_result();
-    $result->{success} = $self->{handler}->SetSceneValue_string($args->_sceneId, $args->_valueId, $args->_value);
-    $output->writeMessageBegin('SetSceneValue_string', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetSceneValue_String_result();
+    $result->{success} = $self->{handler}->SetSceneValue_String($args->_sceneId, $args->_valueId, $args->_value);
+    $output->writeMessageBegin('SetSceneValue_String', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();
 }
 
-sub process_SetSceneValueListSelection_string {
+sub process_SetSceneValueListSelection_String {
     my ($self, $seqid, $input, $output) = @_;
-    my $args = new OpenZWave::RemoteManager_SetSceneValueListSelection_string_args();
+    my $args = new OpenZWave::RemoteManager_SetSceneValueListSelection_String_args();
     $args->read($input);
     $input->readMessageEnd();
-    my $result = new OpenZWave::RemoteManager_SetSceneValueListSelection_string_result();
-    $result->{success} = $self->{handler}->SetSceneValueListSelection_string($args->_sceneId, $args->_valueId, $args->_value);
-    $output->writeMessageBegin('SetSceneValueListSelection_string', TMessageType::REPLY, $seqid);
+    my $result = new OpenZWave::RemoteManager_SetSceneValueListSelection_String_result();
+    $result->{success} = $self->{handler}->SetSceneValueListSelection_String($args->_sceneId, $args->_valueId, $args->_value);
+    $output->writeMessageBegin('SetSceneValueListSelection_String', TMessageType::REPLY, $seqid);
     $result->write($output);
     $output->writeMessageEnd();
     $output->getTransport()->flush();

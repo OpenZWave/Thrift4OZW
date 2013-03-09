@@ -92,11 +92,11 @@ begin
 	#
 	# must load all source files in a single batch (RbGCCXML gets confused otherwise...)
 	#
+	messages = []
 	files = [
 	    File.join(Dir.getwd, "gen-cpp", "RemoteManager_server.skeleton.cpp"),
 	    File.join(OZWRoot, 'cpp', "src", "Manager.h")
 	]
-	
 	puts "Parsing:\n\t" + files.join("\n\t")
 	
 	RootNode = RbGCCXML.parse(files, :includes => MANAGER_INCLUDES, :cxxflags => "-DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H")
@@ -114,7 +114,7 @@ begin
 
 	a = RootNode.classes("RemoteManagerHandler").methods.find(:access => :public)
 	b = RootNode.namespaces("OpenZWave").classes("Manager").methods.find(:access => :public)
-	messages = []
+	
 	messages << "RemoteManagerHandler: #{a.entries.size} public methods"
 	messages << "OpenZWave::Manager:   #{b.entries.size} public methods"
 	messages << "  --//--  ignored :   #{MANAGER_API_IGNORE.size} methods"

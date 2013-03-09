@@ -385,15 +385,15 @@ namespace OpenZWave
       IAsyncResult Begin_GetValueAsString(AsyncCallback callback, object state, RemoteValueID _id);
       Bool_String End_GetValueAsString(IAsyncResult asyncResult);
       #endif
-      Bool_String GetValueListSelection_string(RemoteValueID _id);
+      Bool_String GetValueListSelection_String(RemoteValueID _id);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetValueListSelection_string(AsyncCallback callback, object state, RemoteValueID _id);
-      Bool_String End_GetValueListSelection_string(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetValueListSelection_String(AsyncCallback callback, object state, RemoteValueID _id);
+      Bool_String End_GetValueListSelection_String(IAsyncResult asyncResult);
       #endif
-      Bool_Int GetValueListSelection_int32(RemoteValueID _id);
+      Bool_Int GetValueListSelection_Int32(RemoteValueID _id);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetValueListSelection_int32(AsyncCallback callback, object state, RemoteValueID _id);
-      Bool_Int End_GetValueListSelection_int32(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetValueListSelection_Int32(AsyncCallback callback, object state, RemoteValueID _id);
+      Bool_Int End_GetValueListSelection_Int32(IAsyncResult asyncResult);
       #endif
       Bool_ListString GetValueListItems(RemoteValueID _id);
       #if SILVERLIGHT
@@ -405,25 +405,25 @@ namespace OpenZWave
       IAsyncResult Begin_GetValueFloatPrecision(AsyncCallback callback, object state, RemoteValueID _id);
       Bool_UInt8 End_GetValueFloatPrecision(IAsyncResult asyncResult);
       #endif
-      bool SetValue_bool(RemoteValueID _id, bool _value);
+      bool SetValue_Bool(RemoteValueID _id, bool _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value);
-      bool End_SetValue_bool(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetValue_Bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value);
+      bool End_SetValue_Bool(IAsyncResult asyncResult);
       #endif
-      bool SetValue_uint8(RemoteValueID _id, byte _value);
+      bool SetValue_UInt8(RemoteValueID _id, byte _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_uint8(AsyncCallback callback, object state, RemoteValueID _id, byte _value);
-      bool End_SetValue_uint8(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, byte _value);
+      bool End_SetValue_UInt8(IAsyncResult asyncResult);
       #endif
-      bool SetValue_uint8_uint8(RemoteValueID _id, byte _value, byte _length);
+      bool SetValue_UInt8_UInt8(RemoteValueID _id, List<byte> _value, byte _length);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_uint8_uint8(AsyncCallback callback, object state, RemoteValueID _id, byte _value, byte _length);
-      bool End_SetValue_uint8_uint8(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<byte> _value, byte _length);
+      bool End_SetValue_UInt8_UInt8(IAsyncResult asyncResult);
       #endif
-      bool SetValue_float(RemoteValueID _id, double _value);
+      bool SetValue_Float(RemoteValueID _id, double _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_float(AsyncCallback callback, object state, RemoteValueID _id, double _value);
-      bool End_SetValue_float(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetValue_Float(AsyncCallback callback, object state, RemoteValueID _id, double _value);
+      bool End_SetValue_Float(IAsyncResult asyncResult);
       #endif
       bool SetValue_int32(RemoteValueID _id, int _value);
       #if SILVERLIGHT
@@ -435,10 +435,10 @@ namespace OpenZWave
       IAsyncResult Begin_SetValue_int16(AsyncCallback callback, object state, RemoteValueID _id, short _value);
       bool End_SetValue_int16(IAsyncResult asyncResult);
       #endif
-      bool SetValue_string(RemoteValueID _id, string _value);
+      bool SetValue_String(RemoteValueID _id, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_string(AsyncCallback callback, object state, RemoteValueID _id, string _value);
-      bool End_SetValue_string(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetValue_String(AsyncCallback callback, object state, RemoteValueID _id, string _value);
+      bool End_SetValue_String(IAsyncResult asyncResult);
       #endif
       bool SetValueListSelection(RemoteValueID _id, string _selectedItem);
       #if SILVERLIGHT
@@ -690,10 +690,10 @@ namespace OpenZWave
       IAsyncResult Begin_SceneGetValueAsString(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
       Bool_String End_SceneGetValueAsString(IAsyncResult asyncResult);
       #endif
-      Bool_String SceneGetValueListSelection_string(byte _sceneId, RemoteValueID _valueId);
+      Bool_String SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueListSelection_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
-      Bool_String End_SceneGetValueListSelection_string(IAsyncResult asyncResult);
+      IAsyncResult Begin_SceneGetValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      Bool_String End_SceneGetValueListSelection_String(IAsyncResult asyncResult);
       #endif
       Bool_Int SceneGetValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
@@ -725,15 +725,15 @@ namespace OpenZWave
       IAsyncResult Begin_SetSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value);
       bool End_SetSceneValue_Int16(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_string(byte _sceneId, RemoteValueID _valueId, string _value);
+      bool SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
-      bool End_SetSceneValue_string(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
+      bool End_SetSceneValue_String(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValueListSelection_string(byte _sceneId, RemoteValueID _valueId, string _value);
+      bool SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValueListSelection_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
-      bool End_SetSceneValueListSelection_string(IAsyncResult asyncResult);
+      IAsyncResult Begin_SetSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
+      bool End_SetSceneValueListSelection_String(IAsyncResult asyncResult);
       #endif
       bool SetSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value);
       #if SILVERLIGHT
@@ -5226,39 +5226,39 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetValueListSelection_string(AsyncCallback callback, object state, RemoteValueID _id)
+      public IAsyncResult Begin_GetValueListSelection_String(AsyncCallback callback, object state, RemoteValueID _id)
       {
-        return send_GetValueListSelection_string(callback, state, _id);
+        return send_GetValueListSelection_String(callback, state, _id);
       }
 
-      public Bool_String End_GetValueListSelection_string(IAsyncResult asyncResult)
+      public Bool_String End_GetValueListSelection_String(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_GetValueListSelection_string();
+        return recv_GetValueListSelection_String();
       }
 
       #endif
 
-      public Bool_String GetValueListSelection_string(RemoteValueID _id)
+      public Bool_String GetValueListSelection_String(RemoteValueID _id)
       {
         #if !SILVERLIGHT
-        send_GetValueListSelection_string(_id);
-        return recv_GetValueListSelection_string();
+        send_GetValueListSelection_String(_id);
+        return recv_GetValueListSelection_String();
 
         #else
-        var asyncResult = Begin_GetValueListSelection_string(null, null, _id);
-        return End_GetValueListSelection_string(asyncResult);
+        var asyncResult = Begin_GetValueListSelection_String(null, null, _id);
+        return End_GetValueListSelection_String(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetValueListSelection_string(AsyncCallback callback, object state, RemoteValueID _id)
+      public IAsyncResult send_GetValueListSelection_String(AsyncCallback callback, object state, RemoteValueID _id)
       #else
-      public void send_GetValueListSelection_string(RemoteValueID _id)
+      public void send_GetValueListSelection_String(RemoteValueID _id)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("GetValueListSelection_string", TMessageType.Call, seqid_));
-        GetValueListSelection_string_args args = new GetValueListSelection_string_args();
+        oprot_.WriteMessageBegin(new TMessage("GetValueListSelection_String", TMessageType.Call, seqid_));
+        GetValueListSelection_String_args args = new GetValueListSelection_String_args();
         args._id = _id;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -5269,7 +5269,7 @@ namespace OpenZWave
         #endif
       }
 
-      public Bool_String recv_GetValueListSelection_string()
+      public Bool_String recv_GetValueListSelection_String()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5277,50 +5277,50 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        GetValueListSelection_string_result result = new GetValueListSelection_string_result();
+        GetValueListSelection_String_result result = new GetValueListSelection_String_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetValueListSelection_string failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetValueListSelection_String failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetValueListSelection_int32(AsyncCallback callback, object state, RemoteValueID _id)
+      public IAsyncResult Begin_GetValueListSelection_Int32(AsyncCallback callback, object state, RemoteValueID _id)
       {
-        return send_GetValueListSelection_int32(callback, state, _id);
+        return send_GetValueListSelection_Int32(callback, state, _id);
       }
 
-      public Bool_Int End_GetValueListSelection_int32(IAsyncResult asyncResult)
+      public Bool_Int End_GetValueListSelection_Int32(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_GetValueListSelection_int32();
+        return recv_GetValueListSelection_Int32();
       }
 
       #endif
 
-      public Bool_Int GetValueListSelection_int32(RemoteValueID _id)
+      public Bool_Int GetValueListSelection_Int32(RemoteValueID _id)
       {
         #if !SILVERLIGHT
-        send_GetValueListSelection_int32(_id);
-        return recv_GetValueListSelection_int32();
+        send_GetValueListSelection_Int32(_id);
+        return recv_GetValueListSelection_Int32();
 
         #else
-        var asyncResult = Begin_GetValueListSelection_int32(null, null, _id);
-        return End_GetValueListSelection_int32(asyncResult);
+        var asyncResult = Begin_GetValueListSelection_Int32(null, null, _id);
+        return End_GetValueListSelection_Int32(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetValueListSelection_int32(AsyncCallback callback, object state, RemoteValueID _id)
+      public IAsyncResult send_GetValueListSelection_Int32(AsyncCallback callback, object state, RemoteValueID _id)
       #else
-      public void send_GetValueListSelection_int32(RemoteValueID _id)
+      public void send_GetValueListSelection_Int32(RemoteValueID _id)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("GetValueListSelection_int32", TMessageType.Call, seqid_));
-        GetValueListSelection_int32_args args = new GetValueListSelection_int32_args();
+        oprot_.WriteMessageBegin(new TMessage("GetValueListSelection_Int32", TMessageType.Call, seqid_));
+        GetValueListSelection_Int32_args args = new GetValueListSelection_Int32_args();
         args._id = _id;
         args.Write(oprot_);
         oprot_.WriteMessageEnd();
@@ -5331,7 +5331,7 @@ namespace OpenZWave
         #endif
       }
 
-      public Bool_Int recv_GetValueListSelection_int32()
+      public Bool_Int recv_GetValueListSelection_Int32()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5339,13 +5339,13 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        GetValueListSelection_int32_result result = new GetValueListSelection_int32_result();
+        GetValueListSelection_Int32_result result = new GetValueListSelection_Int32_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetValueListSelection_int32 failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "GetValueListSelection_Int32 failed: unknown result");
       }
 
       
@@ -5474,39 +5474,39 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value)
+      public IAsyncResult Begin_SetValue_Bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value)
       {
-        return send_SetValue_bool(callback, state, _id, _value);
+        return send_SetValue_Bool(callback, state, _id, _value);
       }
 
-      public bool End_SetValue_bool(IAsyncResult asyncResult)
+      public bool End_SetValue_Bool(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetValue_bool();
+        return recv_SetValue_Bool();
       }
 
       #endif
 
-      public bool SetValue_bool(RemoteValueID _id, bool _value)
+      public bool SetValue_Bool(RemoteValueID _id, bool _value)
       {
         #if !SILVERLIGHT
-        send_SetValue_bool(_id, _value);
-        return recv_SetValue_bool();
+        send_SetValue_Bool(_id, _value);
+        return recv_SetValue_Bool();
 
         #else
-        var asyncResult = Begin_SetValue_bool(null, null, _id, _value);
-        return End_SetValue_bool(asyncResult);
+        var asyncResult = Begin_SetValue_Bool(null, null, _id, _value);
+        return End_SetValue_Bool(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value)
+      public IAsyncResult send_SetValue_Bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value)
       #else
-      public void send_SetValue_bool(RemoteValueID _id, bool _value)
+      public void send_SetValue_Bool(RemoteValueID _id, bool _value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetValue_bool", TMessageType.Call, seqid_));
-        SetValue_bool_args args = new SetValue_bool_args();
+        oprot_.WriteMessageBegin(new TMessage("SetValue_Bool", TMessageType.Call, seqid_));
+        SetValue_Bool_args args = new SetValue_Bool_args();
         args._id = _id;
         args._value = _value;
         args.Write(oprot_);
@@ -5518,7 +5518,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetValue_bool()
+      public bool recv_SetValue_Bool()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5526,50 +5526,50 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetValue_bool_result result = new SetValue_bool_result();
+        SetValue_Bool_result result = new SetValue_Bool_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_bool failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_Bool failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_uint8(AsyncCallback callback, object state, RemoteValueID _id, byte _value)
+      public IAsyncResult Begin_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, byte _value)
       {
-        return send_SetValue_uint8(callback, state, _id, _value);
+        return send_SetValue_UInt8(callback, state, _id, _value);
       }
 
-      public bool End_SetValue_uint8(IAsyncResult asyncResult)
+      public bool End_SetValue_UInt8(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetValue_uint8();
+        return recv_SetValue_UInt8();
       }
 
       #endif
 
-      public bool SetValue_uint8(RemoteValueID _id, byte _value)
+      public bool SetValue_UInt8(RemoteValueID _id, byte _value)
       {
         #if !SILVERLIGHT
-        send_SetValue_uint8(_id, _value);
-        return recv_SetValue_uint8();
+        send_SetValue_UInt8(_id, _value);
+        return recv_SetValue_UInt8();
 
         #else
-        var asyncResult = Begin_SetValue_uint8(null, null, _id, _value);
-        return End_SetValue_uint8(asyncResult);
+        var asyncResult = Begin_SetValue_UInt8(null, null, _id, _value);
+        return End_SetValue_UInt8(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_uint8(AsyncCallback callback, object state, RemoteValueID _id, byte _value)
+      public IAsyncResult send_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, byte _value)
       #else
-      public void send_SetValue_uint8(RemoteValueID _id, byte _value)
+      public void send_SetValue_UInt8(RemoteValueID _id, byte _value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetValue_uint8", TMessageType.Call, seqid_));
-        SetValue_uint8_args args = new SetValue_uint8_args();
+        oprot_.WriteMessageBegin(new TMessage("SetValue_UInt8", TMessageType.Call, seqid_));
+        SetValue_UInt8_args args = new SetValue_UInt8_args();
         args._id = _id;
         args._value = _value;
         args.Write(oprot_);
@@ -5581,7 +5581,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetValue_uint8()
+      public bool recv_SetValue_UInt8()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5589,50 +5589,50 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetValue_uint8_result result = new SetValue_uint8_result();
+        SetValue_UInt8_result result = new SetValue_UInt8_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_uint8 failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_UInt8 failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_uint8_uint8(AsyncCallback callback, object state, RemoteValueID _id, byte _value, byte _length)
+      public IAsyncResult Begin_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<byte> _value, byte _length)
       {
-        return send_SetValue_uint8_uint8(callback, state, _id, _value, _length);
+        return send_SetValue_UInt8_UInt8(callback, state, _id, _value, _length);
       }
 
-      public bool End_SetValue_uint8_uint8(IAsyncResult asyncResult)
+      public bool End_SetValue_UInt8_UInt8(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetValue_uint8_uint8();
+        return recv_SetValue_UInt8_UInt8();
       }
 
       #endif
 
-      public bool SetValue_uint8_uint8(RemoteValueID _id, byte _value, byte _length)
+      public bool SetValue_UInt8_UInt8(RemoteValueID _id, List<byte> _value, byte _length)
       {
         #if !SILVERLIGHT
-        send_SetValue_uint8_uint8(_id, _value, _length);
-        return recv_SetValue_uint8_uint8();
+        send_SetValue_UInt8_UInt8(_id, _value, _length);
+        return recv_SetValue_UInt8_UInt8();
 
         #else
-        var asyncResult = Begin_SetValue_uint8_uint8(null, null, _id, _value, _length);
-        return End_SetValue_uint8_uint8(asyncResult);
+        var asyncResult = Begin_SetValue_UInt8_UInt8(null, null, _id, _value, _length);
+        return End_SetValue_UInt8_UInt8(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_uint8_uint8(AsyncCallback callback, object state, RemoteValueID _id, byte _value, byte _length)
+      public IAsyncResult send_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<byte> _value, byte _length)
       #else
-      public void send_SetValue_uint8_uint8(RemoteValueID _id, byte _value, byte _length)
+      public void send_SetValue_UInt8_UInt8(RemoteValueID _id, List<byte> _value, byte _length)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetValue_uint8_uint8", TMessageType.Call, seqid_));
-        SetValue_uint8_uint8_args args = new SetValue_uint8_uint8_args();
+        oprot_.WriteMessageBegin(new TMessage("SetValue_UInt8_UInt8", TMessageType.Call, seqid_));
+        SetValue_UInt8_UInt8_args args = new SetValue_UInt8_UInt8_args();
         args._id = _id;
         args._value = _value;
         args._length = _length;
@@ -5645,7 +5645,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetValue_uint8_uint8()
+      public bool recv_SetValue_UInt8_UInt8()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5653,50 +5653,50 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetValue_uint8_uint8_result result = new SetValue_uint8_uint8_result();
+        SetValue_UInt8_UInt8_result result = new SetValue_UInt8_UInt8_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_uint8_uint8 failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_UInt8_UInt8 failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_float(AsyncCallback callback, object state, RemoteValueID _id, double _value)
+      public IAsyncResult Begin_SetValue_Float(AsyncCallback callback, object state, RemoteValueID _id, double _value)
       {
-        return send_SetValue_float(callback, state, _id, _value);
+        return send_SetValue_Float(callback, state, _id, _value);
       }
 
-      public bool End_SetValue_float(IAsyncResult asyncResult)
+      public bool End_SetValue_Float(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetValue_float();
+        return recv_SetValue_Float();
       }
 
       #endif
 
-      public bool SetValue_float(RemoteValueID _id, double _value)
+      public bool SetValue_Float(RemoteValueID _id, double _value)
       {
         #if !SILVERLIGHT
-        send_SetValue_float(_id, _value);
-        return recv_SetValue_float();
+        send_SetValue_Float(_id, _value);
+        return recv_SetValue_Float();
 
         #else
-        var asyncResult = Begin_SetValue_float(null, null, _id, _value);
-        return End_SetValue_float(asyncResult);
+        var asyncResult = Begin_SetValue_Float(null, null, _id, _value);
+        return End_SetValue_Float(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_float(AsyncCallback callback, object state, RemoteValueID _id, double _value)
+      public IAsyncResult send_SetValue_Float(AsyncCallback callback, object state, RemoteValueID _id, double _value)
       #else
-      public void send_SetValue_float(RemoteValueID _id, double _value)
+      public void send_SetValue_Float(RemoteValueID _id, double _value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetValue_float", TMessageType.Call, seqid_));
-        SetValue_float_args args = new SetValue_float_args();
+        oprot_.WriteMessageBegin(new TMessage("SetValue_Float", TMessageType.Call, seqid_));
+        SetValue_Float_args args = new SetValue_Float_args();
         args._id = _id;
         args._value = _value;
         args.Write(oprot_);
@@ -5708,7 +5708,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetValue_float()
+      public bool recv_SetValue_Float()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5716,13 +5716,13 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetValue_float_result result = new SetValue_float_result();
+        SetValue_Float_result result = new SetValue_Float_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_float failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_Float failed: unknown result");
       }
 
       
@@ -5853,39 +5853,39 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_string(AsyncCallback callback, object state, RemoteValueID _id, string _value)
+      public IAsyncResult Begin_SetValue_String(AsyncCallback callback, object state, RemoteValueID _id, string _value)
       {
-        return send_SetValue_string(callback, state, _id, _value);
+        return send_SetValue_String(callback, state, _id, _value);
       }
 
-      public bool End_SetValue_string(IAsyncResult asyncResult)
+      public bool End_SetValue_String(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetValue_string();
+        return recv_SetValue_String();
       }
 
       #endif
 
-      public bool SetValue_string(RemoteValueID _id, string _value)
+      public bool SetValue_String(RemoteValueID _id, string _value)
       {
         #if !SILVERLIGHT
-        send_SetValue_string(_id, _value);
-        return recv_SetValue_string();
+        send_SetValue_String(_id, _value);
+        return recv_SetValue_String();
 
         #else
-        var asyncResult = Begin_SetValue_string(null, null, _id, _value);
-        return End_SetValue_string(asyncResult);
+        var asyncResult = Begin_SetValue_String(null, null, _id, _value);
+        return End_SetValue_String(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_string(AsyncCallback callback, object state, RemoteValueID _id, string _value)
+      public IAsyncResult send_SetValue_String(AsyncCallback callback, object state, RemoteValueID _id, string _value)
       #else
-      public void send_SetValue_string(RemoteValueID _id, string _value)
+      public void send_SetValue_String(RemoteValueID _id, string _value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetValue_string", TMessageType.Call, seqid_));
-        SetValue_string_args args = new SetValue_string_args();
+        oprot_.WriteMessageBegin(new TMessage("SetValue_String", TMessageType.Call, seqid_));
+        SetValue_String_args args = new SetValue_String_args();
         args._id = _id;
         args._value = _value;
         args.Write(oprot_);
@@ -5897,7 +5897,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetValue_string()
+      public bool recv_SetValue_String()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -5905,13 +5905,13 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetValue_string_result result = new SetValue_string_result();
+        SetValue_String_result result = new SetValue_String_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_string failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetValue_String failed: unknown result");
       }
 
       
@@ -9029,39 +9029,39 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueListSelection_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
       {
-        return send_SceneGetValueListSelection_string(callback, state, _sceneId, _valueId);
+        return send_SceneGetValueListSelection_String(callback, state, _sceneId, _valueId);
       }
 
-      public Bool_String End_SceneGetValueListSelection_string(IAsyncResult asyncResult)
+      public Bool_String End_SceneGetValueListSelection_String(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SceneGetValueListSelection_string();
+        return recv_SceneGetValueListSelection_String();
       }
 
       #endif
 
-      public Bool_String SceneGetValueListSelection_string(byte _sceneId, RemoteValueID _valueId)
+      public Bool_String SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
-        send_SceneGetValueListSelection_string(_sceneId, _valueId);
-        return recv_SceneGetValueListSelection_string();
+        send_SceneGetValueListSelection_String(_sceneId, _valueId);
+        return recv_SceneGetValueListSelection_String();
 
         #else
-        var asyncResult = Begin_SceneGetValueListSelection_string(null, null, _sceneId, _valueId);
-        return End_SceneGetValueListSelection_string(asyncResult);
+        var asyncResult = Begin_SceneGetValueListSelection_String(null, null, _sceneId, _valueId);
+        return End_SceneGetValueListSelection_String(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueListSelection_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueListSelection_string(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SceneGetValueListSelection_string", TMessageType.Call, seqid_));
-        SceneGetValueListSelection_string_args args = new SceneGetValueListSelection_string_args();
+        oprot_.WriteMessageBegin(new TMessage("SceneGetValueListSelection_String", TMessageType.Call, seqid_));
+        SceneGetValueListSelection_String_args args = new SceneGetValueListSelection_String_args();
         args._sceneId = _sceneId;
         args._valueId = _valueId;
         args.Write(oprot_);
@@ -9073,7 +9073,7 @@ namespace OpenZWave
         #endif
       }
 
-      public Bool_String recv_SceneGetValueListSelection_string()
+      public Bool_String recv_SceneGetValueListSelection_String()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -9081,13 +9081,13 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SceneGetValueListSelection_string_result result = new SceneGetValueListSelection_string_result();
+        SceneGetValueListSelection_String_result result = new SceneGetValueListSelection_String_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SceneGetValueListSelection_string failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SceneGetValueListSelection_String failed: unknown result");
       }
 
       
@@ -9475,39 +9475,39 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult Begin_SetSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
       {
-        return send_SetSceneValue_string(callback, state, _sceneId, _valueId, _value);
+        return send_SetSceneValue_String(callback, state, _sceneId, _valueId, _value);
       }
 
-      public bool End_SetSceneValue_string(IAsyncResult asyncResult)
+      public bool End_SetSceneValue_String(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetSceneValue_string();
+        return recv_SetSceneValue_String();
       }
 
       #endif
 
-      public bool SetSceneValue_string(byte _sceneId, RemoteValueID _valueId, string _value)
+      public bool SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)
       {
         #if !SILVERLIGHT
-        send_SetSceneValue_string(_sceneId, _valueId, _value);
-        return recv_SetSceneValue_string();
+        send_SetSceneValue_String(_sceneId, _valueId, _value);
+        return recv_SetSceneValue_String();
 
         #else
-        var asyncResult = Begin_SetSceneValue_string(null, null, _sceneId, _valueId, _value);
-        return End_SetSceneValue_string(asyncResult);
+        var asyncResult = Begin_SetSceneValue_String(null, null, _sceneId, _valueId, _value);
+        return End_SetSceneValue_String(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult send_SetSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
       #else
-      public void send_SetSceneValue_string(byte _sceneId, RemoteValueID _valueId, string _value)
+      public void send_SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetSceneValue_string", TMessageType.Call, seqid_));
-        SetSceneValue_string_args args = new SetSceneValue_string_args();
+        oprot_.WriteMessageBegin(new TMessage("SetSceneValue_String", TMessageType.Call, seqid_));
+        SetSceneValue_String_args args = new SetSceneValue_String_args();
         args._sceneId = _sceneId;
         args._valueId = _valueId;
         args._value = _value;
@@ -9520,7 +9520,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetSceneValue_string()
+      public bool recv_SetSceneValue_String()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -9528,50 +9528,50 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetSceneValue_string_result result = new SetSceneValue_string_result();
+        SetSceneValue_String_result result = new SetSceneValue_String_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetSceneValue_string failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetSceneValue_String failed: unknown result");
       }
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValueListSelection_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult Begin_SetSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
       {
-        return send_SetSceneValueListSelection_string(callback, state, _sceneId, _valueId, _value);
+        return send_SetSceneValueListSelection_String(callback, state, _sceneId, _valueId, _value);
       }
 
-      public bool End_SetSceneValueListSelection_string(IAsyncResult asyncResult)
+      public bool End_SetSceneValueListSelection_String(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
-        return recv_SetSceneValueListSelection_string();
+        return recv_SetSceneValueListSelection_String();
       }
 
       #endif
 
-      public bool SetSceneValueListSelection_string(byte _sceneId, RemoteValueID _valueId, string _value)
+      public bool SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)
       {
         #if !SILVERLIGHT
-        send_SetSceneValueListSelection_string(_sceneId, _valueId, _value);
-        return recv_SetSceneValueListSelection_string();
+        send_SetSceneValueListSelection_String(_sceneId, _valueId, _value);
+        return recv_SetSceneValueListSelection_String();
 
         #else
-        var asyncResult = Begin_SetSceneValueListSelection_string(null, null, _sceneId, _valueId, _value);
-        return End_SetSceneValueListSelection_string(asyncResult);
+        var asyncResult = Begin_SetSceneValueListSelection_String(null, null, _sceneId, _valueId, _value);
+        return End_SetSceneValueListSelection_String(asyncResult);
 
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValueListSelection_string(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult send_SetSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
       #else
-      public void send_SetSceneValueListSelection_string(byte _sceneId, RemoteValueID _valueId, string _value)
+      public void send_SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)
       #endif
       {
-        oprot_.WriteMessageBegin(new TMessage("SetSceneValueListSelection_string", TMessageType.Call, seqid_));
-        SetSceneValueListSelection_string_args args = new SetSceneValueListSelection_string_args();
+        oprot_.WriteMessageBegin(new TMessage("SetSceneValueListSelection_String", TMessageType.Call, seqid_));
+        SetSceneValueListSelection_String_args args = new SetSceneValueListSelection_String_args();
         args._sceneId = _sceneId;
         args._valueId = _valueId;
         args._value = _value;
@@ -9584,7 +9584,7 @@ namespace OpenZWave
         #endif
       }
 
-      public bool recv_SetSceneValueListSelection_string()
+      public bool recv_SetSceneValueListSelection_String()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -9592,13 +9592,13 @@ namespace OpenZWave
           iprot_.ReadMessageEnd();
           throw x;
         }
-        SetSceneValueListSelection_string_result result = new SetSceneValueListSelection_string_result();
+        SetSceneValueListSelection_String_result result = new SetSceneValueListSelection_String_result();
         result.Read(iprot_);
         iprot_.ReadMessageEnd();
         if (result.__isset.success) {
           return result.Success;
         }
-        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetSceneValueListSelection_string failed: unknown result");
+        throw new TApplicationException(TApplicationException.ExceptionType.MissingResult, "SetSceneValueListSelection_String failed: unknown result");
       }
 
       
@@ -10228,17 +10228,17 @@ namespace OpenZWave
         processMap_["GetValueAsInt"] = GetValueAsInt_Process;
         processMap_["GetValueAsShort"] = GetValueAsShort_Process;
         processMap_["GetValueAsString"] = GetValueAsString_Process;
-        processMap_["GetValueListSelection_string"] = GetValueListSelection_string_Process;
-        processMap_["GetValueListSelection_int32"] = GetValueListSelection_int32_Process;
+        processMap_["GetValueListSelection_String"] = GetValueListSelection_String_Process;
+        processMap_["GetValueListSelection_Int32"] = GetValueListSelection_Int32_Process;
         processMap_["GetValueListItems"] = GetValueListItems_Process;
         processMap_["GetValueFloatPrecision"] = GetValueFloatPrecision_Process;
-        processMap_["SetValue_bool"] = SetValue_bool_Process;
-        processMap_["SetValue_uint8"] = SetValue_uint8_Process;
-        processMap_["SetValue_uint8_uint8"] = SetValue_uint8_uint8_Process;
-        processMap_["SetValue_float"] = SetValue_float_Process;
+        processMap_["SetValue_Bool"] = SetValue_Bool_Process;
+        processMap_["SetValue_UInt8"] = SetValue_UInt8_Process;
+        processMap_["SetValue_UInt8_UInt8"] = SetValue_UInt8_UInt8_Process;
+        processMap_["SetValue_Float"] = SetValue_Float_Process;
         processMap_["SetValue_int32"] = SetValue_int32_Process;
         processMap_["SetValue_int16"] = SetValue_int16_Process;
-        processMap_["SetValue_string"] = SetValue_string_Process;
+        processMap_["SetValue_String"] = SetValue_String_Process;
         processMap_["SetValueListSelection"] = SetValueListSelection_Process;
         processMap_["RefreshValue"] = RefreshValue_Process;
         processMap_["SetChangeVerified"] = SetChangeVerified_Process;
@@ -10289,15 +10289,15 @@ namespace OpenZWave
         processMap_["SceneGetValueAsInt"] = SceneGetValueAsInt_Process;
         processMap_["SceneGetValueAsShort"] = SceneGetValueAsShort_Process;
         processMap_["SceneGetValueAsString"] = SceneGetValueAsString_Process;
-        processMap_["SceneGetValueListSelection_string"] = SceneGetValueListSelection_string_Process;
+        processMap_["SceneGetValueListSelection_String"] = SceneGetValueListSelection_String_Process;
         processMap_["SceneGetValueListSelection_Int32"] = SceneGetValueListSelection_Int32_Process;
         processMap_["SetSceneValue_Bool"] = SetSceneValue_Bool_Process;
         processMap_["SetSceneValue_Uint8"] = SetSceneValue_Uint8_Process;
         processMap_["SetSceneValue_Float"] = SetSceneValue_Float_Process;
         processMap_["SetSceneValue_Int32"] = SetSceneValue_Int32_Process;
         processMap_["SetSceneValue_Int16"] = SetSceneValue_Int16_Process;
-        processMap_["SetSceneValue_string"] = SetSceneValue_string_Process;
-        processMap_["SetSceneValueListSelection_string"] = SetSceneValueListSelection_string_Process;
+        processMap_["SetSceneValue_String"] = SetSceneValue_String_Process;
+        processMap_["SetSceneValueListSelection_String"] = SetSceneValueListSelection_String_Process;
         processMap_["SetSceneValueListSelection_Int32"] = SetSceneValueListSelection_Int32_Process;
         processMap_["GetSceneLabel"] = GetSceneLabel_Process;
         processMap_["SetSceneLabel"] = SetSceneLabel_Process;
@@ -11262,27 +11262,27 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
-      public void GetValueListSelection_string_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void GetValueListSelection_String_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        GetValueListSelection_string_args args = new GetValueListSelection_string_args();
+        GetValueListSelection_String_args args = new GetValueListSelection_String_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        GetValueListSelection_string_result result = new GetValueListSelection_string_result();
-        result.Success = iface_.GetValueListSelection_string(args._id);
-        oprot.WriteMessageBegin(new TMessage("GetValueListSelection_string", TMessageType.Reply, seqid)); 
+        GetValueListSelection_String_result result = new GetValueListSelection_String_result();
+        result.Success = iface_.GetValueListSelection_String(args._id);
+        oprot.WriteMessageBegin(new TMessage("GetValueListSelection_String", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void GetValueListSelection_int32_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void GetValueListSelection_Int32_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        GetValueListSelection_int32_args args = new GetValueListSelection_int32_args();
+        GetValueListSelection_Int32_args args = new GetValueListSelection_Int32_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        GetValueListSelection_int32_result result = new GetValueListSelection_int32_result();
-        result.Success = iface_.GetValueListSelection_int32(args._id);
-        oprot.WriteMessageBegin(new TMessage("GetValueListSelection_int32", TMessageType.Reply, seqid)); 
+        GetValueListSelection_Int32_result result = new GetValueListSelection_Int32_result();
+        result.Success = iface_.GetValueListSelection_Int32(args._id);
+        oprot.WriteMessageBegin(new TMessage("GetValueListSelection_Int32", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -11314,53 +11314,53 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
-      public void SetValue_bool_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetValue_Bool_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetValue_bool_args args = new SetValue_bool_args();
+        SetValue_Bool_args args = new SetValue_Bool_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetValue_bool_result result = new SetValue_bool_result();
-        result.Success = iface_.SetValue_bool(args._id, args._value);
-        oprot.WriteMessageBegin(new TMessage("SetValue_bool", TMessageType.Reply, seqid)); 
+        SetValue_Bool_result result = new SetValue_Bool_result();
+        result.Success = iface_.SetValue_Bool(args._id, args._value);
+        oprot.WriteMessageBegin(new TMessage("SetValue_Bool", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void SetValue_uint8_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetValue_UInt8_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetValue_uint8_args args = new SetValue_uint8_args();
+        SetValue_UInt8_args args = new SetValue_UInt8_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetValue_uint8_result result = new SetValue_uint8_result();
-        result.Success = iface_.SetValue_uint8(args._id, args._value);
-        oprot.WriteMessageBegin(new TMessage("SetValue_uint8", TMessageType.Reply, seqid)); 
+        SetValue_UInt8_result result = new SetValue_UInt8_result();
+        result.Success = iface_.SetValue_UInt8(args._id, args._value);
+        oprot.WriteMessageBegin(new TMessage("SetValue_UInt8", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void SetValue_uint8_uint8_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetValue_UInt8_UInt8_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetValue_uint8_uint8_args args = new SetValue_uint8_uint8_args();
+        SetValue_UInt8_UInt8_args args = new SetValue_UInt8_UInt8_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetValue_uint8_uint8_result result = new SetValue_uint8_uint8_result();
-        result.Success = iface_.SetValue_uint8_uint8(args._id, args._value, args._length);
-        oprot.WriteMessageBegin(new TMessage("SetValue_uint8_uint8", TMessageType.Reply, seqid)); 
+        SetValue_UInt8_UInt8_result result = new SetValue_UInt8_UInt8_result();
+        result.Success = iface_.SetValue_UInt8_UInt8(args._id, args._value, args._length);
+        oprot.WriteMessageBegin(new TMessage("SetValue_UInt8_UInt8", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void SetValue_float_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetValue_Float_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetValue_float_args args = new SetValue_float_args();
+        SetValue_Float_args args = new SetValue_Float_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetValue_float_result result = new SetValue_float_result();
-        result.Success = iface_.SetValue_float(args._id, args._value);
-        oprot.WriteMessageBegin(new TMessage("SetValue_float", TMessageType.Reply, seqid)); 
+        SetValue_Float_result result = new SetValue_Float_result();
+        result.Success = iface_.SetValue_Float(args._id, args._value);
+        oprot.WriteMessageBegin(new TMessage("SetValue_Float", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -11392,14 +11392,14 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
-      public void SetValue_string_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetValue_String_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetValue_string_args args = new SetValue_string_args();
+        SetValue_String_args args = new SetValue_String_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetValue_string_result result = new SetValue_string_result();
-        result.Success = iface_.SetValue_string(args._id, args._value);
-        oprot.WriteMessageBegin(new TMessage("SetValue_string", TMessageType.Reply, seqid)); 
+        SetValue_String_result result = new SetValue_String_result();
+        result.Success = iface_.SetValue_String(args._id, args._value);
+        oprot.WriteMessageBegin(new TMessage("SetValue_String", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -12055,14 +12055,14 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
-      public void SceneGetValueListSelection_string_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SceneGetValueListSelection_String_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SceneGetValueListSelection_string_args args = new SceneGetValueListSelection_string_args();
+        SceneGetValueListSelection_String_args args = new SceneGetValueListSelection_String_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SceneGetValueListSelection_string_result result = new SceneGetValueListSelection_string_result();
-        result.Success = iface_.SceneGetValueListSelection_string(args._sceneId, args._valueId);
-        oprot.WriteMessageBegin(new TMessage("SceneGetValueListSelection_string", TMessageType.Reply, seqid)); 
+        SceneGetValueListSelection_String_result result = new SceneGetValueListSelection_String_result();
+        result.Success = iface_.SceneGetValueListSelection_String(args._sceneId, args._valueId);
+        oprot.WriteMessageBegin(new TMessage("SceneGetValueListSelection_String", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -12146,27 +12146,27 @@ namespace OpenZWave
         oprot.Transport.Flush();
       }
 
-      public void SetSceneValue_string_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetSceneValue_String_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetSceneValue_string_args args = new SetSceneValue_string_args();
+        SetSceneValue_String_args args = new SetSceneValue_String_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetSceneValue_string_result result = new SetSceneValue_string_result();
-        result.Success = iface_.SetSceneValue_string(args._sceneId, args._valueId, args._value);
-        oprot.WriteMessageBegin(new TMessage("SetSceneValue_string", TMessageType.Reply, seqid)); 
+        SetSceneValue_String_result result = new SetSceneValue_String_result();
+        result.Success = iface_.SetSceneValue_String(args._sceneId, args._valueId, args._value);
+        oprot.WriteMessageBegin(new TMessage("SetSceneValue_String", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
       }
 
-      public void SetSceneValueListSelection_string_Process(int seqid, TProtocol iprot, TProtocol oprot)
+      public void SetSceneValueListSelection_String_Process(int seqid, TProtocol iprot, TProtocol oprot)
       {
-        SetSceneValueListSelection_string_args args = new SetSceneValueListSelection_string_args();
+        SetSceneValueListSelection_String_args args = new SetSceneValueListSelection_String_args();
         args.Read(iprot);
         iprot.ReadMessageEnd();
-        SetSceneValueListSelection_string_result result = new SetSceneValueListSelection_string_result();
-        result.Success = iface_.SetSceneValueListSelection_string(args._sceneId, args._valueId, args._value);
-        oprot.WriteMessageBegin(new TMessage("SetSceneValueListSelection_string", TMessageType.Reply, seqid)); 
+        SetSceneValueListSelection_String_result result = new SetSceneValueListSelection_String_result();
+        result.Success = iface_.SetSceneValueListSelection_String(args._sceneId, args._valueId, args._value);
+        oprot.WriteMessageBegin(new TMessage("SetSceneValueListSelection_String", TMessageType.Reply, seqid)); 
         result.Write(oprot);
         oprot.WriteMessageEnd();
         oprot.Transport.Flush();
@@ -25686,7 +25686,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class GetValueListSelection_string_args : TBase
+    public partial class GetValueListSelection_String_args : TBase
     {
       private RemoteValueID __id;
 
@@ -25712,7 +25712,7 @@ namespace OpenZWave
         public bool _id;
       }
 
-      public GetValueListSelection_string_args() {
+      public GetValueListSelection_String_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -25745,7 +25745,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetValueListSelection_string_args");
+        TStruct struc = new TStruct("GetValueListSelection_String_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -25761,7 +25761,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetValueListSelection_string_args(");
+        StringBuilder sb = new StringBuilder("GetValueListSelection_String_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(")");
@@ -25774,7 +25774,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class GetValueListSelection_string_result : TBase
+    public partial class GetValueListSelection_String_result : TBase
     {
       private Bool_String _success;
 
@@ -25800,7 +25800,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public GetValueListSelection_string_result() {
+      public GetValueListSelection_String_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -25833,7 +25833,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetValueListSelection_string_result");
+        TStruct struc = new TStruct("GetValueListSelection_String_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -25852,7 +25852,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetValueListSelection_string_result(");
+        StringBuilder sb = new StringBuilder("GetValueListSelection_String_result(");
         sb.Append("Success: ");
         sb.Append(Success== null ? "<null>" : Success.ToString());
         sb.Append(")");
@@ -25865,7 +25865,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class GetValueListSelection_int32_args : TBase
+    public partial class GetValueListSelection_Int32_args : TBase
     {
       private RemoteValueID __id;
 
@@ -25891,7 +25891,7 @@ namespace OpenZWave
         public bool _id;
       }
 
-      public GetValueListSelection_int32_args() {
+      public GetValueListSelection_Int32_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -25924,7 +25924,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetValueListSelection_int32_args");
+        TStruct struc = new TStruct("GetValueListSelection_Int32_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -25940,7 +25940,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetValueListSelection_int32_args(");
+        StringBuilder sb = new StringBuilder("GetValueListSelection_Int32_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(")");
@@ -25953,7 +25953,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class GetValueListSelection_int32_result : TBase
+    public partial class GetValueListSelection_Int32_result : TBase
     {
       private Bool_Int _success;
 
@@ -25979,7 +25979,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public GetValueListSelection_int32_result() {
+      public GetValueListSelection_Int32_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -26012,7 +26012,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("GetValueListSelection_int32_result");
+        TStruct struc = new TStruct("GetValueListSelection_Int32_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -26031,7 +26031,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("GetValueListSelection_int32_result(");
+        StringBuilder sb = new StringBuilder("GetValueListSelection_Int32_result(");
         sb.Append("Success: ");
         sb.Append(Success== null ? "<null>" : Success.ToString());
         sb.Append(")");
@@ -26402,7 +26402,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_bool_args : TBase
+    public partial class SetValue_Bool_args : TBase
     {
       private RemoteValueID __id;
       private bool __value;
@@ -26443,7 +26443,7 @@ namespace OpenZWave
         public bool _value;
       }
 
-      public SetValue_bool_args() {
+      public SetValue_Bool_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -26483,7 +26483,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_bool_args");
+        TStruct struc = new TStruct("SetValue_Bool_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -26507,7 +26507,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_bool_args(");
+        StringBuilder sb = new StringBuilder("SetValue_Bool_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(",_value: ");
@@ -26522,7 +26522,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_bool_result : TBase
+    public partial class SetValue_Bool_result : TBase
     {
       private bool _success;
 
@@ -26548,7 +26548,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetValue_bool_result() {
+      public SetValue_Bool_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -26580,7 +26580,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_bool_result");
+        TStruct struc = new TStruct("SetValue_Bool_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -26597,7 +26597,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_bool_result(");
+        StringBuilder sb = new StringBuilder("SetValue_Bool_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -26610,7 +26610,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_uint8_args : TBase
+    public partial class SetValue_UInt8_args : TBase
     {
       private RemoteValueID __id;
       private byte __value;
@@ -26651,7 +26651,7 @@ namespace OpenZWave
         public bool _value;
       }
 
-      public SetValue_uint8_args() {
+      public SetValue_UInt8_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -26691,7 +26691,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_uint8_args");
+        TStruct struc = new TStruct("SetValue_UInt8_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -26715,7 +26715,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_uint8_args(");
+        StringBuilder sb = new StringBuilder("SetValue_UInt8_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(",_value: ");
@@ -26730,7 +26730,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_uint8_result : TBase
+    public partial class SetValue_UInt8_result : TBase
     {
       private bool _success;
 
@@ -26756,7 +26756,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetValue_uint8_result() {
+      public SetValue_UInt8_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -26788,7 +26788,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_uint8_result");
+        TStruct struc = new TStruct("SetValue_UInt8_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -26805,7 +26805,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_uint8_result(");
+        StringBuilder sb = new StringBuilder("SetValue_UInt8_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -26818,10 +26818,10 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_uint8_uint8_args : TBase
+    public partial class SetValue_UInt8_UInt8_args : TBase
     {
       private RemoteValueID __id;
-      private byte __value;
+      private List<byte> __value;
       private byte __length;
 
       public RemoteValueID _id
@@ -26837,7 +26837,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _value
+      public List<byte> _value
       {
         get
         {
@@ -26874,7 +26874,7 @@ namespace OpenZWave
         public bool _length;
       }
 
-      public SetValue_uint8_uint8_args() {
+      public SetValue_UInt8_UInt8_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -26898,8 +26898,18 @@ namespace OpenZWave
               }
               break;
             case 2:
-              if (field.Type == TType.Byte) {
-                _value = iprot.ReadByte();
+              if (field.Type == TType.List) {
+                {
+                  _value = new List<byte>();
+                  TList _list32 = iprot.ReadListBegin();
+                  for( int _i33 = 0; _i33 < _list32.Count; ++_i33)
+                  {
+                    byte _elem34 = 0;
+                    _elem34 = iprot.ReadByte();
+                    _value.Add(_elem34);
+                  }
+                  iprot.ReadListEnd();
+                }
               } else { 
                 TProtocolUtil.Skip(iprot, field.Type);
               }
@@ -26921,7 +26931,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_uint8_uint8_args");
+        TStruct struc = new TStruct("SetValue_UInt8_UInt8_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -26932,12 +26942,19 @@ namespace OpenZWave
           _id.Write(oprot);
           oprot.WriteFieldEnd();
         }
-        if (__isset._value) {
+        if (_value != null && __isset._value) {
           field.Name = "_value";
-          field.Type = TType.Byte;
+          field.Type = TType.List;
           field.ID = 2;
           oprot.WriteFieldBegin(field);
-          oprot.WriteByte(_value);
+          {
+            oprot.WriteListBegin(new TList(TType.Byte, _value.Count));
+            foreach (byte _iter35 in _value)
+            {
+              oprot.WriteByte(_iter35);
+            }
+            oprot.WriteListEnd();
+          }
           oprot.WriteFieldEnd();
         }
         if (__isset._length) {
@@ -26953,7 +26970,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_uint8_uint8_args(");
+        StringBuilder sb = new StringBuilder("SetValue_UInt8_UInt8_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(",_value: ");
@@ -26970,7 +26987,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_uint8_uint8_result : TBase
+    public partial class SetValue_UInt8_UInt8_result : TBase
     {
       private bool _success;
 
@@ -26996,7 +27013,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetValue_uint8_uint8_result() {
+      public SetValue_UInt8_UInt8_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -27028,7 +27045,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_uint8_uint8_result");
+        TStruct struc = new TStruct("SetValue_UInt8_UInt8_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -27045,7 +27062,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_uint8_uint8_result(");
+        StringBuilder sb = new StringBuilder("SetValue_UInt8_UInt8_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -27058,7 +27075,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_float_args : TBase
+    public partial class SetValue_Float_args : TBase
     {
       private RemoteValueID __id;
       private double __value;
@@ -27099,7 +27116,7 @@ namespace OpenZWave
         public bool _value;
       }
 
-      public SetValue_float_args() {
+      public SetValue_Float_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -27139,7 +27156,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_float_args");
+        TStruct struc = new TStruct("SetValue_Float_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -27163,7 +27180,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_float_args(");
+        StringBuilder sb = new StringBuilder("SetValue_Float_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(",_value: ");
@@ -27178,7 +27195,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_float_result : TBase
+    public partial class SetValue_Float_result : TBase
     {
       private bool _success;
 
@@ -27204,7 +27221,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetValue_float_result() {
+      public SetValue_Float_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -27236,7 +27253,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_float_result");
+        TStruct struc = new TStruct("SetValue_Float_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -27253,7 +27270,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_float_result(");
+        StringBuilder sb = new StringBuilder("SetValue_Float_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -27682,7 +27699,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_string_args : TBase
+    public partial class SetValue_String_args : TBase
     {
       private RemoteValueID __id;
       private string __value;
@@ -27723,7 +27740,7 @@ namespace OpenZWave
         public bool _value;
       }
 
-      public SetValue_string_args() {
+      public SetValue_String_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -27763,7 +27780,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_string_args");
+        TStruct struc = new TStruct("SetValue_String_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (_id != null && __isset._id) {
@@ -27787,7 +27804,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_string_args(");
+        StringBuilder sb = new StringBuilder("SetValue_String_args(");
         sb.Append("_id: ");
         sb.Append(_id== null ? "<null>" : _id.ToString());
         sb.Append(",_value: ");
@@ -27802,7 +27819,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetValue_string_result : TBase
+    public partial class SetValue_String_result : TBase
     {
       private bool _success;
 
@@ -27828,7 +27845,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetValue_string_result() {
+      public SetValue_String_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -27860,7 +27877,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetValue_string_result");
+        TStruct struc = new TStruct("SetValue_String_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -27877,7 +27894,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetValue_string_result(");
+        StringBuilder sb = new StringBuilder("SetValue_String_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -37916,7 +37933,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SceneGetValueListSelection_string_args : TBase
+    public partial class SceneGetValueListSelection_String_args : TBase
     {
       private byte __sceneId;
       private RemoteValueID __valueId;
@@ -37957,7 +37974,7 @@ namespace OpenZWave
         public bool _valueId;
       }
 
-      public SceneGetValueListSelection_string_args() {
+      public SceneGetValueListSelection_String_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -37997,7 +38014,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SceneGetValueListSelection_string_args");
+        TStruct struc = new TStruct("SceneGetValueListSelection_String_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (__isset._sceneId) {
@@ -38021,7 +38038,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SceneGetValueListSelection_string_args(");
+        StringBuilder sb = new StringBuilder("SceneGetValueListSelection_String_args(");
         sb.Append("_sceneId: ");
         sb.Append(_sceneId);
         sb.Append(",_valueId: ");
@@ -38036,7 +38053,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SceneGetValueListSelection_string_result : TBase
+    public partial class SceneGetValueListSelection_String_result : TBase
     {
       private Bool_String _success;
 
@@ -38062,7 +38079,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SceneGetValueListSelection_string_result() {
+      public SceneGetValueListSelection_String_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -38095,7 +38112,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SceneGetValueListSelection_string_result");
+        TStruct struc = new TStruct("SceneGetValueListSelection_String_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -38114,7 +38131,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SceneGetValueListSelection_string_result(");
+        StringBuilder sb = new StringBuilder("SceneGetValueListSelection_String_result(");
         sb.Append("Success: ");
         sb.Append(Success== null ? "<null>" : Success.ToString());
         sb.Append(")");
@@ -39538,7 +39555,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetSceneValue_string_args : TBase
+    public partial class SetSceneValue_String_args : TBase
     {
       private byte __sceneId;
       private RemoteValueID __valueId;
@@ -39594,7 +39611,7 @@ namespace OpenZWave
         public bool _value;
       }
 
-      public SetSceneValue_string_args() {
+      public SetSceneValue_String_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -39641,7 +39658,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetSceneValue_string_args");
+        TStruct struc = new TStruct("SetSceneValue_String_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (__isset._sceneId) {
@@ -39673,7 +39690,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetSceneValue_string_args(");
+        StringBuilder sb = new StringBuilder("SetSceneValue_String_args(");
         sb.Append("_sceneId: ");
         sb.Append(_sceneId);
         sb.Append(",_valueId: ");
@@ -39690,7 +39707,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetSceneValue_string_result : TBase
+    public partial class SetSceneValue_String_result : TBase
     {
       private bool _success;
 
@@ -39716,7 +39733,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetSceneValue_string_result() {
+      public SetSceneValue_String_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -39748,7 +39765,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetSceneValue_string_result");
+        TStruct struc = new TStruct("SetSceneValue_String_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -39765,7 +39782,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetSceneValue_string_result(");
+        StringBuilder sb = new StringBuilder("SetSceneValue_String_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");
@@ -39778,7 +39795,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetSceneValueListSelection_string_args : TBase
+    public partial class SetSceneValueListSelection_String_args : TBase
     {
       private byte __sceneId;
       private RemoteValueID __valueId;
@@ -39834,7 +39851,7 @@ namespace OpenZWave
         public bool _value;
       }
 
-      public SetSceneValueListSelection_string_args() {
+      public SetSceneValueListSelection_String_args() {
       }
 
       public void Read (TProtocol iprot)
@@ -39881,7 +39898,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetSceneValueListSelection_string_args");
+        TStruct struc = new TStruct("SetSceneValueListSelection_String_args");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
         if (__isset._sceneId) {
@@ -39913,7 +39930,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetSceneValueListSelection_string_args(");
+        StringBuilder sb = new StringBuilder("SetSceneValueListSelection_String_args(");
         sb.Append("_sceneId: ");
         sb.Append(_sceneId);
         sb.Append(",_valueId: ");
@@ -39930,7 +39947,7 @@ namespace OpenZWave
     #if !SILVERLIGHT
     [Serializable]
     #endif
-    public partial class SetSceneValueListSelection_string_result : TBase
+    public partial class SetSceneValueListSelection_String_result : TBase
     {
       private bool _success;
 
@@ -39956,7 +39973,7 @@ namespace OpenZWave
         public bool success;
       }
 
-      public SetSceneValueListSelection_string_result() {
+      public SetSceneValueListSelection_String_result() {
       }
 
       public void Read (TProtocol iprot)
@@ -39988,7 +40005,7 @@ namespace OpenZWave
       }
 
       public void Write(TProtocol oprot) {
-        TStruct struc = new TStruct("SetSceneValueListSelection_string_result");
+        TStruct struc = new TStruct("SetSceneValueListSelection_String_result");
         oprot.WriteStructBegin(struc);
         TField field = new TField();
 
@@ -40005,7 +40022,7 @@ namespace OpenZWave
       }
 
       public override string ToString() {
-        StringBuilder sb = new StringBuilder("SetSceneValueListSelection_string_result(");
+        StringBuilder sb = new StringBuilder("SetSceneValueListSelection_String_result(");
         sb.Append("Success: ");
         sb.Append(Success);
         sb.Append(")");

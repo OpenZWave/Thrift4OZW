@@ -565,14 +565,14 @@ class Iface:
     """
     pass
 
-  def GetValueListSelection_string(self, _id):
+  def GetValueListSelection_String(self, _id):
     """
     Parameters:
      - _id
     """
     pass
 
-  def GetValueListSelection_int32(self, _id):
+  def GetValueListSelection_Int32(self, _id):
     """
     Parameters:
      - _id
@@ -593,7 +593,7 @@ class Iface:
     """
     pass
 
-  def SetValue_bool(self, _id, _value):
+  def SetValue_Bool(self, _id, _value):
     """
     Parameters:
      - _id
@@ -601,7 +601,7 @@ class Iface:
     """
     pass
 
-  def SetValue_uint8(self, _id, _value):
+  def SetValue_UInt8(self, _id, _value):
     """
     Parameters:
      - _id
@@ -609,7 +609,7 @@ class Iface:
     """
     pass
 
-  def SetValue_uint8_uint8(self, _id, _value, _length):
+  def SetValue_UInt8_UInt8(self, _id, _value, _length):
     """
     Parameters:
      - _id
@@ -618,7 +618,7 @@ class Iface:
     """
     pass
 
-  def SetValue_float(self, _id, _value):
+  def SetValue_Float(self, _id, _value):
     """
     Parameters:
      - _id
@@ -642,7 +642,7 @@ class Iface:
     """
     pass
 
-  def SetValue_string(self, _id, _value):
+  def SetValue_String(self, _id, _value):
     """
     Parameters:
      - _id
@@ -1049,7 +1049,7 @@ class Iface:
     """
     pass
 
-  def SceneGetValueListSelection_string(self, _sceneId, _valueId):
+  def SceneGetValueListSelection_String(self, _sceneId, _valueId):
     """
     Parameters:
      - _sceneId
@@ -1110,7 +1110,7 @@ class Iface:
     """
     pass
 
-  def SetSceneValue_string(self, _sceneId, _valueId, _value):
+  def SetSceneValue_String(self, _sceneId, _valueId, _value):
     """
     Parameters:
      - _sceneId
@@ -1119,7 +1119,7 @@ class Iface:
     """
     pass
 
-  def SetSceneValueListSelection_string(self, _sceneId, _valueId, _value):
+  def SetSceneValueListSelection_String(self, _sceneId, _valueId, _value):
     """
     Parameters:
      - _sceneId
@@ -3393,65 +3393,65 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetValueAsString failed: unknown result");
 
-  def GetValueListSelection_string(self, _id):
+  def GetValueListSelection_String(self, _id):
     """
     Parameters:
      - _id
     """
-    self.send_GetValueListSelection_string(_id)
-    return self.recv_GetValueListSelection_string()
+    self.send_GetValueListSelection_String(_id)
+    return self.recv_GetValueListSelection_String()
 
-  def send_GetValueListSelection_string(self, _id):
-    self._oprot.writeMessageBegin('GetValueListSelection_string', TMessageType.CALL, self._seqid)
-    args = GetValueListSelection_string_args()
+  def send_GetValueListSelection_String(self, _id):
+    self._oprot.writeMessageBegin('GetValueListSelection_String', TMessageType.CALL, self._seqid)
+    args = GetValueListSelection_String_args()
     args._id = _id
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_GetValueListSelection_string(self):
+  def recv_GetValueListSelection_String(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = GetValueListSelection_string_result()
+    result = GetValueListSelection_String_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetValueListSelection_string failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetValueListSelection_String failed: unknown result");
 
-  def GetValueListSelection_int32(self, _id):
+  def GetValueListSelection_Int32(self, _id):
     """
     Parameters:
      - _id
     """
-    self.send_GetValueListSelection_int32(_id)
-    return self.recv_GetValueListSelection_int32()
+    self.send_GetValueListSelection_Int32(_id)
+    return self.recv_GetValueListSelection_Int32()
 
-  def send_GetValueListSelection_int32(self, _id):
-    self._oprot.writeMessageBegin('GetValueListSelection_int32', TMessageType.CALL, self._seqid)
-    args = GetValueListSelection_int32_args()
+  def send_GetValueListSelection_Int32(self, _id):
+    self._oprot.writeMessageBegin('GetValueListSelection_Int32', TMessageType.CALL, self._seqid)
+    args = GetValueListSelection_Int32_args()
     args._id = _id
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_GetValueListSelection_int32(self):
+  def recv_GetValueListSelection_Int32(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = GetValueListSelection_int32_result()
+    result = GetValueListSelection_Int32_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetValueListSelection_int32 failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetValueListSelection_Int32 failed: unknown result");
 
   def GetValueListItems(self, _id):
     """
@@ -3513,83 +3513,83 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetValueFloatPrecision failed: unknown result");
 
-  def SetValue_bool(self, _id, _value):
+  def SetValue_Bool(self, _id, _value):
     """
     Parameters:
      - _id
      - _value
     """
-    self.send_SetValue_bool(_id, _value)
-    return self.recv_SetValue_bool()
+    self.send_SetValue_Bool(_id, _value)
+    return self.recv_SetValue_Bool()
 
-  def send_SetValue_bool(self, _id, _value):
-    self._oprot.writeMessageBegin('SetValue_bool', TMessageType.CALL, self._seqid)
-    args = SetValue_bool_args()
+  def send_SetValue_Bool(self, _id, _value):
+    self._oprot.writeMessageBegin('SetValue_Bool', TMessageType.CALL, self._seqid)
+    args = SetValue_Bool_args()
     args._id = _id
     args._value = _value
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetValue_bool(self):
+  def recv_SetValue_Bool(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetValue_bool_result()
+    result = SetValue_Bool_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_bool failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_Bool failed: unknown result");
 
-  def SetValue_uint8(self, _id, _value):
+  def SetValue_UInt8(self, _id, _value):
     """
     Parameters:
      - _id
      - _value
     """
-    self.send_SetValue_uint8(_id, _value)
-    return self.recv_SetValue_uint8()
+    self.send_SetValue_UInt8(_id, _value)
+    return self.recv_SetValue_UInt8()
 
-  def send_SetValue_uint8(self, _id, _value):
-    self._oprot.writeMessageBegin('SetValue_uint8', TMessageType.CALL, self._seqid)
-    args = SetValue_uint8_args()
+  def send_SetValue_UInt8(self, _id, _value):
+    self._oprot.writeMessageBegin('SetValue_UInt8', TMessageType.CALL, self._seqid)
+    args = SetValue_UInt8_args()
     args._id = _id
     args._value = _value
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetValue_uint8(self):
+  def recv_SetValue_UInt8(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetValue_uint8_result()
+    result = SetValue_UInt8_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_uint8 failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_UInt8 failed: unknown result");
 
-  def SetValue_uint8_uint8(self, _id, _value, _length):
+  def SetValue_UInt8_UInt8(self, _id, _value, _length):
     """
     Parameters:
      - _id
      - _value
      - _length
     """
-    self.send_SetValue_uint8_uint8(_id, _value, _length)
-    return self.recv_SetValue_uint8_uint8()
+    self.send_SetValue_UInt8_UInt8(_id, _value, _length)
+    return self.recv_SetValue_UInt8_UInt8()
 
-  def send_SetValue_uint8_uint8(self, _id, _value, _length):
-    self._oprot.writeMessageBegin('SetValue_uint8_uint8', TMessageType.CALL, self._seqid)
-    args = SetValue_uint8_uint8_args()
+  def send_SetValue_UInt8_UInt8(self, _id, _value, _length):
+    self._oprot.writeMessageBegin('SetValue_UInt8_UInt8', TMessageType.CALL, self._seqid)
+    args = SetValue_UInt8_UInt8_args()
     args._id = _id
     args._value = _value
     args._length = _length
@@ -3597,51 +3597,51 @@ class Client(Iface):
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetValue_uint8_uint8(self):
+  def recv_SetValue_UInt8_UInt8(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetValue_uint8_uint8_result()
+    result = SetValue_UInt8_UInt8_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_uint8_uint8 failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_UInt8_UInt8 failed: unknown result");
 
-  def SetValue_float(self, _id, _value):
+  def SetValue_Float(self, _id, _value):
     """
     Parameters:
      - _id
      - _value
     """
-    self.send_SetValue_float(_id, _value)
-    return self.recv_SetValue_float()
+    self.send_SetValue_Float(_id, _value)
+    return self.recv_SetValue_Float()
 
-  def send_SetValue_float(self, _id, _value):
-    self._oprot.writeMessageBegin('SetValue_float', TMessageType.CALL, self._seqid)
-    args = SetValue_float_args()
+  def send_SetValue_Float(self, _id, _value):
+    self._oprot.writeMessageBegin('SetValue_Float', TMessageType.CALL, self._seqid)
+    args = SetValue_Float_args()
     args._id = _id
     args._value = _value
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetValue_float(self):
+  def recv_SetValue_Float(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetValue_float_result()
+    result = SetValue_Float_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_float failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_Float failed: unknown result");
 
   def SetValue_int32(self, _id, _value):
     """
@@ -3707,37 +3707,37 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_int16 failed: unknown result");
 
-  def SetValue_string(self, _id, _value):
+  def SetValue_String(self, _id, _value):
     """
     Parameters:
      - _id
      - _value
     """
-    self.send_SetValue_string(_id, _value)
-    return self.recv_SetValue_string()
+    self.send_SetValue_String(_id, _value)
+    return self.recv_SetValue_String()
 
-  def send_SetValue_string(self, _id, _value):
-    self._oprot.writeMessageBegin('SetValue_string', TMessageType.CALL, self._seqid)
-    args = SetValue_string_args()
+  def send_SetValue_String(self, _id, _value):
+    self._oprot.writeMessageBegin('SetValue_String', TMessageType.CALL, self._seqid)
+    args = SetValue_String_args()
     args._id = _id
     args._value = _value
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetValue_string(self):
+  def recv_SetValue_String(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetValue_string_result()
+    result = SetValue_String_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_string failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetValue_String failed: unknown result");
 
   def SetValueListSelection(self, _id, _selectedItem):
     """
@@ -5316,37 +5316,37 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "SceneGetValueAsString failed: unknown result");
 
-  def SceneGetValueListSelection_string(self, _sceneId, _valueId):
+  def SceneGetValueListSelection_String(self, _sceneId, _valueId):
     """
     Parameters:
      - _sceneId
      - _valueId
     """
-    self.send_SceneGetValueListSelection_string(_sceneId, _valueId)
-    return self.recv_SceneGetValueListSelection_string()
+    self.send_SceneGetValueListSelection_String(_sceneId, _valueId)
+    return self.recv_SceneGetValueListSelection_String()
 
-  def send_SceneGetValueListSelection_string(self, _sceneId, _valueId):
-    self._oprot.writeMessageBegin('SceneGetValueListSelection_string', TMessageType.CALL, self._seqid)
-    args = SceneGetValueListSelection_string_args()
+  def send_SceneGetValueListSelection_String(self, _sceneId, _valueId):
+    self._oprot.writeMessageBegin('SceneGetValueListSelection_String', TMessageType.CALL, self._seqid)
+    args = SceneGetValueListSelection_String_args()
     args._sceneId = _sceneId
     args._valueId = _valueId
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SceneGetValueListSelection_string(self):
+  def recv_SceneGetValueListSelection_String(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SceneGetValueListSelection_string_result()
+    result = SceneGetValueListSelection_String_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SceneGetValueListSelection_string failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SceneGetValueListSelection_String failed: unknown result");
 
   def SceneGetValueListSelection_Int32(self, _sceneId, _valueId):
     """
@@ -5550,19 +5550,19 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "SetSceneValue_Int16 failed: unknown result");
 
-  def SetSceneValue_string(self, _sceneId, _valueId, _value):
+  def SetSceneValue_String(self, _sceneId, _valueId, _value):
     """
     Parameters:
      - _sceneId
      - _valueId
      - _value
     """
-    self.send_SetSceneValue_string(_sceneId, _valueId, _value)
-    return self.recv_SetSceneValue_string()
+    self.send_SetSceneValue_String(_sceneId, _valueId, _value)
+    return self.recv_SetSceneValue_String()
 
-  def send_SetSceneValue_string(self, _sceneId, _valueId, _value):
-    self._oprot.writeMessageBegin('SetSceneValue_string', TMessageType.CALL, self._seqid)
-    args = SetSceneValue_string_args()
+  def send_SetSceneValue_String(self, _sceneId, _valueId, _value):
+    self._oprot.writeMessageBegin('SetSceneValue_String', TMessageType.CALL, self._seqid)
+    args = SetSceneValue_String_args()
     args._sceneId = _sceneId
     args._valueId = _valueId
     args._value = _value
@@ -5570,33 +5570,33 @@ class Client(Iface):
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetSceneValue_string(self):
+  def recv_SetSceneValue_String(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetSceneValue_string_result()
+    result = SetSceneValue_String_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetSceneValue_string failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetSceneValue_String failed: unknown result");
 
-  def SetSceneValueListSelection_string(self, _sceneId, _valueId, _value):
+  def SetSceneValueListSelection_String(self, _sceneId, _valueId, _value):
     """
     Parameters:
      - _sceneId
      - _valueId
      - _value
     """
-    self.send_SetSceneValueListSelection_string(_sceneId, _valueId, _value)
-    return self.recv_SetSceneValueListSelection_string()
+    self.send_SetSceneValueListSelection_String(_sceneId, _valueId, _value)
+    return self.recv_SetSceneValueListSelection_String()
 
-  def send_SetSceneValueListSelection_string(self, _sceneId, _valueId, _value):
-    self._oprot.writeMessageBegin('SetSceneValueListSelection_string', TMessageType.CALL, self._seqid)
-    args = SetSceneValueListSelection_string_args()
+  def send_SetSceneValueListSelection_String(self, _sceneId, _valueId, _value):
+    self._oprot.writeMessageBegin('SetSceneValueListSelection_String', TMessageType.CALL, self._seqid)
+    args = SetSceneValueListSelection_String_args()
     args._sceneId = _sceneId
     args._valueId = _valueId
     args._value = _value
@@ -5604,19 +5604,19 @@ class Client(Iface):
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_SetSceneValueListSelection_string(self):
+  def recv_SetSceneValueListSelection_String(self):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = SetSceneValueListSelection_string_result()
+    result = SetSceneValueListSelection_String_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetSceneValueListSelection_string failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "SetSceneValueListSelection_String failed: unknown result");
 
   def SetSceneValueListSelection_Int32(self, _sceneId, _valueId, _value):
     """
@@ -5956,17 +5956,17 @@ class Processor(Iface, TProcessor):
     self._processMap["GetValueAsInt"] = Processor.process_GetValueAsInt
     self._processMap["GetValueAsShort"] = Processor.process_GetValueAsShort
     self._processMap["GetValueAsString"] = Processor.process_GetValueAsString
-    self._processMap["GetValueListSelection_string"] = Processor.process_GetValueListSelection_string
-    self._processMap["GetValueListSelection_int32"] = Processor.process_GetValueListSelection_int32
+    self._processMap["GetValueListSelection_String"] = Processor.process_GetValueListSelection_String
+    self._processMap["GetValueListSelection_Int32"] = Processor.process_GetValueListSelection_Int32
     self._processMap["GetValueListItems"] = Processor.process_GetValueListItems
     self._processMap["GetValueFloatPrecision"] = Processor.process_GetValueFloatPrecision
-    self._processMap["SetValue_bool"] = Processor.process_SetValue_bool
-    self._processMap["SetValue_uint8"] = Processor.process_SetValue_uint8
-    self._processMap["SetValue_uint8_uint8"] = Processor.process_SetValue_uint8_uint8
-    self._processMap["SetValue_float"] = Processor.process_SetValue_float
+    self._processMap["SetValue_Bool"] = Processor.process_SetValue_Bool
+    self._processMap["SetValue_UInt8"] = Processor.process_SetValue_UInt8
+    self._processMap["SetValue_UInt8_UInt8"] = Processor.process_SetValue_UInt8_UInt8
+    self._processMap["SetValue_Float"] = Processor.process_SetValue_Float
     self._processMap["SetValue_int32"] = Processor.process_SetValue_int32
     self._processMap["SetValue_int16"] = Processor.process_SetValue_int16
-    self._processMap["SetValue_string"] = Processor.process_SetValue_string
+    self._processMap["SetValue_String"] = Processor.process_SetValue_String
     self._processMap["SetValueListSelection"] = Processor.process_SetValueListSelection
     self._processMap["RefreshValue"] = Processor.process_RefreshValue
     self._processMap["SetChangeVerified"] = Processor.process_SetChangeVerified
@@ -6017,15 +6017,15 @@ class Processor(Iface, TProcessor):
     self._processMap["SceneGetValueAsInt"] = Processor.process_SceneGetValueAsInt
     self._processMap["SceneGetValueAsShort"] = Processor.process_SceneGetValueAsShort
     self._processMap["SceneGetValueAsString"] = Processor.process_SceneGetValueAsString
-    self._processMap["SceneGetValueListSelection_string"] = Processor.process_SceneGetValueListSelection_string
+    self._processMap["SceneGetValueListSelection_String"] = Processor.process_SceneGetValueListSelection_String
     self._processMap["SceneGetValueListSelection_Int32"] = Processor.process_SceneGetValueListSelection_Int32
     self._processMap["SetSceneValue_Bool"] = Processor.process_SetSceneValue_Bool
     self._processMap["SetSceneValue_Uint8"] = Processor.process_SetSceneValue_Uint8
     self._processMap["SetSceneValue_Float"] = Processor.process_SetSceneValue_Float
     self._processMap["SetSceneValue_Int32"] = Processor.process_SetSceneValue_Int32
     self._processMap["SetSceneValue_Int16"] = Processor.process_SetSceneValue_Int16
-    self._processMap["SetSceneValue_string"] = Processor.process_SetSceneValue_string
-    self._processMap["SetSceneValueListSelection_string"] = Processor.process_SetSceneValueListSelection_string
+    self._processMap["SetSceneValue_String"] = Processor.process_SetSceneValue_String
+    self._processMap["SetSceneValueListSelection_String"] = Processor.process_SetSceneValueListSelection_String
     self._processMap["SetSceneValueListSelection_Int32"] = Processor.process_SetSceneValueListSelection_Int32
     self._processMap["GetSceneLabel"] = Processor.process_GetSceneLabel
     self._processMap["SetSceneLabel"] = Processor.process_SetSceneLabel
@@ -6832,24 +6832,24 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_GetValueListSelection_string(self, seqid, iprot, oprot):
-    args = GetValueListSelection_string_args()
+  def process_GetValueListSelection_String(self, seqid, iprot, oprot):
+    args = GetValueListSelection_String_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = GetValueListSelection_string_result()
-    result.success = self._handler.GetValueListSelection_string(args._id)
-    oprot.writeMessageBegin("GetValueListSelection_string", TMessageType.REPLY, seqid)
+    result = GetValueListSelection_String_result()
+    result.success = self._handler.GetValueListSelection_String(args._id)
+    oprot.writeMessageBegin("GetValueListSelection_String", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_GetValueListSelection_int32(self, seqid, iprot, oprot):
-    args = GetValueListSelection_int32_args()
+  def process_GetValueListSelection_Int32(self, seqid, iprot, oprot):
+    args = GetValueListSelection_Int32_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = GetValueListSelection_int32_result()
-    result.success = self._handler.GetValueListSelection_int32(args._id)
-    oprot.writeMessageBegin("GetValueListSelection_int32", TMessageType.REPLY, seqid)
+    result = GetValueListSelection_Int32_result()
+    result.success = self._handler.GetValueListSelection_Int32(args._id)
+    oprot.writeMessageBegin("GetValueListSelection_Int32", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -6876,46 +6876,46 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetValue_bool(self, seqid, iprot, oprot):
-    args = SetValue_bool_args()
+  def process_SetValue_Bool(self, seqid, iprot, oprot):
+    args = SetValue_Bool_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetValue_bool_result()
-    result.success = self._handler.SetValue_bool(args._id, args._value)
-    oprot.writeMessageBegin("SetValue_bool", TMessageType.REPLY, seqid)
+    result = SetValue_Bool_result()
+    result.success = self._handler.SetValue_Bool(args._id, args._value)
+    oprot.writeMessageBegin("SetValue_Bool", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetValue_uint8(self, seqid, iprot, oprot):
-    args = SetValue_uint8_args()
+  def process_SetValue_UInt8(self, seqid, iprot, oprot):
+    args = SetValue_UInt8_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetValue_uint8_result()
-    result.success = self._handler.SetValue_uint8(args._id, args._value)
-    oprot.writeMessageBegin("SetValue_uint8", TMessageType.REPLY, seqid)
+    result = SetValue_UInt8_result()
+    result.success = self._handler.SetValue_UInt8(args._id, args._value)
+    oprot.writeMessageBegin("SetValue_UInt8", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetValue_uint8_uint8(self, seqid, iprot, oprot):
-    args = SetValue_uint8_uint8_args()
+  def process_SetValue_UInt8_UInt8(self, seqid, iprot, oprot):
+    args = SetValue_UInt8_UInt8_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetValue_uint8_uint8_result()
-    result.success = self._handler.SetValue_uint8_uint8(args._id, args._value, args._length)
-    oprot.writeMessageBegin("SetValue_uint8_uint8", TMessageType.REPLY, seqid)
+    result = SetValue_UInt8_UInt8_result()
+    result.success = self._handler.SetValue_UInt8_UInt8(args._id, args._value, args._length)
+    oprot.writeMessageBegin("SetValue_UInt8_UInt8", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetValue_float(self, seqid, iprot, oprot):
-    args = SetValue_float_args()
+  def process_SetValue_Float(self, seqid, iprot, oprot):
+    args = SetValue_Float_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetValue_float_result()
-    result.success = self._handler.SetValue_float(args._id, args._value)
-    oprot.writeMessageBegin("SetValue_float", TMessageType.REPLY, seqid)
+    result = SetValue_Float_result()
+    result.success = self._handler.SetValue_Float(args._id, args._value)
+    oprot.writeMessageBegin("SetValue_Float", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -6942,13 +6942,13 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetValue_string(self, seqid, iprot, oprot):
-    args = SetValue_string_args()
+  def process_SetValue_String(self, seqid, iprot, oprot):
+    args = SetValue_String_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetValue_string_result()
-    result.success = self._handler.SetValue_string(args._id, args._value)
-    oprot.writeMessageBegin("SetValue_string", TMessageType.REPLY, seqid)
+    result = SetValue_String_result()
+    result.success = self._handler.SetValue_String(args._id, args._value)
+    oprot.writeMessageBegin("SetValue_String", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7503,13 +7503,13 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SceneGetValueListSelection_string(self, seqid, iprot, oprot):
-    args = SceneGetValueListSelection_string_args()
+  def process_SceneGetValueListSelection_String(self, seqid, iprot, oprot):
+    args = SceneGetValueListSelection_String_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SceneGetValueListSelection_string_result()
-    result.success = self._handler.SceneGetValueListSelection_string(args._sceneId, args._valueId)
-    oprot.writeMessageBegin("SceneGetValueListSelection_string", TMessageType.REPLY, seqid)
+    result = SceneGetValueListSelection_String_result()
+    result.success = self._handler.SceneGetValueListSelection_String(args._sceneId, args._valueId)
+    oprot.writeMessageBegin("SceneGetValueListSelection_String", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7580,24 +7580,24 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetSceneValue_string(self, seqid, iprot, oprot):
-    args = SetSceneValue_string_args()
+  def process_SetSceneValue_String(self, seqid, iprot, oprot):
+    args = SetSceneValue_String_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetSceneValue_string_result()
-    result.success = self._handler.SetSceneValue_string(args._sceneId, args._valueId, args._value)
-    oprot.writeMessageBegin("SetSceneValue_string", TMessageType.REPLY, seqid)
+    result = SetSceneValue_String_result()
+    result.success = self._handler.SetSceneValue_String(args._sceneId, args._valueId, args._value)
+    oprot.writeMessageBegin("SetSceneValue_String", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_SetSceneValueListSelection_string(self, seqid, iprot, oprot):
-    args = SetSceneValueListSelection_string_args()
+  def process_SetSceneValueListSelection_String(self, seqid, iprot, oprot):
+    args = SetSceneValueListSelection_String_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = SetSceneValueListSelection_string_result()
-    result.success = self._handler.SetSceneValueListSelection_string(args._sceneId, args._valueId, args._value)
-    oprot.writeMessageBegin("SetSceneValueListSelection_string", TMessageType.REPLY, seqid)
+    result = SetSceneValueListSelection_String_result()
+    result.success = self._handler.SetSceneValueListSelection_String(args._sceneId, args._valueId, args._value)
+    oprot.writeMessageBegin("SetSceneValueListSelection_String", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -16491,7 +16491,7 @@ class GetValueAsString_result:
   def __ne__(self, other):
     return not (self == other)
 
-class GetValueListSelection_string_args:
+class GetValueListSelection_String_args:
   """
   Attributes:
    - _id
@@ -16529,7 +16529,7 @@ class GetValueListSelection_string_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetValueListSelection_string_args')
+    oprot.writeStructBegin('GetValueListSelection_String_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
@@ -16552,7 +16552,7 @@ class GetValueListSelection_string_args:
   def __ne__(self, other):
     return not (self == other)
 
-class GetValueListSelection_string_result:
+class GetValueListSelection_String_result:
   """
   Attributes:
    - success
@@ -16589,7 +16589,7 @@ class GetValueListSelection_string_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetValueListSelection_string_result')
+    oprot.writeStructBegin('GetValueListSelection_String_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.STRUCT, 0)
       self.success.write(oprot)
@@ -16612,7 +16612,7 @@ class GetValueListSelection_string_result:
   def __ne__(self, other):
     return not (self == other)
 
-class GetValueListSelection_int32_args:
+class GetValueListSelection_Int32_args:
   """
   Attributes:
    - _id
@@ -16650,7 +16650,7 @@ class GetValueListSelection_int32_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetValueListSelection_int32_args')
+    oprot.writeStructBegin('GetValueListSelection_Int32_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
@@ -16673,7 +16673,7 @@ class GetValueListSelection_int32_args:
   def __ne__(self, other):
     return not (self == other)
 
-class GetValueListSelection_int32_result:
+class GetValueListSelection_Int32_result:
   """
   Attributes:
    - success
@@ -16710,7 +16710,7 @@ class GetValueListSelection_int32_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetValueListSelection_int32_result')
+    oprot.writeStructBegin('GetValueListSelection_Int32_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.STRUCT, 0)
       self.success.write(oprot)
@@ -16975,7 +16975,7 @@ class GetValueFloatPrecision_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_bool_args:
+class SetValue_Bool_args:
   """
   Attributes:
    - _id
@@ -17021,7 +17021,7 @@ class SetValue_bool_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_bool_args')
+    oprot.writeStructBegin('SetValue_Bool_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
@@ -17048,7 +17048,7 @@ class SetValue_bool_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_bool_result:
+class SetValue_Bool_result:
   """
   Attributes:
    - success
@@ -17084,7 +17084,7 @@ class SetValue_bool_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_bool_result')
+    oprot.writeStructBegin('SetValue_Bool_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -17107,7 +17107,7 @@ class SetValue_bool_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_uint8_args:
+class SetValue_UInt8_args:
   """
   Attributes:
    - _id
@@ -17153,7 +17153,7 @@ class SetValue_uint8_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_uint8_args')
+    oprot.writeStructBegin('SetValue_UInt8_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
@@ -17180,7 +17180,7 @@ class SetValue_uint8_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_uint8_result:
+class SetValue_UInt8_result:
   """
   Attributes:
    - success
@@ -17216,7 +17216,7 @@ class SetValue_uint8_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_uint8_result')
+    oprot.writeStructBegin('SetValue_UInt8_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -17239,7 +17239,7 @@ class SetValue_uint8_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_uint8_uint8_args:
+class SetValue_UInt8_UInt8_args:
   """
   Attributes:
    - _id
@@ -17250,7 +17250,7 @@ class SetValue_uint8_uint8_args:
   thrift_spec = (
     None, # 0
     (1, TType.STRUCT, '_id', (RemoteValueID, RemoteValueID.thrift_spec), None, ), # 1
-    (2, TType.BYTE, '_value', None, None, ), # 2
+    (2, TType.LIST, '_value', (TType.BYTE,None), None, ), # 2
     (3, TType.BYTE, '_length', None, None, ), # 3
   )
 
@@ -17275,8 +17275,13 @@ class SetValue_uint8_uint8_args:
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.BYTE:
-          self._value = iprot.readByte();
+        if ftype == TType.LIST:
+          self._value = []
+          (_etype59, _size56) = iprot.readListBegin()
+          for _i60 in xrange(_size56):
+            _elem61 = iprot.readByte();
+            self._value.append(_elem61)
+          iprot.readListEnd()
         else:
           iprot.skip(ftype)
       elif fid == 3:
@@ -17293,14 +17298,17 @@ class SetValue_uint8_uint8_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_uint8_uint8_args')
+    oprot.writeStructBegin('SetValue_UInt8_UInt8_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
       oprot.writeFieldEnd()
     if self._value is not None:
-      oprot.writeFieldBegin('_value', TType.BYTE, 2)
-      oprot.writeByte(self._value)
+      oprot.writeFieldBegin('_value', TType.LIST, 2)
+      oprot.writeListBegin(TType.BYTE, len(self._value))
+      for iter62 in self._value:
+        oprot.writeByte(iter62)
+      oprot.writeListEnd()
       oprot.writeFieldEnd()
     if self._length is not None:
       oprot.writeFieldBegin('_length', TType.BYTE, 3)
@@ -17324,7 +17332,7 @@ class SetValue_uint8_uint8_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_uint8_uint8_result:
+class SetValue_UInt8_UInt8_result:
   """
   Attributes:
    - success
@@ -17360,7 +17368,7 @@ class SetValue_uint8_uint8_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_uint8_uint8_result')
+    oprot.writeStructBegin('SetValue_UInt8_UInt8_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -17383,7 +17391,7 @@ class SetValue_uint8_uint8_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_float_args:
+class SetValue_Float_args:
   """
   Attributes:
    - _id
@@ -17429,7 +17437,7 @@ class SetValue_float_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_float_args')
+    oprot.writeStructBegin('SetValue_Float_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
@@ -17456,7 +17464,7 @@ class SetValue_float_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_float_result:
+class SetValue_Float_result:
   """
   Attributes:
    - success
@@ -17492,7 +17500,7 @@ class SetValue_float_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_float_result')
+    oprot.writeStructBegin('SetValue_Float_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -17779,7 +17787,7 @@ class SetValue_int16_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_string_args:
+class SetValue_String_args:
   """
   Attributes:
    - _id
@@ -17825,7 +17833,7 @@ class SetValue_string_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_string_args')
+    oprot.writeStructBegin('SetValue_String_args')
     if self._id is not None:
       oprot.writeFieldBegin('_id', TType.STRUCT, 1)
       self._id.write(oprot)
@@ -17852,7 +17860,7 @@ class SetValue_string_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetValue_string_result:
+class SetValue_String_result:
   """
   Attributes:
    - success
@@ -17888,7 +17896,7 @@ class SetValue_string_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetValue_string_result')
+    oprot.writeStructBegin('SetValue_String_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -24319,7 +24327,7 @@ class SceneGetValueAsString_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SceneGetValueListSelection_string_args:
+class SceneGetValueListSelection_String_args:
   """
   Attributes:
    - _sceneId
@@ -24365,7 +24373,7 @@ class SceneGetValueListSelection_string_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SceneGetValueListSelection_string_args')
+    oprot.writeStructBegin('SceneGetValueListSelection_String_args')
     if self._sceneId is not None:
       oprot.writeFieldBegin('_sceneId', TType.BYTE, 1)
       oprot.writeByte(self._sceneId)
@@ -24392,7 +24400,7 @@ class SceneGetValueListSelection_string_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SceneGetValueListSelection_string_result:
+class SceneGetValueListSelection_String_result:
   """
   Attributes:
    - success
@@ -24429,7 +24437,7 @@ class SceneGetValueListSelection_string_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SceneGetValueListSelection_string_result')
+    oprot.writeStructBegin('SceneGetValueListSelection_String_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.STRUCT, 0)
       self.success.write(oprot)
@@ -25305,7 +25313,7 @@ class SetSceneValue_Int16_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetSceneValue_string_args:
+class SetSceneValue_String_args:
   """
   Attributes:
    - _sceneId
@@ -25359,7 +25367,7 @@ class SetSceneValue_string_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetSceneValue_string_args')
+    oprot.writeStructBegin('SetSceneValue_String_args')
     if self._sceneId is not None:
       oprot.writeFieldBegin('_sceneId', TType.BYTE, 1)
       oprot.writeByte(self._sceneId)
@@ -25390,7 +25398,7 @@ class SetSceneValue_string_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetSceneValue_string_result:
+class SetSceneValue_String_result:
   """
   Attributes:
    - success
@@ -25426,7 +25434,7 @@ class SetSceneValue_string_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetSceneValue_string_result')
+    oprot.writeStructBegin('SetSceneValue_String_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)
@@ -25449,7 +25457,7 @@ class SetSceneValue_string_result:
   def __ne__(self, other):
     return not (self == other)
 
-class SetSceneValueListSelection_string_args:
+class SetSceneValueListSelection_String_args:
   """
   Attributes:
    - _sceneId
@@ -25503,7 +25511,7 @@ class SetSceneValueListSelection_string_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetSceneValueListSelection_string_args')
+    oprot.writeStructBegin('SetSceneValueListSelection_String_args')
     if self._sceneId is not None:
       oprot.writeFieldBegin('_sceneId', TType.BYTE, 1)
       oprot.writeByte(self._sceneId)
@@ -25534,7 +25542,7 @@ class SetSceneValueListSelection_string_args:
   def __ne__(self, other):
     return not (self == other)
 
-class SetSceneValueListSelection_string_result:
+class SetSceneValueListSelection_String_result:
   """
   Attributes:
    - success
@@ -25570,7 +25578,7 @@ class SetSceneValueListSelection_string_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('SetSceneValueListSelection_string_result')
+    oprot.writeStructBegin('SetSceneValueListSelection_String_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.BOOL, 0)
       oprot.writeBool(self.success)

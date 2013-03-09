@@ -557,14 +557,14 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
-  void GetValueListSelection_string(Bool_String& _return, const RemoteValueID& _id) {
+  void GetValueListSelection_String(Bool_String& _return, const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (std::string*) &_return.o_value);
 	g_criticalSection.unlock();
   }
 
-  void GetValueListSelection_int32(Bool_Int& _return, const RemoteValueID& _id) {
+  void GetValueListSelection_Int32(Bool_Int& _return, const RemoteValueID& _id) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	_return.retval =  mgr->GetValueListSelection(_id.toValueID(), (::int32*) &_return.o_value);
@@ -585,7 +585,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
-  bool SetValue_bool(const RemoteValueID& _id, const bool _value) {
+  bool SetValue_Bool(const RemoteValueID& _id, const bool _value) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (bool const) _value);
@@ -593,7 +593,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetValue_uint8(const RemoteValueID& _id, const int8_t _value) {
+  bool SetValue_UInt8(const RemoteValueID& _id, const int8_t _value) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (::uint8 const) _value);
@@ -601,7 +601,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetValue_uint8_uint8(const RemoteValueID& _id, const int8_t _value, const int8_t _length) {
+  bool SetValue_UInt8_UInt8(const RemoteValueID& _id, const std::vector<int8_t> & _value, const int8_t _length) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (::uint8 const*) &_value, (::uint8 const) _length);
@@ -609,7 +609,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetValue_float(const RemoteValueID& _id, const double _value) {
+  bool SetValue_Float(const RemoteValueID& _id, const double _value) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (float const) _value);
@@ -633,7 +633,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetValue_string(const RemoteValueID& _id, const std::string& _value) {
+  bool SetValue_String(const RemoteValueID& _id, const std::string& _value) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetValue(_id.toValueID(), (const std::string&) _value);
@@ -1015,7 +1015,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	g_criticalSection.unlock();
   }
 
-  void SceneGetValueListSelection_string(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
+  void SceneGetValueListSelection_String(Bool_String& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	_return.retval =  mgr->SceneGetValueListSelection((::uint8 const) _sceneId, _valueId.toValueID(), (std::string*) &_return.o_value);
@@ -1069,7 +1069,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetSceneValue_string(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
+  bool SetSceneValue_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetSceneValue((::uint8 const) _sceneId, _valueId.toValueID(), (const std::string&) _value);
@@ -1077,7 +1077,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  bool SetSceneValueListSelection_string(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
+  bool SetSceneValueListSelection_String(const int8_t _sceneId, const RemoteValueID& _valueId, const std::string& _value) {
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
 	bool function_result =  mgr->SetSceneValueListSelection((::uint8 const) _sceneId, _valueId.toValueID(), (const std::string&) _value);

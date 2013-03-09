@@ -451,14 +451,14 @@ type IRemoteManager interface {
    *  - _id
    *  - _value
    */
-  SetValueUint8(_id *RemoteValueID, _value byte) (retval300 bool, err os.Error)
+  SetValueUInt8(_id *RemoteValueID, _value byte) (retval300 bool, err os.Error)
   /**
    * Parameters:
    *  - _id
    *  - _value
    *  - _length
    */
-  SetValueUint8Uint8(_id *RemoteValueID, _value byte, _length byte) (retval301 bool, err os.Error)
+  SetValueUInt8UInt8(_id *RemoteValueID, _value thrift.TList, _length byte) (retval301 bool, err os.Error)
   /**
    * Parameters:
    *  - _id
@@ -5271,7 +5271,7 @@ func (p *RemoteManagerClient) SendGetValueListSelectionString(_id *RemoteValueID
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("GetValueListSelection_string", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("GetValueListSelection_String", thrift.CALL, p.SeqId)
   args730 := NewGetValueListSelectionStringArgs()
   args730._id = _id
   err = args730.Write(oprot)
@@ -5331,7 +5331,7 @@ func (p *RemoteManagerClient) SendGetValueListSelectionInt32(_id *RemoteValueID)
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("GetValueListSelection_int32", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("GetValueListSelection_Int32", thrift.CALL, p.SeqId)
   args735 := NewGetValueListSelectionInt32Args()
   args735._id = _id
   err = args735.Write(oprot)
@@ -5512,7 +5512,7 @@ func (p *RemoteManagerClient) SendSetValueBool(_id *RemoteValueID, _value bool)(
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetValue_bool", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("SetValue_Bool", thrift.CALL, p.SeqId)
   args750 := NewSetValueBoolArgs()
   args750._id = _id
   args750._value = _value
@@ -5561,21 +5561,21 @@ func (p *RemoteManagerClient) RecvSetValueBool() (value bool, err os.Error) {
  *  - _id
  *  - _value
  */
-func (p *RemoteManagerClient) SetValueUint8(_id *RemoteValueID, _value byte) (retval754 bool, err os.Error) {
-  err = p.SendSetValueUint8(_id, _value)
+func (p *RemoteManagerClient) SetValueUInt8(_id *RemoteValueID, _value byte) (retval754 bool, err os.Error) {
+  err = p.SendSetValueUInt8(_id, _value)
   if err != nil { return }
-  return p.RecvSetValueUint8()
+  return p.RecvSetValueUInt8()
 }
 
-func (p *RemoteManagerClient) SendSetValueUint8(_id *RemoteValueID, _value byte)(err os.Error) {
+func (p *RemoteManagerClient) SendSetValueUInt8(_id *RemoteValueID, _value byte)(err os.Error) {
   oprot := p.OutputProtocol
   if oprot != nil {
     oprot = p.ProtocolFactory.GetProtocol(p.Transport)
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetValue_uint8", thrift.CALL, p.SeqId)
-  args755 := NewSetValueUint8Args()
+  oprot.WriteMessageBegin("SetValue_UInt8", thrift.CALL, p.SeqId)
+  args755 := NewSetValueUInt8Args()
   args755._id = _id
   args755._value = _value
   err = args755.Write(oprot)
@@ -5585,7 +5585,7 @@ func (p *RemoteManagerClient) SendSetValueUint8(_id *RemoteValueID, _value byte)
 }
 
 
-func (p *RemoteManagerClient) RecvSetValueUint8() (value bool, err os.Error) {
+func (p *RemoteManagerClient) RecvSetValueUInt8() (value bool, err os.Error) {
   iprot := p.InputProtocol
   if iprot == nil {
     iprot = p.ProtocolFactory.GetProtocol(p.Transport)
@@ -5611,7 +5611,7 @@ func (p *RemoteManagerClient) RecvSetValueUint8() (value bool, err os.Error) {
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result756 := NewSetValueUint8Result()
+  result756 := NewSetValueUInt8Result()
   err = result756.Read(iprot)
   iprot.ReadMessageEnd()
   value = result756.Success
@@ -5624,21 +5624,21 @@ func (p *RemoteManagerClient) RecvSetValueUint8() (value bool, err os.Error) {
  *  - _value
  *  - _length
  */
-func (p *RemoteManagerClient) SetValueUint8Uint8(_id *RemoteValueID, _value byte, _length byte) (retval759 bool, err os.Error) {
-  err = p.SendSetValueUint8Uint8(_id, _value, _length)
+func (p *RemoteManagerClient) SetValueUInt8UInt8(_id *RemoteValueID, _value thrift.TList, _length byte) (retval759 bool, err os.Error) {
+  err = p.SendSetValueUInt8UInt8(_id, _value, _length)
   if err != nil { return }
-  return p.RecvSetValueUint8Uint8()
+  return p.RecvSetValueUInt8UInt8()
 }
 
-func (p *RemoteManagerClient) SendSetValueUint8Uint8(_id *RemoteValueID, _value byte, _length byte)(err os.Error) {
+func (p *RemoteManagerClient) SendSetValueUInt8UInt8(_id *RemoteValueID, _value thrift.TList, _length byte)(err os.Error) {
   oprot := p.OutputProtocol
   if oprot != nil {
     oprot = p.ProtocolFactory.GetProtocol(p.Transport)
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetValue_uint8_uint8", thrift.CALL, p.SeqId)
-  args760 := NewSetValueUint8Uint8Args()
+  oprot.WriteMessageBegin("SetValue_UInt8_UInt8", thrift.CALL, p.SeqId)
+  args760 := NewSetValueUInt8UInt8Args()
   args760._id = _id
   args760._value = _value
   args760._length = _length
@@ -5649,7 +5649,7 @@ func (p *RemoteManagerClient) SendSetValueUint8Uint8(_id *RemoteValueID, _value 
 }
 
 
-func (p *RemoteManagerClient) RecvSetValueUint8Uint8() (value bool, err os.Error) {
+func (p *RemoteManagerClient) RecvSetValueUInt8UInt8() (value bool, err os.Error) {
   iprot := p.InputProtocol
   if iprot == nil {
     iprot = p.ProtocolFactory.GetProtocol(p.Transport)
@@ -5675,7 +5675,7 @@ func (p *RemoteManagerClient) RecvSetValueUint8Uint8() (value bool, err os.Error
     err = thrift.NewTApplicationException(thrift.BAD_SEQUENCE_ID, "ping failed: out of sequence response")
     return
   }
-  result761 := NewSetValueUint8Uint8Result()
+  result761 := NewSetValueUInt8UInt8Result()
   err = result761.Read(iprot)
   iprot.ReadMessageEnd()
   value = result761.Success
@@ -5700,7 +5700,7 @@ func (p *RemoteManagerClient) SendSetValueFloat(_id *RemoteValueID, _value float
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetValue_float", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("SetValue_Float", thrift.CALL, p.SeqId)
   args765 := NewSetValueFloatArgs()
   args765._id = _id
   args765._value = _value
@@ -5886,7 +5886,7 @@ func (p *RemoteManagerClient) SendSetValueString(_id *RemoteValueID, _value stri
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetValue_string", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("SetValue_String", thrift.CALL, p.SeqId)
   args780 := NewSetValueStringArgs()
   args780._id = _id
   args780._value = _value
@@ -9040,7 +9040,7 @@ func (p *RemoteManagerClient) SendSceneGetValueListSelectionString(_sceneId byte
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SceneGetValueListSelection_string", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("SceneGetValueListSelection_String", thrift.CALL, p.SeqId)
   args1035 := NewSceneGetValueListSelectionStringArgs()
   args1035._sceneId = _sceneId
   args1035._valueId = _valueId
@@ -9485,7 +9485,7 @@ func (p *RemoteManagerClient) SendSetSceneValueString(_sceneId byte, _valueId *R
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetSceneValue_string", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("SetSceneValue_String", thrift.CALL, p.SeqId)
   args1070 := NewSetSceneValueStringArgs()
   args1070._sceneId = _sceneId
   args1070._valueId = _valueId
@@ -9549,7 +9549,7 @@ func (p *RemoteManagerClient) SendSetSceneValueListSelectionString(_sceneId byte
     p.OutputProtocol = oprot
   }
   p.SeqId++
-  oprot.WriteMessageBegin("SetSceneValueListSelection_string", thrift.CALL, p.SeqId)
+  oprot.WriteMessageBegin("SetSceneValueListSelection_String", thrift.CALL, p.SeqId)
   args1075 := NewSetSceneValueListSelectionStringArgs()
   args1075._sceneId = _sceneId
   args1075._valueId = _valueId
@@ -10226,17 +10226,17 @@ func NewRemoteManagerProcessor(handler IRemoteManager) *RemoteManagerProcessor {
   self1124.processorMap["GetValueAsInt"] = &remoteManagerProcessorGetValueAsInt{handler:handler}
   self1124.processorMap["GetValueAsShort"] = &remoteManagerProcessorGetValueAsShort{handler:handler}
   self1124.processorMap["GetValueAsString"] = &remoteManagerProcessorGetValueAsString{handler:handler}
-  self1124.processorMap["GetValueListSelection_string"] = &remoteManagerProcessorGetValueListSelectionString{handler:handler}
-  self1124.processorMap["GetValueListSelection_int32"] = &remoteManagerProcessorGetValueListSelectionInt32{handler:handler}
+  self1124.processorMap["GetValueListSelection_String"] = &remoteManagerProcessorGetValueListSelectionString{handler:handler}
+  self1124.processorMap["GetValueListSelection_Int32"] = &remoteManagerProcessorGetValueListSelectionInt32{handler:handler}
   self1124.processorMap["GetValueListItems"] = &remoteManagerProcessorGetValueListItems{handler:handler}
   self1124.processorMap["GetValueFloatPrecision"] = &remoteManagerProcessorGetValueFloatPrecision{handler:handler}
-  self1124.processorMap["SetValue_bool"] = &remoteManagerProcessorSetValueBool{handler:handler}
-  self1124.processorMap["SetValue_uint8"] = &remoteManagerProcessorSetValueUint8{handler:handler}
-  self1124.processorMap["SetValue_uint8_uint8"] = &remoteManagerProcessorSetValueUint8Uint8{handler:handler}
-  self1124.processorMap["SetValue_float"] = &remoteManagerProcessorSetValueFloat{handler:handler}
+  self1124.processorMap["SetValue_Bool"] = &remoteManagerProcessorSetValueBool{handler:handler}
+  self1124.processorMap["SetValue_UInt8"] = &remoteManagerProcessorSetValueUInt8{handler:handler}
+  self1124.processorMap["SetValue_UInt8_UInt8"] = &remoteManagerProcessorSetValueUInt8UInt8{handler:handler}
+  self1124.processorMap["SetValue_Float"] = &remoteManagerProcessorSetValueFloat{handler:handler}
   self1124.processorMap["SetValue_int32"] = &remoteManagerProcessorSetValueInt32{handler:handler}
   self1124.processorMap["SetValue_int16"] = &remoteManagerProcessorSetValueInt16{handler:handler}
-  self1124.processorMap["SetValue_string"] = &remoteManagerProcessorSetValueString{handler:handler}
+  self1124.processorMap["SetValue_String"] = &remoteManagerProcessorSetValueString{handler:handler}
   self1124.processorMap["SetValueListSelection"] = &remoteManagerProcessorSetValueListSelection{handler:handler}
   self1124.processorMap["RefreshValue"] = &remoteManagerProcessorRefreshValue{handler:handler}
   self1124.processorMap["SetChangeVerified"] = &remoteManagerProcessorSetChangeVerified{handler:handler}
@@ -10287,15 +10287,15 @@ func NewRemoteManagerProcessor(handler IRemoteManager) *RemoteManagerProcessor {
   self1124.processorMap["SceneGetValueAsInt"] = &remoteManagerProcessorSceneGetValueAsInt{handler:handler}
   self1124.processorMap["SceneGetValueAsShort"] = &remoteManagerProcessorSceneGetValueAsShort{handler:handler}
   self1124.processorMap["SceneGetValueAsString"] = &remoteManagerProcessorSceneGetValueAsString{handler:handler}
-  self1124.processorMap["SceneGetValueListSelection_string"] = &remoteManagerProcessorSceneGetValueListSelectionString{handler:handler}
+  self1124.processorMap["SceneGetValueListSelection_String"] = &remoteManagerProcessorSceneGetValueListSelectionString{handler:handler}
   self1124.processorMap["SceneGetValueListSelection_Int32"] = &remoteManagerProcessorSceneGetValueListSelectionInt32{handler:handler}
   self1124.processorMap["SetSceneValue_Bool"] = &remoteManagerProcessorSetSceneValueBool{handler:handler}
   self1124.processorMap["SetSceneValue_Uint8"] = &remoteManagerProcessorSetSceneValueUint8{handler:handler}
   self1124.processorMap["SetSceneValue_Float"] = &remoteManagerProcessorSetSceneValueFloat{handler:handler}
   self1124.processorMap["SetSceneValue_Int32"] = &remoteManagerProcessorSetSceneValueInt32{handler:handler}
   self1124.processorMap["SetSceneValue_Int16"] = &remoteManagerProcessorSetSceneValueInt16{handler:handler}
-  self1124.processorMap["SetSceneValue_string"] = &remoteManagerProcessorSetSceneValueString{handler:handler}
-  self1124.processorMap["SetSceneValueListSelection_string"] = &remoteManagerProcessorSetSceneValueListSelectionString{handler:handler}
+  self1124.processorMap["SetSceneValue_String"] = &remoteManagerProcessorSetSceneValueString{handler:handler}
+  self1124.processorMap["SetSceneValueListSelection_String"] = &remoteManagerProcessorSetSceneValueListSelectionString{handler:handler}
   self1124.processorMap["SetSceneValueListSelection_Int32"] = &remoteManagerProcessorSetSceneValueListSelectionInt32{handler:handler}
   self1124.processorMap["GetSceneLabel"] = &remoteManagerProcessorGetSceneLabel{handler:handler}
   self1124.processorMap["SetSceneLabel"] = &remoteManagerProcessorSetSceneLabel{handler:handler}
@@ -13387,7 +13387,7 @@ func (p *remoteManagerProcessorGetValueListSelectionString) Process(seqId int32,
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("GetValueListSelection_string", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("GetValueListSelection_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -13396,14 +13396,14 @@ func (p *remoteManagerProcessorGetValueListSelectionString) Process(seqId int32,
   iprot.ReadMessageEnd()
   result := NewGetValueListSelectionStringResult()
   if result.Success, err = p.handler.GetValueListSelectionString(args._id); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing GetValueListSelection_string: " + err.String())
-    oprot.WriteMessageBegin("GetValueListSelection_string", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing GetValueListSelection_String: " + err.String())
+    oprot.WriteMessageBegin("GetValueListSelection_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("GetValueListSelection_string", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("GetValueListSelection_String", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -13430,7 +13430,7 @@ func (p *remoteManagerProcessorGetValueListSelectionInt32) Process(seqId int32, 
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("GetValueListSelection_int32", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("GetValueListSelection_Int32", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -13439,14 +13439,14 @@ func (p *remoteManagerProcessorGetValueListSelectionInt32) Process(seqId int32, 
   iprot.ReadMessageEnd()
   result := NewGetValueListSelectionInt32Result()
   if result.Success, err = p.handler.GetValueListSelectionInt32(args._id); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing GetValueListSelection_int32: " + err.String())
-    oprot.WriteMessageBegin("GetValueListSelection_int32", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing GetValueListSelection_Int32: " + err.String())
+    oprot.WriteMessageBegin("GetValueListSelection_Int32", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("GetValueListSelection_int32", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("GetValueListSelection_Int32", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -13559,7 +13559,7 @@ func (p *remoteManagerProcessorSetValueBool) Process(seqId int32, iprot, oprot t
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetValue_bool", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetValue_Bool", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -13568,14 +13568,14 @@ func (p *remoteManagerProcessorSetValueBool) Process(seqId int32, iprot, oprot t
   iprot.ReadMessageEnd()
   result := NewSetValueBoolResult()
   if result.Success, err = p.handler.SetValueBool(args._id, args._value); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_bool: " + err.String())
-    oprot.WriteMessageBegin("SetValue_bool", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_Bool: " + err.String())
+    oprot.WriteMessageBegin("SetValue_Bool", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetValue_bool", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetValue_Bool", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -13593,32 +13593,32 @@ func (p *remoteManagerProcessorSetValueBool) Process(seqId int32, iprot, oprot t
   return true, err
 }
 
-type remoteManagerProcessorSetValueUint8 struct {
+type remoteManagerProcessorSetValueUInt8 struct {
   handler IRemoteManager
 }
 
-func (p *remoteManagerProcessorSetValueUint8) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-  args := NewSetValueUint8Args()
+func (p *remoteManagerProcessorSetValueUInt8) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
+  args := NewSetValueUInt8Args()
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetValue_uint8", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetValue_UInt8", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
   iprot.ReadMessageEnd()
-  result := NewSetValueUint8Result()
-  if result.Success, err = p.handler.SetValueUint8(args._id, args._value); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_uint8: " + err.String())
-    oprot.WriteMessageBegin("SetValue_uint8", thrift.EXCEPTION, seqId)
+  result := NewSetValueUInt8Result()
+  if result.Success, err = p.handler.SetValueUInt8(args._id, args._value); err != nil {
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_UInt8: " + err.String())
+    oprot.WriteMessageBegin("SetValue_UInt8", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetValue_uint8", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetValue_UInt8", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -13636,32 +13636,32 @@ func (p *remoteManagerProcessorSetValueUint8) Process(seqId int32, iprot, oprot 
   return true, err
 }
 
-type remoteManagerProcessorSetValueUint8Uint8 struct {
+type remoteManagerProcessorSetValueUInt8UInt8 struct {
   handler IRemoteManager
 }
 
-func (p *remoteManagerProcessorSetValueUint8Uint8) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
-  args := NewSetValueUint8Uint8Args()
+func (p *remoteManagerProcessorSetValueUInt8UInt8) Process(seqId int32, iprot, oprot thrift.TProtocol) (success bool, err thrift.TException) {
+  args := NewSetValueUInt8UInt8Args()
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetValue_uint8_uint8", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetValue_UInt8_UInt8", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
   iprot.ReadMessageEnd()
-  result := NewSetValueUint8Uint8Result()
-  if result.Success, err = p.handler.SetValueUint8Uint8(args._id, args._value, args._length); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_uint8_uint8: " + err.String())
-    oprot.WriteMessageBegin("SetValue_uint8_uint8", thrift.EXCEPTION, seqId)
+  result := NewSetValueUInt8UInt8Result()
+  if result.Success, err = p.handler.SetValueUInt8UInt8(args._id, args._value, args._length); err != nil {
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_UInt8_UInt8: " + err.String())
+    oprot.WriteMessageBegin("SetValue_UInt8_UInt8", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetValue_uint8_uint8", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetValue_UInt8_UInt8", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -13688,7 +13688,7 @@ func (p *remoteManagerProcessorSetValueFloat) Process(seqId int32, iprot, oprot 
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetValue_float", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetValue_Float", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -13697,14 +13697,14 @@ func (p *remoteManagerProcessorSetValueFloat) Process(seqId int32, iprot, oprot 
   iprot.ReadMessageEnd()
   result := NewSetValueFloatResult()
   if result.Success, err = p.handler.SetValueFloat(args._id, args._value); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_float: " + err.String())
-    oprot.WriteMessageBegin("SetValue_float", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_Float: " + err.String())
+    oprot.WriteMessageBegin("SetValue_Float", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetValue_float", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetValue_Float", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -13817,7 +13817,7 @@ func (p *remoteManagerProcessorSetValueString) Process(seqId int32, iprot, oprot
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetValue_string", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetValue_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -13826,14 +13826,14 @@ func (p *remoteManagerProcessorSetValueString) Process(seqId int32, iprot, oprot
   iprot.ReadMessageEnd()
   result := NewSetValueStringResult()
   if result.Success, err = p.handler.SetValueString(args._id, args._value); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_string: " + err.String())
-    oprot.WriteMessageBegin("SetValue_string", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetValue_String: " + err.String())
+    oprot.WriteMessageBegin("SetValue_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetValue_string", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetValue_String", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -16010,7 +16010,7 @@ func (p *remoteManagerProcessorSceneGetValueListSelectionString) Process(seqId i
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SceneGetValueListSelection_string", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SceneGetValueListSelection_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -16019,14 +16019,14 @@ func (p *remoteManagerProcessorSceneGetValueListSelectionString) Process(seqId i
   iprot.ReadMessageEnd()
   result := NewSceneGetValueListSelectionStringResult()
   if result.Success, err = p.handler.SceneGetValueListSelectionString(args._sceneId, args._valueId); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SceneGetValueListSelection_string: " + err.String())
-    oprot.WriteMessageBegin("SceneGetValueListSelection_string", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SceneGetValueListSelection_String: " + err.String())
+    oprot.WriteMessageBegin("SceneGetValueListSelection_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SceneGetValueListSelection_string", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SceneGetValueListSelection_String", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -16311,7 +16311,7 @@ func (p *remoteManagerProcessorSetSceneValueString) Process(seqId int32, iprot, 
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetSceneValue_string", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetSceneValue_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -16320,14 +16320,14 @@ func (p *remoteManagerProcessorSetSceneValueString) Process(seqId int32, iprot, 
   iprot.ReadMessageEnd()
   result := NewSetSceneValueStringResult()
   if result.Success, err = p.handler.SetSceneValueString(args._sceneId, args._valueId, args._value); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetSceneValue_string: " + err.String())
-    oprot.WriteMessageBegin("SetSceneValue_string", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetSceneValue_String: " + err.String())
+    oprot.WriteMessageBegin("SetSceneValue_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetSceneValue_string", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetSceneValue_String", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -16354,7 +16354,7 @@ func (p *remoteManagerProcessorSetSceneValueListSelectionString) Process(seqId i
   if err = args.Read(iprot); err != nil {
     iprot.ReadMessageEnd()
     x := thrift.NewTApplicationException(thrift.PROTOCOL_ERROR, err.String())
-    oprot.WriteMessageBegin("SetSceneValueListSelection_string", thrift.EXCEPTION, seqId)
+    oprot.WriteMessageBegin("SetSceneValueListSelection_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
@@ -16363,14 +16363,14 @@ func (p *remoteManagerProcessorSetSceneValueListSelectionString) Process(seqId i
   iprot.ReadMessageEnd()
   result := NewSetSceneValueListSelectionStringResult()
   if result.Success, err = p.handler.SetSceneValueListSelectionString(args._sceneId, args._valueId, args._value); err != nil {
-    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetSceneValueListSelection_string: " + err.String())
-    oprot.WriteMessageBegin("SetSceneValueListSelection_string", thrift.EXCEPTION, seqId)
+    x := thrift.NewTApplicationException(thrift.INTERNAL_ERROR, "Internal error processing SetSceneValueListSelection_String: " + err.String())
+    oprot.WriteMessageBegin("SetSceneValueListSelection_String", thrift.EXCEPTION, seqId)
     x.Write(oprot)
     oprot.WriteMessageEnd()
     oprot.Transport().Flush()
     return
   }
-  if err2 := oprot.WriteMessageBegin("SetSceneValueListSelection_string", thrift.REPLY, seqId); err2 != nil {
+  if err2 := oprot.WriteMessageBegin("SetSceneValueListSelection_String", thrift.REPLY, seqId); err2 != nil {
     err = err2
   }
   if err2 := result.Write(oprot); err == nil && err2 != nil {
@@ -38721,7 +38721,7 @@ type GetValueListSelectionStringArgs struct {
 
 func NewGetValueListSelectionStringArgs() *GetValueListSelectionStringArgs {
   output := &GetValueListSelectionStringArgs{
-    TStruct:thrift.NewTStruct("GetValueListSelection_string_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("GetValueListSelection_String_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     }),
   }
@@ -38782,7 +38782,7 @@ func (p *GetValueListSelectionStringArgs) ReadField_id(iprot thrift.TProtocol) (
 }
 
 func (p *GetValueListSelectionStringArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("GetValueListSelection_string_args")
+  err = oprot.WriteStructBegin("GetValueListSelection_String_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -38814,7 +38814,7 @@ func (p *GetValueListSelectionStringArgs) TStructName() string {
 }
 
 func (p *GetValueListSelectionStringArgs) ThriftName() string {
-  return "GetValueListSelection_string_args"
+  return "GetValueListSelection_String_args"
 }
 
 func (p *GetValueListSelectionStringArgs) String() string {
@@ -38863,7 +38863,7 @@ type GetValueListSelectionStringResult struct {
 
 func NewGetValueListSelectionStringResult() *GetValueListSelectionStringResult {
   output := &GetValueListSelectionStringResult{
-    TStruct:thrift.NewTStruct("GetValueListSelection_string_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("GetValueListSelection_String_result", []thrift.TField{
     thrift.NewTField("success", thrift.STRUCT, 0),
     }),
   }
@@ -38924,7 +38924,7 @@ func (p *GetValueListSelectionStringResult) ReadFieldSuccess(iprot thrift.TProto
 }
 
 func (p *GetValueListSelectionStringResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("GetValueListSelection_string_result")
+  err = oprot.WriteStructBegin("GetValueListSelection_String_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -38960,7 +38960,7 @@ func (p *GetValueListSelectionStringResult) TStructName() string {
 }
 
 func (p *GetValueListSelectionStringResult) ThriftName() string {
-  return "GetValueListSelection_string_result"
+  return "GetValueListSelection_String_result"
 }
 
 func (p *GetValueListSelectionStringResult) String() string {
@@ -39009,7 +39009,7 @@ type GetValueListSelectionInt32Args struct {
 
 func NewGetValueListSelectionInt32Args() *GetValueListSelectionInt32Args {
   output := &GetValueListSelectionInt32Args{
-    TStruct:thrift.NewTStruct("GetValueListSelection_int32_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("GetValueListSelection_Int32_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     }),
   }
@@ -39070,7 +39070,7 @@ func (p *GetValueListSelectionInt32Args) ReadField_id(iprot thrift.TProtocol) (t
 }
 
 func (p *GetValueListSelectionInt32Args) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("GetValueListSelection_int32_args")
+  err = oprot.WriteStructBegin("GetValueListSelection_Int32_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -39102,7 +39102,7 @@ func (p *GetValueListSelectionInt32Args) TStructName() string {
 }
 
 func (p *GetValueListSelectionInt32Args) ThriftName() string {
-  return "GetValueListSelection_int32_args"
+  return "GetValueListSelection_Int32_args"
 }
 
 func (p *GetValueListSelectionInt32Args) String() string {
@@ -39151,7 +39151,7 @@ type GetValueListSelectionInt32Result struct {
 
 func NewGetValueListSelectionInt32Result() *GetValueListSelectionInt32Result {
   output := &GetValueListSelectionInt32Result{
-    TStruct:thrift.NewTStruct("GetValueListSelection_int32_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("GetValueListSelection_Int32_result", []thrift.TField{
     thrift.NewTField("success", thrift.STRUCT, 0),
     }),
   }
@@ -39212,7 +39212,7 @@ func (p *GetValueListSelectionInt32Result) ReadFieldSuccess(iprot thrift.TProtoc
 }
 
 func (p *GetValueListSelectionInt32Result) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("GetValueListSelection_int32_result")
+  err = oprot.WriteStructBegin("GetValueListSelection_Int32_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -39248,7 +39248,7 @@ func (p *GetValueListSelectionInt32Result) TStructName() string {
 }
 
 func (p *GetValueListSelectionInt32Result) ThriftName() string {
-  return "GetValueListSelection_int32_result"
+  return "GetValueListSelection_Int32_result"
 }
 
 func (p *GetValueListSelectionInt32Result) String() string {
@@ -39875,7 +39875,7 @@ type SetValueBoolArgs struct {
 
 func NewSetValueBoolArgs() *SetValueBoolArgs {
   output := &SetValueBoolArgs{
-    TStruct:thrift.NewTStruct("SetValue_bool_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetValue_Bool_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     thrift.NewTField("_value", thrift.BOOL, 2),
     }),
@@ -39959,7 +39959,7 @@ func (p *SetValueBoolArgs) ReadField_value(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *SetValueBoolArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_bool_args")
+  err = oprot.WriteStructBegin("SetValue_Bool_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -40007,7 +40007,7 @@ func (p *SetValueBoolArgs) TStructName() string {
 }
 
 func (p *SetValueBoolArgs) ThriftName() string {
-  return "SetValue_bool_args"
+  return "SetValue_Bool_args"
 }
 
 func (p *SetValueBoolArgs) String() string {
@@ -40061,7 +40061,7 @@ type SetValueBoolResult struct {
 
 func NewSetValueBoolResult() *SetValueBoolResult {
   output := &SetValueBoolResult{
-    TStruct:thrift.NewTStruct("SetValue_bool_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetValue_Bool_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -40122,7 +40122,7 @@ func (p *SetValueBoolResult) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetValueBoolResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_bool_result")
+  err = oprot.WriteStructBegin("SetValue_Bool_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -40156,7 +40156,7 @@ func (p *SetValueBoolResult) TStructName() string {
 }
 
 func (p *SetValueBoolResult) ThriftName() string {
-  return "SetValue_bool_result"
+  return "SetValue_Bool_result"
 }
 
 func (p *SetValueBoolResult) String() string {
@@ -40199,15 +40199,15 @@ func (p *SetValueBoolResult) TStructFields() thrift.TFieldContainer {
  *  - _id
  *  - _value
  */
-type SetValueUint8Args struct {
+type SetValueUInt8Args struct {
   thrift.TStruct
   _id *RemoteValueID "_id"; // 1
   _value byte "_value"; // 2
 }
 
-func NewSetValueUint8Args() *SetValueUint8Args {
-  output := &SetValueUint8Args{
-    TStruct:thrift.NewTStruct("SetValue_uint8_args", []thrift.TField{
+func NewSetValueUInt8Args() *SetValueUInt8Args {
+  output := &SetValueUInt8Args{
+    TStruct:thrift.NewTStruct("SetValue_UInt8_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     thrift.NewTField("_value", thrift.BYTE, 2),
     }),
@@ -40217,7 +40217,7 @@ func NewSetValueUint8Args() *SetValueUint8Args {
   return output
 }
 
-func (p *SetValueUint8Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   _, err = iprot.ReadStructBegin()
   if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
   for {
@@ -40268,30 +40268,30 @@ func (p *SetValueUint8Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
   return err
 }
 
-func (p *SetValueUint8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
   err1537 := p._id.Read(iprot)
   if err1537 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1537); }
   return err
 }
 
-func (p *SetValueUint8Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField1(iprot)
 }
 
-func (p *SetValueUint8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   v1538, err1539 := iprot.ReadByte()
   if err1539 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1539); }
   p._value = v1538
   return err
 }
 
-func (p *SetValueUint8Args) ReadField_value(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8Args) ReadField_value(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField2(iprot)
 }
 
-func (p *SetValueUint8Args) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_uint8_args")
+func (p *SetValueUInt8Args) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("SetValue_UInt8_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -40304,7 +40304,7 @@ func (p *SetValueUint8Args) Write(oprot thrift.TProtocol) (err thrift.TProtocolE
   return err
 }
 
-func (p *SetValueUint8Args) WriteField1(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Args) WriteField1(oprot thrift.TProtocol) (err thrift.TProtocolException) {
   if p._id != nil {
     err = oprot.WriteFieldBegin("_id", thrift.STRUCT, 1)
     if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "_id", p.ThriftName(), err); }
@@ -40316,11 +40316,11 @@ func (p *SetValueUint8Args) WriteField1(oprot thrift.TProtocol) (err thrift.TPro
   return err
 }
 
-func (p *SetValueUint8Args) WriteField_id(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8Args) WriteField_id(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField1(oprot)
 }
 
-func (p *SetValueUint8Args) WriteField2(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Args) WriteField2(oprot thrift.TProtocol) (err thrift.TProtocolException) {
   err = oprot.WriteFieldBegin("_value", thrift.BYTE, 2)
   if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_value", p.ThriftName(), err); }
   err = oprot.WriteByte(byte(p._value))
@@ -40330,30 +40330,30 @@ func (p *SetValueUint8Args) WriteField2(oprot thrift.TProtocol) (err thrift.TPro
   return err
 }
 
-func (p *SetValueUint8Args) WriteField_value(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8Args) WriteField_value(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField2(oprot)
 }
 
-func (p *SetValueUint8Args) TStructName() string {
-  return "SetValueUint8Args"
+func (p *SetValueUInt8Args) TStructName() string {
+  return "SetValueUInt8Args"
 }
 
-func (p *SetValueUint8Args) ThriftName() string {
-  return "SetValue_uint8_args"
+func (p *SetValueUInt8Args) ThriftName() string {
+  return "SetValue_UInt8_args"
 }
 
-func (p *SetValueUint8Args) String() string {
+func (p *SetValueUInt8Args) String() string {
   if p == nil {
     return "<nil>"
   }
-  return fmt.Sprintf("SetValueUint8Args(%+v)", *p)
+  return fmt.Sprintf("SetValueUInt8Args(%+v)", *p)
 }
 
-func (p *SetValueUint8Args) CompareTo(other interface{}) (int, bool) {
+func (p *SetValueUInt8Args) CompareTo(other interface{}) (int, bool) {
   if other == nil {
     return 1, true
   }
-  data, ok := other.(*SetValueUint8Args)
+  data, ok := other.(*SetValueUInt8Args)
   if !ok {
     return 0, false
   }
@@ -40369,7 +40369,7 @@ func (p *SetValueUint8Args) CompareTo(other interface{}) (int, bool) {
   return 0, true
 }
 
-func (p *SetValueUint8Args) AttributeByFieldId(id int) interface{} {
+func (p *SetValueUInt8Args) AttributeByFieldId(id int) interface{} {
   switch id {
   default: return nil
   case 1: return p._id
@@ -40378,7 +40378,7 @@ func (p *SetValueUint8Args) AttributeByFieldId(id int) interface{} {
   return nil
 }
 
-func (p *SetValueUint8Args) TStructFields() thrift.TFieldContainer {
+func (p *SetValueUInt8Args) TStructFields() thrift.TFieldContainer {
   return thrift.NewTFieldContainer([]thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     thrift.NewTField("_value", thrift.BYTE, 2),
@@ -40389,14 +40389,14 @@ func (p *SetValueUint8Args) TStructFields() thrift.TFieldContainer {
  * Attributes:
  *  - Success
  */
-type SetValueUint8Result struct {
+type SetValueUInt8Result struct {
   thrift.TStruct
   Success bool "success"; // 0
 }
 
-func NewSetValueUint8Result() *SetValueUint8Result {
-  output := &SetValueUint8Result{
-    TStruct:thrift.NewTStruct("SetValue_uint8_result", []thrift.TField{
+func NewSetValueUInt8Result() *SetValueUInt8Result {
+  output := &SetValueUInt8Result{
+    TStruct:thrift.NewTStruct("SetValue_UInt8_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -40405,7 +40405,7 @@ func NewSetValueUint8Result() *SetValueUint8Result {
   return output
 }
 
-func (p *SetValueUint8Result) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Result) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   _, err = iprot.ReadStructBegin()
   if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
   for {
@@ -40445,19 +40445,19 @@ func (p *SetValueUint8Result) Read(iprot thrift.TProtocol) (err thrift.TProtocol
   return err
 }
 
-func (p *SetValueUint8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   v1540, err1541 := iprot.ReadBool()
   if err1541 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1541); }
   p.Success = v1540
   return err
 }
 
-func (p *SetValueUint8Result) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8Result) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField0(iprot)
 }
 
-func (p *SetValueUint8Result) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_uint8_result")
+func (p *SetValueUInt8Result) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("SetValue_UInt8_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -40472,7 +40472,7 @@ func (p *SetValueUint8Result) Write(oprot thrift.TProtocol) (err thrift.TProtoco
   return err
 }
 
-func (p *SetValueUint8Result) WriteField0(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8Result) WriteField0(oprot thrift.TProtocol) (err thrift.TProtocolException) {
   err = oprot.WriteFieldBegin("success", thrift.BOOL, 0)
   if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "success", p.ThriftName(), err); }
   err = oprot.WriteBool(bool(p.Success))
@@ -40482,30 +40482,30 @@ func (p *SetValueUint8Result) WriteField0(oprot thrift.TProtocol) (err thrift.TP
   return err
 }
 
-func (p *SetValueUint8Result) WriteFieldSuccess(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8Result) WriteFieldSuccess(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField0(oprot)
 }
 
-func (p *SetValueUint8Result) TStructName() string {
-  return "SetValueUint8Result"
+func (p *SetValueUInt8Result) TStructName() string {
+  return "SetValueUInt8Result"
 }
 
-func (p *SetValueUint8Result) ThriftName() string {
-  return "SetValue_uint8_result"
+func (p *SetValueUInt8Result) ThriftName() string {
+  return "SetValue_UInt8_result"
 }
 
-func (p *SetValueUint8Result) String() string {
+func (p *SetValueUInt8Result) String() string {
   if p == nil {
     return "<nil>"
   }
-  return fmt.Sprintf("SetValueUint8Result(%+v)", *p)
+  return fmt.Sprintf("SetValueUInt8Result(%+v)", *p)
 }
 
-func (p *SetValueUint8Result) CompareTo(other interface{}) (int, bool) {
+func (p *SetValueUInt8Result) CompareTo(other interface{}) (int, bool) {
   if other == nil {
     return 1, true
   }
-  data, ok := other.(*SetValueUint8Result)
+  data, ok := other.(*SetValueUInt8Result)
   if !ok {
     return 0, false
   }
@@ -40515,7 +40515,7 @@ func (p *SetValueUint8Result) CompareTo(other interface{}) (int, bool) {
   return 0, true
 }
 
-func (p *SetValueUint8Result) AttributeByFieldId(id int) interface{} {
+func (p *SetValueUInt8Result) AttributeByFieldId(id int) interface{} {
   switch id {
   default: return nil
   case 0: return p.Success
@@ -40523,7 +40523,7 @@ func (p *SetValueUint8Result) AttributeByFieldId(id int) interface{} {
   return nil
 }
 
-func (p *SetValueUint8Result) TStructFields() thrift.TFieldContainer {
+func (p *SetValueUInt8Result) TStructFields() thrift.TFieldContainer {
   return thrift.NewTFieldContainer([]thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     })
@@ -40535,18 +40535,18 @@ func (p *SetValueUint8Result) TStructFields() thrift.TFieldContainer {
  *  - _value
  *  - _length
  */
-type SetValueUint8Uint8Args struct {
+type SetValueUInt8UInt8Args struct {
   thrift.TStruct
   _id *RemoteValueID "_id"; // 1
-  _value byte "_value"; // 2
+  _value thrift.TList "_value"; // 2
   _length byte "_length"; // 3
 }
 
-func NewSetValueUint8Uint8Args() *SetValueUint8Uint8Args {
-  output := &SetValueUint8Uint8Args{
-    TStruct:thrift.NewTStruct("SetValue_uint8_uint8_args", []thrift.TField{
+func NewSetValueUInt8UInt8Args() *SetValueUInt8UInt8Args {
+  output := &SetValueUInt8UInt8Args{
+    TStruct:thrift.NewTStruct("SetValue_UInt8_UInt8_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
-    thrift.NewTField("_value", thrift.BYTE, 2),
+    thrift.NewTField("_value", thrift.LIST, 2),
     thrift.NewTField("_length", thrift.BYTE, 3),
     }),
   }
@@ -40555,7 +40555,7 @@ func NewSetValueUint8Uint8Args() *SetValueUint8Uint8Args {
   return output
 }
 
-func (p *SetValueUint8Uint8Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   _, err = iprot.ReadStructBegin()
   if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
   for {
@@ -40584,7 +40584,7 @@ func (p *SetValueUint8Uint8Args) Read(iprot thrift.TProtocol) (err thrift.TProto
         if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
       }
     } else if fieldId == 2 || fieldName == "_value" {
-      if fieldTypeId == thrift.BYTE {
+      if fieldTypeId == thrift.LIST {
         err = p.ReadField2(iprot)
         if err != nil { return thrift.NewTProtocolExceptionReadField(int(fieldId), fieldName, p.ThriftName(), err); }
       } else if fieldTypeId == thrift.VOID {
@@ -40617,41 +40617,51 @@ func (p *SetValueUint8Uint8Args) Read(iprot thrift.TProtocol) (err thrift.TProto
   return err
 }
 
-func (p *SetValueUint8Uint8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
   err1544 := p._id.Read(iprot)
   if err1544 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1544); }
   return err
 }
 
-func (p *SetValueUint8Uint8Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField1(iprot)
 }
 
-func (p *SetValueUint8Uint8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1545, err1546 := iprot.ReadByte()
-  if err1546 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1546); }
-  p._value = v1545
+func (p *SetValueUInt8UInt8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  _etype1550, _size1547, err := iprot.ReadListBegin()
+  if err != nil {
+    return thrift.NewTProtocolExceptionReadField(-1, "p._value", "", err)
+  }
+  p._value = thrift.NewTList(_etype1550, _size1547)
+  for _i1551:= 0; _i1551 < _size1547; _i1551++ {
+    v1553, err1554 := iprot.ReadByte()
+    if err1554 != nil { return thrift.NewTProtocolExceptionReadField(0, "_elem1552", "", err1554); }
+    _elem1552 := v1553
+    p._value.Push(_elem1552)
+  }
+  err = iprot.ReadListEnd()
+  if err != nil { return thrift.NewTProtocolExceptionReadField(-1, "", "list",err); }
   return err
 }
 
-func (p *SetValueUint8Uint8Args) ReadField_value(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) ReadField_value(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField2(iprot)
 }
 
-func (p *SetValueUint8Uint8Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1547, err1548 := iprot.ReadByte()
-  if err1548 != nil { return thrift.NewTProtocolExceptionReadField(3, "_length", p.ThriftName(), err1548); }
-  p._length = v1547
+func (p *SetValueUInt8UInt8Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v1555, err1556 := iprot.ReadByte()
+  if err1556 != nil { return thrift.NewTProtocolExceptionReadField(3, "_length", p.ThriftName(), err1556); }
+  p._length = v1555
   return err
 }
 
-func (p *SetValueUint8Uint8Args) ReadField_length(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) ReadField_length(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField3(iprot)
 }
 
-func (p *SetValueUint8Uint8Args) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_uint8_uint8_args")
+func (p *SetValueUInt8UInt8Args) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("SetValue_UInt8_UInt8_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -40666,7 +40676,7 @@ func (p *SetValueUint8Uint8Args) Write(oprot thrift.TProtocol) (err thrift.TProt
   return err
 }
 
-func (p *SetValueUint8Uint8Args) WriteField1(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) WriteField1(oprot thrift.TProtocol) (err thrift.TProtocolException) {
   if p._id != nil {
     err = oprot.WriteFieldBegin("_id", thrift.STRUCT, 1)
     if err != nil { return thrift.NewTProtocolExceptionWriteField(1, "_id", p.ThriftName(), err); }
@@ -40678,25 +40688,34 @@ func (p *SetValueUint8Uint8Args) WriteField1(oprot thrift.TProtocol) (err thrift
   return err
 }
 
-func (p *SetValueUint8Uint8Args) WriteField_id(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) WriteField_id(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField1(oprot)
 }
 
-func (p *SetValueUint8Uint8Args) WriteField2(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteFieldBegin("_value", thrift.BYTE, 2)
-  if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_value", p.ThriftName(), err); }
-  err = oprot.WriteByte(byte(p._value))
-  if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_value", p.ThriftName(), err); }
-  err = oprot.WriteFieldEnd()
-  if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_value", p.ThriftName(), err); }
+func (p *SetValueUInt8UInt8Args) WriteField2(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  if p._value != nil {
+    err = oprot.WriteFieldBegin("_value", thrift.LIST, 2)
+    if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_value", p.ThriftName(), err); }
+    err = oprot.WriteListBegin(thrift.BYTE, p._value.Len())
+    if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
+    for Iter1557 := range p._value.Iter() {
+      Iter1558 := Iter1557.(byte)
+      err = oprot.WriteByte(byte(Iter1558))
+      if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "Iter1558", "", err); }
+    }
+    err = oprot.WriteListEnd()
+    if err != nil { return thrift.NewTProtocolExceptionWriteField(-1, "", "list", err); }
+    err = oprot.WriteFieldEnd()
+    if err != nil { return thrift.NewTProtocolExceptionWriteField(2, "_value", p.ThriftName(), err); }
+  }
   return err
 }
 
-func (p *SetValueUint8Uint8Args) WriteField_value(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) WriteField_value(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField2(oprot)
 }
 
-func (p *SetValueUint8Uint8Args) WriteField3(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) WriteField3(oprot thrift.TProtocol) (err thrift.TProtocolException) {
   err = oprot.WriteFieldBegin("_length", thrift.BYTE, 3)
   if err != nil { return thrift.NewTProtocolExceptionWriteField(3, "_length", p.ThriftName(), err); }
   err = oprot.WriteByte(byte(p._length))
@@ -40706,41 +40725,38 @@ func (p *SetValueUint8Uint8Args) WriteField3(oprot thrift.TProtocol) (err thrift
   return err
 }
 
-func (p *SetValueUint8Uint8Args) WriteField_length(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Args) WriteField_length(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField3(oprot)
 }
 
-func (p *SetValueUint8Uint8Args) TStructName() string {
-  return "SetValueUint8Uint8Args"
+func (p *SetValueUInt8UInt8Args) TStructName() string {
+  return "SetValueUInt8UInt8Args"
 }
 
-func (p *SetValueUint8Uint8Args) ThriftName() string {
-  return "SetValue_uint8_uint8_args"
+func (p *SetValueUInt8UInt8Args) ThriftName() string {
+  return "SetValue_UInt8_UInt8_args"
 }
 
-func (p *SetValueUint8Uint8Args) String() string {
+func (p *SetValueUInt8UInt8Args) String() string {
   if p == nil {
     return "<nil>"
   }
-  return fmt.Sprintf("SetValueUint8Uint8Args(%+v)", *p)
+  return fmt.Sprintf("SetValueUInt8UInt8Args(%+v)", *p)
 }
 
-func (p *SetValueUint8Uint8Args) CompareTo(other interface{}) (int, bool) {
+func (p *SetValueUInt8UInt8Args) CompareTo(other interface{}) (int, bool) {
   if other == nil {
     return 1, true
   }
-  data, ok := other.(*SetValueUint8Uint8Args)
+  data, ok := other.(*SetValueUInt8UInt8Args)
   if !ok {
     return 0, false
   }
   if cmp, ok := p._id.CompareTo(data._id); !ok || cmp != 0 {
     return cmp, ok
   }
-  if p._value != data._value {
-    if p._value < data._value {
-      return -1, true
-    }
-    return 1, true
+  if cmp, ok := p._value.CompareTo(data._value); !ok || cmp != 0 {
+    return cmp, ok
   }
   if p._length != data._length {
     if p._length < data._length {
@@ -40751,7 +40767,7 @@ func (p *SetValueUint8Uint8Args) CompareTo(other interface{}) (int, bool) {
   return 0, true
 }
 
-func (p *SetValueUint8Uint8Args) AttributeByFieldId(id int) interface{} {
+func (p *SetValueUInt8UInt8Args) AttributeByFieldId(id int) interface{} {
   switch id {
   default: return nil
   case 1: return p._id
@@ -40761,10 +40777,10 @@ func (p *SetValueUint8Uint8Args) AttributeByFieldId(id int) interface{} {
   return nil
 }
 
-func (p *SetValueUint8Uint8Args) TStructFields() thrift.TFieldContainer {
+func (p *SetValueUInt8UInt8Args) TStructFields() thrift.TFieldContainer {
   return thrift.NewTFieldContainer([]thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
-    thrift.NewTField("_value", thrift.BYTE, 2),
+    thrift.NewTField("_value", thrift.LIST, 2),
     thrift.NewTField("_length", thrift.BYTE, 3),
     })
 }
@@ -40773,14 +40789,14 @@ func (p *SetValueUint8Uint8Args) TStructFields() thrift.TFieldContainer {
  * Attributes:
  *  - Success
  */
-type SetValueUint8Uint8Result struct {
+type SetValueUInt8UInt8Result struct {
   thrift.TStruct
   Success bool "success"; // 0
 }
 
-func NewSetValueUint8Uint8Result() *SetValueUint8Uint8Result {
-  output := &SetValueUint8Uint8Result{
-    TStruct:thrift.NewTStruct("SetValue_uint8_uint8_result", []thrift.TField{
+func NewSetValueUInt8UInt8Result() *SetValueUInt8UInt8Result {
+  output := &SetValueUInt8UInt8Result{
+    TStruct:thrift.NewTStruct("SetValue_UInt8_UInt8_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -40789,7 +40805,7 @@ func NewSetValueUint8Uint8Result() *SetValueUint8Uint8Result {
   return output
 }
 
-func (p *SetValueUint8Uint8Result) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Result) Read(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   _, err = iprot.ReadStructBegin()
   if err != nil { return thrift.NewTProtocolExceptionReadStruct(p.ThriftName(), err); }
   for {
@@ -40829,19 +40845,19 @@ func (p *SetValueUint8Uint8Result) Read(iprot thrift.TProtocol) (err thrift.TPro
   return err
 }
 
-func (p *SetValueUint8Uint8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1549, err1550 := iprot.ReadBool()
-  if err1550 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1550); }
-  p.Success = v1549
+func (p *SetValueUInt8UInt8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
+  v1559, err1560 := iprot.ReadBool()
+  if err1560 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1560); }
+  p.Success = v1559
   return err
 }
 
-func (p *SetValueUint8Uint8Result) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Result) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.ReadField0(iprot)
 }
 
-func (p *SetValueUint8Uint8Result) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_uint8_uint8_result")
+func (p *SetValueUInt8UInt8Result) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+  err = oprot.WriteStructBegin("SetValue_UInt8_UInt8_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -40856,7 +40872,7 @@ func (p *SetValueUint8Uint8Result) Write(oprot thrift.TProtocol) (err thrift.TPr
   return err
 }
 
-func (p *SetValueUint8Uint8Result) WriteField0(oprot thrift.TProtocol) (err thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Result) WriteField0(oprot thrift.TProtocol) (err thrift.TProtocolException) {
   err = oprot.WriteFieldBegin("success", thrift.BOOL, 0)
   if err != nil { return thrift.NewTProtocolExceptionWriteField(0, "success", p.ThriftName(), err); }
   err = oprot.WriteBool(bool(p.Success))
@@ -40866,30 +40882,30 @@ func (p *SetValueUint8Uint8Result) WriteField0(oprot thrift.TProtocol) (err thri
   return err
 }
 
-func (p *SetValueUint8Uint8Result) WriteFieldSuccess(oprot thrift.TProtocol) (thrift.TProtocolException) {
+func (p *SetValueUInt8UInt8Result) WriteFieldSuccess(oprot thrift.TProtocol) (thrift.TProtocolException) {
   return p.WriteField0(oprot)
 }
 
-func (p *SetValueUint8Uint8Result) TStructName() string {
-  return "SetValueUint8Uint8Result"
+func (p *SetValueUInt8UInt8Result) TStructName() string {
+  return "SetValueUInt8UInt8Result"
 }
 
-func (p *SetValueUint8Uint8Result) ThriftName() string {
-  return "SetValue_uint8_uint8_result"
+func (p *SetValueUInt8UInt8Result) ThriftName() string {
+  return "SetValue_UInt8_UInt8_result"
 }
 
-func (p *SetValueUint8Uint8Result) String() string {
+func (p *SetValueUInt8UInt8Result) String() string {
   if p == nil {
     return "<nil>"
   }
-  return fmt.Sprintf("SetValueUint8Uint8Result(%+v)", *p)
+  return fmt.Sprintf("SetValueUInt8UInt8Result(%+v)", *p)
 }
 
-func (p *SetValueUint8Uint8Result) CompareTo(other interface{}) (int, bool) {
+func (p *SetValueUInt8UInt8Result) CompareTo(other interface{}) (int, bool) {
   if other == nil {
     return 1, true
   }
-  data, ok := other.(*SetValueUint8Uint8Result)
+  data, ok := other.(*SetValueUInt8UInt8Result)
   if !ok {
     return 0, false
   }
@@ -40899,7 +40915,7 @@ func (p *SetValueUint8Uint8Result) CompareTo(other interface{}) (int, bool) {
   return 0, true
 }
 
-func (p *SetValueUint8Uint8Result) AttributeByFieldId(id int) interface{} {
+func (p *SetValueUInt8UInt8Result) AttributeByFieldId(id int) interface{} {
   switch id {
   default: return nil
   case 0: return p.Success
@@ -40907,7 +40923,7 @@ func (p *SetValueUint8Uint8Result) AttributeByFieldId(id int) interface{} {
   return nil
 }
 
-func (p *SetValueUint8Uint8Result) TStructFields() thrift.TFieldContainer {
+func (p *SetValueUInt8UInt8Result) TStructFields() thrift.TFieldContainer {
   return thrift.NewTFieldContainer([]thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     })
@@ -40926,7 +40942,7 @@ type SetValueFloatArgs struct {
 
 func NewSetValueFloatArgs() *SetValueFloatArgs {
   output := &SetValueFloatArgs{
-    TStruct:thrift.NewTStruct("SetValue_float_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetValue_Float_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     thrift.NewTField("_value", thrift.DOUBLE, 2),
     }),
@@ -40989,8 +41005,8 @@ func (p *SetValueFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1553 := p._id.Read(iprot)
-  if err1553 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1553); }
+  err1563 := p._id.Read(iprot)
+  if err1563 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1563); }
   return err
 }
 
@@ -40999,9 +41015,9 @@ func (p *SetValueFloatArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1554, err1555 := iprot.ReadDouble()
-  if err1555 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1555); }
-  p._value = v1554
+  v1564, err1565 := iprot.ReadDouble()
+  if err1565 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1565); }
+  p._value = v1564
   return err
 }
 
@@ -41010,7 +41026,7 @@ func (p *SetValueFloatArgs) ReadField_value(iprot thrift.TProtocol) (thrift.TPro
 }
 
 func (p *SetValueFloatArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_float_args")
+  err = oprot.WriteStructBegin("SetValue_Float_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -41058,7 +41074,7 @@ func (p *SetValueFloatArgs) TStructName() string {
 }
 
 func (p *SetValueFloatArgs) ThriftName() string {
-  return "SetValue_float_args"
+  return "SetValue_Float_args"
 }
 
 func (p *SetValueFloatArgs) String() string {
@@ -41115,7 +41131,7 @@ type SetValueFloatResult struct {
 
 func NewSetValueFloatResult() *SetValueFloatResult {
   output := &SetValueFloatResult{
-    TStruct:thrift.NewTStruct("SetValue_float_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetValue_Float_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -41165,9 +41181,9 @@ func (p *SetValueFloatResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1556, err1557 := iprot.ReadBool()
-  if err1557 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1557); }
-  p.Success = v1556
+  v1566, err1567 := iprot.ReadBool()
+  if err1567 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1567); }
+  p.Success = v1566
   return err
 }
 
@@ -41176,7 +41192,7 @@ func (p *SetValueFloatResult) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *SetValueFloatResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_float_result")
+  err = oprot.WriteStructBegin("SetValue_Float_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -41210,7 +41226,7 @@ func (p *SetValueFloatResult) TStructName() string {
 }
 
 func (p *SetValueFloatResult) ThriftName() string {
-  return "SetValue_float_result"
+  return "SetValue_Float_result"
 }
 
 func (p *SetValueFloatResult) String() string {
@@ -41324,8 +41340,8 @@ func (p *SetValueInt32Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1560 := p._id.Read(iprot)
-  if err1560 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1560); }
+  err1570 := p._id.Read(iprot)
+  if err1570 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1570); }
   return err
 }
 
@@ -41334,9 +41350,9 @@ func (p *SetValueInt32Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1561, err1562 := iprot.ReadI32()
-  if err1562 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1562); }
-  p._value = v1561
+  v1571, err1572 := iprot.ReadI32()
+  if err1572 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1572); }
+  p._value = v1571
   return err
 }
 
@@ -41500,9 +41516,9 @@ func (p *SetValueInt32Result) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1563, err1564 := iprot.ReadBool()
-  if err1564 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1564); }
-  p.Success = v1563
+  v1573, err1574 := iprot.ReadBool()
+  if err1574 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1574); }
+  p.Success = v1573
   return err
 }
 
@@ -41659,8 +41675,8 @@ func (p *SetValueInt16Args) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *SetValueInt16Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1567 := p._id.Read(iprot)
-  if err1567 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1567); }
+  err1577 := p._id.Read(iprot)
+  if err1577 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1577); }
   return err
 }
 
@@ -41669,9 +41685,9 @@ func (p *SetValueInt16Args) ReadField_id(iprot thrift.TProtocol) (thrift.TProtoc
 }
 
 func (p *SetValueInt16Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1568, err1569 := iprot.ReadI16()
-  if err1569 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1569); }
-  p._value = v1568
+  v1578, err1579 := iprot.ReadI16()
+  if err1579 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1579); }
+  p._value = v1578
   return err
 }
 
@@ -41835,9 +41851,9 @@ func (p *SetValueInt16Result) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *SetValueInt16Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1570, err1571 := iprot.ReadBool()
-  if err1571 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1571); }
-  p.Success = v1570
+  v1580, err1581 := iprot.ReadBool()
+  if err1581 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1581); }
+  p.Success = v1580
   return err
 }
 
@@ -41931,7 +41947,7 @@ type SetValueStringArgs struct {
 
 func NewSetValueStringArgs() *SetValueStringArgs {
   output := &SetValueStringArgs{
-    TStruct:thrift.NewTStruct("SetValue_string_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetValue_String_args", []thrift.TField{
     thrift.NewTField("_id", thrift.STRUCT, 1),
     thrift.NewTField("_value", thrift.STRING, 2),
     }),
@@ -41994,8 +42010,8 @@ func (p *SetValueStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *SetValueStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1574 := p._id.Read(iprot)
-  if err1574 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1574); }
+  err1584 := p._id.Read(iprot)
+  if err1584 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1584); }
   return err
 }
 
@@ -42004,9 +42020,9 @@ func (p *SetValueStringArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *SetValueStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1575, err1576 := iprot.ReadString()
-  if err1576 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1576); }
-  p._value = v1575
+  v1585, err1586 := iprot.ReadString()
+  if err1586 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1586); }
+  p._value = v1585
   return err
 }
 
@@ -42015,7 +42031,7 @@ func (p *SetValueStringArgs) ReadField_value(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetValueStringArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_string_args")
+  err = oprot.WriteStructBegin("SetValue_String_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -42063,7 +42079,7 @@ func (p *SetValueStringArgs) TStructName() string {
 }
 
 func (p *SetValueStringArgs) ThriftName() string {
-  return "SetValue_string_args"
+  return "SetValue_String_args"
 }
 
 func (p *SetValueStringArgs) String() string {
@@ -42120,7 +42136,7 @@ type SetValueStringResult struct {
 
 func NewSetValueStringResult() *SetValueStringResult {
   output := &SetValueStringResult{
-    TStruct:thrift.NewTStruct("SetValue_string_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetValue_String_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -42170,9 +42186,9 @@ func (p *SetValueStringResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *SetValueStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1577, err1578 := iprot.ReadBool()
-  if err1578 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1578); }
-  p.Success = v1577
+  v1587, err1588 := iprot.ReadBool()
+  if err1588 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1588); }
+  p.Success = v1587
   return err
 }
 
@@ -42181,7 +42197,7 @@ func (p *SetValueStringResult) ReadFieldSuccess(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *SetValueStringResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetValue_string_result")
+  err = oprot.WriteStructBegin("SetValue_String_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -42215,7 +42231,7 @@ func (p *SetValueStringResult) TStructName() string {
 }
 
 func (p *SetValueStringResult) ThriftName() string {
-  return "SetValue_string_result"
+  return "SetValue_String_result"
 }
 
 func (p *SetValueStringResult) String() string {
@@ -42329,8 +42345,8 @@ func (p *SetValueListSelectionArgs) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *SetValueListSelectionArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1581 := p._id.Read(iprot)
-  if err1581 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1581); }
+  err1591 := p._id.Read(iprot)
+  if err1591 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1591); }
   return err
 }
 
@@ -42339,9 +42355,9 @@ func (p *SetValueListSelectionArgs) ReadField_id(iprot thrift.TProtocol) (thrift
 }
 
 func (p *SetValueListSelectionArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1582, err1583 := iprot.ReadString()
-  if err1583 != nil { return thrift.NewTProtocolExceptionReadField(2, "_selectedItem", p.ThriftName(), err1583); }
-  p._selectedItem = v1582
+  v1592, err1593 := iprot.ReadString()
+  if err1593 != nil { return thrift.NewTProtocolExceptionReadField(2, "_selectedItem", p.ThriftName(), err1593); }
+  p._selectedItem = v1592
   return err
 }
 
@@ -42505,9 +42521,9 @@ func (p *SetValueListSelectionResult) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *SetValueListSelectionResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1584, err1585 := iprot.ReadBool()
-  if err1585 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1585); }
-  p.Success = v1584
+  v1594, err1595 := iprot.ReadBool()
+  if err1595 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1595); }
+  p.Success = v1594
   return err
 }
 
@@ -42650,8 +42666,8 @@ func (p *RefreshValueArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 
 func (p *RefreshValueArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1588 := p._id.Read(iprot)
-  if err1588 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1588); }
+  err1598 := p._id.Read(iprot)
+  if err1598 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1598); }
   return err
 }
 
@@ -42791,9 +42807,9 @@ func (p *RefreshValueResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *RefreshValueResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1589, err1590 := iprot.ReadBool()
-  if err1590 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1590); }
-  p.Success = v1589
+  v1599, err1600 := iprot.ReadBool()
+  if err1600 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1600); }
+  p.Success = v1599
   return err
 }
 
@@ -42950,8 +42966,8 @@ func (p *SetChangeVerifiedArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *SetChangeVerifiedArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1593 := p._id.Read(iprot)
-  if err1593 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1593); }
+  err1603 := p._id.Read(iprot)
+  if err1603 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1603); }
   return err
 }
 
@@ -42960,9 +42976,9 @@ func (p *SetChangeVerifiedArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetChangeVerifiedArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1594, err1595 := iprot.ReadBool()
-  if err1595 != nil { return thrift.NewTProtocolExceptionReadField(2, "_verify", p.ThriftName(), err1595); }
-  p._verify = v1594
+  v1604, err1605 := iprot.ReadBool()
+  if err1605 != nil { return thrift.NewTProtocolExceptionReadField(2, "_verify", p.ThriftName(), err1605); }
+  p._verify = v1604
   return err
 }
 
@@ -43213,8 +43229,8 @@ func (p *PressButtonArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 
 func (p *PressButtonArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1598 := p._id.Read(iprot)
-  if err1598 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1598); }
+  err1608 := p._id.Read(iprot)
+  if err1608 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1608); }
   return err
 }
 
@@ -43354,9 +43370,9 @@ func (p *PressButtonResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *PressButtonResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1599, err1600 := iprot.ReadBool()
-  if err1600 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1600); }
-  p.Success = v1599
+  v1609, err1610 := iprot.ReadBool()
+  if err1610 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1610); }
+  p.Success = v1609
   return err
 }
 
@@ -43499,8 +43515,8 @@ func (p *ReleaseButtonArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 
 func (p *ReleaseButtonArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1603 := p._id.Read(iprot)
-  if err1603 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1603); }
+  err1613 := p._id.Read(iprot)
+  if err1613 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1613); }
   return err
 }
 
@@ -43640,9 +43656,9 @@ func (p *ReleaseButtonResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *ReleaseButtonResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1604, err1605 := iprot.ReadBool()
-  if err1605 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1605); }
-  p.Success = v1604
+  v1614, err1615 := iprot.ReadBool()
+  if err1615 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1615); }
+  p.Success = v1614
   return err
 }
 
@@ -43785,8 +43801,8 @@ func (p *GetNumSwitchPointsArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 
 func (p *GetNumSwitchPointsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1608 := p._id.Read(iprot)
-  if err1608 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1608); }
+  err1618 := p._id.Read(iprot)
+  if err1618 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1618); }
   return err
 }
 
@@ -43926,9 +43942,9 @@ func (p *GetNumSwitchPointsResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetNumSwitchPointsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1609, err1610 := iprot.ReadByte()
-  if err1610 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1610); }
-  p.Success = v1609
+  v1619, err1620 := iprot.ReadByte()
+  if err1620 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1620); }
+  p.Success = v1619
   return err
 }
 
@@ -44116,8 +44132,8 @@ func (p *SetSwitchPointArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *SetSwitchPointArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1613 := p._id.Read(iprot)
-  if err1613 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1613); }
+  err1623 := p._id.Read(iprot)
+  if err1623 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1623); }
   return err
 }
 
@@ -44126,9 +44142,9 @@ func (p *SetSwitchPointArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *SetSwitchPointArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1614, err1615 := iprot.ReadByte()
-  if err1615 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1615); }
-  p._hours = v1614
+  v1624, err1625 := iprot.ReadByte()
+  if err1625 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1625); }
+  p._hours = v1624
   return err
 }
 
@@ -44137,9 +44153,9 @@ func (p *SetSwitchPointArgs) ReadField_hours(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetSwitchPointArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1616, err1617 := iprot.ReadByte()
-  if err1617 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1617); }
-  p._minutes = v1616
+  v1626, err1627 := iprot.ReadByte()
+  if err1627 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1627); }
+  p._minutes = v1626
   return err
 }
 
@@ -44148,9 +44164,9 @@ func (p *SetSwitchPointArgs) ReadField_minutes(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *SetSwitchPointArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1618, err1619 := iprot.ReadByte()
-  if err1619 != nil { return thrift.NewTProtocolExceptionReadField(4, "_setback", p.ThriftName(), err1619); }
-  p._setback = v1618
+  v1628, err1629 := iprot.ReadByte()
+  if err1629 != nil { return thrift.NewTProtocolExceptionReadField(4, "_setback", p.ThriftName(), err1629); }
+  p._setback = v1628
   return err
 }
 
@@ -44362,9 +44378,9 @@ func (p *SetSwitchPointResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *SetSwitchPointResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1620, err1621 := iprot.ReadBool()
-  if err1621 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1621); }
-  p.Success = v1620
+  v1630, err1631 := iprot.ReadBool()
+  if err1631 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1631); }
+  p.Success = v1630
   return err
 }
 
@@ -44535,8 +44551,8 @@ func (p *RemoveSwitchPointArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *RemoveSwitchPointArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1624 := p._id.Read(iprot)
-  if err1624 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1624); }
+  err1634 := p._id.Read(iprot)
+  if err1634 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1634); }
   return err
 }
 
@@ -44545,9 +44561,9 @@ func (p *RemoveSwitchPointArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *RemoveSwitchPointArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1625, err1626 := iprot.ReadByte()
-  if err1626 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1626); }
-  p._hours = v1625
+  v1635, err1636 := iprot.ReadByte()
+  if err1636 != nil { return thrift.NewTProtocolExceptionReadField(2, "_hours", p.ThriftName(), err1636); }
+  p._hours = v1635
   return err
 }
 
@@ -44556,9 +44572,9 @@ func (p *RemoveSwitchPointArgs) ReadField_hours(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *RemoveSwitchPointArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1627, err1628 := iprot.ReadByte()
-  if err1628 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1628); }
-  p._minutes = v1627
+  v1637, err1638 := iprot.ReadByte()
+  if err1638 != nil { return thrift.NewTProtocolExceptionReadField(3, "_minutes", p.ThriftName(), err1638); }
+  p._minutes = v1637
   return err
 }
 
@@ -44746,9 +44762,9 @@ func (p *RemoveSwitchPointResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *RemoveSwitchPointResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1629, err1630 := iprot.ReadBool()
-  if err1630 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1630); }
-  p.Success = v1629
+  v1639, err1640 := iprot.ReadBool()
+  if err1640 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1640); }
+  p.Success = v1639
   return err
 }
 
@@ -44891,8 +44907,8 @@ func (p *ClearSwitchPointsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *ClearSwitchPointsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1633 := p._id.Read(iprot)
-  if err1633 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1633); }
+  err1643 := p._id.Read(iprot)
+  if err1643 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1643); }
   return err
 }
 
@@ -45136,8 +45152,8 @@ func (p *GetSwitchPointArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *GetSwitchPointArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._id = NewRemoteValueID()
-  err1636 := p._id.Read(iprot)
-  if err1636 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1636); }
+  err1646 := p._id.Read(iprot)
+  if err1646 != nil { return thrift.NewTProtocolExceptionReadStruct("p._idRemoteValueID", err1646); }
   return err
 }
 
@@ -45146,9 +45162,9 @@ func (p *GetSwitchPointArgs) ReadField_id(iprot thrift.TProtocol) (thrift.TProto
 }
 
 func (p *GetSwitchPointArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1637, err1638 := iprot.ReadByte()
-  if err1638 != nil { return thrift.NewTProtocolExceptionReadField(2, "_idx", p.ThriftName(), err1638); }
-  p._idx = v1637
+  v1647, err1648 := iprot.ReadByte()
+  if err1648 != nil { return thrift.NewTProtocolExceptionReadField(2, "_idx", p.ThriftName(), err1648); }
+  p._idx = v1647
   return err
 }
 
@@ -45313,8 +45329,8 @@ func (p *GetSwitchPointResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *GetSwitchPointResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetSwitchPointReturnStruct()
-  err1641 := p.Success.Read(iprot)
-  if err1641 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetSwitchPointReturnStruct", err1641); }
+  err1651 := p.Success.Read(iprot)
+  if err1651 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetSwitchPointReturnStruct", err1651); }
   return err
 }
 
@@ -45458,9 +45474,9 @@ func (p *SwitchAllOnArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *SwitchAllOnArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1642, err1643 := iprot.ReadI32()
-  if err1643 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1643); }
-  p._homeId = v1642
+  v1652, err1653 := iprot.ReadI32()
+  if err1653 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1653); }
+  p._homeId = v1652
   return err
 }
 
@@ -45690,9 +45706,9 @@ func (p *SwitchAllOffArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *SwitchAllOffArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1644, err1645 := iprot.ReadI32()
-  if err1645 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1645); }
-  p._homeId = v1644
+  v1654, err1655 := iprot.ReadI32()
+  if err1655 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1655); }
+  p._homeId = v1654
   return err
 }
 
@@ -45979,9 +45995,9 @@ func (p *SetConfigParamArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *SetConfigParamArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1646, err1647 := iprot.ReadI32()
-  if err1647 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1647); }
-  p._homeId = v1646
+  v1656, err1657 := iprot.ReadI32()
+  if err1657 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1657); }
+  p._homeId = v1656
   return err
 }
 
@@ -45990,9 +46006,9 @@ func (p *SetConfigParamArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetConfigParamArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1648, err1649 := iprot.ReadByte()
-  if err1649 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1649); }
-  p._nodeId = v1648
+  v1658, err1659 := iprot.ReadByte()
+  if err1659 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1659); }
+  p._nodeId = v1658
   return err
 }
 
@@ -46001,9 +46017,9 @@ func (p *SetConfigParamArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetConfigParamArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1650, err1651 := iprot.ReadByte()
-  if err1651 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1651); }
-  p._param = v1650
+  v1660, err1661 := iprot.ReadByte()
+  if err1661 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1661); }
+  p._param = v1660
   return err
 }
 
@@ -46012,9 +46028,9 @@ func (p *SetConfigParamArgs) ReadField_param(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetConfigParamArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1652, err1653 := iprot.ReadI32()
-  if err1653 != nil { return thrift.NewTProtocolExceptionReadField(4, "_value", p.ThriftName(), err1653); }
-  p._value = v1652
+  v1662, err1663 := iprot.ReadI32()
+  if err1663 != nil { return thrift.NewTProtocolExceptionReadField(4, "_value", p.ThriftName(), err1663); }
+  p._value = v1662
   return err
 }
 
@@ -46023,9 +46039,9 @@ func (p *SetConfigParamArgs) ReadField_value(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *SetConfigParamArgs) ReadField5(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1654, err1655 := iprot.ReadByte()
-  if err1655 != nil { return thrift.NewTProtocolExceptionReadField(5, "_size", p.ThriftName(), err1655); }
-  p._size = v1654
+  v1664, err1665 := iprot.ReadByte()
+  if err1665 != nil { return thrift.NewTProtocolExceptionReadField(5, "_size", p.ThriftName(), err1665); }
+  p._size = v1664
   return err
 }
 
@@ -46262,9 +46278,9 @@ func (p *SetConfigParamResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *SetConfigParamResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1656, err1657 := iprot.ReadBool()
-  if err1657 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1657); }
-  p.Success = v1656
+  v1666, err1667 := iprot.ReadBool()
+  if err1667 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1667); }
+  p.Success = v1666
   return err
 }
 
@@ -46434,9 +46450,9 @@ func (p *RequestConfigParamArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *RequestConfigParamArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1658, err1659 := iprot.ReadI32()
-  if err1659 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1659); }
-  p._homeId = v1658
+  v1668, err1669 := iprot.ReadI32()
+  if err1669 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1669); }
+  p._homeId = v1668
   return err
 }
 
@@ -46445,9 +46461,9 @@ func (p *RequestConfigParamArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *RequestConfigParamArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1660, err1661 := iprot.ReadByte()
-  if err1661 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1661); }
-  p._nodeId = v1660
+  v1670, err1671 := iprot.ReadByte()
+  if err1671 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1671); }
+  p._nodeId = v1670
   return err
 }
 
@@ -46456,9 +46472,9 @@ func (p *RequestConfigParamArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *RequestConfigParamArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1662, err1663 := iprot.ReadByte()
-  if err1663 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1663); }
-  p._param = v1662
+  v1672, err1673 := iprot.ReadByte()
+  if err1673 != nil { return thrift.NewTProtocolExceptionReadField(3, "_param", p.ThriftName(), err1673); }
+  p._param = v1672
   return err
 }
 
@@ -46750,9 +46766,9 @@ func (p *RequestAllConfigParamsArgs) Read(iprot thrift.TProtocol) (err thrift.TP
 }
 
 func (p *RequestAllConfigParamsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1664, err1665 := iprot.ReadI32()
-  if err1665 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1665); }
-  p._homeId = v1664
+  v1674, err1675 := iprot.ReadI32()
+  if err1675 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1675); }
+  p._homeId = v1674
   return err
 }
 
@@ -46761,9 +46777,9 @@ func (p *RequestAllConfigParamsArgs) ReadField_homeId(iprot thrift.TProtocol) (t
 }
 
 func (p *RequestAllConfigParamsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1666, err1667 := iprot.ReadByte()
-  if err1667 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1667); }
-  p._nodeId = v1666
+  v1676, err1677 := iprot.ReadByte()
+  if err1677 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1677); }
+  p._nodeId = v1676
   return err
 }
 
@@ -47031,9 +47047,9 @@ func (p *GetNumGroupsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExc
 }
 
 func (p *GetNumGroupsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1668, err1669 := iprot.ReadI32()
-  if err1669 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1669); }
-  p._homeId = v1668
+  v1678, err1679 := iprot.ReadI32()
+  if err1679 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1679); }
+  p._homeId = v1678
   return err
 }
 
@@ -47042,9 +47058,9 @@ func (p *GetNumGroupsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TPro
 }
 
 func (p *GetNumGroupsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1670, err1671 := iprot.ReadByte()
-  if err1671 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1671); }
-  p._nodeId = v1670
+  v1680, err1681 := iprot.ReadByte()
+  if err1681 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1681); }
+  p._nodeId = v1680
   return err
 }
 
@@ -47209,9 +47225,9 @@ func (p *GetNumGroupsResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNumGroupsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1672, err1673 := iprot.ReadByte()
-  if err1673 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1673); }
-  p.Success = v1672
+  v1682, err1683 := iprot.ReadByte()
+  if err1683 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1683); }
+  p.Success = v1682
   return err
 }
 
@@ -47384,9 +47400,9 @@ func (p *GetAssociationsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetAssociationsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1674, err1675 := iprot.ReadI32()
-  if err1675 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1675); }
-  p._homeId = v1674
+  v1684, err1685 := iprot.ReadI32()
+  if err1685 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1685); }
+  p._homeId = v1684
   return err
 }
 
@@ -47395,9 +47411,9 @@ func (p *GetAssociationsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetAssociationsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1676, err1677 := iprot.ReadByte()
-  if err1677 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1677); }
-  p._nodeId = v1676
+  v1686, err1687 := iprot.ReadByte()
+  if err1687 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1687); }
+  p._nodeId = v1686
   return err
 }
 
@@ -47406,9 +47422,9 @@ func (p *GetAssociationsArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *GetAssociationsArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1678, err1679 := iprot.ReadByte()
-  if err1679 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1679); }
-  p._groupIdx = v1678
+  v1688, err1689 := iprot.ReadByte()
+  if err1689 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1689); }
+  p._groupIdx = v1688
   return err
 }
 
@@ -47598,8 +47614,8 @@ func (p *GetAssociationsResult) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 
 func (p *GetAssociationsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetAssociationsReturnStruct()
-  err1682 := p.Success.Read(iprot)
-  if err1682 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAssociationsReturnStruct", err1682); }
+  err1692 := p.Success.Read(iprot)
+  if err1692 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAssociationsReturnStruct", err1692); }
   return err
 }
 
@@ -47771,9 +47787,9 @@ func (p *GetMaxAssociationsArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *GetMaxAssociationsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1683, err1684 := iprot.ReadI32()
-  if err1684 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1684); }
-  p._homeId = v1683
+  v1693, err1694 := iprot.ReadI32()
+  if err1694 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1694); }
+  p._homeId = v1693
   return err
 }
 
@@ -47782,9 +47798,9 @@ func (p *GetMaxAssociationsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetMaxAssociationsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1685, err1686 := iprot.ReadByte()
-  if err1686 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1686); }
-  p._nodeId = v1685
+  v1695, err1696 := iprot.ReadByte()
+  if err1696 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1696); }
+  p._nodeId = v1695
   return err
 }
 
@@ -47793,9 +47809,9 @@ func (p *GetMaxAssociationsArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *GetMaxAssociationsArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1687, err1688 := iprot.ReadByte()
-  if err1688 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1688); }
-  p._groupIdx = v1687
+  v1697, err1698 := iprot.ReadByte()
+  if err1698 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1698); }
+  p._groupIdx = v1697
   return err
 }
 
@@ -47984,9 +48000,9 @@ func (p *GetMaxAssociationsResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *GetMaxAssociationsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1689, err1690 := iprot.ReadByte()
-  if err1690 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1690); }
-  p.Success = v1689
+  v1699, err1700 := iprot.ReadByte()
+  if err1700 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1700); }
+  p.Success = v1699
   return err
 }
 
@@ -48159,9 +48175,9 @@ func (p *GetGroupLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetGroupLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1691, err1692 := iprot.ReadI32()
-  if err1692 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1692); }
-  p._homeId = v1691
+  v1701, err1702 := iprot.ReadI32()
+  if err1702 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1702); }
+  p._homeId = v1701
   return err
 }
 
@@ -48170,9 +48186,9 @@ func (p *GetGroupLabelArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *GetGroupLabelArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1693, err1694 := iprot.ReadByte()
-  if err1694 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1694); }
-  p._nodeId = v1693
+  v1703, err1704 := iprot.ReadByte()
+  if err1704 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1704); }
+  p._nodeId = v1703
   return err
 }
 
@@ -48181,9 +48197,9 @@ func (p *GetGroupLabelArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TPr
 }
 
 func (p *GetGroupLabelArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1695, err1696 := iprot.ReadByte()
-  if err1696 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1696); }
-  p._groupIdx = v1695
+  v1705, err1706 := iprot.ReadByte()
+  if err1706 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1706); }
+  p._groupIdx = v1705
   return err
 }
 
@@ -48372,9 +48388,9 @@ func (p *GetGroupLabelResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetGroupLabelResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1697, err1698 := iprot.ReadString()
-  if err1698 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1698); }
-  p.Success = v1697
+  v1707, err1708 := iprot.ReadString()
+  if err1708 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1708); }
+  p.Success = v1707
   return err
 }
 
@@ -48561,9 +48577,9 @@ func (p *AddAssociationArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *AddAssociationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1699, err1700 := iprot.ReadI32()
-  if err1700 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1700); }
-  p._homeId = v1699
+  v1709, err1710 := iprot.ReadI32()
+  if err1710 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1710); }
+  p._homeId = v1709
   return err
 }
 
@@ -48572,9 +48588,9 @@ func (p *AddAssociationArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *AddAssociationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1701, err1702 := iprot.ReadByte()
-  if err1702 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1702); }
-  p._nodeId = v1701
+  v1711, err1712 := iprot.ReadByte()
+  if err1712 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1712); }
+  p._nodeId = v1711
   return err
 }
 
@@ -48583,9 +48599,9 @@ func (p *AddAssociationArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *AddAssociationArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1703, err1704 := iprot.ReadByte()
-  if err1704 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1704); }
-  p._groupIdx = v1703
+  v1713, err1714 := iprot.ReadByte()
+  if err1714 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1714); }
+  p._groupIdx = v1713
   return err
 }
 
@@ -48594,9 +48610,9 @@ func (p *AddAssociationArgs) ReadField_groupIdx(iprot thrift.TProtocol) (thrift.
 }
 
 func (p *AddAssociationArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1705, err1706 := iprot.ReadByte()
-  if err1706 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1706); }
-  p._targetNodeId = v1705
+  v1715, err1716 := iprot.ReadByte()
+  if err1716 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1716); }
+  p._targetNodeId = v1715
   return err
 }
 
@@ -48940,9 +48956,9 @@ func (p *RemoveAssociationArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *RemoveAssociationArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1707, err1708 := iprot.ReadI32()
-  if err1708 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1708); }
-  p._homeId = v1707
+  v1717, err1718 := iprot.ReadI32()
+  if err1718 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1718); }
+  p._homeId = v1717
   return err
 }
 
@@ -48951,9 +48967,9 @@ func (p *RemoveAssociationArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift
 }
 
 func (p *RemoveAssociationArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1709, err1710 := iprot.ReadByte()
-  if err1710 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1710); }
-  p._nodeId = v1709
+  v1719, err1720 := iprot.ReadByte()
+  if err1720 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1720); }
+  p._nodeId = v1719
   return err
 }
 
@@ -48962,9 +48978,9 @@ func (p *RemoveAssociationArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift
 }
 
 func (p *RemoveAssociationArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1711, err1712 := iprot.ReadByte()
-  if err1712 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1712); }
-  p._groupIdx = v1711
+  v1721, err1722 := iprot.ReadByte()
+  if err1722 != nil { return thrift.NewTProtocolExceptionReadField(3, "_groupIdx", p.ThriftName(), err1722); }
+  p._groupIdx = v1721
   return err
 }
 
@@ -48973,9 +48989,9 @@ func (p *RemoveAssociationArgs) ReadField_groupIdx(iprot thrift.TProtocol) (thri
 }
 
 func (p *RemoveAssociationArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1713, err1714 := iprot.ReadByte()
-  if err1714 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1714); }
-  p._targetNodeId = v1713
+  v1723, err1724 := iprot.ReadByte()
+  if err1724 != nil { return thrift.NewTProtocolExceptionReadField(4, "_targetNodeId", p.ThriftName(), err1724); }
+  p._targetNodeId = v1723
   return err
 }
 
@@ -49277,9 +49293,9 @@ func (p *ResetControllerArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *ResetControllerArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1715, err1716 := iprot.ReadI32()
-  if err1716 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1716); }
-  p._homeId = v1715
+  v1725, err1726 := iprot.ReadI32()
+  if err1726 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1726); }
+  p._homeId = v1725
   return err
 }
 
@@ -49509,9 +49525,9 @@ func (p *SoftResetArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExcept
 }
 
 func (p *SoftResetArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1717, err1718 := iprot.ReadI32()
-  if err1718 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1718); }
-  p._homeId = v1717
+  v1727, err1728 := iprot.ReadI32()
+  if err1728 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1728); }
+  p._homeId = v1727
   return err
 }
 
@@ -49797,9 +49813,9 @@ func (p *BeginControllerCommandArgs) Read(iprot thrift.TProtocol) (err thrift.TP
 }
 
 func (p *BeginControllerCommandArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1719, err1720 := iprot.ReadI32()
-  if err1720 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1720); }
-  p._homeId = v1719
+  v1729, err1730 := iprot.ReadI32()
+  if err1730 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1730); }
+  p._homeId = v1729
   return err
 }
 
@@ -49808,9 +49824,9 @@ func (p *BeginControllerCommandArgs) ReadField_homeId(iprot thrift.TProtocol) (t
 }
 
 func (p *BeginControllerCommandArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1721, err1722 := iprot.ReadI32()
-  if err1722 != nil { return thrift.NewTProtocolExceptionReadField(2, "_command", p.ThriftName(), err1722); }
-  p._command = DriverControllerCommand(v1721)
+  v1731, err1732 := iprot.ReadI32()
+  if err1732 != nil { return thrift.NewTProtocolExceptionReadField(2, "_command", p.ThriftName(), err1732); }
+  p._command = DriverControllerCommand(v1731)
   return err
 }
 
@@ -49819,9 +49835,9 @@ func (p *BeginControllerCommandArgs) ReadField_command(iprot thrift.TProtocol) (
 }
 
 func (p *BeginControllerCommandArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1723, err1724 := iprot.ReadBool()
-  if err1724 != nil { return thrift.NewTProtocolExceptionReadField(3, "_highPower", p.ThriftName(), err1724); }
-  p._highPower = v1723
+  v1733, err1734 := iprot.ReadBool()
+  if err1734 != nil { return thrift.NewTProtocolExceptionReadField(3, "_highPower", p.ThriftName(), err1734); }
+  p._highPower = v1733
   return err
 }
 
@@ -49830,9 +49846,9 @@ func (p *BeginControllerCommandArgs) ReadField_highPower(iprot thrift.TProtocol)
 }
 
 func (p *BeginControllerCommandArgs) ReadField4(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1725, err1726 := iprot.ReadByte()
-  if err1726 != nil { return thrift.NewTProtocolExceptionReadField(4, "_nodeId", p.ThriftName(), err1726); }
-  p._nodeId = v1725
+  v1735, err1736 := iprot.ReadByte()
+  if err1736 != nil { return thrift.NewTProtocolExceptionReadField(4, "_nodeId", p.ThriftName(), err1736); }
+  p._nodeId = v1735
   return err
 }
 
@@ -49841,9 +49857,9 @@ func (p *BeginControllerCommandArgs) ReadField_nodeId(iprot thrift.TProtocol) (t
 }
 
 func (p *BeginControllerCommandArgs) ReadField5(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1727, err1728 := iprot.ReadByte()
-  if err1728 != nil { return thrift.NewTProtocolExceptionReadField(5, "_arg", p.ThriftName(), err1728); }
-  p._arg = v1727
+  v1737, err1738 := iprot.ReadByte()
+  if err1738 != nil { return thrift.NewTProtocolExceptionReadField(5, "_arg", p.ThriftName(), err1738); }
+  p._arg = v1737
   return err
 }
 
@@ -50077,9 +50093,9 @@ func (p *BeginControllerCommandResult) Read(iprot thrift.TProtocol) (err thrift.
 }
 
 func (p *BeginControllerCommandResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1729, err1730 := iprot.ReadBool()
-  if err1730 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1730); }
-  p.Success = v1729
+  v1739, err1740 := iprot.ReadBool()
+  if err1740 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1740); }
+  p.Success = v1739
   return err
 }
 
@@ -50221,9 +50237,9 @@ func (p *CancelControllerCommandArgs) Read(iprot thrift.TProtocol) (err thrift.T
 }
 
 func (p *CancelControllerCommandArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1731, err1732 := iprot.ReadI32()
-  if err1732 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1732); }
-  p._homeId = v1731
+  v1741, err1742 := iprot.ReadI32()
+  if err1742 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1742); }
+  p._homeId = v1741
   return err
 }
 
@@ -50364,9 +50380,9 @@ func (p *CancelControllerCommandResult) Read(iprot thrift.TProtocol) (err thrift
 }
 
 func (p *CancelControllerCommandResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1733, err1734 := iprot.ReadBool()
-  if err1734 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1734); }
-  p.Success = v1733
+  v1743, err1744 := iprot.ReadBool()
+  if err1744 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1744); }
+  p.Success = v1743
   return err
 }
 
@@ -50536,9 +50552,9 @@ func (p *TestNetworkNodeArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *TestNetworkNodeArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1735, err1736 := iprot.ReadI32()
-  if err1736 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1736); }
-  p._homeId = v1735
+  v1745, err1746 := iprot.ReadI32()
+  if err1746 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1746); }
+  p._homeId = v1745
   return err
 }
 
@@ -50547,9 +50563,9 @@ func (p *TestNetworkNodeArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *TestNetworkNodeArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1737, err1738 := iprot.ReadByte()
-  if err1738 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1738); }
-  p._nodeId = v1737
+  v1747, err1748 := iprot.ReadByte()
+  if err1748 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1748); }
+  p._nodeId = v1747
   return err
 }
 
@@ -50558,9 +50574,9 @@ func (p *TestNetworkNodeArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *TestNetworkNodeArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1739, err1740 := iprot.ReadI32()
-  if err1740 != nil { return thrift.NewTProtocolExceptionReadField(3, "_count", p.ThriftName(), err1740); }
-  p._count = v1739
+  v1749, err1750 := iprot.ReadI32()
+  if err1750 != nil { return thrift.NewTProtocolExceptionReadField(3, "_count", p.ThriftName(), err1750); }
+  p._count = v1749
   return err
 }
 
@@ -50852,9 +50868,9 @@ func (p *TestNetworkArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *TestNetworkArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1741, err1742 := iprot.ReadI32()
-  if err1742 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1742); }
-  p._homeId = v1741
+  v1751, err1752 := iprot.ReadI32()
+  if err1752 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1752); }
+  p._homeId = v1751
   return err
 }
 
@@ -50863,9 +50879,9 @@ func (p *TestNetworkArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *TestNetworkArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1743, err1744 := iprot.ReadI32()
-  if err1744 != nil { return thrift.NewTProtocolExceptionReadField(2, "_count", p.ThriftName(), err1744); }
-  p._count = v1743
+  v1753, err1754 := iprot.ReadI32()
+  if err1754 != nil { return thrift.NewTProtocolExceptionReadField(2, "_count", p.ThriftName(), err1754); }
+  p._count = v1753
   return err
 }
 
@@ -51147,9 +51163,9 @@ func (p *HealNetworkNodeArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *HealNetworkNodeArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1745, err1746 := iprot.ReadI32()
-  if err1746 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1746); }
-  p._homeId = v1745
+  v1755, err1756 := iprot.ReadI32()
+  if err1756 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1756); }
+  p._homeId = v1755
   return err
 }
 
@@ -51158,9 +51174,9 @@ func (p *HealNetworkNodeArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *HealNetworkNodeArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1747, err1748 := iprot.ReadByte()
-  if err1748 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1748); }
-  p._nodeId = v1747
+  v1757, err1758 := iprot.ReadByte()
+  if err1758 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err1758); }
+  p._nodeId = v1757
   return err
 }
 
@@ -51169,9 +51185,9 @@ func (p *HealNetworkNodeArgs) ReadField_nodeId(iprot thrift.TProtocol) (thrift.T
 }
 
 func (p *HealNetworkNodeArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1749, err1750 := iprot.ReadBool()
-  if err1750 != nil { return thrift.NewTProtocolExceptionReadField(3, "_doRR", p.ThriftName(), err1750); }
-  p._doRR = v1749
+  v1759, err1760 := iprot.ReadBool()
+  if err1760 != nil { return thrift.NewTProtocolExceptionReadField(3, "_doRR", p.ThriftName(), err1760); }
+  p._doRR = v1759
   return err
 }
 
@@ -51460,9 +51476,9 @@ func (p *HealNetworkArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *HealNetworkArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1751, err1752 := iprot.ReadI32()
-  if err1752 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1752); }
-  p._homeId = v1751
+  v1761, err1762 := iprot.ReadI32()
+  if err1762 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1762); }
+  p._homeId = v1761
   return err
 }
 
@@ -51471,9 +51487,9 @@ func (p *HealNetworkArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift.TProt
 }
 
 func (p *HealNetworkArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1753, err1754 := iprot.ReadBool()
-  if err1754 != nil { return thrift.NewTProtocolExceptionReadField(2, "_doRR", p.ThriftName(), err1754); }
-  p._doRR = v1753
+  v1763, err1764 := iprot.ReadBool()
+  if err1764 != nil { return thrift.NewTProtocolExceptionReadField(2, "_doRR", p.ThriftName(), err1764); }
+  p._doRR = v1763
   return err
 }
 
@@ -51813,9 +51829,9 @@ func (p *GetNumScenesResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *GetNumScenesResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1755, err1756 := iprot.ReadByte()
-  if err1756 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1756); }
-  p.Success = v1755
+  v1765, err1766 := iprot.ReadByte()
+  if err1766 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1766); }
+  p.Success = v1765
   return err
 }
 
@@ -52050,8 +52066,8 @@ func (p *GetAllScenesResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 
 func (p *GetAllScenesResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetAllScenesReturnStruct()
-  err1759 := p.Success.Read(iprot)
-  if err1759 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAllScenesReturnStruct", err1759); }
+  err1769 := p.Success.Read(iprot)
+  if err1769 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetAllScenesReturnStruct", err1769); }
   return err
 }
 
@@ -52195,9 +52211,9 @@ func (p *RemoveAllScenesArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *RemoveAllScenesArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1760, err1761 := iprot.ReadI32()
-  if err1761 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1761); }
-  p._homeId = v1760
+  v1770, err1771 := iprot.ReadI32()
+  if err1771 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err1771); }
+  p._homeId = v1770
   return err
 }
 
@@ -52516,9 +52532,9 @@ func (p *CreateSceneResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *CreateSceneResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1762, err1763 := iprot.ReadByte()
-  if err1763 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1763); }
-  p.Success = v1762
+  v1772, err1773 := iprot.ReadByte()
+  if err1773 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1773); }
+  p.Success = v1772
   return err
 }
 
@@ -52663,9 +52679,9 @@ func (p *RemoveSceneArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *RemoveSceneArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1764, err1765 := iprot.ReadByte()
-  if err1765 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1765); }
-  p._sceneId = v1764
+  v1774, err1775 := iprot.ReadByte()
+  if err1775 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1775); }
+  p._sceneId = v1774
   return err
 }
 
@@ -52806,9 +52822,9 @@ func (p *RemoveSceneResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *RemoveSceneResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1766, err1767 := iprot.ReadBool()
-  if err1767 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1767); }
-  p.Success = v1766
+  v1776, err1777 := iprot.ReadBool()
+  if err1777 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1777); }
+  p.Success = v1776
   return err
 }
 
@@ -52978,9 +52994,9 @@ func (p *AddSceneValueBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *AddSceneValueBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1768, err1769 := iprot.ReadByte()
-  if err1769 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1769); }
-  p._sceneId = v1768
+  v1778, err1779 := iprot.ReadByte()
+  if err1779 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1779); }
+  p._sceneId = v1778
   return err
 }
 
@@ -52990,8 +53006,8 @@ func (p *AddSceneValueBoolArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrif
 
 func (p *AddSceneValueBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1772 := p._valueId.Read(iprot)
-  if err1772 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1772); }
+  err1782 := p._valueId.Read(iprot)
+  if err1782 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1782); }
   return err
 }
 
@@ -53000,9 +53016,9 @@ func (p *AddSceneValueBoolArgs) ReadField_valueId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *AddSceneValueBoolArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1773, err1774 := iprot.ReadBool()
-  if err1774 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1774); }
-  p._value = v1773
+  v1783, err1784 := iprot.ReadBool()
+  if err1784 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1784); }
+  p._value = v1783
   return err
 }
 
@@ -53187,9 +53203,9 @@ func (p *AddSceneValueBoolResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *AddSceneValueBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1775, err1776 := iprot.ReadBool()
-  if err1776 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1776); }
-  p.Success = v1775
+  v1785, err1786 := iprot.ReadBool()
+  if err1786 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1786); }
+  p.Success = v1785
   return err
 }
 
@@ -53359,9 +53375,9 @@ func (p *AddSceneValueUint8Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueUint8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1777, err1778 := iprot.ReadByte()
-  if err1778 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1778); }
-  p._sceneId = v1777
+  v1787, err1788 := iprot.ReadByte()
+  if err1788 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1788); }
+  p._sceneId = v1787
   return err
 }
 
@@ -53371,8 +53387,8 @@ func (p *AddSceneValueUint8Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueUint8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1781 := p._valueId.Read(iprot)
-  if err1781 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1781); }
+  err1791 := p._valueId.Read(iprot)
+  if err1791 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1791); }
   return err
 }
 
@@ -53381,9 +53397,9 @@ func (p *AddSceneValueUint8Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueUint8Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1782, err1783 := iprot.ReadByte()
-  if err1783 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1783); }
-  p._value = v1782
+  v1792, err1793 := iprot.ReadByte()
+  if err1793 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1793); }
+  p._value = v1792
   return err
 }
 
@@ -53571,9 +53587,9 @@ func (p *AddSceneValueUint8Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueUint8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1784, err1785 := iprot.ReadBool()
-  if err1785 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1785); }
-  p.Success = v1784
+  v1794, err1795 := iprot.ReadBool()
+  if err1795 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1795); }
+  p.Success = v1794
   return err
 }
 
@@ -53743,9 +53759,9 @@ func (p *AddSceneValueFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1786, err1787 := iprot.ReadByte()
-  if err1787 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1787); }
-  p._sceneId = v1786
+  v1796, err1797 := iprot.ReadByte()
+  if err1797 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1797); }
+  p._sceneId = v1796
   return err
 }
 
@@ -53755,8 +53771,8 @@ func (p *AddSceneValueFloatArgs) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1790 := p._valueId.Read(iprot)
-  if err1790 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1790); }
+  err1800 := p._valueId.Read(iprot)
+  if err1800 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1800); }
   return err
 }
 
@@ -53765,9 +53781,9 @@ func (p *AddSceneValueFloatArgs) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueFloatArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1791, err1792 := iprot.ReadDouble()
-  if err1792 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1792); }
-  p._value = v1791
+  v1801, err1802 := iprot.ReadDouble()
+  if err1802 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1802); }
+  p._value = v1801
   return err
 }
 
@@ -53955,9 +53971,9 @@ func (p *AddSceneValueFloatResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1793, err1794 := iprot.ReadBool()
-  if err1794 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1794); }
-  p.Success = v1793
+  v1803, err1804 := iprot.ReadBool()
+  if err1804 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1804); }
+  p.Success = v1803
   return err
 }
 
@@ -54127,9 +54143,9 @@ func (p *AddSceneValueInt32Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1795, err1796 := iprot.ReadByte()
-  if err1796 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1796); }
-  p._sceneId = v1795
+  v1805, err1806 := iprot.ReadByte()
+  if err1806 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1806); }
+  p._sceneId = v1805
   return err
 }
 
@@ -54139,8 +54155,8 @@ func (p *AddSceneValueInt32Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1799 := p._valueId.Read(iprot)
-  if err1799 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1799); }
+  err1809 := p._valueId.Read(iprot)
+  if err1809 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1809); }
   return err
 }
 
@@ -54149,9 +54165,9 @@ func (p *AddSceneValueInt32Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1800, err1801 := iprot.ReadI32()
-  if err1801 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1801); }
-  p._value = v1800
+  v1810, err1811 := iprot.ReadI32()
+  if err1811 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1811); }
+  p._value = v1810
   return err
 }
 
@@ -54339,9 +54355,9 @@ func (p *AddSceneValueInt32Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1802, err1803 := iprot.ReadBool()
-  if err1803 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1803); }
-  p.Success = v1802
+  v1812, err1813 := iprot.ReadBool()
+  if err1813 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1813); }
+  p.Success = v1812
   return err
 }
 
@@ -54511,9 +54527,9 @@ func (p *AddSceneValueInt16Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *AddSceneValueInt16Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1804, err1805 := iprot.ReadByte()
-  if err1805 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1805); }
-  p._sceneId = v1804
+  v1814, err1815 := iprot.ReadByte()
+  if err1815 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1815); }
+  p._sceneId = v1814
   return err
 }
 
@@ -54523,8 +54539,8 @@ func (p *AddSceneValueInt16Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *AddSceneValueInt16Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1808 := p._valueId.Read(iprot)
-  if err1808 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1808); }
+  err1818 := p._valueId.Read(iprot)
+  if err1818 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1818); }
   return err
 }
 
@@ -54533,9 +54549,9 @@ func (p *AddSceneValueInt16Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *AddSceneValueInt16Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1809, err1810 := iprot.ReadI16()
-  if err1810 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1810); }
-  p._value = v1809
+  v1819, err1820 := iprot.ReadI16()
+  if err1820 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1820); }
+  p._value = v1819
   return err
 }
 
@@ -54723,9 +54739,9 @@ func (p *AddSceneValueInt16Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *AddSceneValueInt16Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1811, err1812 := iprot.ReadBool()
-  if err1812 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1812); }
-  p.Success = v1811
+  v1821, err1822 := iprot.ReadBool()
+  if err1822 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1822); }
+  p.Success = v1821
   return err
 }
 
@@ -54895,9 +54911,9 @@ func (p *AddSceneValueStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *AddSceneValueStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1813, err1814 := iprot.ReadByte()
-  if err1814 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1814); }
-  p._sceneId = v1813
+  v1823, err1824 := iprot.ReadByte()
+  if err1824 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1824); }
+  p._sceneId = v1823
   return err
 }
 
@@ -54907,8 +54923,8 @@ func (p *AddSceneValueStringArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *AddSceneValueStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1817 := p._valueId.Read(iprot)
-  if err1817 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1817); }
+  err1827 := p._valueId.Read(iprot)
+  if err1827 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1827); }
   return err
 }
 
@@ -54917,9 +54933,9 @@ func (p *AddSceneValueStringArgs) ReadField_valueId(iprot thrift.TProtocol) (thr
 }
 
 func (p *AddSceneValueStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1818, err1819 := iprot.ReadString()
-  if err1819 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1819); }
-  p._value = v1818
+  v1828, err1829 := iprot.ReadString()
+  if err1829 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1829); }
+  p._value = v1828
   return err
 }
 
@@ -55107,9 +55123,9 @@ func (p *AddSceneValueStringResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *AddSceneValueStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1820, err1821 := iprot.ReadBool()
-  if err1821 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1821); }
-  p.Success = v1820
+  v1830, err1831 := iprot.ReadBool()
+  if err1831 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1831); }
+  p.Success = v1830
   return err
 }
 
@@ -55279,9 +55295,9 @@ func (p *AddSceneValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err
 }
 
 func (p *AddSceneValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1822, err1823 := iprot.ReadByte()
-  if err1823 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1823); }
-  p._sceneId = v1822
+  v1832, err1833 := iprot.ReadByte()
+  if err1833 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1833); }
+  p._sceneId = v1832
   return err
 }
 
@@ -55291,8 +55307,8 @@ func (p *AddSceneValueListSelectionStringArgs) ReadField_sceneId(iprot thrift.TP
 
 func (p *AddSceneValueListSelectionStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1826 := p._valueId.Read(iprot)
-  if err1826 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1826); }
+  err1836 := p._valueId.Read(iprot)
+  if err1836 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1836); }
   return err
 }
 
@@ -55301,9 +55317,9 @@ func (p *AddSceneValueListSelectionStringArgs) ReadField_valueId(iprot thrift.TP
 }
 
 func (p *AddSceneValueListSelectionStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1827, err1828 := iprot.ReadString()
-  if err1828 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1828); }
-  p._value = v1827
+  v1837, err1838 := iprot.ReadString()
+  if err1838 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1838); }
+  p._value = v1837
   return err
 }
 
@@ -55491,9 +55507,9 @@ func (p *AddSceneValueListSelectionStringResult) Read(iprot thrift.TProtocol) (e
 }
 
 func (p *AddSceneValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1829, err1830 := iprot.ReadBool()
-  if err1830 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1830); }
-  p.Success = v1829
+  v1839, err1840 := iprot.ReadBool()
+  if err1840 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1840); }
+  p.Success = v1839
   return err
 }
 
@@ -55663,9 +55679,9 @@ func (p *AddSceneValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err 
 }
 
 func (p *AddSceneValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1831, err1832 := iprot.ReadByte()
-  if err1832 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1832); }
-  p._sceneId = v1831
+  v1841, err1842 := iprot.ReadByte()
+  if err1842 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1842); }
+  p._sceneId = v1841
   return err
 }
 
@@ -55675,8 +55691,8 @@ func (p *AddSceneValueListSelectionInt32Args) ReadField_sceneId(iprot thrift.TPr
 
 func (p *AddSceneValueListSelectionInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1835 := p._valueId.Read(iprot)
-  if err1835 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1835); }
+  err1845 := p._valueId.Read(iprot)
+  if err1845 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1845); }
   return err
 }
 
@@ -55685,9 +55701,9 @@ func (p *AddSceneValueListSelectionInt32Args) ReadField_valueId(iprot thrift.TPr
 }
 
 func (p *AddSceneValueListSelectionInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1836, err1837 := iprot.ReadI32()
-  if err1837 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1837); }
-  p._value = v1836
+  v1846, err1847 := iprot.ReadI32()
+  if err1847 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1847); }
+  p._value = v1846
   return err
 }
 
@@ -55875,9 +55891,9 @@ func (p *AddSceneValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (er
 }
 
 func (p *AddSceneValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1838, err1839 := iprot.ReadBool()
-  if err1839 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1839); }
-  p.Success = v1838
+  v1848, err1849 := iprot.ReadBool()
+  if err1849 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1849); }
+  p.Success = v1848
   return err
 }
 
@@ -56033,9 +56049,9 @@ func (p *RemoveSceneValueArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 }
 
 func (p *RemoveSceneValueArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1840, err1841 := iprot.ReadByte()
-  if err1841 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1841); }
-  p._sceneId = v1840
+  v1850, err1851 := iprot.ReadByte()
+  if err1851 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1851); }
+  p._sceneId = v1850
   return err
 }
 
@@ -56045,8 +56061,8 @@ func (p *RemoveSceneValueArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrift
 
 func (p *RemoveSceneValueArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1844 := p._valueId.Read(iprot)
-  if err1844 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1844); }
+  err1854 := p._valueId.Read(iprot)
+  if err1854 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1854); }
   return err
 }
 
@@ -56210,9 +56226,9 @@ func (p *RemoveSceneValueResult) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *RemoveSceneValueResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1845, err1846 := iprot.ReadBool()
-  if err1846 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1846); }
-  p.Success = v1845
+  v1855, err1856 := iprot.ReadBool()
+  if err1856 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1856); }
+  p.Success = v1855
   return err
 }
 
@@ -56354,9 +56370,9 @@ func (p *SceneGetValuesArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolE
 }
 
 func (p *SceneGetValuesArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1847, err1848 := iprot.ReadByte()
-  if err1848 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1848); }
-  p._sceneId = v1847
+  v1857, err1858 := iprot.ReadByte()
+  if err1858 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1858); }
+  p._sceneId = v1857
   return err
 }
 
@@ -56498,8 +56514,8 @@ func (p *SceneGetValuesResult) Read(iprot thrift.TProtocol) (err thrift.TProtoco
 
 func (p *SceneGetValuesResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewSceneGetValuesReturnStruct()
-  err1851 := p.Success.Read(iprot)
-  if err1851 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessSceneGetValuesReturnStruct", err1851); }
+  err1861 := p.Success.Read(iprot)
+  if err1861 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessSceneGetValuesReturnStruct", err1861); }
   return err
 }
 
@@ -56657,9 +56673,9 @@ func (p *SceneGetValueAsBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SceneGetValueAsBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1852, err1853 := iprot.ReadByte()
-  if err1853 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1853); }
-  p._sceneId = v1852
+  v1862, err1863 := iprot.ReadByte()
+  if err1863 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1863); }
+  p._sceneId = v1862
   return err
 }
 
@@ -56669,8 +56685,8 @@ func (p *SceneGetValueAsBoolArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *SceneGetValueAsBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1856 := p._valueId.Read(iprot)
-  if err1856 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1856); }
+  err1866 := p._valueId.Read(iprot)
+  if err1866 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1866); }
   return err
 }
 
@@ -56835,8 +56851,8 @@ func (p *SceneGetValueAsBoolResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *SceneGetValueAsBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolBool()
-  err1859 := p.Success.Read(iprot)
-  if err1859 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Bool", err1859); }
+  err1869 := p.Success.Read(iprot)
+  if err1869 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Bool", err1869); }
   return err
 }
 
@@ -56994,9 +57010,9 @@ func (p *SceneGetValueAsByteArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SceneGetValueAsByteArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1860, err1861 := iprot.ReadByte()
-  if err1861 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1861); }
-  p._sceneId = v1860
+  v1870, err1871 := iprot.ReadByte()
+  if err1871 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1871); }
+  p._sceneId = v1870
   return err
 }
 
@@ -57006,8 +57022,8 @@ func (p *SceneGetValueAsByteArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *SceneGetValueAsByteArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1864 := p._valueId.Read(iprot)
-  if err1864 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1864); }
+  err1874 := p._valueId.Read(iprot)
+  if err1874 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1874); }
   return err
 }
 
@@ -57172,8 +57188,8 @@ func (p *SceneGetValueAsByteResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *SceneGetValueAsByteResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolUInt8()
-  err1867 := p.Success.Read(iprot)
-  if err1867 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1867); }
+  err1877 := p.Success.Read(iprot)
+  if err1877 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_UInt8", err1877); }
   return err
 }
 
@@ -57331,9 +57347,9 @@ func (p *SceneGetValueAsFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SceneGetValueAsFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1868, err1869 := iprot.ReadByte()
-  if err1869 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1869); }
-  p._sceneId = v1868
+  v1878, err1879 := iprot.ReadByte()
+  if err1879 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1879); }
+  p._sceneId = v1878
   return err
 }
 
@@ -57343,8 +57359,8 @@ func (p *SceneGetValueAsFloatArgs) ReadField_sceneId(iprot thrift.TProtocol) (th
 
 func (p *SceneGetValueAsFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1872 := p._valueId.Read(iprot)
-  if err1872 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1872); }
+  err1882 := p._valueId.Read(iprot)
+  if err1882 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1882); }
   return err
 }
 
@@ -57509,8 +57525,8 @@ func (p *SceneGetValueAsFloatResult) Read(iprot thrift.TProtocol) (err thrift.TP
 
 func (p *SceneGetValueAsFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolFloat()
-  err1875 := p.Success.Read(iprot)
-  if err1875 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Float", err1875); }
+  err1885 := p.Success.Read(iprot)
+  if err1885 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Float", err1885); }
   return err
 }
 
@@ -57668,9 +57684,9 @@ func (p *SceneGetValueAsIntArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SceneGetValueAsIntArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1876, err1877 := iprot.ReadByte()
-  if err1877 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1877); }
-  p._sceneId = v1876
+  v1886, err1887 := iprot.ReadByte()
+  if err1887 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1887); }
+  p._sceneId = v1886
   return err
 }
 
@@ -57680,8 +57696,8 @@ func (p *SceneGetValueAsIntArgs) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SceneGetValueAsIntArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1880 := p._valueId.Read(iprot)
-  if err1880 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1880); }
+  err1890 := p._valueId.Read(iprot)
+  if err1890 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1890); }
   return err
 }
 
@@ -57846,8 +57862,8 @@ func (p *SceneGetValueAsIntResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 
 func (p *SceneGetValueAsIntResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt()
-  err1883 := p.Success.Read(iprot)
-  if err1883 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1883); }
+  err1893 := p.Success.Read(iprot)
+  if err1893 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1893); }
   return err
 }
 
@@ -58005,9 +58021,9 @@ func (p *SceneGetValueAsShortArgs) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SceneGetValueAsShortArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1884, err1885 := iprot.ReadByte()
-  if err1885 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1885); }
-  p._sceneId = v1884
+  v1894, err1895 := iprot.ReadByte()
+  if err1895 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1895); }
+  p._sceneId = v1894
   return err
 }
 
@@ -58017,8 +58033,8 @@ func (p *SceneGetValueAsShortArgs) ReadField_sceneId(iprot thrift.TProtocol) (th
 
 func (p *SceneGetValueAsShortArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1888 := p._valueId.Read(iprot)
-  if err1888 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1888); }
+  err1898 := p._valueId.Read(iprot)
+  if err1898 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1898); }
   return err
 }
 
@@ -58183,8 +58199,8 @@ func (p *SceneGetValueAsShortResult) Read(iprot thrift.TProtocol) (err thrift.TP
 
 func (p *SceneGetValueAsShortResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt16()
-  err1891 := p.Success.Read(iprot)
-  if err1891 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int16", err1891); }
+  err1901 := p.Success.Read(iprot)
+  if err1901 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int16", err1901); }
   return err
 }
 
@@ -58342,9 +58358,9 @@ func (p *SceneGetValueAsStringArgs) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *SceneGetValueAsStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1892, err1893 := iprot.ReadByte()
-  if err1893 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1893); }
-  p._sceneId = v1892
+  v1902, err1903 := iprot.ReadByte()
+  if err1903 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1903); }
+  p._sceneId = v1902
   return err
 }
 
@@ -58354,8 +58370,8 @@ func (p *SceneGetValueAsStringArgs) ReadField_sceneId(iprot thrift.TProtocol) (t
 
 func (p *SceneGetValueAsStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1896 := p._valueId.Read(iprot)
-  if err1896 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1896); }
+  err1906 := p._valueId.Read(iprot)
+  if err1906 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1906); }
   return err
 }
 
@@ -58520,8 +58536,8 @@ func (p *SceneGetValueAsStringResult) Read(iprot thrift.TProtocol) (err thrift.T
 
 func (p *SceneGetValueAsStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolString()
-  err1899 := p.Success.Read(iprot)
-  if err1899 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1899); }
+  err1909 := p.Success.Read(iprot)
+  if err1909 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1909); }
   return err
 }
 
@@ -58617,7 +58633,7 @@ type SceneGetValueListSelectionStringArgs struct {
 
 func NewSceneGetValueListSelectionStringArgs() *SceneGetValueListSelectionStringArgs {
   output := &SceneGetValueListSelectionStringArgs{
-    TStruct:thrift.NewTStruct("SceneGetValueListSelection_string_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("SceneGetValueListSelection_String_args", []thrift.TField{
     thrift.NewTField("_sceneId", thrift.BYTE, 1),
     thrift.NewTField("_valueId", thrift.STRUCT, 2),
     }),
@@ -58679,9 +58695,9 @@ func (p *SceneGetValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err
 }
 
 func (p *SceneGetValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1900, err1901 := iprot.ReadByte()
-  if err1901 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1901); }
-  p._sceneId = v1900
+  v1910, err1911 := iprot.ReadByte()
+  if err1911 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1911); }
+  p._sceneId = v1910
   return err
 }
 
@@ -58691,8 +58707,8 @@ func (p *SceneGetValueListSelectionStringArgs) ReadField_sceneId(iprot thrift.TP
 
 func (p *SceneGetValueListSelectionStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1904 := p._valueId.Read(iprot)
-  if err1904 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1904); }
+  err1914 := p._valueId.Read(iprot)
+  if err1914 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1914); }
   return err
 }
 
@@ -58701,7 +58717,7 @@ func (p *SceneGetValueListSelectionStringArgs) ReadField_valueId(iprot thrift.TP
 }
 
 func (p *SceneGetValueListSelectionStringArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SceneGetValueListSelection_string_args")
+  err = oprot.WriteStructBegin("SceneGetValueListSelection_String_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -58749,7 +58765,7 @@ func (p *SceneGetValueListSelectionStringArgs) TStructName() string {
 }
 
 func (p *SceneGetValueListSelectionStringArgs) ThriftName() string {
-  return "SceneGetValueListSelection_string_args"
+  return "SceneGetValueListSelection_String_args"
 }
 
 func (p *SceneGetValueListSelectionStringArgs) String() string {
@@ -58806,7 +58822,7 @@ type SceneGetValueListSelectionStringResult struct {
 
 func NewSceneGetValueListSelectionStringResult() *SceneGetValueListSelectionStringResult {
   output := &SceneGetValueListSelectionStringResult{
-    TStruct:thrift.NewTStruct("SceneGetValueListSelection_string_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("SceneGetValueListSelection_String_result", []thrift.TField{
     thrift.NewTField("success", thrift.STRUCT, 0),
     }),
   }
@@ -58857,8 +58873,8 @@ func (p *SceneGetValueListSelectionStringResult) Read(iprot thrift.TProtocol) (e
 
 func (p *SceneGetValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolString()
-  err1907 := p.Success.Read(iprot)
-  if err1907 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1907); }
+  err1917 := p.Success.Read(iprot)
+  if err1917 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_String", err1917); }
   return err
 }
 
@@ -58867,7 +58883,7 @@ func (p *SceneGetValueListSelectionStringResult) ReadFieldSuccess(iprot thrift.T
 }
 
 func (p *SceneGetValueListSelectionStringResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SceneGetValueListSelection_string_result")
+  err = oprot.WriteStructBegin("SceneGetValueListSelection_String_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -58903,7 +58919,7 @@ func (p *SceneGetValueListSelectionStringResult) TStructName() string {
 }
 
 func (p *SceneGetValueListSelectionStringResult) ThriftName() string {
-  return "SceneGetValueListSelection_string_result"
+  return "SceneGetValueListSelection_String_result"
 }
 
 func (p *SceneGetValueListSelectionStringResult) String() string {
@@ -59016,9 +59032,9 @@ func (p *SceneGetValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err 
 }
 
 func (p *SceneGetValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1908, err1909 := iprot.ReadByte()
-  if err1909 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1909); }
-  p._sceneId = v1908
+  v1918, err1919 := iprot.ReadByte()
+  if err1919 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1919); }
+  p._sceneId = v1918
   return err
 }
 
@@ -59028,8 +59044,8 @@ func (p *SceneGetValueListSelectionInt32Args) ReadField_sceneId(iprot thrift.TPr
 
 func (p *SceneGetValueListSelectionInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1912 := p._valueId.Read(iprot)
-  if err1912 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1912); }
+  err1922 := p._valueId.Read(iprot)
+  if err1922 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1922); }
   return err
 }
 
@@ -59194,8 +59210,8 @@ func (p *SceneGetValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (er
 
 func (p *SceneGetValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewBoolInt()
-  err1915 := p.Success.Read(iprot)
-  if err1915 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1915); }
+  err1925 := p.Success.Read(iprot)
+  if err1925 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessBool_Int", err1925); }
   return err
 }
 
@@ -59367,9 +59383,9 @@ func (p *SetSceneValueBoolArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *SetSceneValueBoolArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1916, err1917 := iprot.ReadByte()
-  if err1917 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1917); }
-  p._sceneId = v1916
+  v1926, err1927 := iprot.ReadByte()
+  if err1927 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1927); }
+  p._sceneId = v1926
   return err
 }
 
@@ -59379,8 +59395,8 @@ func (p *SetSceneValueBoolArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrif
 
 func (p *SetSceneValueBoolArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1920 := p._valueId.Read(iprot)
-  if err1920 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1920); }
+  err1930 := p._valueId.Read(iprot)
+  if err1930 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1930); }
   return err
 }
 
@@ -59389,9 +59405,9 @@ func (p *SetSceneValueBoolArgs) ReadField_valueId(iprot thrift.TProtocol) (thrif
 }
 
 func (p *SetSceneValueBoolArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1921, err1922 := iprot.ReadBool()
-  if err1922 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1922); }
-  p._value = v1921
+  v1931, err1932 := iprot.ReadBool()
+  if err1932 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1932); }
+  p._value = v1931
   return err
 }
 
@@ -59576,9 +59592,9 @@ func (p *SetSceneValueBoolResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SetSceneValueBoolResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1923, err1924 := iprot.ReadBool()
-  if err1924 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1924); }
-  p.Success = v1923
+  v1933, err1934 := iprot.ReadBool()
+  if err1934 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1934); }
+  p.Success = v1933
   return err
 }
 
@@ -59748,9 +59764,9 @@ func (p *SetSceneValueUint8Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueUint8Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1925, err1926 := iprot.ReadByte()
-  if err1926 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1926); }
-  p._sceneId = v1925
+  v1935, err1936 := iprot.ReadByte()
+  if err1936 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1936); }
+  p._sceneId = v1935
   return err
 }
 
@@ -59760,8 +59776,8 @@ func (p *SetSceneValueUint8Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueUint8Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1929 := p._valueId.Read(iprot)
-  if err1929 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1929); }
+  err1939 := p._valueId.Read(iprot)
+  if err1939 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1939); }
   return err
 }
 
@@ -59770,9 +59786,9 @@ func (p *SetSceneValueUint8Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueUint8Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1930, err1931 := iprot.ReadByte()
-  if err1931 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1931); }
-  p._value = v1930
+  v1940, err1941 := iprot.ReadByte()
+  if err1941 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1941); }
+  p._value = v1940
   return err
 }
 
@@ -59960,9 +59976,9 @@ func (p *SetSceneValueUint8Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueUint8Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1932, err1933 := iprot.ReadBool()
-  if err1933 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1933); }
-  p.Success = v1932
+  v1942, err1943 := iprot.ReadBool()
+  if err1943 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1943); }
+  p.Success = v1942
   return err
 }
 
@@ -60132,9 +60148,9 @@ func (p *SetSceneValueFloatArgs) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueFloatArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1934, err1935 := iprot.ReadByte()
-  if err1935 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1935); }
-  p._sceneId = v1934
+  v1944, err1945 := iprot.ReadByte()
+  if err1945 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1945); }
+  p._sceneId = v1944
   return err
 }
 
@@ -60144,8 +60160,8 @@ func (p *SetSceneValueFloatArgs) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueFloatArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1938 := p._valueId.Read(iprot)
-  if err1938 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1938); }
+  err1948 := p._valueId.Read(iprot)
+  if err1948 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1948); }
   return err
 }
 
@@ -60154,9 +60170,9 @@ func (p *SetSceneValueFloatArgs) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueFloatArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1939, err1940 := iprot.ReadDouble()
-  if err1940 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1940); }
-  p._value = v1939
+  v1949, err1950 := iprot.ReadDouble()
+  if err1950 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1950); }
+  p._value = v1949
   return err
 }
 
@@ -60344,9 +60360,9 @@ func (p *SetSceneValueFloatResult) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueFloatResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1941, err1942 := iprot.ReadBool()
-  if err1942 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1942); }
-  p.Success = v1941
+  v1951, err1952 := iprot.ReadBool()
+  if err1952 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1952); }
+  p.Success = v1951
   return err
 }
 
@@ -60516,9 +60532,9 @@ func (p *SetSceneValueInt32Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1943, err1944 := iprot.ReadByte()
-  if err1944 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1944); }
-  p._sceneId = v1943
+  v1953, err1954 := iprot.ReadByte()
+  if err1954 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1954); }
+  p._sceneId = v1953
   return err
 }
 
@@ -60528,8 +60544,8 @@ func (p *SetSceneValueInt32Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1947 := p._valueId.Read(iprot)
-  if err1947 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1947); }
+  err1957 := p._valueId.Read(iprot)
+  if err1957 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1957); }
   return err
 }
 
@@ -60538,9 +60554,9 @@ func (p *SetSceneValueInt32Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1948, err1949 := iprot.ReadI32()
-  if err1949 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1949); }
-  p._value = v1948
+  v1958, err1959 := iprot.ReadI32()
+  if err1959 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1959); }
+  p._value = v1958
   return err
 }
 
@@ -60728,9 +60744,9 @@ func (p *SetSceneValueInt32Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1950, err1951 := iprot.ReadBool()
-  if err1951 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1951); }
-  p.Success = v1950
+  v1960, err1961 := iprot.ReadBool()
+  if err1961 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1961); }
+  p.Success = v1960
   return err
 }
 
@@ -60900,9 +60916,9 @@ func (p *SetSceneValueInt16Args) Read(iprot thrift.TProtocol) (err thrift.TProto
 }
 
 func (p *SetSceneValueInt16Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1952, err1953 := iprot.ReadByte()
-  if err1953 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1953); }
-  p._sceneId = v1952
+  v1962, err1963 := iprot.ReadByte()
+  if err1963 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1963); }
+  p._sceneId = v1962
   return err
 }
 
@@ -60912,8 +60928,8 @@ func (p *SetSceneValueInt16Args) ReadField_sceneId(iprot thrift.TProtocol) (thri
 
 func (p *SetSceneValueInt16Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1956 := p._valueId.Read(iprot)
-  if err1956 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1956); }
+  err1966 := p._valueId.Read(iprot)
+  if err1966 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1966); }
   return err
 }
 
@@ -60922,9 +60938,9 @@ func (p *SetSceneValueInt16Args) ReadField_valueId(iprot thrift.TProtocol) (thri
 }
 
 func (p *SetSceneValueInt16Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1957, err1958 := iprot.ReadI16()
-  if err1958 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1958); }
-  p._value = v1957
+  v1967, err1968 := iprot.ReadI16()
+  if err1968 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1968); }
+  p._value = v1967
   return err
 }
 
@@ -61112,9 +61128,9 @@ func (p *SetSceneValueInt16Result) Read(iprot thrift.TProtocol) (err thrift.TPro
 }
 
 func (p *SetSceneValueInt16Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1959, err1960 := iprot.ReadBool()
-  if err1960 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1960); }
-  p.Success = v1959
+  v1969, err1970 := iprot.ReadBool()
+  if err1970 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1970); }
+  p.Success = v1969
   return err
 }
 
@@ -61210,7 +61226,7 @@ type SetSceneValueStringArgs struct {
 
 func NewSetSceneValueStringArgs() *SetSceneValueStringArgs {
   output := &SetSceneValueStringArgs{
-    TStruct:thrift.NewTStruct("SetSceneValue_string_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetSceneValue_String_args", []thrift.TField{
     thrift.NewTField("_sceneId", thrift.BYTE, 1),
     thrift.NewTField("_valueId", thrift.STRUCT, 2),
     thrift.NewTField("_value", thrift.STRING, 3),
@@ -61284,9 +61300,9 @@ func (p *SetSceneValueStringArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *SetSceneValueStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1961, err1962 := iprot.ReadByte()
-  if err1962 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1962); }
-  p._sceneId = v1961
+  v1971, err1972 := iprot.ReadByte()
+  if err1972 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1972); }
+  p._sceneId = v1971
   return err
 }
 
@@ -61296,8 +61312,8 @@ func (p *SetSceneValueStringArgs) ReadField_sceneId(iprot thrift.TProtocol) (thr
 
 func (p *SetSceneValueStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1965 := p._valueId.Read(iprot)
-  if err1965 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1965); }
+  err1975 := p._valueId.Read(iprot)
+  if err1975 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1975); }
   return err
 }
 
@@ -61306,9 +61322,9 @@ func (p *SetSceneValueStringArgs) ReadField_valueId(iprot thrift.TProtocol) (thr
 }
 
 func (p *SetSceneValueStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1966, err1967 := iprot.ReadString()
-  if err1967 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1967); }
-  p._value = v1966
+  v1976, err1977 := iprot.ReadString()
+  if err1977 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1977); }
+  p._value = v1976
   return err
 }
 
@@ -61317,7 +61333,7 @@ func (p *SetSceneValueStringArgs) ReadField_value(iprot thrift.TProtocol) (thrif
 }
 
 func (p *SetSceneValueStringArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetSceneValue_string_args")
+  err = oprot.WriteStructBegin("SetSceneValue_String_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -61381,7 +61397,7 @@ func (p *SetSceneValueStringArgs) TStructName() string {
 }
 
 func (p *SetSceneValueStringArgs) ThriftName() string {
-  return "SetSceneValue_string_args"
+  return "SetSceneValue_String_args"
 }
 
 func (p *SetSceneValueStringArgs) String() string {
@@ -61446,7 +61462,7 @@ type SetSceneValueStringResult struct {
 
 func NewSetSceneValueStringResult() *SetSceneValueStringResult {
   output := &SetSceneValueStringResult{
-    TStruct:thrift.NewTStruct("SetSceneValue_string_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetSceneValue_String_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -61496,9 +61512,9 @@ func (p *SetSceneValueStringResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 }
 
 func (p *SetSceneValueStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1968, err1969 := iprot.ReadBool()
-  if err1969 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1969); }
-  p.Success = v1968
+  v1978, err1979 := iprot.ReadBool()
+  if err1979 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1979); }
+  p.Success = v1978
   return err
 }
 
@@ -61507,7 +61523,7 @@ func (p *SetSceneValueStringResult) ReadFieldSuccess(iprot thrift.TProtocol) (th
 }
 
 func (p *SetSceneValueStringResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetSceneValue_string_result")
+  err = oprot.WriteStructBegin("SetSceneValue_String_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -61541,7 +61557,7 @@ func (p *SetSceneValueStringResult) TStructName() string {
 }
 
 func (p *SetSceneValueStringResult) ThriftName() string {
-  return "SetSceneValue_string_result"
+  return "SetSceneValue_String_result"
 }
 
 func (p *SetSceneValueStringResult) String() string {
@@ -61594,7 +61610,7 @@ type SetSceneValueListSelectionStringArgs struct {
 
 func NewSetSceneValueListSelectionStringArgs() *SetSceneValueListSelectionStringArgs {
   output := &SetSceneValueListSelectionStringArgs{
-    TStruct:thrift.NewTStruct("SetSceneValueListSelection_string_args", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetSceneValueListSelection_String_args", []thrift.TField{
     thrift.NewTField("_sceneId", thrift.BYTE, 1),
     thrift.NewTField("_valueId", thrift.STRUCT, 2),
     thrift.NewTField("_value", thrift.STRING, 3),
@@ -61668,9 +61684,9 @@ func (p *SetSceneValueListSelectionStringArgs) Read(iprot thrift.TProtocol) (err
 }
 
 func (p *SetSceneValueListSelectionStringArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1970, err1971 := iprot.ReadByte()
-  if err1971 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1971); }
-  p._sceneId = v1970
+  v1980, err1981 := iprot.ReadByte()
+  if err1981 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1981); }
+  p._sceneId = v1980
   return err
 }
 
@@ -61680,8 +61696,8 @@ func (p *SetSceneValueListSelectionStringArgs) ReadField_sceneId(iprot thrift.TP
 
 func (p *SetSceneValueListSelectionStringArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1974 := p._valueId.Read(iprot)
-  if err1974 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1974); }
+  err1984 := p._valueId.Read(iprot)
+  if err1984 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1984); }
   return err
 }
 
@@ -61690,9 +61706,9 @@ func (p *SetSceneValueListSelectionStringArgs) ReadField_valueId(iprot thrift.TP
 }
 
 func (p *SetSceneValueListSelectionStringArgs) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1975, err1976 := iprot.ReadString()
-  if err1976 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1976); }
-  p._value = v1975
+  v1985, err1986 := iprot.ReadString()
+  if err1986 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1986); }
+  p._value = v1985
   return err
 }
 
@@ -61701,7 +61717,7 @@ func (p *SetSceneValueListSelectionStringArgs) ReadField_value(iprot thrift.TPro
 }
 
 func (p *SetSceneValueListSelectionStringArgs) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetSceneValueListSelection_string_args")
+  err = oprot.WriteStructBegin("SetSceneValueListSelection_String_args")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   err = p.WriteField1(oprot)
   if err != nil { return err }
@@ -61765,7 +61781,7 @@ func (p *SetSceneValueListSelectionStringArgs) TStructName() string {
 }
 
 func (p *SetSceneValueListSelectionStringArgs) ThriftName() string {
-  return "SetSceneValueListSelection_string_args"
+  return "SetSceneValueListSelection_String_args"
 }
 
 func (p *SetSceneValueListSelectionStringArgs) String() string {
@@ -61830,7 +61846,7 @@ type SetSceneValueListSelectionStringResult struct {
 
 func NewSetSceneValueListSelectionStringResult() *SetSceneValueListSelectionStringResult {
   output := &SetSceneValueListSelectionStringResult{
-    TStruct:thrift.NewTStruct("SetSceneValueListSelection_string_result", []thrift.TField{
+    TStruct:thrift.NewTStruct("SetSceneValueListSelection_String_result", []thrift.TField{
     thrift.NewTField("success", thrift.BOOL, 0),
     }),
   }
@@ -61880,9 +61896,9 @@ func (p *SetSceneValueListSelectionStringResult) Read(iprot thrift.TProtocol) (e
 }
 
 func (p *SetSceneValueListSelectionStringResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1977, err1978 := iprot.ReadBool()
-  if err1978 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1978); }
-  p.Success = v1977
+  v1987, err1988 := iprot.ReadBool()
+  if err1988 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1988); }
+  p.Success = v1987
   return err
 }
 
@@ -61891,7 +61907,7 @@ func (p *SetSceneValueListSelectionStringResult) ReadFieldSuccess(iprot thrift.T
 }
 
 func (p *SetSceneValueListSelectionStringResult) Write(oprot thrift.TProtocol) (err thrift.TProtocolException) {
-  err = oprot.WriteStructBegin("SetSceneValueListSelection_string_result")
+  err = oprot.WriteStructBegin("SetSceneValueListSelection_String_result")
   if err != nil { return thrift.NewTProtocolExceptionWriteStruct(p.ThriftName(), err); }
   switch {
   default:
@@ -61925,7 +61941,7 @@ func (p *SetSceneValueListSelectionStringResult) TStructName() string {
 }
 
 func (p *SetSceneValueListSelectionStringResult) ThriftName() string {
-  return "SetSceneValueListSelection_string_result"
+  return "SetSceneValueListSelection_String_result"
 }
 
 func (p *SetSceneValueListSelectionStringResult) String() string {
@@ -62052,9 +62068,9 @@ func (p *SetSceneValueListSelectionInt32Args) Read(iprot thrift.TProtocol) (err 
 }
 
 func (p *SetSceneValueListSelectionInt32Args) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1979, err1980 := iprot.ReadByte()
-  if err1980 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1980); }
-  p._sceneId = v1979
+  v1989, err1990 := iprot.ReadByte()
+  if err1990 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1990); }
+  p._sceneId = v1989
   return err
 }
 
@@ -62064,8 +62080,8 @@ func (p *SetSceneValueListSelectionInt32Args) ReadField_sceneId(iprot thrift.TPr
 
 func (p *SetSceneValueListSelectionInt32Args) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p._valueId = NewRemoteValueID()
-  err1983 := p._valueId.Read(iprot)
-  if err1983 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1983); }
+  err1993 := p._valueId.Read(iprot)
+  if err1993 != nil { return thrift.NewTProtocolExceptionReadStruct("p._valueIdRemoteValueID", err1993); }
   return err
 }
 
@@ -62074,9 +62090,9 @@ func (p *SetSceneValueListSelectionInt32Args) ReadField_valueId(iprot thrift.TPr
 }
 
 func (p *SetSceneValueListSelectionInt32Args) ReadField3(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1984, err1985 := iprot.ReadI32()
-  if err1985 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1985); }
-  p._value = v1984
+  v1994, err1995 := iprot.ReadI32()
+  if err1995 != nil { return thrift.NewTProtocolExceptionReadField(3, "_value", p.ThriftName(), err1995); }
+  p._value = v1994
   return err
 }
 
@@ -62264,9 +62280,9 @@ func (p *SetSceneValueListSelectionInt32Result) Read(iprot thrift.TProtocol) (er
 }
 
 func (p *SetSceneValueListSelectionInt32Result) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1986, err1987 := iprot.ReadBool()
-  if err1987 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1987); }
-  p.Success = v1986
+  v1996, err1997 := iprot.ReadBool()
+  if err1997 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1997); }
+  p.Success = v1996
   return err
 }
 
@@ -62408,9 +62424,9 @@ func (p *GetSceneLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *GetSceneLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1988, err1989 := iprot.ReadByte()
-  if err1989 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1989); }
-  p._sceneId = v1988
+  v1998, err1999 := iprot.ReadByte()
+  if err1999 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1999); }
+  p._sceneId = v1998
   return err
 }
 
@@ -62551,9 +62567,9 @@ func (p *GetSceneLabelResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *GetSceneLabelResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1990, err1991 := iprot.ReadString()
-  if err1991 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1991); }
-  p.Success = v1990
+  v2000, err2001 := iprot.ReadString()
+  if err2001 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err2001); }
+  p.Success = v2000
   return err
 }
 
@@ -62712,9 +62728,9 @@ func (p *SetSceneLabelArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *SetSceneLabelArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1992, err1993 := iprot.ReadByte()
-  if err1993 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1993); }
-  p._sceneId = v1992
+  v2002, err2003 := iprot.ReadByte()
+  if err2003 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err2003); }
+  p._sceneId = v2002
   return err
 }
 
@@ -62723,9 +62739,9 @@ func (p *SetSceneLabelArgs) ReadField_sceneId(iprot thrift.TProtocol) (thrift.TP
 }
 
 func (p *SetSceneLabelArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1994, err1995 := iprot.ReadString()
-  if err1995 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err1995); }
-  p._value = v1994
+  v2004, err2005 := iprot.ReadString()
+  if err2005 != nil { return thrift.NewTProtocolExceptionReadField(2, "_value", p.ThriftName(), err2005); }
+  p._value = v2004
   return err
 }
 
@@ -62979,9 +62995,9 @@ func (p *SceneExistsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolExce
 }
 
 func (p *SceneExistsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1996, err1997 := iprot.ReadByte()
-  if err1997 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err1997); }
-  p._sceneId = v1996
+  v2006, err2007 := iprot.ReadByte()
+  if err2007 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err2007); }
+  p._sceneId = v2006
   return err
 }
 
@@ -63122,9 +63138,9 @@ func (p *SceneExistsResult) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *SceneExistsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v1998, err1999 := iprot.ReadBool()
-  if err1999 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err1999); }
-  p.Success = v1998
+  v2008, err2009 := iprot.ReadBool()
+  if err2009 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err2009); }
+  p.Success = v2008
   return err
 }
 
@@ -63266,9 +63282,9 @@ func (p *ActivateSceneArgs) Read(iprot thrift.TProtocol) (err thrift.TProtocolEx
 }
 
 func (p *ActivateSceneArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v2000, err2001 := iprot.ReadByte()
-  if err2001 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err2001); }
-  p._sceneId = v2000
+  v2010, err2011 := iprot.ReadByte()
+  if err2011 != nil { return thrift.NewTProtocolExceptionReadField(1, "_sceneId", p.ThriftName(), err2011); }
+  p._sceneId = v2010
   return err
 }
 
@@ -63409,9 +63425,9 @@ func (p *ActivateSceneResult) Read(iprot thrift.TProtocol) (err thrift.TProtocol
 }
 
 func (p *ActivateSceneResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v2002, err2003 := iprot.ReadBool()
-  if err2003 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err2003); }
-  p.Success = v2002
+  v2012, err2013 := iprot.ReadBool()
+  if err2013 != nil { return thrift.NewTProtocolExceptionReadField(0, "success", p.ThriftName(), err2013); }
+  p.Success = v2012
   return err
 }
 
@@ -63553,9 +63569,9 @@ func (p *GetDriverStatisticsArgs) Read(iprot thrift.TProtocol) (err thrift.TProt
 }
 
 func (p *GetDriverStatisticsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v2004, err2005 := iprot.ReadI32()
-  if err2005 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err2005); }
-  p._homeId = v2004
+  v2014, err2015 := iprot.ReadI32()
+  if err2015 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err2015); }
+  p._homeId = v2014
   return err
 }
 
@@ -63697,8 +63713,8 @@ func (p *GetDriverStatisticsResult) Read(iprot thrift.TProtocol) (err thrift.TPr
 
 func (p *GetDriverStatisticsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetDriverStatisticsReturnStruct()
-  err2008 := p.Success.Read(iprot)
-  if err2008 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetDriverStatisticsReturnStruct", err2008); }
+  err2018 := p.Success.Read(iprot)
+  if err2018 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetDriverStatisticsReturnStruct", err2018); }
   return err
 }
 
@@ -63856,9 +63872,9 @@ func (p *GetNodeStatisticsArgs) Read(iprot thrift.TProtocol) (err thrift.TProtoc
 }
 
 func (p *GetNodeStatisticsArgs) ReadField1(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v2009, err2010 := iprot.ReadI32()
-  if err2010 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err2010); }
-  p._homeId = v2009
+  v2019, err2020 := iprot.ReadI32()
+  if err2020 != nil { return thrift.NewTProtocolExceptionReadField(1, "_homeId", p.ThriftName(), err2020); }
+  p._homeId = v2019
   return err
 }
 
@@ -63867,9 +63883,9 @@ func (p *GetNodeStatisticsArgs) ReadField_homeId(iprot thrift.TProtocol) (thrift
 }
 
 func (p *GetNodeStatisticsArgs) ReadField2(iprot thrift.TProtocol) (err thrift.TProtocolException) {
-  v2011, err2012 := iprot.ReadByte()
-  if err2012 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err2012); }
-  p._nodeId = v2011
+  v2021, err2022 := iprot.ReadByte()
+  if err2022 != nil { return thrift.NewTProtocolExceptionReadField(2, "_nodeId", p.ThriftName(), err2022); }
+  p._nodeId = v2021
   return err
 }
 
@@ -64035,8 +64051,8 @@ func (p *GetNodeStatisticsResult) Read(iprot thrift.TProtocol) (err thrift.TProt
 
 func (p *GetNodeStatisticsResult) ReadField0(iprot thrift.TProtocol) (err thrift.TProtocolException) {
   p.Success = NewGetNodeStatisticsReturnStruct()
-  err2015 := p.Success.Read(iprot)
-  if err2015 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetNodeStatisticsReturnStruct", err2015); }
+  err2025 := p.Success.Read(iprot)
+  if err2025 != nil { return thrift.NewTProtocolExceptionReadStruct("p.SuccessGetNodeStatisticsReturnStruct", err2025); }
   return err
 }
 

@@ -94,17 +94,17 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  Bool_Int GetValueAsInt(RemoteValueID _id)'
   print '  Bool_Int16 GetValueAsShort(RemoteValueID _id)'
   print '  Bool_String GetValueAsString(RemoteValueID _id)'
-  print '  Bool_String GetValueListSelection_string(RemoteValueID _id)'
-  print '  Bool_Int GetValueListSelection_int32(RemoteValueID _id)'
+  print '  Bool_String GetValueListSelection_String(RemoteValueID _id)'
+  print '  Bool_Int GetValueListSelection_Int32(RemoteValueID _id)'
   print '  Bool_ListString GetValueListItems(RemoteValueID _id)'
   print '  Bool_UInt8 GetValueFloatPrecision(RemoteValueID _id)'
-  print '  bool SetValue_bool(RemoteValueID _id, bool _value)'
-  print '  bool SetValue_uint8(RemoteValueID _id, byte _value)'
-  print '  bool SetValue_uint8_uint8(RemoteValueID _id, byte _value, byte _length)'
-  print '  bool SetValue_float(RemoteValueID _id, double _value)'
+  print '  bool SetValue_Bool(RemoteValueID _id, bool _value)'
+  print '  bool SetValue_UInt8(RemoteValueID _id, byte _value)'
+  print '  bool SetValue_UInt8_UInt8(RemoteValueID _id,  _value, byte _length)'
+  print '  bool SetValue_Float(RemoteValueID _id, double _value)'
   print '  bool SetValue_int32(RemoteValueID _id, i32 _value)'
   print '  bool SetValue_int16(RemoteValueID _id, i16 _value)'
-  print '  bool SetValue_string(RemoteValueID _id, string _value)'
+  print '  bool SetValue_String(RemoteValueID _id, string _value)'
   print '  bool SetValueListSelection(RemoteValueID _id, string _selectedItem)'
   print '  bool RefreshValue(RemoteValueID _id)'
   print '  void SetChangeVerified(RemoteValueID _id, bool _verify)'
@@ -155,15 +155,15 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  Bool_Int SceneGetValueAsInt(byte _sceneId, RemoteValueID _valueId)'
   print '  Bool_Int16 SceneGetValueAsShort(byte _sceneId, RemoteValueID _valueId)'
   print '  Bool_String SceneGetValueAsString(byte _sceneId, RemoteValueID _valueId)'
-  print '  Bool_String SceneGetValueListSelection_string(byte _sceneId, RemoteValueID _valueId)'
+  print '  Bool_String SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId)'
   print '  Bool_Int SceneGetValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId)'
   print '  bool SetSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value)'
   print '  bool SetSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value)'
   print '  bool SetSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value)'
   print '  bool SetSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, i32 _value)'
   print '  bool SetSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, i16 _value)'
-  print '  bool SetSceneValue_string(byte _sceneId, RemoteValueID _valueId, string _value)'
-  print '  bool SetSceneValueListSelection_string(byte _sceneId, RemoteValueID _valueId, string _value)'
+  print '  bool SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)'
+  print '  bool SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)'
   print '  bool SetSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, i32 _value)'
   print '  string GetSceneLabel(byte _sceneId)'
   print '  void SetSceneLabel(byte _sceneId, string _value)'
@@ -650,17 +650,17 @@ elif cmd == 'GetValueAsString':
     sys.exit(1)
   pp.pprint(client.GetValueAsString(eval(args[0]),))
 
-elif cmd == 'GetValueListSelection_string':
+elif cmd == 'GetValueListSelection_String':
   if len(args) != 1:
-    print 'GetValueListSelection_string requires 1 args'
+    print 'GetValueListSelection_String requires 1 args'
     sys.exit(1)
-  pp.pprint(client.GetValueListSelection_string(eval(args[0]),))
+  pp.pprint(client.GetValueListSelection_String(eval(args[0]),))
 
-elif cmd == 'GetValueListSelection_int32':
+elif cmd == 'GetValueListSelection_Int32':
   if len(args) != 1:
-    print 'GetValueListSelection_int32 requires 1 args'
+    print 'GetValueListSelection_Int32 requires 1 args'
     sys.exit(1)
-  pp.pprint(client.GetValueListSelection_int32(eval(args[0]),))
+  pp.pprint(client.GetValueListSelection_Int32(eval(args[0]),))
 
 elif cmd == 'GetValueListItems':
   if len(args) != 1:
@@ -674,29 +674,29 @@ elif cmd == 'GetValueFloatPrecision':
     sys.exit(1)
   pp.pprint(client.GetValueFloatPrecision(eval(args[0]),))
 
-elif cmd == 'SetValue_bool':
+elif cmd == 'SetValue_Bool':
   if len(args) != 2:
-    print 'SetValue_bool requires 2 args'
+    print 'SetValue_Bool requires 2 args'
     sys.exit(1)
-  pp.pprint(client.SetValue_bool(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.SetValue_Bool(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'SetValue_uint8':
+elif cmd == 'SetValue_UInt8':
   if len(args) != 2:
-    print 'SetValue_uint8 requires 2 args'
+    print 'SetValue_UInt8 requires 2 args'
     sys.exit(1)
-  pp.pprint(client.SetValue_uint8(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.SetValue_UInt8(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'SetValue_uint8_uint8':
+elif cmd == 'SetValue_UInt8_UInt8':
   if len(args) != 3:
-    print 'SetValue_uint8_uint8 requires 3 args'
+    print 'SetValue_UInt8_UInt8 requires 3 args'
     sys.exit(1)
-  pp.pprint(client.SetValue_uint8_uint8(eval(args[0]),eval(args[1]),eval(args[2]),))
+  pp.pprint(client.SetValue_UInt8_UInt8(eval(args[0]),eval(args[1]),eval(args[2]),))
 
-elif cmd == 'SetValue_float':
+elif cmd == 'SetValue_Float':
   if len(args) != 2:
-    print 'SetValue_float requires 2 args'
+    print 'SetValue_Float requires 2 args'
     sys.exit(1)
-  pp.pprint(client.SetValue_float(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.SetValue_Float(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'SetValue_int32':
   if len(args) != 2:
@@ -710,11 +710,11 @@ elif cmd == 'SetValue_int16':
     sys.exit(1)
   pp.pprint(client.SetValue_int16(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'SetValue_string':
+elif cmd == 'SetValue_String':
   if len(args) != 2:
-    print 'SetValue_string requires 2 args'
+    print 'SetValue_String requires 2 args'
     sys.exit(1)
-  pp.pprint(client.SetValue_string(eval(args[0]),args[1],))
+  pp.pprint(client.SetValue_String(eval(args[0]),args[1],))
 
 elif cmd == 'SetValueListSelection':
   if len(args) != 2:
@@ -1016,11 +1016,11 @@ elif cmd == 'SceneGetValueAsString':
     sys.exit(1)
   pp.pprint(client.SceneGetValueAsString(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'SceneGetValueListSelection_string':
+elif cmd == 'SceneGetValueListSelection_String':
   if len(args) != 2:
-    print 'SceneGetValueListSelection_string requires 2 args'
+    print 'SceneGetValueListSelection_String requires 2 args'
     sys.exit(1)
-  pp.pprint(client.SceneGetValueListSelection_string(eval(args[0]),eval(args[1]),))
+  pp.pprint(client.SceneGetValueListSelection_String(eval(args[0]),eval(args[1]),))
 
 elif cmd == 'SceneGetValueListSelection_Int32':
   if len(args) != 2:
@@ -1058,17 +1058,17 @@ elif cmd == 'SetSceneValue_Int16':
     sys.exit(1)
   pp.pprint(client.SetSceneValue_Int16(eval(args[0]),eval(args[1]),eval(args[2]),))
 
-elif cmd == 'SetSceneValue_string':
+elif cmd == 'SetSceneValue_String':
   if len(args) != 3:
-    print 'SetSceneValue_string requires 3 args'
+    print 'SetSceneValue_String requires 3 args'
     sys.exit(1)
-  pp.pprint(client.SetSceneValue_string(eval(args[0]),eval(args[1]),args[2],))
+  pp.pprint(client.SetSceneValue_String(eval(args[0]),eval(args[1]),args[2],))
 
-elif cmd == 'SetSceneValueListSelection_string':
+elif cmd == 'SetSceneValueListSelection_String':
   if len(args) != 3:
-    print 'SetSceneValueListSelection_string requires 3 args'
+    print 'SetSceneValueListSelection_String requires 3 args'
     sys.exit(1)
-  pp.pprint(client.SetSceneValueListSelection_string(eval(args[0]),eval(args[1]),args[2],))
+  pp.pprint(client.SetSceneValueListSelection_String(eval(args[0]),eval(args[1]),args[2],))
 
 elif cmd == 'SetSceneValueListSelection_Int32':
   if len(args) != 3:

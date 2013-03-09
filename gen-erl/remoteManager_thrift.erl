@@ -700,22 +700,22 @@ function_info('GetValueAsString', reply_type) ->
 function_info('GetValueAsString', exceptions) ->
   {struct, []}
 ;
-% GetValueListSelection_string(This, _id)
-function_info('GetValueListSelection_string', params_type) ->
+% GetValueListSelection_String(This, _id)
+function_info('GetValueListSelection_String', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}
 ;
-function_info('GetValueListSelection_string', reply_type) ->
+function_info('GetValueListSelection_String', reply_type) ->
   {struct, {'ozw_types', 'bool_String'}};
-function_info('GetValueListSelection_string', exceptions) ->
+function_info('GetValueListSelection_String', exceptions) ->
   {struct, []}
 ;
-% GetValueListSelection_int32(This, _id)
-function_info('GetValueListSelection_int32', params_type) ->
+% GetValueListSelection_Int32(This, _id)
+function_info('GetValueListSelection_Int32', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}}]}
 ;
-function_info('GetValueListSelection_int32', reply_type) ->
+function_info('GetValueListSelection_Int32', reply_type) ->
   {struct, {'ozw_types', 'bool_Int'}};
-function_info('GetValueListSelection_int32', exceptions) ->
+function_info('GetValueListSelection_Int32', exceptions) ->
   {struct, []}
 ;
 % GetValueListItems(This, _id)
@@ -736,45 +736,45 @@ function_info('GetValueFloatPrecision', reply_type) ->
 function_info('GetValueFloatPrecision', exceptions) ->
   {struct, []}
 ;
-% SetValue_bool(This, _id, _value)
-function_info('SetValue_bool', params_type) ->
+% SetValue_Bool(This, _id, _value)
+function_info('SetValue_Bool', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}},
           {2, bool}]}
 ;
-function_info('SetValue_bool', reply_type) ->
+function_info('SetValue_Bool', reply_type) ->
   bool;
-function_info('SetValue_bool', exceptions) ->
+function_info('SetValue_Bool', exceptions) ->
   {struct, []}
 ;
-% SetValue_uint8(This, _id, _value)
-function_info('SetValue_uint8', params_type) ->
+% SetValue_UInt8(This, _id, _value)
+function_info('SetValue_UInt8', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}},
           {2, byte}]}
 ;
-function_info('SetValue_uint8', reply_type) ->
+function_info('SetValue_UInt8', reply_type) ->
   bool;
-function_info('SetValue_uint8', exceptions) ->
+function_info('SetValue_UInt8', exceptions) ->
   {struct, []}
 ;
-% SetValue_uint8_uint8(This, _id, _value, _length)
-function_info('SetValue_uint8_uint8', params_type) ->
+% SetValue_UInt8_UInt8(This, _id, _value, _length)
+function_info('SetValue_UInt8_UInt8', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}},
-          {2, byte},
+          {2, {list, byte}},
           {3, byte}]}
 ;
-function_info('SetValue_uint8_uint8', reply_type) ->
+function_info('SetValue_UInt8_UInt8', reply_type) ->
   bool;
-function_info('SetValue_uint8_uint8', exceptions) ->
+function_info('SetValue_UInt8_UInt8', exceptions) ->
   {struct, []}
 ;
-% SetValue_float(This, _id, _value)
-function_info('SetValue_float', params_type) ->
+% SetValue_Float(This, _id, _value)
+function_info('SetValue_Float', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}},
           {2, double}]}
 ;
-function_info('SetValue_float', reply_type) ->
+function_info('SetValue_Float', reply_type) ->
   bool;
-function_info('SetValue_float', exceptions) ->
+function_info('SetValue_Float', exceptions) ->
   {struct, []}
 ;
 % SetValue_int32(This, _id, _value)
@@ -797,14 +797,14 @@ function_info('SetValue_int16', reply_type) ->
 function_info('SetValue_int16', exceptions) ->
   {struct, []}
 ;
-% SetValue_string(This, _id, _value)
-function_info('SetValue_string', params_type) ->
+% SetValue_String(This, _id, _value)
+function_info('SetValue_String', params_type) ->
   {struct, [{1, {struct, {'ozw_types', 'remoteValueID'}}},
           {2, string}]}
 ;
-function_info('SetValue_string', reply_type) ->
+function_info('SetValue_String', reply_type) ->
   bool;
-function_info('SetValue_string', exceptions) ->
+function_info('SetValue_String', exceptions) ->
   {struct, []}
 ;
 % SetValueListSelection(This, _id, _selectedItem)
@@ -1318,14 +1318,14 @@ function_info('SceneGetValueAsString', reply_type) ->
 function_info('SceneGetValueAsString', exceptions) ->
   {struct, []}
 ;
-% SceneGetValueListSelection_string(This, _sceneId, _valueId)
-function_info('SceneGetValueListSelection_string', params_type) ->
+% SceneGetValueListSelection_String(This, _sceneId, _valueId)
+function_info('SceneGetValueListSelection_String', params_type) ->
   {struct, [{1, byte},
           {2, {struct, {'ozw_types', 'remoteValueID'}}}]}
 ;
-function_info('SceneGetValueListSelection_string', reply_type) ->
+function_info('SceneGetValueListSelection_String', reply_type) ->
   {struct, {'ozw_types', 'bool_String'}};
-function_info('SceneGetValueListSelection_string', exceptions) ->
+function_info('SceneGetValueListSelection_String', exceptions) ->
   {struct, []}
 ;
 % SceneGetValueListSelection_Int32(This, _sceneId, _valueId)
@@ -1393,26 +1393,26 @@ function_info('SetSceneValue_Int16', reply_type) ->
 function_info('SetSceneValue_Int16', exceptions) ->
   {struct, []}
 ;
-% SetSceneValue_string(This, _sceneId, _valueId, _value)
-function_info('SetSceneValue_string', params_type) ->
+% SetSceneValue_String(This, _sceneId, _valueId, _value)
+function_info('SetSceneValue_String', params_type) ->
   {struct, [{1, byte},
           {2, {struct, {'ozw_types', 'remoteValueID'}}},
           {3, string}]}
 ;
-function_info('SetSceneValue_string', reply_type) ->
+function_info('SetSceneValue_String', reply_type) ->
   bool;
-function_info('SetSceneValue_string', exceptions) ->
+function_info('SetSceneValue_String', exceptions) ->
   {struct, []}
 ;
-% SetSceneValueListSelection_string(This, _sceneId, _valueId, _value)
-function_info('SetSceneValueListSelection_string', params_type) ->
+% SetSceneValueListSelection_String(This, _sceneId, _valueId, _value)
+function_info('SetSceneValueListSelection_String', params_type) ->
   {struct, [{1, byte},
           {2, {struct, {'ozw_types', 'remoteValueID'}}},
           {3, string}]}
 ;
-function_info('SetSceneValueListSelection_string', reply_type) ->
+function_info('SetSceneValueListSelection_String', reply_type) ->
   bool;
-function_info('SetSceneValueListSelection_string', exceptions) ->
+function_info('SetSceneValueListSelection_String', exceptions) ->
   {struct, []}
 ;
 % SetSceneValueListSelection_Int32(This, _sceneId, _valueId, _value)

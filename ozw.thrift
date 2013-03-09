@@ -34,7 +34,8 @@ enum RemoteValueGenre {
 	ValueGenre_Count=4
 }
 
-enum RemoteValueType {
+enum RemoteValueType 
+{
 	ValueType_Bool=0,
 	ValueType_Byte=1,
 	ValueType_Decimal=2,
@@ -46,26 +47,59 @@ enum RemoteValueType {
 	ValueType_Button=8
 }
 
-enum DriverControllerCommand {
+enum DriverControllerCommand 
+{
     ControllerCommand_None = 0,						/**< No command. */
-    ControllerCommand_AddController,				/**< Add a new controller to the Z-Wave network.  The new controller will be a secondary. */
-    ControllerCommand_AddDevice,					/**< Add a new device (but not a controller) to the Z-Wave network. */
-    ControllerCommand_CreateNewPrimary,				/**< Add a new controller to the Z-Wave network.  The new controller will be the primary, and the current primary will become a secondary controller. */
-    ControllerCommand_ReceiveConfiguration,			/**< Receive Z-Wave network configuration information from another controller. */
-    ControllerCommand_RemoveController,				/**< Remove a controller from the Z-Wave network. */
-    ControllerCommand_RemoveDevice,					/**< Remove a new device (but not a controller) from the Z-Wave network. */
+    ControllerCommand_AddDevice,					/**< Add a new device or controller to the Z-Wave network. */
+    ControllerCommand_CreateNewPrimary,				/**< Add a new controller to the Z-Wave network. Used when old primary fails. Requires SUC. */
+    ControllerCommand_ReceiveConfiguration,				/**< Receive Z-Wave network configuration information from another controller. */
+    ControllerCommand_RemoveDevice,					/**< Remove a device or controller from the Z-Wave network. */
     ControllerCommand_RemoveFailedNode,				/**< Move a node to the controller's failed nodes list. This command will only work if the node cannot respond. */
     ControllerCommand_HasNodeFailed,				/**< Check whether a node is in the controller's failed nodes list. */
-    ControllerCommand_ReplaceFailedNode,			/**< Replace a non-responding node with another. The node must be in the controller's list of failed nodes for this command to succeed. */
-    ControllerCommand_TransferPrimaryRole,			/**< Make a different controller the primary. */
-    ControllerCommand_RequestNetworkUpdate,			/**< Request network information from the SUC/SIS. */
-    ControllerCommand_RequestNodeNeighborUpdate,	/**< Get a node to rebuild its neighbour list.  This method also does ControllerCommand_RequestNodeNeighbors */
-    ControllerCommand_AssignReturnRoute,			/**< Assign a network return routes to a device. */
+    ControllerCommand_ReplaceFailedNode,				/**< Replace a non-responding node with another. The node must be in the controller's list of failed nodes for this command to succeed. */
+    ControllerCommand_TransferPrimaryRole,				/**< Make a different controller the primary. */
+    ControllerCommand_RequestNetworkUpdate,				/**< Request network information from the SUC/SIS. */
+    ControllerCommand_RequestNodeNeighborUpdate,			/**< Get a node to rebuild its neighbour list.  This method also does RequestNodeNeighbors */
+    ControllerCommand_AssignReturnRoute,				/**< Assign a network return routes to a device. */
     ControllerCommand_DeleteAllReturnRoutes,			/**< Delete all return routes from a device. */
-    ControllerCommand_CreateButton,             /** Create a handheld button id. */
-	ControllerCommand_DeleteButton             /** Delete a handheld button id. */
+    ControllerCommand_SendNodeInformation,				/**< Send a node information frame */
+    ControllerCommand_ReplicationSend,				/**< Send information from primary to secondary */
+    ControllerCommand_CreateButton,					/**< Create an id that tracks handheld button presses */
+    ControllerCommand_DeleteButton					/**< Delete id that tracks handheld button presses */
 }
 
+enum DriverControllerState
+{
+    ControllerState_Normal = 0,				/**< No command in progress. */
+    ControllerState_Starting,				/**< The command is starting. */
+    ControllerState_Cancel,					/**< The command was cancelled. */
+    ControllerState_Error,					/**< Command invocation had error(s) and was aborted */
+    ControllerState_Waiting,				/**< Controller is waiting for a user action. */
+    ControllerState_Sleeping,				/**< Controller command is on a sleep queue wait for device. */
+    ControllerState_InProgress,				/**< The controller is communicating with the other device to carry out the command. */
+    ControllerState_Completed,			    	/**< The command has completed successfully. */
+    ControllerState_Failed,					/**< The command has failed. */
+    ControllerState_NodeOK,					/**< Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node is OK. */
+    ControllerState_NodeFailed				/**< Used only with ControllerCommand_HasNodeFailed to indicate that the controller thinks the node has failed. */
+};
+
+enum DriverControllerError
+{
+    ControllerError_None = 0,
+    ControllerError_ButtonNotFound,					/**< Button */
+    ControllerError_NodeNotFound,					/**< Button */
+    ControllerError_NotBridge,					/**< Button */
+    ControllerError_NotSUC,						/**< CreateNewPrimary */
+    ControllerError_NotSecondary,					/**< CreateNewPrimary */
+    ControllerError_NotPrimary,					/**< RemoveFailedNode, AddNodeToNetwork */
+    ControllerError_IsPrimary,					/**< ReceiveConfiguration */
+    ControllerError_NotFound,					/**< RemoveFailedNode */
+    ControllerError_Busy,						/**< RemoveFailedNode, RequestNetworkUpdate */
+    ControllerError_Failed,						/**< RemoveFailedNode, RequestNetworkUpdate */
+    ControllerError_Disabled,					/**< RequestNetworkUpdate error */
+    ControllerError_Overflow					/**< RequestNetworkUpdate error */
+};
+		
 enum DriverControllerInterface {
 	ControllerInterface_Unknown = 0,
 	ControllerInterface_Serial,
@@ -455,11 +489,11 @@ service RemoteManager {
 	
 	//bool GetValueListSelection( ValueID const& _id, string* o_value );
     // ekarak: thrift does not support function overloading
-    Bool_String GetValueListSelection_string( 1:RemoteValueID _id );
+    Bool_String GetValueListSelection_String( 1:RemoteValueID _id );
 
 	//bool GetValueListSelection( ValueID const& _id, int32* o_value );
     // ekarak: overloading by name mangling
-    Bool_Int GetValueListSelection_int32( 1:RemoteValueID _id );
+    Bool_Int GetValueListSelection_Int32( 1:RemoteValueID _id );
 
 	//bool GetValueListItems( ValueID const& _id, vector<string>* o_value );
     // ekarak: client must ensure value's type is ValueType_List
@@ -470,19 +504,19 @@ service RemoteManager {
 
 	//bool SetValue( ValueID const& _id, bool const _value );
     // ekarak: client must ensure value's type is ValueType_Bool
-    bool SetValue_bool( 1:RemoteValueID _id, 2:bool _value );
+    bool SetValue_Bool( 1:RemoteValueID _id, 2:bool _value );
 
 	//bool SetValue( ValueID const& _id, uint8 const _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_uint8( 1:RemoteValueID _id, 2:byte _value);
+    bool SetValue_UInt8( 1:RemoteValueID _id, 2:byte _value);
 
-	//TODO: bool SetValue( ValueID const& _id, uint8 const* _value, uint8 const _length );
+	//bool SetValue( ValueID const& _id, uint8 const* _value, uint8 const _length );
     // ekarak:  client must ensure value's type
-    bool SetValue_uint8_uint8( 1:RemoteValueID _id, 2:byte _value, 3:byte _length);
+    bool SetValue_UInt8_UInt8( 1:RemoteValueID _id, 2:list<byte> _value, 3:byte _length);
 
 	//bool SetValue( ValueID const& _id, float const _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_float( 1:RemoteValueID _id, 2:double _value );
+    bool SetValue_Float( 1:RemoteValueID _id, 2:double _value );
 
 	//bool SetValue( ValueID const& _id, int32 const _value );
     // ekarak: client must ensure value's type
@@ -494,7 +528,7 @@ service RemoteManager {
 
 	//bool SetValue( ValueID const& _id, string const& _value );
     // ekarak:  client must ensure value's type
-    bool SetValue_string( 1:RemoteValueID _id, 2:string _value );
+    bool SetValue_String( 1:RemoteValueID _id, 2:string _value );
     
 	//bool SetValueListSelection( ValueID const& _id, string const& _selectedItem );
     bool SetValueListSelection( 1:RemoteValueID _id, 2:string _selectedItem );
@@ -687,7 +721,7 @@ service RemoteManager {
 
 	//bool SceneGetValueListSelection( uint8 const _sceneId, ValueID const& _valueId, string* o_value );
     // ekarak: Notice change of naming & return argument
-    Bool_String SceneGetValueListSelection_string( 1:byte _sceneId, 2:RemoteValueID  _valueId );
+    Bool_String SceneGetValueListSelection_String( 1:byte _sceneId, 2:RemoteValueID  _valueId );
 
     //bool SceneGetValueListSelection( uint8 const _sceneId, ValueID const& _valueId, int32* o_value );
     // ekarak: Notice change of naming & return argument
@@ -715,11 +749,11 @@ service RemoteManager {
 
 	//bool SetSceneValue( uint8 const _sceneId, ValueID const& _valueId, string const& _value );
     // ekarak: Overloaded function renamed
-    bool SetSceneValue_string( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
+    bool SetSceneValue_String( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
     
 	//bool SetSceneValueListSelection( uint8 const _sceneId, ValueID const& _valueId, string const& _value );
     // ekarak: Overloaded function renamed
-    bool SetSceneValueListSelection_string( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
+    bool SetSceneValueListSelection_String( 1:byte _sceneId, 2:RemoteValueID _valueId, 3:string _value );
     
 	//bool SetSceneValueListSelection( uint8 const _sceneId, ValueID const& _valueId, int32 const _value );
     // ekarak: Overloaded function renamed

@@ -7817,7 +7817,7 @@ OpenZWave.RemoteManager_GetValueAsString_result.prototype.write = function(outpu
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_string_args = function(args) {
+OpenZWave.RemoteManager_GetValueListSelection_String_args = function(args) {
   this._id = null;
   if (args) {
     if (args._id !== undefined) {
@@ -7825,8 +7825,8 @@ OpenZWave.RemoteManager_GetValueListSelection_string_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_GetValueListSelection_string_args.prototype = {};
-OpenZWave.RemoteManager_GetValueListSelection_string_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_GetValueListSelection_String_args.prototype = {};
+OpenZWave.RemoteManager_GetValueListSelection_String_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -7859,8 +7859,8 @@ OpenZWave.RemoteManager_GetValueListSelection_string_args.prototype.read = funct
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_string_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetValueListSelection_string_args');
+OpenZWave.RemoteManager_GetValueListSelection_String_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetValueListSelection_String_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
@@ -7871,7 +7871,7 @@ OpenZWave.RemoteManager_GetValueListSelection_string_args.prototype.write = func
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_string_result = function(args) {
+OpenZWave.RemoteManager_GetValueListSelection_String_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -7879,8 +7879,8 @@ OpenZWave.RemoteManager_GetValueListSelection_string_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_GetValueListSelection_string_result.prototype = {};
-OpenZWave.RemoteManager_GetValueListSelection_string_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_GetValueListSelection_String_result.prototype = {};
+OpenZWave.RemoteManager_GetValueListSelection_String_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -7913,8 +7913,8 @@ OpenZWave.RemoteManager_GetValueListSelection_string_result.prototype.read = fun
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_string_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetValueListSelection_string_result');
+OpenZWave.RemoteManager_GetValueListSelection_String_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetValueListSelection_String_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
     this.success.write(output);
@@ -7925,7 +7925,7 @@ OpenZWave.RemoteManager_GetValueListSelection_string_result.prototype.write = fu
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_int32_args = function(args) {
+OpenZWave.RemoteManager_GetValueListSelection_Int32_args = function(args) {
   this._id = null;
   if (args) {
     if (args._id !== undefined) {
@@ -7933,8 +7933,8 @@ OpenZWave.RemoteManager_GetValueListSelection_int32_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_GetValueListSelection_int32_args.prototype = {};
-OpenZWave.RemoteManager_GetValueListSelection_int32_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_GetValueListSelection_Int32_args.prototype = {};
+OpenZWave.RemoteManager_GetValueListSelection_Int32_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -7967,8 +7967,8 @@ OpenZWave.RemoteManager_GetValueListSelection_int32_args.prototype.read = functi
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_int32_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetValueListSelection_int32_args');
+OpenZWave.RemoteManager_GetValueListSelection_Int32_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetValueListSelection_Int32_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
@@ -7979,7 +7979,7 @@ OpenZWave.RemoteManager_GetValueListSelection_int32_args.prototype.write = funct
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_int32_result = function(args) {
+OpenZWave.RemoteManager_GetValueListSelection_Int32_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -7987,8 +7987,8 @@ OpenZWave.RemoteManager_GetValueListSelection_int32_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_GetValueListSelection_int32_result.prototype = {};
-OpenZWave.RemoteManager_GetValueListSelection_int32_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_GetValueListSelection_Int32_result.prototype = {};
+OpenZWave.RemoteManager_GetValueListSelection_Int32_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8021,8 +8021,8 @@ OpenZWave.RemoteManager_GetValueListSelection_int32_result.prototype.read = func
   return;
 };
 
-OpenZWave.RemoteManager_GetValueListSelection_int32_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetValueListSelection_int32_result');
+OpenZWave.RemoteManager_GetValueListSelection_Int32_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetValueListSelection_Int32_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
     this.success.write(output);
@@ -8249,7 +8249,7 @@ OpenZWave.RemoteManager_GetValueFloatPrecision_result.prototype.write = function
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_bool_args = function(args) {
+OpenZWave.RemoteManager_SetValue_Bool_args = function(args) {
   this._id = null;
   this._value = null;
   if (args) {
@@ -8261,8 +8261,8 @@ OpenZWave.RemoteManager_SetValue_bool_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_bool_args.prototype = {};
-OpenZWave.RemoteManager_SetValue_bool_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_Bool_args.prototype = {};
+OpenZWave.RemoteManager_SetValue_Bool_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8299,8 +8299,8 @@ OpenZWave.RemoteManager_SetValue_bool_args.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_bool_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_bool_args');
+OpenZWave.RemoteManager_SetValue_Bool_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_Bool_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
@@ -8316,7 +8316,7 @@ OpenZWave.RemoteManager_SetValue_bool_args.prototype.write = function(output) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_bool_result = function(args) {
+OpenZWave.RemoteManager_SetValue_Bool_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -8324,8 +8324,8 @@ OpenZWave.RemoteManager_SetValue_bool_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_bool_result.prototype = {};
-OpenZWave.RemoteManager_SetValue_bool_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_Bool_result.prototype = {};
+OpenZWave.RemoteManager_SetValue_Bool_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8357,8 +8357,8 @@ OpenZWave.RemoteManager_SetValue_bool_result.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_bool_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_bool_result');
+OpenZWave.RemoteManager_SetValue_Bool_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_Bool_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -8369,7 +8369,7 @@ OpenZWave.RemoteManager_SetValue_bool_result.prototype.write = function(output) 
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_args = function(args) {
+OpenZWave.RemoteManager_SetValue_UInt8_args = function(args) {
   this._id = null;
   this._value = null;
   if (args) {
@@ -8381,8 +8381,8 @@ OpenZWave.RemoteManager_SetValue_uint8_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_uint8_args.prototype = {};
-OpenZWave.RemoteManager_SetValue_uint8_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_UInt8_args.prototype = {};
+OpenZWave.RemoteManager_SetValue_UInt8_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8419,8 +8419,8 @@ OpenZWave.RemoteManager_SetValue_uint8_args.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_uint8_args');
+OpenZWave.RemoteManager_SetValue_UInt8_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_UInt8_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
@@ -8436,7 +8436,7 @@ OpenZWave.RemoteManager_SetValue_uint8_args.prototype.write = function(output) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_result = function(args) {
+OpenZWave.RemoteManager_SetValue_UInt8_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -8444,8 +8444,8 @@ OpenZWave.RemoteManager_SetValue_uint8_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_uint8_result.prototype = {};
-OpenZWave.RemoteManager_SetValue_uint8_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_UInt8_result.prototype = {};
+OpenZWave.RemoteManager_SetValue_UInt8_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8477,8 +8477,8 @@ OpenZWave.RemoteManager_SetValue_uint8_result.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_uint8_result');
+OpenZWave.RemoteManager_SetValue_UInt8_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_UInt8_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -8489,7 +8489,7 @@ OpenZWave.RemoteManager_SetValue_uint8_result.prototype.write = function(output)
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_uint8_args = function(args) {
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_args = function(args) {
   this._id = null;
   this._value = null;
   this._length = null;
@@ -8505,8 +8505,8 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_uint8_uint8_args.prototype = {};
-OpenZWave.RemoteManager_SetValue_uint8_uint8_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_args.prototype = {};
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8528,8 +8528,21 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_args.prototype.read = function(inpu
       }
       break;
       case 2:
-      if (ftype == Thrift.Type.BYTE) {
-        this._value = input.readByte().value;
+      if (ftype == Thrift.Type.LIST) {
+        var _size64 = 0;
+        var _rtmp368;
+        this._value = [];
+        var _etype67 = 0;
+        _rtmp368 = input.readListBegin();
+        _etype67 = _rtmp368.etype;
+        _size64 = _rtmp368.size;
+        for (var _i69 = 0; _i69 < _size64; ++_i69)
+        {
+          var elem70 = null;
+          elem70 = input.readByte().value;
+          this._value.push(elem70);
+        }
+        input.readListEnd();
       } else {
         input.skip(ftype);
       }
@@ -8550,16 +8563,25 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_args.prototype.read = function(inpu
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_uint8_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_uint8_uint8_args');
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_UInt8_UInt8_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
     output.writeFieldEnd();
   }
   if (this._value !== null && this._value !== undefined) {
-    output.writeFieldBegin('_value', Thrift.Type.BYTE, 2);
-    output.writeByte(this._value);
+    output.writeFieldBegin('_value', Thrift.Type.LIST, 2);
+    output.writeListBegin(Thrift.Type.BYTE, this._value.length);
+    for (var iter71 in this._value)
+    {
+      if (this._value.hasOwnProperty(iter71))
+      {
+        iter71 = this._value[iter71];
+        output.writeByte(iter71);
+      }
+    }
+    output.writeListEnd();
     output.writeFieldEnd();
   }
   if (this._length !== null && this._length !== undefined) {
@@ -8572,7 +8594,7 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_args.prototype.write = function(out
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_uint8_result = function(args) {
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -8580,8 +8602,8 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_uint8_uint8_result.prototype = {};
-OpenZWave.RemoteManager_SetValue_uint8_uint8_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_result.prototype = {};
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8613,8 +8635,8 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_result.prototype.read = function(in
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_uint8_uint8_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_uint8_uint8_result');
+OpenZWave.RemoteManager_SetValue_UInt8_UInt8_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_UInt8_UInt8_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -8625,7 +8647,7 @@ OpenZWave.RemoteManager_SetValue_uint8_uint8_result.prototype.write = function(o
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_float_args = function(args) {
+OpenZWave.RemoteManager_SetValue_Float_args = function(args) {
   this._id = null;
   this._value = null;
   if (args) {
@@ -8637,8 +8659,8 @@ OpenZWave.RemoteManager_SetValue_float_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_float_args.prototype = {};
-OpenZWave.RemoteManager_SetValue_float_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_Float_args.prototype = {};
+OpenZWave.RemoteManager_SetValue_Float_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8675,8 +8697,8 @@ OpenZWave.RemoteManager_SetValue_float_args.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_float_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_float_args');
+OpenZWave.RemoteManager_SetValue_Float_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_Float_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
@@ -8692,7 +8714,7 @@ OpenZWave.RemoteManager_SetValue_float_args.prototype.write = function(output) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_float_result = function(args) {
+OpenZWave.RemoteManager_SetValue_Float_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -8700,8 +8722,8 @@ OpenZWave.RemoteManager_SetValue_float_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_float_result.prototype = {};
-OpenZWave.RemoteManager_SetValue_float_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_Float_result.prototype = {};
+OpenZWave.RemoteManager_SetValue_Float_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -8733,8 +8755,8 @@ OpenZWave.RemoteManager_SetValue_float_result.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_float_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_float_result');
+OpenZWave.RemoteManager_SetValue_Float_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_Float_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -8985,7 +9007,7 @@ OpenZWave.RemoteManager_SetValue_int16_result.prototype.write = function(output)
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_string_args = function(args) {
+OpenZWave.RemoteManager_SetValue_String_args = function(args) {
   this._id = null;
   this._value = null;
   if (args) {
@@ -8997,8 +9019,8 @@ OpenZWave.RemoteManager_SetValue_string_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_string_args.prototype = {};
-OpenZWave.RemoteManager_SetValue_string_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_String_args.prototype = {};
+OpenZWave.RemoteManager_SetValue_String_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -9035,8 +9057,8 @@ OpenZWave.RemoteManager_SetValue_string_args.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_string_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_string_args');
+OpenZWave.RemoteManager_SetValue_String_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_String_args');
   if (this._id !== null && this._id !== undefined) {
     output.writeFieldBegin('_id', Thrift.Type.STRUCT, 1);
     this._id.write(output);
@@ -9052,7 +9074,7 @@ OpenZWave.RemoteManager_SetValue_string_args.prototype.write = function(output) 
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_string_result = function(args) {
+OpenZWave.RemoteManager_SetValue_String_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -9060,8 +9082,8 @@ OpenZWave.RemoteManager_SetValue_string_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetValue_string_result.prototype = {};
-OpenZWave.RemoteManager_SetValue_string_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetValue_String_result.prototype = {};
+OpenZWave.RemoteManager_SetValue_String_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -9093,8 +9115,8 @@ OpenZWave.RemoteManager_SetValue_string_result.prototype.read = function(input) 
   return;
 };
 
-OpenZWave.RemoteManager_SetValue_string_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetValue_string_result');
+OpenZWave.RemoteManager_SetValue_String_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetValue_String_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -14864,7 +14886,7 @@ OpenZWave.RemoteManager_SceneGetValueAsString_result.prototype.write = function(
   return;
 };
 
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_args = function(args) {
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_args = function(args) {
   this._sceneId = null;
   this._valueId = null;
   if (args) {
@@ -14876,8 +14898,8 @@ OpenZWave.RemoteManager_SceneGetValueListSelection_string_args = function(args) 
     }
   }
 };
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_args.prototype = {};
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_args.prototype = {};
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -14914,8 +14936,8 @@ OpenZWave.RemoteManager_SceneGetValueListSelection_string_args.prototype.read = 
   return;
 };
 
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SceneGetValueListSelection_string_args');
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SceneGetValueListSelection_String_args');
   if (this._sceneId !== null && this._sceneId !== undefined) {
     output.writeFieldBegin('_sceneId', Thrift.Type.BYTE, 1);
     output.writeByte(this._sceneId);
@@ -14931,7 +14953,7 @@ OpenZWave.RemoteManager_SceneGetValueListSelection_string_args.prototype.write =
   return;
 };
 
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_result = function(args) {
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -14939,8 +14961,8 @@ OpenZWave.RemoteManager_SceneGetValueListSelection_string_result = function(args
     }
   }
 };
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_result.prototype = {};
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_result.prototype = {};
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -14973,8 +14995,8 @@ OpenZWave.RemoteManager_SceneGetValueListSelection_string_result.prototype.read 
   return;
 };
 
-OpenZWave.RemoteManager_SceneGetValueListSelection_string_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SceneGetValueListSelection_string_result');
+OpenZWave.RemoteManager_SceneGetValueListSelection_String_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SceneGetValueListSelection_String_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
     this.success.write(output);
@@ -15786,7 +15808,7 @@ OpenZWave.RemoteManager_SetSceneValue_Int16_result.prototype.write = function(ou
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValue_string_args = function(args) {
+OpenZWave.RemoteManager_SetSceneValue_String_args = function(args) {
   this._sceneId = null;
   this._valueId = null;
   this._value = null;
@@ -15802,8 +15824,8 @@ OpenZWave.RemoteManager_SetSceneValue_string_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetSceneValue_string_args.prototype = {};
-OpenZWave.RemoteManager_SetSceneValue_string_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetSceneValue_String_args.prototype = {};
+OpenZWave.RemoteManager_SetSceneValue_String_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -15847,8 +15869,8 @@ OpenZWave.RemoteManager_SetSceneValue_string_args.prototype.read = function(inpu
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValue_string_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetSceneValue_string_args');
+OpenZWave.RemoteManager_SetSceneValue_String_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetSceneValue_String_args');
   if (this._sceneId !== null && this._sceneId !== undefined) {
     output.writeFieldBegin('_sceneId', Thrift.Type.BYTE, 1);
     output.writeByte(this._sceneId);
@@ -15869,7 +15891,7 @@ OpenZWave.RemoteManager_SetSceneValue_string_args.prototype.write = function(out
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValue_string_result = function(args) {
+OpenZWave.RemoteManager_SetSceneValue_String_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -15877,8 +15899,8 @@ OpenZWave.RemoteManager_SetSceneValue_string_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_SetSceneValue_string_result.prototype = {};
-OpenZWave.RemoteManager_SetSceneValue_string_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetSceneValue_String_result.prototype = {};
+OpenZWave.RemoteManager_SetSceneValue_String_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -15910,8 +15932,8 @@ OpenZWave.RemoteManager_SetSceneValue_string_result.prototype.read = function(in
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValue_string_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetSceneValue_string_result');
+OpenZWave.RemoteManager_SetSceneValue_String_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetSceneValue_String_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -15922,7 +15944,7 @@ OpenZWave.RemoteManager_SetSceneValue_string_result.prototype.write = function(o
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_args = function(args) {
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_args = function(args) {
   this._sceneId = null;
   this._valueId = null;
   this._value = null;
@@ -15938,8 +15960,8 @@ OpenZWave.RemoteManager_SetSceneValueListSelection_string_args = function(args) 
     }
   }
 };
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_args.prototype = {};
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_args.prototype = {};
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -15983,8 +16005,8 @@ OpenZWave.RemoteManager_SetSceneValueListSelection_string_args.prototype.read = 
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetSceneValueListSelection_string_args');
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetSceneValueListSelection_String_args');
   if (this._sceneId !== null && this._sceneId !== undefined) {
     output.writeFieldBegin('_sceneId', Thrift.Type.BYTE, 1);
     output.writeByte(this._sceneId);
@@ -16005,7 +16027,7 @@ OpenZWave.RemoteManager_SetSceneValueListSelection_string_args.prototype.write =
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_result = function(args) {
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -16013,8 +16035,8 @@ OpenZWave.RemoteManager_SetSceneValueListSelection_string_result = function(args
     }
   }
 };
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_result.prototype = {};
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_result.prototype = {};
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -16046,8 +16068,8 @@ OpenZWave.RemoteManager_SetSceneValueListSelection_string_result.prototype.read 
   return;
 };
 
-OpenZWave.RemoteManager_SetSceneValueListSelection_string_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_SetSceneValueListSelection_string_result');
+OpenZWave.RemoteManager_SetSceneValueListSelection_String_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_SetSceneValueListSelection_String_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.BOOL, 0);
     output.writeBool(this.success);
@@ -19369,21 +19391,21 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetValueAsString = function() {
   }
   throw 'GetValueAsString failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.GetValueListSelection_string = function(_id) {
-  this.send_GetValueListSelection_string(_id);
-  return this.recv_GetValueListSelection_string();
+OpenZWave.RemoteManagerClient.prototype.GetValueListSelection_String = function(_id) {
+  this.send_GetValueListSelection_String(_id);
+  return this.recv_GetValueListSelection_String();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_GetValueListSelection_string = function(_id) {
-  this.output.writeMessageBegin('GetValueListSelection_string', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_GetValueListSelection_string_args();
+OpenZWave.RemoteManagerClient.prototype.send_GetValueListSelection_String = function(_id) {
+  this.output.writeMessageBegin('GetValueListSelection_String', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_GetValueListSelection_String_args();
   args._id = _id;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_GetValueListSelection_string = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_GetValueListSelection_String = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19394,30 +19416,30 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetValueListSelection_string = func
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_GetValueListSelection_string_result();
+  var result = new OpenZWave.RemoteManager_GetValueListSelection_String_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'GetValueListSelection_string failed: unknown result';
+  throw 'GetValueListSelection_String failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.GetValueListSelection_int32 = function(_id) {
-  this.send_GetValueListSelection_int32(_id);
-  return this.recv_GetValueListSelection_int32();
+OpenZWave.RemoteManagerClient.prototype.GetValueListSelection_Int32 = function(_id) {
+  this.send_GetValueListSelection_Int32(_id);
+  return this.recv_GetValueListSelection_Int32();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_GetValueListSelection_int32 = function(_id) {
-  this.output.writeMessageBegin('GetValueListSelection_int32', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_GetValueListSelection_int32_args();
+OpenZWave.RemoteManagerClient.prototype.send_GetValueListSelection_Int32 = function(_id) {
+  this.output.writeMessageBegin('GetValueListSelection_Int32', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_GetValueListSelection_Int32_args();
   args._id = _id;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_GetValueListSelection_int32 = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_GetValueListSelection_Int32 = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19428,14 +19450,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetValueListSelection_int32 = funct
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_GetValueListSelection_int32_result();
+  var result = new OpenZWave.RemoteManager_GetValueListSelection_Int32_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'GetValueListSelection_int32 failed: unknown result';
+  throw 'GetValueListSelection_Int32 failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.GetValueListItems = function(_id) {
   this.send_GetValueListItems(_id);
@@ -19505,14 +19527,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetValueFloatPrecision = function()
   }
   throw 'GetValueFloatPrecision failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetValue_bool = function(_id, _value) {
-  this.send_SetValue_bool(_id, _value);
-  return this.recv_SetValue_bool();
+OpenZWave.RemoteManagerClient.prototype.SetValue_Bool = function(_id, _value) {
+  this.send_SetValue_Bool(_id, _value);
+  return this.recv_SetValue_Bool();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetValue_bool = function(_id, _value) {
-  this.output.writeMessageBegin('SetValue_bool', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetValue_bool_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetValue_Bool = function(_id, _value) {
+  this.output.writeMessageBegin('SetValue_Bool', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetValue_Bool_args();
   args._id = _id;
   args._value = _value;
   args.write(this.output);
@@ -19520,7 +19542,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetValue_bool = function(_id, _valu
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetValue_bool = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetValue_Bool = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19531,23 +19553,23 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValue_bool = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetValue_bool_result();
+  var result = new OpenZWave.RemoteManager_SetValue_Bool_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetValue_bool failed: unknown result';
+  throw 'SetValue_Bool failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetValue_uint8 = function(_id, _value) {
-  this.send_SetValue_uint8(_id, _value);
-  return this.recv_SetValue_uint8();
+OpenZWave.RemoteManagerClient.prototype.SetValue_UInt8 = function(_id, _value) {
+  this.send_SetValue_UInt8(_id, _value);
+  return this.recv_SetValue_UInt8();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetValue_uint8 = function(_id, _value) {
-  this.output.writeMessageBegin('SetValue_uint8', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetValue_uint8_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetValue_UInt8 = function(_id, _value) {
+  this.output.writeMessageBegin('SetValue_UInt8', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetValue_UInt8_args();
   args._id = _id;
   args._value = _value;
   args.write(this.output);
@@ -19555,7 +19577,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetValue_uint8 = function(_id, _val
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetValue_uint8 = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetValue_UInt8 = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19566,23 +19588,23 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValue_uint8 = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetValue_uint8_result();
+  var result = new OpenZWave.RemoteManager_SetValue_UInt8_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetValue_uint8 failed: unknown result';
+  throw 'SetValue_UInt8 failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetValue_uint8_uint8 = function(_id, _value, _length) {
-  this.send_SetValue_uint8_uint8(_id, _value, _length);
-  return this.recv_SetValue_uint8_uint8();
+OpenZWave.RemoteManagerClient.prototype.SetValue_UInt8_UInt8 = function(_id, _value, _length) {
+  this.send_SetValue_UInt8_UInt8(_id, _value, _length);
+  return this.recv_SetValue_UInt8_UInt8();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetValue_uint8_uint8 = function(_id, _value, _length) {
-  this.output.writeMessageBegin('SetValue_uint8_uint8', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetValue_uint8_uint8_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetValue_UInt8_UInt8 = function(_id, _value, _length) {
+  this.output.writeMessageBegin('SetValue_UInt8_UInt8', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetValue_UInt8_UInt8_args();
   args._id = _id;
   args._value = _value;
   args._length = _length;
@@ -19591,7 +19613,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetValue_uint8_uint8 = function(_id
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetValue_uint8_uint8 = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetValue_UInt8_UInt8 = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19602,23 +19624,23 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValue_uint8_uint8 = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetValue_uint8_uint8_result();
+  var result = new OpenZWave.RemoteManager_SetValue_UInt8_UInt8_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetValue_uint8_uint8 failed: unknown result';
+  throw 'SetValue_UInt8_UInt8 failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetValue_float = function(_id, _value) {
-  this.send_SetValue_float(_id, _value);
-  return this.recv_SetValue_float();
+OpenZWave.RemoteManagerClient.prototype.SetValue_Float = function(_id, _value) {
+  this.send_SetValue_Float(_id, _value);
+  return this.recv_SetValue_Float();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetValue_float = function(_id, _value) {
-  this.output.writeMessageBegin('SetValue_float', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetValue_float_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetValue_Float = function(_id, _value) {
+  this.output.writeMessageBegin('SetValue_Float', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetValue_Float_args();
   args._id = _id;
   args._value = _value;
   args.write(this.output);
@@ -19626,7 +19648,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetValue_float = function(_id, _val
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetValue_float = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetValue_Float = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19637,14 +19659,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValue_float = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetValue_float_result();
+  var result = new OpenZWave.RemoteManager_SetValue_Float_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetValue_float failed: unknown result';
+  throw 'SetValue_Float failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.SetValue_int32 = function(_id, _value) {
   this.send_SetValue_int32(_id, _value);
@@ -19716,14 +19738,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValue_int16 = function() {
   }
   throw 'SetValue_int16 failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetValue_string = function(_id, _value) {
-  this.send_SetValue_string(_id, _value);
-  return this.recv_SetValue_string();
+OpenZWave.RemoteManagerClient.prototype.SetValue_String = function(_id, _value) {
+  this.send_SetValue_String(_id, _value);
+  return this.recv_SetValue_String();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetValue_string = function(_id, _value) {
-  this.output.writeMessageBegin('SetValue_string', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetValue_string_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetValue_String = function(_id, _value) {
+  this.output.writeMessageBegin('SetValue_String', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetValue_String_args();
   args._id = _id;
   args._value = _value;
   args.write(this.output);
@@ -19731,7 +19753,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetValue_string = function(_id, _va
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetValue_string = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetValue_String = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -19742,14 +19764,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetValue_string = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetValue_string_result();
+  var result = new OpenZWave.RemoteManager_SetValue_String_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetValue_string failed: unknown result';
+  throw 'SetValue_String failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.SetValueListSelection = function(_id, _selectedItem) {
   this.send_SetValueListSelection(_id, _selectedItem);
@@ -21464,14 +21486,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SceneGetValueAsString = function() 
   }
   throw 'SceneGetValueAsString failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SceneGetValueListSelection_string = function(_sceneId, _valueId) {
-  this.send_SceneGetValueListSelection_string(_sceneId, _valueId);
-  return this.recv_SceneGetValueListSelection_string();
+OpenZWave.RemoteManagerClient.prototype.SceneGetValueListSelection_String = function(_sceneId, _valueId) {
+  this.send_SceneGetValueListSelection_String(_sceneId, _valueId);
+  return this.recv_SceneGetValueListSelection_String();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SceneGetValueListSelection_string = function(_sceneId, _valueId) {
-  this.output.writeMessageBegin('SceneGetValueListSelection_string', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SceneGetValueListSelection_string_args();
+OpenZWave.RemoteManagerClient.prototype.send_SceneGetValueListSelection_String = function(_sceneId, _valueId) {
+  this.output.writeMessageBegin('SceneGetValueListSelection_String', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SceneGetValueListSelection_String_args();
   args._sceneId = _sceneId;
   args._valueId = _valueId;
   args.write(this.output);
@@ -21479,7 +21501,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SceneGetValueListSelection_string =
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SceneGetValueListSelection_string = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SceneGetValueListSelection_String = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -21490,14 +21512,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SceneGetValueListSelection_string =
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SceneGetValueListSelection_string_result();
+  var result = new OpenZWave.RemoteManager_SceneGetValueListSelection_String_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SceneGetValueListSelection_string failed: unknown result';
+  throw 'SceneGetValueListSelection_String failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.SceneGetValueListSelection_Int32 = function(_sceneId, _valueId) {
   this.send_SceneGetValueListSelection_Int32(_sceneId, _valueId);
@@ -21714,14 +21736,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValue_Int16 = function() {
   }
   throw 'SetSceneValue_Int16 failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetSceneValue_string = function(_sceneId, _valueId, _value) {
-  this.send_SetSceneValue_string(_sceneId, _valueId, _value);
-  return this.recv_SetSceneValue_string();
+OpenZWave.RemoteManagerClient.prototype.SetSceneValue_String = function(_sceneId, _valueId, _value) {
+  this.send_SetSceneValue_String(_sceneId, _valueId, _value);
+  return this.recv_SetSceneValue_String();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetSceneValue_string = function(_sceneId, _valueId, _value) {
-  this.output.writeMessageBegin('SetSceneValue_string', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetSceneValue_string_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetSceneValue_String = function(_sceneId, _valueId, _value) {
+  this.output.writeMessageBegin('SetSceneValue_String', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetSceneValue_String_args();
   args._sceneId = _sceneId;
   args._valueId = _valueId;
   args._value = _value;
@@ -21730,7 +21752,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetSceneValue_string = function(_sc
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValue_string = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValue_String = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -21741,23 +21763,23 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValue_string = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetSceneValue_string_result();
+  var result = new OpenZWave.RemoteManager_SetSceneValue_String_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetSceneValue_string failed: unknown result';
+  throw 'SetSceneValue_String failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.SetSceneValueListSelection_string = function(_sceneId, _valueId, _value) {
-  this.send_SetSceneValueListSelection_string(_sceneId, _valueId, _value);
-  return this.recv_SetSceneValueListSelection_string();
+OpenZWave.RemoteManagerClient.prototype.SetSceneValueListSelection_String = function(_sceneId, _valueId, _value) {
+  this.send_SetSceneValueListSelection_String(_sceneId, _valueId, _value);
+  return this.recv_SetSceneValueListSelection_String();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_SetSceneValueListSelection_string = function(_sceneId, _valueId, _value) {
-  this.output.writeMessageBegin('SetSceneValueListSelection_string', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_SetSceneValueListSelection_string_args();
+OpenZWave.RemoteManagerClient.prototype.send_SetSceneValueListSelection_String = function(_sceneId, _valueId, _value) {
+  this.output.writeMessageBegin('SetSceneValueListSelection_String', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_SetSceneValueListSelection_String_args();
   args._sceneId = _sceneId;
   args._valueId = _valueId;
   args._value = _value;
@@ -21766,7 +21788,7 @@ OpenZWave.RemoteManagerClient.prototype.send_SetSceneValueListSelection_string =
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValueListSelection_string = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValueListSelection_String = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -21777,14 +21799,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_SetSceneValueListSelection_string =
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_SetSceneValueListSelection_string_result();
+  var result = new OpenZWave.RemoteManager_SetSceneValueListSelection_String_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'SetSceneValueListSelection_string failed: unknown result';
+  throw 'SetSceneValueListSelection_String failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.SetSceneValueListSelection_Int32 = function(_sceneId, _valueId, _value) {
   this.send_SetSceneValueListSelection_Int32(_sceneId, _valueId, _value);

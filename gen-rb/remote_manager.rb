@@ -1063,34 +1063,34 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetValueAsString failed: unknown result')
       end
 
-      def GetValueListSelection_string(_id)
-        send_GetValueListSelection_string(_id)
-        return recv_GetValueListSelection_string()
+      def GetValueListSelection_String(_id)
+        send_GetValueListSelection_String(_id)
+        return recv_GetValueListSelection_String()
       end
 
-      def send_GetValueListSelection_string(_id)
-        send_message('GetValueListSelection_string', GetValueListSelection_string_args, :_id => _id)
+      def send_GetValueListSelection_String(_id)
+        send_message('GetValueListSelection_String', GetValueListSelection_String_args, :_id => _id)
       end
 
-      def recv_GetValueListSelection_string()
-        result = receive_message(GetValueListSelection_string_result)
+      def recv_GetValueListSelection_String()
+        result = receive_message(GetValueListSelection_String_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetValueListSelection_string failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetValueListSelection_String failed: unknown result')
       end
 
-      def GetValueListSelection_int32(_id)
-        send_GetValueListSelection_int32(_id)
-        return recv_GetValueListSelection_int32()
+      def GetValueListSelection_Int32(_id)
+        send_GetValueListSelection_Int32(_id)
+        return recv_GetValueListSelection_Int32()
       end
 
-      def send_GetValueListSelection_int32(_id)
-        send_message('GetValueListSelection_int32', GetValueListSelection_int32_args, :_id => _id)
+      def send_GetValueListSelection_Int32(_id)
+        send_message('GetValueListSelection_Int32', GetValueListSelection_Int32_args, :_id => _id)
       end
 
-      def recv_GetValueListSelection_int32()
-        result = receive_message(GetValueListSelection_int32_result)
+      def recv_GetValueListSelection_Int32()
+        result = receive_message(GetValueListSelection_Int32_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetValueListSelection_int32 failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetValueListSelection_Int32 failed: unknown result')
       end
 
       def GetValueListItems(_id)
@@ -1123,64 +1123,64 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetValueFloatPrecision failed: unknown result')
       end
 
-      def SetValue_bool(_id, _value)
-        send_SetValue_bool(_id, _value)
-        return recv_SetValue_bool()
+      def SetValue_Bool(_id, _value)
+        send_SetValue_Bool(_id, _value)
+        return recv_SetValue_Bool()
       end
 
-      def send_SetValue_bool(_id, _value)
-        send_message('SetValue_bool', SetValue_bool_args, :_id => _id, :_value => _value)
+      def send_SetValue_Bool(_id, _value)
+        send_message('SetValue_Bool', SetValue_Bool_args, :_id => _id, :_value => _value)
       end
 
-      def recv_SetValue_bool()
-        result = receive_message(SetValue_bool_result)
+      def recv_SetValue_Bool()
+        result = receive_message(SetValue_Bool_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_bool failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_Bool failed: unknown result')
       end
 
-      def SetValue_uint8(_id, _value)
-        send_SetValue_uint8(_id, _value)
-        return recv_SetValue_uint8()
+      def SetValue_UInt8(_id, _value)
+        send_SetValue_UInt8(_id, _value)
+        return recv_SetValue_UInt8()
       end
 
-      def send_SetValue_uint8(_id, _value)
-        send_message('SetValue_uint8', SetValue_uint8_args, :_id => _id, :_value => _value)
+      def send_SetValue_UInt8(_id, _value)
+        send_message('SetValue_UInt8', SetValue_UInt8_args, :_id => _id, :_value => _value)
       end
 
-      def recv_SetValue_uint8()
-        result = receive_message(SetValue_uint8_result)
+      def recv_SetValue_UInt8()
+        result = receive_message(SetValue_UInt8_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_uint8 failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_UInt8 failed: unknown result')
       end
 
-      def SetValue_uint8_uint8(_id, _value, _length)
-        send_SetValue_uint8_uint8(_id, _value, _length)
-        return recv_SetValue_uint8_uint8()
+      def SetValue_UInt8_UInt8(_id, _value, _length)
+        send_SetValue_UInt8_UInt8(_id, _value, _length)
+        return recv_SetValue_UInt8_UInt8()
       end
 
-      def send_SetValue_uint8_uint8(_id, _value, _length)
-        send_message('SetValue_uint8_uint8', SetValue_uint8_uint8_args, :_id => _id, :_value => _value, :_length => _length)
+      def send_SetValue_UInt8_UInt8(_id, _value, _length)
+        send_message('SetValue_UInt8_UInt8', SetValue_UInt8_UInt8_args, :_id => _id, :_value => _value, :_length => _length)
       end
 
-      def recv_SetValue_uint8_uint8()
-        result = receive_message(SetValue_uint8_uint8_result)
+      def recv_SetValue_UInt8_UInt8()
+        result = receive_message(SetValue_UInt8_UInt8_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_uint8_uint8 failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_UInt8_UInt8 failed: unknown result')
       end
 
-      def SetValue_float(_id, _value)
-        send_SetValue_float(_id, _value)
-        return recv_SetValue_float()
+      def SetValue_Float(_id, _value)
+        send_SetValue_Float(_id, _value)
+        return recv_SetValue_Float()
       end
 
-      def send_SetValue_float(_id, _value)
-        send_message('SetValue_float', SetValue_float_args, :_id => _id, :_value => _value)
+      def send_SetValue_Float(_id, _value)
+        send_message('SetValue_Float', SetValue_Float_args, :_id => _id, :_value => _value)
       end
 
-      def recv_SetValue_float()
-        result = receive_message(SetValue_float_result)
+      def recv_SetValue_Float()
+        result = receive_message(SetValue_Float_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_float failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_Float failed: unknown result')
       end
 
       def SetValue_int32(_id, _value)
@@ -1213,19 +1213,19 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_int16 failed: unknown result')
       end
 
-      def SetValue_string(_id, _value)
-        send_SetValue_string(_id, _value)
-        return recv_SetValue_string()
+      def SetValue_String(_id, _value)
+        send_SetValue_String(_id, _value)
+        return recv_SetValue_String()
       end
 
-      def send_SetValue_string(_id, _value)
-        send_message('SetValue_string', SetValue_string_args, :_id => _id, :_value => _value)
+      def send_SetValue_String(_id, _value)
+        send_message('SetValue_String', SetValue_String_args, :_id => _id, :_value => _value)
       end
 
-      def recv_SetValue_string()
-        result = receive_message(SetValue_string_result)
+      def recv_SetValue_String()
+        result = receive_message(SetValue_String_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_string failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetValue_String failed: unknown result')
       end
 
       def SetValueListSelection(_id, _selectedItem)
@@ -1963,19 +1963,19 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SceneGetValueAsString failed: unknown result')
       end
 
-      def SceneGetValueListSelection_string(_sceneId, _valueId)
-        send_SceneGetValueListSelection_string(_sceneId, _valueId)
-        return recv_SceneGetValueListSelection_string()
+      def SceneGetValueListSelection_String(_sceneId, _valueId)
+        send_SceneGetValueListSelection_String(_sceneId, _valueId)
+        return recv_SceneGetValueListSelection_String()
       end
 
-      def send_SceneGetValueListSelection_string(_sceneId, _valueId)
-        send_message('SceneGetValueListSelection_string', SceneGetValueListSelection_string_args, :_sceneId => _sceneId, :_valueId => _valueId)
+      def send_SceneGetValueListSelection_String(_sceneId, _valueId)
+        send_message('SceneGetValueListSelection_String', SceneGetValueListSelection_String_args, :_sceneId => _sceneId, :_valueId => _valueId)
       end
 
-      def recv_SceneGetValueListSelection_string()
-        result = receive_message(SceneGetValueListSelection_string_result)
+      def recv_SceneGetValueListSelection_String()
+        result = receive_message(SceneGetValueListSelection_String_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SceneGetValueListSelection_string failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SceneGetValueListSelection_String failed: unknown result')
       end
 
       def SceneGetValueListSelection_Int32(_sceneId, _valueId)
@@ -2068,34 +2068,34 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetSceneValue_Int16 failed: unknown result')
       end
 
-      def SetSceneValue_string(_sceneId, _valueId, _value)
-        send_SetSceneValue_string(_sceneId, _valueId, _value)
-        return recv_SetSceneValue_string()
+      def SetSceneValue_String(_sceneId, _valueId, _value)
+        send_SetSceneValue_String(_sceneId, _valueId, _value)
+        return recv_SetSceneValue_String()
       end
 
-      def send_SetSceneValue_string(_sceneId, _valueId, _value)
-        send_message('SetSceneValue_string', SetSceneValue_string_args, :_sceneId => _sceneId, :_valueId => _valueId, :_value => _value)
+      def send_SetSceneValue_String(_sceneId, _valueId, _value)
+        send_message('SetSceneValue_String', SetSceneValue_String_args, :_sceneId => _sceneId, :_valueId => _valueId, :_value => _value)
       end
 
-      def recv_SetSceneValue_string()
-        result = receive_message(SetSceneValue_string_result)
+      def recv_SetSceneValue_String()
+        result = receive_message(SetSceneValue_String_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetSceneValue_string failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetSceneValue_String failed: unknown result')
       end
 
-      def SetSceneValueListSelection_string(_sceneId, _valueId, _value)
-        send_SetSceneValueListSelection_string(_sceneId, _valueId, _value)
-        return recv_SetSceneValueListSelection_string()
+      def SetSceneValueListSelection_String(_sceneId, _valueId, _value)
+        send_SetSceneValueListSelection_String(_sceneId, _valueId, _value)
+        return recv_SetSceneValueListSelection_String()
       end
 
-      def send_SetSceneValueListSelection_string(_sceneId, _valueId, _value)
-        send_message('SetSceneValueListSelection_string', SetSceneValueListSelection_string_args, :_sceneId => _sceneId, :_valueId => _valueId, :_value => _value)
+      def send_SetSceneValueListSelection_String(_sceneId, _valueId, _value)
+        send_message('SetSceneValueListSelection_String', SetSceneValueListSelection_String_args, :_sceneId => _sceneId, :_valueId => _valueId, :_value => _value)
       end
 
-      def recv_SetSceneValueListSelection_string()
-        result = receive_message(SetSceneValueListSelection_string_result)
+      def recv_SetSceneValueListSelection_String()
+        result = receive_message(SetSceneValueListSelection_String_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetSceneValueListSelection_string failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'SetSceneValueListSelection_String failed: unknown result')
       end
 
       def SetSceneValueListSelection_Int32(_sceneId, _valueId, _value)
@@ -2732,18 +2732,18 @@ module OpenZWave
         write_result(result, oprot, 'GetValueAsString', seqid)
       end
 
-      def process_GetValueListSelection_string(seqid, iprot, oprot)
-        args = read_args(iprot, GetValueListSelection_string_args)
-        result = GetValueListSelection_string_result.new()
-        result.success = @handler.GetValueListSelection_string(args._id)
-        write_result(result, oprot, 'GetValueListSelection_string', seqid)
+      def process_GetValueListSelection_String(seqid, iprot, oprot)
+        args = read_args(iprot, GetValueListSelection_String_args)
+        result = GetValueListSelection_String_result.new()
+        result.success = @handler.GetValueListSelection_String(args._id)
+        write_result(result, oprot, 'GetValueListSelection_String', seqid)
       end
 
-      def process_GetValueListSelection_int32(seqid, iprot, oprot)
-        args = read_args(iprot, GetValueListSelection_int32_args)
-        result = GetValueListSelection_int32_result.new()
-        result.success = @handler.GetValueListSelection_int32(args._id)
-        write_result(result, oprot, 'GetValueListSelection_int32', seqid)
+      def process_GetValueListSelection_Int32(seqid, iprot, oprot)
+        args = read_args(iprot, GetValueListSelection_Int32_args)
+        result = GetValueListSelection_Int32_result.new()
+        result.success = @handler.GetValueListSelection_Int32(args._id)
+        write_result(result, oprot, 'GetValueListSelection_Int32', seqid)
       end
 
       def process_GetValueListItems(seqid, iprot, oprot)
@@ -2760,32 +2760,32 @@ module OpenZWave
         write_result(result, oprot, 'GetValueFloatPrecision', seqid)
       end
 
-      def process_SetValue_bool(seqid, iprot, oprot)
-        args = read_args(iprot, SetValue_bool_args)
-        result = SetValue_bool_result.new()
-        result.success = @handler.SetValue_bool(args._id, args._value)
-        write_result(result, oprot, 'SetValue_bool', seqid)
+      def process_SetValue_Bool(seqid, iprot, oprot)
+        args = read_args(iprot, SetValue_Bool_args)
+        result = SetValue_Bool_result.new()
+        result.success = @handler.SetValue_Bool(args._id, args._value)
+        write_result(result, oprot, 'SetValue_Bool', seqid)
       end
 
-      def process_SetValue_uint8(seqid, iprot, oprot)
-        args = read_args(iprot, SetValue_uint8_args)
-        result = SetValue_uint8_result.new()
-        result.success = @handler.SetValue_uint8(args._id, args._value)
-        write_result(result, oprot, 'SetValue_uint8', seqid)
+      def process_SetValue_UInt8(seqid, iprot, oprot)
+        args = read_args(iprot, SetValue_UInt8_args)
+        result = SetValue_UInt8_result.new()
+        result.success = @handler.SetValue_UInt8(args._id, args._value)
+        write_result(result, oprot, 'SetValue_UInt8', seqid)
       end
 
-      def process_SetValue_uint8_uint8(seqid, iprot, oprot)
-        args = read_args(iprot, SetValue_uint8_uint8_args)
-        result = SetValue_uint8_uint8_result.new()
-        result.success = @handler.SetValue_uint8_uint8(args._id, args._value, args._length)
-        write_result(result, oprot, 'SetValue_uint8_uint8', seqid)
+      def process_SetValue_UInt8_UInt8(seqid, iprot, oprot)
+        args = read_args(iprot, SetValue_UInt8_UInt8_args)
+        result = SetValue_UInt8_UInt8_result.new()
+        result.success = @handler.SetValue_UInt8_UInt8(args._id, args._value, args._length)
+        write_result(result, oprot, 'SetValue_UInt8_UInt8', seqid)
       end
 
-      def process_SetValue_float(seqid, iprot, oprot)
-        args = read_args(iprot, SetValue_float_args)
-        result = SetValue_float_result.new()
-        result.success = @handler.SetValue_float(args._id, args._value)
-        write_result(result, oprot, 'SetValue_float', seqid)
+      def process_SetValue_Float(seqid, iprot, oprot)
+        args = read_args(iprot, SetValue_Float_args)
+        result = SetValue_Float_result.new()
+        result.success = @handler.SetValue_Float(args._id, args._value)
+        write_result(result, oprot, 'SetValue_Float', seqid)
       end
 
       def process_SetValue_int32(seqid, iprot, oprot)
@@ -2802,11 +2802,11 @@ module OpenZWave
         write_result(result, oprot, 'SetValue_int16', seqid)
       end
 
-      def process_SetValue_string(seqid, iprot, oprot)
-        args = read_args(iprot, SetValue_string_args)
-        result = SetValue_string_result.new()
-        result.success = @handler.SetValue_string(args._id, args._value)
-        write_result(result, oprot, 'SetValue_string', seqid)
+      def process_SetValue_String(seqid, iprot, oprot)
+        args = read_args(iprot, SetValue_String_args)
+        result = SetValue_String_result.new()
+        result.success = @handler.SetValue_String(args._id, args._value)
+        write_result(result, oprot, 'SetValue_String', seqid)
       end
 
       def process_SetValueListSelection(seqid, iprot, oprot)
@@ -3159,11 +3159,11 @@ module OpenZWave
         write_result(result, oprot, 'SceneGetValueAsString', seqid)
       end
 
-      def process_SceneGetValueListSelection_string(seqid, iprot, oprot)
-        args = read_args(iprot, SceneGetValueListSelection_string_args)
-        result = SceneGetValueListSelection_string_result.new()
-        result.success = @handler.SceneGetValueListSelection_string(args._sceneId, args._valueId)
-        write_result(result, oprot, 'SceneGetValueListSelection_string', seqid)
+      def process_SceneGetValueListSelection_String(seqid, iprot, oprot)
+        args = read_args(iprot, SceneGetValueListSelection_String_args)
+        result = SceneGetValueListSelection_String_result.new()
+        result.success = @handler.SceneGetValueListSelection_String(args._sceneId, args._valueId)
+        write_result(result, oprot, 'SceneGetValueListSelection_String', seqid)
       end
 
       def process_SceneGetValueListSelection_Int32(seqid, iprot, oprot)
@@ -3208,18 +3208,18 @@ module OpenZWave
         write_result(result, oprot, 'SetSceneValue_Int16', seqid)
       end
 
-      def process_SetSceneValue_string(seqid, iprot, oprot)
-        args = read_args(iprot, SetSceneValue_string_args)
-        result = SetSceneValue_string_result.new()
-        result.success = @handler.SetSceneValue_string(args._sceneId, args._valueId, args._value)
-        write_result(result, oprot, 'SetSceneValue_string', seqid)
+      def process_SetSceneValue_String(seqid, iprot, oprot)
+        args = read_args(iprot, SetSceneValue_String_args)
+        result = SetSceneValue_String_result.new()
+        result.success = @handler.SetSceneValue_String(args._sceneId, args._valueId, args._value)
+        write_result(result, oprot, 'SetSceneValue_String', seqid)
       end
 
-      def process_SetSceneValueListSelection_string(seqid, iprot, oprot)
-        args = read_args(iprot, SetSceneValueListSelection_string_args)
-        result = SetSceneValueListSelection_string_result.new()
-        result.success = @handler.SetSceneValueListSelection_string(args._sceneId, args._valueId, args._value)
-        write_result(result, oprot, 'SetSceneValueListSelection_string', seqid)
+      def process_SetSceneValueListSelection_String(seqid, iprot, oprot)
+        args = read_args(iprot, SetSceneValueListSelection_String_args)
+        result = SetSceneValueListSelection_String_result.new()
+        result.success = @handler.SetSceneValueListSelection_String(args._sceneId, args._valueId, args._value)
+        write_result(result, oprot, 'SetSceneValueListSelection_String', seqid)
       end
 
       def process_SetSceneValueListSelection_Int32(seqid, iprot, oprot)
@@ -5640,7 +5640,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class GetValueListSelection_string_args
+    class GetValueListSelection_String_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
 
@@ -5656,7 +5656,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class GetValueListSelection_string_result
+    class GetValueListSelection_String_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -5672,7 +5672,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class GetValueListSelection_int32_args
+    class GetValueListSelection_Int32_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
 
@@ -5688,7 +5688,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class GetValueListSelection_int32_result
+    class GetValueListSelection_Int32_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -5768,7 +5768,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_bool_args
+    class SetValue_Bool_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
       _VALUE = 2
@@ -5786,7 +5786,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_bool_result
+    class SetValue_Bool_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -5802,7 +5802,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_uint8_args
+    class SetValue_UInt8_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
       _VALUE = 2
@@ -5820,7 +5820,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_uint8_result
+    class SetValue_UInt8_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -5836,7 +5836,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_uint8_uint8_args
+    class SetValue_UInt8_UInt8_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
       _VALUE = 2
@@ -5844,7 +5844,7 @@ module OpenZWave
 
       FIELDS = {
         _ID => {:type => ::Thrift::Types::STRUCT, :name => '_id', :class => ::OpenZWave::RemoteValueID},
-        _VALUE => {:type => ::Thrift::Types::BYTE, :name => '_value'},
+        _VALUE => {:type => ::Thrift::Types::LIST, :name => '_value', :element => {:type => ::Thrift::Types::BYTE}},
         _LENGTH => {:type => ::Thrift::Types::BYTE, :name => '_length'}
       }
 
@@ -5856,7 +5856,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_uint8_uint8_result
+    class SetValue_UInt8_UInt8_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -5872,7 +5872,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_float_args
+    class SetValue_Float_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
       _VALUE = 2
@@ -5890,7 +5890,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_float_result
+    class SetValue_Float_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -5974,7 +5974,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_string_args
+    class SetValue_String_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _ID = 1
       _VALUE = 2
@@ -5992,7 +5992,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetValue_string_result
+    class SetValue_String_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -7715,7 +7715,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SceneGetValueListSelection_string_args
+    class SceneGetValueListSelection_String_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _SCENEID = 1
       _VALUEID = 2
@@ -7733,7 +7733,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SceneGetValueListSelection_string_result
+    class SceneGetValueListSelection_String_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -7963,7 +7963,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetSceneValue_string_args
+    class SetSceneValue_String_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _SCENEID = 1
       _VALUEID = 2
@@ -7983,7 +7983,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetSceneValue_string_result
+    class SetSceneValue_String_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -7999,7 +7999,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetSceneValueListSelection_string_args
+    class SetSceneValueListSelection_String_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _SCENEID = 1
       _VALUEID = 2
@@ -8019,7 +8019,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class SetSceneValueListSelection_string_result
+    class SetSceneValueListSelection_String_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 

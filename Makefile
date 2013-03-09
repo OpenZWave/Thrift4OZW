@@ -44,7 +44,7 @@ INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
 	-I . -I gen-cpp/
 
 # Remove comment below for gnutls support
-GNUTLS := -lgnutls
+#GNUTLS := -lgnutls
 
 LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.a
 LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.so
