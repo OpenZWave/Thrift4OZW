@@ -44,7 +44,8 @@ enum RemoteValueType
 	ValueType_Schedule=5,
 	ValueType_Short=6,
 	ValueType_String=7,
-	ValueType_Button=8
+	ValueType_Button=8,
+	ValueType_Raw				/**< A collection of bytes */
 }
 
 enum DriverControllerCommand 

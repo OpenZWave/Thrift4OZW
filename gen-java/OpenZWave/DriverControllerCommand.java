@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
+/**
+ * < A collection of bytes
+ */
 public enum DriverControllerCommand implements org.apache.thrift.TEnum {
   ControllerCommand_None(0),
   /**

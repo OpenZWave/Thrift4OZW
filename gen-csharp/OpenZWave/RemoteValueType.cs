@@ -18,5 +18,6 @@ namespace OpenZWave
     ValueType_Short = 6,
     ValueType_String = 7,
     ValueType_Button = 8,
+    ValueType_Raw = 9,
   }
 }

@@ -7,6 +7,9 @@
 
 namespace OpenZWave
 {
+  /// <summary>
+  /// < A collection of bytes
+  /// </summary>
   public enum DriverControllerCommand
   {
     ControllerCommand_None = 0,

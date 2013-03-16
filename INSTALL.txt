@@ -1,0 +1,8 @@
+(this will worl on Debian 6, you have to adjust according to your distro)
+
+sudo apt-get install ruby1.9.1-dev gccxml libxml2-dev libxslt-dev
+sudo apt-get install libboost1.42-dev libboost_system1.42-dev libboost_thread1.42-dev lib libboost-filesystem1.42-dev libboost-program-options1.42-dev 
+
+sudo gem1.9.1 install mongrel --pre
+sudo gem1.9.1 install rspec
+sudo gem1.9.1 install rbgccxml 

@@ -24,6 +24,7 @@ use constant ValueType_Schedule => 5;
 use constant ValueType_Short => 6;
 use constant ValueType_String => 7;
 use constant ValueType_Button => 8;
+use constant ValueType_Raw => 9;
 package OpenZWave::DriverControllerCommand;
 use constant ControllerCommand_None => 0;
 use constant ControllerCommand_AddDevice => 1;

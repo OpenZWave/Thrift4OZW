@@ -28,7 +28,7 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 //
 
 #include "RemoteManager.h"
-#include <protocol/TBinaryProtocol.h>
+#include <protocol/TJSONProtocol.h>
 #include <server/TSimpleServer.h>
 #include <transport/TServerSocket.h>
 #include <transport/TBufferTransports.h>
@@ -44,6 +44,9 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 // alse we're using boost's filesystem classes
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/exception/info.hpp>
+
+typedef boost::error_info<struct tag_stack_str,std::string> stack_info;
 
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
@@ -85,7 +88,7 @@ static bool   g_initFailed = false;
 static boost::condition_variable  initCond ;
 static boost::mutex               initMutex;
 
-// Stromp client
+// Stomp client
 #include "BoostStomp.hpp"
 static STOMP::BoostStomp* stomp_client;
 static string*          notifications_topic = new string("/queue/zwave/monitor");
@@ -416,7 +419,6 @@ int main(int argc, char *argv[]) {
     
         // Add a Z-Wave Driver
         Manager::Get()->AddDriver( ozw_port );
-        //Manager::Get()->AddDriver( "HID Controller", Driver::ControllerInterface_Hid );
     } 
     catch (exception& e) 
     {
@@ -429,8 +431,6 @@ int main(int argc, char *argv[]) {
         shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
         shared_ptr<TProcessor> processor(new RemoteManagerProcessor(handler));
         TServerSocket* ss = new TServerSocket(thrift_port);
-        // set 3 seconds timeout value
-        ss->setRecvTimeout(3000);
         shared_ptr<TServerTransport> serverTransport(ss);
         shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
         shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
@@ -448,7 +448,11 @@ int main(int argc, char *argv[]) {
     }    
     catch (exception& e) 
     {
-        cerr << "Exception in OpenZWave Thrift server: " << e.what() << "\n";
+        if ( std::string const *stack = boost::get_error_info<stack_info>(e) ) {                    
+            cerr << stack << endl;
+        } else {
+            cerr << "Exception in OpenZWave Thrift server: " << e.what() << "\n";
+        }
         return 5;
     }
     

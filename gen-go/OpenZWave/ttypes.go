@@ -60,6 +60,7 @@ const (
   ValueType_Short RemoteValueType = 6
   ValueType_String RemoteValueType = 7
   ValueType_Button RemoteValueType = 8
+  ValueType_Raw RemoteValueType = 9
 )
 func (p RemoteValueType) String() string {
   switch p {
@@ -72,6 +73,7 @@ func (p RemoteValueType) String() string {
   case ValueType_Short: return "ValueType_Short"
   case ValueType_String: return "ValueType_String"
   case ValueType_Button: return "ValueType_Button"
+  case ValueType_Raw: return "ValueType_Raw"
   }
   return ""
 }
@@ -87,6 +89,7 @@ func FromRemoteValueTypeString(s string) RemoteValueType {
   case "ValueType_Short": return ValueType_Short
   case "ValueType_String": return ValueType_String
   case "ValueType_Button": return ValueType_Button
+  case "ValueType_Raw": return ValueType_Raw
   }
   return RemoteValueType(-10000)
 }
@@ -99,6 +102,9 @@ func (p RemoteValueType) IsEnum() bool {
   return true
 }
 
+/**
+ *< A collection of bytes
+ */
 type DriverControllerCommand int
 const (
   ControllerCommand_None DriverControllerCommand = 0

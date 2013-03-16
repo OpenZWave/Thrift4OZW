@@ -7,8 +7,10 @@
 
 .SUFFIXES:	.cpp .o .a .s .thrift
 
-CC     := gcc
-CXX    := g++
+#CC     := gcc
+#CXX    := g++
+CC     := clang
+CXX    := clang++
 LD     := ld
 AR     := ar rc
 RANLIB := ranlib
@@ -103,7 +105,7 @@ ozwd.static: Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o g
 
 ozwd:   Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) 
 	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)
-
+	
 dist:	main
 	rm -f Thrift4OZW.tar.gz
 	tar -c --exclude=".git" --exclude ".svn" --exclude "*.o" -hvzf Thrift4OZW.tar.gz *.cpp *.h *.thrift *.sm *.rb Makefile gen-*/ license/ README*
@@ -122,5 +124,5 @@ binclean:
 thrift: gen-cpp/RemoteManager.cpp
 
 patchdiffs:
-	- diff -C3 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h.patched > ozw_types.h.patch
-	- diff -C3 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp.patched > RemoteManager_server.cpp.patch
+	- diff -C3 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h > ozw_types.h.patch
+	- diff -C3 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp > RemoteManager_server.cpp.patch

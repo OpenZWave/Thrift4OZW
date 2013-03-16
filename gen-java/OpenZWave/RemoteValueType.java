@@ -20,7 +20,8 @@ public enum RemoteValueType implements org.apache.thrift.TEnum {
   ValueType_Schedule(5),
   ValueType_Short(6),
   ValueType_String(7),
-  ValueType_Button(8);
+  ValueType_Button(8),
+  ValueType_Raw(9);
 
   private final int value;
 
@@ -59,6 +60,8 @@ public enum RemoteValueType implements org.apache.thrift.TEnum {
         return ValueType_String;
       case 8:
         return ValueType_Button;
+      case 9:
+        return ValueType_Raw;
       default:
         return null;
     }

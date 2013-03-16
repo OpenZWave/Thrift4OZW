@@ -27,8 +27,9 @@ module OpenZWave
     ValueType_Short = 6
     ValueType_String = 7
     ValueType_Button = 8
-    VALUE_MAP = {0 => "ValueType_Bool", 1 => "ValueType_Byte", 2 => "ValueType_Decimal", 3 => "ValueType_Int", 4 => "ValueType_List", 5 => "ValueType_Schedule", 6 => "ValueType_Short", 7 => "ValueType_String", 8 => "ValueType_Button"}
-    VALID_VALUES = Set.new([ValueType_Bool, ValueType_Byte, ValueType_Decimal, ValueType_Int, ValueType_List, ValueType_Schedule, ValueType_Short, ValueType_String, ValueType_Button]).freeze
+    ValueType_Raw = 9
+    VALUE_MAP = {0 => "ValueType_Bool", 1 => "ValueType_Byte", 2 => "ValueType_Decimal", 3 => "ValueType_Int", 4 => "ValueType_List", 5 => "ValueType_Schedule", 6 => "ValueType_Short", 7 => "ValueType_String", 8 => "ValueType_Button", 9 => "ValueType_Raw"}
+    VALID_VALUES = Set.new([ValueType_Bool, ValueType_Byte, ValueType_Decimal, ValueType_Int, ValueType_List, ValueType_Schedule, ValueType_Short, ValueType_String, ValueType_Button, ValueType_Raw]).freeze
   end
 
   module DriverControllerCommand

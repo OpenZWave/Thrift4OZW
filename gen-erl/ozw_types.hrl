@@ -16,6 +16,7 @@
 -define(ozw_RemoteValueType_ValueType_Short, 6).
 -define(ozw_RemoteValueType_ValueType_String, 7).
 -define(ozw_RemoteValueType_ValueType_Button, 8).
+-define(ozw_RemoteValueType_ValueType_Raw, 9).
 
 -define(ozw_DriverControllerCommand_ControllerCommand_None, 0).
 -define(ozw_DriverControllerCommand_ControllerCommand_AddDevice, 1).

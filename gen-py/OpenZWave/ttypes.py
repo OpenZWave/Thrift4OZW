@@ -49,6 +49,7 @@ class RemoteValueType:
   ValueType_Short = 6
   ValueType_String = 7
   ValueType_Button = 8
+  ValueType_Raw = 9
 
   _VALUES_TO_NAMES = {
     0: "ValueType_Bool",
@@ -60,6 +61,7 @@ class RemoteValueType:
     6: "ValueType_Short",
     7: "ValueType_String",
     8: "ValueType_Button",
+    9: "ValueType_Raw",
   }
 
   _NAMES_TO_VALUES = {
@@ -72,9 +74,13 @@ class RemoteValueType:
     "ValueType_Short": 6,
     "ValueType_String": 7,
     "ValueType_Button": 8,
+    "ValueType_Raw": 9,
   }
 
 class DriverControllerCommand:
+  """
+  < A collection of bytes
+  """
   ControllerCommand_None = 0
   ControllerCommand_AddDevice = 1
   ControllerCommand_CreateNewPrimary = 2
