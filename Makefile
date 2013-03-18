@@ -94,16 +94,16 @@ gen-cpp/ozw_types.o:  gen-cpp/ozw_types.cpp gen-cpp/ozw_types.h
 Main.o: Main.cpp gen-cpp/RemoteManager_server.cpp
 	$(CXX) $(CFLAGS) -c Main.cpp $(INCLUDES)   
 	
-openzwave: $(LIBZWAVE_STATIC) $(LIBZWAVE_DYNAMIC)
+openzwave: 
 	cd $(OPENZWAVE)/cpp/build/linux/; make
 	
 booststomp:
 	cd $(BOOSTSTOMP); make
 
-ozwd.static: Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_STATIC)
+ozwd.static: Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o openzwave
 	$(CXX) -static -static-libgcc -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o  $(LIBZWAVE_STATIC) $(LIBBOOSTSTOMP_STATIC) $(LIBBOOST_STATIC) -lpthread -ludev -lthrift -lrt
 
-ozwd:   Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) 
+ozwd:   Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o openzwave
 	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)
 	
 dist:	main
