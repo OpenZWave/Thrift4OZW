@@ -68,132 +68,132 @@
 
 %% struct remoteValueID
 
--record(remoteValueID, {_homeId = undefined :: integer(), 
-                        _nodeId = undefined :: integer(), 
-                        _genre = undefined :: integer(), 
-                        _commandClassId = undefined :: integer(), 
-                        _instance = undefined :: integer(), 
-                        _valueIndex = undefined :: integer(), 
-                        _type = undefined :: integer()}).
+-record(remoteValueID, {_homeId :: integer(),
+                        _nodeId :: integer(),
+                        _genre :: integer(),
+                        _commandClassId :: integer(),
+                        _instance :: integer(),
+                        _valueIndex :: integer(),
+                        _type :: integer()}).
 
 %% struct driverData
 
--record(driverData, {s_SOFCnt = undefined :: integer(), 
-                     s_ACKWaiting = undefined :: integer(), 
-                     s_readAborts = undefined :: integer(), 
-                     s_badChecksum = undefined :: integer(), 
-                     s_readCnt = undefined :: integer(), 
-                     s_writeCnt = undefined :: integer(), 
-                     s_CANCnt = undefined :: integer(), 
-                     s_NAKCnt = undefined :: integer(), 
-                     s_ACKCnt = undefined :: integer(), 
-                     s_OOFCnt = undefined :: integer(), 
-                     s_dropped = undefined :: integer(), 
-                     s_retries = undefined :: integer(), 
-                     s_controllerReadCnt = undefined :: integer(), 
-                     s_controllerWriteCnt = undefined :: integer()}).
+-record(driverData, {s_SOFCnt :: integer(),
+                     s_ACKWaiting :: integer(),
+                     s_readAborts :: integer(),
+                     s_badChecksum :: integer(),
+                     s_readCnt :: integer(),
+                     s_writeCnt :: integer(),
+                     s_CANCnt :: integer(),
+                     s_NAKCnt :: integer(),
+                     s_ACKCnt :: integer(),
+                     s_OOFCnt :: integer(),
+                     s_dropped :: integer(),
+                     s_retries :: integer(),
+                     s_controllerReadCnt :: integer(),
+                     s_controllerWriteCnt :: integer()}).
 
 %% struct getDriverStatisticsReturnStruct
 
--record(getDriverStatisticsReturnStruct, {_data = #driverData{} :: #driverData{}}).
+-record(getDriverStatisticsReturnStruct, {_data :: #driverData{}}).
 
 %% struct commandClassData
 
--record(commandClassData, {m_commandClassId = undefined :: integer(), 
-                           m_sentCnt = undefined :: integer(), 
-                           m_receivedCnt = undefined :: integer()}).
+-record(commandClassData, {m_commandClassId :: integer(),
+                           m_sentCnt :: integer(),
+                           m_receivedCnt :: integer()}).
 
 %% struct nodeData
 
--record(nodeData, {m_sentCnt = undefined :: integer(), 
-                   m_sentFailed = undefined :: integer(), 
-                   m_retries = undefined :: integer(), 
-                   m_receivedCnt = undefined :: integer(), 
-                   m_receivedDups = undefined :: integer(), 
-                   m_rtt = undefined :: integer(), 
-                   m_sentTS = undefined :: string(), 
-                   m_receivedTS = undefined :: string(), 
-                   m_lastRTT = undefined :: integer(), 
-                   m_averageRTT = undefined :: integer(), 
-                   m_quality = undefined :: integer(), 
-                   m_lastReceivedMessage = [] :: list(), 
-                   m_ccData = [] :: list()}).
+-record(nodeData, {m_sentCnt :: integer(),
+                   m_sentFailed :: integer(),
+                   m_retries :: integer(),
+                   m_receivedCnt :: integer(),
+                   m_receivedDups :: integer(),
+                   m_rtt :: integer(),
+                   m_sentTS :: string() | binary(),
+                   m_receivedTS :: string() | binary(),
+                   m_lastRTT :: integer(),
+                   m_averageRTT :: integer(),
+                   m_quality :: integer(),
+                   m_lastReceivedMessage :: list(),
+                   m_ccData :: list()}).
 
 %% struct getNodeStatisticsReturnStruct
 
--record(getNodeStatisticsReturnStruct, {_data = #nodeData{} :: #nodeData{}}).
+-record(getNodeStatisticsReturnStruct, {_data :: #nodeData{}}).
 
 %% struct getSwitchPointReturnStruct
 
--record(getSwitchPointReturnStruct, {retval = undefined :: boolean(), 
-                                     o_hours = undefined :: integer(), 
-                                     o_minutes = undefined :: integer(), 
-                                     o_setback = undefined :: integer()}).
+-record(getSwitchPointReturnStruct, {retval :: boolean(),
+                                     o_hours :: integer(),
+                                     o_minutes :: integer(),
+                                     o_setback :: integer()}).
 
 %% struct bool_Bool
 
--record(bool_Bool, {retval = undefined :: boolean(), 
-                    o_value = undefined :: boolean()}).
+-record(bool_Bool, {retval :: boolean(),
+                    o_value :: boolean()}).
 
 %% struct bool_UInt8
 
--record(bool_UInt8, {retval = undefined :: boolean(), 
-                     o_value = undefined :: integer()}).
+-record(bool_UInt8, {retval :: boolean(),
+                     o_value :: integer()}).
 
 %% struct bool_Float
 
--record(bool_Float, {retval = undefined :: boolean(), 
-                     o_value = undefined :: float()}).
+-record(bool_Float, {retval :: boolean(),
+                     o_value :: float()}).
 
 %% struct bool_Int
 
--record(bool_Int, {retval = undefined :: boolean(), 
-                   o_value = undefined :: integer()}).
+-record(bool_Int, {retval :: boolean(),
+                   o_value :: integer()}).
 
 %% struct bool_Int16
 
--record(bool_Int16, {retval = undefined :: boolean(), 
-                     o_value = undefined :: integer()}).
+-record(bool_Int16, {retval :: boolean(),
+                     o_value :: integer()}).
 
 %% struct bool_String
 
--record(bool_String, {retval = undefined :: boolean(), 
-                      o_value = undefined :: string()}).
+-record(bool_String, {retval :: boolean(),
+                      o_value :: string() | binary()}).
 
 %% struct bool_ListString
 
--record(bool_ListString, {retval = undefined :: boolean(), 
-                          o_value = [] :: list()}).
+-record(bool_ListString, {retval :: boolean(),
+                          o_value :: list()}).
 
 %% struct listUInt8_Byte
 
--record(listUInt8_Byte, {_value = [] :: list(), 
-                         _length = undefined :: integer()}).
+-record(listUInt8_Byte, {_value :: list(),
+                         _length :: integer()}).
 
 %% struct uInt32_ListByte
 
--record(uInt32_ListByte, {retval = undefined :: integer(), 
-                          _nodeNeighbors = [] :: list()}).
+-record(uInt32_ListByte, {retval :: integer(),
+                          _nodeNeighbors :: list()}).
 
 %% struct bool_GetNodeClassInformation
 
--record(bool_GetNodeClassInformation, {retval = undefined :: boolean(), 
-                                       _className = undefined :: string(), 
-                                       _classVersion = undefined :: integer()}).
+-record(bool_GetNodeClassInformation, {retval :: boolean(),
+                                       _className :: string() | binary(),
+                                       _classVersion :: integer()}).
 
 %% struct getAssociationsReturnStruct
 
--record(getAssociationsReturnStruct, {retval = undefined :: integer(), 
-                                      o_associations = [] :: list()}).
+-record(getAssociationsReturnStruct, {retval :: integer(),
+                                      o_associations :: list()}).
 
 %% struct getAllScenesReturnStruct
 
--record(getAllScenesReturnStruct, {retval = undefined :: integer(), 
-                                   _sceneIds = [] :: list()}).
+-record(getAllScenesReturnStruct, {retval :: integer(),
+                                   _sceneIds :: list()}).
 
 %% struct sceneGetValuesReturnStruct
 
--record(sceneGetValuesReturnStruct, {retval = undefined :: integer(), 
-                                     o_value = [] :: list()}).
+-record(sceneGetValuesReturnStruct, {retval :: integer(),
+                                     o_value :: list()}).
 
 -endif.

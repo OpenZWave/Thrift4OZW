@@ -80,7 +80,7 @@ LIBS := $(GNUTLS) $(LIBUSB) $(LIBBOOST) $(LIBTHRIFT) $(LIBBOOSTSTOMP)
 all: openzwave booststomp ozwd
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
-	patch -p0 gen-cpp/ozw_types.h < ozw_types.h.patch_new
+	patch -p0 gen-cpp/ozw_types.h < ozw_types.h.patch
 	ruby create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT)
 	cp gen-cpp/RemoteManager_server.cpp gen-cpp/RemoteManager_server.cpp.orig
 	cp gen-cpp/ozw_types.h gen-cpp/ozw_types.h.orig
