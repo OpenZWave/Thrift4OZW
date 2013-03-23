@@ -141,10 +141,7 @@ public class Bool_ListString implements org.apache.thrift.TBase<Bool_ListString,
     __isset_bitfield = other.__isset_bitfield;
     this.retval = other.retval;
     if (other.isSetO_value()) {
-      List<String> __this__o_value = new ArrayList<String>();
-      for (String other_element : other.o_value) {
-        __this__o_value.add(other_element);
-      }
+      List<String> __this__o_value = new ArrayList<String>(other.o_value);
       this.o_value = __this__o_value;
     }
   }

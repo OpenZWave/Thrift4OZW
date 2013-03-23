@@ -141,10 +141,7 @@ public class UInt32_ListByte implements org.apache.thrift.TBase<UInt32_ListByte,
     __isset_bitfield = other.__isset_bitfield;
     this.retval = other.retval;
     if (other.isSet_nodeNeighbors()) {
-      List<Byte> __this___nodeNeighbors = new ArrayList<Byte>();
-      for (Byte other_element : other._nodeNeighbors) {
-        __this___nodeNeighbors.add(other_element);
-      }
+      List<Byte> __this___nodeNeighbors = new ArrayList<Byte>(other._nodeNeighbors);
       this._nodeNeighbors = __this___nodeNeighbors;
     }
   }
