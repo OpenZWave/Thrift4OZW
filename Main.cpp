@@ -93,6 +93,10 @@ static boost::mutex               initMutex;
 static STOMP::BoostStomp* stomp_client;
 static string*          notifications_topic = new string("/queue/zwave/monitor");
 
+
+//JSON body indicator
+static bool jsonMessageBody =false;
+
 //-----------------------------------------------------------------------------
 // <GetNodeInfo>
 // Callback that is triggered when a value, group or node changes
@@ -114,6 +118,32 @@ NodeInfo* GetNodeInfo
 	}
 
 	return NULL;
+}
+
+//-----------------------------------------------------------------------------
+// <jsonifyHeaders>
+// Represent headers as JSON object
+//-----------------------------------------------------------------------------
+string jsonifyHeaders(STOMP::hdrmap headers)
+{
+	string hdrjson="";	
+	STOMP::hdrmap::iterator it;
+	hdrjson.append("{");
+	for(it=headers.begin(); it!=headers.end(); ++it)
+	{
+	  hdrjson.append("\"");
+	  hdrjson.append(it->first);
+	  hdrjson.append("\":\"");
+	  hdrjson.append(it->second);
+	  hdrjson.append("\"");
+	  hdrjson.append(",");
+	}
+	//pop_back introduced in C++0x
+	//http://stackoverflow.com/questions/2310939/remove-last-character-from-c-string 	
+	//hdrjson.pop_back();
+	hdrjson.resize (hdrjson.size () - 1);
+	hdrjson.append("}");
+	return hdrjson;
 }
 
 //-----------------------------------------------------------------------------
@@ -313,8 +343,10 @@ void OnNotification
             headers["ValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
         }
         //
-        string empty = ""  ;
-        stomp_client->send(*notifications_topic, headers, empty);
+        string response = ""  ;
+	if(jsonMessageBody)
+	     response=jsonifyHeaders(headers);
+        stomp_client->send(*notifications_topic, headers,response );
     }
     //
     g_criticalSection.unlock();
@@ -336,8 +368,10 @@ void send_all_values() {
             headers["HomeID"] =  to_string<uint32_t>(v.GetHomeId(), std::hex);
             headers["ValueID"] =  to_string<uint64_t>(v.GetId(), std::hex);
             //
-            string empty = ""  ;
-            stomp_client->send(*notifications_topic, headers, empty);            
+            string response = ""  ;
+	if(jsonMessageBody)
+	     response=jsonifyHeaders(headers);
+        stomp_client->send(*notifications_topic, headers,response );         
 		}
 	}
 	//
@@ -370,6 +404,7 @@ int main(int argc, char *argv[]) {
             ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.string()), "our OpenZWave manufacturer database")
             ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.string()), "our OpenZWave user config database")
             ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "our OpenZWave driver port")
+            ("json,j",     po::value<bool>(&jsonMessageBody)->default_value(false), "Should stomp messages have JSON body?")
         ;
         // a boost:program_options variable map
         po::variables_map vm;        
