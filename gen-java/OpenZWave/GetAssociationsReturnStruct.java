@@ -141,10 +141,7 @@ public class GetAssociationsReturnStruct implements org.apache.thrift.TBase<GetA
     __isset_bitfield = other.__isset_bitfield;
     this.retval = other.retval;
     if (other.isSetO_associations()) {
-      List<Byte> __this__o_associations = new ArrayList<Byte>();
-      for (Byte other_element : other.o_associations) {
-        __this__o_associations.add(other_element);
-      }
+      List<Byte> __this__o_associations = new ArrayList<Byte>(other.o_associations);
       this.o_associations = __this__o_associations;
     }
   }

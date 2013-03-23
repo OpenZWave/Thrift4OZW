@@ -271,14 +271,11 @@ public class NodeData implements org.apache.thrift.TBase<NodeData, NodeData._Fie
     this.m_averageRTT = other.m_averageRTT;
     this.m_quality = other.m_quality;
     if (other.isSetM_lastReceivedMessage()) {
-      List<Byte> __this__m_lastReceivedMessage = new ArrayList<Byte>();
-      for (Byte other_element : other.m_lastReceivedMessage) {
-        __this__m_lastReceivedMessage.add(other_element);
-      }
+      List<Byte> __this__m_lastReceivedMessage = new ArrayList<Byte>(other.m_lastReceivedMessage);
       this.m_lastReceivedMessage = __this__m_lastReceivedMessage;
     }
     if (other.isSetM_ccData()) {
-      List<CommandClassData> __this__m_ccData = new ArrayList<CommandClassData>();
+      List<CommandClassData> __this__m_ccData = new ArrayList<CommandClassData>(other.m_ccData.size());
       for (CommandClassData other_element : other.m_ccData) {
         __this__m_ccData.add(new CommandClassData(other_element));
       }

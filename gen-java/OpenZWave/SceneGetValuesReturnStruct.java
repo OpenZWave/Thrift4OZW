@@ -141,7 +141,7 @@ public class SceneGetValuesReturnStruct implements org.apache.thrift.TBase<Scene
     __isset_bitfield = other.__isset_bitfield;
     this.retval = other.retval;
     if (other.isSetO_value()) {
-      List<RemoteValueID> __this__o_value = new ArrayList<RemoteValueID>();
+      List<RemoteValueID> __this__o_value = new ArrayList<RemoteValueID>(other.o_value.size());
       for (RemoteValueID other_element : other.o_value) {
         __this__o_value.add(new RemoteValueID(other_element));
       }

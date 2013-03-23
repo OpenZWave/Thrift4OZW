@@ -141,10 +141,7 @@ public class GetAllScenesReturnStruct implements org.apache.thrift.TBase<GetAllS
     __isset_bitfield = other.__isset_bitfield;
     this.retval = other.retval;
     if (other.isSet_sceneIds()) {
-      List<Byte> __this___sceneIds = new ArrayList<Byte>();
-      for (Byte other_element : other._sceneIds) {
-        __this___sceneIds.add(other_element);
-      }
+      List<Byte> __this___sceneIds = new ArrayList<Byte>(other._sceneIds);
       this._sceneIds = __this___sceneIds;
     }
   }
