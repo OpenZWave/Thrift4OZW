@@ -1,14 +1,21 @@
-(this will worl on Debian 6, you have to adjust according to your distro)
+BUILD DEPENDENCIES
+==============
+(this will work on Ubuntu12.x/Debian 6, you have to adjust according to your distro)
 
+# Debian package dependencies
 sudo apt-get install ruby1.9.1-dev gccxml libxml2-dev libxslt-dev
 sudo apt-get install libboost1.42-dev libboost_system1.42-dev libboost_thread1.42-dev libboost-filesystem1.42-dev libboost-program-options1.42-dev 
-
-sudo gem1.9.1 install mongrel --pre
-sudo gem1.9.1 install rspec
 
 # installs the ruby GCCXML client gem without compiling the 'gccxml' executable
 # since it was delivered by Debian package
 sudo gem1.9.1 install gccxml_gem --platform ruby
-# otherwise skip it
+sudo gem1.9.1 install mongrel --pre
+sudo gem1.9.1 install rspec bit-struct onstomp
+
+GCCXML alternative install
+==================
+The alternative path is to install GCCXML from Ruby's gem package management. 
+Do this ONLY if you have a fairly older gcc, otherwise you WILL get errors during building like
+"gccxml-builtins.h: no such file or directory"
 
 sudo gem1.9.1 install rbgccxml 

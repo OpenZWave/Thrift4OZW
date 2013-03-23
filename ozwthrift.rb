@@ -49,6 +49,8 @@ transport.open()
 OZWmgr = OpenZWave::RemoteManager::Client.new(protocol)
 puts OZWmgr.inspect
 
+# Dont forget to set your homeID first! It's usually part of the notification headers..
+
 #OZWmgr.GetNodeNeighbors(HomeID, 1)
 
 #OZWmgr.SetNodeOff(HomeID, 5)

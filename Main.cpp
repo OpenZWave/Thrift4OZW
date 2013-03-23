@@ -356,7 +356,7 @@ int main(int argc, char *argv[]) {
 	string  stomp_host, ozw_port, ozw_conf, ozw_user;
     int     stomp_port, thrift_port;
     //
-    fs::path current_dir = fs::path(get_current_dir_name()) / "/";
+    fs::path current_dir = fs::path(get_current_dir_name());
     fs::path ozw_config_dir = current_dir.parent_path() / "open-zwave-read-only/config/";
     //
     try {        
