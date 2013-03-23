@@ -1,0 +1,39 @@
+Below are a list of steps I had to take to successfully compile on Ubuntu 12.10
+(above and beyond the existing notes in INSTALL.txt).
+
+
+#libboost instead of the several 1.42 directives in INSTALL, I had to do:
+libboost1.50-all-dev
+
+#libudev
+sudo apt-get install libudev-dev
+
+#thrift
+git clone https://git-wip-us.apache.org/repos/asf/thrift.git thrift
+sudo apt-get install libtool
+sudo apt-get install autoconf
+cd thrift
+./bootstrap.sh
+./configure
+make
+make install
+
+
+#rbgccxml
+##Got this error doing sudo gem1.9.1 install rbgccxml
+make
+compiling xslt_stylesheet.c
+compiling xml_relax_ng.c
+compiling xml_xpath_context.c
+xml_xpath_context.c: In function ‘xpath_generic_exception_handler’:
+xml_xpath_context.c:184:3: error: format not a string literal and no format arguments [-Werror=format-security]
+cc1: some warnings being treated as errors
+make: *** [xml_xpath_context.o] Error 1
+##This is caused the version of nokogiri in rbgccxml gem
+##Forked, edited and installed gem from source -> git://github.com/mattinbits/rbgccxml.git
+
+
+
+
+
+
