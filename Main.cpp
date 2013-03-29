@@ -301,6 +301,7 @@ void OnNotification
         case Notification::Type_DriverReady:
         {
             g_homeId = _notification->GetHomeId();
+            initCond.notify_all();
             break;
         }
 
@@ -318,8 +319,7 @@ void OnNotification
         //missing Type_NodeQueriesComplete,			/**< All the initialisation queries on a node have been completed. */
         
         /*< All awake nodes have been queried, so client application can expected complete data for these nodes. */
-        case Notification::Type_AwakeNodesQueried:
-            
+        case Notification::Type_AwakeNodesQueried:        
         /**< All nodes have been queried, so client application can expected complete data. */
         case Notification::Type_AllNodesQueried:
         {
@@ -327,6 +327,13 @@ void OnNotification
                 break;
         }
 
+        case Notification::Type_AllNodesQueriedSomeDead:
+        {
+            // TODO: mark dead nodes for deletion?
+                initCond.notify_all();
+                break;
+        }
+            
         default:
         	break;
     }
@@ -435,8 +442,7 @@ int main(int argc, char *argv[]) {
         return 3;
     } 
 
-    // OpenZWave initialization
-	//initMutex.lock();
+    // OpenZWave daemon initialization
     try {    
         // Create the OpenZWave Manager.
         // The first argument is the path to the config files (where the manufacturer_specific.xml file is located
