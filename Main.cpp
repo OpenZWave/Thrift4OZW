@@ -351,9 +351,11 @@ void OnNotification
         }
         //
         string response = ""  ;
-	if(jsonMessageBody)
-	     response=jsonifyHeaders(headers);
-        stomp_client->send(*notifications_topic, headers,response );
+        if (jsonMessageBody) {
+            response = jsonifyHeaders(headers);
+        }
+        //
+        stomp_client->send(*notifications_topic, headers, response);
     }
     //
     g_criticalSection.unlock();
@@ -390,6 +392,14 @@ void send_all_values() {
 #include "gen-cpp/RemoteManager_server.cpp"
 //
 
+void dump_trace(exception& e, const char* context) {
+        cerr << "------------------------------------------------------------------------" << endl;
+        cerr << context << ": " << e.what() << endl;
+        if ( std::string const *stack = boost::get_error_info<stack_info>(e) ) {                    
+            cerr << "Stack Trace:" << endl << stack << endl;
+        }
+        cerr << "------------------------------------------------------------------------" << endl;
+}
 
 // -----------------------------------------
 int main(int argc, char *argv[]) {
@@ -411,7 +421,7 @@ int main(int argc, char *argv[]) {
             ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.string()), "our OpenZWave manufacturer database")
             ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.string()), "our OpenZWave user config database")
             ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "our OpenZWave driver port")
-            ("json,j",     po::value<bool>(&jsonMessageBody)->default_value(false), "Should stomp messages have JSON body?")
+            ("json,j",        po::bool_switch(&jsonMessageBody), "Should stomp messages have JSON body?")
         ;
         // a boost:program_options variable map
         po::variables_map vm;        
@@ -426,7 +436,7 @@ int main(int argc, char *argv[]) {
     }
     catch (exception& e) 
     {
-        cerr << "Error parsing options: " << e.what() << "\n";
+        dump_trace(e, " parsing command-line options");
         return 2;
     }
 
@@ -438,7 +448,7 @@ int main(int argc, char *argv[]) {
     } 
     catch (exception& e) 
     {
-        cerr << "Error connecting to STOMP: " << e.what() << "\n";
+        dump_trace(e, "connecting to STOMP");
         return 3;
     } 
 
@@ -463,10 +473,12 @@ int main(int argc, char *argv[]) {
     } 
     catch (exception& e) 
     {
-        cerr << "Error initializing OpenZWave: " << e.what() << "\n";
+        dump_trace(e, "initializing OpenZWave");
         return 4;
-    } 
+    };
     
+    // Thrift server initialization
+    TSimpleServer* server;
     try {   
         // THRIFT: initialize RemoteManager
         shared_ptr<RemoteManagerHandler> handler(new RemoteManagerHandler());
@@ -475,26 +487,39 @@ int main(int argc, char *argv[]) {
         shared_ptr<TServerTransport> serverTransport(ss);
         shared_ptr<TTransportFactory> transportFactory(new TBufferedTransportFactory());
         shared_ptr<TProtocolFactory> protocolFactory(new TBinaryProtocolFactory());
-        TSimpleServer server(processor, serverTransport, transportFactory, protocolFactory);
+        server = new TSimpleServer(processor, serverTransport, transportFactory, protocolFactory);
+    }
+    catch (exception& e) 
+    {
+        dump_trace(e, "setting up Thrift SimpleServer");
+        return 5;
+    }
     
+    try {
         // Now we just wait for the driver to become ready, and then write out the loaded config.
         boost::unique_lock<boost::mutex> initLock(initMutex);
         initCond.wait(initLock);
         usleep(500);
-        cout << "------------------------------------------------------------------------" << endl;
-        cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
-        cout << "------------------------------------------------------------------------" << endl;
-        // ready to serve!
-        server.serve();
+    }
+    catch (exception& e) 
+    {
+        dump_trace(e, "waiting for OpenZWave to complete initialization");
+        return 6;
+    }
+
+    cout << "------------------------------------------------------------------------" << endl;
+    cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
+    cout << "------------------------------------------------------------------------" << endl;
+    cout.flush();
+    
+    // ready to serve!
+    try {
+        server->serve();
     }    
     catch (exception& e) 
     {
-        if ( std::string const *stack = boost::get_error_info<stack_info>(e) ) {                    
-            cerr << stack << endl;
-        } else {
-            cerr << "Exception in OpenZWave Thrift server: " << e.what() << "\n";
-        }
-        return 5;
+        dump_trace(e, "server.serve()");
+        return 7;
     }
     
     return 0;
