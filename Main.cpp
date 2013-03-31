@@ -41,7 +41,7 @@ http://en.wikipedia.org/wiki/GNU_Lesser_General_Public_License
 #include <boost/program_options.hpp>
 #include <boost/program_options/parsers.hpp>
 #include <boost/program_options/variables_map.hpp>
-// alse we're using boost's filesystem classes
+// also we're using boost's filesystem classes
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/exception/info.hpp>
@@ -80,7 +80,10 @@ typedef struct
 static list<NodeInfo*>     g_nodes;
 
 // OpenZWave includes
+#include "Manager.h"
 #include "Notification.h"
+#include "Log.h"
+
 static uint32 g_homeId = 0;
 static bool   g_initFailed = false;
 //
@@ -93,9 +96,11 @@ static boost::mutex               initMutex;
 static STOMP::BoostStomp* stomp_client;
 static string*          notifications_topic = new string("/queue/zwave/monitor");
 
+// JSON body indicator
+static bool jsonMessageBody = false;
 
-//JSON body indicator
-static bool jsonMessageBody =false;
+// Show OZW+BoostStomp debug messages?
+static bool debugMsg = false;
 
 //-----------------------------------------------------------------------------
 // <GetNodeInfo>
@@ -124,7 +129,7 @@ NodeInfo* GetNodeInfo
 // <jsonifyHeaders>
 // Represent headers as JSON object
 //-----------------------------------------------------------------------------
-string jsonifyHeaders(STOMP::hdrmap headers)
+string jsonifyHeaders(STOMP::hdrmap& headers)
 {
 	string hdrjson="";	
 	STOMP::hdrmap::iterator it;
@@ -323,14 +328,14 @@ void OnNotification
         /**< All nodes have been queried, so client application can expected complete data. */
         case Notification::Type_AllNodesQueried:
         {
-                initCond.notify_all();
+                //initCond.notify_all();
                 break;
         }
 
         case Notification::Type_AllNodesQueriedSomeDead:
         {
             // TODO: mark dead nodes for deletion?
-                initCond.notify_all();
+                //initCond.notify_all();
                 break;
         }
             
@@ -350,12 +355,9 @@ void OnNotification
             headers["ValueID"] =  to_string<uint64_t>(_notification->GetValueID().GetId(), std::hex);
         }
         //
-        string response = ""  ;
-        if (jsonMessageBody) {
-            response = jsonifyHeaders(headers);
-        }
+        string body = jsonMessageBody ? jsonifyHeaders(headers) : "";
         //
-        stomp_client->send(*notifications_topic, headers, response);
+        stomp_client->send(*notifications_topic, headers, body);
     }
     //
     g_criticalSection.unlock();
@@ -377,10 +379,8 @@ void send_all_values() {
             headers["HomeID"] =  to_string<uint32_t>(v.GetHomeId(), std::hex);
             headers["ValueID"] =  to_string<uint64_t>(v.GetId(), std::hex);
             //
-            string response = ""  ;
-	if(jsonMessageBody)
-	     response=jsonifyHeaders(headers);
-        stomp_client->send(*notifications_topic, headers,response );         
+            string response = jsonMessageBody ? jsonifyHeaders(headers) : "";
+            stomp_client->send(*notifications_topic, headers,response );         
 		}
 	}
 	//
@@ -422,6 +422,7 @@ int main(int argc, char *argv[]) {
             ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.string()), "our OpenZWave user config database")
             ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "our OpenZWave driver port")
             ("json,j",        po::bool_switch(&jsonMessageBody), "Should stomp messages have JSON body?")
+            ("debug,d",       po::bool_switch(&debugMsg), "Show debug logging from OpenZwave and BoostStomp?")
         ;
         // a boost:program_options variable map
         po::variables_map vm;        
@@ -436,7 +437,7 @@ int main(int argc, char *argv[]) {
     }
     catch (exception& e) 
     {
-        dump_trace(e, " parsing command-line options");
+        dump_trace(e, "parsing command-line options");
         return 2;
     }
 
@@ -445,6 +446,7 @@ int main(int argc, char *argv[]) {
         // connect to STOMP server in order to send openzwave notifications 
         stomp_client = new STOMP::BoostStomp(stomp_host, stomp_port);
         stomp_client->start();
+        stomp_client->enable_debug_msgs(debugMsg);
     } 
     catch (exception& e) 
     {
@@ -470,6 +472,13 @@ int main(int argc, char *argv[]) {
     
         // Add a Z-Wave Driver
         Manager::Get()->AddDriver( ozw_port );
+        
+        // Set OpenZwave's log level
+        LogLevel ll_save  = debugMsg ? LogLevel_Debug : LogLevel_None;
+        LogLevel ll_queue = debugMsg ? LogLevel_Debug : LogLevel_Detail;
+        LogLevel ll_dump  = debugMsg ? LogLevel_Warning : LogLevel_Error;
+        Log::SetLoggingState(ll_save, ll_queue, ll_dump);
+        
     } 
     catch (exception& e) 
     {

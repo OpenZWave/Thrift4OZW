@@ -1175,8 +1175,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
   }
 
   void ping() {
-    // Your implementation goes here
-    printf("ping\n");
+    // Dummy method to keep Thrift connection alive over NAT routers
   }
 
 };

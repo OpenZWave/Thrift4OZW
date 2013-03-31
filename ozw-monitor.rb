@@ -101,6 +101,7 @@ notificationtypes, valuegenres, valuetypes = parse_ozw_headers(cpp_src) # in ozw
                     puts "   #{hdr} : #{val}"
                 end
             }
+            puts "   --- message body: ---\n#{msg.body}" unless msg.body.empty?  
         end
     rescue Exception => e
         puts e.inspect

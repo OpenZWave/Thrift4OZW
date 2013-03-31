@@ -1,5 +1,5 @@
-*** gen-cpp/RemoteManager_server.cpp.orig	2013-03-09 21:01:53.973455995 +0200
---- gen-cpp/RemoteManager_server.cpp.patched	2013-03-10 09:25:27.455986522 +0200
+*** gen-cpp/RemoteManager_server.cpp.orig	2013-03-31 10:13:47.323382427 +0300
+--- gen-cpp/RemoteManager_server.cpp.patched	2013-03-31 10:29:40.404108479 +0300
 ***************
 *** 1,11 ****
   // Automatically generated OpenZWave::Manager_server wrapper
@@ -231,7 +231,7 @@
   
     void SceneGetValueAsBool(Bool_Bool& _return, const int8_t _sceneId, const RemoteValueID& _valueId) {
 ***************
-*** 1138,1145 ****
+*** 1138,1150 ****
     }
   
     void SendAllValues() {
@@ -240,7 +240,12 @@
     }
   
     void ping() {
---- 1169,1177 ----
+!     // Your implementation goes here
+!     printf("ping\n");
+    }
+  
+  };
+--- 1169,1181 ----
     }
   
     void SendAllValues() {
@@ -250,3 +255,19 @@
     }
   
     void ping() {
+!     // Dummy method to keep Thrift connection alive over NAT routers
+    }
+  
+  };
+***************
+*** 1162,1165 ****
+  //   return 0;
+  // }
+  // 
+! // 
+\ No newline at end of file
+--- 1193,1196 ----
+  //   return 0;
+  // }
+  // 
+! // 
