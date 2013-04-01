@@ -1,21 +1,56 @@
 BUILD DEPENDENCIES
-==============
+==================
 (this will work on Ubuntu12.x/Debian 6, you have to adjust according to your distro)
 
-# Debian package dependencies
-sudo apt-get install ruby1.9.1-dev gccxml libxml2-dev libxslt-dev
-sudo apt-get install libboost1.42-dev libboost_system1.42-dev libboost_thread1.42-dev libboost-filesystem1.42-dev libboost-program-options1.42-dev 
+# Install development environment
+sudo apt-get install ruby1.9.1-dev libxml2-dev libxslt-dev libudev-dev libtool autoconf
 
+# Debian package dependencies
+sudo apt-get install libboost1.42-dev libboost_system1.42-dev libboost_thread1.42-dev libboost-filesystem1.42-dev libboost-program-options1.42-dev
+
+# Ubuntu has a convenience package for all Boost dev libs, much more elegant!
+sudo apt-get install libboost-dev-all 
+
+1a) Install GCCXML + its Ruby bindings (Ubuntu/Debian) 
+======================================================
 # installs the ruby GCCXML client gem without compiling the 'gccxml' executable
 # since it was delivered by Debian package
+sudo apt-get install gccxml
 sudo gem1.9.1 install gccxml_gem --platform ruby
 sudo gem1.9.1 install mongrel --pre
 sudo gem1.9.1 install rspec bit-struct onstomp
 
-GCCXML alternative install
-==================
+1b) OR, install GCCXML via ruby gems 
+====================================
 The alternative path is to install GCCXML from Ruby's gem package management. 
-Do this ONLY if you have a fairly older gcc, otherwise you WILL get errors during building like
+Do this ONLY if you have a fairly older gcc(4.3 or earlier), otherwise you WILL 
+get tons of errors during compilation, like this: 
 "gccxml-builtins.h: no such file or directory"
 
 sudo gem1.9.1 install rbgccxml 
+
+2) install BoostStomp
+=====================
+git clone https://github.com/ekarak/BoostStomp
+cd BoostStomp
+make && sudo make install
+
+3) install Apache Thrift
+========================
+git clone https://git-wip-us.apache.org/repos/asf/thrift.git thrift
+cd thrift
+./bootstrap.sh
+./configure
+make && sudo make install
+
+4) download OpenZWave
+=====================
+svn checkout http://open-zwave.googlecode.com/svn/trunk/ open-zwave-read-only
+cd open-zwave-read-only/cpp/build/linux
+make
+
+5) compile ozwd!
+================
+cd Thrift4Ozw
+sudo make openzwave-install
+make

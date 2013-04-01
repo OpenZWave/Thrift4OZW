@@ -64,16 +64,25 @@ Hook up your ZWave USB controller. Default is set at /dev/ttyUSB0, you can use t
 Other ozwd command-line flags are:
 
 ekarak@ekarak-laptop ~/ozw/Thrift4OZW $ ./ozwd --help
-Project Ansible - OpenZWave orbiter:
-  -? [ --help ]           print this help message
-  -h [ --stomphost ] arg  STOMP server hostname
-  -s [ --stompport ] arg  STOMP server port number
-  -t [ --thriftport ] arg Thrift service port
-  -c [ --ozwconf ] arg    OpenZWave config/ path (manufacturer database)
-  -u [ --ozwuser ] arg    OpenZWave user path (network & configuration state)
-  -p [ --ozwport ] arg    OpenZWave driver port (e.g. /dev/ttyUSB0)
+----------------------------------------
+Project Ansible - OpenZWave orbiter
+----------------------------------------
+command-line arguments:
+  -? [ --help ]                         print this help message
+  -h [ --stomphost ] arg (=localhost)   external STOMP server hostname
+  -s [ --stompport ] arg (=61613)       external STOMP server port number
+  -t [ --thriftport ] arg (=9090)       our Thrift service port
+  -c [ --ozwconf ] arg (=/home/ekarak/ozw/open-zwave-read-only/config/)
+                                        our OpenZWave manufacturer database
+  -u [ --ozwuser ] arg (=/home/ekarak/ozw/Thrift4OZW)
+                                        our OpenZWave user config database
+  -p [ --ozwport ] arg (=/dev/ttyUSB0)  our OpenZWave driver port
+  -j [ --json ]                         Should stomp messages have JSON body?
+  -d [ --debug ]                        Show debug logging from OpenZwave and 
+                                        BoostStomp?
+
   
-- Fire up ./ozwd, preferrably in a debugger (gdb ./ozwd)
+- Fire up ./ozwd, preferrably in a debugger (gdb ./ozwd) if you need to trace its internals.
 
 The OpenZWave orbiter tries to connect to the Stomp Server (localhost:61613) and then 
 starts the OpenZWave engine.  When all ZWave processing is done, it also fires up the 
@@ -99,7 +108,7 @@ irb(main):002:0> OZWmgr.GetNodeName(HomeID, 5)
 # Switch on node 2
 irb(main):003:0> OZWmgr.SetNodeOn(HomeID, 2)
 => nil 
-(*tack*) did you see the baanshee turning on the christmas tree lights?? :-)
+# (*tack*) did you see the baanshee turning on the christmas tree lights?? :-)
 
 # Set dimmer node 5 at 50% via SetNodeLevel
 irb(main):004:0> OZWmgr.SetNodeLevel(HomeID, 5, 50)
@@ -123,19 +132,43 @@ irb(main):012:0> OZWmgr.SetValue_UInt8(Rvid,50)
 irb(main):013:0> OZWmgr.GetValueAsByte(Rvid)
 => <OpenZWave::Bool_UInt8 retval:true, o_value:50>
 
+# Set that value to 25 (percent if its a dimmer)
 irb(main):014:0> OZWmgr.SetValue_UInt8(Rvid,25)
 => true
 
+# Set it to 0
 irb(main):015:0> OZWmgr.SetValue_UInt8(Rvid,0)
 => true
+
 
 -------------------
 STOMP Notifications
 -------------------
-Also take a look at ozw-monitor.rb, its a basic STOMP client in Ruby listening for OpenZWave 
+The other useful feature of the Ruby client example is OpenZWave notifications.
+Take a look at ozw-monitor.rb, its a basic STOMP client in Ruby listening for OpenZWave 
 notifications. The script uses the BitStruct library to break down ValueIDs into fields. 
 Take into account that you should keep all ValueID's in a Hash or Array for subsequent 
-calls to OpenZWave.
+calls to OpenZWave. All asynchronous notifications will appear in the irb console:
+
+------ ZWAVE MESSAGE (2013-03-31 10:37:34 +0300) ------
+   NotificationByte : 0
+   NotificationNodeId : 0x1
+  notification type: Type_DriverReady: A driver for a PC Z-Wave controller has been added and is ready to use.  The notification will contain the controller's Home ID, which is needed to call most of the Manager methods.
+   destination : /queue/zwave/monitor
+   session : ssng_1364715183.7324069
+   message-id : ekarak-laptop-1364715183-871618-2349
+   subscription : 1
+
+------ ZWAVE MESSAGE (2013-03-31 10:37:34 +0300) ------
+   NotificationByte : 0
+   NotificationNodeId : 0x1
+  notification type: Type_NodeAdded: A new node has been added to OpenZWave's list.  This may be due to a device being added to the Z-Wave network, or because the application is initializing itself.
+   destination : /queue/zwave/monitor
+   session : ssng_1364715183.7324069
+   message-id : ekarak-laptop-1364715183-907925-2350
+   subscription : 1
+
+
 
 ----------------------------
 OpenZWave + other languages
