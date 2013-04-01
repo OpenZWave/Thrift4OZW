@@ -31,28 +31,27 @@ RELEASE_CFLAGS  := -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-unknown-prag
 DEBUG_LDFLAGS	:= -g
 
 # change directories if needed
-OPENZWAVE	:= ../open-zwave
-OPENZWAVE_INC	:= $(OPENZWAVE)/cpp/src
-THRIFT		:= /usr/local/include/thrift
-THRIFT_INC	:= /usr/local/include/thrift
-BOOSTSTOMP  := ../BoostStomp
+OPENZWAVE      := ../open-zwave-read-only
+OPENZWAVE_LIB	:= /usr/lib
+OPENZWAVE_INC	:= /usr/include/openzwave
+THRIFT		    := /usr/local/include/thrift
+THRIFT_INC	    := /usr/local/include/thrift
+BOOSTSTOMP_LIB  := /usr/local/lib
 BOOSTSTOMP_INC	:= /usr/local/include/booststomp
 
 CFLAGS	:= -c $($(TARGET)_CFLAGS) 
 LDFLAGS	:= $($(TARGET)_LDFLAGS) \
 		-Wl,-rpath=$(OPENZWAVE)/cpp/lib/linux/ 
 
-INCLUDES := -I $(OPENZWAVE)/cpp/src -I $(OPENZWAVE)/cpp/src/command_classes/ \
-	-I $(OPENZWAVE)/cpp/src/value_classes/ -I $(OPENZWAVE)/cpp/src/platform/ \
-	-I $(OPENZWAVE)/cpp/src/platform/unix -I $(OPENZWAVE)/cpp/tinyxml/ \
-    -I $(THRIFT_INC) -I $(BOOSTSTOMP_INC) \
-	-I . -I gen-cpp/
+INCLUDES := -I $(OPENZWAVE_INC) -I $(OPENZWAVE_INC)/command_classes/ -I $(OPENZWAVE_INC)/value_classes/ \
+ -I $(OPENZWAVE_INC)/platform/	-I $(OPENZWAVE_INC)/platform/unix	-I $(THRIFT_INC) -I $(BOOSTSTOMP_INC) \
+ -I . -I gen-cpp
 
 # Remove comment below for gnutls support
 #GNUTLS := -lgnutls
 
-LIBZWAVE_STATIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.a
-LIBZWAVE_DYNAMIC := $(OPENZWAVE)/cpp/lib/linux/libopenzwave.so
+LIBZWAVE_STATIC := $(OPENZWAVE_LIB)/libopenzwave.a
+LIBZWAVE_DYNAMIC := $(OPENZWAVE_LIB)/libopenzwave.so.1.0
 LIBUSB := -ludev
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
@@ -100,6 +99,10 @@ Main.o: Main.cpp gen-cpp/RemoteManager_server.cpp
 	
 openzwave: 
 	cd $(OPENZWAVE)/cpp/build/linux/; make
+
+openzwave-install: openzwave
+	cd $(OPENZWAVE)/cpp/lib/linux; 	cp libopenzwave.so libopenzwave.so.1.0 
+	cd $(OPENZWAVE); sudo make -f debian/Makefile  install
 	
 booststomp:
 	#cd $(BOOSTSTOMP); make 

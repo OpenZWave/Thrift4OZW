@@ -406,21 +406,25 @@ int main(int argc, char *argv[]) {
 // -----------------------------------------
 	string  stomp_host, ozw_port, ozw_conf, ozw_user;
     int     stomp_port, thrift_port;
+    // 
+    string ozwconf_default = "/usr/share/openzwave/config";
     //
     fs::path current_dir = fs::path(get_current_dir_name());
-    fs::path ozw_config_dir = current_dir.parent_path() / "open-zwave-read-only/config/";
+    fs::path ozw_config_dir = fs::exists(ozwconf_default) ? 
+        fs::path(ozwconf_default) :
+        current_dir.parent_path() / "open-zwave-read-only/config/";
     //
     try {        
         // Declare the supported options.
         po::options_description desc("----------------------------------------\nProject Ansible - OpenZWave orbiter\n----------------------------------------\ncommand-line arguments");
         desc.add_options()
             ("help,?", "print this help message")
-            ("stomphost,h",   po::value<string>(&stomp_host)->default_value("localhost"), "external STOMP server hostname")
-            ("stompport,s",   po::value<int>(&stomp_port)->default_value(61613), "external STOMP server port number")
+            ("stomphost,h",   po::value<string>(&stomp_host)->default_value("localhost"), "STOMP server hostname")
+            ("stompport,s",   po::value<int>(&stomp_port)->default_value(61613), "STOMP server port number")
             ("thriftport,t",  po::value<int>(&thrift_port)->default_value(9090), "our Thrift service port")
-            ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.string()), "our OpenZWave manufacturer database")
-            ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.string()), "our OpenZWave user config database")
-            ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "our OpenZWave driver port")
+            ("ozwconf,c",     po::value<string>(&ozw_conf)->default_value(ozw_config_dir.string()), "OpenZWave's manufacturer database")
+            ("ozwuser,u",     po::value<string>(&ozw_user)->default_value(current_dir.string()), "OpenZWave's user config database")
+            ("ozwport,p",     po::value<string>(&ozw_port)->default_value("/dev/ttyUSB0"), "OpenZWave's driver dongle")
             ("json,j",        po::bool_switch(&jsonMessageBody), "Should stomp messages have JSON body?")
             ("debug,d",       po::bool_switch(&debugMsg), "Show debug logging from OpenZwave and BoostStomp?")
         ;
@@ -443,10 +447,12 @@ int main(int argc, char *argv[]) {
 
     // ------------------
     try {
+        cout << "Connecting to STOMP server at " << stomp_host << ":" << stomp_port << std::endl;
         // connect to STOMP server in order to send openzwave notifications 
         stomp_client = new STOMP::BoostStomp(stomp_host, stomp_port);
         stomp_client->start();
         stomp_client->enable_debug_msgs(debugMsg);
+        cout << "Connected to STOMP server." << std::endl;
     } 
     catch (exception& e) 
     {
@@ -460,8 +466,12 @@ int main(int argc, char *argv[]) {
         // The first argument is the path to the config files (where the manufacturer_specific.xml file is located
         // The second argument is the path for saved Z-Wave network state and the log file.  If you leave it NULL 
         // the log file will appear in the program's working directory.
-        cout << "OpenZWave configuration dir: " << ozw_conf << std::endl;
-        cout << "OpenZWave user dir: " << ozw_user << std::endl;
+        cout << "Initializing OpenZWave" << endl;
+        cout << "    configuration    : " << ozw_conf << std::endl;
+        cout << "    user preferences : " << ozw_user << std::endl;
+        cout << "    controller port  : " << ozw_port << std::endl;
+        cout.flush();
+        
         Options::Create(ozw_conf, ozw_user, "" );
         Options::Get()->Lock();
     
@@ -517,7 +527,7 @@ int main(int argc, char *argv[]) {
     }
 
     cout << "------------------------------------------------------------------------" << endl;
-    cout << "OpenZWave is initialized, Thrift interface now listening on port " << thrift_port << endl;
+    cout << "OpenZWave orbiter is now active, Thrift interface listening on port " << thrift_port << endl;
     cout << "------------------------------------------------------------------------" << endl;
     cout.flush();
     
