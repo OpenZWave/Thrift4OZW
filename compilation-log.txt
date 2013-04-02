@@ -1,0 +1,30 @@
+ekarak@ekarak-laptop:~/ozw/Thrift4OZW$ make
+cd ../open-zwave-read-only/cpp/build/linux/; make
+make[1]: Entering directory `/home/ekarak/ozw/open-zwave-read-only/cpp/build/linux'
+echo 'char ozw_vers[] = "OpenZWave version 1.0.'`svnversion ../..`'";' > vers.c
+clang -c -Wno-unknown-pragmas -Wno-inline -Wno-format -g -DDEBUG -DLOG_STDERR -fPIC -I ../../src -I ../../src/command_classes/ -I ../../src/value_classes/ -I ../../src/platform/ -I ../../src/platform/unix -I ../../tinyxml/ -I ../../hidapi/hidapi/ -o vers.o vers.c
+ar rc ../../lib/linux/libopenzwave.a vers.o
+g++ -shared -Wl,-soname,libopenzwave.so -o ../../lib/linux/libopenzwave.so tinystr.o tinyxml.o tinyxmlerror.o tinyxmlparser.o hid.o Alarm.o ApplicationStatus.o AssociationCommandConfiguration.o Association.o Basic.o BasicWindowCovering.o Battery.o ClimateControlSchedule.o Clock.o CommandClass.o CommandClasses.o Configuration.o ControllerReplication.o CRC16Encap.o EnergyProduction.o Hail.o Indicator.o Language.o Lock.o ManufacturerSpecific.o Meter.o MeterPulse.o MultiCmd.o MultiInstanceAssociation.o MultiInstance.o NodeNaming.o NoOperation.o Powerlevel.o Proprietary.o Protection.o SceneActivation.o SensorAlarm.o SensorBinary.o SensorMultilevel.o SwitchAll.o SwitchBinary.o SwitchMultilevel.o SwitchToggleBinary.o SwitchToggleMultilevel.o ThermostatFanMode.o ThermostatFanState.o ThermostatMode.o ThermostatOperatingState.o ThermostatSetpoint.o UserCode.o Version.o WakeUp.o ValueBool.o ValueButton.o ValueByte.o Value.o ValueDecimal.o ValueInt.o ValueList.o ValueRaw.o ValueSchedule.o ValueShort.o ValueStore.o ValueString.o Controller.o Event.o FileOps.o HidController.o Log.o Mutex.o SerialController.o Stream.o Thread.o TimeStamp.o Wait.o EventImpl.o FileOpsImpl.o LogImpl.o MutexImpl.o SerialControllerImpl.o ThreadImpl.o TimeStampImpl.o WaitImpl.o Driver.o Group.o Manager.o Msg.o Node.o Options.o Scene.o Utils.o vers.o
+make[1]: Leaving directory `/home/ekarak/ozw/open-zwave-read-only/cpp/build/linux'
+#cd ; make 
+thrift --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
+patch -N -p0 gen-cpp/ozw_types.h < ozw_types.h.patch
+patching file gen-cpp/ozw_types.h
+Hunk #2 succeeded at 153 (offset 48 lines).
+ruby create_server.rb --ozwroot=../open-zwave-read-only --thriftroot=/usr/local/include/thrift
+Parsing:
+	/home/ekarak/ozw/Thrift4OZW/gen-cpp/RemoteManager_server.skeleton.cpp
+	/home/ekarak/ozw/open-zwave-read-only/cpp/src/Manager.h
+Writing generated server (gen-cpp/RemoteManager_server.cpp)....
+Done!
+cp gen-cpp/RemoteManager_server.cpp gen-cpp/RemoteManager_server.cpp.orig
+cp gen-cpp/ozw_types.h gen-cpp/ozw_types.h.orig
+patch -N -p0 gen-cpp/RemoteManager_server.cpp < RemoteManager_server.cpp.patch
+patching file gen-cpp/RemoteManager_server.cpp
+clang++ -c -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-format -g -DDEBUG -Werror -O0 -DDEBUG_BOOSTSTOMP   -c Main.cpp -I /usr/include/openzwave -I /usr/include/openzwave/command_classes/ -I /usr/include/openzwave/value_classes/ -I /usr/include/openzwave/platform/	-I /usr/include/openzwave/platform/unix	-I /usr/local/include/thrift -I /usr/local/include/booststomp -I . -I gen-cpp   
+clang++ -c -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-format -g -DDEBUG -Werror -O0 -DDEBUG_BOOSTSTOMP   -c gen-cpp/RemoteManager.cpp -o gen-cpp/RemoteManager.o -I /usr/include/openzwave -I /usr/include/openzwave/command_classes/ -I /usr/include/openzwave/value_classes/ -I /usr/include/openzwave/platform/	-I /usr/include/openzwave/platform/unix	-I /usr/local/include/thrift -I /usr/local/include/booststomp -I . -I gen-cpp
+clang++ -c -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-format -g -DDEBUG -Werror -O0 -DDEBUG_BOOSTSTOMP   -c gen-cpp/ozw_constants.cpp -o gen-cpp/ozw_constants.o -I /usr/include/openzwave -I /usr/include/openzwave/command_classes/ -I /usr/include/openzwave/value_classes/ -I /usr/include/openzwave/platform/	-I /usr/include/openzwave/platform/unix	-I /usr/local/include/thrift -I /usr/local/include/booststomp -I . -I gen-cpp
+clang++ -c -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-format -g -DDEBUG -Werror -O0 -DDEBUG_BOOSTSTOMP   -c gen-cpp/ozw_types.cpp -o gen-cpp/ozw_types.o -I /usr/include/openzwave -I /usr/include/openzwave/command_classes/ -I /usr/include/openzwave/value_classes/ -I /usr/include/openzwave/platform/	-I /usr/include/openzwave/platform/unix	-I /usr/local/include/thrift -I /usr/local/include/booststomp -I . -I gen-cpp
+clang++ -o ozwd -g -Wl,-rpath=../open-zwave-read-only/cpp/lib/linux/  Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o /usr/lib/libopenzwave.so.1.0  -ludev -lboost_thread-mt -lboost_program_options -lboost_system -lboost_filesystem -lthrift -lbooststomp
+ekarak@ekarak-laptop:~/ozw/Thrift4OZW$ 
+
