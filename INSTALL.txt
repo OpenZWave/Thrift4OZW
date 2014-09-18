@@ -9,7 +9,7 @@ sudo apt-get install ruby1.9.1-dev libxml2-dev libxslt-dev libudev-dev libtool a
 sudo apt-get install libboost1.42-dev libboost_system1.42-dev libboost_thread1.42-dev libboost-filesystem1.42-dev libboost-program-options1.42-dev
 
 # Ubuntu has a convenience package for all Boost dev libs, much more elegant!
-sudo apt-get install libboost-dev-all 
+sudo apt-get install libboost-all-dev
 
 1a) Install GCCXML + its Ruby bindings (Ubuntu/Debian) 
 ======================================================
