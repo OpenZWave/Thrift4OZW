@@ -37,7 +37,7 @@ This is a simple diagram to illustrate the idea behind Thrift4OZW:
 
 These are the side-projects I'm using for this project:
 
-[Thrift Server Creator (create_server.rb)](../blob/master/create_server.rb)
+[Thrift Server Creator (create_server.rb)](../master/create_server.rb)
 ----------------------------------------
 A hackity Ruby script I wrote to automatically create useful Thrift server
 bindings (instead of silly "your code goes here", as produced by Thrift).
