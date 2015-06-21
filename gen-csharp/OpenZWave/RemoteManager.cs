@@ -35,15 +35,15 @@ namespace OpenZWave
       /// Methods for adding and removing drivers and obtaining basic controller information.
       /// </summary>
       /// <param name="_homeId"></param>
-      byte GetControllerNodeId(int _homeId);
+      sbyte GetControllerNodeId(int _homeId);
       #if SILVERLIGHT
       IAsyncResult Begin_GetControllerNodeId(AsyncCallback callback, object state, int _homeId);
-      byte End_GetControllerNodeId(IAsyncResult asyncResult);
+      sbyte End_GetControllerNodeId(IAsyncResult asyncResult);
       #endif
-      byte GetSUCNodeId(int _homeId);
+      sbyte GetSUCNodeId(int _homeId);
       #if SILVERLIGHT
       IAsyncResult Begin_GetSUCNodeId(AsyncCallback callback, object state, int _homeId);
-      byte End_GetSUCNodeId(IAsyncResult asyncResult);
+      sbyte End_GetSUCNodeId(IAsyncResult asyncResult);
       #endif
       bool IsPrimaryController(int _homeId);
       #if SILVERLIGHT
@@ -100,9 +100,9 @@ namespace OpenZWave
       IAsyncResult Begin_SetPollInterval(AsyncCallback callback, object state, int _milliseconds, bool _bIntervalBetweenPolls);
       void End_SetPollInterval(IAsyncResult asyncResult);
       #endif
-      bool EnablePoll(RemoteValueID _valueId, byte _intensity);
+      bool EnablePoll(RemoteValueID _valueId, sbyte _intensity);
       #if SILVERLIGHT
-      IAsyncResult Begin_EnablePoll(AsyncCallback callback, object state, RemoteValueID _valueId, byte _intensity);
+      IAsyncResult Begin_EnablePoll(AsyncCallback callback, object state, RemoteValueID _valueId, sbyte _intensity);
       bool End_EnablePoll(IAsyncResult asyncResult);
       #endif
       bool DisablePoll(RemoteValueID _valueId);
@@ -115,184 +115,184 @@ namespace OpenZWave
       IAsyncResult Begin_isPolled(AsyncCallback callback, object state, RemoteValueID _valueId);
       bool End_isPolled(IAsyncResult asyncResult);
       #endif
-      void SetPollIntensity(RemoteValueID _valueId, byte _intensity);
+      void SetPollIntensity(RemoteValueID _valueId, sbyte _intensity);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetPollIntensity(AsyncCallback callback, object state, RemoteValueID _valueId, byte _intensity);
+      IAsyncResult Begin_SetPollIntensity(AsyncCallback callback, object state, RemoteValueID _valueId, sbyte _intensity);
       void End_SetPollIntensity(IAsyncResult asyncResult);
       #endif
-      bool RefreshNodeInfo(int _homeId, byte _nodeId);
+      bool RefreshNodeInfo(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RefreshNodeInfo(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_RefreshNodeInfo(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_RefreshNodeInfo(IAsyncResult asyncResult);
       #endif
-      bool RequestNodeState(int _homeId, byte _nodeId);
+      bool RequestNodeState(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RequestNodeState(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_RequestNodeState(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_RequestNodeState(IAsyncResult asyncResult);
       #endif
-      bool RequestNodeDynamic(int _homeId, byte _nodeId);
+      bool RequestNodeDynamic(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RequestNodeDynamic(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_RequestNodeDynamic(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_RequestNodeDynamic(IAsyncResult asyncResult);
       #endif
-      bool IsNodeListeningDevice(int _homeId, byte _nodeId);
+      bool IsNodeListeningDevice(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeListeningDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeListeningDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeListeningDevice(IAsyncResult asyncResult);
       #endif
-      bool IsNodeFrequentListeningDevice(int _homeId, byte _nodeId);
+      bool IsNodeFrequentListeningDevice(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeFrequentListeningDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeFrequentListeningDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeFrequentListeningDevice(IAsyncResult asyncResult);
       #endif
-      bool IsNodeBeamingDevice(int _homeId, byte _nodeId);
+      bool IsNodeBeamingDevice(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeBeamingDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeBeamingDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeBeamingDevice(IAsyncResult asyncResult);
       #endif
-      bool IsNodeRoutingDevice(int _homeId, byte _nodeId);
+      bool IsNodeRoutingDevice(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeRoutingDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeRoutingDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeRoutingDevice(IAsyncResult asyncResult);
       #endif
-      bool IsNodeSecurityDevice(int _homeId, byte _nodeId);
+      bool IsNodeSecurityDevice(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeSecurityDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeSecurityDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeSecurityDevice(IAsyncResult asyncResult);
       #endif
-      int GetNodeMaxBaudRate(int _homeId, byte _nodeId);
+      int GetNodeMaxBaudRate(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeMaxBaudRate(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeMaxBaudRate(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       int End_GetNodeMaxBaudRate(IAsyncResult asyncResult);
       #endif
-      byte GetNodeVersion(int _homeId, byte _nodeId);
+      sbyte GetNodeVersion(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeVersion(AsyncCallback callback, object state, int _homeId, byte _nodeId);
-      byte End_GetNodeVersion(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetNodeVersion(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
+      sbyte End_GetNodeVersion(IAsyncResult asyncResult);
       #endif
-      byte GetNodeSecurity(int _homeId, byte _nodeId);
+      sbyte GetNodeSecurity(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeSecurity(AsyncCallback callback, object state, int _homeId, byte _nodeId);
-      byte End_GetNodeSecurity(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetNodeSecurity(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
+      sbyte End_GetNodeSecurity(IAsyncResult asyncResult);
       #endif
-      byte GetNodeBasic(int _homeId, byte _nodeId);
+      sbyte GetNodeBasic(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeBasic(AsyncCallback callback, object state, int _homeId, byte _nodeId);
-      byte End_GetNodeBasic(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetNodeBasic(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
+      sbyte End_GetNodeBasic(IAsyncResult asyncResult);
       #endif
-      byte GetNodeGeneric(int _homeId, byte _nodeId);
+      sbyte GetNodeGeneric(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeGeneric(AsyncCallback callback, object state, int _homeId, byte _nodeId);
-      byte End_GetNodeGeneric(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetNodeGeneric(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
+      sbyte End_GetNodeGeneric(IAsyncResult asyncResult);
       #endif
-      byte GetNodeSpecific(int _homeId, byte _nodeId);
+      sbyte GetNodeSpecific(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeSpecific(AsyncCallback callback, object state, int _homeId, byte _nodeId);
-      byte End_GetNodeSpecific(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetNodeSpecific(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
+      sbyte End_GetNodeSpecific(IAsyncResult asyncResult);
       #endif
-      string GetNodeType(int _homeId, byte _nodeId);
+      string GetNodeType(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeType(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeType(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeType(IAsyncResult asyncResult);
       #endif
-      UInt32_ListByte GetNodeNeighbors(int _homeId, byte _nodeId);
+      UInt32_ListByte GetNodeNeighbors(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeNeighbors(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeNeighbors(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       UInt32_ListByte End_GetNodeNeighbors(IAsyncResult asyncResult);
       #endif
-      string GetNodeManufacturerName(int _homeId, byte _nodeId);
+      string GetNodeManufacturerName(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeManufacturerName(IAsyncResult asyncResult);
       #endif
-      string GetNodeProductName(int _homeId, byte _nodeId);
+      string GetNodeProductName(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeProductName(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeProductName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeProductName(IAsyncResult asyncResult);
       #endif
-      string GetNodeName(int _homeId, byte _nodeId);
+      string GetNodeName(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeName(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeName(IAsyncResult asyncResult);
       #endif
-      string GetNodeLocation(int _homeId, byte _nodeId);
+      string GetNodeLocation(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeLocation(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeLocation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeLocation(IAsyncResult asyncResult);
       #endif
-      string GetNodeManufacturerId(int _homeId, byte _nodeId);
+      string GetNodeManufacturerId(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeManufacturerId(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeManufacturerId(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeManufacturerId(IAsyncResult asyncResult);
       #endif
-      string GetNodeProductType(int _homeId, byte _nodeId);
+      string GetNodeProductType(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeProductType(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeProductType(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeProductType(IAsyncResult asyncResult);
       #endif
-      string GetNodeProductId(int _homeId, byte _nodeId);
+      string GetNodeProductId(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeProductId(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeProductId(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeProductId(IAsyncResult asyncResult);
       #endif
-      void SetNodeManufacturerName(int _homeId, byte _nodeId, string _manufacturerName);
+      void SetNodeManufacturerName(int _homeId, sbyte _nodeId, string _manufacturerName);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _manufacturerName);
+      IAsyncResult Begin_SetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _manufacturerName);
       void End_SetNodeManufacturerName(IAsyncResult asyncResult);
       #endif
-      void SetNodeProductName(int _homeId, byte _nodeId, string _productName);
+      void SetNodeProductName(int _homeId, sbyte _nodeId, string _productName);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeProductName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _productName);
+      IAsyncResult Begin_SetNodeProductName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _productName);
       void End_SetNodeProductName(IAsyncResult asyncResult);
       #endif
-      void SetNodeName(int _homeId, byte _nodeId, string _nodeName);
+      void SetNodeName(int _homeId, sbyte _nodeId, string _nodeName);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _nodeName);
+      IAsyncResult Begin_SetNodeName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _nodeName);
       void End_SetNodeName(IAsyncResult asyncResult);
       #endif
-      void SetNodeLocation(int _homeId, byte _nodeId, string _location);
+      void SetNodeLocation(int _homeId, sbyte _nodeId, string _location);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeLocation(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _location);
+      IAsyncResult Begin_SetNodeLocation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _location);
       void End_SetNodeLocation(IAsyncResult asyncResult);
       #endif
-      void SetNodeOn(int _homeId, byte _nodeId);
+      void SetNodeOn(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeOn(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_SetNodeOn(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       void End_SetNodeOn(IAsyncResult asyncResult);
       #endif
-      void SetNodeOff(int _homeId, byte _nodeId);
+      void SetNodeOff(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeOff(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_SetNodeOff(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       void End_SetNodeOff(IAsyncResult asyncResult);
       #endif
-      void SetNodeLevel(int _homeId, byte _nodeId, byte _level);
+      void SetNodeLevel(int _homeId, sbyte _nodeId, sbyte _level);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetNodeLevel(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _level);
+      IAsyncResult Begin_SetNodeLevel(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _level);
       void End_SetNodeLevel(IAsyncResult asyncResult);
       #endif
-      bool IsNodeInfoReceived(int _homeId, byte _nodeId);
+      bool IsNodeInfoReceived(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeInfoReceived(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeInfoReceived(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeInfoReceived(IAsyncResult asyncResult);
       #endif
-      Bool_GetNodeClassInformation GetNodeClassInformation(int _homeId, byte _nodeId, byte _commandClassId);
+      Bool_GetNodeClassInformation GetNodeClassInformation(int _homeId, sbyte _nodeId, sbyte _commandClassId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeClassInformation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _commandClassId);
+      IAsyncResult Begin_GetNodeClassInformation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _commandClassId);
       Bool_GetNodeClassInformation End_GetNodeClassInformation(IAsyncResult asyncResult);
       #endif
-      bool IsNodeAwake(int _homeId, byte _nodeId);
+      bool IsNodeAwake(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeAwake(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeAwake(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeAwake(IAsyncResult asyncResult);
       #endif
-      bool IsNodeFailed(int _homeId, byte _nodeId);
+      bool IsNodeFailed(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_IsNodeFailed(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_IsNodeFailed(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       bool End_IsNodeFailed(IAsyncResult asyncResult);
       #endif
-      string GetNodeQueryStage(int _homeId, byte _nodeId);
+      string GetNodeQueryStage(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeQueryStage(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeQueryStage(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       string End_GetNodeQueryStage(IAsyncResult asyncResult);
       #endif
       string GetValueLabel(RemoteValueID _id);
@@ -410,14 +410,14 @@ namespace OpenZWave
       IAsyncResult Begin_SetValue_Bool(AsyncCallback callback, object state, RemoteValueID _id, bool _value);
       bool End_SetValue_Bool(IAsyncResult asyncResult);
       #endif
-      bool SetValue_UInt8(RemoteValueID _id, byte _value);
+      bool SetValue_UInt8(RemoteValueID _id, sbyte _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, byte _value);
+      IAsyncResult Begin_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, sbyte _value);
       bool End_SetValue_UInt8(IAsyncResult asyncResult);
       #endif
-      bool SetValue_UInt8_UInt8(RemoteValueID _id, List<byte> _value, byte _length);
+      bool SetValue_UInt8_UInt8(RemoteValueID _id, List<sbyte> _value, sbyte _length);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<byte> _value, byte _length);
+      IAsyncResult Begin_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<sbyte> _value, sbyte _length);
       bool End_SetValue_UInt8_UInt8(IAsyncResult asyncResult);
       #endif
       bool SetValue_Float(RemoteValueID _id, double _value);
@@ -465,19 +465,19 @@ namespace OpenZWave
       IAsyncResult Begin_ReleaseButton(AsyncCallback callback, object state, RemoteValueID _id);
       bool End_ReleaseButton(IAsyncResult asyncResult);
       #endif
-      byte GetNumSwitchPoints(RemoteValueID _id);
+      sbyte GetNumSwitchPoints(RemoteValueID _id);
       #if SILVERLIGHT
       IAsyncResult Begin_GetNumSwitchPoints(AsyncCallback callback, object state, RemoteValueID _id);
-      byte End_GetNumSwitchPoints(IAsyncResult asyncResult);
+      sbyte End_GetNumSwitchPoints(IAsyncResult asyncResult);
       #endif
-      bool SetSwitchPoint(RemoteValueID _id, byte _hours, byte _minutes, byte _setback);
+      bool SetSwitchPoint(RemoteValueID _id, sbyte _hours, sbyte _minutes, sbyte _setback);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _hours, byte _minutes, byte _setback);
+      IAsyncResult Begin_SetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _hours, sbyte _minutes, sbyte _setback);
       bool End_SetSwitchPoint(IAsyncResult asyncResult);
       #endif
-      bool RemoveSwitchPoint(RemoteValueID _id, byte _hours, byte _minutes);
+      bool RemoveSwitchPoint(RemoteValueID _id, sbyte _hours, sbyte _minutes);
       #if SILVERLIGHT
-      IAsyncResult Begin_RemoveSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _hours, byte _minutes);
+      IAsyncResult Begin_RemoveSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _hours, sbyte _minutes);
       bool End_RemoveSwitchPoint(IAsyncResult asyncResult);
       #endif
       void ClearSwitchPoints(RemoteValueID _id);
@@ -485,9 +485,9 @@ namespace OpenZWave
       IAsyncResult Begin_ClearSwitchPoints(AsyncCallback callback, object state, RemoteValueID _id);
       void End_ClearSwitchPoints(IAsyncResult asyncResult);
       #endif
-      GetSwitchPointReturnStruct GetSwitchPoint(RemoteValueID _id, byte _idx);
+      GetSwitchPointReturnStruct GetSwitchPoint(RemoteValueID _id, sbyte _idx);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _idx);
+      IAsyncResult Begin_GetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _idx);
       GetSwitchPointReturnStruct End_GetSwitchPoint(IAsyncResult asyncResult);
       #endif
       void SwitchAllOn(int _homeId);
@@ -500,49 +500,49 @@ namespace OpenZWave
       IAsyncResult Begin_SwitchAllOff(AsyncCallback callback, object state, int _homeId);
       void End_SwitchAllOff(IAsyncResult asyncResult);
       #endif
-      bool SetConfigParam(int _homeId, byte _nodeId, byte _param, int _value, byte _size);
+      bool SetConfigParam(int _homeId, sbyte _nodeId, sbyte _param, int _value, sbyte _size);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetConfigParam(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _param, int _value, byte _size);
+      IAsyncResult Begin_SetConfigParam(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _param, int _value, sbyte _size);
       bool End_SetConfigParam(IAsyncResult asyncResult);
       #endif
-      void RequestConfigParam(int _homeId, byte _nodeId, byte _param);
+      void RequestConfigParam(int _homeId, sbyte _nodeId, sbyte _param);
       #if SILVERLIGHT
-      IAsyncResult Begin_RequestConfigParam(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _param);
+      IAsyncResult Begin_RequestConfigParam(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _param);
       void End_RequestConfigParam(IAsyncResult asyncResult);
       #endif
-      void RequestAllConfigParams(int _homeId, byte _nodeId);
+      void RequestAllConfigParams(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RequestAllConfigParams(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_RequestAllConfigParams(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       void End_RequestAllConfigParams(IAsyncResult asyncResult);
       #endif
-      byte GetNumGroups(int _homeId, byte _nodeId);
+      sbyte GetNumGroups(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNumGroups(AsyncCallback callback, object state, int _homeId, byte _nodeId);
-      byte End_GetNumGroups(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetNumGroups(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
+      sbyte End_GetNumGroups(IAsyncResult asyncResult);
       #endif
-      GetAssociationsReturnStruct GetAssociations(int _homeId, byte _nodeId, byte _groupIdx);
+      GetAssociationsReturnStruct GetAssociations(int _homeId, sbyte _nodeId, sbyte _groupIdx);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetAssociations(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx);
+      IAsyncResult Begin_GetAssociations(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx);
       GetAssociationsReturnStruct End_GetAssociations(IAsyncResult asyncResult);
       #endif
-      byte GetMaxAssociations(int _homeId, byte _nodeId, byte _groupIdx);
+      sbyte GetMaxAssociations(int _homeId, sbyte _nodeId, sbyte _groupIdx);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetMaxAssociations(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx);
-      byte End_GetMaxAssociations(IAsyncResult asyncResult);
+      IAsyncResult Begin_GetMaxAssociations(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx);
+      sbyte End_GetMaxAssociations(IAsyncResult asyncResult);
       #endif
-      string GetGroupLabel(int _homeId, byte _nodeId, byte _groupIdx);
+      string GetGroupLabel(int _homeId, sbyte _nodeId, sbyte _groupIdx);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetGroupLabel(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx);
+      IAsyncResult Begin_GetGroupLabel(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx);
       string End_GetGroupLabel(IAsyncResult asyncResult);
       #endif
-      void AddAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId);
+      void AddAssociation(int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddAssociation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId);
+      IAsyncResult Begin_AddAssociation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId);
       void End_AddAssociation(IAsyncResult asyncResult);
       #endif
-      void RemoveAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId);
+      void RemoveAssociation(int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RemoveAssociation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId);
+      IAsyncResult Begin_RemoveAssociation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId);
       void End_RemoveAssociation(IAsyncResult asyncResult);
       #endif
       void ResetController(int _homeId);
@@ -555,9 +555,9 @@ namespace OpenZWave
       IAsyncResult Begin_SoftReset(AsyncCallback callback, object state, int _homeId);
       void End_SoftReset(IAsyncResult asyncResult);
       #endif
-      bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg);
+      bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, sbyte _nodeId, sbyte _arg);
       #if SILVERLIGHT
-      IAsyncResult Begin_BeginControllerCommand(AsyncCallback callback, object state, int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg);
+      IAsyncResult Begin_BeginControllerCommand(AsyncCallback callback, object state, int _homeId, DriverControllerCommand _command, bool _highPower, sbyte _nodeId, sbyte _arg);
       bool End_BeginControllerCommand(IAsyncResult asyncResult);
       #endif
       bool CancelControllerCommand(int _homeId);
@@ -565,9 +565,9 @@ namespace OpenZWave
       IAsyncResult Begin_CancelControllerCommand(AsyncCallback callback, object state, int _homeId);
       bool End_CancelControllerCommand(IAsyncResult asyncResult);
       #endif
-      void TestNetworkNode(int _homeId, byte _nodeId, int _count);
+      void TestNetworkNode(int _homeId, sbyte _nodeId, int _count);
       #if SILVERLIGHT
-      IAsyncResult Begin_TestNetworkNode(AsyncCallback callback, object state, int _homeId, byte _nodeId, int _count);
+      IAsyncResult Begin_TestNetworkNode(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, int _count);
       void End_TestNetworkNode(IAsyncResult asyncResult);
       #endif
       void TestNetwork(int _homeId, int _count);
@@ -575,9 +575,9 @@ namespace OpenZWave
       IAsyncResult Begin_TestNetwork(AsyncCallback callback, object state, int _homeId, int _count);
       void End_TestNetwork(IAsyncResult asyncResult);
       #endif
-      void HealNetworkNode(int _homeId, byte _nodeId, bool _doRR);
+      void HealNetworkNode(int _homeId, sbyte _nodeId, bool _doRR);
       #if SILVERLIGHT
-      IAsyncResult Begin_HealNetworkNode(AsyncCallback callback, object state, int _homeId, byte _nodeId, bool _doRR);
+      IAsyncResult Begin_HealNetworkNode(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, bool _doRR);
       void End_HealNetworkNode(IAsyncResult asyncResult);
       #endif
       void HealNetwork(int _homeId, bool _doRR);
@@ -585,10 +585,10 @@ namespace OpenZWave
       IAsyncResult Begin_HealNetwork(AsyncCallback callback, object state, int _homeId, bool _doRR);
       void End_HealNetwork(IAsyncResult asyncResult);
       #endif
-      byte GetNumScenes();
+      sbyte GetNumScenes();
       #if SILVERLIGHT
       IAsyncResult Begin_GetNumScenes(AsyncCallback callback, object state);
-      byte End_GetNumScenes(IAsyncResult asyncResult);
+      sbyte End_GetNumScenes(IAsyncResult asyncResult);
       #endif
       GetAllScenesReturnStruct GetAllScenes();
       #if SILVERLIGHT
@@ -600,164 +600,164 @@ namespace OpenZWave
       IAsyncResult Begin_RemoveAllScenes(AsyncCallback callback, object state, int _homeId);
       void End_RemoveAllScenes(IAsyncResult asyncResult);
       #endif
-      byte CreateScene();
+      sbyte CreateScene();
       #if SILVERLIGHT
       IAsyncResult Begin_CreateScene(AsyncCallback callback, object state);
-      byte End_CreateScene(IAsyncResult asyncResult);
+      sbyte End_CreateScene(IAsyncResult asyncResult);
       #endif
-      bool RemoveScene(byte _sceneId);
+      bool RemoveScene(sbyte _sceneId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RemoveScene(AsyncCallback callback, object state, byte _sceneId);
+      IAsyncResult Begin_RemoveScene(AsyncCallback callback, object state, sbyte _sceneId);
       bool End_RemoveScene(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value);
+      bool AddSceneValue_Bool(sbyte _sceneId, RemoteValueID _valueId, bool _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValue_Bool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, bool _value);
+      IAsyncResult Begin_AddSceneValue_Bool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, bool _value);
       bool End_AddSceneValue_Bool(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value);
+      bool AddSceneValue_Uint8(sbyte _sceneId, RemoteValueID _valueId, sbyte _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValue_Uint8(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, byte _value);
+      IAsyncResult Begin_AddSceneValue_Uint8(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, sbyte _value);
       bool End_AddSceneValue_Uint8(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value);
+      bool AddSceneValue_Float(sbyte _sceneId, RemoteValueID _valueId, double _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValue_Float(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, double _value);
+      IAsyncResult Begin_AddSceneValue_Float(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, double _value);
       bool End_AddSceneValue_Float(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, int _value);
+      bool AddSceneValue_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValue_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value);
+      IAsyncResult Begin_AddSceneValue_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value);
       bool End_AddSceneValue_Int32(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, short _value);
+      bool AddSceneValue_Int16(sbyte _sceneId, RemoteValueID _valueId, short _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value);
+      IAsyncResult Begin_AddSceneValue_Int16(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, short _value);
       bool End_AddSceneValue_Int16(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value);
+      bool AddSceneValue_String(sbyte _sceneId, RemoteValueID _valueId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
+      IAsyncResult Begin_AddSceneValue_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value);
       bool End_AddSceneValue_String(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value);
+      bool AddSceneValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
+      IAsyncResult Begin_AddSceneValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value);
       bool End_AddSceneValueListSelection_String(IAsyncResult asyncResult);
       #endif
-      bool AddSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value);
+      bool AddSceneValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_AddSceneValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value);
+      IAsyncResult Begin_AddSceneValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value);
       bool End_AddSceneValueListSelection_Int32(IAsyncResult asyncResult);
       #endif
-      bool RemoveSceneValue(byte _sceneId, RemoteValueID _valueId);
+      bool RemoveSceneValue(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_RemoveSceneValue(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_RemoveSceneValue(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       bool End_RemoveSceneValue(IAsyncResult asyncResult);
       #endif
-      SceneGetValuesReturnStruct SceneGetValues(byte _sceneId);
+      SceneGetValuesReturnStruct SceneGetValues(sbyte _sceneId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValues(AsyncCallback callback, object state, byte _sceneId);
+      IAsyncResult Begin_SceneGetValues(AsyncCallback callback, object state, sbyte _sceneId);
       SceneGetValuesReturnStruct End_SceneGetValues(IAsyncResult asyncResult);
       #endif
-      Bool_Bool SceneGetValueAsBool(byte _sceneId, RemoteValueID _valueId);
+      Bool_Bool SceneGetValueAsBool(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueAsBool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueAsBool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_Bool End_SceneGetValueAsBool(IAsyncResult asyncResult);
       #endif
-      Bool_UInt8 SceneGetValueAsByte(byte _sceneId, RemoteValueID _valueId);
+      Bool_UInt8 SceneGetValueAsByte(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueAsByte(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueAsByte(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_UInt8 End_SceneGetValueAsByte(IAsyncResult asyncResult);
       #endif
-      Bool_Float SceneGetValueAsFloat(byte _sceneId, RemoteValueID _valueId);
+      Bool_Float SceneGetValueAsFloat(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueAsFloat(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueAsFloat(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_Float End_SceneGetValueAsFloat(IAsyncResult asyncResult);
       #endif
-      Bool_Int SceneGetValueAsInt(byte _sceneId, RemoteValueID _valueId);
+      Bool_Int SceneGetValueAsInt(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueAsInt(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueAsInt(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_Int End_SceneGetValueAsInt(IAsyncResult asyncResult);
       #endif
-      Bool_Int16 SceneGetValueAsShort(byte _sceneId, RemoteValueID _valueId);
+      Bool_Int16 SceneGetValueAsShort(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueAsShort(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueAsShort(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_Int16 End_SceneGetValueAsShort(IAsyncResult asyncResult);
       #endif
-      Bool_String SceneGetValueAsString(byte _sceneId, RemoteValueID _valueId);
+      Bool_String SceneGetValueAsString(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueAsString(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueAsString(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_String End_SceneGetValueAsString(IAsyncResult asyncResult);
       #endif
-      Bool_String SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId);
+      Bool_String SceneGetValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_String End_SceneGetValueListSelection_String(IAsyncResult asyncResult);
       #endif
-      Bool_Int SceneGetValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId);
+      Bool_Int SceneGetValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneGetValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId);
+      IAsyncResult Begin_SceneGetValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId);
       Bool_Int End_SceneGetValueListSelection_Int32(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value);
+      bool SetSceneValue_Bool(sbyte _sceneId, RemoteValueID _valueId, bool _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_Bool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, bool _value);
+      IAsyncResult Begin_SetSceneValue_Bool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, bool _value);
       bool End_SetSceneValue_Bool(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value);
+      bool SetSceneValue_Uint8(sbyte _sceneId, RemoteValueID _valueId, sbyte _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_Uint8(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, byte _value);
+      IAsyncResult Begin_SetSceneValue_Uint8(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, sbyte _value);
       bool End_SetSceneValue_Uint8(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value);
+      bool SetSceneValue_Float(sbyte _sceneId, RemoteValueID _valueId, double _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_Float(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, double _value);
+      IAsyncResult Begin_SetSceneValue_Float(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, double _value);
       bool End_SetSceneValue_Float(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, int _value);
+      bool SetSceneValue_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value);
+      IAsyncResult Begin_SetSceneValue_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value);
       bool End_SetSceneValue_Int32(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, short _value);
+      bool SetSceneValue_Int16(sbyte _sceneId, RemoteValueID _valueId, short _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value);
+      IAsyncResult Begin_SetSceneValue_Int16(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, short _value);
       bool End_SetSceneValue_Int16(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value);
+      bool SetSceneValue_String(sbyte _sceneId, RemoteValueID _valueId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
+      IAsyncResult Begin_SetSceneValue_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value);
       bool End_SetSceneValue_String(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value);
+      bool SetSceneValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value);
+      IAsyncResult Begin_SetSceneValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value);
       bool End_SetSceneValueListSelection_String(IAsyncResult asyncResult);
       #endif
-      bool SetSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value);
+      bool SetSceneValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value);
+      IAsyncResult Begin_SetSceneValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value);
       bool End_SetSceneValueListSelection_Int32(IAsyncResult asyncResult);
       #endif
-      string GetSceneLabel(byte _sceneId);
+      string GetSceneLabel(sbyte _sceneId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetSceneLabel(AsyncCallback callback, object state, byte _sceneId);
+      IAsyncResult Begin_GetSceneLabel(AsyncCallback callback, object state, sbyte _sceneId);
       string End_GetSceneLabel(IAsyncResult asyncResult);
       #endif
-      void SetSceneLabel(byte _sceneId, string _value);
+      void SetSceneLabel(sbyte _sceneId, string _value);
       #if SILVERLIGHT
-      IAsyncResult Begin_SetSceneLabel(AsyncCallback callback, object state, byte _sceneId, string _value);
+      IAsyncResult Begin_SetSceneLabel(AsyncCallback callback, object state, sbyte _sceneId, string _value);
       void End_SetSceneLabel(IAsyncResult asyncResult);
       #endif
-      bool SceneExists(byte _sceneId);
+      bool SceneExists(sbyte _sceneId);
       #if SILVERLIGHT
-      IAsyncResult Begin_SceneExists(AsyncCallback callback, object state, byte _sceneId);
+      IAsyncResult Begin_SceneExists(AsyncCallback callback, object state, sbyte _sceneId);
       bool End_SceneExists(IAsyncResult asyncResult);
       #endif
-      bool ActivateScene(byte _sceneId);
+      bool ActivateScene(sbyte _sceneId);
       #if SILVERLIGHT
-      IAsyncResult Begin_ActivateScene(AsyncCallback callback, object state, byte _sceneId);
+      IAsyncResult Begin_ActivateScene(AsyncCallback callback, object state, sbyte _sceneId);
       bool End_ActivateScene(IAsyncResult asyncResult);
       #endif
       GetDriverStatisticsReturnStruct GetDriverStatistics(int _homeId);
@@ -765,9 +765,9 @@ namespace OpenZWave
       IAsyncResult Begin_GetDriverStatistics(AsyncCallback callback, object state, int _homeId);
       GetDriverStatisticsReturnStruct End_GetDriverStatistics(IAsyncResult asyncResult);
       #endif
-      GetNodeStatisticsReturnStruct GetNodeStatistics(int _homeId, byte _nodeId);
+      GetNodeStatisticsReturnStruct GetNodeStatistics(int _homeId, sbyte _nodeId);
       #if SILVERLIGHT
-      IAsyncResult Begin_GetNodeStatistics(AsyncCallback callback, object state, int _homeId, byte _nodeId);
+      IAsyncResult Begin_GetNodeStatistics(AsyncCallback callback, object state, int _homeId, sbyte _nodeId);
       GetNodeStatisticsReturnStruct End_GetNodeStatistics(IAsyncResult asyncResult);
       #endif
       void SendAllValues();
@@ -782,7 +782,7 @@ namespace OpenZWave
       #endif
     }
 
-    public class Client : Iface {
+    public class Client : IDisposable, Iface {
       public Client(TProtocol prot) : this(prot, prot)
       {
       }
@@ -805,6 +805,37 @@ namespace OpenZWave
       {
         get { return oprot_; }
       }
+
+
+      #region " IDisposable Support "
+      private bool _IsDisposed;
+
+      // IDisposable
+      public void Dispose()
+      {
+        Dispose(true);
+      }
+      
+
+      protected virtual void Dispose(bool disposing)
+      {
+        if (!_IsDisposed)
+        {
+          if (disposing)
+          {
+            if (iprot_ != null)
+            {
+              ((IDisposable)iprot_).Dispose();
+            }
+            if (oprot_ != null)
+            {
+              ((IDisposable)oprot_).Dispose();
+            }
+          }
+        }
+        _IsDisposed = true;
+      }
+      #endregion
 
 
       
@@ -879,7 +910,7 @@ namespace OpenZWave
         return send_GetControllerNodeId(callback, state, _homeId);
       }
 
-      public byte End_GetControllerNodeId(IAsyncResult asyncResult)
+      public sbyte End_GetControllerNodeId(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetControllerNodeId();
@@ -892,7 +923,7 @@ namespace OpenZWave
       /// Methods for adding and removing drivers and obtaining basic controller information.
       /// </summary>
       /// <param name="_homeId"></param>
-      public byte GetControllerNodeId(int _homeId)
+      public sbyte GetControllerNodeId(int _homeId)
       {
         #if !SILVERLIGHT
         send_GetControllerNodeId(_homeId);
@@ -922,7 +953,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetControllerNodeId()
+      public sbyte recv_GetControllerNodeId()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -946,7 +977,7 @@ namespace OpenZWave
         return send_GetSUCNodeId(callback, state, _homeId);
       }
 
-      public byte End_GetSUCNodeId(IAsyncResult asyncResult)
+      public sbyte End_GetSUCNodeId(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetSUCNodeId();
@@ -954,7 +985,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetSUCNodeId(int _homeId)
+      public sbyte GetSUCNodeId(int _homeId)
       {
         #if !SILVERLIGHT
         send_GetSUCNodeId(_homeId);
@@ -984,7 +1015,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetSUCNodeId()
+      public sbyte recv_GetSUCNodeId()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -1679,7 +1710,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_EnablePoll(AsyncCallback callback, object state, RemoteValueID _valueId, byte _intensity)
+      public IAsyncResult Begin_EnablePoll(AsyncCallback callback, object state, RemoteValueID _valueId, sbyte _intensity)
       {
         return send_EnablePoll(callback, state, _valueId, _intensity);
       }
@@ -1692,7 +1723,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool EnablePoll(RemoteValueID _valueId, byte _intensity)
+      public bool EnablePoll(RemoteValueID _valueId, sbyte _intensity)
       {
         #if !SILVERLIGHT
         send_EnablePoll(_valueId, _intensity);
@@ -1705,9 +1736,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_EnablePoll(AsyncCallback callback, object state, RemoteValueID _valueId, byte _intensity)
+      public IAsyncResult send_EnablePoll(AsyncCallback callback, object state, RemoteValueID _valueId, sbyte _intensity)
       #else
-      public void send_EnablePoll(RemoteValueID _valueId, byte _intensity)
+      public void send_EnablePoll(RemoteValueID _valueId, sbyte _intensity)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("EnablePoll", TMessageType.Call, seqid_));
@@ -1866,7 +1897,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetPollIntensity(AsyncCallback callback, object state, RemoteValueID _valueId, byte _intensity)
+      public IAsyncResult Begin_SetPollIntensity(AsyncCallback callback, object state, RemoteValueID _valueId, sbyte _intensity)
       {
         return send_SetPollIntensity(callback, state, _valueId, _intensity);
       }
@@ -1879,7 +1910,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetPollIntensity(RemoteValueID _valueId, byte _intensity)
+      public void SetPollIntensity(RemoteValueID _valueId, sbyte _intensity)
       {
         #if !SILVERLIGHT
         send_SetPollIntensity(_valueId, _intensity);
@@ -1892,9 +1923,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetPollIntensity(AsyncCallback callback, object state, RemoteValueID _valueId, byte _intensity)
+      public IAsyncResult send_SetPollIntensity(AsyncCallback callback, object state, RemoteValueID _valueId, sbyte _intensity)
       #else
-      public void send_SetPollIntensity(RemoteValueID _valueId, byte _intensity)
+      public void send_SetPollIntensity(RemoteValueID _valueId, sbyte _intensity)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetPollIntensity", TMessageType.Call, seqid_));
@@ -1926,7 +1957,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RefreshNodeInfo(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_RefreshNodeInfo(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_RefreshNodeInfo(callback, state, _homeId, _nodeId);
       }
@@ -1939,7 +1970,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool RefreshNodeInfo(int _homeId, byte _nodeId)
+      public bool RefreshNodeInfo(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_RefreshNodeInfo(_homeId, _nodeId);
@@ -1952,9 +1983,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RefreshNodeInfo(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_RefreshNodeInfo(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_RefreshNodeInfo(int _homeId, byte _nodeId)
+      public void send_RefreshNodeInfo(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RefreshNodeInfo", TMessageType.Call, seqid_));
@@ -1989,7 +2020,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RequestNodeState(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_RequestNodeState(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_RequestNodeState(callback, state, _homeId, _nodeId);
       }
@@ -2002,7 +2033,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool RequestNodeState(int _homeId, byte _nodeId)
+      public bool RequestNodeState(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_RequestNodeState(_homeId, _nodeId);
@@ -2015,9 +2046,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RequestNodeState(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_RequestNodeState(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_RequestNodeState(int _homeId, byte _nodeId)
+      public void send_RequestNodeState(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RequestNodeState", TMessageType.Call, seqid_));
@@ -2052,7 +2083,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RequestNodeDynamic(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_RequestNodeDynamic(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_RequestNodeDynamic(callback, state, _homeId, _nodeId);
       }
@@ -2065,7 +2096,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool RequestNodeDynamic(int _homeId, byte _nodeId)
+      public bool RequestNodeDynamic(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_RequestNodeDynamic(_homeId, _nodeId);
@@ -2078,9 +2109,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RequestNodeDynamic(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_RequestNodeDynamic(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_RequestNodeDynamic(int _homeId, byte _nodeId)
+      public void send_RequestNodeDynamic(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RequestNodeDynamic", TMessageType.Call, seqid_));
@@ -2115,7 +2146,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeListeningDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeListeningDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeListeningDevice(callback, state, _homeId, _nodeId);
       }
@@ -2128,7 +2159,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeListeningDevice(int _homeId, byte _nodeId)
+      public bool IsNodeListeningDevice(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeListeningDevice(_homeId, _nodeId);
@@ -2141,9 +2172,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeListeningDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeListeningDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeListeningDevice(int _homeId, byte _nodeId)
+      public void send_IsNodeListeningDevice(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeListeningDevice", TMessageType.Call, seqid_));
@@ -2178,7 +2209,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeFrequentListeningDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeFrequentListeningDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeFrequentListeningDevice(callback, state, _homeId, _nodeId);
       }
@@ -2191,7 +2222,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeFrequentListeningDevice(int _homeId, byte _nodeId)
+      public bool IsNodeFrequentListeningDevice(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeFrequentListeningDevice(_homeId, _nodeId);
@@ -2204,9 +2235,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeFrequentListeningDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeFrequentListeningDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeFrequentListeningDevice(int _homeId, byte _nodeId)
+      public void send_IsNodeFrequentListeningDevice(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeFrequentListeningDevice", TMessageType.Call, seqid_));
@@ -2241,7 +2272,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeBeamingDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeBeamingDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeBeamingDevice(callback, state, _homeId, _nodeId);
       }
@@ -2254,7 +2285,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeBeamingDevice(int _homeId, byte _nodeId)
+      public bool IsNodeBeamingDevice(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeBeamingDevice(_homeId, _nodeId);
@@ -2267,9 +2298,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeBeamingDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeBeamingDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeBeamingDevice(int _homeId, byte _nodeId)
+      public void send_IsNodeBeamingDevice(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeBeamingDevice", TMessageType.Call, seqid_));
@@ -2304,7 +2335,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeRoutingDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeRoutingDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeRoutingDevice(callback, state, _homeId, _nodeId);
       }
@@ -2317,7 +2348,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeRoutingDevice(int _homeId, byte _nodeId)
+      public bool IsNodeRoutingDevice(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeRoutingDevice(_homeId, _nodeId);
@@ -2330,9 +2361,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeRoutingDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeRoutingDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeRoutingDevice(int _homeId, byte _nodeId)
+      public void send_IsNodeRoutingDevice(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeRoutingDevice", TMessageType.Call, seqid_));
@@ -2367,7 +2398,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeSecurityDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeSecurityDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeSecurityDevice(callback, state, _homeId, _nodeId);
       }
@@ -2380,7 +2411,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeSecurityDevice(int _homeId, byte _nodeId)
+      public bool IsNodeSecurityDevice(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeSecurityDevice(_homeId, _nodeId);
@@ -2393,9 +2424,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeSecurityDevice(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeSecurityDevice(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeSecurityDevice(int _homeId, byte _nodeId)
+      public void send_IsNodeSecurityDevice(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeSecurityDevice", TMessageType.Call, seqid_));
@@ -2430,7 +2461,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeMaxBaudRate(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeMaxBaudRate(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeMaxBaudRate(callback, state, _homeId, _nodeId);
       }
@@ -2443,7 +2474,7 @@ namespace OpenZWave
 
       #endif
 
-      public int GetNodeMaxBaudRate(int _homeId, byte _nodeId)
+      public int GetNodeMaxBaudRate(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeMaxBaudRate(_homeId, _nodeId);
@@ -2456,9 +2487,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeMaxBaudRate(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeMaxBaudRate(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeMaxBaudRate(int _homeId, byte _nodeId)
+      public void send_GetNodeMaxBaudRate(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeMaxBaudRate", TMessageType.Call, seqid_));
@@ -2493,12 +2524,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeVersion(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeVersion(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeVersion(callback, state, _homeId, _nodeId);
       }
 
-      public byte End_GetNodeVersion(IAsyncResult asyncResult)
+      public sbyte End_GetNodeVersion(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNodeVersion();
@@ -2506,7 +2537,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNodeVersion(int _homeId, byte _nodeId)
+      public sbyte GetNodeVersion(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeVersion(_homeId, _nodeId);
@@ -2519,9 +2550,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeVersion(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeVersion(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeVersion(int _homeId, byte _nodeId)
+      public void send_GetNodeVersion(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeVersion", TMessageType.Call, seqid_));
@@ -2537,7 +2568,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNodeVersion()
+      public sbyte recv_GetNodeVersion()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -2556,12 +2587,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeSecurity(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeSecurity(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeSecurity(callback, state, _homeId, _nodeId);
       }
 
-      public byte End_GetNodeSecurity(IAsyncResult asyncResult)
+      public sbyte End_GetNodeSecurity(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNodeSecurity();
@@ -2569,7 +2600,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNodeSecurity(int _homeId, byte _nodeId)
+      public sbyte GetNodeSecurity(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeSecurity(_homeId, _nodeId);
@@ -2582,9 +2613,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeSecurity(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeSecurity(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeSecurity(int _homeId, byte _nodeId)
+      public void send_GetNodeSecurity(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeSecurity", TMessageType.Call, seqid_));
@@ -2600,7 +2631,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNodeSecurity()
+      public sbyte recv_GetNodeSecurity()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -2619,12 +2650,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeBasic(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeBasic(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeBasic(callback, state, _homeId, _nodeId);
       }
 
-      public byte End_GetNodeBasic(IAsyncResult asyncResult)
+      public sbyte End_GetNodeBasic(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNodeBasic();
@@ -2632,7 +2663,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNodeBasic(int _homeId, byte _nodeId)
+      public sbyte GetNodeBasic(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeBasic(_homeId, _nodeId);
@@ -2645,9 +2676,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeBasic(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeBasic(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeBasic(int _homeId, byte _nodeId)
+      public void send_GetNodeBasic(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeBasic", TMessageType.Call, seqid_));
@@ -2663,7 +2694,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNodeBasic()
+      public sbyte recv_GetNodeBasic()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -2682,12 +2713,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeGeneric(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeGeneric(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeGeneric(callback, state, _homeId, _nodeId);
       }
 
-      public byte End_GetNodeGeneric(IAsyncResult asyncResult)
+      public sbyte End_GetNodeGeneric(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNodeGeneric();
@@ -2695,7 +2726,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNodeGeneric(int _homeId, byte _nodeId)
+      public sbyte GetNodeGeneric(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeGeneric(_homeId, _nodeId);
@@ -2708,9 +2739,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeGeneric(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeGeneric(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeGeneric(int _homeId, byte _nodeId)
+      public void send_GetNodeGeneric(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeGeneric", TMessageType.Call, seqid_));
@@ -2726,7 +2757,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNodeGeneric()
+      public sbyte recv_GetNodeGeneric()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -2745,12 +2776,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeSpecific(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeSpecific(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeSpecific(callback, state, _homeId, _nodeId);
       }
 
-      public byte End_GetNodeSpecific(IAsyncResult asyncResult)
+      public sbyte End_GetNodeSpecific(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNodeSpecific();
@@ -2758,7 +2789,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNodeSpecific(int _homeId, byte _nodeId)
+      public sbyte GetNodeSpecific(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeSpecific(_homeId, _nodeId);
@@ -2771,9 +2802,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeSpecific(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeSpecific(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeSpecific(int _homeId, byte _nodeId)
+      public void send_GetNodeSpecific(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeSpecific", TMessageType.Call, seqid_));
@@ -2789,7 +2820,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNodeSpecific()
+      public sbyte recv_GetNodeSpecific()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -2808,7 +2839,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeType(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeType(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeType(callback, state, _homeId, _nodeId);
       }
@@ -2821,7 +2852,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeType(int _homeId, byte _nodeId)
+      public string GetNodeType(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeType(_homeId, _nodeId);
@@ -2834,9 +2865,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeType(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeType(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeType(int _homeId, byte _nodeId)
+      public void send_GetNodeType(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeType", TMessageType.Call, seqid_));
@@ -2871,7 +2902,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeNeighbors(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeNeighbors(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeNeighbors(callback, state, _homeId, _nodeId);
       }
@@ -2884,7 +2915,7 @@ namespace OpenZWave
 
       #endif
 
-      public UInt32_ListByte GetNodeNeighbors(int _homeId, byte _nodeId)
+      public UInt32_ListByte GetNodeNeighbors(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeNeighbors(_homeId, _nodeId);
@@ -2897,9 +2928,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeNeighbors(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeNeighbors(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeNeighbors(int _homeId, byte _nodeId)
+      public void send_GetNodeNeighbors(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeNeighbors", TMessageType.Call, seqid_));
@@ -2934,7 +2965,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeManufacturerName(callback, state, _homeId, _nodeId);
       }
@@ -2947,7 +2978,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeManufacturerName(int _homeId, byte _nodeId)
+      public string GetNodeManufacturerName(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeManufacturerName(_homeId, _nodeId);
@@ -2960,9 +2991,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeManufacturerName(int _homeId, byte _nodeId)
+      public void send_GetNodeManufacturerName(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeManufacturerName", TMessageType.Call, seqid_));
@@ -2997,7 +3028,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeProductName(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeProductName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeProductName(callback, state, _homeId, _nodeId);
       }
@@ -3010,7 +3041,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeProductName(int _homeId, byte _nodeId)
+      public string GetNodeProductName(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeProductName(_homeId, _nodeId);
@@ -3023,9 +3054,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeProductName(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeProductName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeProductName(int _homeId, byte _nodeId)
+      public void send_GetNodeProductName(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeProductName", TMessageType.Call, seqid_));
@@ -3060,7 +3091,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeName(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeName(callback, state, _homeId, _nodeId);
       }
@@ -3073,7 +3104,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeName(int _homeId, byte _nodeId)
+      public string GetNodeName(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeName(_homeId, _nodeId);
@@ -3086,9 +3117,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeName(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeName(int _homeId, byte _nodeId)
+      public void send_GetNodeName(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeName", TMessageType.Call, seqid_));
@@ -3123,7 +3154,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeLocation(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeLocation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeLocation(callback, state, _homeId, _nodeId);
       }
@@ -3136,7 +3167,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeLocation(int _homeId, byte _nodeId)
+      public string GetNodeLocation(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeLocation(_homeId, _nodeId);
@@ -3149,9 +3180,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeLocation(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeLocation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeLocation(int _homeId, byte _nodeId)
+      public void send_GetNodeLocation(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeLocation", TMessageType.Call, seqid_));
@@ -3186,7 +3217,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeManufacturerId(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeManufacturerId(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeManufacturerId(callback, state, _homeId, _nodeId);
       }
@@ -3199,7 +3230,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeManufacturerId(int _homeId, byte _nodeId)
+      public string GetNodeManufacturerId(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeManufacturerId(_homeId, _nodeId);
@@ -3212,9 +3243,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeManufacturerId(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeManufacturerId(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeManufacturerId(int _homeId, byte _nodeId)
+      public void send_GetNodeManufacturerId(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeManufacturerId", TMessageType.Call, seqid_));
@@ -3249,7 +3280,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeProductType(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeProductType(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeProductType(callback, state, _homeId, _nodeId);
       }
@@ -3262,7 +3293,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeProductType(int _homeId, byte _nodeId)
+      public string GetNodeProductType(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeProductType(_homeId, _nodeId);
@@ -3275,9 +3306,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeProductType(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeProductType(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeProductType(int _homeId, byte _nodeId)
+      public void send_GetNodeProductType(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeProductType", TMessageType.Call, seqid_));
@@ -3312,7 +3343,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeProductId(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeProductId(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeProductId(callback, state, _homeId, _nodeId);
       }
@@ -3325,7 +3356,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeProductId(int _homeId, byte _nodeId)
+      public string GetNodeProductId(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeProductId(_homeId, _nodeId);
@@ -3338,9 +3369,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeProductId(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeProductId(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeProductId(int _homeId, byte _nodeId)
+      public void send_GetNodeProductId(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeProductId", TMessageType.Call, seqid_));
@@ -3375,7 +3406,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _manufacturerName)
+      public IAsyncResult Begin_SetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _manufacturerName)
       {
         return send_SetNodeManufacturerName(callback, state, _homeId, _nodeId, _manufacturerName);
       }
@@ -3388,7 +3419,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeManufacturerName(int _homeId, byte _nodeId, string _manufacturerName)
+      public void SetNodeManufacturerName(int _homeId, sbyte _nodeId, string _manufacturerName)
       {
         #if !SILVERLIGHT
         send_SetNodeManufacturerName(_homeId, _nodeId, _manufacturerName);
@@ -3401,9 +3432,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _manufacturerName)
+      public IAsyncResult send_SetNodeManufacturerName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _manufacturerName)
       #else
-      public void send_SetNodeManufacturerName(int _homeId, byte _nodeId, string _manufacturerName)
+      public void send_SetNodeManufacturerName(int _homeId, sbyte _nodeId, string _manufacturerName)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeManufacturerName", TMessageType.Call, seqid_));
@@ -3436,7 +3467,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeProductName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _productName)
+      public IAsyncResult Begin_SetNodeProductName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _productName)
       {
         return send_SetNodeProductName(callback, state, _homeId, _nodeId, _productName);
       }
@@ -3449,7 +3480,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeProductName(int _homeId, byte _nodeId, string _productName)
+      public void SetNodeProductName(int _homeId, sbyte _nodeId, string _productName)
       {
         #if !SILVERLIGHT
         send_SetNodeProductName(_homeId, _nodeId, _productName);
@@ -3462,9 +3493,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeProductName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _productName)
+      public IAsyncResult send_SetNodeProductName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _productName)
       #else
-      public void send_SetNodeProductName(int _homeId, byte _nodeId, string _productName)
+      public void send_SetNodeProductName(int _homeId, sbyte _nodeId, string _productName)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeProductName", TMessageType.Call, seqid_));
@@ -3497,7 +3528,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _nodeName)
+      public IAsyncResult Begin_SetNodeName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _nodeName)
       {
         return send_SetNodeName(callback, state, _homeId, _nodeId, _nodeName);
       }
@@ -3510,7 +3541,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeName(int _homeId, byte _nodeId, string _nodeName)
+      public void SetNodeName(int _homeId, sbyte _nodeId, string _nodeName)
       {
         #if !SILVERLIGHT
         send_SetNodeName(_homeId, _nodeId, _nodeName);
@@ -3523,9 +3554,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeName(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _nodeName)
+      public IAsyncResult send_SetNodeName(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _nodeName)
       #else
-      public void send_SetNodeName(int _homeId, byte _nodeId, string _nodeName)
+      public void send_SetNodeName(int _homeId, sbyte _nodeId, string _nodeName)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeName", TMessageType.Call, seqid_));
@@ -3558,7 +3589,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeLocation(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _location)
+      public IAsyncResult Begin_SetNodeLocation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _location)
       {
         return send_SetNodeLocation(callback, state, _homeId, _nodeId, _location);
       }
@@ -3571,7 +3602,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeLocation(int _homeId, byte _nodeId, string _location)
+      public void SetNodeLocation(int _homeId, sbyte _nodeId, string _location)
       {
         #if !SILVERLIGHT
         send_SetNodeLocation(_homeId, _nodeId, _location);
@@ -3584,9 +3615,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeLocation(AsyncCallback callback, object state, int _homeId, byte _nodeId, string _location)
+      public IAsyncResult send_SetNodeLocation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, string _location)
       #else
-      public void send_SetNodeLocation(int _homeId, byte _nodeId, string _location)
+      public void send_SetNodeLocation(int _homeId, sbyte _nodeId, string _location)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeLocation", TMessageType.Call, seqid_));
@@ -3619,7 +3650,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeOn(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_SetNodeOn(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_SetNodeOn(callback, state, _homeId, _nodeId);
       }
@@ -3632,7 +3663,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeOn(int _homeId, byte _nodeId)
+      public void SetNodeOn(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_SetNodeOn(_homeId, _nodeId);
@@ -3645,9 +3676,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeOn(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_SetNodeOn(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_SetNodeOn(int _homeId, byte _nodeId)
+      public void send_SetNodeOn(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeOn", TMessageType.Call, seqid_));
@@ -3679,7 +3710,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeOff(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_SetNodeOff(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_SetNodeOff(callback, state, _homeId, _nodeId);
       }
@@ -3692,7 +3723,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeOff(int _homeId, byte _nodeId)
+      public void SetNodeOff(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_SetNodeOff(_homeId, _nodeId);
@@ -3705,9 +3736,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeOff(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_SetNodeOff(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_SetNodeOff(int _homeId, byte _nodeId)
+      public void send_SetNodeOff(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeOff", TMessageType.Call, seqid_));
@@ -3739,7 +3770,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetNodeLevel(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _level)
+      public IAsyncResult Begin_SetNodeLevel(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _level)
       {
         return send_SetNodeLevel(callback, state, _homeId, _nodeId, _level);
       }
@@ -3752,7 +3783,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetNodeLevel(int _homeId, byte _nodeId, byte _level)
+      public void SetNodeLevel(int _homeId, sbyte _nodeId, sbyte _level)
       {
         #if !SILVERLIGHT
         send_SetNodeLevel(_homeId, _nodeId, _level);
@@ -3765,9 +3796,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetNodeLevel(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _level)
+      public IAsyncResult send_SetNodeLevel(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _level)
       #else
-      public void send_SetNodeLevel(int _homeId, byte _nodeId, byte _level)
+      public void send_SetNodeLevel(int _homeId, sbyte _nodeId, sbyte _level)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetNodeLevel", TMessageType.Call, seqid_));
@@ -3800,7 +3831,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeInfoReceived(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeInfoReceived(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeInfoReceived(callback, state, _homeId, _nodeId);
       }
@@ -3813,7 +3844,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeInfoReceived(int _homeId, byte _nodeId)
+      public bool IsNodeInfoReceived(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeInfoReceived(_homeId, _nodeId);
@@ -3826,9 +3857,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeInfoReceived(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeInfoReceived(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeInfoReceived(int _homeId, byte _nodeId)
+      public void send_IsNodeInfoReceived(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeInfoReceived", TMessageType.Call, seqid_));
@@ -3863,7 +3894,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeClassInformation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _commandClassId)
+      public IAsyncResult Begin_GetNodeClassInformation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _commandClassId)
       {
         return send_GetNodeClassInformation(callback, state, _homeId, _nodeId, _commandClassId);
       }
@@ -3876,7 +3907,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_GetNodeClassInformation GetNodeClassInformation(int _homeId, byte _nodeId, byte _commandClassId)
+      public Bool_GetNodeClassInformation GetNodeClassInformation(int _homeId, sbyte _nodeId, sbyte _commandClassId)
       {
         #if !SILVERLIGHT
         send_GetNodeClassInformation(_homeId, _nodeId, _commandClassId);
@@ -3889,9 +3920,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeClassInformation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _commandClassId)
+      public IAsyncResult send_GetNodeClassInformation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _commandClassId)
       #else
-      public void send_GetNodeClassInformation(int _homeId, byte _nodeId, byte _commandClassId)
+      public void send_GetNodeClassInformation(int _homeId, sbyte _nodeId, sbyte _commandClassId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeClassInformation", TMessageType.Call, seqid_));
@@ -3927,7 +3958,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeAwake(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeAwake(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeAwake(callback, state, _homeId, _nodeId);
       }
@@ -3940,7 +3971,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeAwake(int _homeId, byte _nodeId)
+      public bool IsNodeAwake(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeAwake(_homeId, _nodeId);
@@ -3953,9 +3984,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeAwake(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeAwake(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeAwake(int _homeId, byte _nodeId)
+      public void send_IsNodeAwake(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeAwake", TMessageType.Call, seqid_));
@@ -3990,7 +4021,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_IsNodeFailed(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_IsNodeFailed(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_IsNodeFailed(callback, state, _homeId, _nodeId);
       }
@@ -4003,7 +4034,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool IsNodeFailed(int _homeId, byte _nodeId)
+      public bool IsNodeFailed(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_IsNodeFailed(_homeId, _nodeId);
@@ -4016,9 +4047,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_IsNodeFailed(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_IsNodeFailed(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_IsNodeFailed(int _homeId, byte _nodeId)
+      public void send_IsNodeFailed(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("IsNodeFailed", TMessageType.Call, seqid_));
@@ -4053,7 +4084,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeQueryStage(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeQueryStage(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeQueryStage(callback, state, _homeId, _nodeId);
       }
@@ -4066,7 +4097,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetNodeQueryStage(int _homeId, byte _nodeId)
+      public string GetNodeQueryStage(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeQueryStage(_homeId, _nodeId);
@@ -4079,9 +4110,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeQueryStage(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeQueryStage(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeQueryStage(int _homeId, byte _nodeId)
+      public void send_GetNodeQueryStage(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeQueryStage", TMessageType.Call, seqid_));
@@ -5537,7 +5568,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, byte _value)
+      public IAsyncResult Begin_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, sbyte _value)
       {
         return send_SetValue_UInt8(callback, state, _id, _value);
       }
@@ -5550,7 +5581,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetValue_UInt8(RemoteValueID _id, byte _value)
+      public bool SetValue_UInt8(RemoteValueID _id, sbyte _value)
       {
         #if !SILVERLIGHT
         send_SetValue_UInt8(_id, _value);
@@ -5563,9 +5594,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, byte _value)
+      public IAsyncResult send_SetValue_UInt8(AsyncCallback callback, object state, RemoteValueID _id, sbyte _value)
       #else
-      public void send_SetValue_UInt8(RemoteValueID _id, byte _value)
+      public void send_SetValue_UInt8(RemoteValueID _id, sbyte _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetValue_UInt8", TMessageType.Call, seqid_));
@@ -5600,7 +5631,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<byte> _value, byte _length)
+      public IAsyncResult Begin_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<sbyte> _value, sbyte _length)
       {
         return send_SetValue_UInt8_UInt8(callback, state, _id, _value, _length);
       }
@@ -5613,7 +5644,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetValue_UInt8_UInt8(RemoteValueID _id, List<byte> _value, byte _length)
+      public bool SetValue_UInt8_UInt8(RemoteValueID _id, List<sbyte> _value, sbyte _length)
       {
         #if !SILVERLIGHT
         send_SetValue_UInt8_UInt8(_id, _value, _length);
@@ -5626,9 +5657,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<byte> _value, byte _length)
+      public IAsyncResult send_SetValue_UInt8_UInt8(AsyncCallback callback, object state, RemoteValueID _id, List<sbyte> _value, sbyte _length)
       #else
-      public void send_SetValue_UInt8_UInt8(RemoteValueID _id, List<byte> _value, byte _length)
+      public void send_SetValue_UInt8_UInt8(RemoteValueID _id, List<sbyte> _value, sbyte _length)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetValue_UInt8_UInt8", TMessageType.Call, seqid_));
@@ -6230,7 +6261,7 @@ namespace OpenZWave
         return send_GetNumSwitchPoints(callback, state, _id);
       }
 
-      public byte End_GetNumSwitchPoints(IAsyncResult asyncResult)
+      public sbyte End_GetNumSwitchPoints(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNumSwitchPoints();
@@ -6238,7 +6269,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNumSwitchPoints(RemoteValueID _id)
+      public sbyte GetNumSwitchPoints(RemoteValueID _id)
       {
         #if !SILVERLIGHT
         send_GetNumSwitchPoints(_id);
@@ -6268,7 +6299,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNumSwitchPoints()
+      public sbyte recv_GetNumSwitchPoints()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -6287,7 +6318,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _hours, byte _minutes, byte _setback)
+      public IAsyncResult Begin_SetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _hours, sbyte _minutes, sbyte _setback)
       {
         return send_SetSwitchPoint(callback, state, _id, _hours, _minutes, _setback);
       }
@@ -6300,7 +6331,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSwitchPoint(RemoteValueID _id, byte _hours, byte _minutes, byte _setback)
+      public bool SetSwitchPoint(RemoteValueID _id, sbyte _hours, sbyte _minutes, sbyte _setback)
       {
         #if !SILVERLIGHT
         send_SetSwitchPoint(_id, _hours, _minutes, _setback);
@@ -6313,9 +6344,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _hours, byte _minutes, byte _setback)
+      public IAsyncResult send_SetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _hours, sbyte _minutes, sbyte _setback)
       #else
-      public void send_SetSwitchPoint(RemoteValueID _id, byte _hours, byte _minutes, byte _setback)
+      public void send_SetSwitchPoint(RemoteValueID _id, sbyte _hours, sbyte _minutes, sbyte _setback)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSwitchPoint", TMessageType.Call, seqid_));
@@ -6352,7 +6383,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RemoveSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _hours, byte _minutes)
+      public IAsyncResult Begin_RemoveSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _hours, sbyte _minutes)
       {
         return send_RemoveSwitchPoint(callback, state, _id, _hours, _minutes);
       }
@@ -6365,7 +6396,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool RemoveSwitchPoint(RemoteValueID _id, byte _hours, byte _minutes)
+      public bool RemoveSwitchPoint(RemoteValueID _id, sbyte _hours, sbyte _minutes)
       {
         #if !SILVERLIGHT
         send_RemoveSwitchPoint(_id, _hours, _minutes);
@@ -6378,9 +6409,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RemoveSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _hours, byte _minutes)
+      public IAsyncResult send_RemoveSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _hours, sbyte _minutes)
       #else
-      public void send_RemoveSwitchPoint(RemoteValueID _id, byte _hours, byte _minutes)
+      public void send_RemoveSwitchPoint(RemoteValueID _id, sbyte _hours, sbyte _minutes)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RemoveSwitchPoint", TMessageType.Call, seqid_));
@@ -6475,7 +6506,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _idx)
+      public IAsyncResult Begin_GetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _idx)
       {
         return send_GetSwitchPoint(callback, state, _id, _idx);
       }
@@ -6488,7 +6519,7 @@ namespace OpenZWave
 
       #endif
 
-      public GetSwitchPointReturnStruct GetSwitchPoint(RemoteValueID _id, byte _idx)
+      public GetSwitchPointReturnStruct GetSwitchPoint(RemoteValueID _id, sbyte _idx)
       {
         #if !SILVERLIGHT
         send_GetSwitchPoint(_id, _idx);
@@ -6501,9 +6532,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, byte _idx)
+      public IAsyncResult send_GetSwitchPoint(AsyncCallback callback, object state, RemoteValueID _id, sbyte _idx)
       #else
-      public void send_GetSwitchPoint(RemoteValueID _id, byte _idx)
+      public void send_GetSwitchPoint(RemoteValueID _id, sbyte _idx)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetSwitchPoint", TMessageType.Call, seqid_));
@@ -6656,7 +6687,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetConfigParam(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _param, int _value, byte _size)
+      public IAsyncResult Begin_SetConfigParam(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _param, int _value, sbyte _size)
       {
         return send_SetConfigParam(callback, state, _homeId, _nodeId, _param, _value, _size);
       }
@@ -6669,7 +6700,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetConfigParam(int _homeId, byte _nodeId, byte _param, int _value, byte _size)
+      public bool SetConfigParam(int _homeId, sbyte _nodeId, sbyte _param, int _value, sbyte _size)
       {
         #if !SILVERLIGHT
         send_SetConfigParam(_homeId, _nodeId, _param, _value, _size);
@@ -6682,9 +6713,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetConfigParam(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _param, int _value, byte _size)
+      public IAsyncResult send_SetConfigParam(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _param, int _value, sbyte _size)
       #else
-      public void send_SetConfigParam(int _homeId, byte _nodeId, byte _param, int _value, byte _size)
+      public void send_SetConfigParam(int _homeId, sbyte _nodeId, sbyte _param, int _value, sbyte _size)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetConfigParam", TMessageType.Call, seqid_));
@@ -6722,7 +6753,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RequestConfigParam(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _param)
+      public IAsyncResult Begin_RequestConfigParam(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _param)
       {
         return send_RequestConfigParam(callback, state, _homeId, _nodeId, _param);
       }
@@ -6735,7 +6766,7 @@ namespace OpenZWave
 
       #endif
 
-      public void RequestConfigParam(int _homeId, byte _nodeId, byte _param)
+      public void RequestConfigParam(int _homeId, sbyte _nodeId, sbyte _param)
       {
         #if !SILVERLIGHT
         send_RequestConfigParam(_homeId, _nodeId, _param);
@@ -6748,9 +6779,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RequestConfigParam(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _param)
+      public IAsyncResult send_RequestConfigParam(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _param)
       #else
-      public void send_RequestConfigParam(int _homeId, byte _nodeId, byte _param)
+      public void send_RequestConfigParam(int _homeId, sbyte _nodeId, sbyte _param)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RequestConfigParam", TMessageType.Call, seqid_));
@@ -6783,7 +6814,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RequestAllConfigParams(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_RequestAllConfigParams(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_RequestAllConfigParams(callback, state, _homeId, _nodeId);
       }
@@ -6796,7 +6827,7 @@ namespace OpenZWave
 
       #endif
 
-      public void RequestAllConfigParams(int _homeId, byte _nodeId)
+      public void RequestAllConfigParams(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_RequestAllConfigParams(_homeId, _nodeId);
@@ -6809,9 +6840,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RequestAllConfigParams(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_RequestAllConfigParams(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_RequestAllConfigParams(int _homeId, byte _nodeId)
+      public void send_RequestAllConfigParams(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RequestAllConfigParams", TMessageType.Call, seqid_));
@@ -6843,12 +6874,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNumGroups(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNumGroups(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNumGroups(callback, state, _homeId, _nodeId);
       }
 
-      public byte End_GetNumGroups(IAsyncResult asyncResult)
+      public sbyte End_GetNumGroups(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNumGroups();
@@ -6856,7 +6887,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNumGroups(int _homeId, byte _nodeId)
+      public sbyte GetNumGroups(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNumGroups(_homeId, _nodeId);
@@ -6869,9 +6900,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNumGroups(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNumGroups(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNumGroups(int _homeId, byte _nodeId)
+      public void send_GetNumGroups(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNumGroups", TMessageType.Call, seqid_));
@@ -6887,7 +6918,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNumGroups()
+      public sbyte recv_GetNumGroups()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -6906,7 +6937,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetAssociations(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx)
+      public IAsyncResult Begin_GetAssociations(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx)
       {
         return send_GetAssociations(callback, state, _homeId, _nodeId, _groupIdx);
       }
@@ -6919,7 +6950,7 @@ namespace OpenZWave
 
       #endif
 
-      public GetAssociationsReturnStruct GetAssociations(int _homeId, byte _nodeId, byte _groupIdx)
+      public GetAssociationsReturnStruct GetAssociations(int _homeId, sbyte _nodeId, sbyte _groupIdx)
       {
         #if !SILVERLIGHT
         send_GetAssociations(_homeId, _nodeId, _groupIdx);
@@ -6932,9 +6963,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetAssociations(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx)
+      public IAsyncResult send_GetAssociations(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx)
       #else
-      public void send_GetAssociations(int _homeId, byte _nodeId, byte _groupIdx)
+      public void send_GetAssociations(int _homeId, sbyte _nodeId, sbyte _groupIdx)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetAssociations", TMessageType.Call, seqid_));
@@ -6970,12 +7001,12 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetMaxAssociations(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx)
+      public IAsyncResult Begin_GetMaxAssociations(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx)
       {
         return send_GetMaxAssociations(callback, state, _homeId, _nodeId, _groupIdx);
       }
 
-      public byte End_GetMaxAssociations(IAsyncResult asyncResult)
+      public sbyte End_GetMaxAssociations(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetMaxAssociations();
@@ -6983,7 +7014,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetMaxAssociations(int _homeId, byte _nodeId, byte _groupIdx)
+      public sbyte GetMaxAssociations(int _homeId, sbyte _nodeId, sbyte _groupIdx)
       {
         #if !SILVERLIGHT
         send_GetMaxAssociations(_homeId, _nodeId, _groupIdx);
@@ -6996,9 +7027,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetMaxAssociations(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx)
+      public IAsyncResult send_GetMaxAssociations(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx)
       #else
-      public void send_GetMaxAssociations(int _homeId, byte _nodeId, byte _groupIdx)
+      public void send_GetMaxAssociations(int _homeId, sbyte _nodeId, sbyte _groupIdx)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetMaxAssociations", TMessageType.Call, seqid_));
@@ -7015,7 +7046,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetMaxAssociations()
+      public sbyte recv_GetMaxAssociations()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -7034,7 +7065,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetGroupLabel(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx)
+      public IAsyncResult Begin_GetGroupLabel(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx)
       {
         return send_GetGroupLabel(callback, state, _homeId, _nodeId, _groupIdx);
       }
@@ -7047,7 +7078,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetGroupLabel(int _homeId, byte _nodeId, byte _groupIdx)
+      public string GetGroupLabel(int _homeId, sbyte _nodeId, sbyte _groupIdx)
       {
         #if !SILVERLIGHT
         send_GetGroupLabel(_homeId, _nodeId, _groupIdx);
@@ -7060,9 +7091,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetGroupLabel(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx)
+      public IAsyncResult send_GetGroupLabel(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx)
       #else
-      public void send_GetGroupLabel(int _homeId, byte _nodeId, byte _groupIdx)
+      public void send_GetGroupLabel(int _homeId, sbyte _nodeId, sbyte _groupIdx)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetGroupLabel", TMessageType.Call, seqid_));
@@ -7098,7 +7129,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddAssociation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public IAsyncResult Begin_AddAssociation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       {
         return send_AddAssociation(callback, state, _homeId, _nodeId, _groupIdx, _targetNodeId);
       }
@@ -7111,7 +7142,7 @@ namespace OpenZWave
 
       #endif
 
-      public void AddAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public void AddAssociation(int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       {
         #if !SILVERLIGHT
         send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId);
@@ -7124,9 +7155,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddAssociation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public IAsyncResult send_AddAssociation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       #else
-      public void send_AddAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public void send_AddAssociation(int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddAssociation", TMessageType.Call, seqid_));
@@ -7160,7 +7191,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RemoveAssociation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public IAsyncResult Begin_RemoveAssociation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       {
         return send_RemoveAssociation(callback, state, _homeId, _nodeId, _groupIdx, _targetNodeId);
       }
@@ -7173,7 +7204,7 @@ namespace OpenZWave
 
       #endif
 
-      public void RemoveAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public void RemoveAssociation(int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       {
         #if !SILVERLIGHT
         send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId);
@@ -7186,9 +7217,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RemoveAssociation(AsyncCallback callback, object state, int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public IAsyncResult send_RemoveAssociation(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       #else
-      public void send_RemoveAssociation(int _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)
+      public void send_RemoveAssociation(int _homeId, sbyte _nodeId, sbyte _groupIdx, sbyte _targetNodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RemoveAssociation", TMessageType.Call, seqid_));
@@ -7340,7 +7371,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_BeginControllerCommand(AsyncCallback callback, object state, int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)
+      public IAsyncResult Begin_BeginControllerCommand(AsyncCallback callback, object state, int _homeId, DriverControllerCommand _command, bool _highPower, sbyte _nodeId, sbyte _arg)
       {
         return send_BeginControllerCommand(callback, state, _homeId, _command, _highPower, _nodeId, _arg);
       }
@@ -7353,7 +7384,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)
+      public bool BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, sbyte _nodeId, sbyte _arg)
       {
         #if !SILVERLIGHT
         send_BeginControllerCommand(_homeId, _command, _highPower, _nodeId, _arg);
@@ -7366,9 +7397,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_BeginControllerCommand(AsyncCallback callback, object state, int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)
+      public IAsyncResult send_BeginControllerCommand(AsyncCallback callback, object state, int _homeId, DriverControllerCommand _command, bool _highPower, sbyte _nodeId, sbyte _arg)
       #else
-      public void send_BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)
+      public void send_BeginControllerCommand(int _homeId, DriverControllerCommand _command, bool _highPower, sbyte _nodeId, sbyte _arg)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("BeginControllerCommand", TMessageType.Call, seqid_));
@@ -7468,7 +7499,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_TestNetworkNode(AsyncCallback callback, object state, int _homeId, byte _nodeId, int _count)
+      public IAsyncResult Begin_TestNetworkNode(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, int _count)
       {
         return send_TestNetworkNode(callback, state, _homeId, _nodeId, _count);
       }
@@ -7481,7 +7512,7 @@ namespace OpenZWave
 
       #endif
 
-      public void TestNetworkNode(int _homeId, byte _nodeId, int _count)
+      public void TestNetworkNode(int _homeId, sbyte _nodeId, int _count)
       {
         #if !SILVERLIGHT
         send_TestNetworkNode(_homeId, _nodeId, _count);
@@ -7494,9 +7525,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_TestNetworkNode(AsyncCallback callback, object state, int _homeId, byte _nodeId, int _count)
+      public IAsyncResult send_TestNetworkNode(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, int _count)
       #else
-      public void send_TestNetworkNode(int _homeId, byte _nodeId, int _count)
+      public void send_TestNetworkNode(int _homeId, sbyte _nodeId, int _count)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("TestNetworkNode", TMessageType.Call, seqid_));
@@ -7589,7 +7620,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_HealNetworkNode(AsyncCallback callback, object state, int _homeId, byte _nodeId, bool _doRR)
+      public IAsyncResult Begin_HealNetworkNode(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, bool _doRR)
       {
         return send_HealNetworkNode(callback, state, _homeId, _nodeId, _doRR);
       }
@@ -7602,7 +7633,7 @@ namespace OpenZWave
 
       #endif
 
-      public void HealNetworkNode(int _homeId, byte _nodeId, bool _doRR)
+      public void HealNetworkNode(int _homeId, sbyte _nodeId, bool _doRR)
       {
         #if !SILVERLIGHT
         send_HealNetworkNode(_homeId, _nodeId, _doRR);
@@ -7615,9 +7646,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_HealNetworkNode(AsyncCallback callback, object state, int _homeId, byte _nodeId, bool _doRR)
+      public IAsyncResult send_HealNetworkNode(AsyncCallback callback, object state, int _homeId, sbyte _nodeId, bool _doRR)
       #else
-      public void send_HealNetworkNode(int _homeId, byte _nodeId, bool _doRR)
+      public void send_HealNetworkNode(int _homeId, sbyte _nodeId, bool _doRR)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("HealNetworkNode", TMessageType.Call, seqid_));
@@ -7715,7 +7746,7 @@ namespace OpenZWave
         return send_GetNumScenes(callback, state);
       }
 
-      public byte End_GetNumScenes(IAsyncResult asyncResult)
+      public sbyte End_GetNumScenes(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_GetNumScenes();
@@ -7723,7 +7754,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte GetNumScenes()
+      public sbyte GetNumScenes()
       {
         #if !SILVERLIGHT
         send_GetNumScenes();
@@ -7752,7 +7783,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_GetNumScenes()
+      public sbyte recv_GetNumScenes()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -7896,7 +7927,7 @@ namespace OpenZWave
         return send_CreateScene(callback, state);
       }
 
-      public byte End_CreateScene(IAsyncResult asyncResult)
+      public sbyte End_CreateScene(IAsyncResult asyncResult)
       {
         oprot_.Transport.EndFlush(asyncResult);
         return recv_CreateScene();
@@ -7904,7 +7935,7 @@ namespace OpenZWave
 
       #endif
 
-      public byte CreateScene()
+      public sbyte CreateScene()
       {
         #if !SILVERLIGHT
         send_CreateScene();
@@ -7933,7 +7964,7 @@ namespace OpenZWave
         #endif
       }
 
-      public byte recv_CreateScene()
+      public sbyte recv_CreateScene()
       {
         TMessage msg = iprot_.ReadMessageBegin();
         if (msg.Type == TMessageType.Exception) {
@@ -7952,7 +7983,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RemoveScene(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult Begin_RemoveScene(AsyncCallback callback, object state, sbyte _sceneId)
       {
         return send_RemoveScene(callback, state, _sceneId);
       }
@@ -7965,7 +7996,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool RemoveScene(byte _sceneId)
+      public bool RemoveScene(sbyte _sceneId)
       {
         #if !SILVERLIGHT
         send_RemoveScene(_sceneId);
@@ -7978,9 +8009,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RemoveScene(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult send_RemoveScene(AsyncCallback callback, object state, sbyte _sceneId)
       #else
-      public void send_RemoveScene(byte _sceneId)
+      public void send_RemoveScene(sbyte _sceneId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RemoveScene", TMessageType.Call, seqid_));
@@ -8014,7 +8045,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValue_Bool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, bool _value)
+      public IAsyncResult Begin_AddSceneValue_Bool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, bool _value)
       {
         return send_AddSceneValue_Bool(callback, state, _sceneId, _valueId, _value);
       }
@@ -8027,7 +8058,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value)
+      public bool AddSceneValue_Bool(sbyte _sceneId, RemoteValueID _valueId, bool _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValue_Bool(_sceneId, _valueId, _value);
@@ -8040,9 +8071,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValue_Bool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, bool _value)
+      public IAsyncResult send_AddSceneValue_Bool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, bool _value)
       #else
-      public void send_AddSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value)
+      public void send_AddSceneValue_Bool(sbyte _sceneId, RemoteValueID _valueId, bool _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValue_Bool", TMessageType.Call, seqid_));
@@ -8078,7 +8109,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValue_Uint8(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, byte _value)
+      public IAsyncResult Begin_AddSceneValue_Uint8(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       {
         return send_AddSceneValue_Uint8(callback, state, _sceneId, _valueId, _value);
       }
@@ -8091,7 +8122,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value)
+      public bool AddSceneValue_Uint8(sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValue_Uint8(_sceneId, _valueId, _value);
@@ -8104,9 +8135,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValue_Uint8(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, byte _value)
+      public IAsyncResult send_AddSceneValue_Uint8(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       #else
-      public void send_AddSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value)
+      public void send_AddSceneValue_Uint8(sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValue_Uint8", TMessageType.Call, seqid_));
@@ -8142,7 +8173,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValue_Float(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, double _value)
+      public IAsyncResult Begin_AddSceneValue_Float(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, double _value)
       {
         return send_AddSceneValue_Float(callback, state, _sceneId, _valueId, _value);
       }
@@ -8155,7 +8186,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value)
+      public bool AddSceneValue_Float(sbyte _sceneId, RemoteValueID _valueId, double _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValue_Float(_sceneId, _valueId, _value);
@@ -8168,9 +8199,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValue_Float(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, double _value)
+      public IAsyncResult send_AddSceneValue_Float(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, double _value)
       #else
-      public void send_AddSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value)
+      public void send_AddSceneValue_Float(sbyte _sceneId, RemoteValueID _valueId, double _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValue_Float", TMessageType.Call, seqid_));
@@ -8206,7 +8237,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValue_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult Begin_AddSceneValue_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         return send_AddSceneValue_Int32(callback, state, _sceneId, _valueId, _value);
       }
@@ -8219,7 +8250,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public bool AddSceneValue_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValue_Int32(_sceneId, _valueId, _value);
@@ -8232,9 +8263,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValue_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult send_AddSceneValue_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       #else
-      public void send_AddSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public void send_AddSceneValue_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValue_Int32", TMessageType.Call, seqid_));
@@ -8270,7 +8301,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value)
+      public IAsyncResult Begin_AddSceneValue_Int16(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, short _value)
       {
         return send_AddSceneValue_Int16(callback, state, _sceneId, _valueId, _value);
       }
@@ -8283,7 +8314,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, short _value)
+      public bool AddSceneValue_Int16(sbyte _sceneId, RemoteValueID _valueId, short _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValue_Int16(_sceneId, _valueId, _value);
@@ -8296,9 +8327,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value)
+      public IAsyncResult send_AddSceneValue_Int16(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, short _value)
       #else
-      public void send_AddSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, short _value)
+      public void send_AddSceneValue_Int16(sbyte _sceneId, RemoteValueID _valueId, short _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValue_Int16", TMessageType.Call, seqid_));
@@ -8334,7 +8365,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult Begin_AddSceneValue_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         return send_AddSceneValue_String(callback, state, _sceneId, _valueId, _value);
       }
@@ -8347,7 +8378,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public bool AddSceneValue_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValue_String(_sceneId, _valueId, _value);
@@ -8360,9 +8391,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult send_AddSceneValue_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       #else
-      public void send_AddSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public void send_AddSceneValue_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValue_String", TMessageType.Call, seqid_));
@@ -8398,7 +8429,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult Begin_AddSceneValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         return send_AddSceneValueListSelection_String(callback, state, _sceneId, _valueId, _value);
       }
@@ -8411,7 +8442,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public bool AddSceneValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValueListSelection_String(_sceneId, _valueId, _value);
@@ -8424,9 +8455,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult send_AddSceneValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       #else
-      public void send_AddSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public void send_AddSceneValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValueListSelection_String", TMessageType.Call, seqid_));
@@ -8462,7 +8493,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_AddSceneValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult Begin_AddSceneValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         return send_AddSceneValueListSelection_Int32(callback, state, _sceneId, _valueId, _value);
       }
@@ -8475,7 +8506,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool AddSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public bool AddSceneValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         #if !SILVERLIGHT
         send_AddSceneValueListSelection_Int32(_sceneId, _valueId, _value);
@@ -8488,9 +8519,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_AddSceneValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult send_AddSceneValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       #else
-      public void send_AddSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public void send_AddSceneValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("AddSceneValueListSelection_Int32", TMessageType.Call, seqid_));
@@ -8526,7 +8557,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_RemoveSceneValue(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_RemoveSceneValue(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_RemoveSceneValue(callback, state, _sceneId, _valueId);
       }
@@ -8539,7 +8570,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool RemoveSceneValue(byte _sceneId, RemoteValueID _valueId)
+      public bool RemoveSceneValue(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_RemoveSceneValue(_sceneId, _valueId);
@@ -8552,9 +8583,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_RemoveSceneValue(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_RemoveSceneValue(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_RemoveSceneValue(byte _sceneId, RemoteValueID _valueId)
+      public void send_RemoveSceneValue(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("RemoveSceneValue", TMessageType.Call, seqid_));
@@ -8589,7 +8620,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValues(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult Begin_SceneGetValues(AsyncCallback callback, object state, sbyte _sceneId)
       {
         return send_SceneGetValues(callback, state, _sceneId);
       }
@@ -8602,7 +8633,7 @@ namespace OpenZWave
 
       #endif
 
-      public SceneGetValuesReturnStruct SceneGetValues(byte _sceneId)
+      public SceneGetValuesReturnStruct SceneGetValues(sbyte _sceneId)
       {
         #if !SILVERLIGHT
         send_SceneGetValues(_sceneId);
@@ -8615,9 +8646,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValues(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult send_SceneGetValues(AsyncCallback callback, object state, sbyte _sceneId)
       #else
-      public void send_SceneGetValues(byte _sceneId)
+      public void send_SceneGetValues(sbyte _sceneId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValues", TMessageType.Call, seqid_));
@@ -8651,7 +8682,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueAsBool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueAsBool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueAsBool(callback, state, _sceneId, _valueId);
       }
@@ -8664,7 +8695,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_Bool SceneGetValueAsBool(byte _sceneId, RemoteValueID _valueId)
+      public Bool_Bool SceneGetValueAsBool(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueAsBool(_sceneId, _valueId);
@@ -8677,9 +8708,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueAsBool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueAsBool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueAsBool(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueAsBool(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueAsBool", TMessageType.Call, seqid_));
@@ -8714,7 +8745,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueAsByte(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueAsByte(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueAsByte(callback, state, _sceneId, _valueId);
       }
@@ -8727,7 +8758,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_UInt8 SceneGetValueAsByte(byte _sceneId, RemoteValueID _valueId)
+      public Bool_UInt8 SceneGetValueAsByte(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueAsByte(_sceneId, _valueId);
@@ -8740,9 +8771,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueAsByte(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueAsByte(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueAsByte(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueAsByte(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueAsByte", TMessageType.Call, seqid_));
@@ -8777,7 +8808,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueAsFloat(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueAsFloat(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueAsFloat(callback, state, _sceneId, _valueId);
       }
@@ -8790,7 +8821,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_Float SceneGetValueAsFloat(byte _sceneId, RemoteValueID _valueId)
+      public Bool_Float SceneGetValueAsFloat(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueAsFloat(_sceneId, _valueId);
@@ -8803,9 +8834,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueAsFloat(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueAsFloat(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueAsFloat(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueAsFloat(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueAsFloat", TMessageType.Call, seqid_));
@@ -8840,7 +8871,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueAsInt(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueAsInt(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueAsInt(callback, state, _sceneId, _valueId);
       }
@@ -8853,7 +8884,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_Int SceneGetValueAsInt(byte _sceneId, RemoteValueID _valueId)
+      public Bool_Int SceneGetValueAsInt(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueAsInt(_sceneId, _valueId);
@@ -8866,9 +8897,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueAsInt(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueAsInt(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueAsInt(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueAsInt(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueAsInt", TMessageType.Call, seqid_));
@@ -8903,7 +8934,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueAsShort(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueAsShort(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueAsShort(callback, state, _sceneId, _valueId);
       }
@@ -8916,7 +8947,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_Int16 SceneGetValueAsShort(byte _sceneId, RemoteValueID _valueId)
+      public Bool_Int16 SceneGetValueAsShort(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueAsShort(_sceneId, _valueId);
@@ -8929,9 +8960,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueAsShort(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueAsShort(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueAsShort(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueAsShort(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueAsShort", TMessageType.Call, seqid_));
@@ -8966,7 +8997,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueAsString(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueAsString(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueAsString(callback, state, _sceneId, _valueId);
       }
@@ -8979,7 +9010,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_String SceneGetValueAsString(byte _sceneId, RemoteValueID _valueId)
+      public Bool_String SceneGetValueAsString(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueAsString(_sceneId, _valueId);
@@ -8992,9 +9023,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueAsString(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueAsString(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueAsString(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueAsString(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueAsString", TMessageType.Call, seqid_));
@@ -9029,7 +9060,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueListSelection_String(callback, state, _sceneId, _valueId);
       }
@@ -9042,7 +9073,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_String SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId)
+      public Bool_String SceneGetValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueListSelection_String(_sceneId, _valueId);
@@ -9055,9 +9086,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueListSelection_String(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueListSelection_String", TMessageType.Call, seqid_));
@@ -9092,7 +9123,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneGetValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult Begin_SceneGetValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       {
         return send_SceneGetValueListSelection_Int32(callback, state, _sceneId, _valueId);
       }
@@ -9105,7 +9136,7 @@ namespace OpenZWave
 
       #endif
 
-      public Bool_Int SceneGetValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId)
+      public Bool_Int SceneGetValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId)
       {
         #if !SILVERLIGHT
         send_SceneGetValueListSelection_Int32(_sceneId, _valueId);
@@ -9118,9 +9149,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneGetValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId)
+      public IAsyncResult send_SceneGetValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId)
       #else
-      public void send_SceneGetValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId)
+      public void send_SceneGetValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneGetValueListSelection_Int32", TMessageType.Call, seqid_));
@@ -9155,7 +9186,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_Bool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, bool _value)
+      public IAsyncResult Begin_SetSceneValue_Bool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, bool _value)
       {
         return send_SetSceneValue_Bool(callback, state, _sceneId, _valueId, _value);
       }
@@ -9168,7 +9199,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value)
+      public bool SetSceneValue_Bool(sbyte _sceneId, RemoteValueID _valueId, bool _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValue_Bool(_sceneId, _valueId, _value);
@@ -9181,9 +9212,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_Bool(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, bool _value)
+      public IAsyncResult send_SetSceneValue_Bool(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, bool _value)
       #else
-      public void send_SetSceneValue_Bool(byte _sceneId, RemoteValueID _valueId, bool _value)
+      public void send_SetSceneValue_Bool(sbyte _sceneId, RemoteValueID _valueId, bool _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValue_Bool", TMessageType.Call, seqid_));
@@ -9219,7 +9250,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_Uint8(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, byte _value)
+      public IAsyncResult Begin_SetSceneValue_Uint8(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       {
         return send_SetSceneValue_Uint8(callback, state, _sceneId, _valueId, _value);
       }
@@ -9232,7 +9263,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value)
+      public bool SetSceneValue_Uint8(sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValue_Uint8(_sceneId, _valueId, _value);
@@ -9245,9 +9276,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_Uint8(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, byte _value)
+      public IAsyncResult send_SetSceneValue_Uint8(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       #else
-      public void send_SetSceneValue_Uint8(byte _sceneId, RemoteValueID _valueId, byte _value)
+      public void send_SetSceneValue_Uint8(sbyte _sceneId, RemoteValueID _valueId, sbyte _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValue_Uint8", TMessageType.Call, seqid_));
@@ -9283,7 +9314,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_Float(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, double _value)
+      public IAsyncResult Begin_SetSceneValue_Float(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, double _value)
       {
         return send_SetSceneValue_Float(callback, state, _sceneId, _valueId, _value);
       }
@@ -9296,7 +9327,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value)
+      public bool SetSceneValue_Float(sbyte _sceneId, RemoteValueID _valueId, double _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValue_Float(_sceneId, _valueId, _value);
@@ -9309,9 +9340,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_Float(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, double _value)
+      public IAsyncResult send_SetSceneValue_Float(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, double _value)
       #else
-      public void send_SetSceneValue_Float(byte _sceneId, RemoteValueID _valueId, double _value)
+      public void send_SetSceneValue_Float(sbyte _sceneId, RemoteValueID _valueId, double _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValue_Float", TMessageType.Call, seqid_));
@@ -9347,7 +9378,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult Begin_SetSceneValue_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         return send_SetSceneValue_Int32(callback, state, _sceneId, _valueId, _value);
       }
@@ -9360,7 +9391,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public bool SetSceneValue_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValue_Int32(_sceneId, _valueId, _value);
@@ -9373,9 +9404,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult send_SetSceneValue_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       #else
-      public void send_SetSceneValue_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public void send_SetSceneValue_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValue_Int32", TMessageType.Call, seqid_));
@@ -9411,7 +9442,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value)
+      public IAsyncResult Begin_SetSceneValue_Int16(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, short _value)
       {
         return send_SetSceneValue_Int16(callback, state, _sceneId, _valueId, _value);
       }
@@ -9424,7 +9455,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, short _value)
+      public bool SetSceneValue_Int16(sbyte _sceneId, RemoteValueID _valueId, short _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValue_Int16(_sceneId, _valueId, _value);
@@ -9437,9 +9468,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_Int16(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, short _value)
+      public IAsyncResult send_SetSceneValue_Int16(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, short _value)
       #else
-      public void send_SetSceneValue_Int16(byte _sceneId, RemoteValueID _valueId, short _value)
+      public void send_SetSceneValue_Int16(sbyte _sceneId, RemoteValueID _valueId, short _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValue_Int16", TMessageType.Call, seqid_));
@@ -9475,7 +9506,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult Begin_SetSceneValue_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         return send_SetSceneValue_String(callback, state, _sceneId, _valueId, _value);
       }
@@ -9488,7 +9519,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public bool SetSceneValue_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValue_String(_sceneId, _valueId, _value);
@@ -9501,9 +9532,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValue_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult send_SetSceneValue_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       #else
-      public void send_SetSceneValue_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public void send_SetSceneValue_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValue_String", TMessageType.Call, seqid_));
@@ -9539,7 +9570,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult Begin_SetSceneValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         return send_SetSceneValueListSelection_String(callback, state, _sceneId, _valueId, _value);
       }
@@ -9552,7 +9583,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public bool SetSceneValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValueListSelection_String(_sceneId, _valueId, _value);
@@ -9565,9 +9596,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValueListSelection_String(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, string _value)
+      public IAsyncResult send_SetSceneValueListSelection_String(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, string _value)
       #else
-      public void send_SetSceneValueListSelection_String(byte _sceneId, RemoteValueID _valueId, string _value)
+      public void send_SetSceneValueListSelection_String(sbyte _sceneId, RemoteValueID _valueId, string _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValueListSelection_String", TMessageType.Call, seqid_));
@@ -9603,7 +9634,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult Begin_SetSceneValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         return send_SetSceneValueListSelection_Int32(callback, state, _sceneId, _valueId, _value);
       }
@@ -9616,7 +9647,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SetSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public bool SetSceneValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       {
         #if !SILVERLIGHT
         send_SetSceneValueListSelection_Int32(_sceneId, _valueId, _value);
@@ -9629,9 +9660,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneValueListSelection_Int32(AsyncCallback callback, object state, byte _sceneId, RemoteValueID _valueId, int _value)
+      public IAsyncResult send_SetSceneValueListSelection_Int32(AsyncCallback callback, object state, sbyte _sceneId, RemoteValueID _valueId, int _value)
       #else
-      public void send_SetSceneValueListSelection_Int32(byte _sceneId, RemoteValueID _valueId, int _value)
+      public void send_SetSceneValueListSelection_Int32(sbyte _sceneId, RemoteValueID _valueId, int _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneValueListSelection_Int32", TMessageType.Call, seqid_));
@@ -9667,7 +9698,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetSceneLabel(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult Begin_GetSceneLabel(AsyncCallback callback, object state, sbyte _sceneId)
       {
         return send_GetSceneLabel(callback, state, _sceneId);
       }
@@ -9680,7 +9711,7 @@ namespace OpenZWave
 
       #endif
 
-      public string GetSceneLabel(byte _sceneId)
+      public string GetSceneLabel(sbyte _sceneId)
       {
         #if !SILVERLIGHT
         send_GetSceneLabel(_sceneId);
@@ -9693,9 +9724,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetSceneLabel(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult send_GetSceneLabel(AsyncCallback callback, object state, sbyte _sceneId)
       #else
-      public void send_GetSceneLabel(byte _sceneId)
+      public void send_GetSceneLabel(sbyte _sceneId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetSceneLabel", TMessageType.Call, seqid_));
@@ -9729,7 +9760,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SetSceneLabel(AsyncCallback callback, object state, byte _sceneId, string _value)
+      public IAsyncResult Begin_SetSceneLabel(AsyncCallback callback, object state, sbyte _sceneId, string _value)
       {
         return send_SetSceneLabel(callback, state, _sceneId, _value);
       }
@@ -9742,7 +9773,7 @@ namespace OpenZWave
 
       #endif
 
-      public void SetSceneLabel(byte _sceneId, string _value)
+      public void SetSceneLabel(sbyte _sceneId, string _value)
       {
         #if !SILVERLIGHT
         send_SetSceneLabel(_sceneId, _value);
@@ -9755,9 +9786,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SetSceneLabel(AsyncCallback callback, object state, byte _sceneId, string _value)
+      public IAsyncResult send_SetSceneLabel(AsyncCallback callback, object state, sbyte _sceneId, string _value)
       #else
-      public void send_SetSceneLabel(byte _sceneId, string _value)
+      public void send_SetSceneLabel(sbyte _sceneId, string _value)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SetSceneLabel", TMessageType.Call, seqid_));
@@ -9789,7 +9820,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_SceneExists(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult Begin_SceneExists(AsyncCallback callback, object state, sbyte _sceneId)
       {
         return send_SceneExists(callback, state, _sceneId);
       }
@@ -9802,7 +9833,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool SceneExists(byte _sceneId)
+      public bool SceneExists(sbyte _sceneId)
       {
         #if !SILVERLIGHT
         send_SceneExists(_sceneId);
@@ -9815,9 +9846,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_SceneExists(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult send_SceneExists(AsyncCallback callback, object state, sbyte _sceneId)
       #else
-      public void send_SceneExists(byte _sceneId)
+      public void send_SceneExists(sbyte _sceneId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("SceneExists", TMessageType.Call, seqid_));
@@ -9851,7 +9882,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_ActivateScene(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult Begin_ActivateScene(AsyncCallback callback, object state, sbyte _sceneId)
       {
         return send_ActivateScene(callback, state, _sceneId);
       }
@@ -9864,7 +9895,7 @@ namespace OpenZWave
 
       #endif
 
-      public bool ActivateScene(byte _sceneId)
+      public bool ActivateScene(sbyte _sceneId)
       {
         #if !SILVERLIGHT
         send_ActivateScene(_sceneId);
@@ -9877,9 +9908,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_ActivateScene(AsyncCallback callback, object state, byte _sceneId)
+      public IAsyncResult send_ActivateScene(AsyncCallback callback, object state, sbyte _sceneId)
       #else
-      public void send_ActivateScene(byte _sceneId)
+      public void send_ActivateScene(sbyte _sceneId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("ActivateScene", TMessageType.Call, seqid_));
@@ -9975,7 +10006,7 @@ namespace OpenZWave
 
       
       #if SILVERLIGHT
-      public IAsyncResult Begin_GetNodeStatistics(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult Begin_GetNodeStatistics(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       {
         return send_GetNodeStatistics(callback, state, _homeId, _nodeId);
       }
@@ -9988,7 +10019,7 @@ namespace OpenZWave
 
       #endif
 
-      public GetNodeStatisticsReturnStruct GetNodeStatistics(int _homeId, byte _nodeId)
+      public GetNodeStatisticsReturnStruct GetNodeStatistics(int _homeId, sbyte _nodeId)
       {
         #if !SILVERLIGHT
         send_GetNodeStatistics(_homeId, _nodeId);
@@ -10001,9 +10032,9 @@ namespace OpenZWave
         #endif
       }
       #if SILVERLIGHT
-      public IAsyncResult send_GetNodeStatistics(AsyncCallback callback, object state, int _homeId, byte _nodeId)
+      public IAsyncResult send_GetNodeStatistics(AsyncCallback callback, object state, int _homeId, sbyte _nodeId)
       #else
-      public void send_GetNodeStatistics(int _homeId, byte _nodeId)
+      public void send_GetNodeStatistics(int _homeId, sbyte _nodeId)
       #endif
       {
         oprot_.WriteMessageBegin(new TMessage("GetNodeStatistics", TMessageType.Call, seqid_));
@@ -12518,9 +12549,9 @@ namespace OpenZWave
     #endif
     public partial class GetControllerNodeId_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -12693,9 +12724,9 @@ namespace OpenZWave
     #endif
     public partial class GetSUCNodeId_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -14622,7 +14653,7 @@ namespace OpenZWave
     public partial class EnablePoll_args : TBase
     {
       private RemoteValueID __valueId;
-      private byte __intensity;
+      private sbyte __intensity;
 
       public RemoteValueID _valueId
       {
@@ -14637,7 +14668,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _intensity
+      public sbyte _intensity
       {
         get
         {
@@ -14662,6 +14693,7 @@ namespace OpenZWave
 
       public EnablePoll_args() {
         this.__intensity = 1;
+        this.__isset._intensity = true;
       }
 
       public void Read (TProtocol iprot)
@@ -15183,7 +15215,7 @@ namespace OpenZWave
     public partial class SetPollIntensity_args : TBase
     {
       private RemoteValueID __valueId;
-      private byte __intensity;
+      private sbyte __intensity;
 
       public RemoteValueID _valueId
       {
@@ -15198,7 +15230,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _intensity
+      public sbyte _intensity
       {
         get
         {
@@ -15350,7 +15382,7 @@ namespace OpenZWave
     public partial class RefreshNodeInfo_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -15365,7 +15397,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -15557,7 +15589,7 @@ namespace OpenZWave
     public partial class RequestNodeState_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -15572,7 +15604,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -15764,7 +15796,7 @@ namespace OpenZWave
     public partial class RequestNodeDynamic_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -15779,7 +15811,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -15971,7 +16003,7 @@ namespace OpenZWave
     public partial class IsNodeListeningDevice_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -15986,7 +16018,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -16178,7 +16210,7 @@ namespace OpenZWave
     public partial class IsNodeFrequentListeningDevice_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -16193,7 +16225,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -16385,7 +16417,7 @@ namespace OpenZWave
     public partial class IsNodeBeamingDevice_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -16400,7 +16432,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -16592,7 +16624,7 @@ namespace OpenZWave
     public partial class IsNodeRoutingDevice_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -16607,7 +16639,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -16799,7 +16831,7 @@ namespace OpenZWave
     public partial class IsNodeSecurityDevice_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -16814,7 +16846,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -17006,7 +17038,7 @@ namespace OpenZWave
     public partial class GetNodeMaxBaudRate_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -17021,7 +17053,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -17213,7 +17245,7 @@ namespace OpenZWave
     public partial class GetNodeVersion_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -17228,7 +17260,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -17331,9 +17363,9 @@ namespace OpenZWave
     #endif
     public partial class GetNodeVersion_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -17420,7 +17452,7 @@ namespace OpenZWave
     public partial class GetNodeSecurity_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -17435,7 +17467,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -17538,9 +17570,9 @@ namespace OpenZWave
     #endif
     public partial class GetNodeSecurity_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -17627,7 +17659,7 @@ namespace OpenZWave
     public partial class GetNodeBasic_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -17642,7 +17674,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -17745,9 +17777,9 @@ namespace OpenZWave
     #endif
     public partial class GetNodeBasic_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -17834,7 +17866,7 @@ namespace OpenZWave
     public partial class GetNodeGeneric_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -17849,7 +17881,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -17952,9 +17984,9 @@ namespace OpenZWave
     #endif
     public partial class GetNodeGeneric_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -18041,7 +18073,7 @@ namespace OpenZWave
     public partial class GetNodeSpecific_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -18056,7 +18088,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -18159,9 +18191,9 @@ namespace OpenZWave
     #endif
     public partial class GetNodeSpecific_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -18248,7 +18280,7 @@ namespace OpenZWave
     public partial class GetNodeType_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -18263,7 +18295,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -18457,7 +18489,7 @@ namespace OpenZWave
     public partial class GetNodeNeighbors_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -18472,7 +18504,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -18667,7 +18699,7 @@ namespace OpenZWave
     public partial class GetNodeManufacturerName_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -18682,7 +18714,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -18876,7 +18908,7 @@ namespace OpenZWave
     public partial class GetNodeProductName_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -18891,7 +18923,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -19085,7 +19117,7 @@ namespace OpenZWave
     public partial class GetNodeName_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -19100,7 +19132,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -19294,7 +19326,7 @@ namespace OpenZWave
     public partial class GetNodeLocation_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -19309,7 +19341,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -19503,7 +19535,7 @@ namespace OpenZWave
     public partial class GetNodeManufacturerId_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -19518,7 +19550,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -19712,7 +19744,7 @@ namespace OpenZWave
     public partial class GetNodeProductType_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -19727,7 +19759,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -19921,7 +19953,7 @@ namespace OpenZWave
     public partial class GetNodeProductId_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -19936,7 +19968,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -20130,7 +20162,7 @@ namespace OpenZWave
     public partial class SetNodeManufacturerName_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
       private string __manufacturerName;
 
       public int _homeId
@@ -20146,7 +20178,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -20328,7 +20360,7 @@ namespace OpenZWave
     public partial class SetNodeProductName_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
       private string __productName;
 
       public int _homeId
@@ -20344,7 +20376,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -20526,7 +20558,7 @@ namespace OpenZWave
     public partial class SetNodeName_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
       private string __nodeName;
 
       public int _homeId
@@ -20542,7 +20574,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -20724,7 +20756,7 @@ namespace OpenZWave
     public partial class SetNodeLocation_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
       private string __location;
 
       public int _homeId
@@ -20740,7 +20772,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -20922,7 +20954,7 @@ namespace OpenZWave
     public partial class SetNodeOn_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -20937,7 +20969,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -21088,7 +21120,7 @@ namespace OpenZWave
     public partial class SetNodeOff_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -21103,7 +21135,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -21254,8 +21286,8 @@ namespace OpenZWave
     public partial class SetNodeLevel_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __level;
+      private sbyte __nodeId;
+      private sbyte __level;
 
       public int _homeId
       {
@@ -21270,7 +21302,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -21283,7 +21315,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _level
+      public sbyte _level
       {
         get
         {
@@ -21452,7 +21484,7 @@ namespace OpenZWave
     public partial class IsNodeInfoReceived_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -21467,7 +21499,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -21659,8 +21691,8 @@ namespace OpenZWave
     public partial class GetNodeClassInformation_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __commandClassId;
+      private sbyte __nodeId;
+      private sbyte __commandClassId;
 
       public int _homeId
       {
@@ -21675,7 +21707,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -21688,7 +21720,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _commandClassId
+      public sbyte _commandClassId
       {
         get
         {
@@ -21901,7 +21933,7 @@ namespace OpenZWave
     public partial class IsNodeAwake_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -21916,7 +21948,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -22108,7 +22140,7 @@ namespace OpenZWave
     public partial class IsNodeFailed_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -22123,7 +22155,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -22315,7 +22347,7 @@ namespace OpenZWave
     public partial class GetNodeQueryStage_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -22330,7 +22362,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -26613,7 +26645,7 @@ namespace OpenZWave
     public partial class SetValue_UInt8_args : TBase
     {
       private RemoteValueID __id;
-      private byte __value;
+      private sbyte __value;
 
       public RemoteValueID _id
       {
@@ -26628,7 +26660,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _value
+      public sbyte _value
       {
         get
         {
@@ -26821,8 +26853,8 @@ namespace OpenZWave
     public partial class SetValue_UInt8_UInt8_args : TBase
     {
       private RemoteValueID __id;
-      private List<byte> __value;
-      private byte __length;
+      private List<sbyte> __value;
+      private sbyte __length;
 
       public RemoteValueID _id
       {
@@ -26837,7 +26869,7 @@ namespace OpenZWave
         }
       }
 
-      public List<byte> _value
+      public List<sbyte> _value
       {
         get
         {
@@ -26850,7 +26882,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _length
+      public sbyte _length
       {
         get
         {
@@ -26900,11 +26932,11 @@ namespace OpenZWave
             case 2:
               if (field.Type == TType.List) {
                 {
-                  _value = new List<byte>();
+                  _value = new List<sbyte>();
                   TList _list32 = iprot.ReadListBegin();
                   for( int _i33 = 0; _i33 < _list32.Count; ++_i33)
                   {
-                    byte _elem34 = 0;
+                    sbyte _elem34 = 0;
                     _elem34 = iprot.ReadByte();
                     _value.Add(_elem34);
                   }
@@ -26949,7 +26981,7 @@ namespace OpenZWave
           oprot.WriteFieldBegin(field);
           {
             oprot.WriteListBegin(new TList(TType.Byte, _value.Count));
-            foreach (byte _iter35 in _value)
+            foreach (sbyte _iter35 in _value)
             {
               oprot.WriteByte(_iter35);
             }
@@ -28900,9 +28932,9 @@ namespace OpenZWave
     #endif
     public partial class GetNumSwitchPoints_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -28989,9 +29021,9 @@ namespace OpenZWave
     public partial class SetSwitchPoint_args : TBase
     {
       private RemoteValueID __id;
-      private byte __hours;
-      private byte __minutes;
-      private byte __setback;
+      private sbyte __hours;
+      private sbyte __minutes;
+      private sbyte __setback;
 
       public RemoteValueID _id
       {
@@ -29006,7 +29038,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _hours
+      public sbyte _hours
       {
         get
         {
@@ -29019,7 +29051,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _minutes
+      public sbyte _minutes
       {
         get
         {
@@ -29032,7 +29064,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _setback
+      public sbyte _setback
       {
         get
         {
@@ -29261,8 +29293,8 @@ namespace OpenZWave
     public partial class RemoveSwitchPoint_args : TBase
     {
       private RemoteValueID __id;
-      private byte __hours;
-      private byte __minutes;
+      private sbyte __hours;
+      private sbyte __minutes;
 
       public RemoteValueID _id
       {
@@ -29277,7 +29309,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _hours
+      public sbyte _hours
       {
         get
         {
@@ -29290,7 +29322,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _minutes
+      public sbyte _minutes
       {
         get
         {
@@ -29636,7 +29668,7 @@ namespace OpenZWave
     public partial class GetSwitchPoint_args : TBase
     {
       private RemoteValueID __id;
-      private byte __idx;
+      private sbyte __idx;
 
       public RemoteValueID _id
       {
@@ -29651,7 +29683,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _idx
+      public sbyte _idx
       {
         get
         {
@@ -30115,10 +30147,10 @@ namespace OpenZWave
     public partial class SetConfigParam_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __param;
+      private sbyte __nodeId;
+      private sbyte __param;
       private int __value;
-      private byte __size;
+      private sbyte __size;
 
       public int _homeId
       {
@@ -30133,7 +30165,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -30146,7 +30178,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _param
+      public sbyte _param
       {
         get
         {
@@ -30172,7 +30204,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _size
+      public sbyte _size
       {
         get
         {
@@ -30200,6 +30232,7 @@ namespace OpenZWave
 
       public SetConfigParam_args() {
         this.__size = 2;
+        this.__isset._size = true;
       }
 
       public void Read (TProtocol iprot)
@@ -30419,8 +30452,8 @@ namespace OpenZWave
     public partial class RequestConfigParam_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __param;
+      private sbyte __nodeId;
+      private sbyte __param;
 
       public int _homeId
       {
@@ -30435,7 +30468,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -30448,7 +30481,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _param
+      public sbyte _param
       {
         get
         {
@@ -30617,7 +30650,7 @@ namespace OpenZWave
     public partial class RequestAllConfigParams_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -30632,7 +30665,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -30783,7 +30816,7 @@ namespace OpenZWave
     public partial class GetNumGroups_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -30798,7 +30831,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -30901,9 +30934,9 @@ namespace OpenZWave
     #endif
     public partial class GetNumGroups_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -30990,8 +31023,8 @@ namespace OpenZWave
     public partial class GetAssociations_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __groupIdx;
+      private sbyte __nodeId;
+      private sbyte __groupIdx;
 
       public int _homeId
       {
@@ -31006,7 +31039,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -31019,7 +31052,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _groupIdx
+      public sbyte _groupIdx
       {
         get
         {
@@ -31232,8 +31265,8 @@ namespace OpenZWave
     public partial class GetMaxAssociations_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __groupIdx;
+      private sbyte __nodeId;
+      private sbyte __groupIdx;
 
       public int _homeId
       {
@@ -31248,7 +31281,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -31261,7 +31294,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _groupIdx
+      public sbyte _groupIdx
       {
         get
         {
@@ -31382,9 +31415,9 @@ namespace OpenZWave
     #endif
     public partial class GetMaxAssociations_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -31471,8 +31504,8 @@ namespace OpenZWave
     public partial class GetGroupLabel_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __groupIdx;
+      private sbyte __nodeId;
+      private sbyte __groupIdx;
 
       public int _homeId
       {
@@ -31487,7 +31520,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -31500,7 +31533,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _groupIdx
+      public sbyte _groupIdx
       {
         get
         {
@@ -31712,9 +31745,9 @@ namespace OpenZWave
     public partial class AddAssociation_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __groupIdx;
-      private byte __targetNodeId;
+      private sbyte __nodeId;
+      private sbyte __groupIdx;
+      private sbyte __targetNodeId;
 
       public int _homeId
       {
@@ -31729,7 +31762,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -31742,7 +31775,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _groupIdx
+      public sbyte _groupIdx
       {
         get
         {
@@ -31755,7 +31788,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _targetNodeId
+      public sbyte _targetNodeId
       {
         get
         {
@@ -31942,9 +31975,9 @@ namespace OpenZWave
     public partial class RemoveAssociation_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
-      private byte __groupIdx;
-      private byte __targetNodeId;
+      private sbyte __nodeId;
+      private sbyte __groupIdx;
+      private sbyte __targetNodeId;
 
       public int _homeId
       {
@@ -31959,7 +31992,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -31972,7 +32005,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _groupIdx
+      public sbyte _groupIdx
       {
         get
         {
@@ -31985,7 +32018,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _targetNodeId
+      public sbyte _targetNodeId
       {
         get
         {
@@ -32442,8 +32475,8 @@ namespace OpenZWave
       private int __homeId;
       private DriverControllerCommand __command;
       private bool __highPower;
-      private byte __nodeId;
-      private byte __arg;
+      private sbyte __nodeId;
+      private sbyte __arg;
 
       public int _homeId
       {
@@ -32488,7 +32521,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -32501,7 +32534,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _arg
+      public sbyte _arg
       {
         get
         {
@@ -32922,7 +32955,7 @@ namespace OpenZWave
     public partial class TestNetworkNode_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
       private int __count;
 
       public int _homeId
@@ -32938,7 +32971,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -33286,7 +33319,7 @@ namespace OpenZWave
     public partial class HealNetworkNode_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
       private bool __doRR;
 
       public int _homeId
@@ -33302,7 +33335,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {
@@ -33695,9 +33728,9 @@ namespace OpenZWave
     #endif
     public partial class GetNumScenes_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -34100,9 +34133,9 @@ namespace OpenZWave
     #endif
     public partial class CreateScene_result : TBase
     {
-      private byte _success;
+      private sbyte _success;
 
-      public byte Success
+      public sbyte Success
       {
         get
         {
@@ -34188,9 +34221,9 @@ namespace OpenZWave
     #endif
     public partial class RemoveScene_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -34363,11 +34396,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValue_Bool_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private bool __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -34603,11 +34636,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValue_Uint8_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
-      private byte __value;
+      private sbyte __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -34633,7 +34666,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _value
+      public sbyte _value
       {
         get
         {
@@ -34843,11 +34876,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValue_Float_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private double __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -35083,11 +35116,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValue_Int32_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private int __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -35323,11 +35356,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValue_Int16_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private short __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -35563,11 +35596,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValue_String_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private string __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -35803,11 +35836,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValueListSelection_String_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private string __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -36043,11 +36076,11 @@ namespace OpenZWave
     #endif
     public partial class AddSceneValueListSelection_Int32_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private int __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -36283,10 +36316,10 @@ namespace OpenZWave
     #endif
     public partial class RemoveSceneValue_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -36491,9 +36524,9 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValues_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -36669,10 +36702,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueAsBool_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -36880,10 +36913,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueAsByte_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -37091,10 +37124,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueAsFloat_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -37302,10 +37335,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueAsInt_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -37513,10 +37546,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueAsShort_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -37724,10 +37757,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueAsString_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -37935,10 +37968,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueListSelection_String_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -38146,10 +38179,10 @@ namespace OpenZWave
     #endif
     public partial class SceneGetValueListSelection_Int32_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -38357,11 +38390,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValue_Bool_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private bool __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -38597,11 +38630,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValue_Uint8_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
-      private byte __value;
+      private sbyte __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -38627,7 +38660,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _value
+      public sbyte _value
       {
         get
         {
@@ -38837,11 +38870,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValue_Float_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private double __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -39077,11 +39110,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValue_Int32_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private int __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -39317,11 +39350,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValue_Int16_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private short __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -39557,11 +39590,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValue_String_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private string __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -39797,11 +39830,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValueListSelection_String_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private string __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -40037,11 +40070,11 @@ namespace OpenZWave
     #endif
     public partial class SetSceneValueListSelection_Int32_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private RemoteValueID __valueId;
       private int __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -40277,9 +40310,9 @@ namespace OpenZWave
     #endif
     public partial class GetSceneLabel_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -40454,10 +40487,10 @@ namespace OpenZWave
     #endif
     public partial class SetSceneLabel_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
       private string __value;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -40620,9 +40653,9 @@ namespace OpenZWave
     #endif
     public partial class SceneExists_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -40795,9 +40828,9 @@ namespace OpenZWave
     #endif
     public partial class ActivateScene_args : TBase
     {
-      private byte __sceneId;
+      private sbyte __sceneId;
 
-      public byte _sceneId
+      public sbyte _sceneId
       {
         get
         {
@@ -41149,7 +41182,7 @@ namespace OpenZWave
     public partial class GetNodeStatistics_args : TBase
     {
       private int __homeId;
-      private byte __nodeId;
+      private sbyte __nodeId;
 
       public int _homeId
       {
@@ -41164,7 +41197,7 @@ namespace OpenZWave
         }
       }
 
-      public byte _nodeId
+      public sbyte _nodeId
       {
         get
         {

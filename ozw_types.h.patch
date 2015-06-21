@@ -1,38 +1,33 @@
-*** gen-cpp/ozw_types.h.orig	2012-04-25 19:48:56.816331392 +0300
---- gen-cpp/ozw_types.h	2012-04-16 12:25:34.615507390 +0300
-***************
-*** 7,12 ****
---- 7,14 ----
-  #ifndef ozw_TYPES_H
-  #define ozw_TYPES_H
-  
-+ #include <cstddef>
-+ using std::size_t;
-  #include <thrift/Thrift.h>
-  #include <thrift/TApplicationException.h>
-  #include <thrift/protocol/TProtocol.h>
-***************
-*** 103,108 ****
---- 105,126 ----
-    int8_t _valueIndex;
-    RemoteValueType::type _type;
-  
-+ // ekarak: constructor from ValueID
-+    RemoteValueID(ValueID vid) : 
-+      _homeId ((int32_t) vid.GetHomeId()), 
-+      _nodeId ((int8_t) vid.GetNodeId()), 
-+      _genre  ((RemoteValueGenre::type) vid.GetGenre()),
-+      _commandClassId((int8_t) vid.GetCommandClassId()), 
-+      _instance ((int8_t) vid.GetInstance()), 
-+      _valueIndex((int8_t) vid.GetIndex()),
-+      _type ((RemoteValueType::type) vid.GetType()) { }
-+      
-+ // ekarak: converter to ValueID
-+    ValueID toValueID() const {
-+      return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
-+    }
-+    
-+ 
-    _RemoteValueID__isset __isset;
-  
-    void __set__homeId(const int32_t val) {
+--- gen-cpp/ozw_types.h	2014-05-20 21:21:13.856891177 +0300
++++ gen-cpp/ozw_types.h.patched	2014-05-20 21:19:37.232412042 +0300
+@@ -7,6 +7,8 @@
+ #ifndef ozw_TYPES_H
+ #define ozw_TYPES_H
+ 
++#include <cstddef>
++using std::size_t;
+ #include <thrift/Thrift.h>
+ #include <thrift/TApplicationException.h>
+ #include <thrift/protocol/TProtocol.h>
+@@ -144,6 +146,21 @@
+ 
+   virtual ~RemoteValueID() throw() {}
+ 
++   // Thrift4OZW: constructor from ValueID
++   RemoteValueID(ValueID vid) : 
++     _homeId ((int32_t) vid.GetHomeId()), 
++     _nodeId ((int8_t) vid.GetNodeId()), 
++     _genre  ((RemoteValueGenre::type) vid.GetGenre()),
++     _commandClassId((int8_t) vid.GetCommandClassId()), 
++     _instance ((int8_t) vid.GetInstance()), 
++     _valueIndex((int8_t) vid.GetIndex()),
++     _type ((RemoteValueType::type) vid.GetType()) { }
++     
++   // Thrift4OZW: converter to ValueID
++   ValueID toValueID() const {
++     return ValueID((uint32)_homeId, (uint8)_nodeId, (ValueID::ValueGenre)_genre, (uint8)_commandClassId, (uint8)_instance, (uint8)_valueIndex, (ValueID::ValueType)_type);
++   }
++
+   int32_t _homeId;
+   int8_t _nodeId;
+   RemoteValueGenre::type _genre;

@@ -24,9 +24,9 @@ namespace OpenZWave
   public partial class GetSwitchPointReturnStruct : TBase
   {
     private bool _retval;
-    private byte _o_hours;
-    private byte _o_minutes;
-    private byte _o_setback;
+    private sbyte _o_hours;
+    private sbyte _o_minutes;
+    private sbyte _o_setback;
 
     public bool Retval
     {
@@ -41,7 +41,7 @@ namespace OpenZWave
       }
     }
 
-    public byte O_hours
+    public sbyte O_hours
     {
       get
       {
@@ -54,7 +54,7 @@ namespace OpenZWave
       }
     }
 
-    public byte O_minutes
+    public sbyte O_minutes
     {
       get
       {
@@ -67,7 +67,7 @@ namespace OpenZWave
       }
     }
 
-    public byte O_setback
+    public sbyte O_setback
     {
       get
       {

@@ -9,39 +9,47 @@ sudo apt-get install ruby1.9.1-dev libxml2-dev libxslt-dev libudev-dev libtool a
 sudo apt-get install libboost1.42-dev libboost_system1.42-dev libboost_thread1.42-dev libboost-filesystem1.42-dev libboost-program-options1.42-dev
 
 # Ubuntu has a convenience package for all Boost dev libs, much more elegant!
-sudo apt-get install libboost-dev-all 
+sudo apt-get install libboost-dev 
 
 1a) Install GCCXML + its Ruby bindings (Ubuntu/Debian) 
 ======================================================
-# installs the ruby GCCXML client gem without compiling the 'gccxml' executable
-# since it was delivered by Debian package
+# installs GCCXML binary from the package repository
 sudo apt-get install gccxml
-sudo gem1.9.1 install gccxml_gem --platform ruby
-sudo gem1.9.1 install mongrel --pre
-sudo gem1.9.1 install rspec bit-struct onstomp
+# install gccxml_gem and RbGCCXML for Ruby, see also: https://github.com/jasonroelofs/rbgccxml
+sudo gem install gccxml_gem --platform ruby
+sudo gem install rbgccxml
 
-1b) OR, install GCCXML via ruby gems 
+1b) OR, install RBGCCXML directly via ruby gems 
 ====================================
-The alternative path is to install GCCXML from Ruby's gem package management. 
-Do this ONLY if you have a fairly older gcc(4.3 or earlier), otherwise you WILL 
-get tons of errors during compilation, like this: 
-"gccxml-builtins.h: no such file or directory"
+The alternative path is to install the GCCXML+ all its dependencies from Ruby's gem package management. 
+Do this try this ONLY if you have a fairly older gcc(4.3 or earlier), otherwise you WILL SURELY get errors in compilation, like this: 
+     "gccxml-builtins.h: no such file or directory"
+Which simply translates that the version of gccxml that was fetched+compiled by gem is so old that it 
+does NOT support your shiney new gcc that came with your shiney Ubuntu Zapey Zakalope. 
 
-sudo gem1.9.1 install rbgccxml 
+# Cross your fingers 
+sudo gem install rbgccxml 
 
 2) install BoostStomp
 =====================
 git clone https://github.com/ekarak/BoostStomp
 cd BoostStomp
 make && sudo make install
+# Also install these gems for STOMP protocol support in Ruby
+sudo gem install bit-struct onstomp
 
 3) install Apache Thrift
 ========================
+# various Ruby gems (used for Thrift's Ruby library unit tests)
+sudo gem install mongrel --pre
+sudo gem install rspec
+
 git clone https://git-wip-us.apache.org/repos/asf/thrift.git thrift
 cd thrift
 ./bootstrap.sh
 ./configure
 make && sudo make install
+
 
 4) download OpenZWave
 =====================

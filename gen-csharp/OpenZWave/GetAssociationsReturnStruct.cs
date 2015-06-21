@@ -24,7 +24,7 @@ namespace OpenZWave
   public partial class GetAssociationsReturnStruct : TBase
   {
     private int _retval;
-    private List<byte> _o_associations;
+    private List<sbyte> _o_associations;
 
     public int Retval
     {
@@ -39,7 +39,7 @@ namespace OpenZWave
       }
     }
 
-    public List<byte> O_associations
+    public List<sbyte> O_associations
     {
       get
       {
@@ -87,11 +87,11 @@ namespace OpenZWave
           case 2:
             if (field.Type == TType.List) {
               {
-                O_associations = new List<byte>();
+                O_associations = new List<sbyte>();
                 TList _list20 = iprot.ReadListBegin();
                 for( int _i21 = 0; _i21 < _list20.Count; ++_i21)
                 {
-                  byte _elem22 = 0;
+                  sbyte _elem22 = 0;
                   _elem22 = iprot.ReadByte();
                   O_associations.Add(_elem22);
                 }
@@ -129,7 +129,7 @@ namespace OpenZWave
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.Byte, O_associations.Count));
-          foreach (byte _iter23 in O_associations)
+          foreach (sbyte _iter23 in O_associations)
           {
             oprot.WriteByte(_iter23);
           }

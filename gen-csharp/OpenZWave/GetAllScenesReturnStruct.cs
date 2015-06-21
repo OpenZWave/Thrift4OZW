@@ -23,10 +23,10 @@ namespace OpenZWave
   #endif
   public partial class GetAllScenesReturnStruct : TBase
   {
-    private byte _retval;
-    private List<byte> __sceneIds;
+    private sbyte _retval;
+    private List<sbyte> __sceneIds;
 
-    public byte Retval
+    public sbyte Retval
     {
       get
       {
@@ -39,7 +39,7 @@ namespace OpenZWave
       }
     }
 
-    public List<byte> _sceneIds
+    public List<sbyte> _sceneIds
     {
       get
       {
@@ -87,11 +87,11 @@ namespace OpenZWave
           case 2:
             if (field.Type == TType.List) {
               {
-                _sceneIds = new List<byte>();
+                _sceneIds = new List<sbyte>();
                 TList _list24 = iprot.ReadListBegin();
                 for( int _i25 = 0; _i25 < _list24.Count; ++_i25)
                 {
-                  byte _elem26 = 0;
+                  sbyte _elem26 = 0;
                   _elem26 = iprot.ReadByte();
                   _sceneIds.Add(_elem26);
                 }
@@ -129,7 +129,7 @@ namespace OpenZWave
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.Byte, _sceneIds.Count));
-          foreach (byte _iter27 in _sceneIds)
+          foreach (sbyte _iter27 in _sceneIds)
           {
             oprot.WriteByte(_iter27);
           }

@@ -24,7 +24,7 @@ namespace OpenZWave
   public partial class Bool_UInt8 : TBase
   {
     private bool _retval;
-    private byte _o_value;
+    private sbyte _o_value;
 
     public bool Retval
     {
@@ -39,7 +39,7 @@ namespace OpenZWave
       }
     }
 
-    public byte O_value
+    public sbyte O_value
     {
       get
       {

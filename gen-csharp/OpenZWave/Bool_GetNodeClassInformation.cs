@@ -25,7 +25,7 @@ namespace OpenZWave
   {
     private bool _retval;
     private string __className;
-    private byte __classVersion;
+    private sbyte __classVersion;
 
     public bool Retval
     {
@@ -53,7 +53,7 @@ namespace OpenZWave
       }
     }
 
-    public byte _classVersion
+    public sbyte _classVersion
     {
       get
       {

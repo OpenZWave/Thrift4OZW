@@ -24,7 +24,7 @@ namespace OpenZWave
   public partial class UInt32_ListByte : TBase
   {
     private int _retval;
-    private List<byte> __nodeNeighbors;
+    private List<sbyte> __nodeNeighbors;
 
     public int Retval
     {
@@ -39,7 +39,7 @@ namespace OpenZWave
       }
     }
 
-    public List<byte> _nodeNeighbors
+    public List<sbyte> _nodeNeighbors
     {
       get
       {
@@ -87,11 +87,11 @@ namespace OpenZWave
           case 2:
             if (field.Type == TType.List) {
               {
-                _nodeNeighbors = new List<byte>();
+                _nodeNeighbors = new List<sbyte>();
                 TList _list16 = iprot.ReadListBegin();
                 for( int _i17 = 0; _i17 < _list16.Count; ++_i17)
                 {
-                  byte _elem18 = 0;
+                  sbyte _elem18 = 0;
                   _elem18 = iprot.ReadByte();
                   _nodeNeighbors.Add(_elem18);
                 }
@@ -129,7 +129,7 @@ namespace OpenZWave
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.Byte, _nodeNeighbors.Count));
-          foreach (byte _iter19 in _nodeNeighbors)
+          foreach (sbyte _iter19 in _nodeNeighbors)
           {
             oprot.WriteByte(_iter19);
           }

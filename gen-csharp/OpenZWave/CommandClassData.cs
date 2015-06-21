@@ -23,11 +23,11 @@ namespace OpenZWave
   #endif
   public partial class CommandClassData : TBase
   {
-    private byte _m_commandClassId;
+    private sbyte _m_commandClassId;
     private int _m_sentCnt;
     private int _m_receivedCnt;
 
-    public byte M_commandClassId
+    public sbyte M_commandClassId
     {
       get
       {

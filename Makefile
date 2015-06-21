@@ -33,9 +33,9 @@ DEBUG_LDFLAGS	:= -g
 # ============================
 # change directories if needed
 # ============================
-OPENZWAVE      := $(HOME)/ozw/open-zwave-read-only
+OPENZWAVE      := $(HOME)/ozw/openzwave
 OPENZWAVE_LIB	:= /usr/lib
-OPENZWAVE_INC	:= /usr/include/openzwave
+OPENZWAVE_INC	:= $(OPENZWAVE)/cpp/src
 THRIFT		    := $(HOME)/ozw/thrift
 THRIFT_INC	    := /usr/local/include/thrift
 BOOSTSTOMP_LIB  := /usr/local/lib
@@ -54,19 +54,20 @@ INCLUDES := -I $(OPENZWAVE_INC) -I $(OPENZWAVE_INC)/command_classes/ -I $(OPENZW
 
 LIBZWAVE_STATIC := $(OPENZWAVE_LIB)/libopenzwave.a
 LIBZWAVE_DYNAMIC := $(OPENZWAVE_LIB)/libopenzwave.so.1.0
+LIBZWAVE := -lopenzwave
 LIBUSB := -ludev
 
 # for Mac OS X comment out above 2 lines and uncomment next 2 lines
 #LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/mac/*.a)
 #LIBUSB := -framework IOKit -framework CoreFoundation
 
-LIBBOOST := -lboost_thread-mt -lboost_program_options -lboost_system -lboost_filesystem
+LIBBOOST := -lboost_thread-mt -lboost_program_options -lboost_system -lboost_filesystem -lpthread
 LIBBOOST_STATIC := -lboost_thread-mt -lboost_program_options -lboost_system -lboost_filesystem 
 LIBTHRIFT := -lthrift
 LIBBOOSTSTOMP := -lbooststomp
 LIBBOOSTSTOMP_STATIC := libbooststomp.a
 
-LIBS := $(GNUTLS) $(LIBUSB) $(LIBBOOST) $(LIBTHRIFT) $(LIBBOOSTSTOMP)
+LIBS := $(GNUTLS) $(LIBZWAVE) $(LIBUSB) $(LIBBOOST) $(LIBTHRIFT) $(LIBBOOSTSTOMP) 
 
 %.o : %.cpp
 	$(CXX) $(CFLAGS) $(INCLUDES) -o $@ $<
@@ -76,16 +77,19 @@ LIBS := $(GNUTLS) $(LIBUSB) $(LIBBOOST) $(LIBTHRIFT) $(LIBBOOSTSTOMP)
 
 #all: openzwave booststomp ozwd ozwd.static
 all: openzwave booststomp ozwd
+	@echo "---------------------------------"
+	@echo "Your OpenZWave daemon is compiled!"
+	@echo "---------------------------------"
 
 gen-cpp/RemoteManager_server.cpp: create_server.rb gen-cpp/RemoteManager.cpp
-	patch -N -p0 gen-cpp/ozw_types.h < ozw_types.h.patch
+	- patch -u -N -p0 gen-cpp/ozw_types.h < ozw_types.h.patch
 	ruby create_server.rb --ozwroot=${OPENZWAVE} --thriftroot=$(THRIFT_INC)
 	cp gen-cpp/RemoteManager_server.cpp gen-cpp/RemoteManager_server.cpp.orig
 	cp gen-cpp/ozw_types.h gen-cpp/ozw_types.h.orig
-	patch -N -p0 gen-cpp/RemoteManager_server.cpp < RemoteManager_server.cpp.patch
+	- patch -u -N -p0 gen-cpp/RemoteManager_server.cpp < RemoteManager_server.cpp.patch
     
 gen-cpp/RemoteManager.cpp: ozw.thrift
-	thrift --gen cocoa --gen cpp --gen csharp --gen erl --gen go --gen java --gen js --gen perl --gen php --gen py --gen rb ozw.thrift
+	thrift --gen cpp --gen java --gen js --gen py --gen rb ozw.thrift
 
 gen-cpp/RemoteManager.o: gen-cpp/RemoteManager.cpp
 	$(CXX) $(CFLAGS) -c gen-cpp/RemoteManager.cpp -o gen-cpp/RemoteManager.o $(INCLUDES)
@@ -100,7 +104,7 @@ Main.o: Main.cpp gen-cpp/RemoteManager_server.cpp
 	$(CXX) $(CFLAGS) -c Main.cpp $(INCLUDES)   
 	
 openzwave: 
-	cd $(OPENZWAVE)/cpp/build/linux/; make
+	cd $(OPENZWAVE); make
 
 openzwave-install: openzwave
 	cd $(OPENZWAVE)/cpp/lib/linux; 	cp libopenzwave.so libopenzwave.so.1.0 
@@ -113,8 +117,8 @@ ozwd.static: Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o g
 	$(CXX) -static -static-libgcc -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o  $(LIBZWAVE_STATIC) $(LIBBOOSTSTOMP_STATIC) $(LIBBOOST_STATIC) -lpthread -ludev -lthrift -lrt
 
 ozwd:   Main.o booststomp gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o openzwave
-	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBZWAVE_DYNAMIC) $(LIBS)
-	
+	$(CXX) -o $@ $(LDFLAGS) Main.o gen-cpp/RemoteManager.o gen-cpp/ozw_constants.o gen-cpp/ozw_types.o $(LIBS)
+
 dist:	main
 	rm -f Thrift4OZW.tar.gz
 	tar -c --exclude=".git" --exclude ".svn" --exclude "*.o" -hvzf Thrift4OZW.tar.gz *.cpp *.h *.thrift *.sm *.rb Makefile gen-*/ license/ README*
@@ -133,8 +137,8 @@ binclean:
 thrift: gen-cpp/RemoteManager.cpp
 
 patchdiffs:
-	- diff -C3 gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h > ozw_types.h.patch
-	- diff -C3 gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp > RemoteManager_server.cpp.patch
+	- diff -u gen-cpp/ozw_types.h.orig gen-cpp/ozw_types.h > ozw_types.h.patch
+	- diff -u gen-cpp/RemoteManager_server.cpp.orig gen-cpp/RemoteManager_server.cpp > RemoteManager_server.cpp.patch
 	
 java:
 	cd gen-java/OpenZWave; javac -cp .:`find $(THRIFT)/lib/java/build -name "*.jar" | tr "\n" ":"` *.java

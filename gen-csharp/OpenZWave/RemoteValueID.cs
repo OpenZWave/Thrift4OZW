@@ -24,11 +24,11 @@ namespace OpenZWave
   public partial class RemoteValueID : TBase
   {
     private int __homeId;
-    private byte __nodeId;
+    private sbyte __nodeId;
     private RemoteValueGenre __genre;
-    private byte __commandClassId;
-    private byte __instance;
-    private byte __valueIndex;
+    private sbyte __commandClassId;
+    private sbyte __instance;
+    private sbyte __valueIndex;
     private RemoteValueType __type;
 
     public int _homeId
@@ -44,7 +44,7 @@ namespace OpenZWave
       }
     }
 
-    public byte _nodeId
+    public sbyte _nodeId
     {
       get
       {
@@ -74,7 +74,7 @@ namespace OpenZWave
       }
     }
 
-    public byte _commandClassId
+    public sbyte _commandClassId
     {
       get
       {
@@ -87,7 +87,7 @@ namespace OpenZWave
       }
     }
 
-    public byte _instance
+    public sbyte _instance
     {
       get
       {
@@ -100,7 +100,7 @@ namespace OpenZWave
       }
     }
 
-    public byte _valueIndex
+    public sbyte _valueIndex
     {
       get
       {

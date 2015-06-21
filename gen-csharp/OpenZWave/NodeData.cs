@@ -33,8 +33,8 @@ namespace OpenZWave
     private string _m_receivedTS;
     private int _m_lastRTT;
     private int _m_averageRTT;
-    private byte _m_quality;
-    private List<byte> _m_lastReceivedMessage;
+    private sbyte _m_quality;
+    private List<sbyte> _m_lastReceivedMessage;
     private List<CommandClassData> _m_ccData;
 
     public int M_sentCnt
@@ -167,7 +167,7 @@ namespace OpenZWave
       }
     }
 
-    public byte M_quality
+    public sbyte M_quality
     {
       get
       {
@@ -180,7 +180,7 @@ namespace OpenZWave
       }
     }
 
-    public List<byte> M_lastReceivedMessage
+    public List<sbyte> M_lastReceivedMessage
     {
       get
       {
@@ -322,11 +322,11 @@ namespace OpenZWave
           case 12:
             if (field.Type == TType.List) {
               {
-                M_lastReceivedMessage = new List<byte>();
+                M_lastReceivedMessage = new List<sbyte>();
                 TList _list0 = iprot.ReadListBegin();
                 for( int _i1 = 0; _i1 < _list0.Count; ++_i1)
                 {
-                  byte _elem2 = 0;
+                  sbyte _elem2 = 0;
                   _elem2 = iprot.ReadByte();
                   M_lastReceivedMessage.Add(_elem2);
                 }
@@ -462,7 +462,7 @@ namespace OpenZWave
         oprot.WriteFieldBegin(field);
         {
           oprot.WriteListBegin(new TList(TType.Byte, M_lastReceivedMessage.Count));
-          foreach (byte _iter6 in M_lastReceivedMessage)
+          foreach (sbyte _iter6 in M_lastReceivedMessage)
           {
             oprot.WriteByte(_iter6);
           }
