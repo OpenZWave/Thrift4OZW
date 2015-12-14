@@ -593,7 +593,8 @@ service RemoteManager {
 
 	//uint32 GetAssociations( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, uint8** o_associations );
     // ekarak: return list of associations instead
-    GetAssociationsReturnStruct GetAssociations( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx);
+    GetAssociationsReturnStruct GetAssociations_uint8( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx);
+	//uint32 GetAssociations( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, InstanceAssociation** o_associations );
 
 	//uint8 GetMaxAssociations( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx );
     byte GetMaxAssociations( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx );
@@ -601,11 +602,11 @@ service RemoteManager {
 	//string GetGroupLabel( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx );
     string GetGroupLabel( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx );
 
-	//void AddAssociation( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, uint8 const _targetNodeId );
-    void AddAssociation( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx, 4:byte _targetNodeId );
+	//void AddAssociation( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, uint8 const _targetNodeId, uint8 const _instance = 0x00 );
+    void AddAssociation( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx, 4:byte _targetNodeId, 5:byte _instance = 0 );
 
-	//void RemoveAssociation( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, uint8 const _targetNodeId );
-    void RemoveAssociation( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx, 4:byte _targetNodeId );
+	//void RemoveAssociation( uint32 const _homeId, uint8 const _nodeId, uint8 const _groupIdx, uint8 const _targetNodeId, uint8 const _instance = 0x00 );
+    void RemoveAssociation( 1:i32 _homeId, 2:byte _nodeId, 3:byte _groupIdx, 4:byte _targetNodeId, 5:byte _instance = 0 );
 
     //-----------------------------------------------------------------------------
 	// Controller commands
