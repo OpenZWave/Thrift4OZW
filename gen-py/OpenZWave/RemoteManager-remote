@@ -121,11 +121,11 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  void RequestConfigParam(i32 _homeId, byte _nodeId, byte _param)'
   print '  void RequestAllConfigParams(i32 _homeId, byte _nodeId)'
   print '  byte GetNumGroups(i32 _homeId, byte _nodeId)'
-  print '  GetAssociationsReturnStruct GetAssociations(i32 _homeId, byte _nodeId, byte _groupIdx)'
+  print '  GetAssociationsReturnStruct GetAssociations_uint8(i32 _homeId, byte _nodeId, byte _groupIdx)'
   print '  byte GetMaxAssociations(i32 _homeId, byte _nodeId, byte _groupIdx)'
   print '  string GetGroupLabel(i32 _homeId, byte _nodeId, byte _groupIdx)'
-  print '  void AddAssociation(i32 _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)'
-  print '  void RemoveAssociation(i32 _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId)'
+  print '  void AddAssociation(i32 _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId, byte _instance)'
+  print '  void RemoveAssociation(i32 _homeId, byte _nodeId, byte _groupIdx, byte _targetNodeId, byte _instance)'
   print '  void ResetController(i32 _homeId)'
   print '  void SoftReset(i32 _homeId)'
   print '  bool BeginControllerCommand(i32 _homeId, DriverControllerCommand _command, bool _highPower, byte _nodeId, byte _arg)'
@@ -812,11 +812,11 @@ elif cmd == 'GetNumGroups':
     sys.exit(1)
   pp.pprint(client.GetNumGroups(eval(args[0]),eval(args[1]),))
 
-elif cmd == 'GetAssociations':
+elif cmd == 'GetAssociations_uint8':
   if len(args) != 3:
-    print 'GetAssociations requires 3 args'
+    print 'GetAssociations_uint8 requires 3 args'
     sys.exit(1)
-  pp.pprint(client.GetAssociations(eval(args[0]),eval(args[1]),eval(args[2]),))
+  pp.pprint(client.GetAssociations_uint8(eval(args[0]),eval(args[1]),eval(args[2]),))
 
 elif cmd == 'GetMaxAssociations':
   if len(args) != 3:
@@ -831,16 +831,16 @@ elif cmd == 'GetGroupLabel':
   pp.pprint(client.GetGroupLabel(eval(args[0]),eval(args[1]),eval(args[2]),))
 
 elif cmd == 'AddAssociation':
-  if len(args) != 4:
-    print 'AddAssociation requires 4 args'
+  if len(args) != 5:
+    print 'AddAssociation requires 5 args'
     sys.exit(1)
-  pp.pprint(client.AddAssociation(eval(args[0]),eval(args[1]),eval(args[2]),eval(args[3]),))
+  pp.pprint(client.AddAssociation(eval(args[0]),eval(args[1]),eval(args[2]),eval(args[3]),eval(args[4]),))
 
 elif cmd == 'RemoveAssociation':
-  if len(args) != 4:
-    print 'RemoveAssociation requires 4 args'
+  if len(args) != 5:
+    print 'RemoveAssociation requires 5 args'
     sys.exit(1)
-  pp.pprint(client.RemoveAssociation(eval(args[0]),eval(args[1]),eval(args[2]),eval(args[3]),))
+  pp.pprint(client.RemoveAssociation(eval(args[0]),eval(args[1]),eval(args[2]),eval(args[3]),eval(args[4]),))
 
 elif cmd == 'ResetController':
   if len(args) != 1:

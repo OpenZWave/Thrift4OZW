@@ -778,7 +778,7 @@ class Iface:
     """
     pass
 
-  def GetAssociations(self, _homeId, _nodeId, _groupIdx):
+  def GetAssociations_uint8(self, _homeId, _nodeId, _groupIdx):
     """
     Parameters:
      - _homeId
@@ -805,23 +805,25 @@ class Iface:
     """
     pass
 
-  def AddAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId):
+  def AddAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId, _instance):
     """
     Parameters:
      - _homeId
      - _nodeId
      - _groupIdx
      - _targetNodeId
+     - _instance
     """
     pass
 
-  def RemoveAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId):
+  def RemoveAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId, _instance):
     """
     Parameters:
      - _homeId
      - _nodeId
      - _groupIdx
      - _targetNodeId
+     - _instance
     """
     pass
 
@@ -4239,19 +4241,19 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetNumGroups failed: unknown result");
 
-  def GetAssociations(self, _homeId, _nodeId, _groupIdx):
+  def GetAssociations_uint8(self, _homeId, _nodeId, _groupIdx):
     """
     Parameters:
      - _homeId
      - _nodeId
      - _groupIdx
     """
-    self.send_GetAssociations(_homeId, _nodeId, _groupIdx)
-    return self.recv_GetAssociations()
+    self.send_GetAssociations_uint8(_homeId, _nodeId, _groupIdx)
+    return self.recv_GetAssociations_uint8()
 
-  def send_GetAssociations(self, _homeId, _nodeId, _groupIdx):
-    self._oprot.writeMessageBegin('GetAssociations', TMessageType.CALL, self._seqid)
-    args = GetAssociations_args()
+  def send_GetAssociations_uint8(self, _homeId, _nodeId, _groupIdx):
+    self._oprot.writeMessageBegin('GetAssociations_uint8', TMessageType.CALL, self._seqid)
+    args = GetAssociations_uint8_args()
     args._homeId = _homeId
     args._nodeId = _nodeId
     args._groupIdx = _groupIdx
@@ -4259,19 +4261,19 @@ class Client(Iface):
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
 
-  def recv_GetAssociations(self, ):
+  def recv_GetAssociations_uint8(self, ):
     (fname, mtype, rseqid) = self._iprot.readMessageBegin()
     if mtype == TMessageType.EXCEPTION:
       x = TApplicationException()
       x.read(self._iprot)
       self._iprot.readMessageEnd()
       raise x
-    result = GetAssociations_result()
+    result = GetAssociations_uint8_result()
     result.read(self._iprot)
     self._iprot.readMessageEnd()
     if result.success is not None:
       return result.success
-    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetAssociations failed: unknown result");
+    raise TApplicationException(TApplicationException.MISSING_RESULT, "GetAssociations_uint8 failed: unknown result");
 
   def GetMaxAssociations(self, _homeId, _nodeId, _groupIdx):
     """
@@ -4341,24 +4343,26 @@ class Client(Iface):
       return result.success
     raise TApplicationException(TApplicationException.MISSING_RESULT, "GetGroupLabel failed: unknown result");
 
-  def AddAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId):
+  def AddAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId, _instance):
     """
     Parameters:
      - _homeId
      - _nodeId
      - _groupIdx
      - _targetNodeId
+     - _instance
     """
-    self.send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
+    self.send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
     self.recv_AddAssociation()
 
-  def send_AddAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId):
+  def send_AddAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId, _instance):
     self._oprot.writeMessageBegin('AddAssociation', TMessageType.CALL, self._seqid)
     args = AddAssociation_args()
     args._homeId = _homeId
     args._nodeId = _nodeId
     args._groupIdx = _groupIdx
     args._targetNodeId = _targetNodeId
+    args._instance = _instance
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -4375,24 +4379,26 @@ class Client(Iface):
     self._iprot.readMessageEnd()
     return
 
-  def RemoveAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId):
+  def RemoveAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId, _instance):
     """
     Parameters:
      - _homeId
      - _nodeId
      - _groupIdx
      - _targetNodeId
+     - _instance
     """
-    self.send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
+    self.send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
     self.recv_RemoveAssociation()
 
-  def send_RemoveAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId):
+  def send_RemoveAssociation(self, _homeId, _nodeId, _groupIdx, _targetNodeId, _instance):
     self._oprot.writeMessageBegin('RemoveAssociation', TMessageType.CALL, self._seqid)
     args = RemoveAssociation_args()
     args._homeId = _homeId
     args._nodeId = _nodeId
     args._groupIdx = _groupIdx
     args._targetNodeId = _targetNodeId
+    args._instance = _instance
     args.write(self._oprot)
     self._oprot.writeMessageEnd()
     self._oprot.trans.flush()
@@ -5983,7 +5989,7 @@ class Processor(Iface, TProcessor):
     self._processMap["RequestConfigParam"] = Processor.process_RequestConfigParam
     self._processMap["RequestAllConfigParams"] = Processor.process_RequestAllConfigParams
     self._processMap["GetNumGroups"] = Processor.process_GetNumGroups
-    self._processMap["GetAssociations"] = Processor.process_GetAssociations
+    self._processMap["GetAssociations_uint8"] = Processor.process_GetAssociations_uint8
     self._processMap["GetMaxAssociations"] = Processor.process_GetMaxAssociations
     self._processMap["GetGroupLabel"] = Processor.process_GetGroupLabel
     self._processMap["AddAssociation"] = Processor.process_AddAssociation
@@ -7129,13 +7135,13 @@ class Processor(Iface, TProcessor):
     oprot.writeMessageEnd()
     oprot.trans.flush()
 
-  def process_GetAssociations(self, seqid, iprot, oprot):
-    args = GetAssociations_args()
+  def process_GetAssociations_uint8(self, seqid, iprot, oprot):
+    args = GetAssociations_uint8_args()
     args.read(iprot)
     iprot.readMessageEnd()
-    result = GetAssociations_result()
-    result.success = self._handler.GetAssociations(args._homeId, args._nodeId, args._groupIdx)
-    oprot.writeMessageBegin("GetAssociations", TMessageType.REPLY, seqid)
+    result = GetAssociations_uint8_result()
+    result.success = self._handler.GetAssociations_uint8(args._homeId, args._nodeId, args._groupIdx)
+    oprot.writeMessageBegin("GetAssociations_uint8", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
     oprot.trans.flush()
@@ -7167,7 +7173,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = AddAssociation_result()
-    self._handler.AddAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId)
+    self._handler.AddAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId, args._instance)
     oprot.writeMessageBegin("AddAssociation", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -7178,7 +7184,7 @@ class Processor(Iface, TProcessor):
     args.read(iprot)
     iprot.readMessageEnd()
     result = RemoveAssociation_result()
-    self._handler.RemoveAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId)
+    self._handler.RemoveAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId, args._instance)
     oprot.writeMessageBegin("RemoveAssociation", TMessageType.REPLY, seqid)
     result.write(oprot)
     oprot.writeMessageEnd()
@@ -19924,7 +19930,7 @@ class GetNumGroups_result:
   def __ne__(self, other):
     return not (self == other)
 
-class GetAssociations_args:
+class GetAssociations_uint8_args:
   """
   Attributes:
    - _homeId
@@ -19977,7 +19983,7 @@ class GetAssociations_args:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetAssociations_args')
+    oprot.writeStructBegin('GetAssociations_uint8_args')
     if self._homeId is not None:
       oprot.writeFieldBegin('_homeId', TType.I32, 1)
       oprot.writeI32(self._homeId)
@@ -20008,7 +20014,7 @@ class GetAssociations_args:
   def __ne__(self, other):
     return not (self == other)
 
-class GetAssociations_result:
+class GetAssociations_uint8_result:
   """
   Attributes:
    - success
@@ -20045,7 +20051,7 @@ class GetAssociations_result:
     if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
-    oprot.writeStructBegin('GetAssociations_result')
+    oprot.writeStructBegin('GetAssociations_uint8_result')
     if self.success is not None:
       oprot.writeFieldBegin('success', TType.STRUCT, 0)
       self.success.write(oprot)
@@ -20361,6 +20367,7 @@ class AddAssociation_args:
    - _nodeId
    - _groupIdx
    - _targetNodeId
+   - _instance
   """
 
   thrift_spec = (
@@ -20369,13 +20376,15 @@ class AddAssociation_args:
     (2, TType.BYTE, '_nodeId', None, None, ), # 2
     (3, TType.BYTE, '_groupIdx', None, None, ), # 3
     (4, TType.BYTE, '_targetNodeId', None, None, ), # 4
+    (5, TType.BYTE, '_instance', None, 0, ), # 5
   )
 
-  def __init__(self, _homeId=None, _nodeId=None, _groupIdx=None, _targetNodeId=None,):
+  def __init__(self, _homeId=None, _nodeId=None, _groupIdx=None, _targetNodeId=None, _instance=thrift_spec[5][4],):
     self._homeId = _homeId
     self._nodeId = _nodeId
     self._groupIdx = _groupIdx
     self._targetNodeId = _targetNodeId
+    self._instance = _instance
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -20406,6 +20415,11 @@ class AddAssociation_args:
           self._targetNodeId = iprot.readByte();
         else:
           iprot.skip(ftype)
+      elif fid == 5:
+        if ftype == TType.BYTE:
+          self._instance = iprot.readByte();
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -20431,6 +20445,10 @@ class AddAssociation_args:
     if self._targetNodeId is not None:
       oprot.writeFieldBegin('_targetNodeId', TType.BYTE, 4)
       oprot.writeByte(self._targetNodeId)
+      oprot.writeFieldEnd()
+    if self._instance is not None:
+      oprot.writeFieldBegin('_instance', TType.BYTE, 5)
+      oprot.writeByte(self._instance)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -20499,6 +20517,7 @@ class RemoveAssociation_args:
    - _nodeId
    - _groupIdx
    - _targetNodeId
+   - _instance
   """
 
   thrift_spec = (
@@ -20507,13 +20526,15 @@ class RemoveAssociation_args:
     (2, TType.BYTE, '_nodeId', None, None, ), # 2
     (3, TType.BYTE, '_groupIdx', None, None, ), # 3
     (4, TType.BYTE, '_targetNodeId', None, None, ), # 4
+    (5, TType.BYTE, '_instance', None, 0, ), # 5
   )
 
-  def __init__(self, _homeId=None, _nodeId=None, _groupIdx=None, _targetNodeId=None,):
+  def __init__(self, _homeId=None, _nodeId=None, _groupIdx=None, _targetNodeId=None, _instance=thrift_spec[5][4],):
     self._homeId = _homeId
     self._nodeId = _nodeId
     self._groupIdx = _groupIdx
     self._targetNodeId = _targetNodeId
+    self._instance = _instance
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -20544,6 +20565,11 @@ class RemoveAssociation_args:
           self._targetNodeId = iprot.readByte();
         else:
           iprot.skip(ftype)
+      elif fid == 5:
+        if ftype == TType.BYTE:
+          self._instance = iprot.readByte();
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -20569,6 +20595,10 @@ class RemoveAssociation_args:
     if self._targetNodeId is not None:
       oprot.writeFieldBegin('_targetNodeId', TType.BYTE, 4)
       oprot.writeByte(self._targetNodeId)
+      oprot.writeFieldEnd()
+    if self._instance is not None:
+      oprot.writeFieldBegin('_instance', TType.BYTE, 5)
+      oprot.writeByte(self._instance)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
