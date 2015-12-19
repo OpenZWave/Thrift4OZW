@@ -25,7 +25,9 @@ RANLIB := ranlib
 # Change for DEBUG or RELEASE
 TARGET := DEBUG
 
-DEBUG_CFLAGS    := -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-format -g -DDEBUG -Werror -O0 -DDEBUG_BOOSTSTOMP 
+# TODO: Restore the -Werror flag after removing calls to the deprecated
+# Manager::BeginControllerCommand method.
+DEBUG_CFLAGS    := -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-format -g -DDEBUG -O0 -DDEBUG_BOOSTSTOMP 
 RELEASE_CFLAGS  := -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -Wall -Wno-unknown-pragmas -Wno-format -O3 -DNDEBUG
 
 DEBUG_LDFLAGS	:= -g
@@ -53,7 +55,7 @@ INCLUDES := -I $(OPENZWAVE_INC) -I $(OPENZWAVE_INC)/command_classes/ -I $(OPENZW
 #GNUTLS := -lgnutls
 
 LIBZWAVE_STATIC := $(OPENZWAVE_LIB)/libopenzwave.a
-LIBZWAVE_DYNAMIC := $(OPENZWAVE_LIB)/libopenzwave.so.1.0
+LIBZWAVE_DYNAMIC := $(OPENZWAVE_LIB)/libopenzwave.so.1.3
 LIBZWAVE := -lopenzwave
 LIBUSB := -ludev
 
@@ -61,8 +63,8 @@ LIBUSB := -ludev
 #LIBZWAVE := $(wildcard $(OPENZWAVE)/cpp/lib/mac/*.a)
 #LIBUSB := -framework IOKit -framework CoreFoundation
 
-LIBBOOST := -lboost_thread-mt -lboost_program_options -lboost_system -lboost_filesystem -lpthread
-LIBBOOST_STATIC := -lboost_thread-mt -lboost_program_options -lboost_system -lboost_filesystem 
+LIBBOOST := -lboost_thread -lboost_program_options -lboost_system -lboost_filesystem -lpthread
+LIBBOOST_STATIC := -lboost_thread -lboost_program_options -lboost_system -lboost_filesystem 
 LIBTHRIFT := -lthrift
 LIBBOOSTSTOMP := -lbooststomp
 LIBBOOSTSTOMP_STATIC := libbooststomp.a
@@ -107,8 +109,7 @@ openzwave:
 	cd $(OPENZWAVE); make
 
 openzwave-install: openzwave
-	cd $(OPENZWAVE)/cpp/lib/linux; 	cp libopenzwave.so libopenzwave.so.1.0 
-	cd $(OPENZWAVE); sudo make -f debian/Makefile  install
+	cd $(OPENZWAVE); sudo make install
 	
 booststomp:
 	#cd $(BOOSTSTOMP); make 

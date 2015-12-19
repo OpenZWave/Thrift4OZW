@@ -1462,19 +1462,19 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetNumGroups failed: unknown result')
       end
 
-      def GetAssociations(_homeId, _nodeId, _groupIdx)
-        send_GetAssociations(_homeId, _nodeId, _groupIdx)
-        return recv_GetAssociations()
+      def GetAssociations_uint8(_homeId, _nodeId, _groupIdx)
+        send_GetAssociations_uint8(_homeId, _nodeId, _groupIdx)
+        return recv_GetAssociations_uint8()
       end
 
-      def send_GetAssociations(_homeId, _nodeId, _groupIdx)
-        send_message('GetAssociations', GetAssociations_args, :_homeId => _homeId, :_nodeId => _nodeId, :_groupIdx => _groupIdx)
+      def send_GetAssociations_uint8(_homeId, _nodeId, _groupIdx)
+        send_message('GetAssociations_uint8', GetAssociations_uint8_args, :_homeId => _homeId, :_nodeId => _nodeId, :_groupIdx => _groupIdx)
       end
 
-      def recv_GetAssociations()
-        result = receive_message(GetAssociations_result)
+      def recv_GetAssociations_uint8()
+        result = receive_message(GetAssociations_uint8_result)
         return result.success unless result.success.nil?
-        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetAssociations failed: unknown result')
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetAssociations_uint8 failed: unknown result')
       end
 
       def GetMaxAssociations(_homeId, _nodeId, _groupIdx)
@@ -1507,13 +1507,13 @@ module OpenZWave
         raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'GetGroupLabel failed: unknown result')
       end
 
-      def AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
-        send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
+      def AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
+        send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
         recv_AddAssociation()
       end
 
-      def send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
-        send_message('AddAssociation', AddAssociation_args, :_homeId => _homeId, :_nodeId => _nodeId, :_groupIdx => _groupIdx, :_targetNodeId => _targetNodeId)
+      def send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
+        send_message('AddAssociation', AddAssociation_args, :_homeId => _homeId, :_nodeId => _nodeId, :_groupIdx => _groupIdx, :_targetNodeId => _targetNodeId, :_instance => _instance)
       end
 
       def recv_AddAssociation()
@@ -1521,13 +1521,13 @@ module OpenZWave
         return
       end
 
-      def RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
-        send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
+      def RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
+        send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
         recv_RemoveAssociation()
       end
 
-      def send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId)
-        send_message('RemoveAssociation', RemoveAssociation_args, :_homeId => _homeId, :_nodeId => _nodeId, :_groupIdx => _groupIdx, :_targetNodeId => _targetNodeId)
+      def send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance)
+        send_message('RemoveAssociation', RemoveAssociation_args, :_homeId => _homeId, :_nodeId => _nodeId, :_groupIdx => _groupIdx, :_targetNodeId => _targetNodeId, :_instance => _instance)
       end
 
       def recv_RemoveAssociation()
@@ -2921,11 +2921,11 @@ module OpenZWave
         write_result(result, oprot, 'GetNumGroups', seqid)
       end
 
-      def process_GetAssociations(seqid, iprot, oprot)
-        args = read_args(iprot, GetAssociations_args)
-        result = GetAssociations_result.new()
-        result.success = @handler.GetAssociations(args._homeId, args._nodeId, args._groupIdx)
-        write_result(result, oprot, 'GetAssociations', seqid)
+      def process_GetAssociations_uint8(seqid, iprot, oprot)
+        args = read_args(iprot, GetAssociations_uint8_args)
+        result = GetAssociations_uint8_result.new()
+        result.success = @handler.GetAssociations_uint8(args._homeId, args._nodeId, args._groupIdx)
+        write_result(result, oprot, 'GetAssociations_uint8', seqid)
       end
 
       def process_GetMaxAssociations(seqid, iprot, oprot)
@@ -2945,14 +2945,14 @@ module OpenZWave
       def process_AddAssociation(seqid, iprot, oprot)
         args = read_args(iprot, AddAssociation_args)
         result = AddAssociation_result.new()
-        @handler.AddAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId)
+        @handler.AddAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId, args._instance)
         write_result(result, oprot, 'AddAssociation', seqid)
       end
 
       def process_RemoveAssociation(seqid, iprot, oprot)
         args = read_args(iprot, RemoveAssociation_args)
         result = RemoveAssociation_result.new()
-        @handler.RemoveAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId)
+        @handler.RemoveAssociation(args._homeId, args._nodeId, args._groupIdx, args._targetNodeId, args._instance)
         write_result(result, oprot, 'RemoveAssociation', seqid)
       end
 
@@ -6546,7 +6546,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class GetAssociations_args
+    class GetAssociations_uint8_args
       include ::Thrift::Struct, ::Thrift::Struct_Union
       _HOMEID = 1
       _NODEID = 2
@@ -6566,7 +6566,7 @@ module OpenZWave
       ::Thrift::Struct.generate_accessors self
     end
 
-    class GetAssociations_result
+    class GetAssociations_uint8_result
       include ::Thrift::Struct, ::Thrift::Struct_Union
       SUCCESS = 0
 
@@ -6660,12 +6660,14 @@ module OpenZWave
       _NODEID = 2
       _GROUPIDX = 3
       _TARGETNODEID = 4
+      _INSTANCE = 5
 
       FIELDS = {
         _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
         _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'},
         _GROUPIDX => {:type => ::Thrift::Types::BYTE, :name => '_groupIdx'},
-        _TARGETNODEID => {:type => ::Thrift::Types::BYTE, :name => '_targetNodeId'}
+        _TARGETNODEID => {:type => ::Thrift::Types::BYTE, :name => '_targetNodeId'},
+        _INSTANCE => {:type => ::Thrift::Types::BYTE, :name => '_instance', :default => 0}
       }
 
       def struct_fields; FIELDS; end
@@ -6697,12 +6699,14 @@ module OpenZWave
       _NODEID = 2
       _GROUPIDX = 3
       _TARGETNODEID = 4
+      _INSTANCE = 5
 
       FIELDS = {
         _HOMEID => {:type => ::Thrift::Types::I32, :name => '_homeId'},
         _NODEID => {:type => ::Thrift::Types::BYTE, :name => '_nodeId'},
         _GROUPIDX => {:type => ::Thrift::Types::BYTE, :name => '_groupIdx'},
-        _TARGETNODEID => {:type => ::Thrift::Types::BYTE, :name => '_targetNodeId'}
+        _TARGETNODEID => {:type => ::Thrift::Types::BYTE, :name => '_targetNodeId'},
+        _INSTANCE => {:type => ::Thrift::Types::BYTE, :name => '_instance', :default => 0}
       }
 
       def struct_fields; FIELDS; end

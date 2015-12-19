@@ -10913,7 +10913,7 @@ OpenZWave.RemoteManager_GetNumGroups_result.prototype.write = function(output) {
   return;
 };
 
-OpenZWave.RemoteManager_GetAssociations_args = function(args) {
+OpenZWave.RemoteManager_GetAssociations_uint8_args = function(args) {
   this._homeId = null;
   this._nodeId = null;
   this._groupIdx = null;
@@ -10929,8 +10929,8 @@ OpenZWave.RemoteManager_GetAssociations_args = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_GetAssociations_args.prototype = {};
-OpenZWave.RemoteManager_GetAssociations_args.prototype.read = function(input) {
+OpenZWave.RemoteManager_GetAssociations_uint8_args.prototype = {};
+OpenZWave.RemoteManager_GetAssociations_uint8_args.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -10973,8 +10973,8 @@ OpenZWave.RemoteManager_GetAssociations_args.prototype.read = function(input) {
   return;
 };
 
-OpenZWave.RemoteManager_GetAssociations_args.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetAssociations_args');
+OpenZWave.RemoteManager_GetAssociations_uint8_args.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetAssociations_uint8_args');
   if (this._homeId !== null && this._homeId !== undefined) {
     output.writeFieldBegin('_homeId', Thrift.Type.I32, 1);
     output.writeI32(this._homeId);
@@ -10995,7 +10995,7 @@ OpenZWave.RemoteManager_GetAssociations_args.prototype.write = function(output) 
   return;
 };
 
-OpenZWave.RemoteManager_GetAssociations_result = function(args) {
+OpenZWave.RemoteManager_GetAssociations_uint8_result = function(args) {
   this.success = null;
   if (args) {
     if (args.success !== undefined) {
@@ -11003,8 +11003,8 @@ OpenZWave.RemoteManager_GetAssociations_result = function(args) {
     }
   }
 };
-OpenZWave.RemoteManager_GetAssociations_result.prototype = {};
-OpenZWave.RemoteManager_GetAssociations_result.prototype.read = function(input) {
+OpenZWave.RemoteManager_GetAssociations_uint8_result.prototype = {};
+OpenZWave.RemoteManager_GetAssociations_uint8_result.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -11037,8 +11037,8 @@ OpenZWave.RemoteManager_GetAssociations_result.prototype.read = function(input) 
   return;
 };
 
-OpenZWave.RemoteManager_GetAssociations_result.prototype.write = function(output) {
-  output.writeStructBegin('RemoteManager_GetAssociations_result');
+OpenZWave.RemoteManager_GetAssociations_uint8_result.prototype.write = function(output) {
+  output.writeStructBegin('RemoteManager_GetAssociations_uint8_result');
   if (this.success !== null && this.success !== undefined) {
     output.writeFieldBegin('success', Thrift.Type.STRUCT, 0);
     this.success.write(output);
@@ -11324,6 +11324,7 @@ OpenZWave.RemoteManager_AddAssociation_args = function(args) {
   this._nodeId = null;
   this._groupIdx = null;
   this._targetNodeId = null;
+  this._instance = 0;
   if (args) {
     if (args._homeId !== undefined) {
       this._homeId = args._homeId;
@@ -11336,6 +11337,9 @@ OpenZWave.RemoteManager_AddAssociation_args = function(args) {
     }
     if (args._targetNodeId !== undefined) {
       this._targetNodeId = args._targetNodeId;
+    }
+    if (args._instance !== undefined) {
+      this._instance = args._instance;
     }
   }
 };
@@ -11381,6 +11385,13 @@ OpenZWave.RemoteManager_AddAssociation_args.prototype.read = function(input) {
         input.skip(ftype);
       }
       break;
+      case 5:
+      if (ftype == Thrift.Type.BYTE) {
+        this._instance = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -11410,6 +11421,11 @@ OpenZWave.RemoteManager_AddAssociation_args.prototype.write = function(output) {
   if (this._targetNodeId !== null && this._targetNodeId !== undefined) {
     output.writeFieldBegin('_targetNodeId', Thrift.Type.BYTE, 4);
     output.writeByte(this._targetNodeId);
+    output.writeFieldEnd();
+  }
+  if (this._instance !== null && this._instance !== undefined) {
+    output.writeFieldBegin('_instance', Thrift.Type.BYTE, 5);
+    output.writeByte(this._instance);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -11450,6 +11466,7 @@ OpenZWave.RemoteManager_RemoveAssociation_args = function(args) {
   this._nodeId = null;
   this._groupIdx = null;
   this._targetNodeId = null;
+  this._instance = 0;
   if (args) {
     if (args._homeId !== undefined) {
       this._homeId = args._homeId;
@@ -11462,6 +11479,9 @@ OpenZWave.RemoteManager_RemoveAssociation_args = function(args) {
     }
     if (args._targetNodeId !== undefined) {
       this._targetNodeId = args._targetNodeId;
+    }
+    if (args._instance !== undefined) {
+      this._instance = args._instance;
     }
   }
 };
@@ -11507,6 +11527,13 @@ OpenZWave.RemoteManager_RemoveAssociation_args.prototype.read = function(input) 
         input.skip(ftype);
       }
       break;
+      case 5:
+      if (ftype == Thrift.Type.BYTE) {
+        this._instance = input.readByte().value;
+      } else {
+        input.skip(ftype);
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -11536,6 +11563,11 @@ OpenZWave.RemoteManager_RemoveAssociation_args.prototype.write = function(output
   if (this._targetNodeId !== null && this._targetNodeId !== undefined) {
     output.writeFieldBegin('_targetNodeId', Thrift.Type.BYTE, 4);
     output.writeByte(this._targetNodeId);
+    output.writeFieldEnd();
+  }
+  if (this._instance !== null && this._instance !== undefined) {
+    output.writeFieldBegin('_instance', Thrift.Type.BYTE, 5);
+    output.writeByte(this._instance);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
@@ -20315,14 +20347,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetNumGroups = function() {
   }
   throw 'GetNumGroups failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.GetAssociations = function(_homeId, _nodeId, _groupIdx) {
-  this.send_GetAssociations(_homeId, _nodeId, _groupIdx);
-  return this.recv_GetAssociations();
+OpenZWave.RemoteManagerClient.prototype.GetAssociations_uint8 = function(_homeId, _nodeId, _groupIdx) {
+  this.send_GetAssociations_uint8(_homeId, _nodeId, _groupIdx);
+  return this.recv_GetAssociations_uint8();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_GetAssociations = function(_homeId, _nodeId, _groupIdx) {
-  this.output.writeMessageBegin('GetAssociations', Thrift.MessageType.CALL, this.seqid);
-  var args = new OpenZWave.RemoteManager_GetAssociations_args();
+OpenZWave.RemoteManagerClient.prototype.send_GetAssociations_uint8 = function(_homeId, _nodeId, _groupIdx) {
+  this.output.writeMessageBegin('GetAssociations_uint8', Thrift.MessageType.CALL, this.seqid);
+  var args = new OpenZWave.RemoteManager_GetAssociations_uint8_args();
   args._homeId = _homeId;
   args._nodeId = _nodeId;
   args._groupIdx = _groupIdx;
@@ -20331,7 +20363,7 @@ OpenZWave.RemoteManagerClient.prototype.send_GetAssociations = function(_homeId,
   return this.output.getTransport().flush();
 };
 
-OpenZWave.RemoteManagerClient.prototype.recv_GetAssociations = function() {
+OpenZWave.RemoteManagerClient.prototype.recv_GetAssociations_uint8 = function() {
   var ret = this.input.readMessageBegin();
   var fname = ret.fname;
   var mtype = ret.mtype;
@@ -20342,14 +20374,14 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetAssociations = function() {
     this.input.readMessageEnd();
     throw x;
   }
-  var result = new OpenZWave.RemoteManager_GetAssociations_result();
+  var result = new OpenZWave.RemoteManager_GetAssociations_uint8_result();
   result.read(this.input);
   this.input.readMessageEnd();
 
   if (null !== result.success) {
     return result.success;
   }
-  throw 'GetAssociations failed: unknown result';
+  throw 'GetAssociations_uint8 failed: unknown result';
 };
 OpenZWave.RemoteManagerClient.prototype.GetMaxAssociations = function(_homeId, _nodeId, _groupIdx) {
   this.send_GetMaxAssociations(_homeId, _nodeId, _groupIdx);
@@ -20423,18 +20455,19 @@ OpenZWave.RemoteManagerClient.prototype.recv_GetGroupLabel = function() {
   }
   throw 'GetGroupLabel failed: unknown result';
 };
-OpenZWave.RemoteManagerClient.prototype.AddAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId) {
-  this.send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId);
+OpenZWave.RemoteManagerClient.prototype.AddAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance) {
+  this.send_AddAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance);
   this.recv_AddAssociation();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_AddAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId) {
+OpenZWave.RemoteManagerClient.prototype.send_AddAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance) {
   this.output.writeMessageBegin('AddAssociation', Thrift.MessageType.CALL, this.seqid);
   var args = new OpenZWave.RemoteManager_AddAssociation_args();
   args._homeId = _homeId;
   args._nodeId = _nodeId;
   args._groupIdx = _groupIdx;
   args._targetNodeId = _targetNodeId;
+  args._instance = _instance;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();
@@ -20457,18 +20490,19 @@ OpenZWave.RemoteManagerClient.prototype.recv_AddAssociation = function() {
 
   return;
 };
-OpenZWave.RemoteManagerClient.prototype.RemoveAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId) {
-  this.send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId);
+OpenZWave.RemoteManagerClient.prototype.RemoveAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance) {
+  this.send_RemoveAssociation(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance);
   this.recv_RemoveAssociation();
 };
 
-OpenZWave.RemoteManagerClient.prototype.send_RemoveAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId) {
+OpenZWave.RemoteManagerClient.prototype.send_RemoveAssociation = function(_homeId, _nodeId, _groupIdx, _targetNodeId, _instance) {
   this.output.writeMessageBegin('RemoveAssociation', Thrift.MessageType.CALL, this.seqid);
   var args = new OpenZWave.RemoteManager_RemoveAssociation_args();
   args._homeId = _homeId;
   args._nodeId = _nodeId;
   args._groupIdx = _groupIdx;
   args._targetNodeId = _targetNodeId;
+  args._instance = _instance;
   args.write(this.output);
   this.output.writeMessageEnd();
   return this.output.getTransport().flush();
