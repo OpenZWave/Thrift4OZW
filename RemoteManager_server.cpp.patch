@@ -1,5 +1,5 @@
---- gen-cpp/RemoteManager_server.cpp.orig	2015-12-14 01:08:55.315767324 -0800
-+++ gen-cpp/RemoteManager_server.cpp	2015-12-14 01:16:56.983717848 -0800
+--- RemoteManager_server.cpp.orig	2015-12-22 01:12:40.993675829 -0800
++++ RemoteManager_server.cpp	2015-12-22 01:31:57.078124279 -0800
 @@ -1,11 +1,11 @@
  // Automatically generated OpenZWave::Manager_server wrapper
 -// (c) 2011 Elias Karakoulakis <elias.karakoulakis@gmail.com>
@@ -95,12 +95,10 @@
    }
  
    bool PressButton(const RemoteValueID& _id) {
-@@ -762,11 +781,16 @@
- 	return(function_result);
+@@ -763,10 +782,15 @@
    }
  
--  void GetAssociations_uint8(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-+  void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
+   void GetAssociations_uint8(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
 +	uint8* o_associations;
  	Manager* mgr = Manager::Get();
  	g_criticalSection.lock();
@@ -114,28 +112,6 @@
    }
  
    int8_t GetMaxAssociations(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
-@@ -784,17 +808,17 @@
- 	g_criticalSection.unlock();
-   }
- 
--  void AddAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId, const int8_t _instance) {
-+  void AddAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId) {
- 	Manager* mgr = Manager::Get();
- 	g_criticalSection.lock();
--	 mgr->AddAssociation((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8 const) _targetNodeId, (::uint8 const) _instance);
-+	 mgr->AddAssociation((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8 const) _targetNodeId);
- 	g_criticalSection.unlock();
-   }
- 
--  void RemoveAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId, const int8_t _instance) {
-+  void RemoveAssociation(const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx, const int8_t _targetNodeId) {
- 	Manager* mgr = Manager::Get();
- 	g_criticalSection.lock();
--	 mgr->RemoveAssociation((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8 const) _targetNodeId, (::uint8 const) _instance);
-+	 mgr->RemoveAssociation((::uint32 const) _homeId, (::uint8 const) _nodeId, (::uint8 const) _groupIdx, (::uint8 const) _targetNodeId);
- 	g_criticalSection.unlock();
-   }
- 
 @@ -865,10 +889,15 @@
    }
  

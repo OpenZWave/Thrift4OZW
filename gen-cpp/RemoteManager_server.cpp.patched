@@ -781,7 +781,7 @@ class RemoteManagerHandler : virtual public RemoteManagerIf {
 	return(function_result);
   }
 
-  void GetAssociations(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
+  void GetAssociations_uint8(GetAssociationsReturnStruct& _return, const int32_t _homeId, const int8_t _nodeId, const int8_t _groupIdx) {
 	uint8* o_associations;
 	Manager* mgr = Manager::Get();
 	g_criticalSection.lock();
