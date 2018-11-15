@@ -1,4 +1,4 @@
-###Thrift4OZW
+### Thrift4OZW
 
 This project aims to be a multi-lingual interface to the [OpenZWave library]
 (http://www.openzwave.com), a C++ library for the ZWave wireless
@@ -51,5 +51,4 @@ Makes use of Boost's ASIO (Asynchronous I/O) model as well as some other
 useful Boost facilities. It provides the asynchronous notification mechanism
 used to pass OpenZWave notifications to Thrift4OZW. For more info about
 BoostStomp, check out its homepage:
-
 
