@@ -94,7 +94,7 @@ static boost::mutex               initMutex;
 // Stomp client
 #include "BoostStomp.hpp"
 static STOMP::BoostStomp* stomp_client;
-static string*          notifications_topic = new string("/queue/zwave/monitor");
+static string*          notifications_topic = new string("/topic/zwave/monitor");
 
 // JSON body indicator
 static bool jsonMessageBody = false;
